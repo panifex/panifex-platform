@@ -22,6 +22,9 @@ target/
 build.properties
 META-INF/
 
+# Pax Runner folder
+runner/
+
 #####################
 # Eclipse.gitignore #
 #####################
