@@ -15,6 +15,13 @@
 
 target/
 
+##################
+# OSGi.gitignore #
+##################
+
+build.properties
+META-INF/
+
 #####################
 # Eclipse.gitignore #
 #####################
