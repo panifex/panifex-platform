@@ -24,17 +24,14 @@
 		<dependency>
 			<groupId>org.apache.aries.blueprint</groupId>
 			<artifactId>org.apache.aries.blueprint</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.aries.blueprint</groupId>
 			<artifactId>org.apache.aries.blueprint.annotation.api</artifactId>
-			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.aries.blueprint</groupId>
 			<artifactId>org.apache.aries.blueprint.annotation.impl</artifactId>
-			<version>1.0.0</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.xbean</groupId>
@@ -45,29 +42,24 @@
 		<dependency>
 			<groupId>org.apache.aries.proxy</groupId>
 			<artifactId>org.apache.aries.proxy</artifactId>
-			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.aries</groupId>
 			<artifactId>org.apache.aries.util</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<!-- Apache Felix Dependencies -->
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.configadmin</artifactId>
-			<version>1.6.0</version>
 		</dependency>
 		<!-- Apache Xbean Dependencies -->
 		<dependency>
 			<groupId>org.apache.xbean</groupId>
 			<artifactId>xbean-asm4-shaded</artifactId>
-			<version>3.14</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.xbean</groupId>
 			<artifactId>xbean-bundleutils</artifactId>
-			<version>3.14</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
@@ -78,7 +70,6 @@
 		<dependency>
 			<groupId>org.apache.xbean</groupId>
 			<artifactId>xbean-finder-shaded</artifactId>
-			<version>3.14</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
@@ -86,27 +77,32 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- Commons Dependencies -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
 		<!-- Pax Logging Dependencies -->
 		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>
 			<artifactId>pax-logging-api</artifactId>
-			<version>1.7.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>
 			<artifactId>pax-logging-service</artifactId>
-			<version>1.7.1</version>
 		</dependency>
 		<!-- Pax Web Dependencies -->
 		<dependency>
 			<groupId>org.ops4j.pax.web</groupId>
 			<artifactId>pax-web-jetty-bundle</artifactId>
-			<version>3.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ops4j.pax.web</groupId>
 			<artifactId>pax-web-extender-whiteboard</artifactId>
-			<version>3.0.2</version>
 		</dependency>
 
 	</dependencies>
