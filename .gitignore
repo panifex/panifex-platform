@@ -24,6 +24,7 @@ META-INF/
 
 # Pax Runner folder
 runner/
+.DS_Store
 
 #####################
 # Eclipse.gitignore #
