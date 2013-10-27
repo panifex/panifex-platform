@@ -28,19 +28,6 @@
 			classpath <dependency> <type>pom</type> <groupId>${parent.groupId}</groupId> 
 			<artifactId>provision</artifactId> <optional>true</optional> </dependency> -->
 
-		<!-- OSGi Dependencies -->
-
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>osgi_R4_core</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>osgi_R4_compendium</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<!-- Pax Web Dependencies -->
 
 		<dependency>

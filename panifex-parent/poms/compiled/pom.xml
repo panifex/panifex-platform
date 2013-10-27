@@ -1,53 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <parent>
-    <groupId>org.panifex.parent.build</groupId>
-    <artifactId>shared-plugin-settings</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<groupId>org.panifex.parent.build</groupId>
+		<artifactId>shared-plugin-settings</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
 
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>compiled-bundle-settings</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>compiled-bundle-settings</artifactId>
 
-  <name>panifex-parent - bundle instructions</name>
+	<name>panifex-parent - bundle instructions</name>
 
-  <packaging>pom</packaging>
+	<packaging>pom</packaging>
 
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-      </resource>
-      <!--
-       | example additional resource entries, useful when building Eclipse RCP applications
-      -->
-      <resource>
-        <directory>.</directory>
-        <includes>
-          <include>plugin.xml</include>
-          <include>plugin.properties</include>
-          <include>icons/**</include>
-        </includes>
-      </resource>
-    </resources>
-    <plugins>
-      <plugin>
-        <!--
-         | the following instructions build a simple set of public/private classes into an OSGi bundle
-        -->
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
-            <Bundle-Version>${project.version}</Bundle-Version>
-            <_include>-osgi.bnd</_include>
-          </instructions>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<!-- | example additional resource entries, useful when building Eclipse 
+				RCP applications -->
+			<resource>
+				<directory>.</directory>
+				<includes>
+					<include>plugin.xml</include>
+					<include>plugin.properties</include>
+					<include>icons/**</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<!-- | the following instructions build a simple set of public/private 
+					classes into an OSGi bundle -->
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<_include>-osgi.bnd</_include>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- Pax Logging Dependencies -->
+		
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	
+		<!-- OSGi Dependencies -->
+
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>osgi_R4_core</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>osgi_R4_compendium</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
 
 </project>

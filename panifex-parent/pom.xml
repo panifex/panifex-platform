@@ -249,13 +249,4 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<dependencies>
-		<!-- Pax Logging Dependencies -->
-		<dependency>
-			<groupId>org.ops4j.pax.logging</groupId>
-			<artifactId>pax-logging-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
-
 </project>
