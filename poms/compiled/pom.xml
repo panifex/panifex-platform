@@ -43,20 +43,33 @@
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<_include>-osgi.bnd</_include>
 					</instructions>
+					<unpackBundle>true</unpackBundle>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
 		<!-- Pax Logging Dependencies -->
-		
+
 		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>
 			<artifactId>pax-logging-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-	
+
 		<!-- OSGi Dependencies -->
 
 		<dependency>
