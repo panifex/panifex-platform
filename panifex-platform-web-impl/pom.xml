@@ -11,7 +11,7 @@
 	</parent>
 
 	<properties>
-		<bundle.symbolicName>org.panifex.platform-web-impl</bundle.symbolicName>
+		<bundle.symbolicName>panifex-platform-web-impl</bundle.symbolicName>
 		<bundle.namespace>org.panifex.platform.web.impl</bundle.namespace>
 	</properties>
 
@@ -19,14 +19,36 @@
 	<groupId>org.panifex</groupId>
 	<artifactId>panifex-platform-web-impl</artifactId>
 
-	<name>${bundle.symbolicName} [${bundle.namespace}]</name>
+	<name>${bundle.symbolicName}</name>
 
 	<packaging>bundle</packaging>
 
 	<dependencies>
-		<!-- | uncomment to add all imported (non-local) bundles to your compilation 
-			classpath <dependency> <type>pom</type> <groupId>${parent.groupId}</groupId> 
-			<artifactId>provision</artifactId> <optional>true</optional> </dependency> -->
+		<!-- Panifex Platform Dependencies -->
+
+		<dependency>
+			<groupId>org.panifex</groupId>
+			<artifactId>panifex-platform-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Apache Shiro Dependencies -->
+
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+		</dependency>
+
+		<!-- Beanshell Dependencies -->
+
+		<dependency>
+			<groupId>org.beanshell</groupId>
+			<artifactId>bsh</artifactId>
+		</dependency>
 
 		<!-- Pax Web Dependencies -->
 
@@ -41,6 +63,16 @@
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zk</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkex</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkmax</artifactId>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>

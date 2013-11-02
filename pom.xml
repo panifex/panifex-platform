@@ -27,6 +27,8 @@
 		<!-- Defines project encoding -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- Defines dependency versions -->
+		<zk.framework.version>7.0.0-Preview</zk.framework.version>
 	</properties>
 
 	<packaging>pom</packaging>
@@ -132,7 +134,24 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Panifex Platform Dependencies -->
+			<dependency>
+				<groupId>org.panifex</groupId>
+				<artifactId>panifex-platform-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<!-- Apache Aries Dependencies -->
+			<dependency>
+				<groupId>org.apache.aries.proxy</groupId>
+				<artifactId>org.apache.aries.proxy</artifactId>
+				<version>1.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.aries</groupId>
+				<artifactId>org.apache.aries.util</artifactId>
+				<version>1.1.0</version>
+			</dependency>
+			<!-- Apache Aries Blueprint Dependencies -->
 			<dependency>
 				<groupId>org.apache.aries.blueprint</groupId>
 				<artifactId>org.apache.aries.blueprint</artifactId>
@@ -148,15 +167,48 @@
 				<artifactId>org.apache.aries.blueprint.annotation.impl</artifactId>
 				<version>1.0.0</version>
 			</dependency>
+			<!-- Apache Aries JNDI Dependencies -->
 			<dependency>
-				<groupId>org.apache.aries.proxy</groupId>
-				<artifactId>org.apache.aries.proxy</artifactId>
-				<version>1.0.1</version>
+				<groupId>org.apache.aries.jndi</groupId>
+				<artifactId>org.apache.aries.jndi</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<!-- Apache Aries JPA Depedencies -->
+			<dependency>
+				<groupId>org.apache.aries.jpa</groupId>
+				<artifactId>org.apache.aries.jpa.api</artifactId>
+				<version>1.0.0</version>
 			</dependency>
 			<dependency>
-				<groupId>org.apache.aries</groupId>
-				<artifactId>org.apache.aries.util</artifactId>
-				<version>1.1.0</version>
+				<groupId>org.apache.aries.jpa</groupId>
+				<artifactId>org.apache.aries.jpa.blueprint.aries</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.aries.jpa</groupId>
+				<artifactId>org.apache.aries.jpa.container</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.aries.jpa</groupId>
+				<artifactId>org.apache.aries.jpa.container.context</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<!-- Apache Aries Transaction Depedencies -->
+			<dependency>
+				<groupId>org.apache.aries.transaction</groupId>
+				<artifactId>org.apache.aries.transaction.blueprint</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.aries.transaction</groupId>
+				<artifactId>org.apache.aries.transaction.manager</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.aries.transaction</groupId>
+				<artifactId>org.apache.aries.transaction.wrappers</artifactId>
+				<version>1.0.0</version>
 			</dependency>
 			<!-- Apache Felix Dependencies -->
 			<dependency>
@@ -164,13 +216,83 @@
 				<artifactId>org.apache.felix.configadmin</artifactId>
 				<version>1.6.0</version>
 			</dependency>
+			<!-- Apache Geronimo Depedencies -->
+			<dependency>
+				<groupId>org.apache.geronimo.components</groupId>
+				<artifactId>geronimo-transaction</artifactId>
+				<version>3.1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.geronimo.specs</groupId>
+				<artifactId>geronimo-jpa_2.0_spec</artifactId>
+				<version>1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.geronimo.specs</groupId>
+				<artifactId>geronimo-jta_1.1_spec</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			<!-- Apache JPA Dependencies -->
+			<dependency>
+				<groupId>org.apache.openjpa</groupId>
+				<artifactId>openjpa</artifactId>
+				<version>2.2.2</version>
+			</dependency>
+			<!-- Apache Shiro Dependencies -->
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-core</artifactId>
+				<version>1.2.2</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-beanutils</groupId>
+						<artifactId>commons-beanutils</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-web</artifactId>
+				<version>1.2.2</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 			<!-- ASM Depedencies -->
 			<dependency>
-                <groupId>asm</groupId>
-                <artifactId>asm-all</artifactId>
-                <version>3.2</version>
-            </dependency>
+				<groupId>asm</groupId>
+				<artifactId>asm-all</artifactId>
+				<version>3.2</version>
+			</dependency>
+			<!-- Beanshell Dependencies -->
+			<dependency>
+				<groupId>org.beanshell</groupId>
+				<artifactId>bsh</artifactId>
+				<version>2.0b5</version>
+			</dependency>
 			<!-- Commons Dependencies -->
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.8.3</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>3.2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.4</version>
+			</dependency>
 			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
@@ -180,6 +302,17 @@
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
 				<version>2.4</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+			</dependency>
+			<!-- Database Connectors Dependencies -->
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derby</artifactId>
+				<version>10.10.1.1</version>
 			</dependency>
 			<!-- Pax Logging Dependencies -->
 			<dependency>
@@ -191,6 +324,11 @@
 				<groupId>org.ops4j.pax.logging</groupId>
 				<artifactId>pax-logging-service</artifactId>
 				<version>1.7.1</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>1.0.13</version>
 			</dependency>
 			<!-- Pax Web Dependencies -->
 			<dependency>
@@ -207,13 +345,31 @@
 			<dependency>
 				<groupId>org.zkoss.zk</groupId>
 				<artifactId>zk</artifactId>
-				<version>6.5.3</version>
+				<version>${zk.framework.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.zkoss.zk</groupId>
+				<artifactId>zkex</artifactId>
+				<version>${zk.framework.version}</version>
+				<scope>compile</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>net.sf.jasperreports</groupId>
+						<artifactId>jasperreports</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.zkoss.zk</groupId>
+				<artifactId>zkmax</artifactId>
+				<version>${zk.framework.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.zkoss.zk</groupId>
 				<artifactId>zul</artifactId>
-				<version>6.5.3</version>
+				<version>${zk.framework.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
@@ -224,7 +380,7 @@
 			<dependency>
 				<groupId>org.zkoss.common</groupId>
 				<artifactId>zcommon</artifactId>
-				<version>6.5.3</version>
+				<version>${zk.framework.version}</version>
 				<scope>compile</scope>
 				<exclusions>
 					<exclusion>
@@ -236,7 +392,7 @@
 			<dependency>
 				<groupId>org.zkoss.common</groupId>
 				<artifactId>zweb</artifactId>
-				<version>6.5.3</version>
+				<version>${zk.framework.version}</version>
 				<scope>compile</scope>
 			</dependency>
 		</dependencies>

@@ -1,0 +1,183 @@
+<?page title="ZK 7 with Bootstrap Demo"?>
+<?component name="button" extends="button" width="44px" height="44px"?>
+<?link rel="stylesheet" type="text/css"	href="/bootstrap.css" ?>
+<?link rel="stylesheet" type="text/css" href="/index.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/user-nav.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/sidebar.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/search.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/content-header.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+	href="/light-blue.css.dsp"?>
+	
+<zk xmlns:n="native">
+	<popup id="btntip" sclass="btn-tip" style="margin-top: 10px">
+		<label id="msg" value="Manage Files"></label>
+		<attribute name="onOpen">
+		if (event.isOpen()) {
+			msg.setValue(event.getReference().getAttribute("title").toString());
+		}
+		</attribute>
+	</popup>
+				
+	<div sclass="header">
+		<n:h1>
+			<a>Admin</a>
+		</n:h1>
+	</div>
+
+	<div sclass="search">
+		<bandbox placeholder="Search here..." />
+	</div>
+	<div sclass="user-nav">
+		<menubar>
+			<menuitem iconSclass="icon icon-white icon-user" label="Profile" />
+			<menu iconSclass="icon icon-white icon-envelope" label="Messages">
+				<menupopup sclass="navpp">
+					<menuitem label="new message" />
+					<menuitem label="inbox" />
+					<menuitem label="outbox" />
+					<menuitem label="trash" />
+				</menupopup>
+			</menu>
+			<menuitem iconSclass="icon icon-white icon-cog" label="Settings" />
+			<menuitem iconSclass="icon icon-white icon-share-alt" label="Logout" />
+		</menubar>
+	</div>
+
+	<navbar orient="vertical" sclass="sidebar">
+		<navitem iconSclass="icon icon-white icon-home" label="Dashboard" selected="true"/>
+		<nav detailed="true" iconSclass="icon icon-white icon-th-list" label="Form elements">
+			<navitem label="Common elements"/>
+			<navitem label="Validation"/>
+			<navitem label="Wizard"/>
+		</nav>
+		<navitem iconSclass="icon icon-white icon-tint" label="Buttons &amp; icons"/>
+		<navitem iconSclass="icon icon-white icon-pencil" label="Interface elements"/>
+		<navitem iconSclass="icon icon-white icon-th" label="Tables"/>
+		<navitem iconSclass="icon icon-white icon-th-list" label="Grid Layout"/>
+		<nav detailed="true" iconSclass="icon icon-white icon-file" label="Sample pages">
+			<navitem label="Invoice"/>
+			<navitem label="Support chat"/>
+			<navitem label="Calendar"/>
+			<navitem label="Gallery"/>
+		</nav>
+	</navbar>
+	
+	<div sclass="content">
+		<div sclass="content-header">
+			<n:h1>Dashboard</n:h1>
+				<div class="btn-group">
+					<button zclass="btn" iconSclass="icon-file" tooltip="btntip,after_center">
+						<custom-attributes title="Manage Files" />
+					</button>
+					<button zclass="btn" iconSclass="icon-user" tooltip="btntip,after_center">
+						<custom-attributes title="Manage Users" />
+					</button>
+					<button zclass="btn" iconSclass="icon-comment" tooltip="btntip,after_center">
+						<custom-attributes title="Manage Comments" />
+					</button>
+					<button zclass="btn" iconSclass="icon-shopping-cart" tooltip="btntip,after_center">
+						<custom-attributes title="Manage Orders" />
+					</button>
+				</div>
+		</div>
+		<div sclass="breadcrumb">
+			<a href="#" tooltip="btntip,after_center" iconSclass="icon-home">Home
+						<custom-attributes title="Go to Home" />
+						</a>
+			<a href="#">Dashboard</a>
+		</div>
+		<include src="content.zul" />
+	</div>
+<script src="excanvas.min.js" type="" if="${zk.ie lt 9}" ></script>	
+<script src="jquery.flot.min.js"></script>
+<script src="jquery.peity.min.js"></script>
+<script><![CDATA[
+(function ($) {
+    var options = { }; // no options
+
+    function init(plot) {
+        function onResize() {
+            var placeholder = plot.getPlaceholder();
+
+            // somebody might have hidden us and we can't plot
+            // when we don't have the dimensions
+            if (placeholder.width() == 0 || placeholder.height() == 0)
+                return;
+
+            plot.resize();
+            plot.setupGrid();
+            plot.draw();
+            setTimeout(function () {
+            	zk.afterResize(onResize);
+            });
+        }
+        zk.afterResize(onResize);
+    }
+    
+    $.plot.plugins.push({
+        init: init,
+        options: options,
+        name: 'resize',
+        version: '1.0'
+    });
+})(jQuery);
+zk.afterResize(function(){
+	
+	
+	// === Prepare peity charts === //
+	unicorn.peity();
+	
+	// === Prepare the chart data ===/
+	var sin = [], cos = [];
+    for (var i = 0; i < 14; i += 0.5) {
+        sin.push([i, Math.sin(i)]);
+        cos.push([i, Math.cos(i)]);
+    }
+
+	// === Make chart === //
+    var plot = $.plot($(".chart"),
+           [ { data: sin, label: "sin(x)", color: "#BA1E20"}, { data: cos, label: "cos(x)",color: "#459D1C" } ], {
+               series: {
+                   lines: { show: true },
+                   points: { show: true }
+               },
+               grid: { hoverable: true, clickable: true },
+               yaxis: { min: -1.6, max: 1.6 }
+		   });
+    
+	// === Point hover in chart === //
+    var previousPoint = null;
+    $(".chart").bind("plothover", function (event, pos, item) {
+		
+        if (item) {
+            if (previousPoint != item.dataIndex) {
+                previousPoint = item.dataIndex;
+                
+                $('#tooltip').fadeOut(200,function(){
+					$(this).remove();
+				});
+                var x = item.datapoint[0].toFixed(2),
+					y = item.datapoint[1].toFixed(2);
+                    
+                unicorn.flot_tooltip(item.pageX, item.pageY,item.series.label + " of " + x + " = " + y);
+            }
+            
+        } else {
+			$('#tooltip').fadeOut(200,function(){
+					$(this).remove();
+				});
+            previousPoint = null;           
+        }   
+    });
+});
+
+if (zk.ie && zk.ie < 8) {
+	jq.alert("Your browser is not supported, please use the latest one! (IE8+)");
+}
+]]></script>
+</zk>

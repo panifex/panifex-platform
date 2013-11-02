@@ -2,7 +2,12 @@
 # Use this file to add customized Bnd instructions for the bundle
 #-----------------------------------------------------------------
 
-Bundle-Activator: ${bundle.namespace}.internal.ExampleActivator
+Export-Package: \
+	org.panifex.platform.api;version="1.0", \
+	org.panifex.platform.api.security;version="1.0"
 
-Import-Package: !org.panifex.platform.api.*, org.osgi.framework;version="[1.3,2)"
+Import-Package: \
+	!org.panifex.platform.api.*, \
+	org.osgi.framework;version="[1.3,2)"
+
 Private-Package: org.panifex.platform.api.*

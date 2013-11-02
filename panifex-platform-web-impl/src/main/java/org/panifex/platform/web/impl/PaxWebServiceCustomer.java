@@ -4,13 +4,17 @@ import java.util.Hashtable;
 
 import javax.servlet.ServletException;
 
+import org.apache.shiro.web.env.EnvironmentLoaderListener;
+import org.apache.shiro.web.servlet.ShiroFilter;
 import org.ops4j.pax.web.service.WebContainer;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpContext;
+import org.osgi.service.http.NamespaceException;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zkoss.web.servlet.dsp.InterpreterServlet;
 import org.zkoss.zk.au.http.DHtmlUpdateServlet;
 import org.zkoss.zk.ui.http.DHtmlLayoutServlet;
 import org.zkoss.zk.ui.http.HttpSessionListener;
@@ -55,9 +59,20 @@ public final class PaxWebServiceCustomer implements ServiceTrackerCustomizer {
 		auEngineParams.put("servlet-name", "auEngine");
 		String engineMapping[] = {"/zkau/*"}; // same URI as the parameter "update-uri" of zkLoader
 		
+		// configure dsp servlet
+		InterpreterServlet dspServlet = new InterpreterServlet();
+		Hashtable<String, String> dspParams = new Hashtable<>();
+		dspParams.put("class-resource", "true");
+		String dspMapping[] = {"*.dsp"}; // mapping of DSP files
+		
+		// configure security filter
+		EnvironmentLoaderListener secListener = new EnvironmentLoaderListener();
+		String secServletNames[] = {"zkLoader"};
+		String secFilterMapping[] = {"/*"};
+		ShiroFilter secFilter = new ShiroFilter();
+		
 		// get the http context (zk servlets should be registered with the same http context)
 		HttpContext ctx = http.createDefaultHttpContext();
-		
 		// register zk session listener
 		http.registerEventListener(new HttpSessionListener(), ctx);
 		
@@ -65,10 +80,21 @@ public final class PaxWebServiceCustomer implements ServiceTrackerCustomizer {
 			// register zk servlets
 			http.registerServlet(zkLoader, loaderMapping, loaderParams, ctx);
 			http.registerServlet(auEngine, engineMapping, auEngineParams, ctx);
-			log.info("Zk servlets have been registered");
+			http.registerServlet(dspServlet, dspMapping, dspParams, ctx);
+			log.debug("Zk servlets have been registered");
 			
+			// register security filter
+			http.registerEventListener(secListener, ctx);
+			http.registerFilter(secFilter, secFilterMapping, secServletNames, null, ctx);
+			log.debug("Security filter has been registered");
+			
+			// register resources
+			http.registerResources("/", "/", ctx);
+				
 		} catch (ServletException e) {
 			log.error("Unable to register zk servlets", e);
+		} catch (NamespaceException e) {
+			log.error("Unable to register resources", e);
 		}
 		
 		return http;
