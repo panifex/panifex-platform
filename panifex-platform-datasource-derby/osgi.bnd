@@ -1,0 +1,2 @@
+Private-Package: org.panifex.platform.datasouce.derby.*
+Import-Package: !org.panifex.platform.datasource.derby.*, org.osgi.framework;version="[1.3,2)"
