@@ -147,12 +147,6 @@
 				<groupId>org.apache.aries.blueprint</groupId>
 				<artifactId>org.apache.aries.blueprint.annotation.impl</artifactId>
 				<version>1.0.0</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.apache.xbean</groupId>
-						<artifactId>xbean-finder</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.aries.proxy</groupId>
@@ -170,34 +164,12 @@
 				<artifactId>org.apache.felix.configadmin</artifactId>
 				<version>1.6.0</version>
 			</dependency>
-			<!-- Apache Xbean Dependencies -->
+			<!-- ASM Depedencies -->
 			<dependency>
-				<groupId>org.apache.xbean</groupId>
-				<artifactId>xbean-asm4-shaded</artifactId>
-				<version>3.14</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xbean</groupId>
-				<artifactId>xbean-bundleutils</artifactId>
-				<version>3.14</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.slf4j</groupId>
-						<artifactId>slf4j-api</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xbean</groupId>
-				<artifactId>xbean-finder-shaded</artifactId>
-				<version>3.14</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.slf4j</groupId>
-						<artifactId>slf4j-api</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
+                <groupId>asm</groupId>
+                <artifactId>asm-all</artifactId>
+                <version>3.2</version>
+            </dependency>
 			<!-- Commons Dependencies -->
 			<dependency>
 				<groupId>commons-fileupload</groupId>
