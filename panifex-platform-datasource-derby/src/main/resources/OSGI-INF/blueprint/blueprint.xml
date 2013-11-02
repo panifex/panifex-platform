@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	default-activation="eager">
+
+	<bean id="derbyXADataSource" class="org.apache.derby.jdbc.EmbeddedXADataSource">
+		<property name="databaseName" value="panifexdb" />
+		<!-- This creates the database on the fly. See the persistence.xml under 
+			panifex-platform-persistence for property configuration. The DB is created from persistence 
+			entities, this is not recommended for production use. -->
+		<property name="createDatabase" value="create" />
+	</bean>
+
+	<service id="PanifexDataSource" ref="derbyXADataSource"
+		interface="javax.sql.XADataSource">
+		<service-properties>
+			<entry key="osgi.jndi.service.name" value="jdbc/PanifexDataSource" />
+		</service-properties>
+	</service>
+
+
+	<bean id="derbyDataSource" class="org.apache.derby.jdbc.EmbeddedDataSource">
+		<property name="databaseName" value="panifexdb" />
+		<!-- This creates the database on the fly. -->
+		<property name="createDatabase" value="create" />
+	</bean>
+
+	<service id="NoTxPanifexDataSource" ref="derbyDataSource"
+		interface="javax.sql.DataSource">
+		<service-properties>
+			<entry key="osgi.jndi.service.name" value="jdbc/NoTxPanifexDataSource" />
+		</service-properties>
+	</service>
+
+</blueprint>

@@ -124,6 +124,11 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
+		<!-- Database Connectors Dependencies -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+		</dependency>
 		<!-- Pax Logging Dependencies -->
 		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>
