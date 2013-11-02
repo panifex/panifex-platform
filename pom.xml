@@ -237,6 +237,12 @@
 				<groupId>org.apache.openjpa</groupId>
 				<artifactId>openjpa</artifactId>
 				<version>2.2.2</version>
+				<exclusions>
+					<exclusion>
+						<groupId>asm</groupId>
+						<artifactId>asm</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- Apache Shiro Dependencies -->
 			<dependency>
@@ -244,10 +250,6 @@
 				<artifactId>shiro-core</artifactId>
 				<version>1.2.2</version>
 				<exclusions>
-					<exclusion>
-						<groupId>commons-beanutils</groupId>
-						<artifactId>commons-beanutils</artifactId>
-					</exclusion>
 					<exclusion>
 						<groupId>org.slf4j</groupId>
 						<artifactId>slf4j-api</artifactId>
@@ -282,6 +284,12 @@
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils</artifactId>
 				<version>1.8.3</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>commons-collections</groupId>
