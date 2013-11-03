@@ -24,6 +24,11 @@
 	<packaging>bundle</packaging>
 
 	<dependencies>
+		<!-- Apache Geronimo Dependencies -->
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jpa_2.0_spec</artifactId>
+		</dependency>
 		<!-- OSGi Depedencies -->
 		<dependency>
 			<groupId>org.osgi</groupId>
@@ -34,6 +39,11 @@
 			<groupId>org.osgi</groupId>
 			<artifactId>osgi_R4_compendium</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<!-- Panifex Dependencies -->
+		<dependency>
+			<groupId>org.panifex</groupId>
+			<artifactId>panifex-platform-api</artifactId>
 		</dependency>
 	</dependencies>
 

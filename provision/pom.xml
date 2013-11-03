@@ -147,7 +147,11 @@
 			<groupId>org.ops4j.pax.web</groupId>
 			<artifactId>pax-web-extender-whiteboard</artifactId>
 		</dependency>
-
+		<!-- SERP Depedencies -->
+		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.serp</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>
