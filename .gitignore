@@ -21,9 +21,8 @@ target/
 
 build.properties
 META-INF/
-!resource/META-INF/
 OSGI-INF/
-!resource/OSGI-INF/
+!resources/
 
 # Pax Runner folder
 runner/
