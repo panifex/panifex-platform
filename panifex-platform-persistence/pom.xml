@@ -29,6 +29,11 @@
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-jpa_2.0_spec</artifactId>
 		</dependency>
+		<!-- Liquibase Dependencies -->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-osgi</artifactId>
+		</dependency>
 		<!-- OSGi Depedencies -->
 		<dependency>
 			<groupId>org.osgi</groupId>

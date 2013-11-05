@@ -316,6 +316,12 @@
 				<artifactId>derby</artifactId>
 				<version>10.10.1.1</version>
 			</dependency>
+			<!-- Liquibase Depedencies -->
+			<dependency>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-osgi</artifactId>
+				<version>3.0.7</version>
+			</dependency>
 			<!-- Pax Logging Dependencies -->
 			<dependency>
 				<groupId>org.ops4j.pax.logging</groupId>
