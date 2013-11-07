@@ -93,7 +93,9 @@ public class PaxWebServiceListener {
 
 			// register resources
 			container.registerResources("/", "/", ctx);
-
+			container.registerResources("/bootstrap", "/bootstrap", ctx);
+			container.registerResources("/img", "/img", ctx);
+			container.registerResources("/js", "/js", ctx);
 		} catch (ServletException e) {
 			log.error("Unable to register zk servlets", e);
 		} catch (NamespaceException e) {

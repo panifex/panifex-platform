@@ -1,6 +1,6 @@
 <?page title="ZK 7 with Bootstrap Demo"?>
 <?component name="button" extends="button" width="44px" height="44px"?>
-<?link rel="stylesheet" type="text/css"	href="/bootstrap.css" ?>
+<?link rel="stylesheet" type="text/css"	href="/bootstrap/bootstrap.css" ?>
 <?link rel="stylesheet" type="text/css" href="/index.css.dsp" ?>
 <?link rel="stylesheet" type="text/css"
 	href="/user-nav.css.dsp" ?>
@@ -93,9 +93,9 @@
 		</div>
 		<include src="content.zul" />
 	</div>
-<script src="excanvas.min.js" type="" if="${zk.ie lt 9}" ></script>	
-<script src="jquery.flot.min.js"></script>
-<script src="jquery.peity.min.js"></script>
+<script src="js/excanvas.min.js" type="" if="${zk.ie lt 9}" ></script>	
+<script src="js/jquery.flot.min.js"></script>
+<script src="js/jquery.peity.min.js"></script>
 <script><![CDATA[
 (function ($) {
     var options = { }; // no options

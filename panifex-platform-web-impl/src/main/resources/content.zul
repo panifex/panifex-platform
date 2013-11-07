@@ -84,7 +84,7 @@
 			<panelchildren style="padding-bottom: 0px">
 				<vlayout hflex="1" style="overflow:visible" spacing="25px" sclass="separator">
 					<hlayout spacing="10px" forEach="2,3,1">
-						<image src="av${each}.jpg"/>
+						<image src="img/av${each}.jpg"/>
 						<vlayout>
 							<label> By: neytiri on 2 Aug 2012, 09:27 AM, IP: 186.56.45.7 </label>
 							<a href="#">Vivamus sed auctor nibh congue, ligula vitae tempus pharetra...</a>
