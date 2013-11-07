@@ -24,12 +24,6 @@
 	<packaging>bundle</packaging>
 
 	<dependencies>
-		<!-- Apache Aries Blueprint Depedencies -->
-		<dependency>
-			<groupId>org.apache.aries.blueprint</groupId>
-			<artifactId>org.apache.aries.blueprint.annotation.api</artifactId>
-			<scope>provided</scope>
-		</dependency>
 		<!-- Apache Shiro Dependencies -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>

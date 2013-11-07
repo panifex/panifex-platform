@@ -34,17 +34,6 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-osgi</artifactId>
 		</dependency>
-		<!-- OSGi Depedencies -->
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>osgi_R4_core</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>osgi_R4_compendium</artifactId>
-			<optional>true</optional>
-		</dependency>
 		<!-- Panifex Dependencies -->
 		<dependency>
 			<groupId>org.panifex</groupId>
