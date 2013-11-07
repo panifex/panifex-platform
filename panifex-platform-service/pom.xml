@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <parent>
-    <relativePath>../poms/compiled/</relativePath>
-    <groupId>org.panifex.parent.build</groupId>
-    <artifactId>compiled-bundle-settings</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<relativePath>../poms/compiled/</relativePath>
+		<groupId>org.panifex.parent.build</groupId>
+		<artifactId>compiled-bundle-settings</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
 
-  <properties>
-    <bundle.symbolicName>org.panifex.platform-service</bundle.symbolicName>
-    <bundle.namespace>org.panifex.platform.service</bundle.namespace>
-  </properties>
+	<properties>
+		<bundle.symbolicName>panifex-platform-service</bundle.symbolicName>
+		<bundle.namespace>org.panifex.platform.service</bundle.namespace>
+	</properties>
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.panifex</groupId>
-  <artifactId>panifex-platform-service</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.panifex</groupId>
+	<artifactId>panifex-platform-service</artifactId>
 
-  <name>${bundle.symbolicName} [${bundle.namespace}]</name>
+	<name>${bundle.symbolicName}</name>
 
-  <packaging>bundle</packaging>
+	<packaging>bundle</packaging>
 
-  <dependencies>
-    <!--
-     | uncomment to add all imported (non-local) bundles to your compilation classpath
-    <dependency>
-      <type>pom</type>
-      <groupId>${parent.groupId}</groupId>
-      <artifactId>provision</artifactId>
-      <optional>true</optional>
-    </dependency>
-    -->
-  </dependencies>
+	<dependencies>
+		<!-- Apache Aries Blueprint Depedencies -->
+		<dependency>
+			<groupId>org.apache.aries.blueprint</groupId>
+			<artifactId>org.apache.aries.blueprint.annotation.api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Panifex Depedencies -->
+		<dependency>
+			<groupId>org.panifex</groupId>
+			<artifactId>panifex-platform-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 </project>

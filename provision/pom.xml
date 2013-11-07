@@ -98,6 +98,15 @@
 			<groupId>org.apache.openjpa</groupId>
 			<artifactId>openjpa</artifactId>
 		</dependency>
+		<!-- Apache Shiro Dependencies -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+		</dependency>
 		<!-- ASM Depedencies -->
 		<dependency>
 			<groupId>asm</groupId>
