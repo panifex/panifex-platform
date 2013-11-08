@@ -17,17 +17,4 @@
 		</service-properties>
 	</service>
 
-
-	<!-- Liquibase service ->
-
-	<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
-		<property name="dataSource" ref="dataSource" />
-		<property name="changeLog"
-			value="classpath:/db-changelog/db.changelog-master.xml" />
-		<property name="dropFirst" value="false" />
-	</bean>
-
-	<reference id="dataSource" interface="javax.sql.DataSource"
-		filter="(osgi.jndi.service.name=jdbc/PanifexDataSource)" />-->
-
 </blueprint>

@@ -24,6 +24,12 @@
 	<packaging>bundle</packaging>
 
 	<dependencies>
+		<!-- Apache Aries Transaction Depedencies -->
+		<dependency>
+			<groupId>org.apache.aries.transaction</groupId>
+			<artifactId>org.apache.aries.transaction.blueprint</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<!-- Apache Geronimo Dependencies -->
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
