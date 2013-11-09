@@ -6,8 +6,10 @@
         <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/PanifexDataSource)</jta-data-source>
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/NoTxPanifexDataSource)</non-jta-data-source>
          
+         <!-- 
         <class>org.panifex.platform.persistence.security.AccountImpl</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
+         -->
        
         <properties>
             <property name="openjpa.BrokerImpl" value="non-finalizing" /> 

@@ -5,6 +5,8 @@ Import-Package: \
 	javax.sql, \
 	javax.naming, \
 	javax.persistence;version="[2.0,3.0)", \
+	javax.persistence.criteria;version="[2.0,3.0)", \
+	javax.persistence.metamodel;version="[2.0,3.0)", \
 	liquibase;version="[3.0,4.0)", \
 	liquibase.database;version="[3.0,4.0)", \
 	liquibase.database.jvm;version="[3.0,4.0)", \
@@ -17,7 +19,7 @@ Import-Package: \
 	org.panifex.platform.api;version="[1.0,2.0)", \
 	org.panifex.platform.api.security;version="[1.0,2.0)", \
 	!org.panifex.platform.persistence.*, \
-	org.slf4j;version="[1.7,2.0)"
+	org.slf4j;version="[1.4,2.0)"
 
 	
 Meta-Persistence: META-INF/persistence.xml

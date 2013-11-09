@@ -6,10 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.metamodel.StaticMetamodel;
 
 import org.panifex.platform.api.security.Account;
 
 @Entity(name = "account")
+@StaticMetamodel(AccountImpl_.class)
 @Table(name = "account")
 public class AccountImpl implements Account, Serializable {
 
