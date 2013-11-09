@@ -1,0 +1,10 @@
+
+Embed-Dependency: postgresql;groupId=postgresql;inline=false
+
+Import-Package: \
+	javax.naming, \
+	javax.sql, \
+	javax.transaction.xa, \
+	org.osgi.framework;version="[1.3,2)"
+	
+Meta-Persistence: META-INF/persistence.xml
