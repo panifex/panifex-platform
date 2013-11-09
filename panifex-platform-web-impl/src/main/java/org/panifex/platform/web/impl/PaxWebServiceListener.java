@@ -68,7 +68,7 @@ public class PaxWebServiceListener {
 		Hashtable<String, String> loaderParams = new Hashtable<>();
 		loaderParams.put("servlet-name", "zkLoader");
 		loaderParams.put("update-uri", "/zkau"); // URI mapped to auEngine
-		String loaderMapping[] = { "/*" }; // mapping of UI files
+		String loaderMapping[] = { "*.zul" }; // mapping of UI files
 
 		// configure auEngine servlet
 		log.debug("Configure auEngine servlet");
@@ -117,7 +117,7 @@ public class PaxWebServiceListener {
 
 			// register resources
 			container.registerResources("/", "/", ctx);
-			container.registerResources("/bootstrap", "/bootstrap", ctx);
+			container.registerResources("/css", "/css", ctx);
 			container.registerResources("/img", "/img", ctx);
 			container.registerResources("/js", "/js", ctx);
 		} catch (ServletException e) {

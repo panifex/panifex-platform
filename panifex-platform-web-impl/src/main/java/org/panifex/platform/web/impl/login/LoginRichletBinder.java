@@ -27,7 +27,7 @@ public class LoginRichletBinder {
 		log.debug("Bind Zk layout service: {}", zkLayoutService);
 		this.zkLayoutService = zkLayoutService;
 		
-		zkLayoutService.addRichlet(LoginRichlet.class,  "/");
+		//zkLayoutService.addRichlet(LoginRichlet.class,  "/");
 	}
 	
 	@Unbind
