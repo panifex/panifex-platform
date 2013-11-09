@@ -8,7 +8,8 @@ import org.apache.shiro.web.servlet.ShiroFilter;
  * ShiroFilter in order to be used in blueprint environment. 
  *
  */
-@Bean(id = "org.panifex.platform.web.impl.security.SecurityFilter")
+@Bean(id = SecurityFilter.ID)
 public class SecurityFilter extends ShiroFilter {
 
+	public final static String ID = "org.panifex.platform.web.impl.security.SecurityFilter";
 }

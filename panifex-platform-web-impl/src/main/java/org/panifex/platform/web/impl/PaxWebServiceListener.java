@@ -12,43 +12,63 @@ import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
 import org.apache.shiro.web.env.EnvironmentLoaderListener;
 import org.ops4j.pax.web.service.WebContainer;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.http.HttpContext;
 import org.osgi.service.http.NamespaceException;
 import org.panifex.platform.web.impl.security.SecurityFilter;
 import org.panifex.platform.web.impl.security.SecurityRealmListener;
+import org.panifex.platform.web.servlet.ZkLayoutService;
+import org.panifex.platform.web.servlet.ZkLayoutServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.web.servlet.dsp.InterpreterServlet;
 import org.zkoss.zk.au.http.DHtmlUpdateServlet;
-import org.zkoss.zk.ui.http.DHtmlLayoutServlet;
 import org.zkoss.zk.ui.http.HttpSessionListener;
 
-@Bean(id = "org.panifex.platform.web.impl.PaxWebServiceListener")
+@Bean(id = PaxWebServiceListener.ID)
 @ReferenceListener
 public class PaxWebServiceListener {
 
 	private Logger log = LoggerFactory.getLogger(SecurityRealmListener.class);
 
+	public final static String ID = "org.panifex.platform.web.impl.PaxWebServiceListener";
+	
+	@Inject(ref = "blueprintBundleContext")
+	private BundleContext bundleContext;
+	
 	@Inject
-	@Reference(availability = "optional", serviceInterface = WebContainer.class, referenceListeners = @ReferenceListener(ref = "org.panifex.platform.web.impl.PaxWebServiceListener"))
+	@Reference(availability = "optional", serviceInterface = WebContainer.class, referenceListeners = @ReferenceListener(ref = ID))
 	private WebContainer container;
 
-	@Inject(ref = "org.panifex.platform.web.impl.security.SecurityFilter")
+	@Inject(ref = SecurityFilter.ID)
 	private SecurityFilter securityFilter;
+	
+	@Inject(ref = ZkLayoutServiceImpl.ID)
+	private ZkLayoutService zkLayoutService;
+	
+	private ServiceRegistration<ZkLayoutService> zkLayoutServiceRegistration;
+	
+	public void setBundleContext(BundleContext bundleContext) {
+		this.bundleContext = bundleContext;
+	}
 	
 	public void setSecurityFilter(SecurityFilter securityFilter) {
 		this.securityFilter = securityFilter;
+	}
+	
+	public void setZkLayoutService(ZkLayoutService zkLayoutService) {
+		this.zkLayoutService = zkLayoutService;
 	}
 	
 	@Bind
 	public void bind(WebContainer container) {
 		// configure zkLoader servlet
 		log.debug("Configure ZkLoader servlet");
-		DHtmlLayoutServlet zkLoader = new DHtmlLayoutServlet();
 		Hashtable<String, String> loaderParams = new Hashtable<>();
 		loaderParams.put("servlet-name", "zkLoader");
 		loaderParams.put("update-uri", "/zkau"); // URI mapped to auEngine
-		String loaderMapping[] = { "*.zul", "*.html" }; // mapping of UI files
+		String loaderMapping[] = { "/*" }; // mapping of UI files
 
 		// configure auEngine servlet
 		log.debug("Configure auEngine servlet");
@@ -78,13 +98,17 @@ public class PaxWebServiceListener {
 
 		try {
 			// register zk servlets
-			container.registerServlet(zkLoader, loaderMapping, loaderParams,
+			container.registerServlet(zkLayoutService, loaderMapping, loaderParams,
 					ctx);
 			container.registerServlet(auEngine, engineMapping, auEngineParams,
 					ctx);
 			container.registerServlet(dspServlet, dspMapping, dspParams, ctx);
 			log.debug("Zk servlets have been registered");
 
+			// register zk layout service
+			zkLayoutServiceRegistration = bundleContext.registerService(ZkLayoutService.class, zkLayoutService, new Hashtable<String, String>());
+			log.debug("Zk layout service has been registered");
+			
 			// register security filter
 			container.registerEventListener(secListener, ctx);
 			container.registerFilter(securityFilter, secFilterMapping,
@@ -105,6 +129,9 @@ public class PaxWebServiceListener {
 
 	@Unbind
 	public void unbind(WebContainer container) {
-
+		if (zkLayoutServiceRegistration != null) {
+			zkLayoutServiceRegistration.unregister();
+			log.debug("Zk layout service has been unregistered");
+		}
 	}
 }
