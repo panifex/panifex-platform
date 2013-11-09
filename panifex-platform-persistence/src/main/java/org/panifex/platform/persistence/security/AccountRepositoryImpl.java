@@ -65,6 +65,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 	 */
 	@Override
 	public Account getAccountByUsername(String username) {
+		try {
 		log.debug("Get account with username: {}", username);
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<AccountImpl> cq = cb.createQuery(AccountImpl.class);
@@ -82,6 +83,10 @@ public class AccountRepositoryImpl implements AccountRepository {
 			log.error("More than one account with same username: {}", username);
 			throw new RuntimeException(
 					"More than one account with same username");
+		}
+		} catch (Exception e) {
+			log.error("Unable to get account: {}", e);
+			throw e;
 		}
 	}
 

@@ -64,8 +64,10 @@ public class SecurityRealmListener {
 			// remove unbinded realm if it is not null
 			DefaultWebSecurityManager manager = getSecurityManager();
 			Collection<Realm> realms = manager.getRealms();
-			realms.remove(realm);
-			manager.setRealms(realms);
+			if (realms != null) {
+				realms.remove(realm);
+				manager.setRealms(realms);
+			}
 		}
 	}
 

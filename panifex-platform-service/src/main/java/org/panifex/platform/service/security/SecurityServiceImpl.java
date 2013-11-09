@@ -43,11 +43,9 @@ public class SecurityServiceImpl implements SecurityService {
 	public String[] getPasswordForUser(String username) {
 		Account account = accountRepository.getAccountByUsername(username);
 		if (account != null) {
-			// return new String[]{account.getPassword()};
-			return new String[]{ "1234" };
+			return new String[]{account.getPassword()};
 		} else {
-			//return new String[0];
-			return new String[]{ "1234" };
+			return new String[0];
 		}
 	}
 

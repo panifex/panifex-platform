@@ -86,7 +86,7 @@ public class PanifexRealm extends AuthorizingRealm {
 		UsernamePasswordToken upToken = (UsernamePasswordToken) token;
 		String username = upToken.getUsername();
 
-		log.debug("Get 1 authentication info for username: {}", username);
+		log.debug("Get authentication info for username: {}", username);
 		
 		// Null username is invalid
 		if (username == null) {
@@ -96,12 +96,9 @@ public class PanifexRealm extends AuthorizingRealm {
 
 		String password = null;
 		String salt = null;
-		log.debug("Get 2 authentication info for username: {}", username);
 		switch (saltStyle) {
 		case NO_SALT:
-			log.debug("Get 3 authentication info for username: {}", username);
 			password = securityService.getPasswordForUser(username)[0];
-			log.debug("Get 4 authentication info for username: {}", username);
 			break;
 		case CRYPT:
 			// TODO: separate password and hash from getPasswordForUser[0]
