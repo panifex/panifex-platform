@@ -11,7 +11,7 @@
 <?link rel="stylesheet" type="text/css"
 	href="/content-header.css.dsp" ?>
 <?link rel="stylesheet" type="text/css"
-	href="/light-blue.css.dsp"?>
+	href="/grey.css.dsp"?>
 	
 <zk xmlns:n="native">
 	<popup id="btntip" sclass="btn-tip" style="margin-top: 10px">
