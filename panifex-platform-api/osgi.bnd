@@ -3,8 +3,8 @@
 #-----------------------------------------------------------------
 
 Export-Package: \
-	org.panifex.platform.api;version="1.0", \
-	org.panifex.platform.api.security;version="1.0"
+	org.panifex.platform.api, \
+	org.panifex.platform.api.security
 
 Import-Package: \
 	!org.panifex.platform.api.*, \
