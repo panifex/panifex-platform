@@ -19,18 +19,17 @@ public class ZkLayoutServiceImpl extends DHtmlLayoutServlet implements ZkLayoutS
 	private static final long serialVersionUID = 4082554202918040779L;
 
 	/**
-	 * Gets Zk framework configuration which can be used for registering
-	 * richlets, etc.
-	 * 
-	 * @return Zk framework configuration
+	 * {@inheritDoc}
 	 */
-	private Configuration getConfiguration() {
+	@Override
+	public Configuration getConfiguration() {
 		return WebManager.getWebManager(getServletContext()).getWebApp().getConfiguration();
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Object addRichlet(Class<? extends Richlet> richlet, String path) {
 		return addRichlet(richlet, path, null);
 	}
@@ -38,6 +37,7 @@ public class ZkLayoutServiceImpl extends DHtmlLayoutServlet implements ZkLayoutS
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Object addRichlet(Class<? extends Richlet> richlet, String path, Map<String, String> params) {
 		// get the configuration
 		Configuration config = getConfiguration();

@@ -6,6 +6,7 @@ import javax.servlet.Servlet;
 
 import org.zkoss.zk.ui.Richlet;
 import org.zkoss.zk.ui.UiException;
+import org.zkoss.zk.ui.util.Configuration;
 
 /**
  * The zk framework configuration service.
@@ -42,4 +43,12 @@ public interface ZkLayoutService extends Servlet {
 	 * @exception UiException if the richlet is not defined yet.
 	 */
 	Object addRichlet(Class<? extends Richlet> richlet, String path, Map<String, String> params);
+	
+	/**
+	 * Gets Zk framework configuration which can be used for registering
+	 * richlets, etc.
+	 * 
+	 * @return Zk framework configuration
+	 */
+	Configuration getConfiguration();
 }

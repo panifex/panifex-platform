@@ -1,0 +1,118 @@
+@import "~./zul/less/_header.less";
+
+
+.account-container {
+	width: 290px;
+	height: 300px;
+	display: block;
+	margin: 85px auto 0 auto;
+	background: #f9f9f9;
+	border: 1px solid #d5d5d5;
+	padding-bottom: 25px; padding-left : 25px; padding-right : 25px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding-left: 15px;
+}
+
+.account-container h1 {
+	margin-bottom: .4em;
+	color: #263849;
+	font-size: 30px;
+}
+
+.login-fields .field {
+	margin-bottom: 1.25em;
+}
+
+.login-fields label {
+	display: none;
+}
+
+.login-fields input {
+	font-family: 'Open Sans';
+	font-size: 13px;
+	color: #8e8d8d;
+	padding: 11px 15px 10px 50px;
+	background-color: #fdfdfd;
+	width: 255px;
+	display: block;
+	margin: 0;
+	box-shadow: inset 2px 2px 4px #f1f1f1;
+}
+
+.login-fields .username-field {
+	background: url(../img/signin/user.png) no-repeat;
+}
+
+.login-fields .password-field {
+	background: url(../img/signin/password.png) no-repeat;
+}
+
+.login-actions {
+	float: left;
+	width: 100%;
+	margin-top: -1em;
+	margin-bottom: 1.25em;
+}
+
+.login-extra {
+	display: block;
+	width: 300px;
+	margin: 1.5em auto;
+	text-align: center;
+	line-height: 19px;
+	text-shadow: 1px 1px 0px #fff;
+}
+
+span.login-checkbox {
+	float: left;
+	margin-top: 31px;
+}
+
+span.login-checkbox>input[type='checkbox'] {
+	float: left;
+	width: 15px;
+}
+
+/* Buttons */
+.btn-primary {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #92b765;
+  background-image: -moz-linear-gradient(top, #a0c277, #7da64b);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#a0c277), to(#7da64b));
+  background-image: -webkit-linear-gradient(top, #a0c277, #7da64b);
+  background-image: -o-linear-gradient(top, #a0c277, #7da64b);
+  background-image: linear-gradient(to bottom, #a0c277, #7da64b);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffa0c277', endColorstr='#ff7da64b', GradientType=0);
+  border-color: #7da64b #7da64b #567233;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #7da64b;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  color: #ffffff;
+  background-color: #7da64b;
+  *background-color: #709543;
+}
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #63833b \9;
+}
+
+.button {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  float: right;
+  margin-top: 18px;
+}
