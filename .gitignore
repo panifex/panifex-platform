@@ -28,6 +28,13 @@ OSGI-INF/
 runner/
 .DS_Store
 
+################
+# ZK.gitignore #
+################
+
+# ignored generated files
+*.css.dsp
+
 #####################
 # Eclipse.gitignore #
 #####################
