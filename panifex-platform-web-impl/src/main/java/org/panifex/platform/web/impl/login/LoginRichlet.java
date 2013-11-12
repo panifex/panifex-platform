@@ -2,21 +2,32 @@ package org.panifex.platform.web.impl.login;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zkoss.bind.Binder;
+import org.zkoss.bind.DefaultBinder;
+import org.zkoss.zhtml.H1;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.GenericRichlet;
 import org.zkoss.zk.ui.HtmlNativeComponent;
 import org.zkoss.zk.ui.Page;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.sys.PageCtrl;
 import org.zkoss.zul.A;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Script;
 import org.zkoss.zul.Textbox;
 
+/**
+ * Composes the login form.
+ * 
+ */
 public class LoginRichlet extends GenericRichlet {
 
 	private Logger log = LoggerFactory.getLogger(LoginRichlet.class);
+	
+	private Binder binder;
 	
 	@Override
 	public void service(Page page) throws Exception {
@@ -30,7 +41,12 @@ public class LoginRichlet extends GenericRichlet {
 		page.setTitle("Hello Mario!!!");
 
 		final Div main = new Div();
-				
+
+		// initialize Binder
+		binder = new DefaultBinder();
+		binder.init(main, new LoginFormVM(), null);
+		main.setAttribute("vm", binder.getViewModel());
+		
 		createTray(main);
 		createContent(main);
 		
@@ -39,6 +55,7 @@ public class LoginRichlet extends GenericRichlet {
 		s.setParent(main);
 
 		main.setPage(page);
+		binder.loadComponent(main, true);
 	}
 	
 	private void createTray(Component parent) {
@@ -55,7 +72,6 @@ public class LoginRichlet extends GenericRichlet {
 		container.setSclass("container");
 		container.setParent(fill);
 		
-		
 		final A logo = new A();
 		logo.setHref("http://www.panifex.org/");
 		logo.setImage( "../img/panifex_top_logo.png");
@@ -66,11 +82,13 @@ public class LoginRichlet extends GenericRichlet {
 	private void createContent(Component parent) {
 		
 		final Div content = new Div();
-		content.setSclass("account-container");
-			
-		final HtmlNativeComponent h1 = new HtmlNativeComponent("h1");
-		h1.setPrologContent("Sign In");
+		content.setSclass("account-container");;
+		
+		final H1 h1 = new H1();
 		h1.setParent(content);
+		
+		final Label h1Label = new Label("Sign In");
+		h1Label.setParent(h1);
 		
 		final Div loginFields = new Div();
 		loginFields.setSclass("login-fields");
@@ -84,31 +102,43 @@ public class LoginRichlet extends GenericRichlet {
 		usernameField.setSclass("field");
 		usernameField.setParent(loginFields);
 		
+		// Creates username textbox
 		final Textbox usernameTextbox = new Textbox();
 		usernameTextbox.setSclass("username-field");
 		usernameTextbox.setPlaceholder("Username");
 		usernameTextbox.setParent(usernameField);
+		binder.addPropertyLoadBindings(usernameTextbox, "value", "vm.username", null, null, null, null, null);
+		binder.addPropertySaveBindings(usernameTextbox, "value", "vm.username", null, null, null, null, null, null, null);
 		
 		final Div passwordField = new Div();
 		passwordField.setSclass("field");
 		passwordField.setParent(loginFields);
 		
+		// Creates password textbox
 		final Textbox passwordTextbox = new Textbox();
 		passwordTextbox.setSclass("password-field");
 		passwordTextbox.setPlaceholder("Password");
 		passwordTextbox.setParent(passwordField);
+		binder.addPropertyLoadBindings(passwordTextbox, "value", "vm.password", null, null, null, null, null);
+		binder.addPropertySaveBindings(passwordTextbox, "value", "vm.password", null, null, null, null, null, null, null);
 		
 		final Div loginActions = new Div();
 		loginActions.setSclass("login-actions");
 		loginActions.setParent(content);
 		
+		// Creates remember me checkbox
 		final Checkbox remembermeCheckbox = new Checkbox("Keep me signed in");
 		remembermeCheckbox.setSclass("field login-checkbox");
 		remembermeCheckbox.setParent(loginActions);
+		binder.addPropertyLoadBindings(remembermeCheckbox, "checked", "vm.isRememberMe", null, null, null, null, null);
+		binder.addPropertySaveBindings(remembermeCheckbox, "checked", "vm.isRememberMe", null, null, null, null, null, null, null);
 		
+		// Creates sign in button
 		final Button signInButton = new Button("Sign In");
-		signInButton.setSclass("button btn btn-primary btn-large");
+		signInButton.setClass("button btn btn-primary btn-large");
 		signInButton.setParent(loginActions);
+		signInButton.setType("submit");
+		binder.addCommandBinding(signInButton, Events.ON_CLICK, "'signIn'", null);
 		
 		content.setParent(parent);
 	}

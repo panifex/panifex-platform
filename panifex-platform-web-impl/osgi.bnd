@@ -4,6 +4,8 @@ Bundle-Blueprint-Annotation: true
 Embed-Dependency: \
 	bsh;groupId=org.beanshell;inline=false, \
 	zk;groupId=org.zkoss.zk;inline=false, \
+	zkbind;groupId=org.zkoss.zk;inline=false, \
+	zhtml;groupId=org.zkoss.zk;inline=false, \
 	zkex;groupId=org.zkoss.zk;inline=false, \
 	zkmax;groupId=org.zkoss.zk;inline=false, \
 	zul;groupId=org.zkoss.zk;inline=false, \

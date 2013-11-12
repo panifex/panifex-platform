@@ -392,6 +392,18 @@
 			</dependency>
 			<dependency>
 				<groupId>org.zkoss.zk</groupId>
+				<artifactId>zkbind</artifactId>
+				<version>${zk.framework.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.zkoss.zk</groupId>
+				<artifactId>zhtml</artifactId>
+				<version>${zk.framework.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.zkoss.zk</groupId>
 				<artifactId>zkex</artifactId>
 				<version>${zk.framework.version}</version>
 				<scope>compile</scope>
@@ -430,6 +442,12 @@
 						<artifactId>commons-fileupload</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.zkoss.common</groupId>
+				<artifactId>zel</artifactId>
+				<version>${zk.framework.version}</version>
+				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.zkoss.common</groupId>
