@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.DefaultBinder;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.H1;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.GenericRichlet;
@@ -37,8 +38,8 @@ public class LoginFormRichlet extends GenericRichlet {
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/index.css.dsp\"/>");
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/login.css.dsp\"/>");
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/grey.css.dsp\"/>");
-		
-		page.setTitle("Hello Mario!!!");
+
+		page.setTitle(Labels.getLabel("application.name"));
 
 		final Div main = new Div();
 
@@ -73,7 +74,7 @@ public class LoginFormRichlet extends GenericRichlet {
 		container.setParent(fill);
 		
 		final A logo = new A();
-		logo.setHref("http://www.panifex.org/");
+		logo.setHref(Labels.getLabel("application.url"));
 		logo.setImage( "../img/panifex_top_logo.png");
 		logo.setParent(container);
 
@@ -87,7 +88,7 @@ public class LoginFormRichlet extends GenericRichlet {
 		final H1 h1 = new H1();
 		h1.setParent(content);
 		
-		final Label h1Label = new Label("Sign In");
+		final Label h1Label = new Label(Labels.getLabel("login.form.header.title1"));
 		h1Label.setParent(h1);
 		
 		final Div loginFields = new Div();
@@ -95,7 +96,7 @@ public class LoginFormRichlet extends GenericRichlet {
 		loginFields.setParent(content);
 		
 		final HtmlNativeComponent p = new HtmlNativeComponent("p");
-		p.setPrologContent("Sign in using your registered account");
+		p.setPrologContent(Labels.getLabel("login.form.header.title2"));
 		p.setParent(loginFields);
 			
 		final Div usernameField = new Div();
@@ -105,7 +106,8 @@ public class LoginFormRichlet extends GenericRichlet {
 		// Creates username textbox
 		final Textbox usernameTextbox = new Textbox();
 		usernameTextbox.setSclass("username-field");
-		usernameTextbox.setPlaceholder("Username");
+		usernameTextbox.setPlaceholder(Labels.getLabel("login.form.field.username.placeholder"));
+		usernameTextbox.setPlaceholder(Labels.getLabel("login.form.field.username.tooltip"));
 		usernameTextbox.setParent(usernameField);
 		binder.addPropertyLoadBindings(usernameTextbox, "value", "vm.username", null, null, null, null, null);
 		binder.addPropertySaveBindings(usernameTextbox, "value", "vm.username", null, null, null, null, null, null, null);
@@ -117,7 +119,8 @@ public class LoginFormRichlet extends GenericRichlet {
 		// Creates password textbox
 		final Textbox passwordTextbox = new Textbox();
 		passwordTextbox.setSclass("password-field");
-		passwordTextbox.setPlaceholder("Password");
+		passwordTextbox.setPlaceholder(Labels.getLabel("login.form.field.passwors.placeholder"));
+		passwordTextbox.setTooltip(Labels.getLabel("login.form.field.passwors.tooltip"));
 		passwordTextbox.setParent(passwordField);
 		binder.addPropertyLoadBindings(passwordTextbox, "value", "vm.password", null, null, null, null, null);
 		binder.addPropertySaveBindings(passwordTextbox, "value", "vm.password", null, null, null, null, null, null, null);
@@ -127,14 +130,15 @@ public class LoginFormRichlet extends GenericRichlet {
 		loginActions.setParent(content);
 		
 		// Creates remember me checkbox
-		final Checkbox remembermeCheckbox = new Checkbox("Keep me signed in");
+		final Checkbox remembermeCheckbox = new Checkbox(Labels.getLabel("login.form.field.rememberme.label"));
 		remembermeCheckbox.setSclass("field login-checkbox");
+		remembermeCheckbox.setTooltip(Labels.getLabel("login.form.field.rememberme.tooltip"));
 		remembermeCheckbox.setParent(loginActions);
 		binder.addPropertyLoadBindings(remembermeCheckbox, "checked", "vm.isRememberMe", null, null, null, null, null);
 		binder.addPropertySaveBindings(remembermeCheckbox, "checked", "vm.isRememberMe", null, null, null, null, null, null, null);
 		
 		// Creates sign in button
-		final Button signInButton = new Button("Sign In");
+		final Button signInButton = new Button(Labels.getLabel("login.form.button.login.label"));
 		signInButton.setClass("button btn btn-primary btn-large");
 		signInButton.setParent(loginActions);
 		signInButton.setType("submit");

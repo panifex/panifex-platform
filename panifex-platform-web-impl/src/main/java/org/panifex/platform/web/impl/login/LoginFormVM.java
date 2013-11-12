@@ -15,6 +15,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Messagebox;
 
@@ -57,9 +58,9 @@ public class LoginFormVM {
 			currentUser.login(token);
 			Executions.sendRedirect("/zk/main");
 		} catch (UnknownAccountException e) {
-			Messagebox.show("Your user name or password is incorrect.", null, 0, Messagebox.ERROR);
+			Messagebox.show(Labels.getLabel("login.form.fault.UnknownAccountException"), null, 0, Messagebox.ERROR);
 		} catch (IncorrectCredentialsException e) {
-			Messagebox.show("Your user name or password is incorrect.", null, 0, Messagebox.ERROR);
+			Messagebox.show(Labels.getLabel("fault.IncorrectCredentialsException"), null, 0, Messagebox.ERROR);
 		} catch (ExcessiveAttemptsException e) {
 			Messagebox.show("", null, 0, Messagebox.ERROR);
 		} catch (ExpiredCredentialsException e) {
