@@ -23,9 +23,9 @@ import org.zkoss.zul.Textbox;
  * Composes the login form.
  * 
  */
-public class LoginRichlet extends GenericRichlet {
+public class LoginFormRichlet extends GenericRichlet {
 
-	private Logger log = LoggerFactory.getLogger(LoginRichlet.class);
+	private Logger log = LoggerFactory.getLogger(LoginFormRichlet.class);
 	
 	private Binder binder;
 	

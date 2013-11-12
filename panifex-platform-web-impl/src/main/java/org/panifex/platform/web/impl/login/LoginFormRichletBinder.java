@@ -10,11 +10,11 @@ import org.panifex.platform.web.servlet.ZkLayoutService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Bean(id = LoginRichletBinder.ID)
+@Bean(id = LoginFormRichletBinder.ID)
 @ReferenceListener
-public class LoginRichletBinder {
+public class LoginFormRichletBinder {
 
-	private Logger log = LoggerFactory.getLogger(LoginRichlet.class);
+	private Logger log = LoggerFactory.getLogger(LoginFormRichlet.class);
 	
 	public final static String ID = "org.panifex.platform.web.impl.login.LoginRichletBinder";
 	
@@ -27,7 +27,7 @@ public class LoginRichletBinder {
 		log.debug("Bind Zk layout service: {}", zkLayoutService);
 		this.zkLayoutService = zkLayoutService;
 		
-		zkLayoutService.addRichlet(LoginRichlet.class,  "/login");
+		zkLayoutService.addRichlet(LoginFormRichlet.class,  "/login");
 	}
 	
 	@Unbind
