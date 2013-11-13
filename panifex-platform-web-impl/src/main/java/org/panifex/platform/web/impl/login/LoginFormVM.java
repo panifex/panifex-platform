@@ -12,6 +12,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.panifex.platform.web.impl.main.AbstractVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.annotation.Command;
@@ -19,7 +20,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Messagebox;
 
-public class LoginFormVM {
+public class LoginFormVM extends AbstractVM {
 
 	private Logger log = LoggerFactory.getLogger(LoginFormVM.class);
 	
