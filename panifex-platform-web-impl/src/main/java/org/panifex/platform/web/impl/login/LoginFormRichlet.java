@@ -6,9 +6,10 @@ import org.zkoss.bind.Binder;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.H1;
+import org.zkoss.zhtml.P;
+import org.zkoss.zhtml.Text;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.GenericRichlet;
-import org.zkoss.zk.ui.HtmlNativeComponent;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.sys.PageCtrl;
@@ -16,7 +17,6 @@ import org.zkoss.zul.A;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Div;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.Script;
 import org.zkoss.zul.Textbox;
 
@@ -88,17 +88,19 @@ public class LoginFormRichlet extends GenericRichlet {
 		final H1 h1 = new H1();
 		h1.setParent(content);
 		
-		final Label h1Label = new Label(Labels.getLabel("login.form.header.title1"));
+		final Text h1Label = new Text(Labels.getLabel("login.form.header.title1"));
 		h1Label.setParent(h1);
 		
 		final Div loginFields = new Div();
 		loginFields.setSclass("login-fields");
 		loginFields.setParent(content);
 		
-		final HtmlNativeComponent p = new HtmlNativeComponent("p");
-		p.setPrologContent(Labels.getLabel("login.form.header.title2"));
+		final P p = new P();
 		p.setParent(loginFields);
 			
+		final Text pLabel = new Text(Labels.getLabel("login.form.header.title2"));
+		pLabel.setParent(p);
+		
 		final Div usernameField = new Div();
 		usernameField.setSclass("field");
 		usernameField.setParent(loginFields);
@@ -126,7 +128,7 @@ public class LoginFormRichlet extends GenericRichlet {
 		binder.addPropertySaveBindings(passwordTextbox, "value", "vm.password", null, null, null, null, null, null, null);
 		
 		final Div loginActions = new Div();
-		loginActions.setSclass("login-actions");
+		loginActions.setSclass("pull-left");
 		loginActions.setParent(content);
 		
 		// Creates remember me checkbox
