@@ -75,4 +75,8 @@ public class LoginFormVM extends AbstractVM {
 			Messagebox.show("An error during the Authentication process");
 		}
 	}
+	@Override
+	protected Logger getLogger() {
+		return log;
+	}
 }

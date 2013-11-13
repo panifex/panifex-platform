@@ -7,13 +7,16 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.GenericRichlet;
 import org.zkoss.zk.ui.Page;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.sys.PageCtrl;
 import org.zkoss.zul.A;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Menubar;
+import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Script;
 
-/** The abstract richlet which creates core layout.
- * 
+/** 
+ * The abstract richlet which creates core layout.
  *
  */
 public abstract class AbstractRichlet extends GenericRichlet {
@@ -24,9 +27,11 @@ public abstract class AbstractRichlet extends GenericRichlet {
 	public final void service(Page page) throws Exception {
 		PageCtrl pageCtrl = (PageCtrl) page;
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/bootstrap/css/bootstrap.min.css\"/>");
+		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/content-header.css.dsp\"/>");
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/index.css.dsp\"/>");
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/login.css.dsp\"/>");
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/grey.css.dsp\"/>");
+		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/user-nav.css.dsp\"/>");
 
 		page.setTitle(Labels.getLabel("application.name"));
 		
@@ -49,13 +54,17 @@ public abstract class AbstractRichlet extends GenericRichlet {
 	}
 	
 	private void createComponents(Component main) {
-		Component header = createTray();
-		header.setParent(main);
+		Component logo = createLogo();
+		logo.setParent(main);
+		
+		Component userNav = createUserNav();
+		userNav.setParent(main);
+		
 		Component content = createContent();
 		content.setParent(main);
 	}
 	
-	private Component createTray() {
+	private Component createLogo() {
 		
 		final Div header = new Div();
 		header.setSclass("header");
@@ -74,6 +83,22 @@ public abstract class AbstractRichlet extends GenericRichlet {
 		logo.setParent(container);
 
 		return header;
+	}
+	
+	private Component createUserNav() {
+		final Div userNav = new Div();
+		userNav.setSclass("user-nav");
+		
+		final Menubar menubar = new Menubar();
+		menubar.setParent(userNav);
+		
+		final Menuitem logout = new Menuitem(getLabel("main.form.button.logout.label"));
+		logout.setIconSclass("icon icon-white icon-share-alt");
+		logout.setParent(menubar);
+		binder.addCommandBinding(logout, Events.ON_CLICK, "'logout'", null);
+		binder.addPropertyLoadBindings(logout, "visible", "vm.isUserLoggedIn", null, null, null, null, null);
+		
+		return userNav;
 	}
 	
 	protected abstract Component createContent();
