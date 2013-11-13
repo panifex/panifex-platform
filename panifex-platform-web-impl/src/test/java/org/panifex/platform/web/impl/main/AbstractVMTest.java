@@ -2,7 +2,7 @@ package org.panifex.platform.web.impl.main;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.anyString;
+import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -44,7 +44,7 @@ public final class AbstractVMTest {
 		
 		expect(SecurityUtils.getSubject()).andReturn(subjectMock);
 		expect(subjectMock.getPrincipal()).andReturn(principalMock);
-		logMock.info(anyString(), anyString());
+		logMock.info(anyObject(String.class), anyObject(String.class));
 		subjectMock.logout();
 		Executions.sendRedirect("/zk/login");
 		
