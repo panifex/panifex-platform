@@ -24,7 +24,7 @@
 	<packaging>bundle</packaging>
 
 	<dependencies>
-		<!-- Database Dependencies-->
+		<!-- Database Dependencies -->
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>

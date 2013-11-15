@@ -34,128 +34,122 @@ import org.slf4j.LoggerFactory;
 @Service(interfaces = Realm.class)
 public class PanifexRealm extends AuthorizingRealm {
 
-	private Logger log = LoggerFactory.getLogger(PanifexRealm.class);
-	
-	@Inject
-	@Reference(serviceInterface = SecurityService.class, referenceListeners = @ReferenceListener(ref = "org.panifex.platform.service.security.PanifexRealm"))
-	private SecurityService securityService;
+    private Logger log = LoggerFactory.getLogger(PanifexRealm.class);
 
-	/**
-	 * Password hash salt configuration.
-	 * <ul>
-	 * <li>NO_SALT - password hashes are not salted.</li>
-	 * <li>CRYPT - password hashes are stored in unix crypt format.</li>
-	 * <li>COLUMN - salt is in a separate column in the database.</li>
-	 * <li>EXTERNAL - salt is not stored in the database.
-	 * {@link #getSaltForUser(String)} will be called to get the salt</li>
-	 * </ul>
-	 */
-	public enum SaltStyle {
-		NO_SALT, CRYPT, COLUMN, EXTERNAL
-	};
+    @Inject
+    @Reference(serviceInterface = SecurityService.class, referenceListeners = @ReferenceListener(ref = "org.panifex.platform.service.security.PanifexRealm"))
+    private SecurityService securityService;
 
-	protected SaltStyle saltStyle = SaltStyle.NO_SALT;
+    /**
+     * Password hash salt configuration.
+     * <ul>
+     * <li>NO_SALT - password hashes are not salted.</li>
+     * <li>CRYPT - password hashes are stored in unix crypt format.</li>
+     * <li>COLUMN - salt is in a separate column in the database.</li>
+     * <li>EXTERNAL - salt is not stored in the database. {@link #getSaltForUser(String)} will be
+     * called to get the salt</li>
+     * </ul>
+     */
+    public enum SaltStyle {
+        NO_SALT, CRYPT, COLUMN, EXTERNAL
+    };
 
-	/**
-	 * Sets the salt style. See {@link #saltStyle}.
-	 * 
-	 * @param saltStyle
-	 *            new SaltStyle to set.
-	 */
-	public void setSaltStyle(SaltStyle saltStyle) {
-		this.saltStyle = saltStyle;
-	}
+    protected SaltStyle saltStyle = SaltStyle.NO_SALT;
 
-	@Bind
-	public void bind(SecurityService securityService) {
-		this.securityService = securityService;
-	}
-	
-	@Unbind
-	public void unbind(SecurityService securityService) {
-		this.securityService = null;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(
-			AuthenticationToken token) throws AuthenticationException {
+    /**
+     * Sets the salt style. See {@link #saltStyle}.
+     * 
+     * @param saltStyle new SaltStyle to set.
+     */
+    public void setSaltStyle(SaltStyle saltStyle) {
+        this.saltStyle = saltStyle;
+    }
 
-		UsernamePasswordToken upToken = (UsernamePasswordToken) token;
-		String username = upToken.getUsername();
+    @Bind
+    public void bind(SecurityService securityService) {
+        this.securityService = securityService;
+    }
 
-		log.debug("Get authentication info for username: {}", username);
-		
-		// Null username is invalid
-		if (username == null) {
-			throw new AccountException(
-					"Null usernames are not allowed by this realm.");
-		}
+    @Unbind
+    public void unbind(SecurityService securityService) {
+        this.securityService = null;
+    }
 
-		String password = null;
-		String salt = null;
-		switch (saltStyle) {
-		case NO_SALT:
-			password = securityService.getPasswordForUser(username)[0];
-			break;
-		case CRYPT:
-			// TODO: separate password and hash from getPasswordForUser[0]
-			throw new ConfigurationException("Not implemented yet");
-			// break;
-		case COLUMN:
-			String[] queryResults = securityService
-					.getPasswordForUser(username);
-			password = queryResults[0];
-			salt = queryResults[1];
-			break;
-		case EXTERNAL:
-			password = securityService.getPasswordForUser(username)[0];
-		}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
+            throws AuthenticationException {
 
-		if (password == null) {
-			throw new UnknownAccountException("No account found for user ["
-					+ username + "]");
-		}
+        UsernamePasswordToken upToken = (UsernamePasswordToken) token;
+        String username = upToken.getUsername();
 
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username,
-				password.toCharArray(), getName());
+        log.debug("Get authentication info for username: {}", username);
 
-		if (salt != null) {
-			info.setCredentialsSalt(ByteSource.Util.bytes(salt));
-		}
+        // Null username is invalid
+        if (username == null) {
+            throw new AccountException("Null usernames are not allowed by this realm.");
+        }
 
-		log.debug("Authentication info resolved: username={}, password={}", username, password);
-		
-		return info;
-	}
+        String password = null;
+        String salt = null;
+        switch (saltStyle) {
+            case NO_SALT:
+                password = securityService.getPasswordForUser(username)[0];
+                break;
+            case CRYPT:
+                // TODO: separate password and hash from getPasswordForUser[0]
+                throw new ConfigurationException("Not implemented yet");
+                // break;
+            case COLUMN:
+                String[] queryResults = securityService.getPasswordForUser(username);
+                password = queryResults[0];
+                salt = queryResults[1];
+                break;
+            case EXTERNAL:
+                password = securityService.getPasswordForUser(username)[0];
+        }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(
-			PrincipalCollection principals) {
+        if (password == null) {
+            throw new UnknownAccountException("No account found for user [" + username + "]");
+        }
 
-		// null usernames are invalid
-		if (principals == null) {
-			throw new AuthorizationException(
-					"PrincipalCollection method argument cannot be null.");
-		}
+        SimpleAuthenticationInfo info =
+                new SimpleAuthenticationInfo(username, password.toCharArray(), getName());
 
-		String username = (String) getAvailablePrincipal(principals);
+        if (salt != null) {
+            info.setCredentialsSalt(ByteSource.Util.bytes(salt));
+        }
 
-		Set<String> roleNames = null;
-		Set<String> permissions = null;
+        log.debug("Authentication info resolved: username={}, password={}", username, password);
 
-		// TODO implement
-		roleNames = new HashSet<>();
-		permissions = new HashSet<>();
+        return info;
+    }
 
-		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
-		info.setStringPermissions(permissions);
-		return info;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+
+        // null usernames are invalid
+        if (principals == null) {
+            throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
+        }
+
+        String username = (String) getAvailablePrincipal(principals);
+
+        Set<String> roleNames = null;
+        Set<String> permissions = null;
+
+        // TODO implement
+        roleNames = new HashSet<>();
+        permissions = new HashSet<>();
+
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
+        info.setStringPermissions(permissions);
+        return info;
+    }
 
 }

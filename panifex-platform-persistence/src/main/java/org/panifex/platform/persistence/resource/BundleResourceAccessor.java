@@ -11,26 +11,26 @@ import liquibase.resource.ResourceAccessor;
 
 public class BundleResourceAccessor implements ResourceAccessor {
 
-	private BundleContext context;
-	
-	public BundleResourceAccessor(BundleContext context) {
-		this.context = context;
-	}
-	
-	@Override
-	public InputStream getResourceAsStream(String file) throws IOException {
-		URL resource = context.getBundle().getResource(file);
-		return resource.openStream();
-	}
+    private BundleContext context;
 
-	@Override
-	public Enumeration<URL> getResources(String packageName) throws IOException {
-		return context.getBundle().getResources(packageName);
-	}
+    public BundleResourceAccessor(BundleContext context) {
+        this.context = context;
+    }
 
-	@Override
-	public ClassLoader toClassLoader() {
-		return null;
-	}
+    @Override
+    public InputStream getResourceAsStream(String file) throws IOException {
+        URL resource = context.getBundle().getResource(file);
+        return resource.openStream();
+    }
+
+    @Override
+    public Enumeration<URL> getResources(String packageName) throws IOException {
+        return context.getBundle().getResources(packageName);
+    }
+
+    @Override
+    public ClassLoader toClassLoader() {
+        return null;
+    }
 
 }

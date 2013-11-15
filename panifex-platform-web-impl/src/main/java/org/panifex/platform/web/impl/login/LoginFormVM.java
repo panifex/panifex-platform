@@ -22,61 +22,66 @@ import org.zkoss.zul.Messagebox;
 
 public class LoginFormVM extends AbstractVM {
 
-	private Logger log = LoggerFactory.getLogger(LoginFormVM.class);
-	
-	private String username = "";
-	private String password = "";
-	private boolean isRememberMe = true;
-	
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public boolean getIsRememberMe() {
-		return isRememberMe;
-	}
-	public void setIsRememberMe(boolean isRemember) {
-		this.isRememberMe = isRemember;
-	}
-	
-	@Command
-	public void signIn() {
-		log.debug("User is signing in");
-		
-		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-		token.setRememberMe(isRememberMe);
-		Subject currentUser = SecurityUtils.getSubject();
-		
-		try {
-			currentUser.login(token);
-			Executions.sendRedirect("/zk/main");
-		} catch (UnknownAccountException e) {
-			Messagebox.show(Labels.getLabel("login.form.fault.UnknownAccountException"), null, 0, Messagebox.ERROR);
-		} catch (IncorrectCredentialsException e) {
-			Messagebox.show(Labels.getLabel("fault.IncorrectCredentialsException"), null, 0, Messagebox.ERROR);
-		} catch (ExcessiveAttemptsException e) {
-			Messagebox.show("", null, 0, Messagebox.ERROR);
-		} catch (ExpiredCredentialsException e) {
-		} catch (LockedAccountException e) {
-		} catch (DisabledAccountException e) {
-		
-		} catch (ConcurrentAccessException e) { 
-		} catch (AccountException e) {		
-		
-		} catch (AuthenticationException e) {
-			Messagebox.show("An error during the Authentication process");
-		}
-	}
-	@Override
-	protected Logger getLogger() {
-		return log;
-	}
+    private Logger log = LoggerFactory.getLogger(LoginFormVM.class);
+
+    private String username = "";
+    private String password = "";
+    private boolean isRememberMe = true;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean getIsRememberMe() {
+        return isRememberMe;
+    }
+
+    public void setIsRememberMe(boolean isRemember) {
+        this.isRememberMe = isRemember;
+    }
+
+    @Command
+    public void signIn() {
+        log.debug("User is signing in");
+
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        token.setRememberMe(isRememberMe);
+        Subject currentUser = SecurityUtils.getSubject();
+
+        try {
+            currentUser.login(token);
+            Executions.sendRedirect("/zk/main");
+        } catch (UnknownAccountException e) {
+            Messagebox.show(Labels.getLabel("login.form.fault.UnknownAccountException"), null, 0,
+                    Messagebox.ERROR);
+        } catch (IncorrectCredentialsException e) {
+            Messagebox.show(Labels.getLabel("fault.IncorrectCredentialsException"), null, 0,
+                    Messagebox.ERROR);
+        } catch (ExcessiveAttemptsException e) {
+            Messagebox.show("", null, 0, Messagebox.ERROR);
+        } catch (ExpiredCredentialsException e) {} catch (LockedAccountException e) {} catch (DisabledAccountException e) {
+
+        } catch (ConcurrentAccessException e) {} catch (AccountException e) {
+
+        } catch (AuthenticationException e) {
+            Messagebox.show("An error during the Authentication process");
+        }
+    }
+
+    @Override
+    protected Logger getLogger() {
+        return log;
+    }
 }

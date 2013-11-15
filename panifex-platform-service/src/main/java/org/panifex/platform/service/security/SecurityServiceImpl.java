@@ -21,44 +21,44 @@ import org.slf4j.LoggerFactory;
 @Service(interfaces = SecurityService.class)
 public class SecurityServiceImpl implements SecurityService {
 
-	private Logger log = LoggerFactory.getLogger(SecurityServiceImpl.class);
-	
-	@Inject
-	@Reference(serviceInterface = AccountRepository.class, referenceListeners = @ReferenceListener(ref = "org.panifex.platform.service.security.SecurityServiceImpl"))
-	private AccountRepository accountRepository;
-	
-	@Bind
-	public void bind(AccountRepository accountRepository) {
-		log.debug("Bind account repository: {}", accountRepository);
-		this.accountRepository = accountRepository;
-	}
-	
-	@Unbind
-	public void unbind(AccountRepository accountRepository) {
-		log.debug("Unbind account repository: {}", accountRepository);
-		this.accountRepository = null;
-	}
-	
-	@Override
-	public String[] getPasswordForUser(String username) {
-		Account account = accountRepository.getAccountByUsername(username);
-		if (account != null) {
-			return new String[]{account.getPassword()};
-		} else {
-			return new String[0];
-		}
-	}
+    private Logger log = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
-	@Override
-	public Set<String> getPermissions(String arg0, Collection<String> arg1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Inject
+    @Reference(serviceInterface = AccountRepository.class, referenceListeners = @ReferenceListener(ref = "org.panifex.platform.service.security.SecurityServiceImpl"))
+    private AccountRepository accountRepository;
 
-	@Override
-	public Set<String> getRoleNamesForUser(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Bind
+    public void bind(AccountRepository accountRepository) {
+        log.debug("Bind account repository: {}", accountRepository);
+        this.accountRepository = accountRepository;
+    }
+
+    @Unbind
+    public void unbind(AccountRepository accountRepository) {
+        log.debug("Unbind account repository: {}", accountRepository);
+        this.accountRepository = null;
+    }
+
+    @Override
+    public String[] getPasswordForUser(String username) {
+        Account account = accountRepository.getAccountByUsername(username);
+        if (account != null) {
+            return new String[] {account.getPassword()};
+        } else {
+            return new String[0];
+        }
+    }
+
+    @Override
+    public Set<String> getPermissions(String arg0, Collection<String> arg1) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Set<String> getRoleNamesForUser(String arg0) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

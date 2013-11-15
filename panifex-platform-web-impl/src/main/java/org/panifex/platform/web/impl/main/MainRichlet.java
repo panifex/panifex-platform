@@ -7,19 +7,19 @@ import org.zkoss.zul.Div;
 
 public class MainRichlet extends AbstractRichlet {
 
-	private Logger log = LoggerFactory.getLogger(MainRichlet.class);
+    private Logger log = LoggerFactory.getLogger(MainRichlet.class);
 
-	@Override
-	protected Component createContent() {
-		log.debug("Create content");
-		final Div content = new Div();
-		return content;
-	
-	}
+    @Override
+    protected Component createContent() {
+        log.debug("Create content");
+        final Div content = new Div();
+        return content;
 
-	@Override
-	protected AbstractVM getViewModel() {
-		return new MainVM();
-	}
+    }
+
+    @Override
+    protected AbstractVM getViewModel() {
+        return new MainVM();
+    }
 
 }

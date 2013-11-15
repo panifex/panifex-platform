@@ -27,66 +27,64 @@ import org.slf4j.LoggerFactory;
 @ReferenceListener
 public class DataSourceListener {
 
-	private Logger log = LoggerFactory.getLogger(DataSourceListener.class);
+    private Logger log = LoggerFactory.getLogger(DataSourceListener.class);
 
-	@Inject(ref = "blueprintBundleContext")
-	private BundleContext bundleContext;
+    @Inject(ref = "blueprintBundleContext")
+    private BundleContext bundleContext;
 
-	@Inject
-	@Reference(serviceInterface = DataSource.class, filter = "(osgi.jndi.service.name=jdbc/PanifexDataSource)", referenceListeners = @ReferenceListener(ref = "org.panifex.platform.persistence.DataSourceListener"))
-	private DataSource dataSource;
+    @Inject
+    @Reference(serviceInterface = DataSource.class, filter = "(osgi.jndi.service.name=jdbc/PanifexDataSource)", referenceListeners = @ReferenceListener(ref = "org.panifex.platform.persistence.DataSourceListener"))
+    private DataSource dataSource;
 
-	private String changeLogFile = "/db-changelog/db.changelog-master.xml";;
-	private String defaultSchema = "";
-	private String contexts = "";
+    private String changeLogFile = "/db-changelog/db.changelog-master.xml";;
+    private String defaultSchema = "";
+    private String contexts = "";
 
-	public void setBundleContext(BundleContext bundleContext) {
-		this.bundleContext = bundleContext;
-	}
-	
-	@Bind
-	public void bind(DataSource dataSource) {
-		try {
-			log.debug("Fetch data source");
-			Connection connection = dataSource.getConnection();
+    public void setBundleContext(BundleContext bundleContext) {
+        this.bundleContext = bundleContext;
+    }
 
-			BundleResourceAccessor bundleResAccessor = new BundleResourceAccessor(
-					bundleContext);
+    @Bind
+    public void bind(DataSource dataSource) {
+        try {
+            log.debug("Fetch data source");
+            Connection connection = dataSource.getConnection();
 
-			Database database = DatabaseFactory.getInstance()
-					.findCorrectDatabaseImplementation(
-							new JdbcConnection(connection));
-			// database.setDefaultSchemaName(getDefaultSchema());
+            BundleResourceAccessor bundleResAccessor = new BundleResourceAccessor(bundleContext);
 
-			Liquibase liquibase = new Liquibase(getChangeLogFile(),
-					bundleResAccessor, database);
+            Database database =
+                    DatabaseFactory.getInstance().findCorrectDatabaseImplementation(
+                            new JdbcConnection(connection));
+            // database.setDefaultSchemaName(getDefaultSchema());
 
-			log.debug("Start updating data source schemas");
-			liquibase.update(contexts);
+            Liquibase liquibase = new Liquibase(getChangeLogFile(), bundleResAccessor, database);
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} catch (DatabaseException e) {
-			throw new RuntimeException(e);
-		} catch (LiquibaseException e) {
-			throw new RuntimeException(e);
-		}
-	}
+            log.debug("Start updating data source schemas");
+            liquibase.update(contexts);
 
-	@Unbind
-	public void unbind(DataSource dataSource) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (DatabaseException e) {
+            throw new RuntimeException(e);
+        } catch (LiquibaseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	}
+    @Unbind
+    public void unbind(DataSource dataSource) {
 
-	protected String getChangeLogFile() {
-		return changeLogFile;
-	}
+    }
 
-	protected String getDefaultSchema() {
-		return defaultSchema;
-	}
+    protected String getChangeLogFile() {
+        return changeLogFile;
+    }
 
-	protected String getContexts() {
-		return contexts;
-	}
+    protected String getDefaultSchema() {
+        return defaultSchema;
+    }
+
+    protected String getContexts() {
+        return contexts;
+    }
 }

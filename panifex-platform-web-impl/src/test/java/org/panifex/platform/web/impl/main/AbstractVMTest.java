@@ -24,52 +24,53 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.slf4j.Logger;
 import org.zkoss.zk.ui.Executions;
 
-@RunWith(PowerMockRunner.class) 
+@RunWith(PowerMockRunner.class)
 @PrepareForTest({AbstractVMImpl.class, Executions.class, SecurityUtils.class})
 public final class AbstractVMTest {
 
-	private AbstractVMImpl vm;
-	
-	// mocks
-	private Logger loggerMock = createMock(Logger.class);
-	private InitialContext initialContextMock = createMock(InitialContext.class);
-	private SidebarManager sidebarManagerMock = createMock(SidebarManager.class);
-	
-	@Before
-	public void init() throws Exception {
-		reset(loggerMock, initialContextMock);
-		PowerMock.createMock(InitialContext.class);
-		PowerMock.expectNew(InitialContext.class).andReturn(initialContextMock);
-		expect(initialContextMock.lookup("blueprint:comp/" + SidebarManager.ID)).andReturn(sidebarManagerMock);
-		
-		replay(initialContextMock);
-		replayAll();
-		
-		vm = new AbstractVMImpl(loggerMock);
-	}
-	
-	@Test
-	public void testLogout() {
-		Subject subjectMock = createMock(Subject.class);
-		String principalMock = "principal";
-		
-		PowerMock.createMock(SecurityUtils.class);
-		PowerMock.createMock(Executions.class);
-		mockStatic(SecurityUtils.class);
-		mockStatic(Executions.class);
+    private AbstractVMImpl vm;
 
-		expect(SecurityUtils.getSubject()).andReturn(subjectMock);
-		expect(subjectMock.getPrincipal()).andReturn(principalMock);
-		loggerMock.info(anyObject(String.class), anyObject(String.class));
-		subjectMock.logout();
-		Executions.sendRedirect("/zk/login");
-		
-		replay(subjectMock, loggerMock);
-		replayAll();
-		
-		vm.logout();
-		
-		verify(subjectMock, loggerMock);
-		verifyAll();
-	}
+    // mocks
+    private Logger loggerMock = createMock(Logger.class);
+    private InitialContext initialContextMock = createMock(InitialContext.class);
+    private SidebarManager sidebarManagerMock = createMock(SidebarManager.class);
+
+    @Before
+    public void init() throws Exception {
+        reset(loggerMock, initialContextMock);
+        PowerMock.createMock(InitialContext.class);
+        PowerMock.expectNew(InitialContext.class).andReturn(initialContextMock);
+        expect(initialContextMock.lookup("blueprint:comp/" + SidebarManager.ID)).andReturn(
+                sidebarManagerMock);
+
+        replay(initialContextMock);
+        replayAll();
+
+        vm = new AbstractVMImpl(loggerMock);
+    }
+
+    @Test
+    public void testLogout() {
+        Subject subjectMock = createMock(Subject.class);
+        String principalMock = "principal";
+
+        PowerMock.createMock(SecurityUtils.class);
+        PowerMock.createMock(Executions.class);
+        mockStatic(SecurityUtils.class);
+        mockStatic(Executions.class);
+
+        expect(SecurityUtils.getSubject()).andReturn(subjectMock);
+        expect(subjectMock.getPrincipal()).andReturn(principalMock);
+        loggerMock.info(anyObject(String.class), anyObject(String.class));
+        subjectMock.logout();
+        Executions.sendRedirect("/zk/login");
+
+        replay(subjectMock, loggerMock);
+        replayAll();
+
+        vm.logout();
+
+        verify(subjectMock, loggerMock);
+        verifyAll();
+    }
 }

@@ -1,139 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-		<relativePath>../poms/compiled/</relativePath>
-		<groupId>org.panifex.parent.build</groupId>
-		<artifactId>compiled-bundle-settings</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <relativePath>../poms/compiled/</relativePath>
+        <groupId>org.panifex.parent.build</groupId>
+        <artifactId>compiled-bundle-settings</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-	<properties>
-		<bundle.symbolicName>panifex-platform-web-impl</bundle.symbolicName>
-		<bundle.namespace>org.panifex.platform.web.impl</bundle.namespace>
-	</properties>
+    <properties>
+        <bundle.symbolicName>panifex-platform-web-impl</bundle.symbolicName>
+        <bundle.namespace>org.panifex.platform.web.impl</bundle.namespace>
+    </properties>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.panifex</groupId>
-	<artifactId>panifex-platform-web-impl</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.panifex</groupId>
+    <artifactId>panifex-platform-web-impl</artifactId>
 
-	<name>${bundle.symbolicName}</name>
+    <name>${bundle.symbolicName}</name>
 
-	<packaging>bundle</packaging>
+    <packaging>bundle</packaging>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.zkoss.maven</groupId>
-				<artifactId>zkless-engine-maven-plugin</artifactId>
-				<version>0.8.2</version>
-				<executions>
-					<execution>
-						<id>compile-less</id>
-						<goals>
-							<goal>lessc</goal>
-						</goals>
-						<configuration>
-							<!-- LESS source folder -->
-							<sourceDirectory>${project.basedir}/src/main/resources</sourceDirectory>
-							<!-- *.CSS.DSP output folder -->
-							<outputDirectory>${project.basedir}/src/main/resources</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.zkoss.maven</groupId>
+                <artifactId>zkless-engine-maven-plugin</artifactId>
+                <version>0.8.2</version>
+                <executions>
+                    <execution>
+                        <id>compile-less</id>
+                        <goals>
+                            <goal>lessc</goal>
+                        </goals>
+                        <configuration>
+                            <!-- LESS source folder -->
+                            <sourceDirectory>${project.basedir}/src/main/resources</sourceDirectory>
+                            <!-- *.CSS.DSP output folder -->
+                            <outputDirectory>${project.basedir}/src/main/resources</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
-	<dependencies>
-		<!-- Apache Shiro Dependencies -->
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-core</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-web</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!-- Beanshell Dependencies -->
-		<dependency>
-			<groupId>org.beanshell</groupId>
-			<artifactId>bsh</artifactId>
-		</dependency>
-		<!-- Panifex Platform Dependencies -->
-		<dependency>
-			<groupId>org.panifex</groupId>
-			<artifactId>panifex-platform-module-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.panifex</groupId>
-			<artifactId>panifex-platform-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!-- Pax Web Dependencies -->
-		<dependency>
-			<groupId>org.ops4j.pax.web</groupId>
-			<artifactId>pax-web-jetty-bundle</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!-- ZK Framework Dependencies -->
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zk</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zkbind</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zhtml</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zkex</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zkmax</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zul</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zkforge.el</groupId>
-			<artifactId>zcommons-el</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.common</groupId>
-			<artifactId>zcommon</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-fileupload</groupId>
-					<artifactId>commons-fileupload</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.common</groupId>
-			<artifactId>zel</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.common</groupId>
-			<artifactId>zweb</artifactId>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <!-- Apache Shiro Dependencies -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Beanshell Dependencies -->
+        <dependency>
+            <groupId>org.beanshell</groupId>
+            <artifactId>bsh</artifactId>
+        </dependency>
+        <!-- Panifex Platform Dependencies -->
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-platform-module-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-platform-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Pax Web Dependencies -->
+        <dependency>
+            <groupId>org.ops4j.pax.web</groupId>
+            <artifactId>pax-web-jetty-bundle</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- ZK Framework Dependencies -->
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zk</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkbind</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zhtml</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkex</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkmax</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zul</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zkforge.el</groupId>
+            <artifactId>zcommons-el</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.common</groupId>
+            <artifactId>zcommon</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-fileupload</groupId>
+                    <artifactId>commons-fileupload</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.common</groupId>
+            <artifactId>zel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.common</groupId>
+            <artifactId>zweb</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -5,9 +5,9 @@ import java.util.Set;
 
 public interface SecurityService {
 
-	String[] getPasswordForUser(String username);
-	
-	Set<String> getRoleNamesForUser(String username);
-	
-	Set<String> getPermissions(String username, Collection<String> roleNames);
+    String[] getPasswordForUser(String username);
+
+    Set<String> getRoleNamesForUser(String username);
+
+    Set<String> getPermissions(String username, Collection<String> roleNames);
 }

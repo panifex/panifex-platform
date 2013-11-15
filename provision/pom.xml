@@ -1,171 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-		<groupId>org.panifex</groupId>
-		<artifactId>panifex-parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.panifex.parent.build</groupId>
-	<artifactId>provision</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.panifex.parent.build</groupId>
+    <artifactId>provision</artifactId>
 
-	<name>panifex-parent - imported bundles</name>
+    <name>panifex-parent - imported bundles</name>
 
-	<packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-	<dependencies>
-		<!-- Apache Aries Dependencies -->
-		<dependency>
-			<groupId>org.apache.aries.proxy</groupId>
-			<artifactId>org.apache.aries.proxy</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.aries</groupId>
-			<artifactId>org.apache.aries.util</artifactId>
-		</dependency>
-		<!-- Apache Aries Blueprint Dependencies -->
-		<dependency>
-			<groupId>org.apache.aries.blueprint</groupId>
-			<artifactId>org.apache.aries.blueprint</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.aries.blueprint</groupId>
-			<artifactId>org.apache.aries.blueprint.annotation.api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.aries.blueprint</groupId>
-			<artifactId>org.apache.aries.blueprint.annotation.impl</artifactId>
-		</dependency>
-		<!-- Apache Aries JNDI Dependencies -->
-		<dependency>
-			<groupId>org.apache.aries.jndi</groupId>
-			<artifactId>org.apache.aries.jndi</artifactId>
-		</dependency>
-		<!-- Apache Aries JPA Depedencies -->
-		<dependency>
-			<groupId>org.apache.aries.jpa</groupId>
-			<artifactId>org.apache.aries.jpa.api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.aries.jpa</groupId>
-			<artifactId>org.apache.aries.jpa.blueprint.aries</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.aries.jpa</groupId>
-			<artifactId>org.apache.aries.jpa.container</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.aries.jpa</groupId>
-			<artifactId>org.apache.aries.jpa.container.context</artifactId>
-		</dependency>
-		<!-- Apache Aries Transaction Depedencies -->
-		<dependency>
-			<groupId>org.apache.aries.transaction</groupId>
-			<artifactId>org.apache.aries.transaction.blueprint</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.aries.transaction</groupId>
-			<artifactId>org.apache.aries.transaction.manager</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.aries.transaction</groupId>
-			<artifactId>org.apache.aries.transaction.wrappers</artifactId>
-		</dependency>
-		<!-- Apache Felix Dependencies -->
-		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.apache.felix.configadmin</artifactId>
-		</dependency>
-		<!-- Apache Geronimo Depedencies -->
-		<dependency>
-			<groupId>org.apache.geronimo.components</groupId>
-			<artifactId>geronimo-transaction</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-jpa_2.0_spec</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-jta_1.1_spec</artifactId>
-		</dependency>
-		<!-- Apache JPA Dependencies -->
-		<dependency>
-			<groupId>org.apache.openjpa</groupId>
-			<artifactId>openjpa</artifactId>
-		</dependency>
-		<!-- Apache Shiro Dependencies -->
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-web</artifactId>
-		</dependency>
-		<!-- ASM Depedencies -->
-		<dependency>
-			<groupId>asm</groupId>
-			<artifactId>asm-all</artifactId>
-		</dependency>
-		<!-- Commons Dependencies -->
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
-		<!-- Database Connectors Dependencies -->
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-		</dependency>
-		<!-- Liquibase Depedencies -->
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-osgi</artifactId>
-		</dependency>
-		<!-- Pax Logging Dependencies -->
-		<dependency>
-			<groupId>org.ops4j.pax.logging</groupId>
-			<artifactId>pax-logging-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.ops4j.pax.logging</groupId>
-			<artifactId>pax-logging-service</artifactId>
-		</dependency>
-		<!-- Pax Web Dependencies -->
-		<dependency>
-			<groupId>org.ops4j.pax.web</groupId>
-			<artifactId>pax-web-jetty-bundle</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.ops4j.pax.web</groupId>
-			<artifactId>pax-web-extender-whiteboard</artifactId>
-		</dependency>
-		<!-- SERP Depedencies -->
-		<dependency>
-			<groupId>org.apache.servicemix.bundles</groupId>
-			<artifactId>org.apache.servicemix.bundles.serp</artifactId>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <!-- Apache Aries Dependencies -->
+        <dependency>
+            <groupId>org.apache.aries.proxy</groupId>
+            <artifactId>org.apache.aries.proxy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.aries</groupId>
+            <artifactId>org.apache.aries.util</artifactId>
+        </dependency>
+        <!-- Apache Aries Blueprint Dependencies -->
+        <dependency>
+            <groupId>org.apache.aries.blueprint</groupId>
+            <artifactId>org.apache.aries.blueprint</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.aries.blueprint</groupId>
+            <artifactId>org.apache.aries.blueprint.annotation.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.aries.blueprint</groupId>
+            <artifactId>org.apache.aries.blueprint.annotation.impl</artifactId>
+        </dependency>
+        <!-- Apache Aries JNDI Dependencies -->
+        <dependency>
+            <groupId>org.apache.aries.jndi</groupId>
+            <artifactId>org.apache.aries.jndi</artifactId>
+        </dependency>
+        <!-- Apache Aries JPA Depedencies -->
+        <dependency>
+            <groupId>org.apache.aries.jpa</groupId>
+            <artifactId>org.apache.aries.jpa.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.aries.jpa</groupId>
+            <artifactId>org.apache.aries.jpa.blueprint.aries</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.aries.jpa</groupId>
+            <artifactId>org.apache.aries.jpa.container</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.aries.jpa</groupId>
+            <artifactId>org.apache.aries.jpa.container.context</artifactId>
+        </dependency>
+        <!-- Apache Aries Transaction Depedencies -->
+        <dependency>
+            <groupId>org.apache.aries.transaction</groupId>
+            <artifactId>org.apache.aries.transaction.blueprint</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.aries.transaction</groupId>
+            <artifactId>org.apache.aries.transaction.manager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.aries.transaction</groupId>
+            <artifactId>org.apache.aries.transaction.wrappers</artifactId>
+        </dependency>
+        <!-- Apache Felix Dependencies -->
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.configadmin</artifactId>
+        </dependency>
+        <!-- Apache Geronimo Depedencies -->
+        <dependency>
+            <groupId>org.apache.geronimo.components</groupId>
+            <artifactId>geronimo-transaction</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_2.0_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jta_1.1_spec</artifactId>
+        </dependency>
+        <!-- Apache JPA Dependencies -->
+        <dependency>
+            <groupId>org.apache.openjpa</groupId>
+            <artifactId>openjpa</artifactId>
+        </dependency>
+        <!-- Apache Shiro Dependencies -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+        </dependency>
+        <!-- ASM Depedencies -->
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm-all</artifactId>
+        </dependency>
+        <!-- Commons Dependencies -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <!-- Database Connectors Dependencies -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+        </dependency>
+        <!-- Liquibase Depedencies -->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-osgi</artifactId>
+        </dependency>
+        <!-- Pax Logging Dependencies -->
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-service</artifactId>
+        </dependency>
+        <!-- Pax Web Dependencies -->
+        <dependency>
+            <groupId>org.ops4j.pax.web</groupId>
+            <artifactId>pax-web-jetty-bundle</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.web</groupId>
+            <artifactId>pax-web-extender-whiteboard</artifactId>
+        </dependency>
+        <!-- SERP Depedencies -->
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.serp</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

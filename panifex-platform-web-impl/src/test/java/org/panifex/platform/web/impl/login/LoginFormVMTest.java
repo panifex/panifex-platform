@@ -28,56 +28,58 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.Executions;
 
-@RunWith(PowerMockRunner.class) 
+@RunWith(PowerMockRunner.class)
 @PrepareForTest({LoginFormVM.class, Executions.class, LoggerFactory.class, SecurityUtils.class})
 public class LoginFormVMTest {
 
-	private LoginFormVM vm;
-	
-	private Logger loggerMock = createMock(Logger.class);;
-	private InitialContext initialContextMock = createMock(InitialContext.class);
-	private SidebarManager sidebarManagerMock = createMock(SidebarManager.class);
-	
-	@Before
-	public void init() throws Exception {
-		
-		reset(initialContextMock);
-		
-		mockStatic(LoggerFactory.class);
-		expect(LoggerFactory.getLogger(LoginFormVM.class)).andReturn(loggerMock);
-		PowerMock.createMock(InitialContext.class);
-		PowerMock.expectNew(InitialContext.class).andReturn(initialContextMock);
-		expect(initialContextMock.lookup("blueprint:comp/" + SidebarManager.ID)).andReturn(sidebarManagerMock);
-		
-		replay(initialContextMock);
-		replayAll();
-		vm = new LoginFormVM();
-		verifyAll();
-		resetAll();
-	}
-	
-	@Test
-	public void testLogin() throws Exception {
-		UsernamePasswordToken token = createMock(UsernamePasswordToken.class);
-		Subject subjectMock = createMock(Subject.class);
-		
-		mockStatic(SecurityUtils.class);
-		mockStatic(Executions.class);
-		
-		loggerMock.debug(anyObject(String.class));
-		PowerMock.createMock(UsernamePasswordToken.class);
-		PowerMock.expectNew(UsernamePasswordToken.class, new Class<?>[]{String.class, String.class}, eq(""), eq("")).andReturn(token);
-		token.setRememberMe(true);
-		expect(SecurityUtils.getSubject()).andReturn(subjectMock);
-		subjectMock.login(token);
-		Executions.sendRedirect("/zk/main");
-		
-		replay(token, subjectMock);
-		replayAll();
-		
-		vm.signIn();
-		
-		verify(token, subjectMock);
-		verifyAll();
-	}
+    private LoginFormVM vm;
+
+    private Logger loggerMock = createMock(Logger.class);;
+    private InitialContext initialContextMock = createMock(InitialContext.class);
+    private SidebarManager sidebarManagerMock = createMock(SidebarManager.class);
+
+    @Before
+    public void init() throws Exception {
+
+        reset(initialContextMock);
+
+        mockStatic(LoggerFactory.class);
+        expect(LoggerFactory.getLogger(LoginFormVM.class)).andReturn(loggerMock);
+        PowerMock.createMock(InitialContext.class);
+        PowerMock.expectNew(InitialContext.class).andReturn(initialContextMock);
+        expect(initialContextMock.lookup("blueprint:comp/" + SidebarManager.ID)).andReturn(
+                sidebarManagerMock);
+
+        replay(initialContextMock);
+        replayAll();
+        vm = new LoginFormVM();
+        verifyAll();
+        resetAll();
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        UsernamePasswordToken token = createMock(UsernamePasswordToken.class);
+        Subject subjectMock = createMock(Subject.class);
+
+        mockStatic(SecurityUtils.class);
+        mockStatic(Executions.class);
+
+        loggerMock.debug(anyObject(String.class));
+        PowerMock.createMock(UsernamePasswordToken.class);
+        PowerMock.expectNew(UsernamePasswordToken.class,
+                new Class<?>[] {String.class, String.class}, eq(""), eq("")).andReturn(token);
+        token.setRememberMe(true);
+        expect(SecurityUtils.getSubject()).andReturn(subjectMock);
+        subjectMock.login(token);
+        Executions.sendRedirect("/zk/main");
+
+        replay(token, subjectMock);
+        replayAll();
+
+        vm.signIn();
+
+        verify(token, subjectMock);
+        verifyAll();
+    }
 }

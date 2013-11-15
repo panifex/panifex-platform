@@ -7,11 +7,11 @@ import org.zkoss.bind.annotation.Init;
 @Init(superclass = true)
 public class MainVM extends AbstractVM {
 
-	private Logger log = LoggerFactory.getLogger(MainVM.class);
-	
-	@Override
-	protected Logger getLogger() {
-		return log;
-	}
+    private Logger log = LoggerFactory.getLogger(MainVM.class);
+
+    @Override
+    protected Logger getLogger() {
+        return log;
+    }
 
 }

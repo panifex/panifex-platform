@@ -25,33 +25,33 @@ import org.slf4j.LoggerFactory;
 @ReferenceListener
 public class SidebarManager {
 
-	private Logger log = LoggerFactory.getLogger(SidebarManager.class);
-	
-	public final static String ID = "org.panifex.platform.web.impl.sidebar.SidebarManager";
-	
-	@Inject
-	@ReferenceList(availability = "optional", serviceInterface = Sidebar.class, referenceListeners = @ReferenceListener(ref = ID))
-	private Sidebar sidebar;
-	
-	private Set<Sidebar> sidebarItems = new HashSet<>();
-	
-	@Bind
-	public void bind(Sidebar sidebar) {
-		log.debug("Bind sidebar: {}", sidebar);
-		sidebarItems.add(sidebar);
-	}
-	
-	@Unbind
-	public void unbind(Sidebar sidebar) {
-		log.debug("Unbind sidebar: {}", sidebar);
-		sidebarItems.remove(sidebar);
-	}
-	
-	public List<AbstractSidebarItem> getSidebarItems() {
-		
-		List<AbstractSidebarItem> list = new ArrayList<>();
-		
-		return list;
-	}
-	
+    private Logger log = LoggerFactory.getLogger(SidebarManager.class);
+
+    public final static String ID = "org.panifex.platform.web.impl.sidebar.SidebarManager";
+
+    @Inject
+    @ReferenceList(availability = "optional", serviceInterface = Sidebar.class, referenceListeners = @ReferenceListener(ref = ID))
+    private Sidebar sidebar;
+
+    private Set<Sidebar> sidebarItems = new HashSet<>();
+
+    @Bind
+    public void bind(Sidebar sidebar) {
+        log.debug("Bind sidebar: {}", sidebar);
+        sidebarItems.add(sidebar);
+    }
+
+    @Unbind
+    public void unbind(Sidebar sidebar) {
+        log.debug("Unbind sidebar: {}", sidebar);
+        sidebarItems.remove(sidebar);
+    }
+
+    public List<AbstractSidebarItem> getSidebarItems() {
+
+        List<AbstractSidebarItem> list = new ArrayList<>();
+
+        return list;
+    }
+
 }

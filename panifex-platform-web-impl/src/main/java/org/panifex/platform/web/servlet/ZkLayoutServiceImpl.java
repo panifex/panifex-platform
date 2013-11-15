@@ -11,42 +11,43 @@ import org.zkoss.zk.ui.util.Configuration;
 @Bean(id = ZkLayoutServiceImpl.ID)
 public class ZkLayoutServiceImpl extends DHtmlLayoutServlet implements ZkLayoutService {
 
-	public final static String ID = "org.panifex.platform.web.servlet.ZkLayoutServlet";
-	
-	/**
-	 * Generated serial ID
-	 */
-	private static final long serialVersionUID = 4082554202918040779L;
+    public final static String ID = "org.panifex.platform.web.servlet.ZkLayoutServlet";
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Configuration getConfiguration() {
-		return WebManager.getWebManager(getServletContext()).getWebApp().getConfiguration();
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Object addRichlet(Class<? extends Richlet> richlet, String path) {
-		return addRichlet(richlet, path, null);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Object addRichlet(Class<? extends Richlet> richlet, String path, Map<String, String> params) {
-		// get the configuration
-		Configuration config = getConfiguration();
-		
-		// register Richlet
-		String richletName = richlet.getName();
-		Object previousRichlet = config.addRichlet(richletName, richletName, params);
-		config.addRichletMapping(richletName, path);
-		
-		return previousRichlet;
-	}
+    /**
+     * Generated serial ID
+     */
+    private static final long serialVersionUID = 4082554202918040779L;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Configuration getConfiguration() {
+        return WebManager.getWebManager(getServletContext()).getWebApp().getConfiguration();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object addRichlet(Class<? extends Richlet> richlet, String path) {
+        return addRichlet(richlet, path, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object addRichlet(Class<? extends Richlet> richlet, String path,
+            Map<String, String> params) {
+        // get the configuration
+        Configuration config = getConfiguration();
+
+        // register Richlet
+        String richletName = richlet.getName();
+        Object previousRichlet = config.addRichlet(richletName, richletName, params);
+        config.addRichletMapping(richletName, path);
+
+        return previousRichlet;
+    }
 }

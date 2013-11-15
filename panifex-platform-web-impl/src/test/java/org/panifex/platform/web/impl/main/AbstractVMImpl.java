@@ -5,14 +5,14 @@ import org.slf4j.Logger;
 
 public class AbstractVMImpl extends AbstractVM {
 
-	private final Logger log;
-	
-	AbstractVMImpl(Logger log) {
-		this.log = log;
-	}
-	
-	@Override
-	protected Logger getLogger() {
-		return log;
-	}
+    private final Logger log;
+
+    AbstractVMImpl(Logger log) {
+        this.log = log;
+    }
+
+    @Override
+    protected Logger getLogger() {
+        return log;
+    }
 }
