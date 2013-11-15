@@ -5,11 +5,14 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 import static org.powermock.api.easymock.PowerMock.mockStatic;
 import static org.powermock.api.easymock.PowerMock.replayAll;
 import static org.powermock.api.easymock.PowerMock.resetAll;
 import static org.powermock.api.easymock.PowerMock.verifyAll;
+
+import javax.naming.InitialContext;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -17,6 +20,7 @@ import org.apache.shiro.subject.Subject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.panifex.platform.web.impl.sidebar.SidebarManager;
 import org.powermock.api.easymock.PowerMock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -30,15 +34,22 @@ public class LoginFormVMTest {
 
 	private LoginFormVM vm;
 	
-	private Logger loggerMock;
+	private Logger loggerMock = createMock(Logger.class);;
+	private InitialContext initialContextMock = createMock(InitialContext.class);
+	private SidebarManager sidebarManagerMock = createMock(SidebarManager.class);
 	
 	@Before
-	public void init() {
-		loggerMock = createMock(Logger.class);
+	public void init() throws Exception {
+		
+		reset(initialContextMock);
 		
 		mockStatic(LoggerFactory.class);
 		expect(LoggerFactory.getLogger(LoginFormVM.class)).andReturn(loggerMock);
+		PowerMock.createMock(InitialContext.class);
+		PowerMock.expectNew(InitialContext.class).andReturn(initialContextMock);
+		expect(initialContextMock.lookup("blueprint:comp/" + SidebarManager.ID)).andReturn(sidebarManagerMock);
 		
+		replay(initialContextMock);
 		replayAll();
 		vm = new LoginFormVM();
 		verifyAll();

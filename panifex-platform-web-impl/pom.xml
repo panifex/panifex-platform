@@ -67,6 +67,11 @@
 		<!-- Panifex Platform Dependencies -->
 		<dependency>
 			<groupId>org.panifex</groupId>
+			<artifactId>panifex-platform-module-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.panifex</groupId>
 			<artifactId>panifex-platform-api</artifactId>
 			<scope>provided</scope>
 		</dependency>

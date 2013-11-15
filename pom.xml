@@ -151,12 +151,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- Panifex Platform Dependencies -->
-			<dependency>
-				<groupId>org.panifex</groupId>
-				<artifactId>panifex-platform-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
 			<!-- Apache Aries Dependencies -->
 			<dependency>
 				<groupId>org.apache.aries.proxy</groupId>
@@ -349,6 +343,17 @@
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-osgi</artifactId>
 				<version>3.0.7</version>
+			</dependency>
+			<!-- Panifex Platform Dependencies -->
+			<dependency>
+				<groupId>org.panifex</groupId>
+				<artifactId>panifex-platform-module-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.panifex</groupId>
+				<artifactId>panifex-platform-api</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 			<!-- Pax Logging Dependencies -->
 			<dependency>

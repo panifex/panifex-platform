@@ -1,5 +1,6 @@
 package org.panifex.platform.web.impl.main;
 
+import org.panifex.platform.web.impl.sidebar.SidebarTemplate;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.text.MessageFormats;
@@ -9,6 +10,7 @@ import org.zkoss.zk.ui.GenericRichlet;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.sys.PageCtrl;
+import org.zkoss.zkmax.zul.Navbar;
 import org.zkoss.zul.A;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Menubar;
@@ -31,6 +33,7 @@ public abstract class AbstractRichlet extends GenericRichlet {
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/index.css.dsp\"/>");
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/login.css.dsp\"/>");
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/grey.css.dsp\"/>");
+		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/sidebar.css.dsp\"/>");
 		pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/user-nav.css.dsp\"/>");
 
 		page.setTitle(Labels.getLabel("application.name"));
@@ -54,14 +57,11 @@ public abstract class AbstractRichlet extends GenericRichlet {
 	}
 	
 	private void createComponents(Component main) {
-		Component logo = createLogo();
-		logo.setParent(main);
 		
-		Component userNav = createUserNav();
-		userNav.setParent(main);
-		
-		Component content = createContent();
-		content.setParent(main);
+		main.appendChild(createLogo());
+		main.appendChild(createUserNav());
+		main.appendChild(createSidebar());
+		main.appendChild(createContent());
 	}
 	
 	private Component createLogo() {
@@ -101,6 +101,18 @@ public abstract class AbstractRichlet extends GenericRichlet {
 		return userNav;
 	}
 	
+	private Component createSidebar() {
+		final Div sidebar = new Div();
+		sidebar.setSclass("sidebar");
+		
+		final Navbar navBar = new Navbar();
+		binder.addChildrenLoadBindings(navBar, "vm.sidebarItems", null, null, null, null, null);
+		navBar.setTemplate("children", new SidebarTemplate(binder));
+		navBar.setParent(sidebar);
+
+		return sidebar;
+	}
+	
 	protected abstract Component createContent();
 	
 	protected abstract AbstractVM getViewModel();
@@ -138,4 +150,5 @@ public abstract class AbstractRichlet extends GenericRichlet {
 	protected Binder getBinder() {
 		return binder;
 	}
+	
 }
