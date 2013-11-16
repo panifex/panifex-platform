@@ -21,6 +21,9 @@ package org.panifex.platform.web.impl.content;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Bind;
 import org.apache.aries.blueprint.annotation.Inject;
@@ -30,6 +33,7 @@ import org.apache.aries.blueprint.annotation.Unbind;
 import org.panifex.platform.module.api.content.Content;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zkoss.zk.ui.Component;
 
 @Bean(id = ContentManager.ID)
 @ReferenceListener
@@ -42,6 +46,9 @@ public class ContentManager {
     @Inject
     @ReferenceList(availability = "optional", serviceInterface = Content.class, referenceListeners = @ReferenceListener(ref = ID))
     private Content content;
+    
+    @Inject(ref = ContentUiFactory.ID)
+    private ContentUiFactory contentUiFactory;
     
     private Set<Content> contents = new HashSet<>();
     
@@ -57,5 +64,56 @@ public class ContentManager {
         log.debug("Unbind content: {}", content);
         this.content = null;
         contents.remove(content);
+    }
+    
+    public void setContentUiFactory(ContentUiFactory contentUiFactory) {
+        this.contentUiFactory = contentUiFactory;
+    }
+    
+    public Component render(String bookmark) {
+        
+        Content content = getBookmarkedContent(bookmark);
+        
+        if (content == null) {
+            content = getDefaultContent();
+        }
+        
+        return contentUiFactory.render(content);
+    }
+    
+    private Content getBookmarkedContent(String bookmark) {
+        for (Content content : contents) {
+            if (content.getBookmark() != null) {
+                if (content.getBookmark().equalsIgnoreCase(bookmark)) {
+                    return content;
+                }
+            }
+        }
+        return null;
+    }
+    
+    private Content getDefaultContent() {
+        for (Content content : contents) {
+            if (content.isDefault()) {
+                return content;
+            }
+        }
+        
+        // a default content is not specified. return empty content
+        return new EmptyContent();
+    }
+    
+    public static ContentManager getManager() {
+        ContentManager contentManager;
+        
+        InitialContext ctx;
+        try {
+            ctx = new InitialContext();
+            contentManager = (ContentManager) ctx.lookup("blueprint:comp/" + ContentManager.ID);
+        } catch (NamingException e) {
+            throw new RuntimeException(e);
+        }
+        
+        return contentManager;
     }
 }

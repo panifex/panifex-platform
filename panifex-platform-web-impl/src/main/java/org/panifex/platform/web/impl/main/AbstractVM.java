@@ -20,32 +20,33 @@ package org.panifex.platform.web.impl.main;
 
 import java.util.List;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.panifex.platform.module.api.sidebar.SidebarItem;
+import org.panifex.platform.web.impl.content.ContentManager;
 import org.panifex.platform.web.impl.sidebar.SidebarManager;
 import org.slf4j.Logger;
+import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.ContextParam;
+import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.select.Selectors;
+import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Div;
 
+/**
+ * View-Model of an abstract window which is drawn by AbstractRichlet.
+ *
+ */
 public abstract class AbstractVM {
 
     protected abstract Logger getLogger();
 
-    private SidebarManager sidebarManager;
-
-    public AbstractVM() {
-        try {
-            InitialContext ctx = new InitialContext();
-            sidebarManager = (SidebarManager) ctx.lookup("blueprint:comp/" + SidebarManager.ID);
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        };
-    }
-
+    @Wire("#_content")
+    private Div content;
+    
     @Command
     public void logout() {
         Subject currentUser = SecurityUtils.getSubject();
@@ -60,6 +61,31 @@ public abstract class AbstractVM {
     }
 
     public List<SidebarItem> getSidebarItems() {
-        return sidebarManager.getSidebarItems();
+        return SidebarManager.getManager().getSidebarItems();
+    }
+    
+    @Command
+    public void onBookmarkChange() {
+        cleanContent();
+        
+        // create content
+        String bookmark = Executions.getCurrent().getDesktop().getBookmark();
+        Component newContent = ContentManager.getManager().render(bookmark);
+        content.appendChild(newContent);
+    }
+    
+    /**
+     * Removes children from content
+     */
+    private void cleanContent() {
+        List<Component> children = content.getChildren();
+        for (Component child : children) {
+            content.removeChild(child);
+        }
+    }
+    
+    @AfterCompose
+    public void afterCompose(@ContextParam(ContextType.VIEW) Component view){
+        Selectors.wireComponents(view, this, false);
     }
 }

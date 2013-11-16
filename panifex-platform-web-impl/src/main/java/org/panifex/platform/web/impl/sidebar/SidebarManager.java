@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Bind;
 import org.apache.aries.blueprint.annotation.Inject;
@@ -143,4 +146,14 @@ public class SidebarManager {
         return sidebarItems;
     }
 
+    public static SidebarManager getManager() {
+        SidebarManager sidebarManager;
+        try {
+            InitialContext ctx = new InitialContext();
+            sidebarManager = (SidebarManager) ctx.lookup("blueprint:comp/" + SidebarManager.ID);
+        } catch (NamingException e) {
+            throw new RuntimeException(e);
+        };
+        return sidebarManager;
+    }
 }

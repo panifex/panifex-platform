@@ -63,7 +63,11 @@ public abstract class AbstractRichlet extends GenericRichlet {
         binder.init(main, getViewModel(), null);
         main.setAttribute("vm", binder.getViewModel());
 
+        // create components
         createComponents(main);
+        
+        // bind form events
+        binder.addCommandBinding(main, Events.ON_BOOKMARK_CHANGE, "'onBookmarkChange'", null);
 
         Script s = new Script();
         s.setSrc("../css/bootstrap/js/bootstrap.min.js");
@@ -75,7 +79,6 @@ public abstract class AbstractRichlet extends GenericRichlet {
     }
 
     private void createComponents(Component main) {
-
         main.appendChild(createLogo());
         main.appendChild(createUserNav());
         main.appendChild(createSidebar());
@@ -89,16 +92,12 @@ public abstract class AbstractRichlet extends GenericRichlet {
 
         final Div fill = new Div();
         fill.setSclass("fill");
-        fill.setParent(header);
-
-        final Div container = new Div();
-        container.setSclass("container");
-        container.setParent(fill);
+        header.appendChild(fill);
 
         final A logo = new A();
         logo.setHref(Labels.getLabel("application.url"));
         logo.setImage("../img/panifex_top_logo.png");
-        logo.setParent(container);
+        fill.appendChild(logo);
 
         return header;
     }

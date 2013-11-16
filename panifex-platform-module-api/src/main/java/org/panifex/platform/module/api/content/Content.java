@@ -33,6 +33,13 @@ public interface Content {
     String getTitle();
     
     /**
+     * Returns an assigned bookmark
+     * 
+     * @return the assigned bookmark
+     */
+    String getBookmark();
+    
+    /**
      * Determines whether the content is default if the desktop bookmark is 
      * not specified.
      * <p>Only one content should be default.

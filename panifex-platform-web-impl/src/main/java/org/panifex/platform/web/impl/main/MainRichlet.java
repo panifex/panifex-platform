@@ -18,22 +18,31 @@
  ******************************************************************************/
 package org.panifex.platform.web.impl.main;
 
+import org.panifex.platform.web.impl.content.ContentManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Div;
 
+/**
+ * MainRichlet draws main window.
+ * 
+ */
 public class MainRichlet extends AbstractRichlet {
 
     private Logger log = LoggerFactory.getLogger(MainRichlet.class);
-
+    
     @Override
     protected Component createContent() {
         log.debug("Create content");
+        
         final Div content = new Div();
+        content.setId("_content");
         content.setSclass("content");
+        
+        content.appendChild(ContentManager.getManager().render(""));
+        
         return content;
-
     }
 
     @Override

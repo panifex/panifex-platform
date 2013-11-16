@@ -16,44 +16,33 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.api.content;
+package org.panifex.platform.web.impl.content;
 
-/**
- * 
- * @since 1.0
- *
- */
-public abstract class AbstractContent implements Content {
+import org.apache.aries.blueprint.annotation.Bean;
+import org.panifex.platform.module.api.content.Content;
+import org.zkoss.zhtml.H1;
+import org.zkoss.zhtml.Text;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zul.Div;
 
-    private String title;
-    private String bookmark;
-    private boolean isDefault = false;
-    
-    @Override
-    public String getTitle() {
-        return title;
-    }
-    
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    
-    @Override
-    public String getBookmark() {
-        return bookmark;
-    }
+@Bean(id = ContentUiFactory.ID)
+public class ContentUiFactory {
 
-    public void setBookmark(String bookmark) {
-        this.bookmark = bookmark;
-    }
-
-    @Override
-    public boolean isDefault() {
-        return isDefault;
-    }
+    public final static String ID = "org.panifex.platform.web.impl.content.ContentUiFactory";
     
-    public void setDefault(boolean isDefault) {
-        this.isDefault = isDefault;
+    public Component render(Content content) {
+        final Div root = new Div();
+        
+        final Div contentHeader = new Div();
+        contentHeader.setSclass("content-header");
+        root.appendChild(contentHeader);
+        
+        final H1 title = new H1();
+        contentHeader.appendChild(title);
+        
+        final Text titleText = new Text(content.getTitle());
+        title.appendChild(titleText);
+        
+        return root;
     }
-    
 }

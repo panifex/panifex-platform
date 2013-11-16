@@ -16,44 +16,17 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.api.content;
+package org.panifex.platform.web.impl.content;
+
+import org.panifex.platform.module.api.content.AbstractContent;
 
 /**
+ * A content which is used when a default content is not specified.
  * 
- * @since 1.0
- *
  */
-public abstract class AbstractContent implements Content {
+public class EmptyContent extends AbstractContent {
 
-    private String title;
-    private String bookmark;
-    private boolean isDefault = false;
-    
-    @Override
-    public String getTitle() {
-        return title;
+    public EmptyContent() {
+        setTitle("No default content specified.");
     }
-    
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    
-    @Override
-    public String getBookmark() {
-        return bookmark;
-    }
-
-    public void setBookmark(String bookmark) {
-        this.bookmark = bookmark;
-    }
-
-    @Override
-    public boolean isDefault() {
-        return isDefault;
-    }
-    
-    public void setDefault(boolean isDefault) {
-        this.isDefault = isDefault;
-    }
-    
 }
