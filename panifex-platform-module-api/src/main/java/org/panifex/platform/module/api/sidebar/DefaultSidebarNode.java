@@ -18,6 +18,26 @@
  ******************************************************************************/
 package org.panifex.platform.module.api.sidebar;
 
-public class SidebarCommandImpl extends AbstractSidebarItem implements SidebarCommand {
+import java.util.ArrayList;
+import java.util.List;
+
+public class DefaultSidebarNode extends AbstractSidebarItem implements SidebarNode {
+
+    private List<SidebarItem> sidebarItems = new ArrayList<>();
+    private String badgeText;
+    
+    @Override
+    public List<SidebarItem> getSidebarItems() {
+        return sidebarItems;
+    }
+
+    public void setSidebarItems(List<SidebarItem> sidebarItems) {
+        this.sidebarItems = sidebarItems;
+    }
+    
+    @Override
+    public String getBadgeText() {
+        return badgeText;
+    }
 
 }
