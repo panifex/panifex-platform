@@ -24,7 +24,7 @@ package org.panifex.platform.module.api.sidebar;
  * 
  * @since 1.0
  */
-public interface SidebarItem {
+public interface SidebarItem extends Comparable<SidebarItem> {
 
     /**
      * Returns the label

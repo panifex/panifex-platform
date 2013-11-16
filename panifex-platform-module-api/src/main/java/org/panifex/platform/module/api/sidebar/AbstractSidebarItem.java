@@ -51,4 +51,9 @@ public abstract class AbstractSidebarItem implements SidebarItem {
         this.priority = priority;
     }
 
+    @Override
+    public int compareTo(SidebarItem other) {
+        return Integer.compare(getPriority(), other.getPriority());
+    }
+    
 }
