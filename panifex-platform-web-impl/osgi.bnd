@@ -37,6 +37,7 @@ Import-Package: \
 	org.apache.shiro.web.servlet;version="[1.2,2.0)", \
 	org.apache.shiro.web.session.mgt;version="[1.2,2.0)", \
 	org.panifex.platform.api.security;version="[1.0, 2.0)", \
+	org.panifex.platform.module.api.content;version="[1.0, 2.0)", \
 	org.panifex.platform.module.api.sidebar;version="[1.0, 2.0)", \
 	!org.panifex.platform.web.impl.*, \
 	org.ops4j.pax.web.service;version="[3.0,4.0)", \

@@ -1,4 +1,5 @@
 Expect-Package: \
+    org.panifex.platform.module.api.content, \
 	org.panifex.platform.module.api.sidebar
 
 Import-Package: \

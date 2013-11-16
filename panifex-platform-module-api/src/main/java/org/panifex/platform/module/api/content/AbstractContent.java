@@ -16,29 +16,34 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.web.impl.main;
+package org.panifex.platform.module.api.content;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zul.Div;
+/**
+ * 
+ * @since 1.0
+ *
+ */
+public abstract class AbstractContent implements Content {
 
-public class MainRichlet extends AbstractRichlet {
-
-    private Logger log = LoggerFactory.getLogger(MainRichlet.class);
-
+    private String title;
+    private boolean isDefault = false;
+    
     @Override
-    protected Component createContent() {
-        log.debug("Create content");
-        final Div content = new Div();
-        content.setSclass("content");
-        return content;
-
+    public String getTitle() {
+        return title;
+    }
+    
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
-    protected AbstractVM getViewModel() {
-        return new MainVM();
+    public boolean isDefault() {
+        return isDefault;
     }
-
+    
+    public void setDefault(boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+    
 }

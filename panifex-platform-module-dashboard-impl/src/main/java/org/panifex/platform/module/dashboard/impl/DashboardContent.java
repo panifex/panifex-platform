@@ -16,29 +16,21 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.web.impl.main;
+package org.panifex.platform.module.dashboard.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zul.Div;
+import org.apache.aries.blueprint.annotation.Bean;
+import org.apache.aries.blueprint.annotation.Service;
+import org.panifex.platform.module.api.content.AbstractContent;
+import org.panifex.platform.module.api.content.Content;
 
-public class MainRichlet extends AbstractRichlet {
+@Bean(id = DashboardContent.ID)
+@Service(interfaces = Content.class)
+public class DashboardContent extends AbstractContent {
 
-    private Logger log = LoggerFactory.getLogger(MainRichlet.class);
-
-    @Override
-    protected Component createContent() {
-        log.debug("Create content");
-        final Div content = new Div();
-        content.setSclass("content");
-        return content;
-
+    public final static String ID = "org.panifex.platform.module.dashboard.impl.DashboardContent";
+    
+    public DashboardContent() {
+        setTitle("Dashboard");
+        setDefault(true);
     }
-
-    @Override
-    protected AbstractVM getViewModel() {
-        return new MainVM();
-    }
-
 }
