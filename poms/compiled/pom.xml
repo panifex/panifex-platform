@@ -139,6 +139,11 @@
             <artifactId>org.apache.aries.blueprint.annotation.api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- Apache Commons Dependencies -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
         <!-- OSGi Dependencies -->
         <dependency>
             <groupId>org.osgi</groupId>
