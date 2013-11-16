@@ -18,35 +18,37 @@
  ******************************************************************************/
 package org.panifex.platform.module.api.sidebar;
 
-/**
- * This is an abstract sidebar item which can be node or item. The sidebar items are used to define
- * dynamic sidebar menu.
- * 
- * @since 1.0
- */
-public interface AbstractSidebarItem {
+public abstract class AbstractSidebarItem implements SidebarItem {
 
-    /**
-     * Returns the label
-     * 
-     * @return the label (never null)
-     * @since 1.0
-     */
-    String getLabel();
+    private String label;
+    private String iconSclass;
+    private int priority;
+    
+    @Override
+    public String getLabel() {
+        return label;
+    }
+    
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-    /**
-     * Returns the icon font
-     * 
-     * @return the icon font
-     * @since 1.0
-     */
-    String getIconSclass();
+    @Override
+    public String getIconSclass() {
+        return iconSclass;
+    }
+    
+    public void setIconSclass(String iconSclass) {
+        this.iconSclass = iconSclass;
+    }
 
-    /**
-     * A priority of item. The items will be ordered by priority in sidebar menu.
-     * 
-     * @return the priority of item
-     * @since 1.0
-     */
-    int priority();
+    @Override
+    public int getPriority() {
+        return priority;
+    }
+    
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
 }

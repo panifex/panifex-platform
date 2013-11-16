@@ -18,24 +18,26 @@
  ******************************************************************************/
 package org.panifex.platform.module.api.sidebar;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A container of sidebar menu's items which will be merged to sidebar menu instance. This interface
- * should be registered as OSGi service. Panifex platform will dynamic register to the service and
- * merge to menu instance.
- * 
- * @since 1.0
- */
-public interface Sidebar {
+public class SidebarNodeImpl extends AbstractSidebarItem implements SidebarNode {
 
-    /**
-     * Returns a list of menu items. The list could contain other nodes or sidebar's items.
-     * 
-     * @return the list of menu items
-     * @see SidebarCommand
-     * @see SidebarNode
-     * @since 1.0
-     */
-    List<SidebarItem> getSidebarItems();
+    private List<SidebarItem> sidebarItems = new ArrayList<>();
+    private String badgeText;
+    
+    @Override
+    public List<SidebarItem> getSidebarItems() {
+        return sidebarItems;
+    }
+
+    public void setSidebarItems(List<SidebarItem> sidebarItems) {
+        this.sidebarItems = sidebarItems;
+    }
+    
+    @Override
+    public String getBadgeText() {
+        return badgeText;
+    }
+
 }

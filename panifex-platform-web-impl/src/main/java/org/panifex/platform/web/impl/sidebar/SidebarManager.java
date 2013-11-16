@@ -29,8 +29,8 @@ import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.ReferenceList;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
-import org.panifex.platform.module.api.sidebar.AbstractSidebarItem;
 import org.panifex.platform.module.api.sidebar.Sidebar;
+import org.panifex.platform.module.api.sidebar.SidebarItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,9 +65,9 @@ public class SidebarManager {
         sidebarItems.remove(sidebar);
     }
 
-    public List<AbstractSidebarItem> getSidebarItems() {
+    public List<SidebarItem> getSidebarItems() {
 
-        List<AbstractSidebarItem> list = new ArrayList<>();
+        List<SidebarItem> list = new ArrayList<>();
 
         return list;
     }

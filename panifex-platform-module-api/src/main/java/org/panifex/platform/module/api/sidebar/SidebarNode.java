@@ -25,16 +25,16 @@ import java.util.List;
  * 
  * @since 1.0
  */
-public interface SidebarNode extends AbstractSidebarItem {
+public interface SidebarNode extends SidebarItem {
 
     /**
      * Returns a list of children. The children could be other nodes or sidebar items.
      * 
      * @return the list of sidebar menu items
-     * @see SidebarItem
+     * @see SidebarCommand
      * @since 1.0
      */
-    List<AbstractSidebarItem> getSidebarItems();
+    List<SidebarItem> getSidebarItems();
 
     /**
      * Returns the badge text of the {@link Nav}
