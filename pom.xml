@@ -231,11 +231,36 @@
         <artifactId>org.apache.felix.configadmin</artifactId>
         <version>1.6.0</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>org.apache.felix.prefs</artifactId>
+        <version>1.0.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>org.apache.felix.scr</artifactId>
+        <version>1.8.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>org.apache.felix.shell</artifactId>
+        <version>1.4.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>org.apache.felix.webconsole</artifactId>
+        <version>4.2.0</version>
+      </dependency>
       <!-- Apache Geronimo Depedencies -->
       <dependency>
-        <groupId>org.apache.geronimo.components</groupId>
-        <artifactId>geronimo-transaction</artifactId>
-        <version>3.1.1</version>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-j2ee-connector_1.6_spec</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-jms_1.1_spec</artifactId>
+        <version>1.1.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.geronimo.specs</groupId>
@@ -246,6 +271,11 @@
         <groupId>org.apache.geronimo.specs</groupId>
         <artifactId>geronimo-jta_1.1_spec</artifactId>
         <version>1.1.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.geronimo.components</groupId>
+        <artifactId>geronimo-transaction</artifactId>
+        <version>3.1.1</version>
       </dependency>
       <!-- Apache JPA Dependencies -->
       <dependency>
@@ -282,6 +312,29 @@
           </exclusion>
         </exclusions>
       </dependency>
+      <!-- Apache XBean Dependencies -->
+      <dependency>
+        <groupId>org.apache.xbean</groupId>
+        <artifactId>xbean-bundleutils</artifactId>
+        <version>3.7</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.xbean</groupId>
+        <artifactId>xbean-finder</artifactId>
+        <version>3.7</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
       <!-- ASM Depedencies -->
       <dependency>
         <groupId>asm</groupId>
@@ -295,6 +348,11 @@
         <version>2.0b5</version>
       </dependency>
       <!-- Commons Dependencies -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.1</version>
+      </dependency>
       <dependency>
         <groupId>commons-beanutils</groupId>
         <artifactId>commons-beanutils</artifactId>
@@ -327,9 +385,14 @@
         <version>2.4</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-lang3</artifactId>
-        <version>3.1</version>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-pool</groupId>
+        <artifactId>commons-pool</artifactId>
+        <version>1.6</version>
       </dependency>
       <!-- Database Connectors Dependencies -->
       <dependency>
@@ -342,6 +405,28 @@
         <artifactId>postgresql</artifactId>
         <version>9.1-901.jdbc4</version>
       </dependency>
+      <!-- Equinox Dependencies -->
+      <dependency>
+        <groupId>org.eclipse</groupId>
+        <artifactId>osgi</artifactId>
+        <version>3.9.1-v20130814-1242</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.osgi</groupId>
+        <artifactId>org.eclipse.osgi.services</artifactId>
+        <version>3.2.100.v20100503</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.osgi</groupId>
+        <artifactId>org.eclipse.osgi.util</artifactId>
+        <version>3.2.100.v20100503</version>
+      </dependency>
+      <!-- JSON Depedencies -->
+      <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20131018</version>
+      </dependency>
       <!-- Liquibase Depedencies -->
       <dependency>
         <groupId>org.liquibase</groupId>
@@ -350,13 +435,48 @@
       </dependency>
       <!-- Panifex Platform Dependencies -->
       <dependency>
+          <groupId>org.panifex</groupId>
+          <artifactId>libs</artifactId>
+          <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-platform-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-platform-datasource-derby</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-platform-datasource-postgresql</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.panifex</groupId>
         <artifactId>panifex-platform-module-api</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.panifex</groupId>
-        <artifactId>panifex-platform-api</artifactId>
+        <artifactId>panifex-platform-module-dashboard-impl</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-platform-persistence</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-platform-service</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-platform-web-impl</artifactId>
         <version>${project.version}</version>
       </dependency>
       <!-- Pax Logging Dependencies -->
@@ -375,15 +495,21 @@
         <artifactId>logback-core</artifactId>
         <version>1.0.13</version>
       </dependency>
+      <!-- Pax Runner Dependencies -->
+      <dependency>
+        <groupId>org.ops4j.pax.runner</groupId>
+        <artifactId>pax-runner</artifactId>
+        <version>1.8.5</version>
+      </dependency>
       <!-- Pax Web Dependencies -->
       <dependency>
         <groupId>org.ops4j.pax.web</groupId>
-        <artifactId>pax-web-jetty-bundle</artifactId>
+        <artifactId>pax-web-extender-whiteboard</artifactId>
         <version>3.0.2</version>
       </dependency>
       <dependency>
         <groupId>org.ops4j.pax.web</groupId>
-        <artifactId>pax-web-extender-whiteboard</artifactId>
+        <artifactId>pax-web-jetty-bundle</artifactId>
         <version>3.0.2</version>
       </dependency>
       <!-- SERP Depedencies -->
@@ -391,6 +517,12 @@
         <groupId>org.apache.servicemix.bundles</groupId>
         <artifactId>org.apache.servicemix.bundles.serp</artifactId>
         <version>1.14.1_1</version>
+      </dependency>
+      <!-- SnakeYAML Dependencies -->
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>1.13</version>
       </dependency>
       <!-- Testing Dependencies -->
       <dependency>

@@ -1,0 +1,6 @@
+Embed-Dependency: \
+    json;groupId=org.json;inline=false
+    
+Export-Package: \
+    org.json;version="0.0.0", \
+    org.json.zip;version="0.0.0"
