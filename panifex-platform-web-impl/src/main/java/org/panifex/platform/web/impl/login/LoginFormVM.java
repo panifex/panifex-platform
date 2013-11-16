@@ -18,6 +18,8 @@
  ******************************************************************************/
 package org.panifex.platform.web.impl.login;
 
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -30,6 +32,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.panifex.platform.module.api.sidebar.SidebarItem;
 import org.panifex.platform.web.impl.main.AbstractVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,4 +105,11 @@ public class LoginFormVM extends AbstractVM {
     protected Logger getLogger() {
         return log;
     }
+
+    @Override
+    public List<SidebarItem> getSidebarItems() {
+        return null;
+    }
+    
+    
 }
