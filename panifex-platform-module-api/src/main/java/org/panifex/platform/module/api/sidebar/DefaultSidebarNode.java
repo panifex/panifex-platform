@@ -19,19 +19,22 @@
 package org.panifex.platform.module.api.sidebar;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class DefaultSidebarNode extends AbstractSidebarItem implements SidebarNode {
 
-    private List<SidebarItem> sidebarItems = new ArrayList<>();
+    private Collection<SidebarItem> sidebarItems = new ArrayList<>();
     private String badgeText;
     
     @Override
-    public List<SidebarItem> getSidebarItems() {
+    public Collection<SidebarItem> getSidebarItems() {
         return sidebarItems;
     }
 
-    public void setSidebarItems(List<SidebarItem> sidebarItems) {
+    public void setSidebarItems(Collection<SidebarItem> sidebarItems) {
         this.sidebarItems = sidebarItems;
     }
     
@@ -40,4 +43,44 @@ public class DefaultSidebarNode extends AbstractSidebarItem implements SidebarNo
         return badgeText;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) { 
+            return false; 
+        }
+        if (other == this) { 
+            return true; 
+        }
+        if (other.getClass() != getClass()) {
+            return false;
+        }
+        DefaultSidebarNode obj = (DefaultSidebarNode) other;
+        return new EqualsBuilder()
+                .appendSuper(super.equals(obj))
+                .append(sidebarItems, obj.sidebarItems)
+                .append(badgeText, obj.badgeText)
+                .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(339, 901)
+                .appendSuper(super.hashCode())
+                .append(sidebarItems)
+                .append(badgeText)
+                .toHashCode();
+    }
+
+    @Override
+    public DefaultSidebarNode copy() {
+        DefaultSidebarNode cloned = new DefaultSidebarNode();
+        super.copyValues(this, cloned);
+        
+        for (SidebarItem item : sidebarItems) {
+            cloned.sidebarItems.add(item.copy());
+        }
+        
+        return null;
+    }
+   
 }

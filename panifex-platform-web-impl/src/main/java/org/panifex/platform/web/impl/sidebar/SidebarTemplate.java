@@ -21,8 +21,6 @@ package org.panifex.platform.web.impl.sidebar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.zkoss.bind.Binder;
 import org.zkoss.xel.VariableResolver;
 import org.zkoss.zk.ui.Component;
@@ -31,8 +29,6 @@ import org.zkoss.zk.ui.util.Template;
 import org.zkoss.zkmax.zul.Navitem;
 
 public class SidebarTemplate implements Template {
-
-    private Logger log = LoggerFactory.getLogger(SidebarTemplate.class);
 
     private Binder binder;
 

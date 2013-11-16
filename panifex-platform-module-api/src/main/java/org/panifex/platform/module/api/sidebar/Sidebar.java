@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.platform.module.api.sidebar;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * A container of sidebar menu's items which will be merged to sidebar menu instance. This interface
@@ -37,5 +37,5 @@ public interface Sidebar {
      * @see SidebarNode
      * @since 1.0
      */
-    List<SidebarItem> getSidebarItems();
+    Collection<SidebarItem> getSidebarItems();
 }

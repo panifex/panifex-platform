@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.platform.module.api.sidebar;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * This is a menu node. The node could contain children which could be other nodes or sidebar items.
@@ -28,14 +28,16 @@ import java.util.List;
 public interface SidebarNode extends SidebarItem {
 
     /**
-     * Returns a list of children. The children could be other nodes or sidebar items.
+     * Returns a collection of children. The children could be other nodes or sidebar items.
      * 
-     * @return the list of sidebar menu items
+     * @return the collection of sidebar menu items
      * @see SidebarCommand
      * @since 1.0
      */
-    List<SidebarItem> getSidebarItems();
+    Collection<SidebarItem> getSidebarItems();
 
+    void setSidebarItems(Collection<SidebarItem> items);
+    
     /**
      * Returns the badge text of the {@link Nav}
      * 

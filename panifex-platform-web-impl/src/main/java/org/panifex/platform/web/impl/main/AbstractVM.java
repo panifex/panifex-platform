@@ -25,7 +25,7 @@ import javax.naming.NamingException;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.panifex.platform.module.api.sidebar.AbstractSidebarItem;
+import org.panifex.platform.module.api.sidebar.SidebarItem;
 import org.panifex.platform.web.impl.sidebar.SidebarManager;
 import org.slf4j.Logger;
 import org.zkoss.bind.annotation.Command;
@@ -59,7 +59,7 @@ public abstract class AbstractVM {
         return currentUser.isAuthenticated();
     }
 
-    public List<AbstractSidebarItem> getSidebarItems() {
+    public List<SidebarItem> getSidebarItems() {
         return sidebarManager.getSidebarItems();
     }
 }

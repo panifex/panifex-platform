@@ -20,4 +20,11 @@ package org.panifex.platform.module.api.sidebar;
 
 public class DefaultSidebarCommand extends AbstractSidebarItem implements SidebarCommand {
 
+    @Override
+    public DefaultSidebarCommand copy() {
+        DefaultSidebarCommand cloned = new DefaultSidebarCommand();
+        super.copyValues(this, cloned);
+        return cloned;
+    }
+
 }

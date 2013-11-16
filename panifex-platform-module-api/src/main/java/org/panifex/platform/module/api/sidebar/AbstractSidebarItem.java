@@ -18,6 +18,10 @@
  ******************************************************************************/
 package org.panifex.platform.module.api.sidebar;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 public abstract class AbstractSidebarItem implements SidebarItem {
 
     private String label;
@@ -53,7 +57,47 @@ public abstract class AbstractSidebarItem implements SidebarItem {
 
     @Override
     public int compareTo(SidebarItem other) {
-        return Integer.compare(getPriority(), other.getPriority());
+        AbstractSidebarItem object = (AbstractSidebarItem) other;
+        return new CompareToBuilder()
+          .append(this.priority, object.priority)
+          .append(this.label, object.label)
+          .append(this.iconSclass, object.iconSclass)
+          .toComparison();
     }
     
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) { 
+            return false; 
+        }
+        if (other == this) { 
+            return true; 
+        }
+        if (other.getClass() != getClass()) {
+            return false;
+        }
+        AbstractSidebarItem obj = (AbstractSidebarItem) other;
+        return new EqualsBuilder()
+                .append(label, obj.label)
+                .append(iconSclass, obj.iconSclass)
+                .append(priority, obj.priority)
+                .isEquals();
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(339, 901)
+                .append(label)
+                .append(iconSclass)
+                .append(priority)
+                .toHashCode();
+    }
+
+    protected AbstractSidebarItem copyValues(AbstractSidebarItem oldObject, AbstractSidebarItem newObject) {
+        // just copy values because immutability
+        newObject.label = oldObject.label;
+        newObject.iconSclass = oldObject.iconSclass;
+        newObject.priority = oldObject.priority;
+        return newObject;
+    }
 }

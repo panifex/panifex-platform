@@ -49,4 +49,11 @@ public interface SidebarItem extends Comparable<SidebarItem> {
      * @since 1.0
      */
     int getPriority();
+    
+    /**
+     * Returns a deep copy of object.
+     *  
+     * @return the deep copy of object
+     */
+    SidebarItem copy();
 }
