@@ -34,15 +34,17 @@ import org.panifex.platform.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Bean(id = "org.panifex.platform.service.security.SecurityServiceImpl")
+@Bean(id = SecurityServiceImpl.ID)
 @ReferenceListener
 @Service(interfaces = SecurityService.class)
 public class SecurityServiceImpl implements SecurityService {
 
     private Logger log = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
+    public final static String ID = "org.panifex.platform.service.security.SecurityServiceImpl";
+    
     @Inject
-    @Reference(serviceInterface = AccountRepository.class, referenceListeners = @ReferenceListener(ref = "org.panifex.platform.service.security.SecurityServiceImpl"))
+    @Reference(serviceInterface = AccountRepository.class, referenceListeners = @ReferenceListener(ref = ID))
     private AccountRepository accountRepository;
 
     @Bind

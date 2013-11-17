@@ -47,15 +47,17 @@ import org.panifex.platform.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Bean(id = "org.panifex.platform.service.security.PanifexRealm")
+@Bean(id = PanifexRealm.ID)
 @ReferenceListener
 @Service(interfaces = Realm.class)
 public class PanifexRealm extends AuthorizingRealm {
 
     private Logger log = LoggerFactory.getLogger(PanifexRealm.class);
 
+    public final static String ID = "org.panifex.platform.service.security.PanifexRealm";
+    
     @Inject
-    @Reference(serviceInterface = SecurityService.class, referenceListeners = @ReferenceListener(ref = "org.panifex.platform.service.security.PanifexRealm"))
+    @Reference(serviceInterface = SecurityService.class, referenceListeners = @ReferenceListener(ref = ID))
     private SecurityService securityService;
 
     /**

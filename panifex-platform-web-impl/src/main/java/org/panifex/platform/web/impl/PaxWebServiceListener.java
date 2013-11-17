@@ -35,6 +35,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.http.HttpContext;
 import org.osgi.service.http.NamespaceException;
 import org.panifex.platform.web.impl.security.SecurityFilter;
+import org.panifex.platform.web.impl.security.SecurityFilterImpl;
 import org.panifex.platform.web.impl.security.SecurityRealmListener;
 import org.panifex.platform.web.servlet.ZkLayoutService;
 import org.panifex.platform.web.servlet.ZkLayoutServiceImpl;
@@ -59,28 +60,29 @@ public class PaxWebServiceListener {
     @Reference(availability = "optional", serviceInterface = WebContainer.class, referenceListeners = @ReferenceListener(ref = ID))
     private WebContainer container;
 
-    @Inject(ref = SecurityFilter.ID)
+    @Inject(ref = SecurityFilterImpl.ID)
     private SecurityFilter securityFilter;
+    private ServiceRegistration<SecurityFilter> securityFilterServiceRegistration;
 
     @Inject(ref = ZkLayoutServiceImpl.ID)
     private ZkLayoutService zkLayoutService;
-
     private ServiceRegistration<ZkLayoutService> zkLayoutServiceRegistration;
-
+    
+    
     public void setBundleContext(BundleContext bundleContext) {
         this.bundleContext = bundleContext;
     }
 
-    public void setSecurityFilter(SecurityFilter securityFilter) {
+    public void setSecurityFilter(SecurityFilterImpl securityFilter) {
         this.securityFilter = securityFilter;
     }
-
+    
     public void setZkLayoutService(ZkLayoutService zkLayoutService) {
         this.zkLayoutService = zkLayoutService;
     }
 
     @Bind
-    public void bind(WebContainer container) {
+    public void bind(WebContainer container) throws Exception {
         // configure zkLoader servlet
         log.debug("Configure ZkLoader servlet");
         Hashtable<String, String> loaderParams = new Hashtable<>();
@@ -123,15 +125,16 @@ public class PaxWebServiceListener {
 
             // register zk layout service
             zkLayoutServiceRegistration =
-                    bundleContext.registerService(ZkLayoutService.class, zkLayoutService,
-                            new Hashtable<String, String>());
+                    bundleContext.registerService(ZkLayoutService.class, zkLayoutService, new Hashtable<String, String>());
             log.debug("Zk layout service has been registered");
 
             // register security filter
             container.registerEventListener(secListener, ctx);
             container.registerFilter(securityFilter, secFilterMapping, secServletNames, null, ctx);
+            securityFilterServiceRegistration =
+                    bundleContext.registerService(SecurityFilter.class, securityFilter, new Hashtable<String, String>());
             log.debug("Security filter has been registered");
-
+            
             // register resources
             container.registerResources("/", "/", ctx);
             container.registerResources("/css", "/css", ctx);
@@ -146,9 +149,16 @@ public class PaxWebServiceListener {
 
     @Unbind
     public void unbind(WebContainer container) {
+        // unregister layout service
         if (zkLayoutServiceRegistration != null) {
             zkLayoutServiceRegistration.unregister();
             log.debug("Zk layout service has been unregistered");
+        }
+        
+        // unregister shiro filter
+        if (securityFilterServiceRegistration != null) {
+            securityFilterServiceRegistration.unregister();
+            log.debug("Shiro filter has been unregistered");
         }
     }
 }
