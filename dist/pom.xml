@@ -131,6 +131,11 @@
             <groupId>org.panifex</groupId>
             <artifactId>panifex-platform-web-impl</artifactId>
         </dependency>
+        <!-- Pax Logging Dependencies -->
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-logback</artifactId>
+        </dependency>
         <!-- Pax Runner Dependencies -->
         <dependency>
             <groupId>org.ops4j.pax.runner</groupId>

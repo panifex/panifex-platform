@@ -185,6 +185,15 @@
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
         </dependency>
+        <!-- Equinox Dependencies -->
+        <dependency>
+            <groupId>org.eclipse.equinox</groupId>
+            <artifactId>cm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.osgi</groupId>
+            <artifactId>org.eclipse.osgi.services</artifactId>
+        </dependency>
         <!-- Liquibase Depedencies -->
         <dependency>
             <groupId>org.liquibase</groupId>
@@ -203,10 +212,6 @@
         <dependency>
             <groupId>org.ops4j.pax.logging</groupId>
             <artifactId>pax-logging-service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.ops4j.pax.logging</groupId>
-            <artifactId>pax-logging-logback</artifactId>
         </dependency>
         <!-- Pax Web Dependencies -->
         <dependency>

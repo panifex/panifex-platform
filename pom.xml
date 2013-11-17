@@ -444,6 +444,17 @@
         <artifactId>liquibase-osgi</artifactId>
         <version>3.0.7</version>
       </dependency>
+      <!-- OSGi Depedencies -->
+      <dependency>
+         <groupId>org.osgi</groupId>
+         <artifactId>org.osgi.core</artifactId>
+         <version>4.3.1</version>
+      </dependency>
+      <dependency>
+         <groupId>org.osgi</groupId>
+         <artifactId>org.osgi.compendium</artifactId>
+         <version>4.3.1</version>
+      </dependency>
       <!-- Panifex Platform Dependencies -->
       <dependency>
           <groupId>org.panifex</groupId>
@@ -489,6 +500,11 @@
         <groupId>org.panifex</groupId>
         <artifactId>panifex-platform-web-impl</artifactId>
         <version>${project.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.panifex.parent.build</groupId>
+          <artifactId>provision</artifactId>
+          <version>${project.version}</version>
       </dependency>
       <!-- Pax Configuration Loader Dependencies -->
       <dependency>
