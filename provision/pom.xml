@@ -93,11 +93,6 @@
             <groupId>org.apache.aries.transaction</groupId>
             <artifactId>org.apache.aries.transaction.wrappers</artifactId>
         </dependency>
-        <!-- Apache Felix Dependencies -->
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.configadmin</artifactId>
-        </dependency>
         <!-- Apache Geronimo Depedencies -->
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
@@ -147,6 +142,11 @@
             <groupId>asm</groupId>
             <artifactId>asm-all</artifactId>
         </dependency>
+        <!-- Codehaus Dependencies -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+        </dependency>
         <!-- Commons Dependencies -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -190,6 +190,11 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-osgi</artifactId>
         </dependency>
+        <!-- Pax Configuration Loader Dependencies -->
+        <dependency>
+            <groupId>org.ops4j.pax.confman</groupId>
+            <artifactId>pax-confman-propsloader</artifactId>
+        </dependency>
         <!-- Pax Logging Dependencies -->
         <dependency>
             <groupId>org.ops4j.pax.logging</groupId>
@@ -198,6 +203,10 @@
         <dependency>
             <groupId>org.ops4j.pax.logging</groupId>
             <artifactId>pax-logging-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-logback</artifactId>
         </dependency>
         <!-- Pax Web Dependencies -->
         <dependency>

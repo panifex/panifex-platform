@@ -1,6 +1,10 @@
 Embed-Dependency: \
-    json;groupId=org.json;inline=false
+    commons-compiler;groupId=org.codehaus.janino;inline=true, \
+    json;groupId=org.json;inline=true
     
 Export-Package: \
+    org.codehaus.commons.compiler;version="0.0.0", \
     org.json;version="0.0.0", \
     org.json.zip;version="0.0.0"
+    
+Import-Package: !*

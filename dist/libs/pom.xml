@@ -57,6 +57,11 @@
     </build>
     
     <dependencies>
+        <!-- Codehaus Janino Depedencies -->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>commons-compiler</artifactId>
+        </dependency>
         <!-- JSON Depedencies -->
         <dependency>
             <groupId>org.json</groupId>

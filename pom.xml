@@ -228,11 +228,6 @@
       <!-- Apache Felix Dependencies -->
       <dependency>
         <groupId>org.apache.felix</groupId>
-        <artifactId>org.apache.felix.configadmin</artifactId>
-        <version>1.6.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.felix</groupId>
         <artifactId>org.apache.felix.prefs</artifactId>
         <version>1.0.6</version>
       </dependency>
@@ -347,6 +342,17 @@
         <artifactId>bsh</artifactId>
         <version>2.0b5</version>
       </dependency>
+      <!-- Codehaus Depedencies -->
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-all</artifactId>
+        <version>2.1.9</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.janino</groupId>
+        <artifactId>commons-compiler</artifactId>
+        <version>2.6.1</version>
+      </dependency>
       <!-- Commons Dependencies -->
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -410,6 +416,11 @@
         <groupId>org.eclipse</groupId>
         <artifactId>osgi</artifactId>
         <version>3.9.1-v20130814-1242</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.equinox</groupId>
+        <artifactId>cm</artifactId>
+        <version>3.2.0-v20070116</version>
       </dependency>
       <dependency>
         <groupId>org.eclipse.osgi</groupId>
@@ -479,6 +490,12 @@
         <artifactId>panifex-platform-web-impl</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <!-- Pax Configuration Loader Dependencies -->
+      <dependency>
+        <groupId>org.ops4j.pax.confman</groupId>
+        <artifactId>pax-confman-propsloader</artifactId>
+        <version>0.2.3</version>
+      </dependency>
       <!-- Pax Logging Dependencies -->
       <dependency>
         <groupId>org.ops4j.pax.logging</groupId>
@@ -491,9 +508,9 @@
         <version>1.7.1</version>
       </dependency>
       <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-core</artifactId>
-        <version>1.0.13</version>
+        <groupId>org.ops4j.pax.logging</groupId>
+        <artifactId>pax-logging-logback</artifactId>
+        <version>1.7.1</version>
       </dependency>
       <!-- Pax Runner Dependencies -->
       <dependency>

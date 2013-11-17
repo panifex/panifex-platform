@@ -28,12 +28,9 @@
             <outputDirectory>/lib</outputDirectory>
             <includes>
                 <include>*:*</include>
-                <include>org.eclipse.osgi:org.eclipse.equinox.cm
-                </include>
             </includes>
             <excludes>
-                <exclude>org.eclipse:*</exclude>
-                <exclude>org.eclipse.osgi:*</exclude>
+                <exclude>org.eclipse:osgi</exclude>
                 <exclude>org.ops4j.pax.runner:*</exclude>
             </excludes>
         </dependencySet>
@@ -48,8 +45,7 @@
         <repository>
             <outputDirectory>equinox</outputDirectory>
             <includes>
-                <include>org.eclipse:*</include>
-                <include>org.eclipse.osgi:*</include>
+                <include>org.eclipse:osgi</include>
             </includes>
         </repository>
     </repositories>
