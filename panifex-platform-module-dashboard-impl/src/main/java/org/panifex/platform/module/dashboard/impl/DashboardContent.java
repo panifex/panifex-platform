@@ -30,7 +30,6 @@ public class DashboardContent extends AbstractContent {
     public final static String ID = "org.panifex.platform.module.dashboard.impl.DashboardContent";
     
     public DashboardContent() {
-        setTitle("Dashboard");
-        setDefault(true);
+        super("Dashboard", ID, true);
     }
 }

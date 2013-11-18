@@ -19,14 +19,15 @@
 package org.panifex.platform.web.impl.content;
 
 import org.panifex.platform.module.api.content.AbstractContent;
+import org.zkoss.util.resource.Labels;
 
 /**
- * A content which is used when a default content is not specified.
+ * A content which is used when the default content is not specified.
  * 
  */
 public class EmptyContent extends AbstractContent {
 
     public EmptyContent() {
-        setTitle("No default content specified.");
+        super(Labels.getLabel("empty.content.title"));
     }
 }

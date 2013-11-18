@@ -19,7 +19,7 @@
 package org.panifex.platform.module.api.content;
 
 /**
- * 
+ * Content of web application.
  * 
  * @since 1.0
  */
@@ -29,13 +29,17 @@ public interface Content {
      * Returns the content title
      * 
      * @return the content title
+     * @since 1.0
      */
     String getTitle();
     
     /**
-     * Returns an assigned bookmark
+     * Returns an assigned bookmark. 
+     * 
+     * <p> The content doesn't have to be assigned to any bookmark.
      * 
      * @return the assigned bookmark
+     * @since 1.0
      */
     String getBookmark();
     
@@ -45,6 +49,7 @@ public interface Content {
      * <p>Only one content should be default.
      * 
      * @return if the content is default
+     * @since 1.0
      */
     boolean isDefault();
 }

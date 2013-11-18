@@ -21,7 +21,6 @@ package org.panifex.platform.module.api.content;
 /**
  * 
  * @since 1.0
- *
  */
 public abstract class AbstractContent implements Content {
 
@@ -29,15 +28,58 @@ public abstract class AbstractContent implements Content {
     private String bookmark;
     private boolean isDefault = false;
     
+    /**
+     * Construct new content template.
+     * 
+     * @param title a content title
+     */
+    protected AbstractContent(String title) {
+        this(title, null, false);
+    }
+    
+    /**
+     * Construct new content template.
+     * 
+     * @param title a content title
+     * @param bookmark a bookmark identificator
+     */
+    protected AbstractContent(String title, String bookmark) {
+        this(title, bookmark, false);
+    }
+    
+    /**
+     * Construct new content template.
+     * 
+     * @param title a content title
+     * @param bookmark a bookmark identificator
+     * @param isDefault if the content is default if the desktop bookmark is not set
+     */
+    protected AbstractContent(String title, String bookmark, boolean isDefault) {
+        this.title = title;
+        this.bookmark = bookmark;
+        this.isDefault = isDefault;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTitle() {
         return title;
     }
     
+    /**
+     * Sets the title of content.
+     * 
+     * @param title the title of content
+     */
     public void setTitle(String title) {
         this.title = title;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getBookmark() {
         return bookmark;
@@ -47,6 +89,9 @@ public abstract class AbstractContent implements Content {
         this.bookmark = bookmark;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isDefault() {
         return isDefault;
