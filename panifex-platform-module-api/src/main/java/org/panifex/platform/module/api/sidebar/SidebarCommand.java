@@ -25,4 +25,12 @@ package org.panifex.platform.module.api.sidebar;
  */
 public interface SidebarCommand extends SidebarItem {
 
+    final static String ID = "org.panifex.platform.module.api.sidebar.SidebarCommand";
+    
+    /**
+     * This method is called when user clicks on a sidebar command.
+     * 
+     * @since 1.0
+     */
+    void onClick();
 }

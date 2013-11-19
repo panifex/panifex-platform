@@ -48,6 +48,8 @@ Import-Package: \
 	org.xml.sax, \
 	org.xml.sax.ext, \
 	org.xml.sax.helpers, \
-	org.w3c.dom 
+	org.w3c.dom
 
-Private-Package: org.panifex.platform.web.impl.*
+Private-Package: \
+    org.panifex.platform.web.impl.*
+

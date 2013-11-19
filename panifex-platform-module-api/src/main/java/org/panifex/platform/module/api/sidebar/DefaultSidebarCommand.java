@@ -18,8 +18,39 @@
  ******************************************************************************/
 package org.panifex.platform.module.api.sidebar;
 
+/**
+ * Default implementation of a sidebar command.
+ * 
+ * @since 1.0
+ */
 public class DefaultSidebarCommand extends AbstractSidebarItem implements SidebarCommand {
 
+    private enum ActionType {
+        CONTENT,
+        REDIRECT
+    }
+    
+    private ActionType activeActionType;
+    private String contentId;
+    
+    /**
+     * Content ID identifies content which would be shown if user
+     * clicks on a sidebar command. 
+     * 
+     * <p> If content id is set, other actions would be disabled if they 
+     * had been set before.
+     * 
+     * @param contentId identifies content
+     * @since 1.0
+     */
+    public void setContentId(String contentId) {
+        this.contentId = contentId;
+        activeActionType = ActionType.CONTENT;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DefaultSidebarCommand copy() {
         DefaultSidebarCommand cloned = new DefaultSidebarCommand();
@@ -27,4 +58,16 @@ public class DefaultSidebarCommand extends AbstractSidebarItem implements Sideba
         return cloned;
     }
 
+    public void onClick() {
+        switch (activeActionType) {
+            case CONTENT:
+                setBookmark(contentId);
+                break;
+            case REDIRECT:
+                break;
+        }
+    }
+    
+    private void setBookmark(String bookmark) {
+    }
 }

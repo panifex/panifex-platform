@@ -54,6 +54,7 @@ public interface SidebarItem extends Comparable<SidebarItem> {
      * Returns a deep copy of object.
      *  
      * @return the deep copy of object
+     * @since 1.0
      */
     SidebarItem copy();
 }
