@@ -41,6 +41,7 @@
     <module>poms</module>
     <module>provision</module>
     <module>panifex-platform-module-api</module>
+    <module>panifex-platform-module-spi</module>
     <module>panifex-platform-api</module>
     <module>panifex-platform-service</module>
     <module>panifex-platform-web-impl</module>
@@ -446,20 +447,20 @@
       </dependency>
       <!-- OSGi Depedencies -->
       <dependency>
-         <groupId>org.osgi</groupId>
-         <artifactId>org.osgi.core</artifactId>
-         <version>4.3.1</version>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.core</artifactId>
+        <version>4.3.1</version>
       </dependency>
       <dependency>
-         <groupId>org.osgi</groupId>
-         <artifactId>org.osgi.compendium</artifactId>
-         <version>4.3.1</version>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.compendium</artifactId>
+        <version>4.3.1</version>
       </dependency>
       <!-- Panifex Platform Dependencies -->
       <dependency>
-          <groupId>org.panifex</groupId>
-          <artifactId>libs</artifactId>
-          <version>${project.version}</version>
+        <groupId>org.panifex</groupId>
+        <artifactId>libs</artifactId>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.panifex</groupId>
@@ -483,6 +484,11 @@
       </dependency>
       <dependency>
         <groupId>org.panifex</groupId>
+        <artifactId>panifex-platform-module-spi</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.panifex</groupId>
         <artifactId>panifex-platform-module-dashboard-impl</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -502,9 +508,9 @@
         <version>${project.version}</version>
       </dependency>
       <dependency>
-          <groupId>org.panifex.parent.build</groupId>
-          <artifactId>provision</artifactId>
-          <version>${project.version}</version>
+        <groupId>org.panifex.parent.build</groupId>
+        <artifactId>provision</artifactId>
+        <version>${project.version}</version>
       </dependency>
       <!-- Pax Configuration Loader Dependencies -->
       <dependency>
