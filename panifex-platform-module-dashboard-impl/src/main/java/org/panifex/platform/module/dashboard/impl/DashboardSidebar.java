@@ -21,8 +21,13 @@ public class DashboardSidebar implements Sidebar {
      * Initializes Dashboard sidebar items;
      */
     public DashboardSidebar() {
-        DefaultSidebarCommand dashboardItem = new DefaultSidebarCommand();
-        dashboardItem.setLabel("Dashboard");
+        // create dashboard sidebar item
+        DefaultSidebarCommand dashboardItem = new DefaultSidebarCommand(
+            "Dashboard",
+            DashboardContent.ID,
+            0);
+        
+        // add item to list
         sidebarItems.add(dashboardItem);
     }
     

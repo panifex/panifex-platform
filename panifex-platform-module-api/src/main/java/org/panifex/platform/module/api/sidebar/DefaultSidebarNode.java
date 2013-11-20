@@ -29,6 +29,18 @@ public class DefaultSidebarNode extends AbstractSidebarItem implements SidebarNo
     private Collection<SidebarItem> sidebarItems = new ArrayList<>();
     private String badgeText;
     
+    public DefaultSidebarNode(String label, int priority) {
+        super(label, priority);
+    }
+    
+    private DefaultSidebarNode(DefaultSidebarNode oldNode) {
+        super(oldNode);
+        this.badgeText = oldNode.badgeText;
+        for (SidebarItem item : sidebarItems) {
+            this.sidebarItems.add(item.copy());
+        }
+    }
+    
     @Override
     public Collection<SidebarItem> getSidebarItems() {
         return sidebarItems;
@@ -73,14 +85,8 @@ public class DefaultSidebarNode extends AbstractSidebarItem implements SidebarNo
 
     @Override
     public DefaultSidebarNode copy() {
-        DefaultSidebarNode cloned = new DefaultSidebarNode();
-        super.copyValues(this, cloned);
-        
-        for (SidebarItem item : sidebarItems) {
-            cloned.sidebarItems.add(item.copy());
-        }
-        
-        return null;
+        DefaultSidebarNode cloned = new DefaultSidebarNode(this);
+        return cloned;
     }
    
 }

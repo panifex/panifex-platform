@@ -28,6 +28,18 @@ public abstract class AbstractSidebarItem implements SidebarItem {
     private String iconSclass;
     private int priority;
     
+    protected AbstractSidebarItem(String label, int priority) {
+        this.label = label;
+        this.priority = priority;
+    }
+    
+    protected AbstractSidebarItem(AbstractSidebarItem oldItem) {
+        // just copy values because immutability
+        this.label = oldItem.label;
+        this.iconSclass = oldItem.iconSclass;
+        this.priority = oldItem.priority;
+    }
+    
     @Override
     public String getLabel() {
         return label;
@@ -93,11 +105,4 @@ public abstract class AbstractSidebarItem implements SidebarItem {
                 .toHashCode();
     }
 
-    protected AbstractSidebarItem copyValues(AbstractSidebarItem oldObject, AbstractSidebarItem newObject) {
-        // just copy values because immutability
-        newObject.label = oldObject.label;
-        newObject.iconSclass = oldObject.iconSclass;
-        newObject.priority = oldObject.priority;
-        return newObject;
-    }
 }

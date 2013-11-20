@@ -18,6 +18,8 @@
  ******************************************************************************/
 package org.panifex.platform.module.api.sidebar;
 
+import org.panifex.platform.module.api.environment.EnvironmentManager;
+
 /**
  * Default implementation of a sidebar command.
  * 
@@ -32,6 +34,17 @@ public class DefaultSidebarCommand extends AbstractSidebarItem implements Sideba
     
     private ActionType activeActionType;
     private String contentId;
+    
+    public DefaultSidebarCommand(String label, String contentId, int priority) {
+        super(label, priority);
+        setContentId(contentId);
+    }
+    
+    protected DefaultSidebarCommand(DefaultSidebarCommand oldCommand) {
+        super(oldCommand);
+        this.activeActionType = oldCommand.activeActionType;
+        this.contentId = oldCommand.contentId;
+    }
     
     /**
      * Content ID identifies content which would be shown if user
@@ -53,8 +66,7 @@ public class DefaultSidebarCommand extends AbstractSidebarItem implements Sideba
      */
     @Override
     public DefaultSidebarCommand copy() {
-        DefaultSidebarCommand cloned = new DefaultSidebarCommand();
-        super.copyValues(this, cloned);
+        DefaultSidebarCommand cloned = new DefaultSidebarCommand(this);
         return cloned;
     }
 
@@ -70,5 +82,6 @@ public class DefaultSidebarCommand extends AbstractSidebarItem implements Sideba
     }
     
     private void setBookmark(String bookmark) {
+        EnvironmentManager.getService().setBookmark(bookmark);
     }
 }
