@@ -81,8 +81,8 @@ public abstract class AbstractVM {
     }
     
     @Command()
-    public void onSidebarItemClick(@BindingParam(SidebarCommand.ID) String command) {
-        Messagebox.show(command);
+    public void onSidebarItemClick(@BindingParam(SidebarCommand.ID) SidebarCommand command) {
+        command.onClick();
     }
     
     /**

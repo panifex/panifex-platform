@@ -24,6 +24,7 @@ import java.util.Map;
 import org.panifex.platform.module.api.sidebar.SidebarCommand;
 import org.panifex.platform.web.impl.main.AbstractVM;
 import org.zkoss.bind.Binder;
+import org.zkoss.bind.impl.BindEvaluatorXUtil;
 import org.zkoss.xel.VariableResolver;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Events;
@@ -41,13 +42,14 @@ public class SidebarTemplate implements Template {
 
     @Override
     public Component[] create(Component parent, Component insertBefore, VariableResolver resolver,
-            Composer composer) {
+            @SuppressWarnings("rawtypes") Composer composer) {
 
         final Navitem navItem = new Navitem();
         
-        Map<String, Object> onClickArgs = new HashMap<>();
-        onClickArgs.put(SidebarCommand.ID, "item.label");
-        binder.addCommandBinding(navItem, Events.ON_CLICK, AbstractVM.ON_SIDEBAR_ITEM_CLICK, onClickArgs);
+        Map<String, String[]> onClickArgs = new HashMap<>();
+        onClickArgs.put(SidebarCommand.ID, new String[]{"item"});
+        Map<String, Object> parsedOnClickArgs = BindEvaluatorXUtil.parseArgs(binder.getEvaluatorX(), onClickArgs);
+        binder.addCommandBinding(navItem, Events.ON_CLICK, AbstractVM.ON_SIDEBAR_ITEM_CLICK, parsedOnClickArgs);
         
         binder.addPropertyLoadBindings(navItem, "label", "item.label", null, null, null, null, null);
         binder.addPropertyLoadBindings(navItem, "iconSclass", "item.iconSclass", null, null, null,

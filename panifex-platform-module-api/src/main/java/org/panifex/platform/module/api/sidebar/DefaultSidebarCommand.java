@@ -58,6 +58,7 @@ public class DefaultSidebarCommand extends AbstractSidebarItem implements Sideba
         return cloned;
     }
 
+    @Override
     public void onClick() {
         switch (activeActionType) {
             case CONTENT:
