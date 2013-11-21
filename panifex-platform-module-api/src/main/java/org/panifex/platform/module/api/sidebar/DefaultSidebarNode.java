@@ -24,7 +24,7 @@ import java.util.Collection;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class DefaultSidebarNode extends AbstractSidebarItem implements SidebarNode {
+public class DefaultSidebarNode extends AbstractSidebarNode {
 
     private Collection<SidebarItem> sidebarItems = new ArrayList<>();
     private String badgeText;
@@ -88,5 +88,5 @@ public class DefaultSidebarNode extends AbstractSidebarItem implements SidebarNo
         DefaultSidebarNode cloned = new DefaultSidebarNode(this);
         return cloned;
     }
-   
+
 }

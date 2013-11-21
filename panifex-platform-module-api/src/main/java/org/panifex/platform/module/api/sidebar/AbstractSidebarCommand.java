@@ -18,48 +18,18 @@
  ******************************************************************************/
 package org.panifex.platform.module.api.sidebar;
 
-/**
- * This is an abstract sidebar item which can be node or item. The sidebar items are used to define
- * dynamic sidebar menu.
- * 
- * @since 1.0
- */
-public interface SidebarItem extends Comparable<SidebarItem> {
+public abstract class AbstractSidebarCommand extends AbstractSidebarItem implements SidebarCommand {
 
-    public final static String COMMAND = "command";
-    public final static String NODE = "node";
-    
-    /**
-     * Returns the label
-     * 
-     * @return the label (never null)
-     * @since 1.0
-     */
-    String getLabel();
+    protected AbstractSidebarCommand(AbstractSidebarCommand oldItem) {
+        super(oldItem);
+    }
 
-    /**
-     * Returns the icon font
-     * 
-     * @return the icon font
-     * @since 1.0
-     */
-    String getIconSclass();
-
-    /**
-     * A priority of item. The items will be ordered by priority in sidebar menu.
-     * 
-     * @return the priority of item
-     * @since 1.0
-     */
-    int getPriority();
+    protected AbstractSidebarCommand(String label, int priority) {
+        super(label, priority);
+    }
     
-    /**
-     * Returns a deep copy of object.
-     *  
-     * @return the deep copy of object
-     * @since 1.0
-     */
-    SidebarItem copy();
-    
-    String getType();
+    @Override
+    public final String getType() {
+        return COMMAND;
+    }
 }

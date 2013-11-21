@@ -25,7 +25,7 @@ import org.panifex.platform.module.api.environment.EnvironmentManager;
  * 
  * @since 1.0
  */
-public class DefaultSidebarCommand extends AbstractSidebarItem implements SidebarCommand {
+public class DefaultSidebarCommand extends AbstractSidebarCommand {
 
     private enum ActionType {
         CONTENT,

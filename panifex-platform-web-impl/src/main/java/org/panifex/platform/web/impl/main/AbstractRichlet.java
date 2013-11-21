@@ -18,7 +18,10 @@
  ******************************************************************************/
 package org.panifex.platform.web.impl.main;
 
-import org.panifex.platform.web.impl.sidebar.SidebarTemplate;
+import org.panifex.platform.module.api.sidebar.SidebarItem;
+import org.panifex.platform.module.api.sidebar.SidebarNode;
+import org.panifex.platform.web.impl.sidebar.SidebarCommandTemplate;
+import org.panifex.platform.web.impl.sidebar.SidebarNodeTemplate;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.text.MessageFormats;
@@ -125,7 +128,9 @@ public abstract class AbstractRichlet extends GenericRichlet {
 
         final Navbar navBar = new Navbar();
         binder.addChildrenLoadBindings(navBar, "vm.sidebarItems", null, null, null, null, null);
-        navBar.setTemplate("children", new SidebarTemplate(binder));
+        binder.setTemplate(navBar, "$CHILDREN$", "each.type", null);
+        navBar.setTemplate(SidebarItem.COMMAND, new SidebarCommandTemplate(binder));
+        navBar.setTemplate(SidebarItem.NODE, new SidebarNodeTemplate(binder));
         navBar.setParent(sidebar);
 
         return sidebar;
