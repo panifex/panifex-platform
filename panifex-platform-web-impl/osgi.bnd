@@ -3,7 +3,7 @@ Bundle-Blueprint-Annotation: true
 
 Embed-Dependency: \
 	bsh;groupId=org.beanshell;inline=false, \
-	zk;groupId=org.zkoss.zk;inline=org.zkoss.zk.ui|metainfo/**, \
+	zk;groupId=org.zkoss.zk;inline=org.zkoss.zk.ui|metainfo/**|web/**, \
 	zkbind;groupId=org.zkoss.zk;inline=org.zkoss.bind, \
 	zhtml;groupId=org.zkoss.zk;inline=false, \
 	zkmax;groupId=org.zkoss.zk;inline=false, \
@@ -64,6 +64,7 @@ Import-Package: \
 	org.zkoss.zk.au.http;version="[7.0,8.0)", \
 	org.zkoss.zk.au.out;version="[7.0,8.0)", \
 	org.zkoss.zk.device;version="[7.0,8.0)", \
+	org.zkoss.zk.fn;version="[7.0,8.0)", \
 	org.zkoss.zk.mesg;version="[7.0,8.0)", \
 	org.zkoss.zk.scripting;version="[7.0,8.0)", \
 	org.zkoss.zk.ui;version="[7.0,8.0)", \
@@ -122,6 +123,7 @@ Private-Package: \
     !org.zkoss.zk.au.http, \
     !org.zkoss.zk.au.out, \
     !org.zkoss.zk.device, \
+    !org.zkoss.zk.fn, \
     !org.zkoss.zk.mesg, \
     !org.zkoss.zk.scripting, \
     !org.zkoss.zk.ui, \

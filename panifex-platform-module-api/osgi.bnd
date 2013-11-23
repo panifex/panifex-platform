@@ -28,6 +28,7 @@ Export-Package: \
 	org.zkoss.zk.au.http;version="7.0", \
 	org.zkoss.zk.au.out;version="7.0", \
 	org.zkoss.zk.device;version="7.0", \
+	org.zkoss.zk.fn;version="7.0", \
 	org.zkoss.zk.mesg;version="7.0", \
 	org.zkoss.zk.scripting;version="7.0", \
 	org.zkoss.zk.ui;version="7.0", \
