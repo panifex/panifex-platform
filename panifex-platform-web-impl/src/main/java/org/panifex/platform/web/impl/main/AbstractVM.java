@@ -37,7 +37,6 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Div;
-import org.zkoss.zul.Messagebox;
 
 /**
  * View-Model of an abstract window which is drawn by AbstractRichlet.

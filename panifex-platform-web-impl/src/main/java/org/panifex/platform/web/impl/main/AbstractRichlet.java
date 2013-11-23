@@ -19,7 +19,6 @@
 package org.panifex.platform.web.impl.main;
 
 import org.panifex.platform.module.api.sidebar.SidebarItem;
-import org.panifex.platform.module.api.sidebar.SidebarNode;
 import org.panifex.platform.web.impl.sidebar.SidebarCommandTemplate;
 import org.panifex.platform.web.impl.sidebar.SidebarNodeTemplate;
 import org.zkoss.bind.Binder;
