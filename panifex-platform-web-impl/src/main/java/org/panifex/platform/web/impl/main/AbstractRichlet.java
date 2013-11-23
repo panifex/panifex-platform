@@ -29,6 +29,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.GenericRichlet;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.sys.PageCtrl;
 import org.zkoss.zkmax.zul.Navbar;
 import org.zkoss.zul.A;
@@ -59,6 +60,7 @@ public abstract class AbstractRichlet extends GenericRichlet {
         page.setTitle(Labels.getLabel("application.name"));
 
         final Div main = new Div();
+        main.setId("main");
 
         // initialize Binder
         binder = new DefaultBinder();
@@ -68,16 +70,14 @@ public abstract class AbstractRichlet extends GenericRichlet {
         // create components
         createComponents(main);
         
-        // bind form events
-        binder.addCommandBinding(main, Events.ON_BOOKMARK_CHANGE, "'onBookmarkChange'", null);
-
         Script s = new Script();
         s.setSrc("../css/bootstrap/js/bootstrap.min.js");
         s.setParent(main);
 
         main.setPage(page);
         binder.loadComponent(main, true);
-
+        Selectors.wireEventListeners(main, binder.getViewModel());
+        Selectors.wireComponents(main, binder.getViewModel(), true);
     }
 
     private void createComponents(Component main) {

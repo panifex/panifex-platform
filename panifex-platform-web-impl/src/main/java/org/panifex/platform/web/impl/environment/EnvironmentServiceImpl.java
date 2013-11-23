@@ -23,6 +23,8 @@ import org.apache.aries.blueprint.annotation.Service;
 import org.panifex.platform.module.api.environment.EnvironmentService;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.BookmarkEvent;
+import org.zkoss.zk.ui.event.Events;
 
 @Bean(id = EnvironmentServiceImpl.ID)
 @Service(interfaces = EnvironmentService.class)
@@ -47,7 +49,7 @@ public class EnvironmentServiceImpl implements EnvironmentService {
      */
     @Override
     public void setBookmark(String bookmark) {
-        getDesktop().setBookmark(bookmark); 
+        setBookmark(bookmark, false);
     }
 
     /**
@@ -56,6 +58,7 @@ public class EnvironmentServiceImpl implements EnvironmentService {
     @Override
     public void setBookmark(String name, boolean replace) {
         getDesktop().setBookmark(name, replace);
+        Events.postEvent(new BookmarkEvent(Events.ON_BOOKMARK_CHANGE, name));
     }
 
 }

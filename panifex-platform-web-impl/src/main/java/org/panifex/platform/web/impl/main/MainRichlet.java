@@ -37,7 +37,7 @@ public class MainRichlet extends AbstractRichlet {
         log.debug("Create content");
         
         final Div content = new Div();
-        content.setId("_content");
+        content.setId("content");
         content.setSclass("content");
         
         content.appendChild(ContentManager.getManager().render(""));

@@ -85,6 +85,7 @@ public class ContentManager {
         for (Content content : contents) {
             if (content.getBookmark() != null) {
                 if (content.getBookmark().equalsIgnoreCase(bookmark)) {
+                    log.debug("Founded bookmarked content: {}", content);
                     return content;
                 }
             }
@@ -95,11 +96,13 @@ public class ContentManager {
     private Content getDefaultContent() {
         for (Content content : contents) {
             if (content.isDefault()) {
+                log.debug("Bookmarked content has not found. Default content is returned");
                 return content;
             }
         }
         
         // a default content is not specified. return empty content
+        log.debug("Default content is not specified. Return empty content");
         return new EmptyContent();
     }
     
