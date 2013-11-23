@@ -22,6 +22,8 @@ import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Service;
 import org.panifex.platform.module.api.content.AbstractContent;
 import org.panifex.platform.module.api.content.Content;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zul.Div;
 
 @Bean(id = DashboardContent.ID)
 @Service(interfaces = Content.class)
@@ -31,5 +33,10 @@ public class DashboardContent extends AbstractContent {
     
     public DashboardContent() {
         super("Dashboard", ID, true);
+    }
+
+    @Override
+    public Component createBody() {
+        return new Div();
     }
 }

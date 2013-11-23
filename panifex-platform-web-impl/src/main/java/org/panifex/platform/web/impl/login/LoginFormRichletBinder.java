@@ -24,9 +24,10 @@ import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
-import org.panifex.platform.web.servlet.ZkLayoutService;
+import org.panifex.platform.web.impl.servlet.ZkLayoutService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zkoss.lang.Classes;
 
 @Bean(id = LoginFormRichletBinder.ID)
 @ReferenceListener
@@ -46,6 +47,12 @@ public class LoginFormRichletBinder {
         this.zkLayoutService = zkLayoutService;
 
         zkLayoutService.addRichlet(LoginFormRichlet.class, "/login");
+        
+        try {
+            Classes.forNameByThread(LoginFormRichlet.class.getName());
+        } catch (ClassNotFoundException e) {
+            log.error("Greska: {}", e);
+        }
     }
 
     @Unbind

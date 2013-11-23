@@ -18,6 +18,8 @@
  ******************************************************************************/
 package org.panifex.platform.module.api.content;
 
+import org.zkoss.zk.ui.Component;
+
 /**
  * Content of web application.
  * 
@@ -52,4 +54,11 @@ public interface Content {
      * @since 1.0
      */
     boolean isDefault();
+    
+    /**
+     * Creates a body of content.
+     * 
+     * @return the ZK Component which represents body
+     */
+    Component createBody();
 }

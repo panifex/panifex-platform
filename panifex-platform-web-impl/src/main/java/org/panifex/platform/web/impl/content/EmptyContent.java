@@ -20,6 +20,8 @@ package org.panifex.platform.web.impl.content;
 
 import org.panifex.platform.module.api.content.AbstractContent;
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zul.Div;
 
 /**
  * A content which is used when the default content is not specified.
@@ -29,5 +31,10 @@ public class EmptyContent extends AbstractContent {
 
     public EmptyContent() {
         super(Labels.getLabel("empty.content.title"));
+    }
+
+    @Override
+    public Component createBody() {
+        return new Div();
     }
 }

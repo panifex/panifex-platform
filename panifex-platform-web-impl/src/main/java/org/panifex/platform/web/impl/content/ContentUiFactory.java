@@ -43,6 +43,9 @@ public class ContentUiFactory {
         final Text titleText = new Text(content.getTitle());
         title.appendChild(titleText);
         
+        Component body = content.createBody();
+        root.appendChild(body);
+        
         return root;
     }
 }

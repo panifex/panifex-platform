@@ -37,13 +37,14 @@ import org.osgi.service.http.NamespaceException;
 import org.panifex.platform.web.impl.security.SecurityFilter;
 import org.panifex.platform.web.impl.security.SecurityFilterImpl;
 import org.panifex.platform.web.impl.security.SecurityRealmListener;
-import org.panifex.platform.web.servlet.ZkLayoutService;
-import org.panifex.platform.web.servlet.ZkLayoutServiceImpl;
+import org.panifex.platform.web.impl.servlet.ZkLayoutService;
+import org.panifex.platform.web.impl.servlet.ZkLayoutServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.web.servlet.dsp.InterpreterServlet;
 import org.zkoss.zk.au.http.DHtmlUpdateServlet;
 import org.zkoss.zk.ui.http.HttpSessionListener;
+import org.zkoss.zul.Div;
 
 @Bean(id = PaxWebServiceListener.ID)
 @ReferenceListener

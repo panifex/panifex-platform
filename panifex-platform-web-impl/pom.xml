@@ -103,21 +103,18 @@
         <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zk</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zkbind</artifactId>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.common</groupId>
+            <artifactId>zel</artifactId>
         </dependency>
         <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zhtml</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkex</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -129,24 +126,6 @@
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zul</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zkforge.el</groupId>
-            <artifactId>zcommons-el</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.common</groupId>
-            <artifactId>zcommon</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-fileupload</groupId>
-                    <artifactId>commons-fileupload</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.common</groupId>
-            <artifactId>zel</artifactId>
         </dependency>
         <dependency>
             <groupId>org.zkoss.common</groupId>

@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.web.servlet;
+package org.panifex.platform.web.impl.servlet;
 
 import java.util.Map;
 
@@ -29,7 +29,7 @@ import org.zkoss.zk.ui.util.Configuration;
 @Bean(id = ZkLayoutServiceImpl.ID)
 public class ZkLayoutServiceImpl extends DHtmlLayoutServlet implements ZkLayoutService {
 
-    public final static String ID = "org.panifex.platform.web.servlet.ZkLayoutServlet";
+    public final static String ID = "org.panifex.platform.web.impl.servlet.ZkLayoutServlet";
 
     /**
      * Generated serial ID

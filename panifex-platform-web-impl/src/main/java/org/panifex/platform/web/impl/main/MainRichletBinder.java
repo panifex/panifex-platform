@@ -24,7 +24,7 @@ import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
-import org.panifex.platform.web.servlet.ZkLayoutService;
+import org.panifex.platform.web.impl.servlet.ZkLayoutService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
