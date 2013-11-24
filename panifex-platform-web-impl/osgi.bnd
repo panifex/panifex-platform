@@ -5,9 +5,10 @@ Embed-Dependency: \
 	bsh;groupId=org.beanshell;inline=false, \
 	zk;groupId=org.zkoss.zk;inline=org.zkoss.zk.ui|metainfo/**|web/**, \
 	zkbind;groupId=org.zkoss.zk;inline=org.zkoss.bind, \
+	zkex;groupId=org.zkoss.zk;inline=web/**, \
 	zhtml;groupId=org.zkoss.zk;inline=false, \
 	zkmax;groupId=org.zkoss.zk;inline=false, \
-	zul;groupId=org.zkoss.zk;inline=org.zkoss.zul|metainfo/**, \
+	zul;groupId=org.zkoss.zk;inline=org.zkoss.zul|metainfo/**|web/**, \
 	zel;groupId=org.zkoss.common;inline=org.zkoss.zel, \
 	zweb;groupId=org.zkoss.common;inline=false
 

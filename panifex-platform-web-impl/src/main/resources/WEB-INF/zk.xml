@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk>
+    <language-config>
+        <addon-uri>/metainfo/lang-addon-bind.xml</addon-uri>
+    </language-config>
+    
+    
+    <listener>
+        <listener-class>org.zkoss.bind.tracker.impl.BindUiLifeCycle</listener-class>
+    </listener>
+</zk>

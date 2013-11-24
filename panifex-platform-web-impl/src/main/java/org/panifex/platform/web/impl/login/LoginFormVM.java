@@ -83,6 +83,7 @@ public class LoginFormVM extends AbstractVM {
 
         try {
             currentUser.login(token);
+            log.info("User {} has been signed in", username);
             Executions.sendRedirect("/zk/main");
         } catch (UnknownAccountException e) {
             Messagebox.show(Labels.getLabel("login.form.fault.UnknownAccountException"), null, 0,

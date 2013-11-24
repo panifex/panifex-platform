@@ -58,8 +58,8 @@ public abstract class AbstractRichlet extends GenericRichlet {
         pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/user-nav.css.dsp\"/>");
 
         page.setTitle(Labels.getLabel("application.name"));
-
         final Div main = new Div();
+       
         main.setId("main");
 
         // initialize Binder
