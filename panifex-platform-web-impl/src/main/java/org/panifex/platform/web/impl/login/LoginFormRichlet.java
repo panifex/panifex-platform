@@ -69,6 +69,7 @@ public class LoginFormRichlet extends AbstractRichlet {
 
         // Creates username textbox
         final Textbox usernameTextbox = new Textbox();
+        usernameTextbox.setId("username");
         usernameTextbox.setSclass("username-field");
         usernameTextbox.setPlaceholder(getLabel("login.form.field.username.placeholder"));
         usernameTextbox.setPlaceholder(getLabel("login.form.field.username.tooltip"));
@@ -84,6 +85,8 @@ public class LoginFormRichlet extends AbstractRichlet {
 
         // Creates password textbox
         final Textbox passwordTextbox = new Textbox();
+        passwordTextbox.setId("password");
+        passwordTextbox.setType("password");
         passwordTextbox.setSclass("password-field");
         passwordTextbox.setPlaceholder(getLabel("login.form.field.passwors.placeholder"));
         passwordTextbox.setTooltip(getLabel("login.form.field.passwors.tooltip"));
