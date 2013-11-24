@@ -16,6 +16,19 @@ Export-Package: \
     org.panifex.platform.module.api.content, \
     org.panifex.platform.module.api.environment, \
 	org.panifex.platform.module.api.sidebar, \
+	org.zkoss.bind;version="7.0", \
+	org.zkoss.bind.annotation;version="7.0", \
+	org.zkoss.bind.converter;version="7.0", \
+	org.zkoss.bind.converter.sys;version="7.0", \
+	org.zkoss.bind.impl;version="7.0", \
+	org.zkoss.bind.sys;version="7.0", \
+	org.zkoss.bind.sys.debugger;version="7.0", \
+	org.zkoss.bind.sys.debugger.impl;version="7.0", \
+	org.zkoss.bind.sys.tracker;version="7.0", \
+	org.zkoss.bind.tracker.impl;version="7.0", \
+	org.zkoss.bind.validator;version="7.0", \
+	org.zkoss.bind.xel;version="7.0", \
+	org.zkoss.bind.xel.zel;version="7.0", \
 	org.zkoss.html;version="7.0", \
 	org.zkoss.io;version="7.0", \
 	org.zkoss.lang;version="7.0", \
@@ -48,7 +61,6 @@ Export-Package: \
 	org.zkoss.zk.ui.util;version="7.0", \
 	org.zkoss.zk.xel;version="7.0", \
 	org.zkoss.zk.xel.impl;version="7.0", \
-	org.zkoss.bind.annotation;version="7.0", \
 	org.zkoss.zel;version="7.0", \
 	org.zkoss.zkex.ui.comet;version="7.0", \
 	org.zkoss.zkex.rt;version="7.0", \
@@ -89,6 +101,13 @@ Import-Package: \
     org.w3c.dom
 	
 Private-Package: \
+    org.zkoss.bind, \
+    org.zkoss.bind.converter, \
+    org.zkoss.bind.converter.sys, \
+    org.zkoss.bind.impl, \
+    org.zkoss.bind.sys, \
+    org.zkoss.bind.sys.debugger, \
+    org.zkoss.bind.tracker.impl, \
     org.zkoss.html, \
     org.zkoss.io, \
     org.zkoss.lang, \

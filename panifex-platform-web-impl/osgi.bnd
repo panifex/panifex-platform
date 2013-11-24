@@ -52,7 +52,19 @@ Import-Package: \
 	org.xml.sax.ext, \
 	org.xml.sax.helpers, \
 	org.w3c.dom, \
+	org.zkoss.bind;version="[7.0,8.0)", \
 	org.zkoss.bind.annotation;version="[7.0,8.0)", \
+	org.zkoss.bind.converter;version="[7.0,8.0)", \
+	org.zkoss.bind.converter.sys;version="[7.0,8.0)", \
+	org.zkoss.bind.impl;version="[7.0,8.0)", \
+	org.zkoss.bind.sys;version="[7.0,8.0)", \
+	org.zkoss.bind.sys.debugger;version="[7.0,8.0)", \
+	org.zkoss.bind.sys.debugger.impl;version="[7.0,8.0)", \
+	org.zkoss.bind.sys.tracker;version="[7.0,8.0)", \
+	org.zkoss.bind.tracker.impl;version="[7.0,8.0)", \
+	org.zkoss.bind.validator;version="[7.0,8.0)", \
+	org.zkoss.bind.xel;version="[7.0,8.0)", \
+	org.zkoss.bind.xel.zel;version="[7.0,8.0)", \
 	org.zkoss.html;version="[7.0,8.0)", \
 	org.zkoss.io;version="[7.0,8.0)", \
 	org.zkoss.lang;version="[7.0,8.0)", \
@@ -103,16 +115,21 @@ Import-Package: \
 	org.zkoss.web.util.resource;version="[7.0,8.0)", \
 	org.zkoss.web.theme;version="[7.0,8.0)"
 
-#   org.zkoss.zel.impl;version="[7.0,8.0)", \
-#   org.zkoss.zel.impl.lang;version="[7.0,8.0)", \
-
 Private-Package: \
     org.panifex.platform.web.impl.*, \
+    !org.zkoss.bind, \
     !org.zkoss.bind.annotation, \
-    org.zkoss.bind.*, \
-    org.zkoss.bind.impl, \
-    org.zkoss.bind.validator, \
-    org.zkoss.bind.sys.debugger.impl, \
+    !org.zkoss.bind.converter, \
+    !org.zkoss.bind.converter.sys, \
+    !org.zkoss.bind.impl, \
+    !org.zkoss.bind.sys, \
+    !org.zkoss.bind.sys.debugger, \
+    !org.zkoss.bind.sys.debugger.impl, \
+    !org.zkoss.bind.sys.tracker, \
+    !org.zkoss.bind.tracker.impl, \
+    !org.zkoss.bind.validator, \
+    !org.zkoss.bind.xel, \
+    !org.zkoss.bind.xel.zel, \
     !org.zkoss.html, \
     !org.zkoss.io, \
     !org.zkoss.lang, \
