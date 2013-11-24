@@ -233,12 +233,6 @@
             <artifactId>snakeyaml</artifactId>
         </dependency>
         
-        <!-- MKD Dependencies - only for test -->
-        <dependency>
-            <groupId>hr.mkd</groupId>
-            <artifactId>mkd-workrecords-spi</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 </project>
