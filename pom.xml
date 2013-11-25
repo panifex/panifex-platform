@@ -70,13 +70,18 @@
         <module>panifex-platform-module-dashboard-impl</module>
     </modules>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>zkmaven</id>
-            <name>ZK Maven Plugin Repository</name>
-            <url>http://mavensync.zkoss.org/maven2/</url>
-        </pluginRepository>
-    </pluginRepositories>
+    <repositories>
+        <repository>
+            <id>ZK CE</id>
+            <name>ZK CE repository</name>
+            <url>http://mavensync.zkoss.org/maven2</url>
+        </repository>
+        <repository>
+            <id>ZK PE/EE Eval</id>
+            <name>ZK PE/EE Evaluation repository</name>
+            <url>http://mavensync.zkoss.org/eval/</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
