@@ -77,8 +77,8 @@
             <url>http://mavensync.zkoss.org/maven2</url>
         </repository>
         <repository>
-            <id>ZK PE/EE Eval</id>
-            <name>ZK PE/EE Evaluation repository</name>
+            <id>ZK PE-EE Eval</id>
+            <name>ZK PE-EE Evaluation repository</name>
             <url>http://mavensync.zkoss.org/eval/</url>
         </repository>
     </repositories>
