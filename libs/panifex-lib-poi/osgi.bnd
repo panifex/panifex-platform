@@ -1,0 +1,20 @@
+Embed-Dependency: \
+    poi;groupId=org.apache.poi;inline=true, \
+    poi-contrib;groupId=org.apache.poi;inline=true, \
+    poi-ooxml;groupId=org.apache.poi;inline=true, \
+    poi-ooxml-schemas;groupId=org.apache.poi;inline=true, \
+    poi-scratchpad;groupId=org.apache.poi; inline=true, \
+    xmlbeans;groupId=org.apache.xmlbeans;inline=true
+    
+Export-Package: \
+    org.apache.poi.hssf.usermodel;version="3.9", \
+    org.apache.poi.openxml4j.exceptions;version="3.9", \
+    org.apache.poi.ss.usermodel;version="3.9", \
+    org.apache.poi.xssf.usermodel;version="3.9", \
+    !*
+    
+Import-Package: \
+    com.sun.*;resolution:=optional, \
+    org.apache.commons.logging;version="[1.1,2)", \
+    org.dom4j;version="[1.6,2.0)"
+    
