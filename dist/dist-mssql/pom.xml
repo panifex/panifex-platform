@@ -28,11 +28,11 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>dist-postgresql</bundle.symbolicName>
+        <bundle.symbolicName>dist-mssql</bundle.symbolicName>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>dist-postgresql</artifactId>
+    <artifactId>dist-mssql</artifactId>
 
     <name>${bundle.symbolicName}</name>
 
@@ -50,7 +50,7 @@
         <!-- Panifex Platform Depedencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-platform-datasource-postgresql</artifactId>
+            <artifactId>panifex-platform-datasource-mssql</artifactId>
         </dependency>
     </dependencies>
 

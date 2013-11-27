@@ -51,6 +51,11 @@
     </repositories>
     <fileSets>
         <fileSet>
+            <directory>../src/main/etc</directory>
+            <fileMode>0755</fileMode>
+            <outputDirectory></outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>src/main/etc</directory>
             <fileMode>0755</fileMode>
             <outputDirectory></outputDirectory>

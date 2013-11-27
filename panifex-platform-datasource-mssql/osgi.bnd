@@ -1,0 +1,8 @@
+Embed-Dependency: jtds;groupId=net.sourceforge.jtds;inline=false
+
+Import-Package: \
+    javax.naming, \
+    javax.sql, \
+    javax.transaction.xa, \
+    org.apache.commons.dbcp;version="[1.4,2.0)", \
+    org.osgi.framework;version="[1.3,2)"

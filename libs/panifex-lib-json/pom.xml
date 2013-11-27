@@ -22,35 +22,34 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
+        <relativePath>../../poms/compiled/</relativePath>
         <groupId>org.panifex.parent.build</groupId>
-        <artifactId>dist</artifactId>
+        <artifactId>compiled-bundle-settings</artifactId>
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <properties>
-        <bundle.symbolicName>dist-postgresql</bundle.symbolicName>
+        <bundle.symbolicName>panifex-lib-json</bundle.symbolicName>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>dist-postgresql</artifactId>
+    <groupId>org.panifex</groupId>
+    <artifactId>panifex-lib-json</artifactId>
 
     <name>${bundle.symbolicName}</name>
 
-    <packaging>pom</packaging>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
+    <packaging>bundle</packaging>
+    
     <dependencies>
-        <!-- Panifex Platform Depedencies -->
+        <!-- Codehaus Janino Depedencies -->
         <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-platform-datasource-postgresql</artifactId>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>commons-compiler</artifactId>
+        </dependency>
+        <!-- JSON Depedencies -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
         </dependency>
     </dependencies>
 

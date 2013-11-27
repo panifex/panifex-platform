@@ -22,50 +22,30 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
+        <relativePath>../poms/compiled/</relativePath>
         <groupId>org.panifex.parent.build</groupId>
-        <artifactId>dist</artifactId>
+        <artifactId>compiled-bundle-settings</artifactId>
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <properties>
-        <bundle.symbolicName>libs</bundle.symbolicName>
+        <bundle.symbolicName>panifex-platform-datasource-mssql</bundle.symbolicName>
+        <bundle.namespace>org.panifex</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
-    <artifactId>libs</artifactId>
+    <artifactId>panifex-platform-datasource-mssql</artifactId>
 
     <name>${bundle.symbolicName}</name>
 
     <packaging>bundle</packaging>
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <configuration>
-                    <instructions>
-                        <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                        <_include>-osgi.bnd</_include>
-                    </instructions>
-                    <unpackBundle>true</unpackBundle>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-    
+
     <dependencies>
-        <!-- Codehaus Janino Depedencies -->
+        <!-- Database Connectors Dependencies -->
         <dependency>
-            <groupId>org.codehaus.janino</groupId>
-            <artifactId>commons-compiler</artifactId>
-        </dependency>
-        <!-- JSON Depedencies -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
+            <groupId>net.sourceforge.jtds</groupId>
+            <artifactId>jtds</artifactId>
         </dependency>
     </dependencies>
 

@@ -40,7 +40,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>libs</module>
+        <module>dist-mssql</module>
         <module>dist-postgresql</module>
     </modules>
 
@@ -52,7 +52,7 @@
                     <configuration>
                         <finalName>panifex-${project.version}</finalName>
                         <descriptors>
-                            <descriptor>src/main/assembly/assembly.xml</descriptor>
+                            <descriptor>../src/main/assembly/assembly.xml</descriptor>
                         </descriptors>
                     </configuration>
                 </plugin>
@@ -91,10 +91,6 @@
         </dependency>
         <!-- Equinox Dependencies -->
         <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>osgi</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.eclipse.equinox</groupId>
             <artifactId>cm</artifactId>
         </dependency>
@@ -107,6 +103,14 @@
             <artifactId>org.eclipse.osgi.util</artifactId>
         </dependency>
         <!-- Panifex Platform Dependencies -->
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-lib-json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-lib-poi</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
             <artifactId>panifex-platform-api</artifactId>
