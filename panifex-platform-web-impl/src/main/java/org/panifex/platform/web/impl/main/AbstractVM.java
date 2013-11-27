@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.jfree.util.Log;
 import org.panifex.platform.module.api.sidebar.SidebarCommand;
 import org.panifex.platform.module.api.sidebar.SidebarItem;
 import org.panifex.platform.web.impl.content.ContentManager;
@@ -78,7 +77,7 @@ public abstract class AbstractVM {
             Component newContent = ContentManager.getManager().render(bookmark);
             content.appendChild(newContent);
         } else {
-            Log.error("Content manager is null");
+            getLogger().error("Content manager is null");
         }
     }
     
