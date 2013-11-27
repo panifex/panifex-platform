@@ -32,7 +32,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- Defines dependency versions -->
     <openjpa.version>2.2.2</openjpa.version>
-    <zk.framework.version>7.0.0-Preview</zk.framework.version>
+    <zk.framework.version>7.0.0</zk.framework.version>
   </properties>
 
   <packaging>pom</packaging>
@@ -57,11 +57,7 @@
       <name>ZK CE repository</name>
       <url>http://mavensync.zkoss.org/maven2</url>
     </repository>
-    <repository>
-      <id>ZK PE-EE Eval</id>
-      <name>ZK PE-EE Evaluation repository</name>
-      <url>http://mavensync.zkoss.org/eval/</url>
-    </repository>
+    <!-- ZK PE/EE repository should be defined in .m2/setting.xml -->
   </repositories>
 
   <build>
