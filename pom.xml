@@ -620,6 +620,12 @@
                 <artifactId>snakeyaml</artifactId>
                 <version>1.13</version>
             </dependency>
+            <!-- SuperCSV Dependencies -->
+            <dependency>
+                <groupId>net.sf.supercsv</groupId>
+                <artifactId>super-csv</artifactId>
+                <version>2.1.0</version>
+            </dependency>
             <!-- Testing Dependencies -->
             <dependency>
                 <groupId>junit</groupId>

@@ -249,7 +249,11 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
         </dependency>
-        
+        <!-- SuperCSV Dependencies -->
+        <dependency>
+            <groupId>net.sf.supercsv</groupId>
+            <artifactId>super-csv</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
