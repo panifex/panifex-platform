@@ -32,15 +32,23 @@
         </cm:default-properties>
     </cm:property-placeholder>
 
-    <bean id="jtdsXADataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="net.sourceforge.jtds.jdbcx.JtdsDataSource"/>
-        <property name="url" value="jdbc:jtds:sqlserver//${serverName}:${portNumber}/${databaseName}" />
-        <property name="username" value="${username}" />
+    <bean id="jtdsXADataSource" class="net.sourceforge.jtds.jdbcx.JtdsDataSource">
+        <property name="databaseName" value="${databaseName}" />
+        <property name="serverName" value="${serverName}" />
+        <property name="portNumber" value="${portNumber}" />
+        <property name="user" value="${username}" />
         <property name="password" value="${password}" />
-        <property name="validationQuery" value="select * from databasechangelog where id='1'"/>
     </bean>
 
-    <service id="JtdsDataSource" ref="jtdsXADataSource"
+    <!-- <bean id="jtdsXADataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="net.sourceforge.jtds.jdbcx.JtdsDataSource"/>
+        <property name="url" value="jdbc:jtds:sqlserver://${serverName}:${portNumber}/${databaseName}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+        <property name="validationQuery" value="select 1"/>
+    </bean> -->
+
+    <service id="PanifexXADataSource" ref="jtdsXADataSource"
         interface="javax.sql.XADataSource">
         <service-properties>
             <entry key="osgi.jndi.service.name" value="jdbc/PanifexDataSource" />
@@ -48,12 +56,12 @@
     </service>
 
 
-    <bean id="jtdsDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="net.sourceforge.jtds.jdbcx.JtdsDataSource"/>
-        <property name="url" value="jdbc:jtds:sqlserver//${serverName}:${portNumber}/${databaseName}" />
-        <property name="username" value="${username}" />
+    <bean id="jtdsDataSource" class="net.sourceforge.jtds.jdbcx.JtdsDataSource">
+        <property name="databaseName" value="${databaseName}" />
+        <property name="serverName" value="${serverName}" />
+        <property name="portNumber" value="${portNumber}" />
+        <property name="user" value="${username}" />
         <property name="password" value="${password}" />
-        <property name="validationQuery" value="select * from databasechangelog where id='1'"/>
     </bean>
 
     <service id="NoTxPanifexDataSource" ref="jtdsDataSource"

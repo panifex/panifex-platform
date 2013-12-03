@@ -42,10 +42,15 @@
     <packaging>bundle</packaging>
 
     <dependencies>
+        <!-- Commons Dependencies -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+        </dependency>
         <!-- Database Connectors Dependencies -->
         <dependency>
             <groupId>net.sourceforge.jtds</groupId>
-            <artifactId>jtds</artifactId>
+            <artifactId>com.springsource.net.sourceforge.jtds</artifactId>
         </dependency>
     </dependencies>
 

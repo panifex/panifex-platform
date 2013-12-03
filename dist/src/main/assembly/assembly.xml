@@ -30,7 +30,10 @@
                 <include>*:*</include>
             </includes>
             <excludes>
-                <exclude>org.eclipse:osgi</exclude>
+                <exclude>org.eclipse.osgi:org.eclipse.osgi.util</exclude>
+                <exclude>org.eclipse.osgi:org.eclipse.osgi.services</exclude>
+                <exclude>org.eclipse.equinox:cm</exclude>
+                <exclude>org.ops4j.pax.confman:pax-confman-propsloader</exclude>
                 <exclude>org.ops4j.pax.runner:*</exclude>
             </excludes>
         </dependencySet>
@@ -46,6 +49,10 @@
             <outputDirectory>equinox</outputDirectory>
             <includes>
                 <include>org.eclipse:osgi</include>
+                <include>org.eclipse.osgi:org.eclipse.osgi.util</include>
+                <include>org.eclipse.osgi:org.eclipse.osgi.services</include>
+                <include>org.eclipse.equinox:cm</include>
+                <include>org.ops4j.pax.confman:pax-confman-propsloader</include>
             </includes>
         </repository>
     </repositories>
