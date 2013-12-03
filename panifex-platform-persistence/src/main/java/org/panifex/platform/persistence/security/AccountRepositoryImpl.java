@@ -88,6 +88,7 @@ public class AccountRepositoryImpl implements AccountRepository {
             CriteriaBuilder cb = entityManager.getCriteriaBuilder();
             CriteriaQuery<AccountImpl> cq = cb.createQuery(AccountImpl.class);
             Root<AccountImpl> account = cq.from(AccountImpl.class);
+            cq.where(cb.equal(account.get(AccountImpl_.username), username));
             cq.select(account);
             TypedQuery<AccountImpl> q = entityManager.createQuery(cq);
             List<AccountImpl> allAccounts = q.getResultList();
