@@ -44,7 +44,6 @@ import org.slf4j.LoggerFactory;
 import org.zkoss.web.servlet.dsp.InterpreterServlet;
 import org.zkoss.zk.au.http.DHtmlUpdateServlet;
 import org.zkoss.zk.ui.http.HttpSessionListener;
-import org.zkoss.zul.Div;
 
 @Bean(id = PaxWebServiceListener.ID)
 @ReferenceListener
