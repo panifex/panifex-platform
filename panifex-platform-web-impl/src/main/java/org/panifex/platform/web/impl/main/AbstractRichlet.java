@@ -112,7 +112,7 @@ public abstract class AbstractRichlet extends GenericRichlet {
         menubar.setParent(userNav);
 
         final Menuitem logout = new Menuitem(getLabel("main.form.button.logout.label"));
-        logout.setIconSclass("icon icon-white icon-share-alt");
+        logout.setIconSclass("glyphicon glyphicon-share-alt");
         logout.setParent(menubar);
         binder.addCommandBinding(logout, Events.ON_CLICK, "'logout'", null);
         binder.addPropertyLoadBindings(logout, "visible", "vm.isUserLoggedIn", null, null, null,
