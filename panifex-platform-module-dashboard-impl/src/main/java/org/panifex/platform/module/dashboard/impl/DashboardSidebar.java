@@ -27,6 +27,8 @@ public class DashboardSidebar implements Sidebar {
             DashboardContent.ID,
             0);
         
+        dashboardItem.setIconSclass("glyphicon glyphicon-home");
+        
         // add item to list
         sidebarItems.add(dashboardItem);
     }
