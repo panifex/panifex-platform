@@ -123,9 +123,11 @@ public abstract class AbstractRichlet extends GenericRichlet {
 
     private Component createSidebar() {
         final Div sidebar = new Div();
-        sidebar.setSclass("sidebar");
 
         final Navbar navBar = new Navbar();
+        navBar.setSclass("sidebar");
+        navBar.setOrient("vertical");
+        
         binder.addChildrenLoadBindings(navBar, "vm.sidebarItems", null, null, null, null, null);
         binder.setTemplate(navBar, "$CHILDREN$", "each.type", null);
         navBar.setTemplate(SidebarItem.COMMAND, new SidebarCommandTemplate(binder));
