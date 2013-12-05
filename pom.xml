@@ -94,6 +94,15 @@
         <!-- ZK PE/EE repository should be defined in .m2/setting.xml -->
     </repositories>
 
+    <pluginRepositories>
+        <!-- ZK Framework Repositories -->
+        <pluginRepository>
+            <id>ZK CE</id>
+            <name>ZK CE repository</name>
+            <url>http://mavensync.zkoss.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
         <plugins>
             <plugin>
