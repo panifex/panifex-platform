@@ -16,21 +16,21 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.web.impl.main;
+package org.panifex.web.impl.view.main;
 
 import org.panifex.web.impl.view.layout.AbstractVM;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zkoss.bind.annotation.Init;
 
-public class AbstractVMImpl extends AbstractVM {
+@Init(superclass = true)
+public class MainVM extends AbstractVM {
 
-    private final Logger log;
-
-    AbstractVMImpl(Logger log) {
-        this.log = log;
-    }
+    private Logger log = LoggerFactory.getLogger(MainVM.class);
 
     @Override
     protected Logger getLogger() {
         return log;
     }
+
 }

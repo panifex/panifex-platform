@@ -16,21 +16,36 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.web.impl.main;
+package org.panifex.web.impl.content;
 
-import org.panifex.web.impl.view.layout.AbstractVM;
-import org.slf4j.Logger;
+import org.apache.aries.blueprint.annotation.Bean;
+import org.panifex.platform.module.api.content.Content;
+import org.zkoss.zhtml.H1;
+import org.zkoss.zhtml.Text;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zul.Div;
 
-public class AbstractVMImpl extends AbstractVM {
+@Bean(id = ContentUiFactory.ID)
+public class ContentUiFactory {
 
-    private final Logger log;
-
-    AbstractVMImpl(Logger log) {
-        this.log = log;
-    }
-
-    @Override
-    protected Logger getLogger() {
-        return log;
+    public final static String ID = "org.panifex.web.impl.content.ContentUiFactory";
+    
+    public Component render(Content content) {
+        final Div root = new Div();
+        
+        final Div contentHeader = new Div();
+        contentHeader.setSclass("content-header");
+        root.appendChild(contentHeader);
+        
+        final H1 title = new H1();
+        contentHeader.appendChild(title);
+        
+        final Text titleText = new Text(content.getTitle());
+        title.appendChild(titleText);
+        
+        Component body = content.createBody();
+        root.appendChild(body);
+        
+        return root;
     }
 }

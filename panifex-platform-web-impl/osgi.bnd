@@ -12,7 +12,7 @@ Embed-Dependency: \
 	zel;groupId=org.zkoss.common;inline=org.zkoss.zel, \
 	zweb;groupId=org.zkoss.common;inline=false
 
-Export-Package: org.panifex.platform.web.impl.login
+Export-Package: org.panifex.web.impl.login
 
 Import-Package: \
 	javax.naming, \
@@ -116,7 +116,7 @@ Import-Package: \
 	org.zkoss.web.theme;version="[7.0,8.0)"
 
 Private-Package: \
-    org.panifex.platform.web.impl.*, \
+    org.panifex.web.impl.*, \
     !org.zkoss.bind, \
     !org.zkoss.bind.annotation, \
     !org.zkoss.bind.converter, \

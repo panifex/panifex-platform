@@ -16,21 +16,13 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.web.impl.main;
+package org.panifex.web.impl.security;
 
-import org.panifex.web.impl.view.layout.AbstractVM;
-import org.slf4j.Logger;
+import javax.servlet.Filter;
 
-public class AbstractVMImpl extends AbstractVM {
+import org.apache.shiro.web.mgt.WebSecurityManager;
 
-    private final Logger log;
+public interface SecurityFilter extends Filter {
 
-    AbstractVMImpl(Logger log) {
-        this.log = log;
-    }
-
-    @Override
-    protected Logger getLogger() {
-        return log;
-    }
+    WebSecurityManager getSecurityManager();
 }

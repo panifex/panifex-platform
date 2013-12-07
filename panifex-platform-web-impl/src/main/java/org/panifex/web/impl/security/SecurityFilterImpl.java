@@ -16,21 +16,13 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.web.impl.main;
+package org.panifex.web.impl.security;
 
-import org.panifex.web.impl.view.layout.AbstractVM;
-import org.slf4j.Logger;
+import org.apache.aries.blueprint.annotation.Bean;
+import org.apache.shiro.web.servlet.ShiroFilter;
 
-public class AbstractVMImpl extends AbstractVM {
-
-    private final Logger log;
-
-    AbstractVMImpl(Logger log) {
-        this.log = log;
-    }
-
-    @Override
-    protected Logger getLogger() {
-        return log;
-    }
+@Bean(id = SecurityFilterImpl.ID)
+public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
+    
+    public final static String ID = "org.panifex.web.impl.security.SecurityFilter";
 }

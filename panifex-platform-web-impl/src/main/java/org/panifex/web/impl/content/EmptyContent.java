@@ -16,21 +16,25 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.web.impl.main;
+package org.panifex.web.impl.content;
 
-import org.panifex.web.impl.view.layout.AbstractVM;
-import org.slf4j.Logger;
+import org.panifex.platform.module.api.content.AbstractContent;
+import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zul.Div;
 
-public class AbstractVMImpl extends AbstractVM {
+/**
+ * A content which is used when the default content is not specified.
+ * 
+ */
+public class EmptyContent extends AbstractContent {
 
-    private final Logger log;
-
-    AbstractVMImpl(Logger log) {
-        this.log = log;
+    public EmptyContent() {
+        super(Labels.getLabel("empty.content.title"));
     }
 
     @Override
-    protected Logger getLogger() {
-        return log;
+    public Component createBody() {
+        return new Div();
     }
 }
