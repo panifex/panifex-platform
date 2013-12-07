@@ -42,7 +42,7 @@ import org.zkoss.zul.Script;
  * The abstract richlet which creates core layout.
  * 
  */
-public abstract class LayoutRichlet extends GenericRichlet {
+public abstract class AbstractRichlet extends GenericRichlet {
 
     private Binder binder;
 
@@ -151,7 +151,7 @@ public abstract class LayoutRichlet extends GenericRichlet {
 
     protected abstract Component createContent();
 
-    protected abstract LayoutVM getViewModel();
+    protected abstract AbstractVM getViewModel();
 
     /**
      * Returns the label of the specified key based on the current Locale, or null if not found.
