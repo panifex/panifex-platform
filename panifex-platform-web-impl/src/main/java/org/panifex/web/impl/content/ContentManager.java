@@ -75,7 +75,8 @@ public class ContentManager {
         Content content = getBookmarkedContent(bookmark);
         
         if (content == null) {
-            content = getDefaultContent();
+            // if bookmarked content hasn't been find, return empty content
+            content = new EmptyContent();
         }
         
         return contentUiFactory.render(content);
@@ -91,19 +92,6 @@ public class ContentManager {
             }
         }
         return null;
-    }
-    
-    private Content getDefaultContent() {
-        for (Content content : contents) {
-            if (content.isDefault()) {
-                log.debug("Bookmarked content has not found. Default content is returned");
-                return content;
-            }
-        }
-        
-        // a default content is not specified. return empty content
-        log.debug("Default content is not specified. Return empty content");
-        return new EmptyContent();
     }
     
     public static ContentManager getManager() {

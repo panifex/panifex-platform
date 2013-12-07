@@ -46,16 +46,6 @@ public interface Content {
     String getBookmark();
     
     /**
-     * Determines whether the content is default if the desktop bookmark is 
-     * not specified.
-     * <p>Only one content should be default.
-     * 
-     * @return if the content is default
-     * @since 1.0
-     */
-    boolean isDefault();
-    
-    /**
      * Creates a body of content.
      * 
      * @return the ZK Component which represents body

@@ -26,7 +26,6 @@ public abstract class AbstractContent implements Content {
 
     private String title;
     private String bookmark;
-    private boolean isDefault = false;
     
     /**
      * Construct new content template.
@@ -34,7 +33,7 @@ public abstract class AbstractContent implements Content {
      * @param title a content title
      */
     protected AbstractContent(String title) {
-        this(title, null, false);
+        this(title, null);
     }
     
     /**
@@ -44,20 +43,8 @@ public abstract class AbstractContent implements Content {
      * @param bookmark a bookmark identificator
      */
     protected AbstractContent(String title, String bookmark) {
-        this(title, bookmark, false);
-    }
-    
-    /**
-     * Construct new content template.
-     * 
-     * @param title a content title
-     * @param bookmark a bookmark identificator
-     * @param isDefault if the content is default if the desktop bookmark is not set
-     */
-    protected AbstractContent(String title, String bookmark, boolean isDefault) {
         this.title = title;
         this.bookmark = bookmark;
-        this.isDefault = isDefault;
     }
     
     /**
@@ -89,16 +76,4 @@ public abstract class AbstractContent implements Content {
         this.bookmark = bookmark;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isDefault() {
-        return isDefault;
-    }
-    
-    public void setDefault(boolean isDefault) {
-        this.isDefault = isDefault;
-    }
-    
 }
