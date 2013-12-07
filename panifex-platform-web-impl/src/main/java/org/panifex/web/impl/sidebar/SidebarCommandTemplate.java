@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.panifex.platform.module.api.sidebar.SidebarCommand;
-import org.panifex.web.impl.view.layout.AbstractVM;
+import org.panifex.web.impl.view.layout.LayoutVM;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.impl.BindEvaluatorXUtil;
 import org.zkoss.xel.VariableResolver;
@@ -50,7 +50,7 @@ public class SidebarCommandTemplate implements Template {
         Map<String, String[]> onClickArgs = new HashMap<>();
         onClickArgs.put(SidebarCommand.ID, new String[]{"item"});
         Map<String, Object> parsedOnClickArgs = BindEvaluatorXUtil.parseArgs(binder.getEvaluatorX(), onClickArgs);
-        binder.addCommandBinding(navItem, Events.ON_CLICK, AbstractVM.ON_SIDEBAR_ITEM_CLICK, parsedOnClickArgs);
+        binder.addCommandBinding(navItem, Events.ON_CLICK, LayoutVM.ON_SIDEBAR_ITEM_CLICK, parsedOnClickArgs);
         
         // property bindings
         binder.addPropertyLoadBindings(navItem, "label", "item.label", null, null, null, null, null);

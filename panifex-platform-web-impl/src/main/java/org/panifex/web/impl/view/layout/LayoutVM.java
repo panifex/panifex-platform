@@ -39,7 +39,7 @@ import org.zkoss.zul.Div;
  * View-Model of an abstract window which is drawn by AbstractRichlet.
  *
  */
-public abstract class AbstractVM {
+public abstract class LayoutVM {
 
     public final static String ON_SIDEBAR_ITEM_CLICK = "'onSidebarItemClick'";
     

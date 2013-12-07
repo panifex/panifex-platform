@@ -18,10 +18,10 @@
  ******************************************************************************/
 package org.panifex.platform.web.impl.main;
 
-import org.panifex.web.impl.view.layout.AbstractVM;
+import org.panifex.web.impl.view.layout.LayoutVM;
 import org.slf4j.Logger;
 
-public class AbstractVMImpl extends AbstractVM {
+public class AbstractVMImpl extends LayoutVM {
 
     private final Logger log;
 

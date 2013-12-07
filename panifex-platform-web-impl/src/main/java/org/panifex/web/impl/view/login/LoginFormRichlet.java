@@ -18,8 +18,8 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
-import org.panifex.web.impl.view.layout.AbstractRichlet;
-import org.panifex.web.impl.view.layout.AbstractVM;
+import org.panifex.web.impl.view.layout.LayoutRichlet;
+import org.panifex.web.impl.view.layout.LayoutVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.zhtml.H1;
@@ -36,7 +36,7 @@ import org.zkoss.zul.Textbox;
  * Composes the login form.
  * 
  */
-public class LoginFormRichlet extends AbstractRichlet {
+public class LoginFormRichlet extends LayoutRichlet {
 
     private Logger log = LoggerFactory.getLogger(LoginFormRichlet.class);
 
@@ -123,7 +123,7 @@ public class LoginFormRichlet extends AbstractRichlet {
 
 
     @Override
-    protected AbstractVM getViewModel() {
+    protected LayoutVM getViewModel() {
         return new LoginFormVM();
     }
 

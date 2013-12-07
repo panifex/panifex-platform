@@ -19,8 +19,8 @@
 package org.panifex.web.impl.view.main;
 
 import org.panifex.web.impl.content.ContentManager;
-import org.panifex.web.impl.view.layout.AbstractRichlet;
-import org.panifex.web.impl.view.layout.AbstractVM;
+import org.panifex.web.impl.view.layout.LayoutRichlet;
+import org.panifex.web.impl.view.layout.LayoutVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.Component;
@@ -30,7 +30,7 @@ import org.zkoss.zul.Div;
  * MainRichlet draws main window.
  * 
  */
-public class MainRichlet extends AbstractRichlet {
+public class MainRichlet extends LayoutRichlet {
 
     private Logger log = LoggerFactory.getLogger(MainRichlet.class);
     
@@ -48,7 +48,7 @@ public class MainRichlet extends AbstractRichlet {
     }
 
     @Override
-    protected AbstractVM getViewModel() {
+    protected LayoutVM getViewModel() {
         return new MainVM();
     }
 
