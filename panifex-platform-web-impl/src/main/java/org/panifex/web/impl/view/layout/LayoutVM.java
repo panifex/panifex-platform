@@ -26,11 +26,14 @@ import org.panifex.platform.module.api.sidebar.SidebarCommand;
 import org.panifex.platform.module.api.sidebar.SidebarItem;
 import org.panifex.web.impl.content.ContentManager;
 import org.panifex.web.impl.sidebar.SidebarManager;
+import org.panifex.web.impl.view.settings.SettingsContent;
 import org.slf4j.Logger;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.BookmarkEvent;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Div;
@@ -105,6 +108,11 @@ public abstract class LayoutVM {
     
     @Command
     public void onSettingsClick() {
-        
+        changeBookmark(SettingsContent.ID);
+    }
+    
+    private void changeBookmark(String name) {
+        Executions.getCurrent().getDesktop().setBookmark(name);
+        Events.postEvent(new BookmarkEvent(Events.ON_BOOKMARK_CHANGE, name));
     }
 }
