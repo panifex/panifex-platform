@@ -111,14 +111,26 @@ public abstract class AbstractRichlet extends GenericRichlet {
         final Menubar menubar = new Menubar();
         menubar.setParent(userNav);
 
+        addSettingsButton(menubar);
+        addLogoutButton(menubar);
+
+        return userNav;
+    }
+
+    private void addSettingsButton(Menubar menubar) {
+        final Menuitem settings = new Menuitem(getLabel("main.form.button.settings.label"));
+        settings.setIconSclass("glyphicon glyphicon-cog");
+        settings.setParent(menubar);
+        binder.addCommandBinding(settings, Events.ON_CLICK, "'onSettingsClick'", null);
+    }
+    
+    private void addLogoutButton(Menubar menubar) {
         final Menuitem logout = new Menuitem(getLabel("main.form.button.logout.label"));
         logout.setIconSclass("glyphicon glyphicon-share-alt");
         logout.setParent(menubar);
         binder.addCommandBinding(logout, Events.ON_CLICK, "'logout'", null);
         binder.addPropertyLoadBindings(logout, "visible", "vm.isUserLoggedIn", null, null, null,
                 null, null);
-
-        return userNav;
     }
 
     private Component createSidebar() {

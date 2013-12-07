@@ -88,8 +88,8 @@ public class LoginFormRichlet extends AbstractRichlet {
         passwordTextbox.setId("password");
         passwordTextbox.setType("password");
         passwordTextbox.setSclass("password-field");
-        passwordTextbox.setPlaceholder(getLabel("login.form.field.passwors.placeholder"));
-        passwordTextbox.setTooltip(getLabel("login.form.field.passwors.tooltip"));
+        passwordTextbox.setPlaceholder(getLabel("login.form.field.password.placeholder"));
+        passwordTextbox.setTooltip(getLabel("login.form.field.password.tooltip"));
         passwordTextbox.setParent(passwordField);
         getBinder().addPropertyLoadBindings(passwordTextbox, "value", "vm.password", null, null,
                 null, null, null);

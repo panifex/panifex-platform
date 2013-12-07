@@ -56,15 +56,21 @@ public abstract class AbstractVM {
         Executions.sendRedirect("/zk/login");
     }
 
+    /**
+     * Returns if the user is logged in.
+     * 
+     * @return true if the user is logged in, or false if it is not
+     */
     public boolean getIsUserLoggedIn() {
         Subject currentUser = SecurityUtils.getSubject();
         return currentUser.isAuthenticated();
     }
-
-    public List<SidebarItem> getSidebarItems() {
-        return SidebarManager.getManager().getSidebarItems();
-    }
     
+    /**
+     * This method is called when the bookmark is being changed.
+     * 
+     * The method calls ContentManager which changes the content.
+     */
     @Listen("onBookmarkChange = #main")
     public void onBookmarkChange() {
         cleanContent();
@@ -80,6 +86,10 @@ public abstract class AbstractVM {
             getLogger().error("Content manager is null");
         }
     }
+
+    public List<SidebarItem> getSidebarItems() {
+        return SidebarManager.getManager().getSidebarItems();
+    }
     
     @Command()
     public void onSidebarItemClick(@BindingParam(SidebarCommand.ID) SidebarCommand command) {
@@ -91,5 +101,10 @@ public abstract class AbstractVM {
      */
     private void cleanContent() {
         content.getChildren().clear();
+    }
+    
+    @Command
+    public void onSettingsClick() {
+        
     }
 }
