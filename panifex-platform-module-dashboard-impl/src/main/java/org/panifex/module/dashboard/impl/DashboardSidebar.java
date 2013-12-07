@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.dashboard.impl;
+package org.panifex.module.dashboard.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,7 +31,7 @@ import org.panifex.platform.module.api.sidebar.SidebarItem;
 @Service(interfaces = Sidebar.class)
 public class DashboardSidebar implements Sidebar {
 
-    public final static String ID = "org.panifex.platform.module.dashboard.impl.DashboardSidebar";
+    public final static String ID = "org.panifex.module.dashboard.impl.DashboardSidebar";
     
     private Collection<SidebarItem> sidebarItems = new ArrayList<>();
     

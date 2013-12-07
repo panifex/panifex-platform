@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.dashboard.impl;
+package org.panifex.module.dashboard.impl;
 
 import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Service;
@@ -29,7 +29,7 @@ import org.zkoss.zul.Div;
 @Service(interfaces = Content.class)
 public class DashboardContent extends AbstractContent {
 
-    public final static String ID = "org.panifex.platform.module.dashboard.impl.DashboardContent";
+    public final static String ID = "org.panifex.module.dashboard.impl.DashboardContent";
     
     public DashboardContent() {
         super("Dashboard", ID, true);
