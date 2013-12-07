@@ -211,6 +211,16 @@
             <groupId>org.eclipse.osgi</groupId>
             <artifactId>org.eclipse.osgi.services</artifactId>
         </dependency>
+        <!-- Janino Dependencies -->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>com.springsource.org.codehaus.commons.compiler</artifactId>
+        </dependency>
+        <!-- JSON Dependencies -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>com.springsource.org.json</artifactId>
+        </dependency>
         <!-- Liquibase Depedencies -->
         <dependency>
             <groupId>org.liquibase</groupId>

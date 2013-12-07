@@ -498,11 +498,17 @@
                 <artifactId>org.eclipse.osgi.util</artifactId>
                 <version>3.2.100.v20100503</version>
             </dependency>
+            <!-- Janino Dependencies -->
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>com.springsource.org.codehaus.commons.compiler</artifactId>
+                <version>2.6.1</version>
+            </dependency>
             <!-- JSON Depedencies -->
             <dependency>
                 <groupId>org.json</groupId>
-                <artifactId>json</artifactId>
-                <version>20131018</version>
+                <artifactId>com.springsource.org.json</artifactId>
+                <version>1.0.0</version>
             </dependency>
             <!-- Liquibase Depedencies -->
             <dependency>
@@ -517,11 +523,6 @@
                 <version>4.3.1</version>
             </dependency>
             <!-- Panifex Platform Dependencies -->
-            <dependency>
-                <groupId>org.panifex</groupId>
-                <artifactId>panifex-lib-json</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-lib-poi</artifactId>
@@ -598,6 +599,16 @@
                 <groupId>org.ops4j.pax.logging</groupId>
                 <artifactId>pax-logging-logback</artifactId>
                 <version>1.7.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!-- Pax Runner Dependencies -->
             <dependency>

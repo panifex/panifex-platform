@@ -36,7 +36,6 @@
 
     <modules>
         <module>panifex-lib-poi</module>
-        <module>panifex-lib-json</module>
     </modules>
 
 </project>
