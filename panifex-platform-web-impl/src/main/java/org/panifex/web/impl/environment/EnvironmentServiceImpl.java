@@ -20,7 +20,7 @@ package org.panifex.web.impl.environment;
 
 import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Service;
-import org.panifex.platform.module.api.environment.EnvironmentService;
+import org.panifex.module.api.environment.EnvironmentService;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.BookmarkEvent;

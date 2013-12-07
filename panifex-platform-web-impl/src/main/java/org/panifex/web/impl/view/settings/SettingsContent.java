@@ -20,8 +20,8 @@ package org.panifex.web.impl.view.settings;
 
 import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Service;
-import org.panifex.platform.module.api.content.AbstractContent;
-import org.panifex.platform.module.api.content.Content;
+import org.panifex.module.api.content.AbstractContent;
+import org.panifex.module.api.content.Content;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Div;

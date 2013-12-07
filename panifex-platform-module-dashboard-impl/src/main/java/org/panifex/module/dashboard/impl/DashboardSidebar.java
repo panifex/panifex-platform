@@ -23,9 +23,9 @@ import java.util.Collection;
 
 import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Service;
-import org.panifex.platform.module.api.sidebar.Sidebar;
-import org.panifex.platform.module.api.sidebar.DefaultSidebarCommand;
-import org.panifex.platform.module.api.sidebar.SidebarItem;
+import org.panifex.module.api.sidebar.DefaultSidebarCommand;
+import org.panifex.module.api.sidebar.Sidebar;
+import org.panifex.module.api.sidebar.SidebarItem;
 
 @Bean(id = DashboardSidebar.ID)
 @Service(interfaces = Sidebar.class)

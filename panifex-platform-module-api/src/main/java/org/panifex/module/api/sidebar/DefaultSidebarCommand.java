@@ -16,9 +16,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.api.sidebar;
+package org.panifex.module.api.sidebar;
 
-import org.panifex.platform.module.api.environment.EnvironmentManager;
+import org.panifex.module.api.environment.EnvironmentManager;
 
 /**
  * Default implementation of a sidebar command.

@@ -16,26 +16,21 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.api.sidebar;
-
-import java.util.Collection;
+package org.panifex.module.api.sidebar;
 
 /**
- * A container of sidebar menu's items which will be merged to sidebar menu instance. This interface
- * should be registered as OSGi service. Panifex platform will dynamic register to the service and
- * merge to menu instance.
+ * This is a sidebar menu item.
  * 
  * @since 1.0
  */
-public interface Sidebar {
+public interface SidebarCommand extends SidebarItem {
 
+    final static String ID = "org.panifex.platform.module.api.sidebar.SidebarCommand";
+    
     /**
-     * Returns a list of menu items. The list could contain other nodes or sidebar's items.
+     * This method is called when user clicks on a sidebar command.
      * 
-     * @return the list of menu items
-     * @see SidebarCommand
-     * @see SidebarNode
      * @since 1.0
      */
-    Collection<SidebarItem> getSidebarItems();
+    void onClick();
 }

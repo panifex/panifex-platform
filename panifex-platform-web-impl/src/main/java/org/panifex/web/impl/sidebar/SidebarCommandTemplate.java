@@ -21,7 +21,7 @@ package org.panifex.web.impl.sidebar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.panifex.platform.module.api.sidebar.SidebarCommand;
+import org.panifex.module.api.sidebar.SidebarCommand;
 import org.panifex.web.impl.view.layout.LayoutVM;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.impl.BindEvaluatorXUtil;

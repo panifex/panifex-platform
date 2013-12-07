@@ -34,9 +34,9 @@ import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.ReferenceList;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
-import org.panifex.platform.module.api.sidebar.Sidebar;
-import org.panifex.platform.module.api.sidebar.SidebarItem;
-import org.panifex.platform.module.api.sidebar.SidebarNode;
+import org.panifex.module.api.sidebar.Sidebar;
+import org.panifex.module.api.sidebar.SidebarItem;
+import org.panifex.module.api.sidebar.SidebarNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

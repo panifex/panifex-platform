@@ -3,9 +3,9 @@ Bundle-Blueprint-Annotation: true
 
 Import-Package: \
     org.apache.aries.blueprint.annotation;version="[1.0, 2.0)", \
-    org.panifex.platform.module.api.content;version="[1.0, 2.0)", \
-    org.panifex.platform.module.api.sidebar;version="[1.0, 2.0)", \
-    !org.panifex.platform.module.dashboard.impl.*, \
+    org.panifex.module.api.content;version="[1.0, 2.0)", \
+    org.panifex.module.api.sidebar;version="[1.0, 2.0)", \
+    !org.panifex.module.dashboard.impl.*, \
     org.slf4j;version="[1.4,2.0)", \
     org.zkoss.zk.ui;version="[7.0,8.0)", \
     org.zkoss.zul;version="[7.0,8.0)"

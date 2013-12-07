@@ -16,20 +16,26 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.api.sidebar;
+package org.panifex.module.api.sidebar;
 
-public abstract class AbstractSidebarCommand extends AbstractSidebarItem implements SidebarCommand {
+import java.util.Collection;
 
-    protected AbstractSidebarCommand(AbstractSidebarCommand oldItem) {
-        super(oldItem);
-    }
+/**
+ * A container of sidebar menu's items which will be merged to sidebar menu instance. This interface
+ * should be registered as OSGi service. Panifex platform will dynamic register to the service and
+ * merge to menu instance.
+ * 
+ * @since 1.0
+ */
+public interface Sidebar {
 
-    protected AbstractSidebarCommand(String label, int priority) {
-        super(label, priority);
-    }
-    
-    @Override
-    public final String getType() {
-        return COMMAND;
-    }
+    /**
+     * Returns a list of menu items. The list could contain other nodes or sidebar's items.
+     * 
+     * @return the list of menu items
+     * @see SidebarCommand
+     * @see SidebarNode
+     * @since 1.0
+     */
+    Collection<SidebarItem> getSidebarItems();
 }

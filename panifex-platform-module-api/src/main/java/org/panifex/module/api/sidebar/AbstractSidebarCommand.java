@@ -16,34 +16,20 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.api.environment;
+package org.panifex.module.api.sidebar;
 
-/**
- * Provides method to manage environment settings, for example to add bookmark.
- * 
- * @since 1.0
- */
-public interface EnvironmentService {
+public abstract class AbstractSidebarCommand extends AbstractSidebarItem implements SidebarCommand {
 
-    /**
-     * Returns the current bookmark (never null).
-     * 
-     * @return the current bookmark
-     */
-    String getBookmark();
+    protected AbstractSidebarCommand(AbstractSidebarCommand oldItem) {
+        super(oldItem);
+    }
+
+    protected AbstractSidebarCommand(String label, int priority) {
+        super(label, priority);
+    }
     
-    /**
-     * Adds a bookmark to this desktop.
-     * 
-     * @param bookmark
-     */
-    void setBookmark(String bookmark);
-    
-    /**
-     * Sets the bookmark to this desktop. with more control.
-     * 
-     * @param name the bookmark name
-     * @param replace replace the current bookmark, or add new book
-     */
-    void setBookmark(String name, boolean replace);
+    @Override
+    public final String getType() {
+        return COMMAND;
+    }
 }

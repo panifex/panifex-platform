@@ -32,7 +32,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.panifex.platform.module.api.sidebar.SidebarItem;
+import org.panifex.module.api.sidebar.SidebarItem;
 import org.panifex.web.impl.view.layout.LayoutVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

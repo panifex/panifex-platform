@@ -16,34 +16,49 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.api.sidebar;
+package org.panifex.module.api.content;
 
-import java.util.Collection;
+import org.zkoss.zk.ui.Component;
 
 /**
- * This is a menu node. The node could contain children which could be other nodes or sidebar items.
+ * Content of web application.
  * 
  * @since 1.0
  */
-public interface SidebarNode extends SidebarItem {
+public interface Content {
 
     /**
-     * Returns a collection of children. The children could be other nodes or sidebar items.
+     * Returns the content title
      * 
-     * @return the collection of sidebar menu items
-     * @see SidebarCommand
+     * @return the content title
      * @since 1.0
      */
-    Collection<SidebarItem> getSidebarItems();
-
-    void setSidebarItems(Collection<SidebarItem> items);
+    String getTitle();
     
     /**
-     * Returns the badge text of the {@link Nav}
+     * Returns an assigned bookmark. 
      * 
-     * @return the badge text of the nav.
-     * @see Nav
+     * <p> The content doesn't have to be assigned to any bookmark.
+     * 
+     * @return the assigned bookmark
      * @since 1.0
      */
-    String getBadgeText();
+    String getBookmark();
+    
+    /**
+     * Determines whether the content is default if the desktop bookmark is 
+     * not specified.
+     * <p>Only one content should be default.
+     * 
+     * @return if the content is default
+     * @since 1.0
+     */
+    boolean isDefault();
+    
+    /**
+     * Creates a body of content.
+     * 
+     * @return the ZK Component which represents body
+     */
+    Component createBody();
 }

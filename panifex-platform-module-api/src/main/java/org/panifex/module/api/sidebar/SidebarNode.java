@@ -16,50 +16,34 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.api.sidebar;
+package org.panifex.module.api.sidebar;
+
+import java.util.Collection;
 
 /**
- * This is an abstract sidebar item which can be node or item. The sidebar items are used to define
- * dynamic sidebar menu.
+ * This is a menu node. The node could contain children which could be other nodes or sidebar items.
  * 
  * @since 1.0
  */
-public interface SidebarItem extends Comparable<SidebarItem> {
-
-    public final static String COMMAND = "command";
-    public final static String NODE = "node";
-    
-    /**
-     * Returns the label
-     * 
-     * @return the label (never null)
-     * @since 1.0
-     */
-    String getLabel();
+public interface SidebarNode extends SidebarItem {
 
     /**
-     * Returns the icon font
+     * Returns a collection of children. The children could be other nodes or sidebar items.
      * 
-     * @return the icon font
+     * @return the collection of sidebar menu items
+     * @see SidebarCommand
      * @since 1.0
      */
-    String getIconSclass();
+    Collection<SidebarItem> getSidebarItems();
 
+    void setSidebarItems(Collection<SidebarItem> items);
+    
     /**
-     * A priority of item. The items will be ordered by priority in sidebar menu.
+     * Returns the badge text of the {@link Nav}
      * 
-     * @return the priority of item
+     * @return the badge text of the nav.
+     * @see Nav
      * @since 1.0
      */
-    int getPriority();
-    
-    /**
-     * Returns a deep copy of object.
-     *  
-     * @return the deep copy of object
-     * @since 1.0
-     */
-    SidebarItem copy();
-    
-    String getType();
+    String getBadgeText();
 }

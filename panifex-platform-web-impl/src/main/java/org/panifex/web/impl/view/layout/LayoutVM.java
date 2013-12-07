@@ -22,8 +22,8 @@ import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.panifex.platform.module.api.sidebar.SidebarCommand;
-import org.panifex.platform.module.api.sidebar.SidebarItem;
+import org.panifex.module.api.sidebar.SidebarCommand;
+import org.panifex.module.api.sidebar.SidebarItem;
 import org.panifex.web.impl.content.ContentManager;
 import org.panifex.web.impl.sidebar.SidebarManager;
 import org.panifex.web.impl.view.settings.SettingsContent;

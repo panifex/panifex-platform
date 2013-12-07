@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.impl.content;
 
-import org.panifex.platform.module.api.content.AbstractContent;
+import org.panifex.module.api.content.AbstractContent;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Div;

@@ -19,7 +19,7 @@
 package org.panifex.web.impl.content;
 
 import org.apache.aries.blueprint.annotation.Bean;
-import org.panifex.platform.module.api.content.Content;
+import org.panifex.module.api.content.Content;
 import org.zkoss.zhtml.H1;
 import org.zkoss.zhtml.Text;
 import org.zkoss.zk.ui.Component;

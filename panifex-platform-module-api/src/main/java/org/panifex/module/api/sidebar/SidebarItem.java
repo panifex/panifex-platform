@@ -16,21 +16,50 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.module.api.sidebar;
+package org.panifex.module.api.sidebar;
 
 /**
- * This is a sidebar menu item.
+ * This is an abstract sidebar item which can be node or item. The sidebar items are used to define
+ * dynamic sidebar menu.
  * 
  * @since 1.0
  */
-public interface SidebarCommand extends SidebarItem {
+public interface SidebarItem extends Comparable<SidebarItem> {
 
-    final static String ID = "org.panifex.platform.module.api.sidebar.SidebarCommand";
+    public final static String COMMAND = "command";
+    public final static String NODE = "node";
     
     /**
-     * This method is called when user clicks on a sidebar command.
+     * Returns the label
      * 
+     * @return the label (never null)
      * @since 1.0
      */
-    void onClick();
+    String getLabel();
+
+    /**
+     * Returns the icon font
+     * 
+     * @return the icon font
+     * @since 1.0
+     */
+    String getIconSclass();
+
+    /**
+     * A priority of item. The items will be ordered by priority in sidebar menu.
+     * 
+     * @return the priority of item
+     * @since 1.0
+     */
+    int getPriority();
+    
+    /**
+     * Returns a deep copy of object.
+     *  
+     * @return the deep copy of object
+     * @since 1.0
+     */
+    SidebarItem copy();
+    
+    String getType();
 }
