@@ -16,24 +16,27 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.sidebar;
+package org.panifex.web.impl.menu;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.panifex.module.api.sidebar.SidebarItem;
+import org.panifex.module.api.menu.MenuAction;
+import org.panifex.web.impl.view.layout.LayoutVM;
 import org.zkoss.bind.Binder;
+import org.zkoss.bind.impl.BindEvaluatorXUtil;
 import org.zkoss.xel.VariableResolver;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Composer;
 import org.zkoss.zk.ui.util.Template;
-import org.zkoss.zkmax.zul.Nav;
+import org.zkoss.zkmax.zul.Navitem;
 
-public class SidebarNodeTemplate implements Template {
+public final class MenuActionTemplate implements Template {
 
     private Binder binder;
     
-    public SidebarNodeTemplate(Binder binder) {
+    public MenuActionTemplate(Binder binder) {
         this.binder = binder;
     }
     
@@ -41,24 +44,26 @@ public class SidebarNodeTemplate implements Template {
     public Component[] create(Component parent, Component insertBefore, VariableResolver resolver,
             @SuppressWarnings("rawtypes") Composer composer) {
         
-        final Nav node = new Nav();
+        final Navitem navItem = new Navitem();
         
         // property bindings
-        binder.addPropertyLoadBindings(node, "label", "item.label", null, null, null, null, null);
-        binder.addPropertyLoadBindings(node, "iconSclass", "item.iconSclass", null, null, null,
-            null, null);
-        
-        // children binding
-        binder.addChildrenLoadBindings(node, "item.sidebarItems", null, null, null, null, null);
-        binder.setTemplate(node, "$CHILDREN$", "each.type", null);
-        node.setTemplate(SidebarItem.COMMAND, new SidebarCommandTemplate(binder));
-        node.setTemplate(SidebarItem.NODE, new SidebarNodeTemplate(binder));
+        binder.addPropertyLoadBindings(navItem, "label", "item.data.label", null, null, null, null, null);
+        binder.addPropertyLoadBindings(navItem, "iconSclass", "item.data.iconSclass", null, null, null,
+                null, null);
+
+        // command binding
+        Map<String, String[]> onClickArgs = new HashMap<>();
+        onClickArgs.put(MenuAction.ID, new String[]{"item.data"});
+        Map<String, Object> parsedOnClickArgs = 
+                BindEvaluatorXUtil.parseArgs(binder.getEvaluatorX(), onClickArgs);
+        binder.addCommandBinding(navItem, Events.ON_CLICK, 
+            LayoutVM.ON_MENU_ACTION_CLICK, parsedOnClickArgs);
         
         // append to the parent
-        node.setParent(parent);
+        navItem.setParent(parent);
 
         Component[] components = new Component[1];
-        components[0] = node;
+        components[0] = navItem;
 
         return components;
     }

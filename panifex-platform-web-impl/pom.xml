@@ -81,6 +81,11 @@
             <groupId>org.beanshell</groupId>
             <artifactId>bsh</artifactId>
         </dependency>
+        <!-- Commons Dependencies -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+        </dependency>
         <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>

@@ -16,52 +16,49 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.sidebar;
+package org.panifex.web.impl.menu;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.panifex.module.api.sidebar.SidebarCommand;
-import org.panifex.web.impl.view.layout.LayoutVM;
+import org.panifex.module.api.menu.MenuItem;
 import org.zkoss.bind.Binder;
-import org.zkoss.bind.impl.BindEvaluatorXUtil;
 import org.zkoss.xel.VariableResolver;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Composer;
 import org.zkoss.zk.ui.util.Template;
-import org.zkoss.zkmax.zul.Navitem;
+import org.zkoss.zkmax.zul.Nav;
 
-public class SidebarCommandTemplate implements Template {
+public final class MenuNodeTemplate implements Template {
 
     private Binder binder;
-
-    public SidebarCommandTemplate(Binder binder) {
+    
+    public MenuNodeTemplate(Binder binder) {
         this.binder = binder;
     }
-
+    
     @Override
     public Component[] create(Component parent, Component insertBefore, VariableResolver resolver,
             @SuppressWarnings("rawtypes") Composer composer) {
-
-        final Navitem navItem = new Navitem();
         
-        // command binding
-        Map<String, String[]> onClickArgs = new HashMap<>();
-        onClickArgs.put(SidebarCommand.ID, new String[]{"item"});
-        Map<String, Object> parsedOnClickArgs = BindEvaluatorXUtil.parseArgs(binder.getEvaluatorX(), onClickArgs);
-        binder.addCommandBinding(navItem, Events.ON_CLICK, LayoutVM.ON_SIDEBAR_ITEM_CLICK, parsedOnClickArgs);
+        final Nav node = new Nav();
         
         // property bindings
-        binder.addPropertyLoadBindings(navItem, "label", "item.label", null, null, null, null, null);
-        binder.addPropertyLoadBindings(navItem, "iconSclass", "item.iconSclass", null, null, null,
-                null, null);
-
+        binder.addPropertyLoadBindings(node, "label", "item.data.label", null, null, null, null, null);
+        binder.addPropertyLoadBindings(node, "iconSclass", "item.data.iconSclass", null, null, null,
+            null, null);
+        
+        // children binding
+        binder.addChildrenLoadBindings(node, "item.children", null, null, null, null, null);
+        binder.setTemplate(node, "$CHILDREN$", "each.data.type", null);
+        node.setTemplate(MenuItem.ACTION, new MenuActionTemplate(binder));
+        node.setTemplate(MenuItem.NODE, new MenuNodeTemplate(binder));
+        
         // append to the parent
-        navItem.setParent(parent);
+        node.setParent(parent);
 
         Component[] components = new Component[1];
-        components[0] = navItem;
+        components[0] = node;
 
         return components;
     }

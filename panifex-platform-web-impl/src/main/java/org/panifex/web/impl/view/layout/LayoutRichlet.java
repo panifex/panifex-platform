@@ -18,9 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.layout;
 
-import org.panifex.module.api.sidebar.SidebarItem;
-import org.panifex.web.impl.sidebar.SidebarCommandTemplate;
-import org.panifex.web.impl.sidebar.SidebarNodeTemplate;
+import org.panifex.module.api.menu.MenuItem;
+import org.panifex.web.impl.menu.MenuActionTemplate;
+import org.panifex.web.impl.menu.MenuNodeTemplate;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.text.MessageFormats;
@@ -83,7 +83,7 @@ public abstract class LayoutRichlet extends GenericRichlet {
     private void createComponents(Component main) {
         main.appendChild(createLogo());
         main.appendChild(createUserNav());
-        main.appendChild(createSidebar());
+        main.appendChild(createAppMenu());
         main.appendChild(createContent());
     }
 
@@ -133,17 +133,17 @@ public abstract class LayoutRichlet extends GenericRichlet {
                 null, null);
     }
 
-    private Component createSidebar() {
+    private Component createAppMenu() {
         final Div sidebar = new Div();
 
         final Navbar navBar = new Navbar();
         navBar.setSclass("sidebar");
         navBar.setOrient("vertical");
         
-        binder.addChildrenLoadBindings(navBar, "vm.sidebarItems", null, null, null, null, null);
-        binder.setTemplate(navBar, "$CHILDREN$", "each.type", null);
-        navBar.setTemplate(SidebarItem.COMMAND, new SidebarCommandTemplate(binder));
-        navBar.setTemplate(SidebarItem.NODE, new SidebarNodeTemplate(binder));
+        binder.addChildrenLoadBindings(navBar, "vm.menuItems", null, null, null, null, null);
+        binder.setTemplate(navBar, "$CHILDREN$", "each.data.type", null);
+        navBar.setTemplate(MenuItem.ACTION, new MenuActionTemplate(binder));
+        navBar.setTemplate(MenuItem.NODE, new MenuNodeTemplate(binder));
         navBar.setParent(sidebar);
 
         return sidebar;

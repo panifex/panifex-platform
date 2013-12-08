@@ -16,18 +16,30 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.api.sidebar;
+package org.panifex.module.api.menu;
 
 /**
- * This is an abstract sidebar item which can be node or item. The sidebar items are used to define
- * dynamic sidebar menu.
- * 
- * @since 1.0
+ * MenuItem is used to define application menu.
+ *
  */
-public interface SidebarItem extends Comparable<SidebarItem> {
+public interface MenuItem {
 
-    public final static String COMMAND = "command";
-    public final static String NODE = "node";
+    public static final String ACTION = "action";
+    public static final String NODE = "node";
+    
+    /**
+     * Returns the item's ID.
+     * 
+     * @return the item's ID
+     */
+    String getId();
+    
+    /**
+     * Returns the parent node's ID.
+     * 
+     * @return the parent node's ID
+     */
+    String getParentId();
     
     /**
      * Returns the label
@@ -54,12 +66,11 @@ public interface SidebarItem extends Comparable<SidebarItem> {
     int getPriority();
     
     /**
-     * Returns a deep copy of object.
-     *  
-     * @return the deep copy of object
-     * @since 1.0
+     * Returns item's type. Type can be 'action' or 'node.
+     * 
+     * <p>This method is used by ZK template resolver.
+     * 
+     * @return item's type
      */
-    SidebarItem copy();
-    
     String getType();
 }

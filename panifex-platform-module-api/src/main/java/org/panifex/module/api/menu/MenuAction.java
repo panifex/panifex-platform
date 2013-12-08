@@ -16,34 +16,16 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.api.sidebar;
+package org.panifex.module.api.menu;
 
-import java.util.Collection;
+public interface MenuAction extends MenuItem {
 
-/**
- * This is a menu node. The node could contain children which could be other nodes or sidebar items.
- * 
- * @since 1.0
- */
-public interface SidebarNode extends SidebarItem {
-
-    /**
-     * Returns a collection of children. The children could be other nodes or sidebar items.
-     * 
-     * @return the collection of sidebar menu items
-     * @see SidebarCommand
-     * @since 1.0
-     */
-    Collection<SidebarItem> getSidebarItems();
-
-    void setSidebarItems(Collection<SidebarItem> items);
+    public static final String ID = "org.panifex.module.api.menu.MenuAction";
     
     /**
-     * Returns the badge text of the {@link Nav}
+     * This method is called when user clicks on a sidebar command.
      * 
-     * @return the badge text of the nav.
-     * @see Nav
      * @since 1.0
      */
-    String getBadgeText();
+    void onClick();
 }

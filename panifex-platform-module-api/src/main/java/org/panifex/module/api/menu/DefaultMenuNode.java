@@ -16,20 +16,30 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.api.sidebar;
+package org.panifex.module.api.menu;
 
-public abstract class AbstractSidebarCommand extends AbstractSidebarItem implements SidebarCommand {
+public class DefaultMenuNode extends AbstractMenuItem implements MenuNode {
 
-    protected AbstractSidebarCommand(AbstractSidebarCommand oldItem) {
-        super(oldItem);
+    private String badgeText;
+    
+    public DefaultMenuNode(String id) {
+        super(id);
     }
-
-    protected AbstractSidebarCommand(String label, int priority) {
-        super(label, priority);
+    
+    public DefaultMenuNode(String id, String parentId) {
+        super(id, parentId);
+    }
+    
+    public DefaultMenuNode(String id, String parentId, int priority) {
+        super(id, parentId, priority);
     }
     
     @Override
-    public final String getType() {
-        return COMMAND;
+    public String getBadgeText() {
+        return badgeText;
+    }
+
+    public void setBadgeText(String badgeText) {
+        this.badgeText = badgeText;
     }
 }

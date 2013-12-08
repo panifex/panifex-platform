@@ -32,7 +32,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.panifex.module.api.sidebar.SidebarItem;
+import org.panifex.module.api.menu.MenuItem;
 import org.panifex.web.impl.view.layout.LayoutVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +40,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.TreeNode;
 
 public class LoginFormVM extends LayoutVM {
 
@@ -108,9 +109,8 @@ public class LoginFormVM extends LayoutVM {
     }
 
     @Override
-    public List<SidebarItem> getSidebarItems() {
+    public List<TreeNode<MenuItem>> getMenuItems() {
         return null;
-    }
-    
+    } 
     
 }

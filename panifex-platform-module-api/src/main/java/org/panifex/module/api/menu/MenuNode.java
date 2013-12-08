@@ -16,20 +16,16 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.api.sidebar;
+package org.panifex.module.api.menu;
 
-public abstract class AbstractSidebarNode extends AbstractSidebarItem implements SidebarNode {
+public interface MenuNode extends MenuItem {
 
-    protected AbstractSidebarNode(AbstractSidebarNode oldItem) {
-        super(oldItem);
-    }
-
-    protected AbstractSidebarNode(String label, int priority) {
-        super(label, priority);
-    }
-    
-    @Override
-    public final String getType() {
-        return NODE;
-    }
+    /**
+     * Returns the badge text.
+     * 
+     * @return the badge text of the nav.
+     * @see Nav
+     * @since 1.0
+     */
+    String getBadgeText();
 }

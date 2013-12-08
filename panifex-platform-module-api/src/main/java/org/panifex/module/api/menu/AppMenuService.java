@@ -16,21 +16,25 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.api.sidebar;
+package org.panifex.module.api.menu;
+
+import java.util.List;
+
+import org.zkoss.zul.TreeNode;
 
 /**
- * This is a sidebar menu item.
- * 
- * @since 1.0
+ * AppMenuService provides methods to manage application menu.
+ *
  */
-public interface SidebarCommand extends SidebarItem {
+public interface AppMenuService {
 
-    final static String ID = "org.panifex.platform.module.api.sidebar.SidebarCommand";
+    void bindMenuItem(MenuAction menuAction);
     
-    /**
-     * This method is called when user clicks on a sidebar command.
-     * 
-     * @since 1.0
-     */
-    void onClick();
+    void bindMenuItem(MenuNode menuNode);
+    
+    void unbindMenuItem(MenuAction menuAction);
+    
+    void unbindMenuItem(MenuNode menuNode);
+    
+    List<TreeNode<MenuItem>> getMenuItems();
 }
