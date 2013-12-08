@@ -69,6 +69,7 @@ Import-Package: \
 	org.zkoss.html;version="[7.0,8.0)", \
 	org.zkoss.io;version="[7.0,8.0)", \
 	org.zkoss.lang;version="[7.0,8.0)", \
+	org.zkoss.mesg;version="[7.0,8.0)", \
 	org.zkoss.util;version="[7.0,8.0)", \
 	org.zkoss.util.media;version="[7.0,8.0)", \
 	org.zkoss.util.resource;version="[7.0,8.0)", \
@@ -134,6 +135,7 @@ Private-Package: \
     !org.zkoss.html, \
     !org.zkoss.io, \
     !org.zkoss.lang, \
+    !org.zkoss.mesg, \
     !org.zkoss.util, \
     !org.zkoss.util.media, \
     !org.zkoss.util.resource, \
