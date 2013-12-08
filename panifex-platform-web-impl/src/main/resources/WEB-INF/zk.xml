@@ -8,4 +8,9 @@
     <listener>
         <listener-class>org.zkoss.bind.tracker.impl.BindUiLifeCycle</listener-class>
     </listener>
+    
+    <system-config>
+        <disable-zscript>true</disable-zscript>
+        <ui-factory-class>org.zkoss.zk.ui.http.SerializableUiFactory</ui-factory-class>
+    </system-config>
 </zk>
