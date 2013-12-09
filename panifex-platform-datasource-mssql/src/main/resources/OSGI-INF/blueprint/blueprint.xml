@@ -24,50 +24,69 @@
 
     <cm:property-placeholder persistent-id="org.panifex.datasource.mssql" update-strategy="reload">
         <cm:default-properties>
-            <cm:property name="databaseName" value="panifexdb"/>
-            <cm:property name="serverName" value="localhost"/>
-            <cm:property name="portNumber" value="1433"/>
-            <cm:property name="username" value="admin"/>
-            <cm:property name="password" value="1234"/>
+            <cm:property name="url" value="jdbc:jtds:sqlserver://localhost:1433/panifexdb" />
+            <cm:property name="username" value="admin" />
+            <cm:property name="password" value="1234" />
+            <cm:property name="connectionProperties" value="" />
+            <cm:property name="defaultAutoCommit" value="true" />
+            <cm:property name="defaultReadOnly" value="false" />
+            <cm:property name="defaultTransactionIsolation" value="-1" />
+            <cm:property name="defaultCatalog" value="" />
+            <cm:property name="initialSize" value="0" />
+            <cm:property name="maxActive" value="8" />
+            <cm:property name="maxIdle" value="8" />
+            <cm:property name="minIdle" value="0" />
+            <cm:property name="maxWait" value="-1" />
+            <cm:property name="validationQuery" value="select 1" />
+            <cm:property name="testOnBorrow" value="true" />
+            <cm:property name="testOnReturn" value="false" />
+            <cm:property name="testWhileIdle" value="false" />
+            <cm:property name="timeBetweenEvictionRunsMillis" value="-1" />
+            <cm:property name="numTestsPerEvictionRun" value="3" />
+            <cm:property name="minEvictableIdleTimeMillis" value="1800000" />
+            <cm:property name="poolPreparedStatements" value="false" />
+            <cm:property name="maxOpenPreparedStatements" value="0" />
+            <cm:property name="accessToUnderlyingConnectionAllowed" value="false" />
+            <cm:property name="removeAbandoned" value="false" />
+            <cm:property name="removeAbandonedTimeout" value="300" />
+            <cm:property name="logAbandoned" value="false" />
         </cm:default-properties>
     </cm:property-placeholder>
 
-    <bean id="jtdsXADataSource" class="net.sourceforge.jtds.jdbcx.JtdsDataSource">
-        <property name="databaseName" value="${databaseName}" />
-        <property name="serverName" value="${serverName}" />
-        <property name="portNumber" value="${portNumber}" />
-        <property name="user" value="${username}" />
-        <property name="password" value="${password}" />
-    </bean>
-
-    <!-- <bean id="jtdsXADataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <bean id="jtdsDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="net.sourceforge.jtds.jdbcx.JtdsDataSource"/>
-        <property name="url" value="jdbc:jtds:sqlserver://${serverName}:${portNumber}/${databaseName}" />
+        <property name="url" value="${url}" />
         <property name="username" value="${username}" />
         <property name="password" value="${password}" />
-        <property name="validationQuery" value="select 1"/>
-    </bean> -->
-
-    <service id="PanifexXADataSource" ref="jtdsXADataSource"
-        interface="javax.sql.XADataSource">
-        <service-properties>
-            <entry key="osgi.jndi.service.name" value="jdbc/PanifexDataSource" />
-        </service-properties>
-    </service>
-
-
-    <bean id="jtdsDataSource" class="net.sourceforge.jtds.jdbcx.JtdsDataSource">
-        <property name="databaseName" value="${databaseName}" />
-        <property name="serverName" value="${serverName}" />
-        <property name="portNumber" value="${portNumber}" />
-        <property name="user" value="${username}" />
-        <property name="password" value="${password}" />
+        <property name="connectionProperties" value="${connectionProperties}" />
+        <property name="defaultAutoCommit" value="${defaultAutoCommit}" />
+        <property name="defaultReadOnly" value="${defaultReadOnly}" />
+        <property name="defaultTransactionIsolation" value="${defaultTransactionIsolation}" />
+        <property name="defaultCatalog" value="${defaultCatalog}" />
+        <property name="initialSize" value="${initialSize}" />
+        <property name="maxActive" value="${maxActive}" />
+        <property name="maxIdle" value="${maxIdle}" />
+        <property name="maxWait" value="${maxWait}" />
+        <property name="minIdle" value="${minIdle}" />
+        <property name="validationQuery" value="${validationQuery}" />
+        <property name="testOnBorrow" value="${testOnBorrow}" />
+        <property name="testWhileIdle" value="${testWhileIdle}" />
+        <property name="testOnReturn" value="${testOnReturn}" />
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+        <property name="numTestsPerEvictionRun" value="${numTestsPerEvictionRun}" />
+        <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+        <property name="poolPreparedStatements" value="${poolPreparedStatements}" />
+        <property name="maxOpenPreparedStatements" value="${maxOpenPreparedStatements}" />
+        <property name="accessToUnderlyingConnectionAllowed" value="${accessToUnderlyingConnectionAllowed}" />
+        <property name="removeAbandoned" value="${removeAbandoned}" />
+        <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}" />
+        <property name="logAbandoned" value="${logAbandoned}" />
     </bean>
 
     <service id="NoTxPanifexDataSource" ref="jtdsDataSource"
         interface="javax.sql.DataSource">
         <service-properties>
-            <entry key="osgi.jndi.service.name" value="jdbc/NoTxPanifexDataSource" />
+            <entry key="osgi.jndi.service.name" value="jdbc/PanifexDataSource" />
         </service-properties>
     </service>
 

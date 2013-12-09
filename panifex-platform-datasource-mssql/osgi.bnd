@@ -1,5 +1,3 @@
-Embed-Dependency: commons-dbcp;groupId=commons-dbcp;inline=true
-
 Export-Package: !*
 
 Import-Package: \
@@ -7,7 +5,8 @@ Import-Package: \
     javax.sql, \
     javax.transaction, \
     javax.transaction.xa, \
-    org.apache.commons.pool;version="[1.6,2.0)", \
-    org.apache.commons.pool.impl;version="[1.6,2.0)", \
+    org.apache.commons.dbcp;version="[1.4,2.0)", \
+    org.apache.commons.pool;version="[1.5,2.0)", \
+    org.apache.commons.pool.impl;version="[1.5,2.0)", \
     net.sourceforge.jtds.jdbc;version="[1.2,2.0)", \
     net.sourceforge.jtds.jdbcx;version="[1.2,2.0)"

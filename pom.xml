@@ -436,9 +436,9 @@
                 <version>3.2.1</version>
             </dependency>
             <dependency>
-                <groupId>commons-dbcp</groupId>
-                <artifactId>commons-dbcp</artifactId>
-                <version>1.4</version>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.commons-dbcp</artifactId>
+                <version>1.4_3</version>
             </dependency>
             <dependency>
                 <groupId>commons-fileupload</groupId>
@@ -456,9 +456,9 @@
                 <version>2.6</version>
             </dependency>
             <dependency>
-                <groupId>commons-pool</groupId>
-                <artifactId>commons-pool</artifactId>
-                <version>1.6</version>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.commons-pool</artifactId>
+                <version>1.5.4_4</version>
             </dependency>
             <!-- Database Connectors Dependencies -->
             <dependency>
