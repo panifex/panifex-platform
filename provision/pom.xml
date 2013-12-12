@@ -131,11 +131,6 @@
             <groupId>org.apache.openjpa</groupId>
             <artifactId>openjpa</artifactId>
         </dependency>
-        <!-- Apache ServiceMix Dependencies -->
-        <dependency>
-            <groupId>org.apache.servicemix.bundles</groupId>
-            <artifactId>org.apache.servicemix.bundles.dom4j</artifactId>
-        </dependency>
         <!-- Apache Shiro Dependencies -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -154,6 +149,11 @@
             <groupId>org.apache.xbean</groupId>
             <artifactId>xbean-finder</artifactId>
         </dependency>
+        <!-- Apache XmlBeans Dependencies -->
+        <!-- <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.xmlbeans</artifactId>
+        </dependency> -->
         <!-- ASM Depedencies -->
         <dependency>
             <groupId>asm</groupId>
@@ -201,6 +201,11 @@
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
+        </dependency>
+        <!-- Dom4j Dependencies -->
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.dom4j</artifactId>
         </dependency>
         <!-- Equinox Dependencies -->
         <dependency>

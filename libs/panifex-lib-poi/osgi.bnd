@@ -1,10 +1,10 @@
 Embed-Dependency: \
+    ooxml-schemas;groupId=org.apache.poi;inline=true, \
     poi;groupId=org.apache.poi;inline=true, \
     poi-contrib;groupId=org.apache.poi;inline=true, \
     poi-ooxml;groupId=org.apache.poi;inline=true, \
-    poi-ooxml-schemas;groupId=org.apache.poi;inline=true, \
     poi-scratchpad;groupId=org.apache.poi; inline=true, \
-    xmlbeans;groupId=org.apache.xmlbeans;inline=true
+    xmlbeans;groupId=org.apache.xmlbeans; inline=true
     
 Export-Package: \
     org.apache.poi.hssf.usermodel;version="3.9", \
@@ -14,7 +14,17 @@ Export-Package: \
     !*
     
 Import-Package: \
+	javax.xml, \
+	javax.xml.namespace, \
+	javax.xml.stream, \
     com.sun.*;resolution:=optional, \
-    org.apache.commons.logging;version="[1.1,2)", \
-    org.dom4j;version="[1.6,2.0)"
+    org.apache.commons.logging;version="[1.1,2.0)", \
+    org.dom4j;version="[1.6,2.0)", \
+    org.dom4j.io;version="[1.6,2.0)", \
+    org.xml.sax, \
+    org.xml.sax.ext, \
+    org.w3c.dom
+    
+Private-Package: \
+   !org.w3c.dom.*
     
