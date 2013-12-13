@@ -30,6 +30,10 @@ public abstract class AbstractMenuItem implements MenuItem {
         this(id, "");
     }
     
+    protected AbstractMenuItem(String id, int priority) {
+        this(id, "", priority);
+    }
+    
     protected AbstractMenuItem(String id, String parentId) {
         this(id, parentId, Integer.MAX_VALUE);
     }

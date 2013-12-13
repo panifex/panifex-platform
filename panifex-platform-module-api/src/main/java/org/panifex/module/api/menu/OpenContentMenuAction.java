@@ -20,28 +20,55 @@ package org.panifex.module.api.menu;
 
 import org.panifex.module.api.environment.EnvironmentManager;
 
-public class DefaultMenuAction extends AbstractMenuItem implements MenuAction {
+public final class OpenContentMenuAction extends AbstractMenuItem implements MenuAction {
 
-    private String contentId;
+    private final String contentId;
     
-    public DefaultMenuAction(String id) {
+    /**
+     * Creates a new Open Content Menu Action
+     * 
+     * @param id action id
+     * @param contentId content id
+     */
+    public OpenContentMenuAction(String id, String contentId) {
         super(id);
+        this.contentId = contentId;
     }
     
-    public DefaultMenuAction(String id, String parentId) {
-        super(id, parentId);
+    
+    /**
+     * Creates a new Open Content Menu Action
+     * 
+     * @param id action id
+     * @param contentId content id
+     * @param priority position in a node
+     */
+    public OpenContentMenuAction(String id, String contentId, int priority) {
+        super(id, priority);
+        this.contentId = contentId;
     }
     
-    public DefaultMenuAction(String id, String parentId, int priority) {
-        super(id, parentId, priority);
-    }
-    
-    public DefaultMenuAction(String id, String parentId, String contentId) {
+    /**
+     * Creates a new Open Content Menu Action
+     * 
+     * @param id action id
+     * @param parentId parent node id
+     * @param contentId content id
+     */
+    public OpenContentMenuAction(String id, String parentId, String contentId) {
         super(id, parentId);
         this.contentId = contentId;
     }
     
-    public DefaultMenuAction(String id, String parentId, String contentId, int priority) {
+    /**
+     * Creates a new Open Content Menu Action
+     * 
+     * @param id action id
+     * @param parentId parent node id
+     * @param contentId content id
+     * @param priority position in a node
+     */
+    public OpenContentMenuAction(String id, String parentId, String contentId, int priority) {
         super(id, parentId, priority);
         this.contentId = contentId;
     }

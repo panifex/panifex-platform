@@ -25,7 +25,7 @@ import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
 import org.panifex.module.api.menu.AppMenuService;
-import org.panifex.module.api.menu.DefaultMenuAction;
+import org.panifex.module.api.menu.OpenContentMenuAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,10 +44,10 @@ public class AppMenuServiceListener {
         referenceListeners = @ReferenceListener(ref = ID))
     private AppMenuService service;
     
-    private final DefaultMenuAction action;
+    private final OpenContentMenuAction action;
     
     public AppMenuServiceListener() {
-        action = new DefaultMenuAction(ID, "", DashboardContent.ID, 0);
+        action = new OpenContentMenuAction(ID, "", DashboardContent.ID, 0);
         action.setLabel("Dashboard");
     }
     
