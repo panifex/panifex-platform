@@ -81,4 +81,9 @@ public final class OpenContentMenuAction extends AbstractMenuItem implements Men
     private void setBookmark(String bookmark) {
         EnvironmentManager.getService().setBookmark(bookmark);
     }
+    
+    @Override
+    public String getContentId() {
+        return contentId;
+    }
 }

@@ -16,17 +16,24 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.api.menu;
+package org.panifex.web.impl.component;
 
-public interface MenuAction extends MenuItem {
+import org.zkoss.zkmax.zul.Navitem;
 
-    public static final String ID = "org.panifex.module.api.menu.MenuAction";
-    
+public final class MenuNavitem extends Navitem {
+
     /**
-     * This method is called when user clicks on a sidebar command.
-     * 
-     * @since 1.0
+     * Serial version UID
      */
-    void onClick();
-
+    private static final long serialVersionUID = 8048726554145580742L;
+    
+    private String contentId;
+    
+    public void setContentId(String contentId) {
+        this.contentId = contentId;
+    }
+    
+    public String getContentId() {
+        return contentId;
+    }
 }

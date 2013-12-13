@@ -73,4 +73,11 @@ public interface MenuItem {
      * @return item's type
      */
     String getType();
+    
+    /**
+     * Returns content id. This is only used in OpenContentMenuAction.
+     * 
+     * @return content id
+     */
+    String getContentId();
 }

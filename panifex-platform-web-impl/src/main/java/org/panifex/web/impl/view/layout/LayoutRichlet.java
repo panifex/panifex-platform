@@ -137,6 +137,7 @@ public abstract class LayoutRichlet extends GenericRichlet {
         final Div sidebar = new Div();
 
         final Navbar navBar = new Navbar();
+        navBar.setId("appmenu");
         navBar.setSclass("sidebar");
         navBar.setOrient("vertical");
         

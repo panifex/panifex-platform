@@ -91,5 +91,15 @@ public abstract class AbstractMenuItem implements MenuItem {
             throw new UnsupportedOperationException();
         }
     }
+    
+    /**
+     * Return content id. It is only used in OpenContentMenuAction. No one else 
+     * should override this method.
+     * 
+     */
+    @Override
+    public String getContentId() {
+        return "";
+    }
 
 }

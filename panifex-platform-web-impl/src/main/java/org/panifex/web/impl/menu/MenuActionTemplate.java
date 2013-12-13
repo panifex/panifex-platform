@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.panifex.module.api.menu.MenuAction;
+import org.panifex.web.impl.component.MenuNavitem;
 import org.panifex.web.impl.view.layout.LayoutVM;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.impl.BindEvaluatorXUtil;
@@ -30,7 +31,6 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Composer;
 import org.zkoss.zk.ui.util.Template;
-import org.zkoss.zkmax.zul.Navitem;
 
 public final class MenuActionTemplate implements Template {
 
@@ -44,9 +44,10 @@ public final class MenuActionTemplate implements Template {
     public Component[] create(Component parent, Component insertBefore, VariableResolver resolver,
             @SuppressWarnings("rawtypes") Composer composer) {
         
-        final Navitem navItem = new Navitem();
+        final MenuNavitem navItem = new MenuNavitem();
         
         // property bindings
+        binder.addPropertyLoadBindings(navItem, "contentId", "item.data.contentId", null, null, null, null, null);
         binder.addPropertyLoadBindings(navItem, "label", "item.data.label", null, null, null, null, null);
         binder.addPropertyLoadBindings(navItem, "iconSclass", "item.data.iconSclass", null, null, null,
                 null, null);

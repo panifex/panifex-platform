@@ -24,6 +24,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.panifex.module.api.menu.MenuAction;
 import org.panifex.module.api.menu.MenuItem;
+import org.panifex.web.impl.component.MenuNavitem;
 import org.panifex.web.impl.content.ContentManager;
 import org.panifex.web.impl.menu.AppMenuManager;
 import org.panifex.web.impl.view.settings.SettingsContent;
@@ -36,6 +37,8 @@ import org.zkoss.zk.ui.event.BookmarkEvent;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zkmax.zul.Nav;
+import org.zkoss.zkmax.zul.Navbar;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.TreeNode;
 
@@ -51,6 +54,8 @@ public abstract class LayoutVM {
     
     @Wire("#content")
     private Div content;
+    @Wire("#appmenu")
+    private Navbar navbar;
     
     @Command
     public void logout() {
@@ -80,15 +85,48 @@ public abstract class LayoutVM {
         cleanContent();
         
         // create content
-        String bookmark = Executions.getCurrent().getDesktop().getBookmark();
+        String contentId = Executions.getCurrent().getDesktop().getBookmark();
         
         ContentManager manager = ContentManager.getManager();
         if (manager != null) {
-            Component newContent = ContentManager.getManager().render(bookmark);
+            Component newContent = ContentManager.getManager().render(contentId);
             content.appendChild(newContent);
+            
+            // select application menu action
+            selectOpenContentMenuAction(contentId);
         } else {
             getLogger().error("Content manager is null");
         }
+    }
+    
+    /**
+     * Selects open content menu action based on content id
+     * 
+     * @param contentId content id
+     */
+    private void selectOpenContentMenuAction(String contentId) {
+        if (!selectOpenContentMenuAction0(contentId, navbar.getChildren())) {
+            // unselect menu action
+            navbar.clearSelection();
+        }
+    }
+    
+    private boolean selectOpenContentMenuAction0(String contentId, List<Component> components) {
+        for (Component item : navbar.getChildren()) {
+            if (item instanceof MenuNavitem) {
+                MenuNavitem menuItem = (MenuNavitem) item;
+                if (menuItem.getContentId().equals(contentId)) {
+                    navbar.setSelectedItem(menuItem);
+                    return true;
+                }
+            } else if (item instanceof Nav) {
+                Nav nav = (Nav) item;
+                if (selectOpenContentMenuAction0(contentId, nav.getChildren())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public List<TreeNode<MenuItem>> getMenuItems() {
@@ -104,6 +142,7 @@ public abstract class LayoutVM {
      * Removes children from content
      */
     private void cleanContent() {
+        // clear content area
         content.getChildren().clear();
     }
     
