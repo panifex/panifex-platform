@@ -26,6 +26,7 @@ import org.apache.aries.blueprint.annotation.Bind;
 import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
+import org.apache.aries.blueprint.annotation.Service;
 import org.apache.aries.blueprint.annotation.Unbind;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -39,6 +40,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.panifex.platform.api.security.SecurityService;
@@ -50,6 +52,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 @Bean(id = OsgiRealm.ID)
+@Service(interfaces = Realm.class)
 @ReferenceListener
 public class OsgiRealm extends AuthorizingRealm {
 

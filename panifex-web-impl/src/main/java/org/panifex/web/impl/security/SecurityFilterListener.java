@@ -18,12 +18,17 @@
  ******************************************************************************/
 package org.panifex.web.impl.security;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Bind;
 import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.Reference;
+import org.apache.aries.blueprint.annotation.ReferenceList;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.panifex.web.impl.WebContainerListener;
 import org.slf4j.Logger;
@@ -45,9 +50,19 @@ public class SecurityFilterListener {
     private OsgiRealm osgiRealm;
 
     @Inject
-    @Reference(availability = "optional", serviceInterface = SecurityFilter.class, referenceListeners = @ReferenceListener(ref = ID))
+    @Reference(
+        availability = "optional", 
+        serviceInterface = SecurityFilter.class, 
+        referenceListeners = @ReferenceListener(ref = ID))
     private SecurityFilter securityFilter;
 
+    @Inject
+    @ReferenceList(
+        availability = "optional",
+        serviceInterface = Realm.class,
+        referenceListeners = @ReferenceListener(ref = ID))
+    private Set<Realm> realms = new HashSet<>();
+    
     public void setOsgiRealm(OsgiRealm osgiRealm) {
         this.osgiRealm = osgiRealm;
     }
@@ -65,6 +80,18 @@ public class SecurityFilterListener {
         this.securityFilter = null;
     }
 
+    @Bind
+    public void bind(Realm realm) {
+        log.debug("Bind realm: {}", realm);
+        realms.add(realm);
+    }
+    
+    @Unbind
+    public void unbind(Realm realm) {
+        log.debug("Unbind realm: {}", realm);
+        realms.remove(realm);
+    }
+    
     private DefaultWebSecurityManager getSecurityManager() {
         if (securityFilter != null) {
             return (DefaultWebSecurityManager) securityFilter.getSecurityManager();
@@ -76,7 +103,7 @@ public class SecurityFilterListener {
     private void updateRealms() {
         DefaultWebSecurityManager manager = getSecurityManager();
         if (manager != null) {
-            manager.setRealm(osgiRealm);
+            manager.setRealms(realms);
             log.debug("Realms has been updated");
         } else {
             log.debug("Unable to update realms. Security manager has not been registered");
