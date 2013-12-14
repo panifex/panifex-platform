@@ -45,9 +45,9 @@ import org.zkoss.web.servlet.dsp.InterpreterServlet;
 import org.zkoss.zk.au.http.DHtmlUpdateServlet;
 import org.zkoss.zk.ui.http.HttpSessionListener;
 
-@Bean(id = PaxWebServiceListener.ID)
+@Bean(id = WebContainerListener.ID)
 @ReferenceListener
-public class PaxWebServiceListener {
+public class WebContainerListener {
 
     private Logger log = LoggerFactory.getLogger(SecurityRealmListener.class);
 

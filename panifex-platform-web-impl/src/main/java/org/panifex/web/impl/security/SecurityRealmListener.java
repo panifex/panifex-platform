@@ -30,7 +30,7 @@ import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.panifex.web.impl.PaxWebServiceListener;
+import org.panifex.web.impl.WebContainerListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  * Listens to active Realm services and register or unregister its to the Shiro's security manager.
  * 
  */
-@Bean(id = SecurityRealmListener.ID, dependsOn = PaxWebServiceListener.ID)
+@Bean(id = SecurityRealmListener.ID, dependsOn = WebContainerListener.ID)
 @ReferenceListener
 public class SecurityRealmListener {
 
