@@ -29,53 +29,39 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>panifex-platform-module-api</bundle.symbolicName>
-        <bundle.namespace>org.panifex.platform.module.api</bundle.namespace>
+        <bundle.symbolicName>panifex-persistence-impl</bundle.symbolicName>
+        <bundle.namespace>org.panifex.persistence.impl</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
-    <artifactId>panifex-platform-module-api</artifactId>
+    <artifactId>panifex-persistence-impl</artifactId>
 
     <name>${bundle.symbolicName}</name>
 
     <packaging>bundle</packaging>
 
     <dependencies>
-        <!-- ZK Framework Depedencies -->
+        <!-- Apache Aries Transaction Depedencies -->
         <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zk</artifactId>
+            <groupId>org.apache.aries.transaction</groupId>
+            <artifactId>org.apache.aries.transaction.blueprint</artifactId>
+            <scope>provided</scope>
         </dependency>
+        <!-- Apache Geronimo Dependencies -->
         <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkbind</artifactId>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_2.0_spec</artifactId>
         </dependency>
+        <!-- Liquibase Dependencies -->
         <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zul</artifactId>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-osgi</artifactId>
         </dependency>
+        <!-- Panifex Dependencies -->
         <dependency>
-            <groupId>org.zkoss.common</groupId>
-            <artifactId>zcommon</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-fileupload</groupId>
-                    <artifactId>commons-fileupload</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zkforge.el</groupId>
-            <artifactId>zcommons-el</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.common</groupId>
-            <artifactId>zel</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkex</artifactId>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-service-api</artifactId>
         </dependency>
     </dependencies>
 

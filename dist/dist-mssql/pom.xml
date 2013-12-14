@@ -55,7 +55,7 @@
         <!-- Panifex Platform Depedencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-platform-datasource-mssql</artifactId>
+            <artifactId>panifex-datasource-mssql</artifactId>
         </dependency>
         <!-- Samba Dependencies -->
         <dependency>

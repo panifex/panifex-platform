@@ -29,13 +29,13 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>panifex-platform-web-impl</bundle.symbolicName>
-        <bundle.namespace>org.panifex.platform.web.impl</bundle.namespace>
+        <bundle.symbolicName>panifex-web-impl</bundle.symbolicName>
+        <bundle.namespace>org.panifex.web.impl</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
-    <artifactId>panifex-platform-web-impl</artifactId>
+    <artifactId>panifex-web-impl</artifactId>
 
     <name>${bundle.symbolicName}</name>
 
@@ -93,12 +93,12 @@
         <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-platform-module-api</artifactId>
+            <artifactId>panifex-module-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-platform-api</artifactId>
+            <artifactId>panifex-service-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <!-- Pax Web Dependencies -->

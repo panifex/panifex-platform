@@ -29,39 +29,24 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>panifex-platform-persistence</bundle.symbolicName>
-        <bundle.namespace>org.panifex.platform.persistence</bundle.namespace>
+        <bundle.symbolicName>panifex-service-impl</bundle.symbolicName>
+        <bundle.namespace>org.panifex.service.impl</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
-    <artifactId>panifex-platform-persistence</artifactId>
+    <artifactId>panifex-service-impl</artifactId>
 
     <name>${bundle.symbolicName}</name>
 
     <packaging>bundle</packaging>
 
     <dependencies>
-        <!-- Apache Aries Transaction Depedencies -->
-        <dependency>
-            <groupId>org.apache.aries.transaction</groupId>
-            <artifactId>org.apache.aries.transaction.blueprint</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Apache Geronimo Dependencies -->
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jpa_2.0_spec</artifactId>
-        </dependency>
-        <!-- Liquibase Dependencies -->
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-osgi</artifactId>
-        </dependency>
-        <!-- Panifex Dependencies -->
+        <!-- Panifex Depedencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-platform-api</artifactId>
+            <artifactId>panifex-service-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

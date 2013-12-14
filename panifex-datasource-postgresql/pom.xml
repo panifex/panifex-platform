@@ -29,13 +29,13 @@
 	</parent>
 
 	<properties>
-		<bundle.symbolicName>panifex-platform-datasource-postgresql</bundle.symbolicName>
-		<bundle.namespace>org.panifex.platform.datasource.postgresql</bundle.namespace>
+		<bundle.symbolicName>panifex-datasource-postgresql</bundle.symbolicName>
+		<bundle.namespace>org.panifex.datasource.postgresql</bundle.namespace>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.panifex</groupId>
-	<artifactId>panifex-platform-datasource-postgresql</artifactId>
+	<artifactId>panifex-datasource-postgresql</artifactId>
 
 	<name>${bundle.symbolicName}</name>
 

@@ -29,13 +29,13 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>panifex-platform-datasource-mssql</bundle.symbolicName>
+        <bundle.symbolicName>panifex-datasource-mssql</bundle.symbolicName>
         <bundle.namespace>org.panifex</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
-    <artifactId>panifex-platform-datasource-mssql</artifactId>
+    <artifactId>panifex-datasource-mssql</artifactId>
 
     <name>${bundle.symbolicName}</name>
 

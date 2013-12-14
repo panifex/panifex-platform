@@ -29,23 +29,23 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>panifex-platform-module-dashboard-impl</bundle.symbolicName>
-        <bundle.namespace>org.panifex</bundle.namespace>
+        <bundle.symbolicName>panifex-datasource-derby</bundle.symbolicName>
+        <bundle.namespace>org.panifex.datasource.derby</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
-    <artifactId>panifex-platform-module-dashboard-impl</artifactId>
+    <artifactId>panifex-datasource-derby</artifactId>
 
     <name>${bundle.symbolicName}</name>
 
     <packaging>bundle</packaging>
 
     <dependencies>
-        <!-- Panifex Depedencies -->
+        <!-- Database Connectors Dependencies -->
         <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-platform-module-api</artifactId>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
         </dependency>
     </dependencies>
 

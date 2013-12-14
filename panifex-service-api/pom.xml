@@ -29,13 +29,13 @@
 	</parent>
 
 	<properties>
-		<bundle.symbolicName>panifex-platform-api</bundle.symbolicName>
-		<bundle.namespace>org.panifex.platform.api</bundle.namespace>
+		<bundle.symbolicName>panifex-service-api</bundle.symbolicName>
+		<bundle.namespace>org.panifex.service.api</bundle.namespace>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.panifex</groupId>
-	<artifactId>panifex-platform-api</artifactId>
+	<artifactId>panifex-service-api</artifactId>
 
 	<name>${bundle.symbolicName}</name>
 

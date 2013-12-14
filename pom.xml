@@ -61,15 +61,15 @@
     <modules>
         <module>poms</module>
         <module>provision</module>
-        <module>panifex-platform-module-api</module>
-        <module>panifex-platform-api</module>
-        <module>panifex-platform-service</module>
-        <module>panifex-platform-web-impl</module>
-        <module>panifex-platform-persistence</module>
-        <module>panifex-platform-datasource-derby</module>
-        <module>panifex-platform-datasource-mssql</module>
-        <module>panifex-platform-datasource-postgresql</module>
-        <module>panifex-platform-module-dashboard-impl</module>
+        <module>panifex-module-api</module>
+        <module>panifex-service-api</module>
+        <module>panifex-service-impl</module>
+        <module>panifex-web-impl</module>
+        <module>panifex-persistence-impl</module>
+        <module>panifex-datasource-derby</module>
+        <module>panifex-datasource-mssql</module>
+        <module>panifex-datasource-postgresql</module>
+        <module>panifex-module-dashboard-impl</module>
         <module>libs</module>
     </modules>
 
@@ -547,47 +547,47 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-platform-api</artifactId>
+                <artifactId>panifex-service-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-platform-datasource-derby</artifactId>
+                <artifactId>panifex-datasource-derby</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-platform-datasource-mssql</artifactId>
+                <artifactId>panifex-datasource-mssql</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-platform-datasource-postgresql</artifactId>
+                <artifactId>panifex-datasource-postgresql</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-platform-module-api</artifactId>
+                <artifactId>panifex-module-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-platform-module-dashboard-impl</artifactId>
+                <artifactId>panifex-module-dashboard-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-platform-persistence</artifactId>
+                <artifactId>panifex-persistence-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-platform-service</artifactId>
+                <artifactId>panifex-service-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-platform-web-impl</artifactId>
+                <artifactId>panifex-web-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
