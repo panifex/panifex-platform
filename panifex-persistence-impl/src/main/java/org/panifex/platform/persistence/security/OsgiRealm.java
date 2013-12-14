@@ -16,18 +16,15 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.security;
+package org.panifex.platform.persistence.security;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Bind;
 import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Service;
-import org.apache.aries.blueprint.annotation.Unbind;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -43,12 +40,11 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.panifex.platform.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Realm that allows authentication and authorization via SecurityService calls.
+ * Realm that allows authentication and authorization via persisted data.
  * 
  */
 @Bean(id = OsgiRealm.ID)
@@ -60,10 +56,9 @@ public class OsgiRealm extends AuthorizingRealm {
 
     public final static String ID = "org.panifex.web.impl.security.OsgiRealm";
     
-    @Inject
-    @Reference(serviceInterface = SecurityService.class, referenceListeners = @ReferenceListener(ref = ID))
-    private SecurityService securityService;
-
+    @Inject(ref = AccountRepository.ID)
+    private AccountRepository accountRepository;
+    
     /**
      * Constructor adds EhCacheManager.
      */
@@ -71,16 +66,10 @@ public class OsgiRealm extends AuthorizingRealm {
         super(new EhCacheManager());
     }
     
-    @Bind
-    public void bind(SecurityService securityService) {
-        this.securityService = securityService;
+    public void setAccountRepository(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
     }
-
-    @Unbind
-    public void unbind(SecurityService securityService) {
-        this.securityService = null;
-    }
-
+    
     /**
      * {@inheritDoc}
      */
@@ -98,7 +87,7 @@ public class OsgiRealm extends AuthorizingRealm {
             throw new AccountException("Null usernames are not allowed by this realm.");
         }
 
-        String[] retrivedAuthCredentials = securityService.getPasswordForUser(username);
+        String[] retrivedAuthCredentials = accountRepository.getPasswordForUser(username);
         
         // get password
         String password = null;

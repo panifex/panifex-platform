@@ -24,7 +24,6 @@ import java.util.Set;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.easymock.EasyMock;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -34,16 +33,7 @@ import org.junit.Test;
 public class SecurityFilterListenerBindingSecurityFilterTest {
 
     private SecurityFilterListener listener = new SecurityFilterListener();
-    
-    private OsgiRealm osgiRealmMock;
-    
-    @Before
-    public void before() {
-        // set mocked osgi realm
-        osgiRealmMock = EasyMock.createMock(OsgiRealm.class);
-        listener.setOsgiRealm(osgiRealmMock);
-    }
-    
+
     /**
      * This test case try to simulate situation when SecurityFilter bean appears.
      * 
@@ -62,12 +52,12 @@ public class SecurityFilterListenerBindingSecurityFilterTest {
         // set osgi realm to security manager
         secManager.setRealms(realms);
         
-        EasyMock.replay(osgiRealmMock, secFilter, secManager);
+        EasyMock.replay(secFilter, secManager);
         
         // bind security filter
         listener.bind(secFilter);
         
-        EasyMock.verify(osgiRealmMock, secFilter, secManager);
+        EasyMock.verify(secFilter, secManager);
     }
     
     /**
@@ -78,11 +68,11 @@ public class SecurityFilterListenerBindingSecurityFilterTest {
         // create mocks
         SecurityFilter secFilter = EasyMock.createMock(SecurityFilter.class);
         
-        EasyMock.replay(osgiRealmMock, secFilter);
+        EasyMock.replay(secFilter);
         
         // unbind security filter
         listener.unbind(secFilter);
         
-        EasyMock.verify(osgiRealmMock, secFilter);
+        EasyMock.verify(secFilter);
     }
 }

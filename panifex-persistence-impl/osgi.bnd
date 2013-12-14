@@ -30,6 +30,16 @@ Import-Package: \
 	liquibase.resource;version="[3.0,4.0)", \
 	org.apache.aries.blueprint.annotation;version="[1.0, 2.0)", \
 	org.apache.aries.transaction.annotations;version="[1.0, 2.0)", \
+	org.apache.shiro;version="[1.2,2.0)", \
+	org.apache.shiro.authc;version="[1.2,2.0)", \
+	org.apache.shiro.authz;version="[1.2,2.0)", \
+	org.apache.shiro.cache;version="[1.2,2.0)", \
+	org.apache.shiro.cache.ehcache;version="[1.2,2.0)", \
+	org.apache.shiro.config;version="[1.2,2.0)", \
+	org.apache.shiro.mgt;version="[1.2,2.0)", \
+	org.apache.shiro.realm;version="[1.2,2.0)", \
+	org.apache.shiro.subject;version="[1.2,2.0)", \
+	org.apache.shiro.util;version="[1.2,2.0)", \
 	org.osgi.framework;version="[1.3,2.0)", \
 	org.osgi.util.tracker;version="[1.3,2.0)", \
 	org.panifex.platform.api;version="[1.0,2.0)", \

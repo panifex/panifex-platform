@@ -34,20 +34,17 @@ import org.apache.aries.blueprint.annotation.Bind;
 import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Service;
 import org.apache.aries.blueprint.annotation.Unbind;
-import org.panifex.platform.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Bean(id = SecurityServiceImpl.ID)
+@Bean(id = AccountRepository.ID)
 @ReferenceListener
-@Service(interfaces = SecurityService.class)
-public class SecurityServiceImpl implements SecurityService {
+public class AccountRepository {
 
-    public static final String ID = "org.panifex.platform.persistence.security.SecurityServiceImpl";
+    public static final String ID = "org.panifex.platform.persistence.security.AccountRepository";
     
-    private Logger log = LoggerFactory.getLogger(SecurityServiceImpl.class);
+    private Logger log = LoggerFactory.getLogger(AccountRepository.class);
     
     @Inject
     @Reference(
@@ -74,7 +71,6 @@ public class SecurityServiceImpl implements SecurityService {
         this.entityManager = null;
     }
     
-    @Override
     public String[] getPasswordForUser(String username) {
         try {
             log.debug("Get account with username: {}", username);
@@ -107,13 +103,11 @@ public class SecurityServiceImpl implements SecurityService {
         }
     }
 
-    @Override
     public Set<String> getRoleNamesForUser(String username) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    @Override
     public Set<String> getPermissions(String username, Collection<String> roleNames) {
         // TODO Auto-generated method stub
         return null;

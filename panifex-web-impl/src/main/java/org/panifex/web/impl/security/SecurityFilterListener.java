@@ -45,9 +45,6 @@ public class SecurityFilterListener {
     private Logger log = LoggerFactory.getLogger(SecurityFilterListener.class);
 
     public final static String ID = "org.panifex.web.impl.security.SecurityFilterListener";
-    
-    @Inject(ref = OsgiRealm.ID)
-    private OsgiRealm osgiRealm;
 
     @Inject
     @Reference(
@@ -63,9 +60,6 @@ public class SecurityFilterListener {
         referenceListeners = @ReferenceListener(ref = ID))
     private Set<Realm> realms = new HashSet<>();
     
-    public void setOsgiRealm(OsgiRealm osgiRealm) {
-        this.osgiRealm = osgiRealm;
-    }
     
     @Bind
     public void bind(SecurityFilter securityFilter) {
