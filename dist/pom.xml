@@ -84,11 +84,6 @@
             <artifactId>derby</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <!-- Equinox Dependencies -->
         <dependency>
             <groupId>org.eclipse.equinox</groupId>

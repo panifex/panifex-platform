@@ -455,6 +455,11 @@
             </dependency>
             <!-- Database Connectors Dependencies -->
             <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>com.springsource.org.postgresql.jdbc4</artifactId>
+                <version>8.3.604</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.derby</groupId>
                 <artifactId>derby</artifactId>
                 <version>10.10.1.1</version>
@@ -463,11 +468,6 @@
                 <groupId>net.sourceforge.jtds</groupId>
                 <artifactId>com.springsource.net.sourceforge.jtds</artifactId>
                 <version>1.2.2</version>
-            </dependency>
-            <dependency>
-                <groupId>postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>9.1-901.jdbc4</version>
             </dependency>
             <!-- Dom4j Dependencies -->
             <dependency>
