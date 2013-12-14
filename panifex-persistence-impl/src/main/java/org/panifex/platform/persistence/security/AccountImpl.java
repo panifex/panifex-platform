@@ -28,24 +28,29 @@ import javax.persistence.metamodel.StaticMetamodel;
 
 import org.panifex.platform.api.security.Account;
 
-@Entity(name = "account")
+@Entity()
 @StaticMetamodel(AccountImpl_.class)
-@Table(name = "account")
+@Table(name = "sec_account")
 public class AccountImpl implements Account, Serializable {
 
     /**
-     * Generated serial version ID
+     * Serial version UID
      */
     private static final long serialVersionUID = 6039053761668790089L;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "account_id", nullable = false)
     private Long id;
+    
     @Column(name = "username")
     private String username;
+    
     @Column(name = "password")
     private String password;
 
+    @Column(name = "password_salt")
+    private String passwordSalt;
+    
     @Override
     public Long getId() {
         return id;
@@ -74,5 +79,9 @@ public class AccountImpl implements Account, Serializable {
     @Override
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public String getPasswordSalt() {
+        return passwordSalt;
     }
 }

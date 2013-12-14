@@ -29,4 +29,6 @@ public interface Account extends Entity {
     String getPassword();
 
     void setPassword(String password);
+    
+    String getPasswordSalt();
 }

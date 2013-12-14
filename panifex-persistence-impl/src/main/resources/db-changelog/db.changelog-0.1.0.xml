@@ -23,9 +23,9 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
 	<changeSet id="0.1.0-1" author="mariokr">
-		<comment>Create table account</comment>
-		<createTable tableName="account">
-			<column name="id" type="bigint" autoIncrement="true">
+		<comment>Create table sec_account</comment>
+		<createTable tableName="sec_account">
+			<column name="account_id" type="bigint" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="username" type="varchar(255)">
@@ -34,7 +34,19 @@
 			<column name="password" type="varchar(255)">
 				<constraints nullable="false" />
 			</column>
+            <column name="password_salt" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
 		</createTable>
 	</changeSet>
-
+    
+    <changeSet id="0.1.0-2" author="mariokr">
+        <comment>Create index uix_sec_account_username</comment>
+        <createIndex 
+                indexName="uix_sec_account_username"
+                tableName="sec_account"
+                unique="true">
+            <column name="username" />
+        </createIndex>
+    </changeSet>
 </databaseChangeLog>
