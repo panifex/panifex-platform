@@ -70,7 +70,6 @@
         <module>panifex-platform-datasource-postgresql</module>
         <module>panifex-platform-module-dashboard-impl</module>
         <module>libs</module>
-        <module>dist</module>
     </modules>
 
     <repositories>
@@ -733,6 +732,14 @@
                     <exclusion>
                         <groupId>commons-fileupload</groupId>
                         <artifactId>commons-fileupload</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-jdk14</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>

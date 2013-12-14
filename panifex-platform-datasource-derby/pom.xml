@@ -42,6 +42,11 @@
     <packaging>bundle</packaging>
 
     <dependencies>
+        <!-- Database Connectors Dependencies -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

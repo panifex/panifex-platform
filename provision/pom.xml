@@ -197,11 +197,6 @@
             <groupId>org.apache.servicemix.bundles</groupId>
             <artifactId>org.apache.servicemix.bundles.commons-pool</artifactId>
         </dependency>
-        <!-- Database Connectors Dependencies -->
-        <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
-        </dependency>
         <!-- Dom4j Dependencies -->
         <dependency>
             <groupId>org.apache.servicemix.bundles</groupId>

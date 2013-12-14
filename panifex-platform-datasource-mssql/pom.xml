@@ -41,4 +41,12 @@
 
     <packaging>bundle</packaging>
 
+    <dependencies>
+        <!-- Database Connectors Dependencies -->
+        <dependency>
+            <groupId>net.sourceforge.jtds</groupId>
+            <artifactId>com.springsource.net.sourceforge.jtds</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
