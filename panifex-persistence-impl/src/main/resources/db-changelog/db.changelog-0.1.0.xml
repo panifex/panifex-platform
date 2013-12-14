@@ -22,7 +22,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-	<changeSet id="1.0.0-1" author="mariokr">
+	<changeSet id="0.1.0-1" author="mariokr">
 		<comment>Create table account</comment>
 		<createTable tableName="account">
 			<column name="id" type="bigint" autoIncrement="true">
