@@ -45,24 +45,20 @@ public class ContentManager {
     
     @Inject
     @ReferenceList(availability = "optional", serviceInterface = Content.class, referenceListeners = @ReferenceListener(ref = ID))
-    private Content content;
+    private Set<Content> contents = new HashSet<>();
     
     @Inject(ref = ContentUiFactory.ID)
     private ContentUiFactory contentUiFactory;
     
-    private Set<Content> contents = new HashSet<>();
-    
     @Bind
     public void bind(Content content) {
         log.debug("Bind content: {}", content);
-        this.content = content;
         contents.add(content);
     }
     
     @Unbind
     public void unbind(Content content) {
         log.debug("Unbind content: {}", content);
-        this.content = null;
         contents.remove(content);
     }
     
