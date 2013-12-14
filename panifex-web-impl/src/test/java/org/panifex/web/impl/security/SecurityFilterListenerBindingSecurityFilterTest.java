@@ -18,12 +18,20 @@
  ******************************************************************************/
 package org.panifex.web.impl.security;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SecurityFilterListenerTest {
+/**
+ * Tests binding and unbinding security filters to SecurityFilterListener
+ *
+ */
+public class SecurityFilterListenerBindingSecurityFilterTest {
 
     private SecurityFilterListener listener = new SecurityFilterListener();
     
@@ -46,12 +54,13 @@ public class SecurityFilterListenerTest {
         // create mocks
         SecurityFilter secFilter = EasyMock.createMock(SecurityFilter.class);
         DefaultWebSecurityManager secManager = EasyMock.createMock(DefaultWebSecurityManager.class);
+        Set<Realm> realms = new HashSet<>();
         
         // must get SecurityManager in order to set osgi realm
         EasyMock.expect(secFilter.getSecurityManager()).andReturn(secManager);
         
         // set osgi realm to security manager
-        secManager.setRealm(osgiRealmMock);
+        secManager.setRealms(realms);
         
         EasyMock.replay(osgiRealmMock, secFilter, secManager);
         
