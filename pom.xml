@@ -52,6 +52,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- Defines dependency versions -->
         <openjpa.version>2.2.2</openjpa.version>
+        <shiro.version>1.2.2</shiro.version>
         <zk.framework.version>7.0.0</zk.framework.version>
     </properties>
 
@@ -335,7 +336,18 @@
             <dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-core</artifactId>
-                <version>1.2.2</version>
+                <version>${shiro.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-ehcache</artifactId>
+                <version>${shiro.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.slf4j</groupId>
@@ -346,7 +358,7 @@
             <dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-web</artifactId>
-                <version>1.2.2</version>
+                <version>${shiro.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.slf4j</groupId>
@@ -474,6 +486,12 @@
                 <groupId>org.apache.servicemix.bundles</groupId>
                 <artifactId>org.apache.servicemix.bundles.dom4j</artifactId>
                 <version>1.6.1_5</version>
+            </dependency>
+            <!-- EhCache Dependencies -->
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.ehcache</artifactId>
+                <version>2.6.6_1</version>
             </dependency>
             <!-- Equinox Dependencies -->
             <dependency>

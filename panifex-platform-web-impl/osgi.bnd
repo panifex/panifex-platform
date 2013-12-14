@@ -49,6 +49,8 @@ Import-Package: \
 	org.apache.shiro;version="[1.2,2.0)", \
 	org.apache.shiro.authc;version="[1.2,2.0)", \
 	org.apache.shiro.authz;version="[1.2,2.0)", \
+	org.apache.shiro.cache;version="[1.2,2.0)", \
+	org.apache.shiro.cache.ehcache;version="[1.2,2.0)", \
 	org.apache.shiro.config;version="[1.2,2.0)", \
 	org.apache.shiro.mgt;version="[1.2,2.0)", \
 	org.apache.shiro.realm;version="[1.2,2.0)", \

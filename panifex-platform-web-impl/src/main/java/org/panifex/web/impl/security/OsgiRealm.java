@@ -37,6 +37,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -60,6 +61,13 @@ public class OsgiRealm extends AuthorizingRealm {
     @Reference(serviceInterface = SecurityService.class, referenceListeners = @ReferenceListener(ref = ID))
     private SecurityService securityService;
 
+    /**
+     * Constructor adds EhCacheManager.
+     */
+    public OsgiRealm() {
+        super(new EhCacheManager());
+    }
+    
     @Bind
     public void bind(SecurityService securityService) {
         this.securityService = securityService;
