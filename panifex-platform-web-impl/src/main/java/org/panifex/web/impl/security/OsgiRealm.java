@@ -26,7 +26,6 @@ import org.apache.aries.blueprint.annotation.Bind;
 import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Service;
 import org.apache.aries.blueprint.annotation.Unbind;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -38,52 +37,28 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.panifex.platform.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Bean(id = PanifexRealm.ID)
+/**
+ * Realm that allows authentication and authorization via SecurityService calls.
+ * 
+ */
+@Bean(id = OsgiRealm.ID)
 @ReferenceListener
-@Service(interfaces = Realm.class)
-public class PanifexRealm extends AuthorizingRealm {
+public class OsgiRealm extends AuthorizingRealm {
 
-    private Logger log = LoggerFactory.getLogger(PanifexRealm.class);
+    private Logger log = LoggerFactory.getLogger(OsgiRealm.class);
 
-    public final static String ID = "org.panifex.service.security.PanifexRealm";
+    public final static String ID = "org.panifex.web.impl.security.OsgiRealm";
     
     @Inject
     @Reference(serviceInterface = SecurityService.class, referenceListeners = @ReferenceListener(ref = ID))
     private SecurityService securityService;
-
-    /**
-     * Password hash salt configuration.
-     * <ul>
-     * <li>NO_SALT - password hashes are not salted.</li>
-     * <li>CRYPT - password hashes are stored in unix crypt format.</li>
-     * <li>COLUMN - salt is in a separate column in the database.</li>
-     * <li>EXTERNAL - salt is not stored in the database. {@link #getSaltForUser(String)} will be
-     * called to get the salt</li>
-     * </ul>
-     */
-    public enum SaltStyle {
-        NO_SALT, CRYPT, COLUMN, EXTERNAL
-    };
-
-    protected SaltStyle saltStyle = SaltStyle.NO_SALT;
-
-    /**
-     * Sets the salt style. See {@link #saltStyle}.
-     * 
-     * @param saltStyle new SaltStyle to set.
-     */
-    public void setSaltStyle(SaltStyle saltStyle) {
-        this.saltStyle = saltStyle;
-    }
 
     @Bind
     public void bind(SecurityService securityService) {
@@ -112,25 +87,20 @@ public class PanifexRealm extends AuthorizingRealm {
             throw new AccountException("Null usernames are not allowed by this realm.");
         }
 
+        String[] retrivedAuthCredentials = securityService.getPasswordForUser(username);
+        
+        // get password
         String password = null;
-        String salt = null;
-        switch (saltStyle) {
-            case NO_SALT:
-                password = securityService.getPasswordForUser(username)[0];
-                break;
-            case CRYPT:
-                // TODO: separate password and hash from getPasswordForUser[0]
-                throw new ConfigurationException("Not implemented yet");
-                // break;
-            case COLUMN:
-                String[] queryResults = securityService.getPasswordForUser(username);
-                password = queryResults[0];
-                salt = queryResults[1];
-                break;
-            case EXTERNAL:
-                password = securityService.getPasswordForUser(username)[0];
+        if (retrivedAuthCredentials.length > 0) {
+            password = retrivedAuthCredentials[0];
         }
-
+        
+        // get salt
+        String salt = null;
+        if (retrivedAuthCredentials.length > 1) {
+            salt = retrivedAuthCredentials[1];
+        }
+        
         if (password == null) {
             throw new UnknownAccountException("No account found for user [" + username + "]");
         }

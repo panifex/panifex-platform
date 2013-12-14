@@ -18,17 +18,12 @@
  ******************************************************************************/
 package org.panifex.web.impl.security;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Bind;
 import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.Reference;
-import org.apache.aries.blueprint.annotation.ReferenceList;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
-import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.panifex.web.impl.WebContainerListener;
 import org.slf4j.Logger;
@@ -38,50 +33,36 @@ import org.slf4j.LoggerFactory;
  * Listens to active Realm services and register or unregister its to the Shiro's security manager.
  * 
  */
-@Bean(id = SecurityRealmListener.ID, dependsOn = WebContainerListener.ID)
+@Bean(id = SecurityFilterListener.ID, dependsOn = WebContainerListener.ID)
 @ReferenceListener
-public class SecurityRealmListener {
+public class SecurityFilterListener {
 
-    private Logger log = LoggerFactory.getLogger(SecurityRealmListener.class);
+    private Logger log = LoggerFactory.getLogger(SecurityFilterListener.class);
 
-    public final static String ID = "org.panifex.web.impl.security.SecurityRealmListener";
+    public final static String ID = "org.panifex.web.impl.security.SecurityFilterListener";
     
-    @Inject
-    @ReferenceList(availability = "optional", serviceInterface = Realm.class, referenceListeners = @ReferenceListener(ref = ID))
-    private Set<Realm> realms = new HashSet<>();
+    @Inject(ref = OsgiRealm.ID)
+    private OsgiRealm osgiRealm;
 
     @Inject
     @Reference(availability = "optional", serviceInterface = SecurityFilter.class, referenceListeners = @ReferenceListener(ref = ID))
     private SecurityFilter securityFilter;
 
+    public void setOsgiRealm(OsgiRealm osgiRealm) {
+        this.osgiRealm = osgiRealm;
+    }
+    
     @Bind
     public void bind(SecurityFilter securityFilter) {
-        log.debug("Bind shiro filter: {}", securityFilter);
+        log.debug("Bind security filter: {}", securityFilter);
         this.securityFilter = securityFilter;
         updateRealms();
     }
     
     @Unbind
     public void unbind(SecurityFilter securityFilter) {
-        log.debug("Unbind shiro filter: {}", securityFilter);
+        log.debug("Unbind security filter: {}", securityFilter);
         this.securityFilter = null;
-    }
-
-    @Bind
-    public void bind(Realm realm) {
-        log.debug("Binding security realm: {}", realm);
-
-        realms.add(realm);
-        
-        updateRealms();
-    }
-
-    @Unbind
-    public void unbind(Realm realm) {
-        log.debug("Unbinding security realm: {}", realm);
-
-        realms.remove(realm);
-        updateRealms();
     }
 
     private DefaultWebSecurityManager getSecurityManager() {
@@ -95,7 +76,7 @@ public class SecurityRealmListener {
     private void updateRealms() {
         DefaultWebSecurityManager manager = getSecurityManager();
         if (manager != null) {
-            manager.setRealms(realms);
+            manager.setRealm(osgiRealm);
             log.debug("Realms has been updated");
         } else {
             log.debug("Unable to update realms. Security manager has not been registered");

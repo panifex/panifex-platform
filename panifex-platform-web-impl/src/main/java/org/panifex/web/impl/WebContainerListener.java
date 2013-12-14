@@ -36,7 +36,7 @@ import org.osgi.service.http.HttpContext;
 import org.osgi.service.http.NamespaceException;
 import org.panifex.web.impl.security.SecurityFilter;
 import org.panifex.web.impl.security.SecurityFilterImpl;
-import org.panifex.web.impl.security.SecurityRealmListener;
+import org.panifex.web.impl.security.SecurityFilterListener;
 import org.panifex.web.impl.servlet.ZkLayoutService;
 import org.panifex.web.impl.servlet.ZkLayoutServiceImpl;
 import org.slf4j.Logger;
@@ -49,7 +49,7 @@ import org.zkoss.zk.ui.http.HttpSessionListener;
 @ReferenceListener
 public class WebContainerListener {
 
-    private Logger log = LoggerFactory.getLogger(SecurityRealmListener.class);
+    private Logger log = LoggerFactory.getLogger(SecurityFilterListener.class);
 
     public final static String ID = "org.panifex.web.impl.PaxWebServiceListener";
 
