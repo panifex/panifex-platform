@@ -35,7 +35,7 @@
 				<constraints nullable="false" />
 			</column>
             <column name="password_salt" type="varchar(255)">
-                <constraints nullable="true"/>
+                <constraints nullable="false"/>
             </column>
 		</createTable>
 	</changeSet>
@@ -48,5 +48,14 @@
                 unique="true">
             <column name="username" />
         </createIndex>
+    </changeSet>
+    
+    <changeSet id="0.1.0-3" author="mariokr">
+        <comment>Insert admin user</comment>
+        <insert tableName="sec_account">
+            <column name="username">admin</column>
+            <column name="password">lA2jtiWHI3Yp35rRL/50CzAvGvTVb2PsULtZ3GeKdtDwS8V54sUAQ3g7wF6KCT3wE9OMRXLtTQ/PLJjbEaF4yg==</column>
+            <column name="password_salt">1dfpY4vWFRtQIqOxejFVJg==</column>
+        </insert>
     </changeSet>
 </databaseChangeLog>

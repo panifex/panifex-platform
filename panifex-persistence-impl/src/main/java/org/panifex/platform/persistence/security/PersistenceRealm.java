@@ -32,10 +32,13 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.codec.Base64;
+import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -47,23 +50,41 @@ import org.slf4j.LoggerFactory;
  * Realm that allows authentication and authorization via persisted data.
  * 
  */
-@Bean(id = OsgiRealm.ID)
+@Bean(id = PersistenceRealm.ID)
 @Service(interfaces = Realm.class)
 @ReferenceListener
-public class OsgiRealm extends AuthorizingRealm {
+public class PersistenceRealm extends AuthorizingRealm {
 
-    private Logger log = LoggerFactory.getLogger(OsgiRealm.class);
+    private final Logger log = LoggerFactory.getLogger(PersistenceRealm.class);
 
-    public final static String ID = "org.panifex.web.impl.security.OsgiRealm";
+    public static final String ID = "org.panifex.web.impl.security.OsgiRealm";
     
-    @Inject(ref = AccountRepository.ID)
+    /**
+     * Hash algorithm name to use when performing hashes for credentials matching.
+     */
+    public static final String HASH_ALGORITHM = Sha512Hash.ALGORITHM_NAME;
+    
+    /**
+     * The number of times a submitted {@code AuthenticationToken}'s credentials will be hashed before comparing
+     * to the credentials stored in the system.
+     */
+    public static final int HASH_ITERATIONS = 1024;
+    
+    @Inject(ref = AccountRepositoryImpl.ID)
     private AccountRepository accountRepository;
     
     /**
      * Constructor adds EhCacheManager.
      */
-    public OsgiRealm() {
-        super(new EhCacheManager());
+    public PersistenceRealm() {
+        super(
+            new EhCacheManager());
+        
+        // set hashed credentials matcher
+        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher(HASH_ALGORITHM);
+        credentialsMatcher.setHashIterations(HASH_ITERATIONS);
+        credentialsMatcher.setStoredCredentialsHexEncoded(false);
+        setCredentialsMatcher(credentialsMatcher);
     }
     
     public void setAccountRepository(AccountRepository accountRepository) {
@@ -87,34 +108,34 @@ public class OsgiRealm extends AuthorizingRealm {
             throw new AccountException("Null usernames are not allowed by this realm.");
         }
 
-        String[] retrivedAuthCredentials = accountRepository.getPasswordForUser(username);
+        // get account from repository
+        AccountImpl account = accountRepository.getAccountByUsername(username);
         
-        // get password
-        String password = null;
-        if (retrivedAuthCredentials.length > 0) {
-            password = retrivedAuthCredentials[0];
-        }
-        
-        // get salt
-        String salt = null;
-        if (retrivedAuthCredentials.length > 1) {
-            salt = retrivedAuthCredentials[1];
-        }
-        
-        if (password == null) {
+        if (account != null) {
+            // get password
+            String password = account.getPassword();
+            
+            // get password salt
+            String passwordSalt = account.getPasswordSalt();
+            
+            if (password == null || passwordSalt == null) {
+                throw new UnknownAccountException("No account found for user [" + username + "]");
+            }
+    
+            SimpleAuthenticationInfo info =
+                    new SimpleAuthenticationInfo(
+                        username, 
+                        password,
+                        ByteSource.Util.bytes(Base64.decode(passwordSalt)),
+                        getName());
+    
+            log.debug("Authentication info resolved: username={}", username);
+    
+            return info;
+        } else {
+            // account == null
             throw new UnknownAccountException("No account found for user [" + username + "]");
         }
-
-        SimpleAuthenticationInfo info =
-                new SimpleAuthenticationInfo(username, password.toCharArray(), getName());
-
-        if (salt != null) {
-            info.setCredentialsSalt(ByteSource.Util.bytes(salt));
-        }
-
-        log.debug("Authentication info resolved: username={}, password={}", username, password);
-
-        return info;
     }
 
     /**

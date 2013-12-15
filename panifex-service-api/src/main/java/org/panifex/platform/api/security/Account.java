@@ -24,11 +24,5 @@ public interface Account extends Entity {
 
     String getUsername();
 
-    void setUsername(String username);
-
     String getPassword();
-
-    void setPassword(String password);
-    
-    String getPasswordSalt();
 }

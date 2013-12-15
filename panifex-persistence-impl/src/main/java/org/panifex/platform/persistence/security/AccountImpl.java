@@ -65,9 +65,7 @@ public class AccountImpl implements Account, Serializable {
         return username;
     }
 
-
-    @Override
-    public void setUsername(String username) {
+    protected void setUsername(String username) {
         this.username = username;
     }
 
@@ -76,12 +74,15 @@ public class AccountImpl implements Account, Serializable {
         return password;
     }
 
-    @Override
-    public void setPassword(String password) {
+    protected void setPassword(String password) {
         this.password = password;
     }
     
     public String getPasswordSalt() {
         return passwordSalt;
+    }
+    
+    protected void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
 }
