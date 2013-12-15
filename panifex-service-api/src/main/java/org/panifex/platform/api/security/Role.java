@@ -16,17 +16,29 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.persistence.security;
+package org.panifex.platform.api.security;
 
-import java.util.List;
+import org.panifex.platform.api.Entity;
 
-import org.panifex.platform.api.security.Account;
+/**
+ * User's role.
+ * 
+ * <p>Role contains permissions which allows users to perform some actions.
+ * 
+ */
+public interface Role extends Entity {
 
-public interface AccountRepository {
-
-    void insertAccount(Account account);
+    /**
+     * Returns role's name. It must be unique.
+     * 
+     * @return role's name
+     */
+    String getName();
     
-    AccountImpl getAccountByUsername(String username);
-    
-    List<PermissionImpl> getPermissionsByAccount(Account account);
+    /**
+     * Returns role's description.
+     * 
+     * @return role's description
+     */
+    String getDescription();
 }

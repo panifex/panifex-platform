@@ -16,17 +16,35 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.persistence.security;
+package org.panifex.platform.api.security;
 
-import java.util.List;
+import org.panifex.platform.api.Entity;
 
-import org.panifex.platform.api.security.Account;
+/**
+ * Permission identifies action which can be perfomed by user.
+ *
+ */
+public interface Permission extends Entity {
 
-public interface AccountRepository {
+    /**
+     * Returns permission's name. It must be unique.
+     * 
+     * @return permission's name
+     */
+    String getName();
 
-    void insertAccount(Account account);
+    /**
+     * Returns permission's wildcard expression.
+     * 
+     * @return wildcard expression 
+     */
+    String getWildcardExpression();
     
-    AccountImpl getAccountByUsername(String username);
-    
-    List<PermissionImpl> getPermissionsByAccount(Account account);
+    /**
+     * Returns permission's description.
+     * 
+     * @return permission's description
+     */
+    String getDescription(); 
+
 }

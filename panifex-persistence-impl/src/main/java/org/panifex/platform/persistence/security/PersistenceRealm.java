@@ -19,6 +19,7 @@
 package org.panifex.platform.persistence.security;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.aries.blueprint.annotation.Bean;
@@ -151,15 +152,26 @@ public class PersistenceRealm extends AuthorizingRealm {
 
         String username = (String) getAvailablePrincipal(principals);
 
-        Set<String> roleNames = null;
-        Set<String> permissions = null;
-
-        // TODO implement
-        roleNames = new HashSet<>();
-        permissions = new HashSet<>();
-
+        log.debug("Get authorization info for username: {}", username);
+        
+        // get account from repository
+        AccountImpl account = accountRepository.getAccountByUsername(username);
+       
+        // create empty sets
+        Set<String> roleNames = new HashSet<>();
+        Set<String> permissionWildcardExpressions = new HashSet<>();
+        
+        if (account != null ) {
+            List<PermissionImpl> permissions = accountRepository.getPermissionsByAccount(account);
+            
+            for (PermissionImpl permission : permissions) {
+                String wildcardExpression = permission.getWildcardExpression();
+                permissionWildcardExpressions.add(wildcardExpression);
+            }
+        } 
+        
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
-        info.setStringPermissions(permissions);
+        info.setStringPermissions(permissionWildcardExpressions);
         return info;
     }
 

@@ -25,7 +25,7 @@
 	<changeSet id="0.1.0-1" author="mariokr">
 		<comment>Create table sec_account</comment>
 		<createTable tableName="sec_account">
-			<column name="account_id" type="bigint" autoIncrement="true">
+			<column name="account_id" type="int" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="username" type="varchar(255)">
@@ -41,21 +41,149 @@
 	</changeSet>
     
     <changeSet id="0.1.0-2" author="mariokr">
-        <comment>Create index uix_sec_account_username</comment>
-        <createIndex 
-                indexName="uix_sec_account_username"
-                tableName="sec_account"
-                unique="true">
-            <column name="username" />
-        </createIndex>
+        <comment>Add unique constraint uq_sec_account_username</comment>
+        <addUniqueConstraint 
+            constraintName="uq_sec_account_username"
+            tableName="sec_account"
+            columnNames="username" />
     </changeSet>
     
     <changeSet id="0.1.0-3" author="mariokr">
-        <comment>Insert admin user</comment>
+        <comment>Create table sec_role</comment>
+        <createTable tableName="sec_role">
+            <column name="role_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="text">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="0.1.0-4" author="mariokr">
+        <comment>Add unique constraint index uq_sec_role_name</comment>
+        <addUniqueConstraint
+            constraintName="uq_sec_role_name"
+            tableName="sec_role" 
+            columnNames="name" />
+    </changeSet>
+    
+    <changeSet id="0.1.0-5" author="mariokr">
+        <comment>Create table sec_account_role</comment>
+        <createTable tableName="sec_account_role">
+            <column name="account_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="role_id" type="int">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="0.1.0-6" author="mariokr">
+        <comment>Add primary key pk_sec_account_role</comment>
+        <addPrimaryKey 
+            constraintName="pk_sec_account_role"
+            tableName="sec_account_role" 
+            columnNames="account_id, role_id" />
+    </changeSet>
+    
+    <changeSet id="0.1.0-7" author="mariokr">
+        <comment>Add foreign key constraint fk_account_role_account</comment>
+        <addForeignKeyConstraint 
+            constraintName="fk_account_role_account"
+            baseTableName="sec_account_role"
+            baseColumnNames="account_id"
+            referencedTableName="sec_account"
+            referencedColumnNames="account_id" />
+    </changeSet>
+    
+    <changeSet id="0.1.0-8" author="mariokr">
+        <comment>Add foreign key constraint fk_account_role_role</comment>
+        <addForeignKeyConstraint 
+            constraintName="fk_account_role_role"
+            baseTableName="sec_account_role"
+            baseColumnNames="role_id"
+            referencedTableName="sec_role"
+            referencedColumnNames="role_id" />
+    </changeSet>
+    
+    <changeSet id="0.1.0-9" author="mariokr">
+        <comment>Create table sec_permission</comment>
+        <createTable tableName="sec_permission">
+            <column name="permission_id" type="int" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="wildcard_expression" type="varchar(510)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="text">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="0.1.0-10" author="mariokr">
+        <comment>Add unique key constraint uq_sec_permission_name</comment>
+        <addUniqueConstraint
+            constraintName="uq_sec_permission_name"
+            tableName="sec_permission"
+            columnNames="name" />
+    </changeSet>
+    
+    <changeSet id="0.1.0-11" author="mariokr">
+        <comment>Create table sec_role_permission</comment>
+        <createTable tableName="sec_role_permission">
+            <column name="role_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="permission_id" type="int">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="0.1.0-12" author="mariokr">
+        <comment>Add primary key pk_sec_role_permission</comment>
+        <addPrimaryKey 
+            constraintName="pk_sec_role_permission"
+            tableName="sec_role_permission" 
+            columnNames="role_id, permission_id" />
+    </changeSet>
+    
+    <changeSet id="0.1.0-13" author="mariokr">
+        <comment>Add foreign key fk_sec_role_permission_role</comment>
+        <addForeignKeyConstraint 
+            constraintName="fk_sec_role_permission_role"
+            baseTableName="sec_role_permission"
+            baseColumnNames="role_id" 
+            referencedTableName="sec_role" 
+            referencedColumnNames="role_id" />
+    </changeSet>
+    
+    <changeSet id="0.1.0-14" author="mariokr">
+        <comment>Add foreign key fk_sec_role_permission_permission</comment>
+        <addForeignKeyConstraint
+            constraintName="fk_sec_role_permission_permission"
+            baseTableName="sec_role_permission"
+            baseColumnNames="permission_id"
+            referencedTableName="sec_permission"
+            referencedColumnNames="permission_id" />
+    </changeSet>
+    
+    <changeSet id="0.1.0-15" author="mariokr">
+        <comment>Insert admin account</comment>
         <insert tableName="sec_account">
             <column name="username">admin</column>
             <column name="password">lA2jtiWHI3Yp35rRL/50CzAvGvTVb2PsULtZ3GeKdtDwS8V54sUAQ3g7wF6KCT3wE9OMRXLtTQ/PLJjbEaF4yg==</column>
             <column name="password_salt">1dfpY4vWFRtQIqOxejFVJg==</column>
         </insert>
     </changeSet>
+
 </databaseChangeLog>

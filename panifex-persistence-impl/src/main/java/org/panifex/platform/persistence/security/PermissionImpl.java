@@ -24,42 +24,36 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
-import org.panifex.platform.api.security.Account;
+import org.panifex.platform.api.security.Permission;
 
 @Entity
-@StaticMetamodel(AccountImpl_.class)
-@Table(name = "sec_account")
-public class AccountImpl implements Account, Serializable {
+@StaticMetamodel(PermissionImpl_.class)
+@Table(name = "sec_permission")
+public class PermissionImpl implements Permission, Serializable {
 
     /**
-     * Serial version UID
+     * Serial version id
      */
-    private static final long serialVersionUID = 6039053761668790089L;
+    private static final long serialVersionUID = -4258555983967199451L;
 
     @Id
-    @Column(name = "account_id", nullable = false)
+    @Column(name = "permission_id", nullable = false)
     private Long id;
     
-    @Column(name = "username", nullable = false)
-    private String username;
+    @Column(name = "name", nullable = false)
+    private String name;
     
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Column(name = "password_salt", nullable = false)
-    private String passwordSalt;
+    @Column(name = "wildcard_expression", nullable = false)
+    private String wildcardExpression;
     
-    @ManyToMany
-    @JoinTable(
-        name = "sec_account_role",
-        joinColumns = {@JoinColumn(name = "account_id", referencedColumnName = "account_id")},
-        inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
+    @Column(name = "description", nullable = false)
+    private String description;
+    
+    @ManyToMany(mappedBy = "permissions")
     private List<RoleImpl> roles;
     
     @Override
@@ -67,33 +61,19 @@ public class AccountImpl implements Account, Serializable {
         return id;
     }
 
-    protected void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
-    public String getUsername() {
-        return username;
+    public String getWildcardExpression() {
+        return wildcardExpression;
     }
-
-    protected void setUsername(String username) {
-        this.username = username;
-    }
-
+    
     @Override
-    public String getPassword() {
-        return password;
+    public String getDescription() {
+        return description;
     }
 
-    protected void setPassword(String password) {
-        this.password = password;
-    }
-    
-    public String getPasswordSalt() {
-        return passwordSalt;
-    }
-    
-    protected void setPasswordSalt(String passwordSalt) {
-        this.passwordSalt = passwordSalt;
-    }
 }

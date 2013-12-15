@@ -25,6 +25,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
 import org.apache.aries.blueprint.annotation.Bean;
@@ -89,10 +90,11 @@ public class AccountRepositoryImpl implements AccountRepository {
         
         // select from account
         Root<AccountImpl> account = cq.from(AccountImpl.class);
-        // where username = ?
+        // where account.username = ?
         cq.where(cb.equal(account.get(AccountImpl_.username), username));
         cq.select(account);
         
+        // execute query
         TypedQuery<AccountImpl> q = entityManager.createQuery(cq);
         List<AccountImpl> accounts = q.getResultList();
         
@@ -107,6 +109,29 @@ public class AccountRepositoryImpl implements AccountRepository {
             log.error("Found more than one account with the same username: {}", username);
             return null;
         }
+    }
+
+    @Override
+    public List<PermissionImpl> getPermissionsByAccount(Account account) {
+        log.debug("Get permission by account: {}", account);
+        
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<PermissionImpl> cq = cb.createQuery(PermissionImpl.class);
+        
+        // select from permission
+        Root<PermissionImpl> permission = cq.from(PermissionImpl.class);
+        // join role
+        Join<PermissionImpl, RoleImpl> roles = permission.join(PermissionImpl_.roles);
+        // join account
+        Join<RoleImpl, AccountImpl> accounts = roles.join(RoleImpl_.accounts);
+        // where account.id = ?
+        cq.where(cb.equal(accounts.get(AccountImpl_.id), account.getId()));
+        
+        // execute query
+        TypedQuery<PermissionImpl> q = entityManager.createQuery(cq);
+        List<PermissionImpl> permissions = q.getResultList();
+        
+        return permissions;
     }
 
 }
