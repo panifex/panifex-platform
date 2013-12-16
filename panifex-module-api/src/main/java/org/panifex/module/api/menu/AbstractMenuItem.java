@@ -18,6 +18,8 @@
  ******************************************************************************/
 package org.panifex.module.api.menu;
 
+import org.apache.shiro.SecurityUtils;
+
 public abstract class AbstractMenuItem implements MenuItem {
 
     private final String id;
@@ -25,6 +27,7 @@ public abstract class AbstractMenuItem implements MenuItem {
     private String label;
     private String iconSclass;
     private int priority;
+    private String wildcardPermissionExpression;
     
     protected AbstractMenuItem(String id) {
         this(id, "");
@@ -38,10 +41,22 @@ public abstract class AbstractMenuItem implements MenuItem {
         this(id, parentId, Integer.MAX_VALUE);
     }
     
-    protected AbstractMenuItem(String id, String parentId, int priority) {
+    protected AbstractMenuItem(
+            String id, 
+            String parentId, 
+            int priority) {
+        this(id, parentId, priority, "*");
+    }
+    
+    protected AbstractMenuItem(
+            String id, 
+            String parentId, 
+            int priority,
+            String wildcardPermissionExpression) {
         this.id = id;
         this.parentId = (parentId != null) ? parentId : "";
         this.priority = priority;
+        this.wildcardPermissionExpression = wildcardPermissionExpression;
     }
     
     @Override
@@ -101,5 +116,15 @@ public abstract class AbstractMenuItem implements MenuItem {
     public String getContentId() {
         return "";
     }
+    
+    public void setWildcardPermissionExpression(String wildcardPermissionExpression) {
+        this.wildcardPermissionExpression = wildcardPermissionExpression;
+    }
 
+    @Override
+    public boolean getIsPermitted() {
+        boolean isPermitted = SecurityUtils.getSubject().isPermitted(wildcardPermissionExpression);
+        return isPermitted;
+    }
+    
 }

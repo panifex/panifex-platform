@@ -41,9 +41,9 @@ import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.panifex.platform.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,9 +52,9 @@ import org.slf4j.LoggerFactory;
  * 
  */
 @Bean(id = PersistenceRealm.ID)
-@Service(interfaces = Realm.class)
+@Service(interfaces = SecurityService.class)
 @ReferenceListener
-public class PersistenceRealm extends AuthorizingRealm {
+public class PersistenceRealm extends AuthorizingRealm implements SecurityService {
 
     private final Logger log = LoggerFactory.getLogger(PersistenceRealm.class);
 

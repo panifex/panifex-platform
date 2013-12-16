@@ -30,6 +30,7 @@ import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.panifex.platform.api.security.SecurityService;
 import org.panifex.web.impl.WebContainerListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,9 +57,9 @@ public class SecurityFilterListener {
     @Inject
     @ReferenceList(
         availability = "optional",
-        serviceInterface = Realm.class,
+        serviceInterface = SecurityService.class,
         referenceListeners = @ReferenceListener(ref = ID))
-    private Set<Realm> realms = new HashSet<>();
+    private Set<SecurityService> securityServices = new HashSet<>();
     
     
     @Bind
@@ -75,15 +76,15 @@ public class SecurityFilterListener {
     }
 
     @Bind
-    public void bind(Realm realm) {
-        log.debug("Bind realm: {}", realm);
-        realms.add(realm);
+    public void bind(SecurityService securityService) {
+        log.debug("Bind security service: {}", securityService);
+        securityServices.add(securityService);
     }
     
     @Unbind
-    public void unbind(Realm realm) {
-        log.debug("Unbind realm: {}", realm);
-        realms.remove(realm);
+    public void unbind(SecurityService securityService) {
+        log.debug("Unbind security service: {}", securityService);
+        securityServices.remove(securityService);
     }
     
     private DefaultWebSecurityManager getSecurityManager() {
@@ -96,7 +97,12 @@ public class SecurityFilterListener {
     
     private void updateRealms() {
         DefaultWebSecurityManager manager = getSecurityManager();
-        if (manager != null) {
+        if (manager != null && !securityServices.isEmpty()) {
+            // TODO Check what to do when realms is empty
+            
+            Set<Realm> realms = new HashSet<>();
+            realms.addAll(securityServices);
+            
             manager.setRealms(realms);
             log.debug("Realms has been updated");
         } else {

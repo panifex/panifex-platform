@@ -80,4 +80,12 @@ public interface MenuItem {
      * @return content id
      */
     String getContentId();
+    
+    /**
+     * Returns {@code true} if the logged account has permission to open a node or 
+     * to perform an action .
+     * 
+     * @return true if an account is permitted, false otherwise
+     */
+    boolean getIsPermitted();
 }

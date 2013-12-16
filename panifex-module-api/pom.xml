@@ -42,6 +42,11 @@
     <packaging>bundle</packaging>
 
     <dependencies>
+        <!-- Apache Shiro Dependencies -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+        </dependency>
         <!-- ZK Framework Depedencies -->
         <dependency>
             <groupId>org.zkoss.zk</groupId>

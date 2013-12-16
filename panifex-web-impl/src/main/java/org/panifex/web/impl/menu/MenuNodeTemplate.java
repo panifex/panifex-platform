@@ -45,8 +45,9 @@ public final class MenuNodeTemplate implements Template {
         
         // property bindings
         binder.addPropertyLoadBindings(node, "label", "item.data.label", null, null, null, null, null);
-        binder.addPropertyLoadBindings(node, "iconSclass", "item.data.iconSclass", null, null, null,
-            null, null);
+        binder.addPropertyLoadBindings(node, "iconSclass", "item.data.iconSclass", null, null, null, null, null);
+        binder.addPropertyLoadBindings(node, "disabled", "not item.data.isPermitted", null, null, null, null, null);
+        binder.addPropertyLoadBindings(node, "visible", "item.data.isPermitted", null, null, null, null, null);
         
         // children binding
         binder.addChildrenLoadBindings(node, "item.children", null, null, null, null, null);

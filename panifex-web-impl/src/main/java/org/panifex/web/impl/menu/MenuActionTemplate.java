@@ -49,8 +49,9 @@ public final class MenuActionTemplate implements Template {
         // property bindings
         binder.addPropertyLoadBindings(navItem, "contentId", "item.data.contentId", null, null, null, null, null);
         binder.addPropertyLoadBindings(navItem, "label", "item.data.label", null, null, null, null, null);
-        binder.addPropertyLoadBindings(navItem, "iconSclass", "item.data.iconSclass", null, null, null,
-                null, null);
+        binder.addPropertyLoadBindings(navItem, "iconSclass", "item.data.iconSclass", null, null, null, null, null);
+        binder.addPropertyLoadBindings(navItem, "disabled", "not item.data.isPermitted", null, null, null, null, null);
+        binder.addPropertyLoadBindings(navItem, "visible", "item.data.isPermitted", null, null, null, null, null);
 
         // command binding
         Map<String, String[]> onClickArgs = new HashMap<>();
