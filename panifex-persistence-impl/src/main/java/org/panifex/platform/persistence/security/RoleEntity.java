@@ -16,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
+
 package org.panifex.platform.persistence.security;
 
 import java.io.Serializable;
@@ -30,70 +31,78 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
-import org.panifex.platform.api.security.Account;
+import org.panifex.platform.api.security.Role;
 
 @Entity
-@StaticMetamodel(AccountImpl_.class)
-@Table(name = "sec_account")
-public class AccountImpl implements Account, Serializable {
+@StaticMetamodel(RoleEntity_.class)
+@Table(name = "sec_role")
+public class RoleEntity implements Role, Serializable {
 
     /**
      * Serial version UID
      */
-    private static final long serialVersionUID = 6039053761668790089L;
+    private static final long serialVersionUID = 8260877176766030641L;
 
-    @Id
-    @Column(name = "account_id", nullable = false)
     private Long id;
     
-    @Column(name = "username", nullable = false)
-    private String username;
+    private String name;
     
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Column(name = "password_salt", nullable = false)
-    private String passwordSalt;
+    private String description;
     
-    @ManyToMany
-    @JoinTable(
-        name = "sec_account_role",
-        joinColumns = {@JoinColumn(name = "account_id", referencedColumnName = "account_id")},
-        inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
-    private List<RoleImpl> roles;
+    private List<AccountEntity> accounts;
     
+    private List<PermissionEntity> permissions;
+    
+    @Id
+    @Column(name = "role_id", nullable = false)
     @Override
     public Long getId() {
         return id;
     }
-
+    
     protected void setId(Long id) {
         this.id = id;
     }
 
+    @Column(name = "name", nullable = false, unique = true)
     @Override
-    public String getUsername() {
-        return username;
-    }
-
-    protected void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    protected void setPassword(String password) {
-        this.password = password;
+    public String getName() {
+        return name;
     }
     
-    public String getPasswordSalt() {
-        return passwordSalt;
+    protected void setName(String name) {
+        this.name = name;
+    }
+   
+    @Column(name = "description", nullable = false)
+    @Override
+    public String getDescription() {
+        return description;
     }
     
-    protected void setPasswordSalt(String passwordSalt) {
-        this.passwordSalt = passwordSalt;
+    protected void setDescription(String description) {
+        this.description = description;
     }
+
+    @ManyToMany(mappedBy = "roles")
+    protected List<AccountEntity> getAccounts() {
+        return accounts;
+    }
+    
+    protected void setAccounts(List<AccountEntity> accounts) {
+        this.accounts = accounts;
+    }
+    
+    @ManyToMany
+    @JoinTable(name = "sec_role_permission",
+            joinColumns = {@JoinColumn(name = "role_id")},
+            inverseJoinColumns = {@JoinColumn(name = "permission_id")})
+    protected List<PermissionEntity> getPermissions() {
+        return permissions;
+    }
+    
+    protected void setPermissions(List<PermissionEntity> permissions) {
+        this.setPermissions(permissions);
+    }
+    
 }

@@ -56,8 +56,8 @@ public final class AccountImplBuilder {
         return hashedPasswordBase64;
     }
     
-    public AccountImpl build() {
-        AccountImpl account = new AccountImpl();
+    public AccountEntity build() {
+        AccountEntity account = new AccountEntity();
         account.setUsername(username);
         account.setPassword(password);
         account.setPasswordSalt(passwordSalt);

@@ -110,7 +110,7 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         }
 
         // get account from repository
-        AccountImpl account = accountRepository.getAccountByUsername(username);
+        AccountEntity account = accountRepository.getAccountByUsername(username);
         
         if (account != null) {
             // get password
@@ -155,16 +155,16 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         log.debug("Get authorization info for username: {}", username);
         
         // get account from repository
-        AccountImpl account = accountRepository.getAccountByUsername(username);
+        AccountEntity account = accountRepository.getAccountByUsername(username);
        
         // create empty sets
         Set<String> roleNames = new HashSet<>();
         Set<String> permissionWildcardExpressions = new HashSet<>();
         
         if (account != null ) {
-            List<PermissionImpl> permissions = accountRepository.getPermissionsByAccount(account);
+            List<PermissionEntity> permissions = accountRepository.getPermissionsByAccount(account);
             
-            for (PermissionImpl permission : permissions) {
+            for (PermissionEntity permission : permissions) {
                 String wildcardExpression = permission.getWildcardExpression();
                 permissionWildcardExpressions.add(wildcardExpression);
             }

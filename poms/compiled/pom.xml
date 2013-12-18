@@ -105,9 +105,10 @@
                         </goals>
                         <phase>generate-sources</phase>
                         <configuration>
+                            <compilerArguments>-Aopenjpa.source=7 -Aopenjpa.metamodel=true</compilerArguments>
                             <outputDirectory>target/metamodel</outputDirectory>
                             <processors>
-                                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+                                <processor>org.apache.openjpa.persistence.meta.AnnotationProcessor6</processor>
                             </processors>
                         </configuration>
                     </execution>

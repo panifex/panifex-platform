@@ -24,7 +24,7 @@ import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Test;
 import org.panifex.platform.api.security.Account;
-import org.panifex.platform.persistence.security.AccountImpl;
+import org.panifex.platform.persistence.security.AccountEntity;
 import org.panifex.platform.persistence.security.AccountImplBuilder;
 import org.panifex.platform.persistence.security.PersistenceRealm;
 
@@ -47,7 +47,7 @@ public final class AccountImplBuilderTest {
         
         // build account impl
         AccountImplBuilder builder = new AccountImplBuilder(accountMock);
-        AccountImpl buildedAccount = builder.build();
+        AccountEntity buildedAccount = builder.build();
         
         EasyMock.verify(accountMock);
         

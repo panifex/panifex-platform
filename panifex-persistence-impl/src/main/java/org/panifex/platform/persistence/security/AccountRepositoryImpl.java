@@ -76,27 +76,27 @@ public class AccountRepositoryImpl implements AccountRepository {
         log.debug("Insert account: {}", account);
         AccountImplBuilder accountBuilder = new AccountImplBuilder(account);
         
-        AccountImpl accountImpl = accountBuilder.build();
+        AccountEntity accountImpl = accountBuilder.build();
         
         entityManager.persist(accountImpl);
     }
     
     @Override
-    public AccountImpl getAccountByUsername(String username) {
+    public AccountEntity getAccountByUsername(String username) {
         log.debug("Get account with username: {}", username);
-        
+        try {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<AccountImpl> cq = cb.createQuery(AccountImpl.class);
+        CriteriaQuery<AccountEntity> cq = cb.createQuery(AccountEntity.class);
         
         // select from account
-        Root<AccountImpl> account = cq.from(AccountImpl.class);
+        Root<AccountEntity> account = cq.from(AccountEntity.class);
         // where account.username = ?
-        cq.where(cb.equal(account.get(AccountImpl_.username), username));
+        cq.where(cb.equal(account.get(AccountEntity_.username), username));
         cq.select(account);
         
         // execute query
-        TypedQuery<AccountImpl> q = entityManager.createQuery(cq);
-        List<AccountImpl> accounts = q.getResultList();
+        TypedQuery<AccountEntity> q = entityManager.createQuery(cq);
+        List<AccountEntity> accounts = q.getResultList();
         
         if (accounts.size() == 1) {
             log.debug("Found account with username: {}", username);
@@ -109,27 +109,41 @@ public class AccountRepositoryImpl implements AccountRepository {
             log.error("Found more than one account with the same username: {}", username);
             return null;
         }
+        } catch (Exception e) {
+            log.error("Exception: {}", e);
+            return null;
+        }
     }
 
     @Override
-    public List<PermissionImpl> getPermissionsByAccount(Account account) {
+    public List<PermissionEntity> getPermissionsByAccount(Account account) {
         log.debug("Get permission by account: {}", account);
         
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<PermissionImpl> cq = cb.createQuery(PermissionImpl.class);
+        CriteriaQuery<PermissionEntity> cq = cb.createQuery(PermissionEntity.class);
         
         // select from permission
-        Root<PermissionImpl> permission = cq.from(PermissionImpl.class);
+        Root<PermissionEntity> permission = cq.from(PermissionEntity.class);
+        
+        // loads RoleEntit_ metamodel
+        cq.from(RoleEntity.class);
+        
         // join role
-        Join<PermissionImpl, RoleImpl> roles = permission.join(PermissionImpl_.roles);
-        // join account
-        Join<RoleImpl, AccountImpl> accounts = roles.join(RoleImpl_.accounts);
-        // where account.id = ?
-        cq.where(cb.equal(accounts.get(AccountImpl_.id), account.getId()));
+        Join<PermissionEntity, RoleEntity> roles = permission.join(PermissionEntity_.roles);
+        Join<RoleEntity, AccountEntity> accounts = roles.join(RoleEntity_.accounts);
+                
+        // where
+        cq.where(cb.equal(accounts.get(AccountEntity_.id), account.getId()));
+        
+        // distinct
+        cq.select(permission);
+        cq.distinct(true);
         
         // execute query
-        TypedQuery<PermissionImpl> q = entityManager.createQuery(cq);
-        List<PermissionImpl> permissions = q.getResultList();
+        TypedQuery<PermissionEntity> q = entityManager.createQuery(cq);
+        List<PermissionEntity> permissions = q.getResultList();
+        
+        log.debug("Returned {} permissions", permissions.size());
         
         return permissions;
     }

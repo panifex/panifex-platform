@@ -31,49 +31,72 @@ import javax.persistence.metamodel.StaticMetamodel;
 import org.panifex.platform.api.security.Permission;
 
 @Entity
-@StaticMetamodel(PermissionImpl_.class)
+@StaticMetamodel(PermissionEntity_.class)
 @Table(name = "sec_permission")
-public class PermissionImpl implements Permission, Serializable {
+public class PermissionEntity implements Permission, Serializable {
 
     /**
      * Serial version id
      */
     private static final long serialVersionUID = -4258555983967199451L;
 
-    @Id
-    @Column(name = "permission_id", nullable = false)
     private Long id;
     
-    @Column(name = "name", nullable = false)
     private String name;
     
-    @Column(name = "wildcard_expression", nullable = false)
     private String wildcardExpression;
     
-    @Column(name = "description", nullable = false)
     private String description;
     
-    @ManyToMany(mappedBy = "permissions")
-    private List<RoleImpl> roles;
+    private List<RoleEntity> roles;
     
+    @Id
+    @Column(name = "permission_id", nullable = false)
     @Override
     public Long getId() {
         return id;
     }
+    
+    protected void setId(Long id) {
+        this.id = id;
+    }
 
+    @Column(name = "name", nullable = false, unique = true)
     @Override
     public String getName() {
         return name;
     }
+    
+    protected void setName(String name) {
+        this.name = name;
+    }
 
+    @Column(name = "wildcard_expression", nullable = false)
     @Override
     public String getWildcardExpression() {
         return wildcardExpression;
     }
     
+    protected void setWildcardExpression(String wildcardExpression) {
+        this.wildcardExpression = wildcardExpression;
+    }
+    
+    @Column(name = "description", nullable = false)
     @Override
     public String getDescription() {
         return description;
     }
+    
+    protected void setDescription(String description) {
+        this.description = description;
+    }
 
+    @ManyToMany(mappedBy = "permissions")
+    protected List<RoleEntity> getRoles() {
+        return roles;
+    }
+    
+    protected void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
+    }
 }

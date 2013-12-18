@@ -26,7 +26,7 @@ public interface AccountRepository {
 
     void insertAccount(Account account);
     
-    AccountImpl getAccountByUsername(String username);
+    AccountEntity getAccountByUsername(String username);
     
-    List<PermissionImpl> getPermissionsByAccount(Account account);
+    List<PermissionEntity> getPermissionsByAccount(Account account);
 }

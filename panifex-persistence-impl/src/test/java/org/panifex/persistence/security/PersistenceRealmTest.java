@@ -24,7 +24,7 @@ import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.panifex.platform.persistence.security.AccountImpl;
+import org.panifex.platform.persistence.security.AccountEntity;
 import org.panifex.platform.persistence.security.AccountRepository;
 import org.panifex.platform.persistence.security.PersistenceRealm;
 
@@ -51,7 +51,7 @@ public final class PersistenceRealmTest {
     @Test
     public void authentificationTest() {
         // create mocks
-        AccountImpl accountMock = EasyMock.createMock(AccountImpl.class);
+        AccountEntity accountMock = EasyMock.createMock(AccountEntity.class);
         UsernamePasswordToken tokenMock = EasyMock.createMock(UsernamePasswordToken.class);
         
         // username

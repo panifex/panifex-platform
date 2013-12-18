@@ -30,52 +30,77 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
-import org.panifex.platform.api.security.Role;
+import org.panifex.platform.api.security.Account;
 
 @Entity
-@StaticMetamodel(RoleImpl.class)
-@Table(name = "sec_role")
-public class RoleImpl implements Role, Serializable {
+@StaticMetamodel(AccountEntity_.class)
+@Table(name = "sec_account")
+public class AccountEntity implements Account, Serializable {
 
     /**
      * Serial version UID
      */
-    private static final long serialVersionUID = 5331116346234332898L;
+    private static final long serialVersionUID = 6039053761668790089L;
 
-    @Id
-    @Column(name = "role_id", nullable = false)
     private Long id;
     
-    @Column(name = "name", nullable = false)
-    private String name;
+    private String username;
     
-    @Column(name = "description", nullable = false)
-    private String description;
+    private String password;
 
-    @ManyToMany
-    @JoinTable(
-        name = "sec_role_permission",
-        joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")},
-        inverseJoinColumns = {@JoinColumn(name = "permission_id", referencedColumnName = "permission_id")})
-    private List<PermissionImpl> permissions;
+    private String passwordSalt;
     
-    @ManyToMany(mappedBy = "roles")
-    private List<AccountImpl> accounts;
+    private List<RoleEntity> roles;
     
+    @Id
+    @Column(name = "account_id", nullable = false)
     @Override
     public Long getId() {
         return id;
     }
 
-    @Override
-    public String getName() {
-        return name;
+    protected void setId(Long id) {
+        this.id = id;
     }
 
+    @Column(name = "username", nullable = false, unique = true)
     @Override
-    public String getDescription() {
-        return description;
+    public String getUsername() {
+        return username;
+    }
+
+    protected void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Column(name = "password", nullable = false)
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    protected void setPassword(String password) {
+        this.password = password;
     }
     
+    @Column(name = "password_salt", nullable = false)
+    public String getPasswordSalt() {
+        return passwordSalt;
+    }
     
+    protected void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
+    }
+    
+    @ManyToMany
+    @JoinTable(name = "sec_account_role",
+    joinColumns = {@JoinColumn(name = "account_id")},
+    inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    protected List<RoleEntity> getRoles() {
+        return roles;
+    }
+    
+    protected void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
+    }
 }
