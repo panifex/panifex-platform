@@ -22,6 +22,8 @@ import org.apache.shiro.SecurityUtils;
 
 public abstract class AbstractMenuItem implements MenuItem {
 
+    private static final String DEFAULT_WILDCARD_PERMISSION_EXPRESSION = "user";
+    
     private final String id;
     private final String parentId;
     private String label;
@@ -45,7 +47,7 @@ public abstract class AbstractMenuItem implements MenuItem {
             String id, 
             String parentId, 
             int priority) {
-        this(id, parentId, priority, "*");
+        this(id, parentId, priority, DEFAULT_WILDCARD_PERMISSION_EXPRESSION);
     }
     
     protected AbstractMenuItem(
@@ -56,7 +58,11 @@ public abstract class AbstractMenuItem implements MenuItem {
         this.id = id;
         this.parentId = (parentId != null) ? parentId : "";
         this.priority = priority;
-        this.wildcardPermissionExpression = wildcardPermissionExpression;
+        if (wildcardPermissionExpression != null) {
+            this.wildcardPermissionExpression = wildcardPermissionExpression;
+        } else {
+            this.wildcardPermissionExpression = DEFAULT_WILDCARD_PERMISSION_EXPRESSION;
+        }
     }
     
     @Override
