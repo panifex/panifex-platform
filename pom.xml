@@ -619,6 +619,12 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
+                <artifactId>panifex-test-support</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
