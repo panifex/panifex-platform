@@ -71,11 +71,6 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-ehcache</artifactId>
         </dependency>
-        <!-- ASM Depedencies -->
-        <dependency>
-            <groupId>asm</groupId>
-            <artifactId>asm-all</artifactId>
-        </dependency>
         <!-- Liquibase Dependencies -->
         <dependency>
             <groupId>org.liquibase</groupId>
@@ -93,9 +88,8 @@
         </dependency>
         <!-- Testing Dependencies -->
         <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <scope>test</scope>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-test-support</artifactId>
         </dependency>
     </dependencies>
 
