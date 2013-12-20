@@ -61,6 +61,7 @@
     <modules>
         <module>poms</module>
         <module>provision</module>
+        <module>panifex-test-support</module>
         <module>panifex-module-api</module>
         <module>panifex-service-api</module>
         <module>panifex-service-impl</module>
