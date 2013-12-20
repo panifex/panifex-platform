@@ -34,11 +34,11 @@ import org.apache.openjpa.conf.OpenJPAConfiguration;
 import org.apache.openjpa.persistence.OpenJPAEntityManagerFactorySPI;
 import org.apache.openjpa.persistence.OpenJPAPersistence;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.panifex.test.support.TestSupport;
 
-public final class AccountRepositoryImplTest {
+public final class AccountRepositoryImplTest extends TestSupport {
 
     private static final String USERNAME = "admin";
     
@@ -76,7 +76,7 @@ public final class AccountRepositoryImplTest {
         AccountEntity account = accountRepository.getAccountByUsername(USERNAME);
         
         // assert must be admin
-        Assert.assertNotNull(account);
-        Assert.assertEquals(USERNAME, account.getUsername());
+        assertNotNull(account);
+        assertEquals(USERNAME, account.getUsername());
     }
 }

@@ -21,11 +21,11 @@ package org.panifex.persistence.security;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.easymock.EasyMock;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.panifex.test.support.TestSupport;
 
-public final class PersistenceRealmTest {
+public final class PersistenceRealmTest extends TestSupport {
 
     private PersistenceRealm realm;
     
@@ -71,7 +71,7 @@ public final class PersistenceRealmTest {
         EasyMock.verify(accountMock, accountRepositoryMock, tokenMock);
         
         
-        Assert.assertNotNull(info);
+        assertNotNull(info);
     }
     
 }

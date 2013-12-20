@@ -21,11 +21,11 @@ package org.panifex.persistence.security;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.easymock.EasyMock;
-import org.junit.Assert;
 import org.junit.Test;
 import org.panifex.platform.api.security.Account;
+import org.panifex.test.support.TestSupport;
 
-public final class AccountImplBuilderTest {
+public final class AccountImplBuilderTest extends TestSupport {
 
     @Test
     public void buildAccountTest() {
@@ -49,14 +49,14 @@ public final class AccountImplBuilderTest {
         EasyMock.verify(accountMock);
         
         // asserts
-        Assert.assertEquals(username, buildedAccount.getUsername());
+        assertEquals(username, buildedAccount.getUsername());
         
         // check password
         String passwordSalt = buildedAccount.getPasswordSalt();
-        Assert.assertNotNull(passwordSalt);
+        assertNotNull(passwordSalt);
         byte[] salt = Base64.decode(passwordSalt);
         String hashedPasswordBase64 = new SimpleHash(PersistenceRealm.HASH_ALGORITHM, plainTextPassword, salt, PersistenceRealm.HASH_ITERATIONS).toBase64();
-        Assert.assertEquals(hashedPasswordBase64, buildedAccount.getPassword());
+        assertEquals(hashedPasswordBase64, buildedAccount.getPassword());
 
     }
 }
