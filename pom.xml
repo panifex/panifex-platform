@@ -493,6 +493,11 @@
             </dependency>
             <!-- Database Connectors Dependencies -->
             <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+            <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>com.springsource.org.postgresql.jdbc4</artifactId>
                 <version>8.3.604</version>

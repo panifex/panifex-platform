@@ -18,6 +18,61 @@
  ******************************************************************************/
 package org.panifex.persistence.security;
 
-public class AccountRepositoryImplTest {
+import java.sql.Connection;
+import java.sql.SQLException;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.sql.DataSource;
+
+import liquibase.Liquibase;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.LiquibaseException;
+import liquibase.resource.FileSystemResourceAccessor;
+
+import org.apache.openjpa.conf.OpenJPAConfiguration;
+import org.apache.openjpa.persistence.OpenJPAEntityManagerFactorySPI;
+import org.apache.openjpa.persistence.OpenJPAPersistence;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.panifex.platform.persistence.security.AccountEntity;
+import org.panifex.platform.persistence.security.AccountRepositoryImpl;
+
+public final class AccountRepositoryImplTest {
+
+    private static final String USERNAME = "admin";
+    
+    private EntityManagerFactory entityManagerFactory;
+    private AccountRepositoryImpl accountRepository;
+    
+    @Before
+    public void setUp() throws SQLException, LiquibaseException {
+        entityManagerFactory = Persistence.createEntityManagerFactory("panifex");
+        
+        OpenJPAEntityManagerFactorySPI kemf = (OpenJPAEntityManagerFactorySPI) OpenJPAPersistence.cast(entityManagerFactory);
+        OpenJPAConfiguration conf = kemf.getConfiguration();
+        DataSource dataSource = (DataSource) conf.getConnectionFactory();
+        Connection conn = dataSource.getConnection();
+        Liquibase liquibase = new Liquibase("src/main/resources/db-changelog/db.changelog-master.xml", new FileSystemResourceAccessor(), new JdbcConnection(conn));
+        liquibase.update(null);
+        
+        accountRepository = new AccountRepositoryImpl();
+        accountRepository.bind(entityManagerFactory);
+    }
+    
+    @After
+    public void after() {
+        accountRepository.unbind(entityManagerFactory);
+    }
+    
+    @Test
+    public void getAccountByUsernameTest() {
+        AccountEntity account = accountRepository.getAccountByUsername(USERNAME);
+        
+        // assert must be admin
+        Assert.assertNotNull(account);
+        Assert.assertEquals(USERNAME, account.getUsername());
+    }
 }
