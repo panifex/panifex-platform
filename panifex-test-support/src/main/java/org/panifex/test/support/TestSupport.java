@@ -29,7 +29,7 @@ import org.junit.internal.ArrayComparisonFailure;
  * to {@link org.junit.Assert} class. 
  *
  */
-public abstract class TestCase {
+public abstract class TestSupport {
 
     /**
      * Asserts that a condition is true. If it isn't it throws an
