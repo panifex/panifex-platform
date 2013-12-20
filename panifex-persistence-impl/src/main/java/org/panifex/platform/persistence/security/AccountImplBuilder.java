@@ -57,10 +57,11 @@ public final class AccountImplBuilder {
     }
     
     public AccountEntity build() {
-        AccountEntity account = new AccountEntity();
-        account.setUsername(username);
-        account.setPassword(password);
-        account.setPasswordSalt(passwordSalt);
+        AccountEntity account = new AccountEntity(
+            username,
+            password,
+            passwordSalt);
+        
         return account;
     }
 }

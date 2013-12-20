@@ -52,13 +52,22 @@ public class AccountEntity implements Account, Serializable {
     
     private List<RoleEntity> roles;
     
+    public AccountEntity(
+            String username,
+            String password,
+            String passwordSalt) {
+        this.username = username;
+        this.password = password;
+        this.passwordSalt = passwordSalt;
+    }
+    
     @Id
     @Column(name = "account_id", nullable = false)
     @Override
     public Long getId() {
         return id;
     }
-
+    
     protected void setId(Long id) {
         this.id = id;
     }
@@ -72,7 +81,7 @@ public class AccountEntity implements Account, Serializable {
     protected void setUsername(String username) {
         this.username = username;
     }
-
+    
     @Column(name = "password", nullable = false)
     @Override
     public String getPassword() {
