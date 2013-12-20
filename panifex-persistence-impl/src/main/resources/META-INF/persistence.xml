@@ -25,9 +25,9 @@
 		<jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/PanifexDataSource)</jta-data-source>
 		<!-- <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/NoTxPanifexDataSource)</non-jta-data-source> -->
 
-		<class>org.panifex.platform.persistence.security.AccountEntity</class>
-        <class>org.panifex.platform.persistence.security.RoleEntity</class>
-        <class>org.panifex.platform.persistence.security.PermissionEntity</class>
+		<class>org.panifex.persistence.security.AccountEntity</class>
+        <class>org.panifex.persistence.security.RoleEntity</class>
+        <class>org.panifex.persistence.security.PermissionEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="openjpa.DynamicEnhancementAgent" value="false"/> 

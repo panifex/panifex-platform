@@ -24,9 +24,6 @@ import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Test;
 import org.panifex.platform.api.security.Account;
-import org.panifex.platform.persistence.security.AccountEntity;
-import org.panifex.platform.persistence.security.AccountImplBuilder;
-import org.panifex.platform.persistence.security.PersistenceRealm;
 
 public final class AccountImplBuilderTest {
 

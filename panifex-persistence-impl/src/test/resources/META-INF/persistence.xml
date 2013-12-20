@@ -23,9 +23,9 @@
 	<persistence-unit name="panifex" transaction-type="RESOURCE_LOCAL">
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
 
-		<class>org.panifex.platform.persistence.security.AccountEntity</class>
-        <class>org.panifex.platform.persistence.security.RoleEntity</class>
-        <class>org.panifex.platform.persistence.security.PermissionEntity</class>
+		<class>org.panifex.persistence.security.AccountEntity</class>
+        <class>org.panifex.persistence.security.RoleEntity</class>
+        <class>org.panifex.persistence.security.PermissionEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         
         <properties>

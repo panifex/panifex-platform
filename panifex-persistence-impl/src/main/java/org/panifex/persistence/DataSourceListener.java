@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.persistence;
+package org.panifex.persistence;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -37,7 +37,7 @@ import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
 import org.osgi.framework.BundleContext;
-import org.panifex.platform.persistence.resource.BundleResourceAccessor;
+import org.panifex.persistence.resource.BundleResourceAccessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

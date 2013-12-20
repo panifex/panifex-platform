@@ -37,8 +37,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.panifex.platform.persistence.security.AccountEntity;
-import org.panifex.platform.persistence.security.AccountRepositoryImpl;
 
 public final class AccountRepositoryImplTest {
 
@@ -67,6 +65,12 @@ public final class AccountRepositoryImplTest {
         accountRepository.unbind(entityManagerFactory);
     }
     
+    /**
+     * This test checks if the admin user is inserted to initial database created by liquibase scripts.
+     * The test also checks functionality of AccountRepository.getAccountByUsername method
+     * 
+     * Admin user must be found.
+     */
     @Test
     public void getAccountByUsernameTest() {
         AccountEntity account = accountRepository.getAccountByUsername(USERNAME);

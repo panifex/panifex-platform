@@ -17,6 +17,9 @@
 
 Bundle-Blueprint-Annotation: true
 
+# Bundle does not export anything
+Export-Package:
+
 Import-Package: \
 	javax.sql, \
 	javax.naming, \
@@ -56,4 +59,4 @@ Import-Package: \
 	
 Meta-Persistence: META-INF/persistence.xml
 
-Private-Package: org.panifex.platform.persistence.*
+Private-Package: org.panifex.persistence.*

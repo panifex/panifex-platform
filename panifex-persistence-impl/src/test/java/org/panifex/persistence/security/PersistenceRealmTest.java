@@ -24,9 +24,6 @@ import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.panifex.platform.persistence.security.AccountEntity;
-import org.panifex.platform.persistence.security.AccountRepository;
-import org.panifex.platform.persistence.security.PersistenceRealm;
 
 public final class PersistenceRealmTest {
 

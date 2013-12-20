@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.persistence.security;
+package org.panifex.persistence.security;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,45 +24,34 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
-import org.panifex.platform.api.security.Account;
+import org.panifex.platform.api.security.Permission;
 
 @Entity
-@StaticMetamodel(AccountEntity_.class)
-@Table(name = "sec_account")
-public class AccountEntity implements Account, Serializable {
+@StaticMetamodel(PermissionEntity_.class)
+@Table(name = "sec_permission")
+public class PermissionEntity implements Permission, Serializable {
 
     /**
-     * Serial version UID
+     * Serial version id
      */
-    private static final long serialVersionUID = 6039053761668790089L;
+    private static final long serialVersionUID = -4258555983967199451L;
 
     private Long id;
     
-    private String username;
+    private String name;
     
-    private String password;
-
-    private String passwordSalt;
+    private String wildcardExpression;
+    
+    private String description;
     
     private List<RoleEntity> roles;
     
-    public AccountEntity(
-            String username,
-            String password,
-            String passwordSalt) {
-        this.username = username;
-        this.password = password;
-        this.passwordSalt = passwordSalt;
-    }
-    
     @Id
-    @Column(name = "account_id", nullable = false)
+    @Column(name = "permission_id", nullable = false)
     @Override
     public Long getId() {
         return id;
@@ -72,39 +61,37 @@ public class AccountEntity implements Account, Serializable {
         this.id = id;
     }
 
-    @Column(name = "username", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     @Override
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
+    }
+    
+    protected void setName(String name) {
+        this.name = name;
     }
 
-    protected void setUsername(String username) {
-        this.username = username;
+    @Column(name = "wildcard_expression", nullable = false)
+    @Override
+    public String getWildcardExpression() {
+        return wildcardExpression;
     }
     
-    @Column(name = "password", nullable = false)
+    protected void setWildcardExpression(String wildcardExpression) {
+        this.wildcardExpression = wildcardExpression;
+    }
+    
+    @Column(name = "description", nullable = false)
     @Override
-    public String getPassword() {
-        return password;
+    public String getDescription() {
+        return description;
+    }
+    
+    protected void setDescription(String description) {
+        this.description = description;
     }
 
-    protected void setPassword(String password) {
-        this.password = password;
-    }
-    
-    @Column(name = "password_salt", nullable = false)
-    public String getPasswordSalt() {
-        return passwordSalt;
-    }
-    
-    protected void setPasswordSalt(String passwordSalt) {
-        this.passwordSalt = passwordSalt;
-    }
-    
-    @ManyToMany
-    @JoinTable(name = "sec_account_role",
-    joinColumns = {@JoinColumn(name = "account_id")},
-    inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    @ManyToMany(mappedBy = "permissions")
     protected List<RoleEntity> getRoles() {
         return roles;
     }

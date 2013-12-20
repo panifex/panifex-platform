@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
 
-package org.panifex.platform.persistence.security;
+package org.panifex.persistence.security;
 
 import java.io.Serializable;
 import java.util.List;
