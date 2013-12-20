@@ -22,7 +22,7 @@ import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.easymock.EasyMock;
 import org.junit.Test;
-import org.panifex.platform.api.security.Account;
+import org.panifex.service.api.security.Account;
 import org.panifex.test.support.TestSupport;
 
 public final class AccountImplBuilderTest extends TestSupport {

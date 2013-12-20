@@ -43,7 +43,7 @@ import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.panifex.platform.api.security.SecurityService;
+import org.panifex.service.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

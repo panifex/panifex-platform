@@ -25,7 +25,7 @@ import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.easymock.EasyMock;
 import org.junit.Test;
-import org.panifex.platform.api.security.SecurityService;
+import org.panifex.service.api.security.SecurityService;
 
 /**
  * Tests binding and unbinding security filters to SecurityFilterListener

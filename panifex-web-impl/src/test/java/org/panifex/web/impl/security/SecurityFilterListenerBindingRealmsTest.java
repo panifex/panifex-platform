@@ -20,7 +20,7 @@ package org.panifex.web.impl.security;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
-import org.panifex.platform.api.security.SecurityService;
+import org.panifex.service.api.security.SecurityService;
 
 /**
  * Tests binding and unbinding realms to SecurityFilterListener

@@ -30,7 +30,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
-import org.panifex.platform.api.security.Account;
+import org.panifex.service.api.security.Account;
 
 @Entity
 @StaticMetamodel(AccountEntity_.class)

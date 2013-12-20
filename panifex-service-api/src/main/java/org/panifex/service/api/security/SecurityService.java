@@ -16,13 +16,11 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.api.security;
+package org.panifex.service.api.security;
 
-import org.panifex.platform.api.Entity;
+import org.apache.shiro.authz.Authorizer;
+import org.apache.shiro.realm.Realm;
 
-public interface Account extends Entity {
+public interface SecurityService extends Authorizer, Realm {
 
-    String getUsername();
-
-    String getPassword();
 }

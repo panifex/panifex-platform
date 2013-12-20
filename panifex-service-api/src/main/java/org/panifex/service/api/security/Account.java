@@ -16,29 +16,13 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.api.security;
+package org.panifex.service.api.security;
 
-import org.panifex.platform.api.Entity;
+import org.panifex.service.api.Entity;
 
-/**
- * User's role.
- * 
- * <p>Role contains permissions which allows users to perform some actions.
- * 
- */
-public interface Role extends Entity {
+public interface Account extends Entity {
 
-    /**
-     * Returns role's name. It must be unique.
-     * 
-     * @return role's name
-     */
-    String getName();
-    
-    /**
-     * Returns role's description.
-     * 
-     * @return role's description
-     */
-    String getDescription();
+    String getUsername();
+
+    String getPassword();
 }

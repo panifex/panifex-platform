@@ -22,7 +22,7 @@ import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.panifex.platform.api.security.Account;
+import org.panifex.service.api.security.Account;
 
 public final class AccountImplBuilder {
 

@@ -20,7 +20,7 @@ package org.panifex.persistence.security;
 
 import java.util.List;
 
-import org.panifex.platform.api.security.Account;
+import org.panifex.service.api.security.Account;
 
 public interface AccountRepository {
 

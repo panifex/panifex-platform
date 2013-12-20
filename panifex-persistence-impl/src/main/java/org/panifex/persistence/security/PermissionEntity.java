@@ -28,7 +28,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
-import org.panifex.platform.api.security.Permission;
+import org.panifex.service.api.security.Permission;
 
 @Entity
 @StaticMetamodel(PermissionEntity_.class)

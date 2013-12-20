@@ -30,7 +30,7 @@ import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.panifex.platform.api.security.SecurityService;
+import org.panifex.service.api.security.SecurityService;
 import org.panifex.web.impl.WebContainerListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

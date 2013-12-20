@@ -16,11 +16,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.api.security;
+package org.panifex.service.api;
 
-import org.apache.shiro.authz.Authorizer;
-import org.apache.shiro.realm.Realm;
+public interface Entity {
 
-public interface SecurityService extends Authorizer, Realm {
-
+    Long getId();
 }

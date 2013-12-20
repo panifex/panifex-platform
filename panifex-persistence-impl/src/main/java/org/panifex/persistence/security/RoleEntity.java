@@ -31,7 +31,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
-import org.panifex.platform.api.security.Role;
+import org.panifex.service.api.security.Role;
 
 @Entity
 @StaticMetamodel(RoleEntity_.class)

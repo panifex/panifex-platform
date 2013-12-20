@@ -16,35 +16,29 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.platform.api.security;
+package org.panifex.service.api.security;
 
-import org.panifex.platform.api.Entity;
+import org.panifex.service.api.Entity;
 
 /**
- * Permission identifies action which can be perfomed by user.
- *
+ * User's role.
+ * 
+ * <p>Role contains permissions which allows users to perform some actions.
+ * 
  */
-public interface Permission extends Entity {
+public interface Role extends Entity {
 
     /**
-     * Returns permission's name. It must be unique.
+     * Returns role's name. It must be unique.
      * 
-     * @return permission's name
+     * @return role's name
      */
     String getName();
-
-    /**
-     * Returns permission's wildcard expression.
-     * 
-     * @return wildcard expression 
-     */
-    String getWildcardExpression();
     
     /**
-     * Returns permission's description.
+     * Returns role's description.
      * 
-     * @return permission's description
+     * @return role's description
      */
-    String getDescription(); 
-
+    String getDescription();
 }
