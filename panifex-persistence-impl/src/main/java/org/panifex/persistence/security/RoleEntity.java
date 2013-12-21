@@ -102,7 +102,7 @@ public class RoleEntity implements Role, Serializable {
     }
     
     protected void setPermissions(List<PermissionEntity> permissions) {
-        this.setPermissions(permissions);
+        this.permissions = permissions;
     }
     
 }
