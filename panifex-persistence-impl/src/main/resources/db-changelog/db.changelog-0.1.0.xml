@@ -186,4 +186,30 @@
         </insert>
     </changeSet>
 
+    <changeSet id="0.1.0-16" author="mariokr">
+        <comment>Insert administrator role</comment>
+        <insert tableName="sec_role">
+            <column name="name">Administrator</column>
+            <column name="description">Application administrator</column>
+        </insert>
+    </changeSet>
+    
+    <changeSet id="0.1.0-17" author="mariokr">
+        <comment>Assign administrator role to admin user</comment>
+        <sql>insert into sec_account_role (account_id, role_id) select sec_account.account_id, sec_role.role_id from sec_account, sec_role where sec_account.username='admin' and sec_role.name='Administrator'</sql>
+    </changeSet>
+    
+    <changeSet id="0.1.0-18" author="mariokr">
+        <comment>Insert user permission</comment>
+        <insert tableName="sec_permission">
+            <column name="name">User</column>
+            <column name="wildcard_expression">user</column>
+            <column name="description">Basic user permission. All users must have that permission.</column>
+        </insert>
+    </changeSet>
+    
+    <changeSet id="0.1.0-19" author="mariokr">
+        <comment>Assign user permission to administration role</comment>
+        <sql>insert into sec_role_permission (role_id, permission_id) select sec_role.role_id, sec_permission.permission_id from sec_role, sec_permission where sec_role.name='Administrator' and sec_permission.name='User'</sql>
+    </changeSet>
 </databaseChangeLog>

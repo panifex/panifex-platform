@@ -20,6 +20,7 @@ package org.panifex.persistence.security;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -38,9 +39,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.panifex.test.support.TestSupport;
 
+/**
+ * Test cases for {@link AccountRepositoryImpl} class. 
+ *
+ */
 public final class AccountRepositoryImplTest extends TestSupport {
 
-    private static final String USERNAME = "admin";
+    private static final String ADMIN_USERNAME = "admin";
+    private static final String ADMINISTRATOR_ROLE = "Administrator";
+    private static final String USER_PERMISSION = "user";
     
     private EntityManagerFactory entityManagerFactory;
     private AccountRepositoryImpl accountRepository;
@@ -67,16 +74,63 @@ public final class AccountRepositoryImplTest extends TestSupport {
     
     /**
      * This test checks if the admin user is inserted to initial database created by liquibase scripts.
-     * The test also checks functionality of AccountRepository.getAccountByUsername method
      * 
-     * Admin user must be found.
+     * <p>The test also checks functionality of {@link AccountRepositoryImpl#getAccountByUsername(String)} method.
+     * 
+     * <p>Admin user must be found.
      */
     @Test
     public void getAccountByUsernameTest() {
-        AccountEntity account = accountRepository.getAccountByUsername(USERNAME);
+        AccountEntity account = accountRepository.getAccountByUsername(ADMIN_USERNAME);
         
-        // assert must be admin
+        // must be admin
         assertNotNull(account);
-        assertEquals(USERNAME, account.getUsername());
+        assertEquals(ADMIN_USERNAME, account.getUsername());
+    }
+    
+    /**
+     * This test checks if the admin user has administrator role. The administrator role must be
+     * inserted by liquibase scripts.
+     * 
+     * <p>The test also checks functionality of {@link AccountRepositoryImpl#getRolesForAccount(org.panifex.service.api.security.Account)} 
+     * method.
+     */
+    @Test
+    public void getRolesForAccountTest() {
+        // get admin account
+        AccountEntity adminAccount = accountRepository.getAccountByUsername(ADMIN_USERNAME);
+        
+        // must be admin
+        assertEquals(ADMIN_USERNAME, adminAccount.getUsername());
+        
+        // get admin's roles
+        List<RoleEntity> roles = accountRepository.getRolesForAccount(adminAccount);
+        
+        // check if admin user has administration role
+        assertNotNull(roles);
+        assertEquals(ADMINISTRATOR_ROLE, roles.get(0).getName());
+    }
+    
+    /**
+     * This test checks if the admin user has user permission. The user permission must be inserted
+     * by liquibase scripts.
+     * 
+     * <p>The test also checks functionality of {@link AccountRepositoryImpl#getPermissionsByAccount(org.panifex.service.api.security.Account)}
+     * method.
+     */
+    @Test
+    public void getPermissionsForAccountTest() {
+        // get admin account
+        AccountEntity adminAccount = accountRepository.getAccountByUsername(ADMIN_USERNAME);
+        
+        // must be admin
+        assertEquals(ADMIN_USERNAME, adminAccount.getUsername());
+        
+        // get admin's permissions
+        List<PermissionEntity> permissions = accountRepository.getPermissionsByAccount(adminAccount);
+        
+        // check if admin user has user permission
+        assertNotNull(permissions);
+        assertEquals(USER_PERMISSION, permissions.get(0).getWildcardExpression());
     }
 }

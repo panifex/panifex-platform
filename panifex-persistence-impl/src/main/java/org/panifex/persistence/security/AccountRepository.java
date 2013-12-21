@@ -22,6 +22,10 @@ import java.util.List;
 
 import org.panifex.service.api.security.Account;
 
+/**
+ * Repository of {@link AccountEntity}.
+ *
+ */
 public interface AccountRepository {
 
     void insertAccount(Account account);
@@ -29,4 +33,14 @@ public interface AccountRepository {
     AccountEntity getAccountByUsername(String username);
     
     List<PermissionEntity> getPermissionsByAccount(Account account);
+    
+    /**
+     * Returns a distinct list of {@link RoleEntity} for specified account.
+     * 
+     * <p>If the account does not have any role, than the empty list is returned.
+     * 
+     * @param account the account whose roles will be returned
+     * @return a distinct list of {@link RoleEntity} for specified account
+     */
+    List<RoleEntity> getRolesForAccount(Account account);
 }

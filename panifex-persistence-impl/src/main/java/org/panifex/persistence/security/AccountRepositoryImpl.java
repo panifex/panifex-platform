@@ -115,6 +115,36 @@ public class AccountRepositoryImpl implements AccountRepository {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<RoleEntity> getRolesForAccount(Account account) {
+        log.debug("Get roles by account: {}", account);
+        
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<RoleEntity> cq = cb.createQuery(RoleEntity.class);
+        
+        // select from role
+        Root<RoleEntity> role = cq.from(RoleEntity.class);
+        
+        // join account
+        Join<RoleEntity, AccountEntity> accounts = role.join(RoleEntity_.accounts);
+        
+        // where account = ?
+        cq.where(cb.equal(accounts.get(AccountEntity_.id), account.getId()));
+        
+        // distinct
+        cq.distinct(true);
+        cq.select(role);
+        
+        // execute query
+        TypedQuery<RoleEntity> q = entityManager.createQuery(cq);
+        List<RoleEntity> roles = q.getResultList();
+        
+        return roles;
+    }
+    
     @Override
     public List<PermissionEntity> getPermissionsByAccount(Account account) {
         log.debug("Get permission by account: {}", account);
