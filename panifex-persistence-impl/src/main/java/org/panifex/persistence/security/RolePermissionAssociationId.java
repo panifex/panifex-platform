@@ -49,6 +49,7 @@ public class RolePermissionAssociationId implements Serializable {
         this.permissionId = permissionId;
     }
     
+    @Override
     public int hashCode() {
         return new HashCodeBuilder(5, 67).
                 append(roleId).
@@ -56,6 +57,7 @@ public class RolePermissionAssociationId implements Serializable {
                 toHashCode();
     }
 
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;

@@ -49,6 +49,7 @@ public class AccountRoleAssociationId implements Serializable {
         this.roleId = roleId;
     }
     
+    @Override
     public int hashCode() {
         return new HashCodeBuilder(5, 67).
                 append(accountId).
@@ -56,6 +57,7 @@ public class AccountRoleAssociationId implements Serializable {
                 toHashCode();
     }
 
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
