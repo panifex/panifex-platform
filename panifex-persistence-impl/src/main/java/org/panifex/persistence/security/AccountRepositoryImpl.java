@@ -133,14 +133,13 @@ public class AccountRepositoryImpl implements AccountRepository {
         // select from role
         Root<RoleEntity> role = cq.from(RoleEntity.class);
         cq.from(AccountRoleAssociationEntity.class);
+        cq.from(AccountEntity.class);
         
         // join account
         Join<RoleEntity, AccountRoleAssociationEntity> accountRoleAssociation =
                 role.join(RoleEntity_.accountRoleAssociations);
         Join<AccountRoleAssociationEntity, AccountEntity> accounts = 
                 accountRoleAssociation.join(AccountRoleAssociationEntity_.account);
-        //Join<AccountRoleAssociationEntityId, AccountEntity> accounts =
-        //        accountRoleAssociationId.join(AccountRoleAssociationEntityId_.)
         
         // where account = ?
         cq.where(cb.equal(accounts.get(AccountEntity_.id), account.getId()));
@@ -173,6 +172,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         cq.from(AccountRoleAssociationEntity.class);
         cq.from(RolePermissionAssociationEntity.class);
         cq.from(RoleEntity.class);
+        cq.from(AccountEntity.class);
         
         // join role
         Join<PermissionEntity, RolePermissionAssociationEntity> rolePermission = 
