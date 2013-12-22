@@ -732,25 +732,21 @@
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zk</artifactId>
                 <version>${zk.framework.version}</version>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zkbind</artifactId>
                 <version>${zk.framework.version}</version>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zhtml</artifactId>
                 <version>${zk.framework.version}</version>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zkex</artifactId>
                 <version>${zk.framework.version}</version>
-                <scope>compile</scope>
                 <exclusions>
                     <exclusion>
                         <groupId>net.sf.jasperreports</groupId>
@@ -762,13 +758,11 @@
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zkmax</artifactId>
                 <version>${zk.framework.version}</version>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zul</artifactId>
                 <version>${zk.framework.version}</version>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.zkoss.zkforge.el</groupId>
@@ -779,7 +773,6 @@
                 <groupId>org.zkoss.common</groupId>
                 <artifactId>zcommon</artifactId>
                 <version>${zk.framework.version}</version>
-                <scope>compile</scope>
                 <exclusions>
                     <exclusion>
                         <groupId>commons-fileupload</groupId>
@@ -799,13 +792,11 @@
                 <groupId>org.zkoss.common</groupId>
                 <artifactId>zel</artifactId>
                 <version>${zk.framework.version}</version>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.zkoss.common</groupId>
                 <artifactId>zweb</artifactId>
                 <version>${zk.framework.version}</version>
-                <scope>compile</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

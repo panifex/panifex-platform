@@ -123,17 +123,14 @@
         <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zhtml</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zkmax</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zul</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.zkoss.common</groupId>
