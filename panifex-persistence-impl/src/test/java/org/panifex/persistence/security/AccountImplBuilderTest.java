@@ -20,7 +20,6 @@ package org.panifex.persistence.security;
 
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.easymock.EasyMock;
 import org.junit.Test;
 import org.panifex.service.api.security.Account;
 import org.panifex.test.support.TestSupport;
@@ -30,23 +29,23 @@ public final class AccountImplBuilderTest extends TestSupport {
     @Test
     public void buildAccountTest() {
         // create mocks
-        Account accountMock = EasyMock.createMock(Account.class);
+        Account accountMock = createMock(Account.class);
         
         // username
         final String username = "admin";
-        EasyMock.expect(accountMock.getUsername()).andReturn(username);
+        expect(accountMock.getUsername()).andReturn(username);
         
         // password
         final String plainTextPassword = "admin";
-        EasyMock.expect(accountMock.getPassword()).andReturn(plainTextPassword);
+        expect(accountMock.getPassword()).andReturn(plainTextPassword);
         
-        EasyMock.replay(accountMock);
+        replay(accountMock);
         
         // build account impl
         AccountImplBuilder builder = new AccountImplBuilder(accountMock);
         AccountEntity buildedAccount = builder.build();
         
-        EasyMock.verify(accountMock);
+        verify(accountMock);
         
         // asserts
         assertEquals(username, buildedAccount.getUsername());

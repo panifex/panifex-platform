@@ -20,7 +20,6 @@ package org.panifex.persistence.security;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.panifex.test.support.TestSupport;
@@ -35,7 +34,7 @@ public final class PersistenceRealmTest extends TestSupport {
     @Before
     public void before() {
         realm = new PersistenceRealm();
-        accountRepositoryMock = EasyMock.createMock(AccountRepositoryImpl.class);
+        accountRepositoryMock = createMock(AccountRepositoryImpl.class);
         realm.setAccountRepository(accountRepositoryMock);
     }
     
@@ -48,27 +47,27 @@ public final class PersistenceRealmTest extends TestSupport {
     @Test
     public void authentificationTest() {
         // create mocks
-        AccountEntity accountMock = EasyMock.createMock(AccountEntity.class);
-        UsernamePasswordToken tokenMock = EasyMock.createMock(UsernamePasswordToken.class);
+        AccountEntity accountMock = createMock(AccountEntity.class);
+        UsernamePasswordToken tokenMock = createMock(UsernamePasswordToken.class);
         
         // username
         String username = "admin";
-        EasyMock.expect(tokenMock.getUsername()).andReturn(username);
+        expect(tokenMock.getUsername()).andReturn(username);
         
         // password
         String password = "admin";
-        EasyMock.expect(tokenMock.getCredentials()).andReturn(password.toCharArray());
+        expect(tokenMock.getCredentials()).andReturn(password.toCharArray());
         
-        EasyMock.expect(accountRepositoryMock.getAccountByUsername(username)).andReturn(accountMock);
-        EasyMock.expect(accountMock.getPassword()).andReturn("lA2jtiWHI3Yp35rRL/50CzAvGvTVb2PsULtZ3GeKdtDwS8V54sUAQ3g7wF6KCT3wE9OMRXLtTQ/PLJjbEaF4yg==");
-        EasyMock.expect(accountMock.getPasswordSalt()).andReturn("1dfpY4vWFRtQIqOxejFVJg==");
+        expect(accountRepositoryMock.getAccountByUsername(username)).andReturn(accountMock);
+        expect(accountMock.getPassword()).andReturn("lA2jtiWHI3Yp35rRL/50CzAvGvTVb2PsULtZ3GeKdtDwS8V54sUAQ3g7wF6KCT3wE9OMRXLtTQ/PLJjbEaF4yg==");
+        expect(accountMock.getPasswordSalt()).andReturn("1dfpY4vWFRtQIqOxejFVJg==");
         
-        EasyMock.replay(accountMock, accountRepositoryMock, tokenMock);
+        replay(accountMock, accountRepositoryMock, tokenMock);
         
         // authenticate token
         AuthenticationInfo info = realm.getAuthenticationInfo(tokenMock);
         
-        EasyMock.verify(accountMock, accountRepositoryMock, tokenMock);
+        verify(accountMock, accountRepositoryMock, tokenMock);
         
         
         assertNotNull(info);
