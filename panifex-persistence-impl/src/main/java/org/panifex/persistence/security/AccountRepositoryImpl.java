@@ -171,10 +171,14 @@ public class AccountRepositoryImpl implements AccountRepository {
         
         // loads metamodel
         cq.from(AccountRoleAssociationEntity.class);
+        cq.from(RolePermissionAssociationEntity.class);
         cq.from(RoleEntity.class);
         
         // join role
-        Join<PermissionEntity, RoleEntity> roles = permission.join(PermissionEntity_.roles);
+        Join<PermissionEntity, RolePermissionAssociationEntity> rolePermission = 
+                permission.join(PermissionEntity_.rolePermissionAssociations);
+        Join<RolePermissionAssociationEntity, RoleEntity> roles = 
+                rolePermission.join(RolePermissionAssociationEntity_.role);
         Join<RoleEntity, AccountRoleAssociationEntity> accountRoleAssociation = 
                 roles.join(RoleEntity_.accountRoleAssociations);
         Join<AccountRoleAssociationEntity, AccountEntity> accounts =

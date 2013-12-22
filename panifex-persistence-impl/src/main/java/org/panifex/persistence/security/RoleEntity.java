@@ -24,9 +24,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
@@ -50,7 +47,7 @@ public class RoleEntity extends AbstractEntity implements Role, Serializable {
     
     private List<AccountRoleAssociationEntity> accountRoleAssociations;
     
-    private List<PermissionEntity> permissions;
+    private List<RolePermissionAssociationEntity> rolePermissionAssociations;
     
     @Column(name = "name", nullable = false, unique = true)
     @Override
@@ -81,16 +78,13 @@ public class RoleEntity extends AbstractEntity implements Role, Serializable {
         this.accountRoleAssociations = accountRoleAssociations;
     }
     
-    @ManyToMany
-    @JoinTable(name = "sec_role_permission",
-            joinColumns = {@JoinColumn(name = "role_id")},
-            inverseJoinColumns = {@JoinColumn(name = "permission_id")})
-    protected List<PermissionEntity> getPermissions() {
-        return permissions;
+    @OneToMany(mappedBy = "role")
+    protected List<RolePermissionAssociationEntity> getRolePermissionAssociations() {
+        return rolePermissionAssociations;
     }
     
-    protected void setPermissions(List<PermissionEntity> permissions) {
-        this.permissions = permissions;
+    protected void setRolePermissionAssociations(List<RolePermissionAssociationEntity> rolePermissionAssociations) {
+        this.rolePermissionAssociations = rolePermissionAssociations;
     }
     
 }

@@ -23,7 +23,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -46,7 +46,7 @@ public class PermissionEntity extends AbstractEntity implements Permission, Seri
     
     private String description;
     
-    private List<RoleEntity> roles;
+    private List<RolePermissionAssociationEntity> rolePermissionAssociations;
        
     @Column(name = "name", nullable = false, unique = true)
     @Override
@@ -78,12 +78,12 @@ public class PermissionEntity extends AbstractEntity implements Permission, Seri
         this.description = description;
     }
 
-    @ManyToMany(mappedBy = "permissions")
-    protected List<RoleEntity> getRoles() {
-        return roles;
+    @OneToMany(mappedBy = "permission")
+    protected List<RolePermissionAssociationEntity> getRolePermissionAssociations() {
+        return rolePermissionAssociations;
     }
     
-    protected void setRoles(List<RoleEntity> roles) {
-        this.roles = roles;
+    protected void setRolePermissionAssociations(List<RolePermissionAssociationEntity> rolePermissionAssociations) {
+        this.rolePermissionAssociations = rolePermissionAssociations;
     }
 }

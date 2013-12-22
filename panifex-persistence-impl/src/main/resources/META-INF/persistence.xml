@@ -29,6 +29,7 @@
 		<class>org.panifex.persistence.security.AccountEntity</class>
         <class>org.panifex.persistence.security.AccountRoleAssociationEntity</class>
         <class>org.panifex.persistence.security.RoleEntity</class>
+        <class>org.panifex.persistence.security.RolePermissionAssociationEntity</class>
         <class>org.panifex.persistence.security.PermissionEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
