@@ -25,7 +25,7 @@
 	<changeSet id="0.1.0-1" author="mariokr">
 		<comment>Creates table sec_account</comment>
 		<createTable tableName="sec_account">
-			<column name="account_id" type="int" autoIncrement="true">
+			<column name="id" type="int" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
             <column name="optlock_version" type="int">
@@ -54,7 +54,7 @@
     <changeSet id="0.1.0-3" author="mariokr">
         <comment>Creates table sec_role</comment>
         <createTable tableName="sec_role">
-            <column name="role_id" type="int" autoIncrement="true">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="optlock_version" type="int">
@@ -104,7 +104,7 @@
             baseTableName="sec_account_role"
             baseColumnNames="account_id"
             referencedTableName="sec_account"
-            referencedColumnNames="account_id" />
+            referencedColumnNames="id" />
     </changeSet>
     
     <changeSet id="0.1.0-8" author="mariokr">
@@ -114,13 +114,13 @@
             baseTableName="sec_account_role"
             baseColumnNames="role_id"
             referencedTableName="sec_role"
-            referencedColumnNames="role_id" />
+            referencedColumnNames="id" />
     </changeSet>
     
     <changeSet id="0.1.0-9" author="mariokr">
         <comment>Creates table sec_permission</comment>
         <createTable tableName="sec_permission">
-            <column name="permission_id" type="int" autoIncrement="true" >
+            <column name="id" type="int" autoIncrement="true" >
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="optlock_version" type="int">
@@ -173,7 +173,7 @@
             baseTableName="sec_role_permission"
             baseColumnNames="role_id" 
             referencedTableName="sec_role" 
-            referencedColumnNames="role_id" />
+            referencedColumnNames="id" />
     </changeSet>
     
     <changeSet id="0.1.0-14" author="mariokr">
@@ -183,7 +183,7 @@
             baseTableName="sec_role_permission"
             baseColumnNames="permission_id"
             referencedTableName="sec_permission"
-            referencedColumnNames="permission_id" />
+            referencedColumnNames="id" />
     </changeSet>
     
     <changeSet id="0.1.0-15" author="mariokr">
@@ -207,7 +207,7 @@
     
     <changeSet id="0.1.0-17" author="mariokr">
         <comment>Assigns administrator role to admin user</comment>
-        <sql>insert into sec_account_role (account_id, role_id) select sec_account.account_id, sec_role.role_id from sec_account, sec_role where sec_account.username='admin' and sec_role.name='Administrator'</sql>
+        <sql>insert into sec_account_role (account_id, role_id) select sec_account.id, sec_role.id from sec_account, sec_role where sec_account.username='admin' and sec_role.name='Administrator'</sql>
     </changeSet>
     
     <changeSet id="0.1.0-18" author="mariokr">
@@ -222,6 +222,6 @@
     
     <changeSet id="0.1.0-19" author="mariokr">
         <comment>Assigns user permission to administration role</comment>
-        <sql>insert into sec_role_permission (role_id, permission_id) select sec_role.role_id, sec_permission.permission_id from sec_role, sec_permission where sec_role.name='Administrator' and sec_permission.name='User'</sql>
+        <sql>insert into sec_role_permission (role_id, permission_id) select sec_role.id, sec_permission.id from sec_role, sec_permission where sec_role.name='Administrator' and sec_permission.name='User'</sql>
     </changeSet>
 </databaseChangeLog>

@@ -24,28 +24,24 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.persistence.metamodel.StaticMetamodel;
 
+import org.panifex.persistence.AbstractEntity;
 import org.panifex.service.api.security.Role;
 
 @Entity
 @StaticMetamodel(RoleEntity_.class)
 @Table(name = "sec_role")
-public class RoleEntity implements Role, Serializable {
+public class RoleEntity extends AbstractEntity implements Role, Serializable {
 
     /**
      * Serial version UID
      */
     private static final long serialVersionUID = 8260877176766030641L;
-
-    private Long id;
-    private int optlockVersion;
     
     private String name;
     
@@ -54,30 +50,6 @@ public class RoleEntity implements Role, Serializable {
     private List<AccountEntity> accounts;
     
     private List<PermissionEntity> permissions;
-    
-    @Id
-    @Column(name = "role_id", nullable = false)
-    @Override
-    public Long getId() {
-        return id;
-    }
-    
-    protected void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Column(name = "optlock_version")
-    @Version
-    public int getOptlockVersion() {
-        return optlockVersion;
-    }
-    
-    protected void setOptlockVersion(int optlockVersion) {
-        this.optlockVersion = optlockVersion;
-    }
     
     @Column(name = "name", nullable = false, unique = true)
     @Override

@@ -23,28 +23,24 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.persistence.metamodel.StaticMetamodel;
 
+import org.panifex.persistence.AbstractEntity;
 import org.panifex.service.api.security.Account;
 
 @Entity
 @StaticMetamodel(AccountEntity_.class)
 @Table(name = "sec_account")
-public class AccountEntity implements Account, Serializable {
+public class AccountEntity extends AbstractEntity implements Account, Serializable {
 
     /**
      * Serial version UID
      */
     private static final long serialVersionUID = 6039053761668790089L;
-
-    private Long id;
-    private int optlockVersion;
     
     private String username;
     
@@ -61,30 +57,6 @@ public class AccountEntity implements Account, Serializable {
         this.username = username;
         this.password = password;
         this.passwordSalt = passwordSalt;
-    }
-    
-    @Id
-    @Column(name = "account_id", nullable = false)
-    @Override
-    public Long getId() {
-        return id;
-    }
-    
-    protected void setId(Long id) {
-        this.id = id;
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Column(name = "optlock_version")
-    @Version
-    public int getOptlockVersion() {
-        return optlockVersion;
-    }
-    
-    protected void setOptlockVersion(int optlockVersion) {
-        this.optlockVersion = optlockVersion;
     }
 
     @Column(name = "username", nullable = false, unique = true)

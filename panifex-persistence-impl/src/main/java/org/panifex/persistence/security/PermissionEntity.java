@@ -23,26 +23,22 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.persistence.metamodel.StaticMetamodel;
 
+import org.panifex.persistence.AbstractEntity;
 import org.panifex.service.api.security.Permission;
 
 @Entity
 @StaticMetamodel(PermissionEntity_.class)
 @Table(name = "sec_permission")
-public class PermissionEntity implements Permission, Serializable {
+public class PermissionEntity extends AbstractEntity implements Permission, Serializable {
 
     /**
      * Serial version id
      */
     private static final long serialVersionUID = -4258555983967199451L;
-
-    private Long id;
-    private int optlockVersion;
     
     private String name;
     
@@ -51,31 +47,7 @@ public class PermissionEntity implements Permission, Serializable {
     private String description;
     
     private List<RoleEntity> roles;
-    
-    @Id
-    @Column(name = "permission_id", nullable = false)
-    @Override
-    public Long getId() {
-        return id;
-    }
-    
-    protected void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Column(name = "optlock_version")
-    @Version
-    public int getOptlockVersion() {
-        return optlockVersion;
-    }
-    
-    protected void setOptlockVersion(int optlockVersion) {
-        this.optlockVersion = optlockVersion;
-    }
-    
+       
     @Column(name = "name", nullable = false, unique = true)
     @Override
     public String getName() {
