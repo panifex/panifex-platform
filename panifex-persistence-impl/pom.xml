@@ -86,11 +86,6 @@
             <groupId>org.panifex</groupId>
             <artifactId>panifex-service-api</artifactId>
         </dependency>
-        <!-- Testing Dependencies -->
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-test-support</artifactId>
-        </dependency>
     </dependencies>
 
 </project>
