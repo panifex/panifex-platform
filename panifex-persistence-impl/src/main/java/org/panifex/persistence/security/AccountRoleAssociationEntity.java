@@ -26,6 +26,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @IdClass(AccountRoleAssociationId.class)
 @StaticMetamodel(AccountRoleAssociationEntity_.class)
@@ -76,5 +80,43 @@ public class AccountRoleAssociationEntity {
         this.role = role;
     }
     
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(3, 7).
+                append(accountId).
+                append(roleId).
+                append(account).
+                append(role).
+                toHashCode();
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        AccountRoleAssociationEntity other = (AccountRoleAssociationEntity) obj;
+        return new EqualsBuilder().
+                append(accountId, other.accountId).
+                append(roleId, other.roleId).
+                append(account, other.account).
+                append(role, other.role).
+                isEquals();
+    }
+    
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                append("accountId", accountId).
+                append("roleId", roleId).
+                append("account", account).
+                append("role", role).
+                toString();
+    }
 }

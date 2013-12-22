@@ -28,6 +28,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.panifex.persistence.AbstractEntity;
 import org.panifex.service.api.security.Role;
 
@@ -87,4 +90,45 @@ public class RoleEntity extends AbstractEntity implements Role, Serializable {
         this.rolePermissionAssociations = rolePermissionAssociations;
     }
     
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(3, 7).
+                appendSuper(super.hashCode()).
+                append(name).
+                append(description).
+                append(accountRoleAssociations).
+                append(rolePermissionAssociations).
+                toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        RoleEntity other = (RoleEntity) obj;
+        return new EqualsBuilder().
+                appendSuper(super.equals(obj)).
+                append(name, other.name).
+                append(description, other.description).
+                append(accountRoleAssociations, other.accountRoleAssociations).
+                append(rolePermissionAssociations, other.rolePermissionAssociations).
+                isEquals();
+    }
+    
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                append("name", name).
+                append("description", description).
+                append("accountRoleAssociations", accountRoleAssociations).
+                append("rolePermissionAssociations", rolePermissionAssociations).
+                toString();
+    }
 }

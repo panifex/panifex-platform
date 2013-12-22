@@ -27,6 +27,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.panifex.persistence.AbstractEntity;
 import org.panifex.service.api.security.Permission;
 
@@ -85,5 +88,48 @@ public class PermissionEntity extends AbstractEntity implements Permission, Seri
     
     protected void setRolePermissionAssociations(List<RolePermissionAssociationEntity> rolePermissionAssociations) {
         this.rolePermissionAssociations = rolePermissionAssociations;
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(3, 7).
+                appendSuper(super.hashCode()).
+                append(name).
+                append(wildcardExpression).
+                append(description).
+                append(rolePermissionAssociations).
+                toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        PermissionEntity other = (PermissionEntity) obj;
+        return new EqualsBuilder().
+                appendSuper(super.equals(obj)).
+                append(name, other.name).
+                append(wildcardExpression, other.wildcardExpression).
+                append(description, other.description).
+                append(rolePermissionAssociations, other.rolePermissionAssociations).
+                isEquals();
+    }
+    
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                appendSuper(super.toString()).
+                append("name", name).
+                append("wildcardExpression", wildcardExpression).
+                append("description", description).
+                append("rolePermissionAssociations", rolePermissionAssociations).
+                toString();
     }
 }

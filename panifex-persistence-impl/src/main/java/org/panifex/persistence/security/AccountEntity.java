@@ -27,6 +27,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.panifex.persistence.AbstractEntity;
 import org.panifex.service.api.security.Account;
 
@@ -93,5 +96,48 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
     
     protected void setAccountRoleAssociations(List<AccountRoleAssociationEntity> accountRoleAssociations) {
         this.accountRoleAssociations = accountRoleAssociations;
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(3, 7).
+                appendSuper(super.hashCode()).
+                append(username).
+                append(password).
+                append(passwordSalt).
+                append(accountRoleAssociations).
+                toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        AccountEntity other = (AccountEntity) obj;
+        return new EqualsBuilder().
+                appendSuper(super.equals(obj)).
+                append(username, other.username).
+                append(password, other.password).
+                append(passwordSalt, other.passwordSalt).
+                append(accountRoleAssociations, other.accountRoleAssociations).
+                isEquals();
+    }
+    
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                appendSuper(super.toString()).
+                append("username", username).
+                append("password", password).
+                append("passwordSalt", passwordSalt).
+                append("accountRoleAssociations", accountRoleAssociations).
+                toString();
     }
 }

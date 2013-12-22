@@ -26,6 +26,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @IdClass(RolePermissionAssociationId.class)
 @StaticMetamodel(RolePermissionAssociationEntity_.class)
@@ -74,5 +78,45 @@ public class RolePermissionAssociationEntity {
     
     protected void setPermission(PermissionEntity permission) {
         this.permission = permission;
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(3, 7).
+                append(roleId).
+                append(permissionId).
+                append(role).
+                append(permission).
+                toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        RolePermissionAssociationEntity other = (RolePermissionAssociationEntity) obj;
+        return new EqualsBuilder().
+                append(roleId, other.roleId).
+                append(permissionId, other.permissionId).
+                append(role, other.role).
+                append(permission, other.permission).
+                isEquals();
+    }
+    
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                append("roleId", roleId).
+                append("permissionId", permissionId).
+                append("role", role).
+                append("permission", permission).
+                toString();
     }
 }

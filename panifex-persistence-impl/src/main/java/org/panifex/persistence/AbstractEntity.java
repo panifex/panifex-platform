@@ -23,6 +23,9 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.panifex.service.api.Entity;
 
 /**
@@ -71,5 +74,39 @@ public abstract class AbstractEntity implements Entity {
      */
     protected void setOptlockVersion(int optlockVersion) {
         this.optlockVersion = optlockVersion;
+    }
+    
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(3, 7).
+                append(id).
+                append(optlockVersion).
+                toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        AbstractEntity other = (AbstractEntity) obj;
+        return new EqualsBuilder().
+                append(id, other.id).
+                append(optlockVersion, other.optlockVersion).
+                isEquals();
+    }
+    
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                append("id", id).
+                append("optlockVersion", optlockVersion).
+                toString();
     }
 }
