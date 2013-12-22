@@ -23,7 +23,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
 	<changeSet id="0.1.0-1" author="mariokr">
-		<comment>Create table sec_account</comment>
+		<comment>Creates table sec_account</comment>
 		<createTable tableName="sec_account">
 			<column name="account_id" type="int" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
@@ -41,7 +41,7 @@
 	</changeSet>
     
     <changeSet id="0.1.0-2" author="mariokr">
-        <comment>Add unique constraint uq_sec_account_username</comment>
+        <comment>Adds unique constraint uq_sec_account_username</comment>
         <addUniqueConstraint 
             constraintName="uq_sec_account_username"
             tableName="sec_account"
@@ -49,7 +49,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-3" author="mariokr">
-        <comment>Create table sec_role</comment>
+        <comment>Creates table sec_role</comment>
         <createTable tableName="sec_role">
             <column name="role_id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
@@ -64,7 +64,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-4" author="mariokr">
-        <comment>Add unique constraint index uq_sec_role_name</comment>
+        <comment>Adds unique constraint index uq_sec_role_name</comment>
         <addUniqueConstraint
             constraintName="uq_sec_role_name"
             tableName="sec_role" 
@@ -72,7 +72,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-5" author="mariokr">
-        <comment>Create table sec_account_role</comment>
+        <comment>Creates table sec_account_role</comment>
         <createTable tableName="sec_account_role">
             <column name="account_id" type="int">
                 <constraints nullable="false" />
@@ -84,7 +84,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-6" author="mariokr">
-        <comment>Add primary key pk_sec_account_role</comment>
+        <comment>Adds primary key pk_sec_account_role</comment>
         <addPrimaryKey 
             constraintName="pk_sec_account_role"
             tableName="sec_account_role" 
@@ -92,7 +92,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-7" author="mariokr">
-        <comment>Add foreign key constraint fk_account_role_account</comment>
+        <comment>Adds foreign key constraint fk_account_role_account</comment>
         <addForeignKeyConstraint 
             constraintName="fk_account_role_account"
             baseTableName="sec_account_role"
@@ -102,7 +102,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-8" author="mariokr">
-        <comment>Add foreign key constraint fk_account_role_role</comment>
+        <comment>Adds foreign key constraint fk_account_role_role</comment>
         <addForeignKeyConstraint 
             constraintName="fk_account_role_role"
             baseTableName="sec_account_role"
@@ -112,7 +112,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-9" author="mariokr">
-        <comment>Create table sec_permission</comment>
+        <comment>Creates table sec_permission</comment>
         <createTable tableName="sec_permission">
             <column name="permission_id" type="int" autoIncrement="true" >
                 <constraints primaryKey="true" nullable="false"/>
@@ -130,7 +130,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-10" author="mariokr">
-        <comment>Add unique key constraint uq_sec_permission_name</comment>
+        <comment>Adds unique key constraint uq_sec_permission_name</comment>
         <addUniqueConstraint
             constraintName="uq_sec_permission_name"
             tableName="sec_permission"
@@ -138,7 +138,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-11" author="mariokr">
-        <comment>Create table sec_role_permission</comment>
+        <comment>Creates table sec_role_permission</comment>
         <createTable tableName="sec_role_permission">
             <column name="role_id" type="int">
                 <constraints nullable="false" />
@@ -150,7 +150,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-12" author="mariokr">
-        <comment>Add primary key pk_sec_role_permission</comment>
+        <comment>Adds primary key pk_sec_role_permission</comment>
         <addPrimaryKey 
             constraintName="pk_sec_role_permission"
             tableName="sec_role_permission" 
@@ -158,7 +158,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-13" author="mariokr">
-        <comment>Add foreign key fk_sec_role_permission_role</comment>
+        <comment>Adds foreign key fk_sec_role_permission_role</comment>
         <addForeignKeyConstraint 
             constraintName="fk_sec_role_permission_role"
             baseTableName="sec_role_permission"
@@ -168,7 +168,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-14" author="mariokr">
-        <comment>Add foreign key fk_sec_role_permission_permission</comment>
+        <comment>Adds foreign key fk_sec_role_permission_permission</comment>
         <addForeignKeyConstraint
             constraintName="fk_sec_role_permission_permission"
             baseTableName="sec_role_permission"
@@ -178,7 +178,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-15" author="mariokr">
-        <comment>Insert admin account</comment>
+        <comment>Inserts admin account</comment>
         <insert tableName="sec_account">
             <column name="username">admin</column>
             <column name="password">lA2jtiWHI3Yp35rRL/50CzAvGvTVb2PsULtZ3GeKdtDwS8V54sUAQ3g7wF6KCT3wE9OMRXLtTQ/PLJjbEaF4yg==</column>
@@ -187,7 +187,7 @@
     </changeSet>
 
     <changeSet id="0.1.0-16" author="mariokr">
-        <comment>Insert administrator role</comment>
+        <comment>Inserts administrator role</comment>
         <insert tableName="sec_role">
             <column name="name">Administrator</column>
             <column name="description">Application administrator</column>
@@ -195,12 +195,12 @@
     </changeSet>
     
     <changeSet id="0.1.0-17" author="mariokr">
-        <comment>Assign administrator role to admin user</comment>
+        <comment>Assigns administrator role to admin user</comment>
         <sql>insert into sec_account_role (account_id, role_id) select sec_account.account_id, sec_role.role_id from sec_account, sec_role where sec_account.username='admin' and sec_role.name='Administrator'</sql>
     </changeSet>
     
     <changeSet id="0.1.0-18" author="mariokr">
-        <comment>Insert user permission</comment>
+        <comment>Inserts user permission</comment>
         <insert tableName="sec_permission">
             <column name="name">User</column>
             <column name="wildcard_expression">user</column>
@@ -209,7 +209,7 @@
     </changeSet>
     
     <changeSet id="0.1.0-19" author="mariokr">
-        <comment>Assign user permission to administration role</comment>
+        <comment>Assigns user permission to administration role</comment>
         <sql>insert into sec_role_permission (role_id, permission_id) select sec_role.role_id, sec_permission.permission_id from sec_role, sec_permission where sec_role.name='Administrator' and sec_permission.name='User'</sql>
     </changeSet>
 </databaseChangeLog>
