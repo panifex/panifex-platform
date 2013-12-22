@@ -26,6 +26,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.persistence.metamodel.StaticMetamodel;
 
 import org.panifex.service.api.security.Permission;
@@ -41,6 +42,7 @@ public class PermissionEntity implements Permission, Serializable {
     private static final long serialVersionUID = -4258555983967199451L;
 
     private Long id;
+    private int version;
     
     private String name;
     
@@ -61,6 +63,18 @@ public class PermissionEntity implements Permission, Serializable {
         this.id = id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Version
+    public int getVersion() {
+        return version;
+    }
+    
+    protected void setVersion(int version) {
+        this.version = version;
+    }
+    
     @Column(name = "name", nullable = false, unique = true)
     @Override
     public String getName() {

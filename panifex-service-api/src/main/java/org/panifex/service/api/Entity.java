@@ -21,4 +21,12 @@ package org.panifex.service.api;
 public interface Entity {
 
     Long getId();
+    
+    /**
+     * Returns the version of {@link Entity}. The version is used to ensure integrity 
+     * when performing the merge operation and for optimistic concurrency control.
+     * 
+     * @return the version of {@link Entity}
+     */
+    int getVersion();
 }

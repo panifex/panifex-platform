@@ -28,6 +28,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.persistence.metamodel.StaticMetamodel;
 
 import org.panifex.service.api.security.Account;
@@ -43,6 +44,7 @@ public class AccountEntity implements Account, Serializable {
     private static final long serialVersionUID = 6039053761668790089L;
 
     private Long id;
+    private int version;
     
     private String username;
     
@@ -70,6 +72,18 @@ public class AccountEntity implements Account, Serializable {
     
     protected void setId(Long id) {
         this.id = id;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Version
+    public int getVersion() {
+        return version;
+    }
+    
+    protected void setversion(int version) {
+        this.version = version;
     }
 
     @Column(name = "username", nullable = false, unique = true)
