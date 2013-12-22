@@ -18,17 +18,12 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.main;
 
-import static org.powermock.api.easymock.PowerMock.mockStatic;
-import static org.powermock.api.easymock.PowerMock.replayAll;
-import static org.powermock.api.easymock.PowerMock.verifyAll;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
-import org.powermock.api.easymock.PowerMock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zk.ui.Executions;
@@ -51,8 +46,8 @@ public final class AbstractVMTest extends TestSupport {
         Subject subjectMock = createMock(Subject.class);
         String principalMock = "principal";
 
-        PowerMock.createMock(SecurityUtils.class);
-        PowerMock.createMock(Executions.class);
+        createMock(SecurityUtils.class);
+        createMock(Executions.class);
         mockStatic(SecurityUtils.class);
         mockStatic(Executions.class);
 

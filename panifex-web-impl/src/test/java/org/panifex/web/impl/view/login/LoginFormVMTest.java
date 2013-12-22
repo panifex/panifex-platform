@@ -18,11 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
-import static org.powermock.api.easymock.PowerMock.mockStatic;
-import static org.powermock.api.easymock.PowerMock.replayAll;
-import static org.powermock.api.easymock.PowerMock.resetAll;
-import static org.powermock.api.easymock.PowerMock.verifyAll;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -31,7 +26,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
 import org.panifex.web.impl.view.login.LoginFormVM;
-import org.powermock.api.easymock.PowerMock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zk.ui.Executions;
@@ -58,8 +52,8 @@ public class LoginFormVMTest extends TestSupport {
         mockStatic(SecurityUtils.class);
         mockStatic(Executions.class);
 
-        PowerMock.createMock(UsernamePasswordToken.class);
-        PowerMock.expectNew(UsernamePasswordToken.class,
+        createMock(UsernamePasswordToken.class);
+        expectNew(UsernamePasswordToken.class,
                 new Class<?>[] {String.class, String.class}, eq(""), eq("")).andReturn(token);
         token.setRememberMe(true);
         expect(SecurityUtils.getSubject()).andReturn(subjectMock);

@@ -140,20 +140,10 @@
             <artifactId>pax-logging-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- Testing Dependencies -->
+        <!-- Test Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
             <artifactId>panifex-test-support</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-easymock</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
