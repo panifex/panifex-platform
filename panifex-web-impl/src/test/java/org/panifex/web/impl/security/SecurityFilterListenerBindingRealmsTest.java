@@ -18,41 +18,41 @@
  ******************************************************************************/
 package org.panifex.web.impl.security;
 
-import org.easymock.EasyMock;
 import org.junit.Test;
 import org.panifex.service.api.security.SecurityService;
+import org.panifex.test.support.TestSupport;
 
 /**
  * Tests binding and unbinding realms to SecurityFilterListener
  *
  */
-public class SecurityFilterListenerBindingRealmsTest {
+public class SecurityFilterListenerBindingRealmsTest extends TestSupport {
 
     private SecurityFilterListener listener = new SecurityFilterListener();;
     
     @Test
     public void bindSecurityServiceTest() {
         // create mocks
-        SecurityService securityServiceMock = EasyMock.createMock(SecurityService.class);
+        SecurityService securityServiceMock = createMock(SecurityService.class);
         
-        EasyMock.replay(securityServiceMock);
+        replay(securityServiceMock);
         
         // bind realm
         listener.bind(securityServiceMock);
         
-        EasyMock.verify(securityServiceMock);
+        verify(securityServiceMock);
     }
     
     @Test
     public void unbindSecurityServiceTest() {
         // create mocks
-        SecurityService securityServiceMock = EasyMock.createMock(SecurityService.class);
+        SecurityService securityServiceMock = createMock(SecurityService.class);
         
-        EasyMock.replay(securityServiceMock);
+        replay(securityServiceMock);
         
         // unbind realm
         listener.unbind(securityServiceMock);
         
-        EasyMock.verify(securityServiceMock);
+        verify(securityServiceMock);
     }
 }

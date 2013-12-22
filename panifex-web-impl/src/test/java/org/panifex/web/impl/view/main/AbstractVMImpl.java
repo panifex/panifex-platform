@@ -20,14 +20,11 @@ package org.panifex.web.impl.view.main;
 
 import org.panifex.web.impl.view.layout.LayoutVM;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class AbstractVMImpl extends LayoutVM {
+public final class AbstractVMImpl extends LayoutVM {
 
-    private final Logger log;
-
-    AbstractVMImpl(Logger log) {
-        this.log = log;
-    }
+    private final Logger log = LoggerFactory.getLogger(AbstractVMImpl.class);
 
     @Override
     protected Logger getLogger() {

@@ -18,12 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 import static org.powermock.api.easymock.PowerMock.mockStatic;
 import static org.powermock.api.easymock.PowerMock.replayAll;
 import static org.powermock.api.easymock.PowerMock.resetAll;
@@ -35,27 +29,21 @@ import org.apache.shiro.subject.Subject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.panifex.test.support.TestSupport;
 import org.panifex.web.impl.view.login.LoginFormVM;
 import org.powermock.api.easymock.PowerMock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.Executions;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({LoginFormVM.class, Executions.class, LoggerFactory.class, SecurityUtils.class})
-public class LoginFormVMTest {
+@PrepareForTest({LoginFormVM.class, Executions.class, SecurityUtils.class})
+public class LoginFormVMTest extends TestSupport {
 
     private LoginFormVM vm;
 
-    private Logger loggerMock = createMock(Logger.class);;
-
     @Before
     public void init() throws Exception {
-        mockStatic(LoggerFactory.class);
-        expect(LoggerFactory.getLogger(LoginFormVM.class)).andReturn(loggerMock);
-
         replayAll();
         vm = new LoginFormVM();
         verifyAll();
@@ -70,7 +58,6 @@ public class LoginFormVMTest {
         mockStatic(SecurityUtils.class);
         mockStatic(Executions.class);
 
-        loggerMock.debug(anyObject(String.class));
         PowerMock.createMock(UsernamePasswordToken.class);
         PowerMock.expectNew(UsernamePasswordToken.class,
                 new Class<?>[] {String.class, String.class}, eq(""), eq("")).andReturn(token);

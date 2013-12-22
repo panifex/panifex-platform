@@ -23,15 +23,15 @@ import java.util.Set;
 
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.easymock.EasyMock;
 import org.junit.Test;
 import org.panifex.service.api.security.SecurityService;
+import org.panifex.test.support.TestSupport;
 
 /**
  * Tests binding and unbinding security filters to SecurityFilterListener
  *
  */
-public class SecurityFilterListenerBindingSecurityFilterTest {
+public class SecurityFilterListenerBindingSecurityFilterTest extends TestSupport {
 
     private SecurityFilterListener listener = new SecurityFilterListener();
 
@@ -43,19 +43,19 @@ public class SecurityFilterListenerBindingSecurityFilterTest {
     @Test
     public void bindSecurityFilterTest() {
         // create mocks
-        SecurityFilter secFilterMock = EasyMock.createMock(SecurityFilter.class);
-        DefaultWebSecurityManager secManagerMock = EasyMock.createMock(DefaultWebSecurityManager.class);
-        SecurityService secServiceMock = EasyMock.createMock(SecurityService.class);
+        SecurityFilter secFilterMock = createMock(SecurityFilter.class);
+        DefaultWebSecurityManager secManagerMock = createMock(DefaultWebSecurityManager.class);
+        SecurityService secServiceMock = createMock(SecurityService.class);
         Set<Realm> realms = new HashSet<>();
         realms.add(secServiceMock);
         
         // must get SecurityManager in order to set osgi realm
-        EasyMock.expect(secFilterMock.getSecurityManager()).andReturn(secManagerMock);
+        expect(secFilterMock.getSecurityManager()).andReturn(secManagerMock);
         
         // set osgi realm to security manager
         secManagerMock.setRealms(realms);
         
-        EasyMock.replay(secServiceMock, secFilterMock, secManagerMock);
+        replay(secServiceMock, secFilterMock, secManagerMock);
         
         // bind realm
         listener.bind(secServiceMock);
@@ -63,7 +63,7 @@ public class SecurityFilterListenerBindingSecurityFilterTest {
         // bind security filter
         listener.bind(secFilterMock);
         
-        EasyMock.verify(secServiceMock, secFilterMock, secManagerMock);
+        verify(secServiceMock, secFilterMock, secManagerMock);
     }
     
     /**
@@ -72,13 +72,13 @@ public class SecurityFilterListenerBindingSecurityFilterTest {
     @Test
     public void unbindSecurityFilterTest() {
         // create mocks
-        SecurityFilter secFilter = EasyMock.createMock(SecurityFilter.class);
+        SecurityFilter secFilter = createMock(SecurityFilter.class);
         
-        EasyMock.replay(secFilter);
+        replay(secFilter);
         
         // unbind security filter
         listener.unbind(secFilter);
         
-        EasyMock.verify(secFilter);
+        verify(secFilter);
     }
 }

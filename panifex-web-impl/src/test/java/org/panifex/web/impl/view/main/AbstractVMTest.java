@@ -18,12 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.main;
 
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.reset;
-import static org.easymock.EasyMock.verify;
 import static org.powermock.api.easymock.PowerMock.mockStatic;
 import static org.powermock.api.easymock.PowerMock.replayAll;
 import static org.powermock.api.easymock.PowerMock.verifyAll;
@@ -33,28 +27,23 @@ import org.apache.shiro.subject.Subject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.panifex.test.support.TestSupport;
 import org.powermock.api.easymock.PowerMock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.slf4j.Logger;
 import org.zkoss.zk.ui.Executions;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({AbstractVMImpl.class, Executions.class, SecurityUtils.class})
-public final class AbstractVMTest {
+public final class AbstractVMTest extends TestSupport {
 
     private AbstractVMImpl vm;
 
-    // mocks
-    private Logger loggerMock = createMock(Logger.class);
-
     @Before
     public void init() throws Exception {
-        reset(loggerMock);
-
         replayAll();
 
-        vm = new AbstractVMImpl(loggerMock);
+        vm = new AbstractVMImpl();
     }
 
     @Test
@@ -69,16 +58,15 @@ public final class AbstractVMTest {
 
         expect(SecurityUtils.getSubject()).andReturn(subjectMock);
         expect(subjectMock.getPrincipal()).andReturn(principalMock);
-        loggerMock.info(anyObject(String.class), anyObject(String.class));
         subjectMock.logout();
         Executions.sendRedirect("/zk/login");
 
-        replay(subjectMock, loggerMock);
+        replay(subjectMock);
         replayAll();
 
         vm.logout();
 
-        verify(subjectMock, loggerMock);
+        verify(subjectMock);
         verifyAll();
     }
 }
