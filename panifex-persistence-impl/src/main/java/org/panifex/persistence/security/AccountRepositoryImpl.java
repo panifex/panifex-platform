@@ -35,6 +35,8 @@ import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
 import org.panifex.service.api.security.Account;
+import org.panifex.service.api.security.Permission;
+import org.panifex.service.api.security.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,6 +83,9 @@ public class AccountRepositoryImpl implements AccountRepository {
         entityManager.persist(accountImpl);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AccountEntity getAccountByUsername(String username) {
         log.debug("Get account with username: {}", username);
@@ -119,7 +124,7 @@ public class AccountRepositoryImpl implements AccountRepository {
      * {@inheritDoc}
      */
     @Override
-    public List<RoleEntity> getRolesForAccount(Account account) {
+    public List<? extends Role> getRolesForAccount(Account account) {
         log.debug("Get roles by account: {}", account);
         
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -149,7 +154,7 @@ public class AccountRepositoryImpl implements AccountRepository {
      * {@inheritDoc}
      */
     @Override
-    public List<PermissionEntity> getPermissionsForAccount(Account account) {
+    public List<? extends Permission> getPermissionsForAccount(Account account) {
         log.debug("Get permission by account: {}", account);
         
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();

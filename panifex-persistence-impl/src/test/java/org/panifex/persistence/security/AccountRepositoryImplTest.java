@@ -37,6 +37,8 @@ import org.apache.openjpa.persistence.OpenJPAPersistence;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.panifex.service.api.security.Permission;
+import org.panifex.service.api.security.Role;
 import org.panifex.test.support.TestSupport;
 
 /**
@@ -104,7 +106,7 @@ public final class AccountRepositoryImplTest extends TestSupport {
         assertEquals(ADMIN_USERNAME, adminAccount.getUsername());
         
         // get admin's roles
-        List<RoleEntity> roles = accountRepository.getRolesForAccount(adminAccount);
+        List<? extends Role> roles = accountRepository.getRolesForAccount(adminAccount);
         
         // check if admin user has administration role
         assertNotNull(roles);
@@ -127,7 +129,8 @@ public final class AccountRepositoryImplTest extends TestSupport {
         assertEquals(ADMIN_USERNAME, adminAccount.getUsername());
         
         // get admin's permissions
-        List<PermissionEntity> permissions = accountRepository.getPermissionsForAccount(adminAccount);
+        List<? extends Permission> permissions = 
+                accountRepository.getPermissionsForAccount(adminAccount);
         
         // check if admin user has user permission
         assertNotNull(permissions);

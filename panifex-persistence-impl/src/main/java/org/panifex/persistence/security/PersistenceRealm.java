@@ -43,6 +43,7 @@ import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.panifex.service.api.security.Permission;
 import org.panifex.service.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +73,7 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
     public static final int HASH_ITERATIONS = 1024;
     
     @Inject(ref = AccountRepositoryImpl.ID)
-    private AccountRepository accountRepository;
+    private AccountRepositoryImpl accountRepository;
     
     /**
      * Constructor adds EhCacheManager.
@@ -88,7 +89,7 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         setCredentialsMatcher(credentialsMatcher);
     }
     
-    public void setAccountRepository(AccountRepository accountRepository) {
+    public void setAccountRepository(AccountRepositoryImpl accountRepository) {
         this.accountRepository = accountRepository;
     }
     
@@ -162,9 +163,10 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         Set<String> permissionWildcardExpressions = new HashSet<>();
         
         if (account != null ) {
-            List<PermissionEntity> permissions = accountRepository.getPermissionsForAccount(account);
+            List<? extends Permission> permissions = 
+                    accountRepository.getPermissionsForAccount(account);
             
-            for (PermissionEntity permission : permissions) {
+            for (Permission permission : permissions) {
                 String wildcardExpression = permission.getWildcardExpression();
                 permissionWildcardExpressions.add(wildcardExpression);
             }

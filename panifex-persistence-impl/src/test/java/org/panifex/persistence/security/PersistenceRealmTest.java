@@ -30,12 +30,12 @@ public final class PersistenceRealmTest extends TestSupport {
     private PersistenceRealm realm;
     
     // mocks
-    private AccountRepository accountRepositoryMock;
+    private AccountRepositoryImpl accountRepositoryMock;
 
     @Before
     public void before() {
         realm = new PersistenceRealm();
-        accountRepositoryMock = EasyMock.createMock(AccountRepository.class);
+        accountRepositoryMock = EasyMock.createMock(AccountRepositoryImpl.class);
         realm.setAccountRepository(accountRepositoryMock);
     }
     
