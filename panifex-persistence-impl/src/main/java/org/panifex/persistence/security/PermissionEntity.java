@@ -42,7 +42,7 @@ public class PermissionEntity implements Permission, Serializable {
     private static final long serialVersionUID = -4258555983967199451L;
 
     private Long id;
-    private int version;
+    private int optlockVersion;
     
     private String name;
     
@@ -66,13 +66,14 @@ public class PermissionEntity implements Permission, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Column(name = "optlock_version")
     @Version
-    public int getVersion() {
-        return version;
+    public int getOptlockVersion() {
+        return optlockVersion;
     }
     
-    protected void setVersion(int version) {
-        this.version = version;
+    protected void setOptlockVersion(int optlockVersion) {
+        this.optlockVersion = optlockVersion;
     }
     
     @Column(name = "name", nullable = false, unique = true)

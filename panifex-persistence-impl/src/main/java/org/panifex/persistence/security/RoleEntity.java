@@ -45,7 +45,7 @@ public class RoleEntity implements Role, Serializable {
     private static final long serialVersionUID = 8260877176766030641L;
 
     private Long id;
-    private int version;
+    private int optlockVersion;
     
     private String name;
     
@@ -69,13 +69,14 @@ public class RoleEntity implements Role, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Column(name = "optlock_version")
     @Version
-    public int getVersion() {
-        return version;
+    public int getOptlockVersion() {
+        return optlockVersion;
     }
     
-    protected void setVersion(int version) {
-        this.version = version;
+    protected void setOptlockVersion(int optlockVersion) {
+        this.optlockVersion = optlockVersion;
     }
     
     @Column(name = "name", nullable = false, unique = true)

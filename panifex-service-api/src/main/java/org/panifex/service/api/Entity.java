@@ -28,5 +28,5 @@ public interface Entity {
      * 
      * @return the version of {@link Entity}
      */
-    int getVersion();
+    int getOptlockVersion();
 }
