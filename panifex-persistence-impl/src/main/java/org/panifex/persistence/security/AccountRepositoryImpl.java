@@ -132,9 +132,15 @@ public class AccountRepositoryImpl implements AccountRepository {
         
         // select from role
         Root<RoleEntity> role = cq.from(RoleEntity.class);
+        cq.from(AccountRoleAssociationEntity.class);
         
         // join account
-        Join<RoleEntity, AccountEntity> accounts = role.join(RoleEntity_.accounts);
+        Join<RoleEntity, AccountRoleAssociationEntity> accountRoleAssociation =
+                role.join(RoleEntity_.accountRoleAssociations);
+        Join<AccountRoleAssociationEntity, AccountEntity> accounts = 
+                accountRoleAssociation.join(AccountRoleAssociationEntity_.account);
+        //Join<AccountRoleAssociationEntityId, AccountEntity> accounts =
+        //        accountRoleAssociationId.join(AccountRoleAssociationEntityId_.)
         
         // where account = ?
         cq.where(cb.equal(accounts.get(AccountEntity_.id), account.getId()));
@@ -163,13 +169,17 @@ public class AccountRepositoryImpl implements AccountRepository {
         // select from permission
         Root<PermissionEntity> permission = cq.from(PermissionEntity.class);
         
-        // loads RoleEntit_ metamodel
+        // loads metamodel
+        cq.from(AccountRoleAssociationEntity.class);
         cq.from(RoleEntity.class);
         
         // join role
         Join<PermissionEntity, RoleEntity> roles = permission.join(PermissionEntity_.roles);
-        Join<RoleEntity, AccountEntity> accounts = roles.join(RoleEntity_.accounts);
-                
+        Join<RoleEntity, AccountRoleAssociationEntity> accountRoleAssociation = 
+                roles.join(RoleEntity_.accountRoleAssociations);
+        Join<AccountRoleAssociationEntity, AccountEntity> accounts =
+                accountRoleAssociation.join(AccountRoleAssociationEntity_.account);
+               
         // where
         cq.where(cb.equal(accounts.get(AccountEntity_.id), account.getId()));
         

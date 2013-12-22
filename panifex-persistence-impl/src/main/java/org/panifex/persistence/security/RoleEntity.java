@@ -27,6 +27,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -47,7 +48,7 @@ public class RoleEntity extends AbstractEntity implements Role, Serializable {
     
     private String description;
     
-    private List<AccountEntity> accounts;
+    private List<AccountRoleAssociationEntity> accountRoleAssociations;
     
     private List<PermissionEntity> permissions;
     
@@ -71,13 +72,13 @@ public class RoleEntity extends AbstractEntity implements Role, Serializable {
         this.description = description;
     }
 
-    @ManyToMany(mappedBy = "roles")
-    protected List<AccountEntity> getAccounts() {
-        return accounts;
+    @OneToMany(mappedBy = "role")
+    protected List<AccountRoleAssociationEntity> getAccountRoleAssociations() {
+        return accountRoleAssociations;
     }
     
-    protected void setAccounts(List<AccountEntity> accounts) {
-        this.accounts = accounts;
+    protected void setAccountRoleAssociations(List<AccountRoleAssociationEntity> accountRoleAssociations) {
+        this.accountRoleAssociations = accountRoleAssociations;
     }
     
     @ManyToMany

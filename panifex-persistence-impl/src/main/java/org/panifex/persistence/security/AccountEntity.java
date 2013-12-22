@@ -23,9 +23,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -48,7 +46,7 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
 
     private String passwordSalt;
     
-    private List<RoleEntity> roles;
+    private List<AccountRoleAssociationEntity> accountRoleAssociations;
     
     public AccountEntity(
             String username,
@@ -88,15 +86,12 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
         this.passwordSalt = passwordSalt;
     }
     
-    @ManyToMany
-    @JoinTable(name = "sec_account_role",
-    joinColumns = {@JoinColumn(name = "account_id")},
-    inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    protected List<RoleEntity> getRoles() {
-        return roles;
+    @OneToMany(mappedBy = "account")
+    protected List<AccountRoleAssociationEntity> getAccountRoleAssociations() {
+        return accountRoleAssociations;
     }
     
-    protected void setRoles(List<RoleEntity> roles) {
-        this.roles = roles;
+    protected void setAccountRoleAssociations(List<AccountRoleAssociationEntity> accountRoleAssociations) {
+        this.accountRoleAssociations = accountRoleAssociations;
     }
 }
