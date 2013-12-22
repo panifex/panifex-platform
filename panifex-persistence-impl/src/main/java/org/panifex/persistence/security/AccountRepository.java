@@ -32,8 +32,6 @@ public interface AccountRepository {
     
     AccountEntity getAccountByUsername(String username);
     
-    List<PermissionEntity> getPermissionsByAccount(Account account);
-    
     /**
      * Returns a distinct list of {@link RoleEntity} for specified account.
      * 
@@ -43,4 +41,14 @@ public interface AccountRepository {
      * @return a distinct list of {@link RoleEntity} for specified account
      */
     List<RoleEntity> getRolesForAccount(Account account);
+
+    /**
+     * Returns a distinct list of {@link PermissionEntity} for specified account.
+     * 
+     * <p>If the account does not have any permission, than the empty list is returned.
+     * 
+     * @param account the account whose permissions will be returned
+     * @return a distinct list of {@link PermissionEntity} for specified account
+     */
+    List<PermissionEntity> getPermissionsForAccount(Account account);
 }

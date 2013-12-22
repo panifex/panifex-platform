@@ -115,7 +115,7 @@ public final class AccountRepositoryImplTest extends TestSupport {
      * This test checks if the admin user has user permission. The user permission must be inserted
      * by liquibase scripts.
      * 
-     * <p>The test also checks functionality of {@link AccountRepositoryImpl#getPermissionsByAccount(org.panifex.service.api.security.Account)}
+     * <p>The test also checks functionality of {@link AccountRepositoryImpl#getPermissionsForAccount(org.panifex.service.api.security.Account)}
      * method.
      */
     @Test
@@ -127,7 +127,7 @@ public final class AccountRepositoryImplTest extends TestSupport {
         assertEquals(ADMIN_USERNAME, adminAccount.getUsername());
         
         // get admin's permissions
-        List<PermissionEntity> permissions = accountRepository.getPermissionsByAccount(adminAccount);
+        List<PermissionEntity> permissions = accountRepository.getPermissionsForAccount(adminAccount);
         
         // check if admin user has user permission
         assertNotNull(permissions);

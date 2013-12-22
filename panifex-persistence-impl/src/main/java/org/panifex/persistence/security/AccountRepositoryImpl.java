@@ -145,8 +145,11 @@ public class AccountRepositoryImpl implements AccountRepository {
         return roles;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<PermissionEntity> getPermissionsByAccount(Account account) {
+    public List<PermissionEntity> getPermissionsForAccount(Account account) {
         log.debug("Get permission by account: {}", account);
         
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();

@@ -162,7 +162,7 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         Set<String> permissionWildcardExpressions = new HashSet<>();
         
         if (account != null ) {
-            List<PermissionEntity> permissions = accountRepository.getPermissionsByAccount(account);
+            List<PermissionEntity> permissions = accountRepository.getPermissionsForAccount(account);
             
             for (PermissionEntity permission : permissions) {
                 String wildcardExpression = permission.getWildcardExpression();
