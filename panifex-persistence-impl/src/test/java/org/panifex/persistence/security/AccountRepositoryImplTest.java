@@ -75,9 +75,10 @@ public final class AccountRepositoryImplTest extends TestSupport {
     }
     
     /**
-     * This test checks if the admin user is inserted to initial database created by liquibase scripts.
+     * This test checks if the admin user exists in an initial database created by liquibase scripts.
      * 
-     * <p>The test also checks functionality of {@link AccountRepositoryImpl#getAccountByUsername(String)} method.
+     * <p>The test also checks functionality of {@link AccountRepositoryImpl#getAccountByUsername(String)} 
+     * method.
      * 
      * <p>Admin user must be found.
      */
@@ -114,7 +115,7 @@ public final class AccountRepositoryImplTest extends TestSupport {
     }
     
     /**
-     * This test checks if the admin user has user permission. The user permission must be inserted
+     * This test checks if the admin user has the user permission. The user permission must be inserted
      * by liquibase scripts.
      * 
      * <p>The test also checks functionality of {@link AccountRepositoryImpl#getPermissionsForAccount(org.panifex.service.api.security.Account)}
