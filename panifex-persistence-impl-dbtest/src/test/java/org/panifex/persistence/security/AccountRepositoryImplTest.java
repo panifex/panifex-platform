@@ -62,7 +62,8 @@ public final class AccountRepositoryImplTest extends TestSupport {
         OpenJPAConfiguration conf = kemf.getConfiguration();
         DataSource dataSource = (DataSource) conf.getConnectionFactory();
         Connection conn = dataSource.getConnection();
-        Liquibase liquibase = new Liquibase("src/main/resources/db-changelog/db.changelog-master.xml", new FileSystemResourceAccessor(), new JdbcConnection(conn));
+        Liquibase liquibase = new Liquibase("../panifex-persistence-impl/src/main/resources/db-changelog/db.changelog-master.xml", 
+            new FileSystemResourceAccessor(), new JdbcConnection(conn));
         liquibase.update(null);
         
         accountRepository = new AccountRepositoryImpl();
@@ -137,4 +138,7 @@ public final class AccountRepositoryImplTest extends TestSupport {
         assertNotNull(permissions);
         assertEquals(USER_PERMISSION, permissions.get(0).getWildcardExpression());
     }
+
+    
+
 }

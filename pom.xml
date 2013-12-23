@@ -67,6 +67,7 @@
         <module>panifex-service-impl</module>
         <module>panifex-web-impl</module>
         <module>panifex-persistence-impl</module>
+        <module>panifex-persistence-impl-dbtest</module>
         <module>panifex-datasource-derby</module>
         <module>panifex-datasource-mssql</module>
         <module>panifex-datasource-postgresql</module>
