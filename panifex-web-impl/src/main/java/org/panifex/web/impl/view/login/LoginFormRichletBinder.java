@@ -27,8 +27,11 @@ import org.apache.aries.blueprint.annotation.Unbind;
 import org.panifex.web.impl.servlet.ZkLayoutService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zkoss.lang.Classes;
 
+/**
+ * Binds login form richlet to ZK layout servlet.
+ *
+ */
 @Bean(id = LoginFormRichletBinder.ID)
 @ReferenceListener
 public class LoginFormRichletBinder {
@@ -36,7 +39,8 @@ public class LoginFormRichletBinder {
     private Logger log = LoggerFactory.getLogger(LoginFormRichlet.class);
 
     public final static String ID = "org.panifex.web.impl.login.LoginRichletBinder";
-
+    private final static String PATH = "/login";
+    
     @Inject
     @Reference(availability = "optional", serviceInterface = ZkLayoutService.class, referenceListeners = @ReferenceListener(ref = ID))
     private ZkLayoutService zkLayoutService;
@@ -46,17 +50,12 @@ public class LoginFormRichletBinder {
         log.debug("Bind Zk layout service: {}", zkLayoutService);
         this.zkLayoutService = zkLayoutService;
 
-        zkLayoutService.addRichlet(LoginFormRichlet.class, "/login");
-        
-        try {
-            Classes.forNameByThread(LoginFormRichlet.class.getName());
-        } catch (ClassNotFoundException e) {
-            log.error("Greska: {}", e);
-        }
+        zkLayoutService.addRichlet(LoginFormRichlet.class, PATH);
     }
 
     @Unbind
     public void unbind(ZkLayoutService zkLayoutServlet) {
+        zkLayoutServlet.addRichlet(null, PATH);
         this.zkLayoutService = null;
     }
 }
