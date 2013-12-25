@@ -30,6 +30,7 @@ public final class RolePermissionAssociationEntityTest {
         EqualsVerifier.
             forClass(RolePermissionAssociationEntity.class).
             usingGetClass().
+            allFieldsShouldBeUsed().
             suppress(Warning.NONFINAL_FIELDS).
             verify();
     }

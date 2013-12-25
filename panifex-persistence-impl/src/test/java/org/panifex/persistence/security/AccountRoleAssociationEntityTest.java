@@ -30,6 +30,7 @@ public final class AccountRoleAssociationEntityTest {
         EqualsVerifier.
             forClass(AccountRoleAssociationEntity.class).
             usingGetClass().
+            allFieldsShouldBeUsed().
             suppress(Warning.NONFINAL_FIELDS).
             verify();
     }

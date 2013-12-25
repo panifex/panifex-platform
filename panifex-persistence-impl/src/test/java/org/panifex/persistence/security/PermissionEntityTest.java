@@ -30,6 +30,7 @@ public final class PermissionEntityTest {
         EqualsVerifier.
             forClass(PermissionEntity.class).
             usingGetClass().
+            allFieldsShouldBeUsed().
             suppress(Warning.NONFINAL_FIELDS).
             verify();
     }

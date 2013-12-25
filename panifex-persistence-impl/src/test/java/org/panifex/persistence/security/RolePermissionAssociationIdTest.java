@@ -30,6 +30,7 @@ public final class RolePermissionAssociationIdTest {
         EqualsVerifier.
             forClass(RolePermissionAssociationId.class).
             usingGetClass().
+            allFieldsShouldBeUsed().
             suppress(Warning.NONFINAL_FIELDS).
             verify();
     }

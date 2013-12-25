@@ -30,6 +30,7 @@ public final class AbstractEntityTest {
         EqualsVerifier.
             forClass(AbstractEntity.class).
             usingGetClass().
+            allFieldsShouldBeUsed().
             suppress(Warning.NONFINAL_FIELDS).
             verify();
     }

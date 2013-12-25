@@ -30,6 +30,7 @@ public final class AccountRoleAssociationIdTest {
         EqualsVerifier.
             forClass(AccountRoleAssociationId.class).
             usingGetClass().
+            allFieldsShouldBeUsed().
             suppress(Warning.NONFINAL_FIELDS).
             verify();
     }

@@ -30,6 +30,7 @@ public final class AccountEntityTest {
         EqualsVerifier.
             forClass(AccountEntity.class).
             usingGetClass().
+            allFieldsShouldBeUsed().
             suppress(Warning.NONFINAL_FIELDS).
             verify();
     }
