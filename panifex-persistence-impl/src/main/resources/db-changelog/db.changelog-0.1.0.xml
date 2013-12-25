@@ -18,30 +18,30 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 -->
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-	<changeSet id="0.1.0-1" author="mariokr">
-		<comment>Creates table sec_account</comment>
-		<createTable tableName="sec_account">
-			<column name="id" type="int" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" />
-			</column>
+    <changeSet id="0.1.0-1" author="mariokr">
+        <comment>Creates table sec_account</comment>
+        <createTable tableName="sec_account">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
             <column name="optlock_version" type="int">
                 <constraints nullable="false" />
             </column>
-			<column name="username" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
-			<column name="password" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="password_salt" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-		</createTable>
-	</changeSet>
+        </createTable>
+    </changeSet>
     
     <changeSet id="0.1.0-2" author="mariokr">
         <comment>Adds unique constraint uq_sec_account_username</comment>
