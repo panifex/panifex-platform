@@ -44,10 +44,9 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
     private static final long serialVersionUID = 6039053761668790089L;
     
     private String username;
-    
     private String password;
-
     private String passwordSalt;
+    private boolean isCredentialsExpired;
     
     private List<AccountRoleAssociationEntity> accountRoleAssociations;
     
@@ -89,6 +88,16 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
         this.passwordSalt = passwordSalt;
     }
     
+    @Column(name = "is_credentials_expired", nullable = false)
+    @Override
+    public boolean getIsCredentialsExpired() {
+        return isCredentialsExpired;
+    }
+    
+    protected void setIsCredentialsExpired(boolean isCredentialsExpired) {
+        this.isCredentialsExpired = isCredentialsExpired;
+    }
+    
     @OneToMany(mappedBy = "account")
     protected List<AccountRoleAssociationEntity> getAccountRoleAssociations() {
         return accountRoleAssociations;
@@ -105,6 +114,7 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
                 append(username).
                 append(password).
                 append(passwordSalt).
+                append(isCredentialsExpired).
                 append(accountRoleAssociations).
                 toHashCode();
     }
@@ -126,6 +136,7 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
                 append(username, other.username).
                 append(password, other.password).
                 append(passwordSalt, other.passwordSalt).
+                append(isCredentialsExpired, other.isCredentialsExpired).
                 append(accountRoleAssociations, other.accountRoleAssociations).
                 isEquals();
     }
@@ -137,6 +148,7 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
                 append("username", username).
                 append("password", password).
                 append("passwordSalt", passwordSalt).
+                append("isCredentialsExpired", isCredentialsExpired).
                 append("accountRoleAssociations", accountRoleAssociations).
                 toString();
     }

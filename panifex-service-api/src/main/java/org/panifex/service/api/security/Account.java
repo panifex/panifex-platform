@@ -25,4 +25,12 @@ public interface Account extends Entity {
     String getUsername();
 
     String getPassword();
+    
+    /**
+     * Returns true if credentials are expired and a user must to change it
+     * before logging in.
+     * 
+     * @return true if the user must to change credentials before logging in
+     */
+    boolean getIsCredentialsExpired();
 }

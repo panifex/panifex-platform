@@ -34,6 +34,8 @@ import liquibase.resource.FileSystemResourceAccessor;
 import org.apache.openjpa.conf.OpenJPAConfiguration;
 import org.apache.openjpa.persistence.OpenJPAEntityManagerFactorySPI;
 import org.apache.openjpa.persistence.OpenJPAPersistence;
+import org.apache.shiro.codec.Base64;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +50,7 @@ import org.panifex.test.support.TestSupport;
 public final class AccountRepositoryImplTest extends TestSupport {
 
     private static final String ADMIN_USERNAME = "admin";
+    private static final String ADMIN_PASSWORD = "admin";
     private static final String ADMINISTRATOR_ROLE = "Administrator";
     private static final String USER_PERMISSION = "user";
     
@@ -89,7 +92,16 @@ public final class AccountRepositoryImplTest extends TestSupport {
         
         // must be admin
         assertNotNull(account);
+        assertNotNull(account.getId());
         assertEquals(ADMIN_USERNAME, account.getUsername());
+        assertNotNull(account.getPassword());
+        assertNotNull(account.getPasswordSalt());
+        assertEquals(true, account.getIsCredentialsExpired());
+        
+        // check password
+        byte[] salt = Base64.decode(account.getPasswordSalt());
+        String hashedPasswordBase64 = new SimpleHash(PersistenceRealm.HASH_ALGORITHM, ADMIN_PASSWORD, salt, PersistenceRealm.HASH_ITERATIONS).toBase64();
+        assertEquals(hashedPasswordBase64, account.getPassword());
     }
     
     /**

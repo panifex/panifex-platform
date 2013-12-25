@@ -40,6 +40,11 @@
             <column name="password_salt" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="is_credentials_expired" 
+                    type="boolean" 
+                    defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     
