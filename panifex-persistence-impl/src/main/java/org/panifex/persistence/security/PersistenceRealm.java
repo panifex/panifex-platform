@@ -30,6 +30,7 @@ import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -119,9 +120,21 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
             
             // get password salt
             String passwordSalt = account.getPasswordSalt();
-            
+    
+            // check user's username and password
             if (password == null || passwordSalt == null) {
-                throw new UnknownAccountException("No account found for user [" + username + "]");
+                StringBuilder sb = new StringBuilder();
+                sb.append("No account found for user ");
+                sb.append(username);
+                throw new UnknownAccountException(sb.toString());
+            }
+            
+            // check if user's account is expired
+            if (account.getIsCredentialsExpired()) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("Credentials has been expired for user ");
+                sb.append(username);
+                throw new ExpiredCredentialsException(sb.toString());
             }
     
             SimpleAuthenticationInfo info =
