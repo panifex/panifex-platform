@@ -76,11 +76,12 @@ public class AccountRepositoryImpl implements AccountRepository {
     @Override
     public void insertAccount(Account account) {
         log.debug("Insert account: {}", account);
+        /*
         AccountImplBuilder accountBuilder = new AccountImplBuilder(account);
         
         AccountEntity accountImpl = accountBuilder.build();
         
-        entityManager.persist(accountImpl);
+        entityManager.persist(accountImpl);*/
     }
     
     /**
