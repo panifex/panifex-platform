@@ -27,12 +27,22 @@ public abstract class EntityImpl implements Entity {
     private long id;
     private int optlockVersion;
     
+    protected EntityImpl() {
+    }
+    
+    protected EntityImpl(
+            Long id,
+            int optlockVersion) {
+        this.id = id;
+        this.optlockVersion = optlockVersion;
+    }
+    
     @Override
-    public Long getId() {
+    public final Long getId() {
         return id;
     }
     
-    public int getOptlockVersion() {
+    public final int getOptlockVersion() {
         return optlockVersion;
     }
     

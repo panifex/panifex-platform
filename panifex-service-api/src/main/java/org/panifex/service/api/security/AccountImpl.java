@@ -29,6 +29,17 @@ public final class AccountImpl extends EntityImpl implements Account {
     private String password;
     private boolean isCredentialsExpired;
 
+    public AccountImpl(
+            Long id,
+            int optlockVersion,
+            String username,
+            String password,
+            boolean isCredentialsExpired) {
+        super(id, optlockVersion);
+        this.username = username;
+        this.password = password;
+    }
+    
     @Override
     public String getUsername() {
         return username;
