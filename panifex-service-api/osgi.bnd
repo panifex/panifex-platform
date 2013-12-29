@@ -19,7 +19,8 @@ Export-Package: \
 	org.panifex.service.api, \
 	org.panifex.service.api.security
 
-Import-Package: \
+Import-Package: \	
+    org.apache.commons.lang3.builder;version="[3.1,4.0)", \
 	org.apache.shiro.authc;version="[1.2,2.0)", \
 	org.apache.shiro.authz;version="[1.2,2.0)", \
 	org.apache.shiro.realm;version="[1.2,2.0)", \
