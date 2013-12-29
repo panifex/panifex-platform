@@ -707,7 +707,7 @@
                 <artifactId>super-csv</artifactId>
                 <version>2.1.0</version>
             </dependency>
-            <!-- Testing Dependencies -->
+            <!-- Test Dependencies -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -722,6 +722,11 @@
                 <groupId>org.easymock</groupId>
                 <artifactId>easymock</artifactId>
                 <version>3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fluttercode.datafactory</groupId>
+                <artifactId>datafactory</artifactId>
+                <version>0.8</version>
             </dependency>
             <dependency>
                 <groupId>org.powermock</groupId>
