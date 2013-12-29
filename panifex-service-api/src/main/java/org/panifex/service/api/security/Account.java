@@ -22,9 +22,30 @@ import org.panifex.service.api.Entity;
 
 public interface Account extends Entity {
 
+    /**
+     * Returns the account's username
+     * 
+     * @return the account's username
+     */
     String getUsername();
 
+    /**
+     * Returns the account's password. 
+     * <p>
+     * The password can be hashed, salted and Base64 encoded in case
+     * getting it from a repository, or in plain text in case saving it
+     * to the repository.
+     * 
+     * @return the account's password
+     */
     String getPassword();
+
+    /**
+     * Sets the account's password.
+     * 
+     * @param password the plain text password
+     */
+    void setPassword(String password);
     
     /**
      * Returns true if credentials are expired and a user must to change it

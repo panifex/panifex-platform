@@ -75,7 +75,7 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
         return password;
     }
 
-    protected void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
     
