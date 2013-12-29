@@ -51,6 +51,18 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
     private List<AccountRoleAssociationEntity> accountRoleAssociations;
     
     public AccountEntity(
+            Long id,
+            int optlockVersion,
+            String username,
+            String password,
+            String passwordSalt) {
+        super(id, optlockVersion);
+        this.username = username;
+        this.password = password;
+        this.passwordSalt = passwordSalt;
+    }
+    
+    public AccountEntity(
             String username,
             String password,
             String passwordSalt) {

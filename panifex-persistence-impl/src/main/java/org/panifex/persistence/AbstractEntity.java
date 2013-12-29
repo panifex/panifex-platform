@@ -39,6 +39,16 @@ public abstract class AbstractEntity implements Entity {
     private Long id;
     private int optlockVersion;
     
+    protected AbstractEntity() {
+    }
+    
+    protected AbstractEntity(
+            Long id,
+            int optlockVersion) {
+        this.id = id;
+        this.optlockVersion = optlockVersion;
+    }
+    
     /**
      * {@inheritDoc}
      */
