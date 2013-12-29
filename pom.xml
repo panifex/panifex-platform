@@ -597,6 +597,13 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
+                <artifactId>panifex-service-api</artifactId>
+                <version>${project.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
                 <artifactId>panifex-datasource-derby</artifactId>
                 <version>${project.version}</version>
             </dependency>
