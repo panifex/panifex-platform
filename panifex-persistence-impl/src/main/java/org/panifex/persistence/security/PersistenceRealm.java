@@ -22,6 +22,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
 import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
@@ -40,10 +42,15 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Sha512Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.panifex.service.api.security.AccountNotExpiredException;
+import org.panifex.service.api.security.AccountNotFoundException;
 import org.panifex.service.api.security.Permission;
 import org.panifex.service.api.security.SecurityService;
 import org.slf4j.Logger;
@@ -77,6 +84,14 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
     private AccountRepositoryImpl accountRepository;
     
     /**
+     * {@link org.apache.shiro.crypto.RandomNumberGenerator RandomNumberGenerator} is used
+     * for creating random numbers for generating password salts.
+     */
+    private RandomNumberGenerator randomGenerator = new SecureRandomNumberGenerator();
+    
+    private EntityManager entityManager;
+    
+    /**
      * Constructor adds EhCacheManager.
      */
     public PersistenceRealm() {
@@ -94,6 +109,10 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         this.accountRepository = accountRepository;
     }
     
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -112,7 +131,7 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         }
 
         // get account from repository
-        AccountEntity account = accountRepository.getAccountByUsername(username);
+        AccountEntity account = accountRepository.getAccountByUsername(entityManager, username);
         
         if (account != null) {
             // get password
@@ -169,7 +188,7 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         log.debug("Get authorization info for username: {}", username);
         
         // get account from repository
-        AccountEntity account = accountRepository.getAccountByUsername(username);
+        AccountEntity account = accountRepository.getAccountByUsername(entityManager, username);
        
         // create empty sets
         Set<String> roleNames = new HashSet<>();
@@ -177,7 +196,7 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         
         if (account != null ) {
             List<? extends Permission> permissions = 
-                    accountRepository.getPermissionsForAccount(account);
+                    accountRepository.getPermissionsForAccount(entityManager, account);
             
             for (Permission permission : permissions) {
                 String wildcardExpression = permission.getWildcardExpression();
@@ -190,4 +209,46 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         return info;
     }
 
+    @Override
+    public void updateAccountExpiredPassword(String username, String plainPassword) 
+            throws AccountNotFoundException, AccountNotExpiredException {
+        
+        AccountEntity account = accountRepository.getAccountByUsername(entityManager, username);
+        
+        if (account == null) {
+            throw new AccountNotFoundException();
+        }
+        
+        if (!account.getIsCredentialsExpired()) {
+            throw new AccountNotExpiredException();
+        }
+        
+        String passwordSalt = getRandomPasswordSalt();
+        String password = getHashedPasswordBase64(plainPassword, passwordSalt);
+        
+        account.setPassword(password);
+        account.setPasswordSalt(passwordSalt);
+        account.setIsCredentialsExpired(false);
+        
+        accountRepository.updateAccount(entityManager, account);
+    }
+
+    
+    protected String getRandomPasswordSalt() {
+        return randomGenerator.nextBytes().toBase64();
+    }
+    
+    protected String getHashedPasswordBase64(String plainTextPassword, String passwordSalt) {
+        // decode password salt
+        byte[] salt = Base64.decode(passwordSalt);
+            
+        // hash salted password
+        String hashedPasswordBase64 = new SimpleHash(
+            PersistenceRealm.HASH_ALGORITHM, 
+            plainTextPassword, 
+            salt, 
+            PersistenceRealm.HASH_ITERATIONS).toBase64();
+        
+        return hashedPasswordBase64;
+    }
 }

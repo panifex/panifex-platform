@@ -20,6 +20,8 @@ package org.panifex.persistence.security;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.panifex.service.api.security.Account;
 import org.panifex.service.api.security.Permission;
 import org.panifex.service.api.security.Role;
@@ -28,11 +30,13 @@ import org.panifex.service.api.security.Role;
  * Repository of {@link AccountEntity}.
  *
  */
-public interface AccountRepository {
+public interface AccountRepository<T extends Account> {
 
-    void insertAccount(Account account);
+    void insertAccount(EntityManager entityManager, T account);
     
-    Account getAccountByUsername(String username);
+    void updateAccount(EntityManager entityManager, T account);
+    
+    T getAccountByUsername(EntityManager entityManager, String username);
     
     /**
      * Returns a distinct list of {@link org.panifex.service.api.security.Role} for 
@@ -43,7 +47,7 @@ public interface AccountRepository {
      * @param account the account whose roles will be returned
      * @return a distinct list of {@link RoleEntity} for specified account
      */
-    List<? extends Role> getRolesForAccount(Account account);
+    List<? extends Role> getRolesForAccount(EntityManager entityManager, T account);
 
     /**
      * Returns a distinct list of {@link org.panifex.service.api.security.Permission} for 
@@ -54,5 +58,5 @@ public interface AccountRepository {
      * @param account the account whose permissions will be returned
      * @return a distinct list of {@link PermissionEntity} for specified account
      */
-    List<? extends Permission> getPermissionsForAccount(Account account);
+    List<? extends Permission> getPermissionsForAccount(EntityManager entityManager, T account);
 }

@@ -21,7 +21,6 @@ package org.panifex.persistence.security;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -29,12 +28,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
 import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Bind;
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Unbind;
-import org.panifex.service.api.security.Account;
 import org.panifex.service.api.security.Permission;
 import org.panifex.service.api.security.Role;
 import org.slf4j.Logger;
@@ -42,39 +36,14 @@ import org.slf4j.LoggerFactory;
 
 @Bean(id = AccountRepositoryImpl.ID)
 @ReferenceListener
-public class AccountRepositoryImpl implements AccountRepository {
+public class AccountRepositoryImpl implements AccountRepository<AccountEntity> {
 
     public static final String ID = "org.panifex.platform.persistence.security.AccountRepository";
     
     private Logger log = LoggerFactory.getLogger(AccountRepositoryImpl.class);
     
-    @Inject
-    @Reference(
-        serviceInterface = EntityManagerFactory.class, 
-        filter = "(osgi.unit.name=panifex-cm)", 
-        referenceListeners = @ReferenceListener(ref = ID))
-    private EntityManagerFactory entityManagerFactory;
-    
-    private EntityManager entityManager;
-
-    @Bind
-    public void bind(EntityManagerFactory entityManagerFactory) {
-        log.debug("Bind entity manager factory: {}", entityManagerFactory);
-        this.entityManagerFactory = entityManagerFactory;
-
-        // create entity manager
-        this.entityManager = entityManagerFactory.createEntityManager();
-    }
-
-    @Unbind
-    public void unbind(EntityManagerFactory entityManagerFactory) {
-        log.debug("Unbind entity manager factory: {}", entityManagerFactory);
-        this.entityManagerFactory = null;
-        this.entityManager = null;
-    }
-
     @Override
-    public void insertAccount(Account account) {
+    public void insertAccount(EntityManager entityManager, AccountEntity account) {
         log.debug("Insert account: {}", account);
         /*
         AccountImplBuilder accountBuilder = new AccountImplBuilder(account);
@@ -84,13 +53,19 @@ public class AccountRepositoryImpl implements AccountRepository {
         entityManager.persist(accountImpl);*/
     }
     
+    @Override
+    public void updateAccount(EntityManager entityManager, AccountEntity account) {
+        log.debug("Update account: {}", account);
+        entityManager.persist(account);
+    }
+    
     /**
      * {@inheritDoc}
      */
     @Override
-    public AccountEntity getAccountByUsername(String username) {
+    public AccountEntity getAccountByUsername(EntityManager entityManager, String username) {
         log.debug("Get account with username: {}", username);
-        try {
+
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<AccountEntity> cq = cb.createQuery(AccountEntity.class);
         
@@ -115,17 +90,13 @@ public class AccountRepositoryImpl implements AccountRepository {
             log.error("Found more than one account with the same username: {}", username);
             return null;
         }
-        } catch (Exception e) {
-            log.error("Exception: {}", e);
-            return null;
-        }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<? extends Role> getRolesForAccount(Account account) {
+    public List<? extends Role> getRolesForAccount(EntityManager entityManager, AccountEntity account) {
         log.debug("Get roles by account: {}", account);
         
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -160,7 +131,7 @@ public class AccountRepositoryImpl implements AccountRepository {
      * {@inheritDoc}
      */
     @Override
-    public List<? extends Permission> getPermissionsForAccount(Account account) {
+    public List<? extends Permission> getPermissionsForAccount(EntityManager entityManager, AccountEntity account) {
         log.debug("Get permission by account: {}", account);
         
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();

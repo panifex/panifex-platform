@@ -18,26 +18,54 @@
  ******************************************************************************/
 package org.panifex.persistence.security;
 
+import javax.persistence.EntityManager;
+
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.codec.Base64;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
+import org.fluttercode.datafactory.impl.DataFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.panifex.service.api.security.AccountNotExpiredException;
+import org.panifex.service.api.security.AccountNotFoundException;
 import org.panifex.test.support.TestSupport;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * This test cases checks the functionalities of {@link PersitenceRealm}.
  * <p>
- * It simulates successful and unsuccessful logging in scenarios.
+ * It simulates successful and unsuccessful logging in various scenarios, and tests
+ * updating the expired account's credentials.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({
+    PersistenceRealm.class,
+    Base64.class
+})
 public final class PersistenceRealmTest extends TestSupport {
 
     private PersistenceRealm realm;
     
     // mocks
-    private AccountRepositoryImpl accountRepositoryMock;
-
+    private AccountRepositoryImpl accountRepositoryMock = 
+            createMock(AccountRepositoryImpl.class);
+    private EntityManager entityManagerMock = createMock(EntityManager.class);
+    private SecureRandomNumberGenerator randomGeneratorMock = 
+            createMock(SecureRandomNumberGenerator.class);
+    
+    /**
+     * {@link org.fluttercode.datafactory.impl.DataFactory DataFactory} is used
+     * for generating random data.
+     */
+    private DataFactory df = new DataFactory();
+    
     // constants
     private final String USERNAME = "admin";
     private final String PASSWORD = "admin";
@@ -45,10 +73,21 @@ public final class PersistenceRealmTest extends TestSupport {
     private final String PASSWORD_SALT = "1dfpY4vWFRtQIqOxejFVJg==";
     
     @Before
-    public void before() {
+    public void before() throws Exception {
+        // expect instancing the SecureRandomNumberGenerator
+        expectNew(SecureRandomNumberGenerator.class).andReturn(randomGeneratorMock);
+        
+        replayAll();
+        
+        // create realm
         realm = new PersistenceRealm();
-        accountRepositoryMock = createMock(AccountRepositoryImpl.class);
+        
+        // set the realm's properties
         realm.setAccountRepository(accountRepositoryMock);
+        realm.setEntityManager(entityManagerMock);
+        
+        verifyAll();
+        resetAll();
     }
     
     /**
@@ -62,22 +101,22 @@ public final class PersistenceRealmTest extends TestSupport {
         // create mocks
         AccountEntity accountMock = createMock(AccountEntity.class);
         UsernamePasswordToken tokenMock = createMock(UsernamePasswordToken.class);
-        
+
         // expectations
         expect(tokenMock.getUsername()).andReturn(USERNAME);
         expect(tokenMock.getCredentials()).andReturn(PASSWORD.toCharArray());
  
-        expect(accountRepositoryMock.getAccountByUsername(USERNAME)).andReturn(accountMock);
+        expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, USERNAME)).andReturn(accountMock);
         expect(accountMock.getPassword()).andReturn(PASSWORD_HASH);
         expect(accountMock.getPasswordSalt()).andReturn(PASSWORD_SALT);
         expect(accountMock.getIsCredentialsExpired()).andReturn(false);
         
-        replay(accountMock, accountRepositoryMock, tokenMock);
+        replayAll();
         
         // authentificate token
         AuthenticationInfo info = realm.getAuthenticationInfo(tokenMock);
         
-        verify(accountMock, accountRepositoryMock, tokenMock);
+        verifyAll();
         
         assertNotNull(info);
     }
@@ -96,9 +135,9 @@ public final class PersistenceRealmTest extends TestSupport {
         // expectations
         expect(tokenMock.getUsername()).andReturn(USERNAME);
  
-        expect(accountRepositoryMock.getAccountByUsername(USERNAME)).andReturn(null);
+        expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, USERNAME)).andReturn(null);
         
-        replay(accountRepositoryMock, tokenMock);
+        replayAll();
 
         try {
             // authentificate token
@@ -127,22 +166,128 @@ public final class PersistenceRealmTest extends TestSupport {
         // expectations
         expect(tokenMock.getUsername()).andReturn(USERNAME);
  
-        expect(accountRepositoryMock.getAccountByUsername(USERNAME)).andReturn(accountMock);
+        expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, USERNAME)).andReturn(accountMock);
         expect(accountMock.getPassword()).andReturn(PASSWORD_HASH);
         expect(accountMock.getPasswordSalt()).andReturn(PASSWORD_SALT);
         expect(accountMock.getIsCredentialsExpired()).andReturn(true);
         
-        replay(accountMock, accountRepositoryMock, tokenMock);
+        replayAll();
 
         try {
             // authentificate token
             realm.getAuthenticationInfo(tokenMock);
         } catch (ExpiredCredentialsException e) {
             // expected 
-            verify(accountMock, accountRepositoryMock, tokenMock);
+            verifyAll();
             return;
         }
         
         fail("ExpiredCredentialException have must be thrown");
+    }
+    
+    /**
+     * Tries to successfully update an accounts' expired password.
+     * <p>
+     * The account's password must have been updated.
+     */
+    @Test
+    public void successfullyUpdateExpiredPasswordTest() throws Exception {
+        String username = df.getRandomWord();
+        String plainTextPassword = df.getRandomChars(20);
+        String base64PasswordSalt = df.getRandomChars(20);
+        byte[] bytesPasswordSalt = base64PasswordSalt.getBytes();
+        String hashedSaltedPassword = df.getRandomChars(20);
+        
+        // create mocks
+        AccountEntity accountMock = createMock(AccountEntity.class);
+        ByteSource byteSourceMock = createMock(ByteSource.class);
+        SimpleHash simpleHashMock = createMockAndExpectNew(SimpleHash.class,
+            new Class[] {String.class, Object.class, Object.class, int.class},
+            PersistenceRealm.HASH_ALGORITHM,
+            plainTextPassword,
+            bytesPasswordSalt,
+            PersistenceRealm.HASH_ITERATIONS);
+        mockStatic(Base64.class);
+        
+        // expectations
+        
+        // expect get the account from the repository
+        expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, username)).andReturn(accountMock);
+        
+        // expect check if the account is expired
+        expect(accountMock.getIsCredentialsExpired()).andReturn(true);
+        
+        // expect generating a password salt and decoding it to Base64
+        expect(randomGeneratorMock.nextBytes()).andReturn(byteSourceMock);
+        expect(byteSourceMock.toBase64()).andReturn(base64PasswordSalt);
+        expect(Base64.decode(base64PasswordSalt)).andReturn(bytesPasswordSalt);
+        expect(simpleHashMock.toBase64()).andReturn(hashedSaltedPassword);
+        
+        // expect setting a hashed password and the password salt to the account entity
+        accountMock.setPassword(hashedSaltedPassword);
+        accountMock.setPasswordSalt(base64PasswordSalt);
+        accountMock.setIsCredentialsExpired(false);
+        
+        // expect persisting the changed account
+        accountRepositoryMock.updateAccount(entityManagerMock, accountMock);
+        
+        replayAll();
+        
+        // try to update the account's password
+        realm.updateAccountExpiredPassword(username, plainTextPassword);
+        
+        verifyAll();
+    }
+    
+    /**
+     * Tries to update a not existed accounts' password. {@link org.panifex.service.api.security.AccountNotFoundException AccountNotFoundException}
+     * must be thrown because the account with the same username does not exist in db.
+     */
+    @Test(expected = AccountNotFoundException.class)
+    public void updateNotExistedAccountsPasswordTest() throws AccountNotFoundException, AccountNotExpiredException {
+        // variables
+        String username = df.getRandomWord();
+        String plainTextPassword = df.getRandomChars(20);
+        
+        // expectations
+        
+        // expect getting the account from the repository
+        expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, username)).andReturn(null);
+        
+        replayAll();
+        
+        // try to update the account's password
+        realm.updateAccountExpiredPassword(username, plainTextPassword);
+        
+        fail("AccountNotFoundException must be thrown");
+    }
+    
+    /**
+     * Tries to update a not expired account. {@link org.panifex.service.api.security.AccountNotExpiredException AccountNotExpiredException}
+     * must be thrown because the account is not expired.
+     */
+    @Test(expected = AccountNotExpiredException.class)
+    public void updateNotExpiredAccountTest() throws AccountNotFoundException, AccountNotExpiredException {
+        // variables
+        String username = df.getRandomWord();
+        String plainTextPassword = df.getRandomChars(20);
+        
+        // mocks
+        AccountEntity accountEntity = createMock(AccountEntity.class);
+        
+        // expectations
+        
+        // expect getting the account from the repository
+        expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, username)).andReturn(accountEntity);
+        
+        // expect checking if the account is expired
+        expect(accountEntity.getIsCredentialsExpired()).andReturn(false);
+        
+        replayAll();
+        
+        // try to update the account's password
+        realm.updateAccountExpiredPassword(username, plainTextPassword);
+        
+        fail("AccountNotExpiredException must be thrown.");
     }
 }

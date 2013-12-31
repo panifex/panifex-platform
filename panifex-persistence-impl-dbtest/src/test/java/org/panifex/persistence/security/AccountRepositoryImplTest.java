@@ -22,6 +22,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.sql.DataSource;
@@ -36,7 +37,7 @@ import org.apache.openjpa.persistence.OpenJPAEntityManagerFactorySPI;
 import org.apache.openjpa.persistence.OpenJPAPersistence;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.junit.After;
+import org.fluttercode.datafactory.impl.DataFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.panifex.service.api.security.Permission;
@@ -54,12 +55,13 @@ public final class AccountRepositoryImplTest extends TestSupport {
     private static final String ADMINISTRATOR_ROLE = "Administrator";
     private static final String USER_PERMISSION = "user";
     
-    private EntityManagerFactory entityManagerFactory;
+    private EntityManager entityManager;
     private AccountRepositoryImpl accountRepository;
     
     @Before
     public void setUp() throws SQLException, LiquibaseException {
-        entityManagerFactory = Persistence.createEntityManagerFactory("panifex");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("panifex");
+        entityManager = entityManagerFactory.createEntityManager();
         
         OpenJPAEntityManagerFactorySPI kemf = (OpenJPAEntityManagerFactorySPI) OpenJPAPersistence.cast(entityManagerFactory);
         OpenJPAConfiguration conf = kemf.getConfiguration();
@@ -70,12 +72,39 @@ public final class AccountRepositoryImplTest extends TestSupport {
         liquibase.update(null);
         
         accountRepository = new AccountRepositoryImpl();
-        accountRepository.bind(entityManagerFactory);
     }
     
-    @After
-    public void after() {
-        accountRepository.unbind(entityManagerFactory);
+    /**
+     * This test tries to update an existed account. It checks functionality of
+     * {@link AccountRepositoryImpl#updateAccount(AccountEntity)} method.
+     * <p>
+     * For starter the test gets an existed Account.
+     */
+    @Test
+    public void updateAccountTest() {
+        // variables
+        DataFactory df = new DataFactory();
+        String newPassword = df.getRandomChars(20);
+                
+        // get the persisted account
+        AccountEntity account = accountRepository.getAccountByUsername(entityManager, ADMIN_USERNAME);
+        
+        // must be admin
+        assertNotNull(account);
+        assertEquals(ADMIN_USERNAME, account.getUsername());
+        assertNotEquals(newPassword, account.getPassword());
+        
+        // change their password
+        account.setPassword(newPassword);
+        
+        // save the changed account
+        accountRepository.updateAccount(entityManager, account);
+        
+        // check if the account has been changed
+        AccountEntity changedAccount = accountRepository.getAccountByUsername(entityManager, ADMIN_USERNAME);
+        
+        assertEquals(account.getId(), changedAccount.getId());
+        assertEquals(newPassword, changedAccount.getPassword());
     }
     
     /**
@@ -88,7 +117,7 @@ public final class AccountRepositoryImplTest extends TestSupport {
      */
     @Test
     public void getAccountByUsernameTest() {
-        AccountEntity account = accountRepository.getAccountByUsername(ADMIN_USERNAME);
+        AccountEntity account = accountRepository.getAccountByUsername(entityManager, ADMIN_USERNAME);
         
         // must be admin
         assertNotNull(account);
@@ -114,13 +143,13 @@ public final class AccountRepositoryImplTest extends TestSupport {
     @Test
     public void getRolesForAccountTest() {
         // get admin account
-        AccountEntity adminAccount = accountRepository.getAccountByUsername(ADMIN_USERNAME);
+        AccountEntity adminAccount = accountRepository.getAccountByUsername(entityManager, ADMIN_USERNAME);
         
         // must be admin
         assertEquals(ADMIN_USERNAME, adminAccount.getUsername());
         
         // get admin's roles
-        List<? extends Role> roles = accountRepository.getRolesForAccount(adminAccount);
+        List<? extends Role> roles = accountRepository.getRolesForAccount(entityManager, adminAccount);
         
         // check if admin user has administration role
         assertNotNull(roles);
@@ -137,14 +166,14 @@ public final class AccountRepositoryImplTest extends TestSupport {
     @Test
     public void getPermissionsForAccountTest() {
         // get admin account
-        AccountEntity adminAccount = accountRepository.getAccountByUsername(ADMIN_USERNAME);
+        AccountEntity adminAccount = accountRepository.getAccountByUsername(entityManager, ADMIN_USERNAME);
         
         // must be admin
         assertEquals(ADMIN_USERNAME, adminAccount.getUsername());
         
         // get admin's permissions
         List<? extends Permission> permissions = 
-                accountRepository.getPermissionsForAccount(adminAccount);
+                accountRepository.getPermissionsForAccount(entityManager, adminAccount);
         
         // check if admin user has user permission
         assertNotNull(permissions);

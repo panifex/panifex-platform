@@ -18,22 +18,11 @@
  ******************************************************************************/
 package org.panifex.service.api.security;
 
-import org.apache.shiro.authz.Authorizer;
-import org.apache.shiro.realm.Realm;
-
-public interface SecurityService extends Authorizer, Realm {
+public class AccountNotExpiredException extends Exception {
 
     /**
-     * Updates the {@link Account} expired password.
-     * <p>
-     * It must be implemented if the account can expire.
-     * 
-     * @param username the Account's username
-     * @param plainPassword the new Account's plain password
-     * @throws AccountNotFoundException if the account with the same username does not exists in db
+     * Serial version UID.
      */
-    void updateAccountExpiredPassword(String username, String plainPassword)
-        throws AccountNotFoundException,
-        AccountNotExpiredException;
-    
+    private static final long serialVersionUID = -5110932631541936126L;
+
 }
