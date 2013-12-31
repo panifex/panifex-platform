@@ -27,20 +27,14 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.panifex.service.api.security.Permission;
 import org.panifex.service.api.security.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Bean(id = AccountRepositoryImpl.ID)
-@ReferenceListener
 public class AccountRepositoryImpl implements AccountRepository<AccountEntity> {
 
-    public static final String ID = "org.panifex.platform.persistence.security.AccountRepository";
-    
-    private Logger log = LoggerFactory.getLogger(AccountRepositoryImpl.class);
+    private final Logger log = LoggerFactory.getLogger(AccountRepositoryImpl.class);
     
     @Override
     public void insertAccount(EntityManager entityManager, AccountEntity account) {

@@ -30,24 +30,18 @@ import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.exception.LiquibaseException;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Bind;
 import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Unbind;
 import org.osgi.framework.BundleContext;
 import org.panifex.persistence.resource.BundleResourceAccessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Bean(id = "org.panifex.platform.persistence.DataSourceListener")
-@ReferenceListener
 public class DataSourceListener {
 
     private Logger log = LoggerFactory.getLogger(DataSourceListener.class);
 
-    @Inject(ref = "blueprintBundleContext")
     private BundleContext bundleContext;
 
     @Inject
@@ -62,7 +56,6 @@ public class DataSourceListener {
         this.bundleContext = bundleContext;
     }
 
-    @Bind
     public void bind(DataSource dataSource) {
         try {
             log.debug("Fetch data source");
@@ -89,7 +82,6 @@ public class DataSourceListener {
         }
     }
 
-    @Unbind
     public void unbind(DataSource dataSource) {
 
     }

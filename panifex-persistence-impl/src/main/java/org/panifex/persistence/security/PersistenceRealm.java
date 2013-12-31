@@ -24,10 +24,6 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Service;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -60,15 +56,10 @@ import org.slf4j.LoggerFactory;
  * Realm that allows authentication and authorization via persisted data.
  * 
  */
-@Bean(id = PersistenceRealm.ID)
-@Service(interfaces = SecurityService.class)
-@ReferenceListener
 public class PersistenceRealm extends AuthorizingRealm implements SecurityService {
 
     private final Logger log = LoggerFactory.getLogger(PersistenceRealm.class);
 
-    public static final String ID = "org.panifex.web.impl.security.OsgiRealm";
-    
     /**
      * Hash algorithm name to use when performing hashes for credentials matching.
      */
@@ -80,7 +71,6 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
      */
     public static final int HASH_ITERATIONS = 1024;
     
-    @Inject(ref = AccountRepositoryImpl.ID)
     private AccountRepositoryImpl accountRepository;
     
     /**
