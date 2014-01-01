@@ -20,6 +20,8 @@ package org.panifex.test.support;
 
 import java.lang.reflect.Method;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 import org.easymock.Capture;
 import org.easymock.ConstructorArgs;
@@ -29,6 +31,10 @@ import org.easymock.IExpectationSetters;
 import org.easymock.IMockBuilder;
 import org.easymock.IMocksControl;
 import org.easymock.LogicalOperator;
+import org.fluttercode.datafactory.AddressDataValues;
+import org.fluttercode.datafactory.ContentDataValues;
+import org.fluttercode.datafactory.NameDataValues;
+import org.fluttercode.datafactory.impl.DataFactory;
 import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.internal.ArrayComparisonFailure;
@@ -38,7 +44,7 @@ import org.powermock.core.classloader.annotations.PrepareOnlyThisForTest;
 import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
 
 /**
- * Template class for test cases.
+ * The template class for unit tests.
  * 
  * <p>The class inlines methods from {@link org.junit.Assert}, {@link org.easymock.EasyMock} and
  * {@link org.powermock.api.easymock.PowerMock} classes in order to subclasses do not have the reference 
@@ -47,6 +53,11 @@ import org.powermock.core.classloader.annotations.SuppressStaticInitializationFo
  */
 public abstract class TestSupport {
 
+    /**
+     * Class that provides a number of methods for generating test data.
+     */
+    private DataFactory df;
+    
     /**
      * Asserts that a condition is true. If it isn't it throws an
      * {@link AssertionError} with the given message.
@@ -3828,4 +3839,529 @@ public abstract class TestSupport {
             Object... arguments) throws Exception {
         return PowerMock.expectNiceNew(type, parameterTypes, arguments);
     }
+    
+    /**
+     * Returns the {@link org.fluttercode.datafactory.impl.DataFactory DataFactory} instance.
+     * @return
+     */
+    private DataFactory getDataFactory() {
+        if (df == null) {
+            // initialize the DataFactory if it has not inialized yet
+            synchronized (DataFactory.class) {
+                if (df == null) {
+                    df = new DataFactory();
+                }
+            }
+        }
+        return df;
+    }
+    
+    /**
+     * Returns a random item from a list of items.
+     * 
+     * @param <T>
+     *            Item type in the list and to return
+     * @param items
+     *            List of items to choose from
+     * @return Item from the list
+     */
+    protected final <T> T getItem(List<T> items) {
+        return getDataFactory().getItem(items);
+    }
+
+    /**
+     * Returns a random item from a list of items or the null depending on the
+     * probability parameter. The probability determines the chance (in %) of
+     * returning an item off the list versus null.
+     * 
+     * @param <T>
+     *            Item type in the list and to return
+     * @param items
+     *            List of items to choose from
+     * @param probability
+     *            chance (in %, 100 being guaranteed) of returning an item from
+     *            the list
+     * @return Item from the list or null if the probability test fails.
+     */
+    protected final <T> T getItem(List<T> items, int probability) {
+        return getDataFactory().getItem(items, probability);
+    }
+
+    /**
+     * Returns a random item from a list of items or the defaultItem depending
+     * on the probability parameter. The probability determines the chance (in
+     * %) of returning an item off the list versus the default value.
+     * 
+     * @param <T>
+     *            Item type in the list and to return
+     * @param items
+     *            List of items to choose from
+     * @param probability
+     *            chance (in %, 100 being guaranteed) of returning an item from
+     *            the list
+     * @param defaultItem
+     *            value to return if the probability test fails
+     * @return Item from the list or the default value
+     */
+    protected final <T> T getItem(List<T> items, int probability, T defaultItem) {
+        return getDataFactory().getItem(items, probability, defaultItem);
+    }
+
+    /**
+     * Returns a random item from an array of items
+     * 
+     * @param <T>
+     *            Array item type and the type to return
+     * @param items
+     *            Array of items to choose from
+     * @return Item from the array
+     */
+    protected final <T> T getItem(T[] items) {
+        return getDataFactory().getItem(items);
+    }
+
+    /**
+     * Returns a random item from an array of items or null depending on the
+     * probability parameter. The probability determines the chance (in %) of
+     * returning an item from the array versus null.
+     * 
+     * @param <T>
+     *            Array item type and the type to return
+     * @param items
+     *            Array of items to choose from
+     * @param probability
+     *            chance (in %, 100 being guaranteed) of returning an item from
+     *            the array
+     * @return Item from the array or the default value
+     */
+    protected final <T> T getItem(T[] items, int probability) {
+        return getDataFactory().getItem(items, probability);
+    }
+
+    /**
+     * Returns a random item from an array of items or the defaultItem depending
+     * on the probability parameter. The probability determines the chance (in
+     * %) of returning an item from the array versus the default value.
+     * 
+     * @param <T>
+     *            Array item type and the type to return
+     * @param items
+     *            Array of items to choose from
+     * @param probability
+     *            chance (in %, 100 being guaranteed) of returning an item from
+     *            the array
+     * @param defaultItem
+     *            value to return if the probability test fails
+     * @return Item from the array or the default value
+     */
+    protected final <T> T getItem(T[] items, int probability, T defaultItem) {
+        return getDataFactory().getItem(items, probability, defaultItem);
+    }
+
+    /**
+     * @return A random first name
+     */
+    protected final String getFirstName() {
+        return getDataFactory().getFirstName();
+    }
+
+    /**
+     * Returns a combination of first and last name values in one string
+     * 
+     * @return
+     */
+    protected final String getName() {
+        return getDataFactory().getName();
+    }
+
+    /**
+     * @return A random last name
+     */
+    protected final String getLastName() {
+        return getDataFactory().getLastName();
+    }
+
+    /**
+     * @return A random street name
+     */
+    protected final String getStreetName() {
+        return getDataFactory().getStreetName();
+    }
+
+    /**
+     * @return A random street suffix
+     */
+    protected final String getStreetSuffix() {
+        return getDataFactory().getStreetSuffix();
+    }
+
+    /**
+     * Generates a random city value
+     * 
+     * @return City as a string
+     */
+    protected final String getCity() {
+        return getDataFactory().getCity();
+    }
+
+    /**
+     * Generates an address value consisting of house number, street name and
+     * street suffix. i.e. <code>543 Larkhill Road</code>
+     * 
+     * @return Address as a string
+     */
+    protected final String getAddress() {
+        return getDataFactory().getAddress();
+    }
+
+    /**
+     * Generates line 2 for a street address (usually an Apt. or Suite #).
+     * Returns null if the probabilty test fails.
+     * 
+     * @param probability
+     *            Chance as % of have a value returned instead of null.
+     * @return Street address line two or null if the probability test fails
+     */
+    protected final String getAddressLine2(int probability) {
+        return getDataFactory().getAddressLine2(probability);
+    }
+
+    /**
+     * Generates line 2 for a street address (usually an Apt. or Suite #).
+     * Returns default value if the probabilty test fails.
+     * 
+     * @param probability
+     *            Chance as % of have a value returned instead of null.
+     * @param defaultValue
+     *            Value to return if the probability test fails.
+     * @return Street address line two or null if the probability test fails
+     */
+    protected final String getAddressLine2(int probability, String defaultValue) {
+        return getDataFactory().getAddressLine2(probability, defaultValue);
+    }
+
+    /**
+     * Generates line 2 for a street address (usually an Apt. or Suite #).
+     * Returns default value if the probabilty test fails.
+     * 
+     * @return Street address line 2
+     */
+    protected final String getAddressLine2() {
+        return getDataFactory().getAddressLine2();
+    }
+
+    /**
+     * Creates a random birthdate within the range of 1955 to 1985
+     * 
+     * @return Date representing a birthdate
+     */
+    protected final Date getBirthDate() {
+        return getDataFactory().getBirthDate();
+    }
+
+    /**
+     * Returns a random int value.
+     * 
+     * @return random number
+     */
+    protected final int getNumber() {
+        return getDataFactory().getNumber();
+    }
+
+    /**
+     * Returns a random number between 0 and max
+     * 
+     * @param max
+     *            Maximum value of result
+     * @return random number no more than max
+     */
+    protected final int getNumberUpTo(int max) {
+        return getDataFactory().getNumberUpTo(max);
+    }
+
+    /**
+     * Returns a number betwen min and max
+     * 
+     * @param min
+     *            minimum value of result
+     * @param max
+     *            maximum value of result
+     * @return Random number within range
+     */
+    protected final int getNumberBetween(int min, int max) {
+        return getDataFactory().getNumberBetween(min, max);
+    }
+
+    /**
+     * Builds a date from the year, month, day values passed in
+     * 
+     * @param year
+     *            The year of the final {@link Date} result
+     * @param month
+     *            The month of the final {@link Date} result (from 1-12)
+     * @param day
+     *            The day of the final {@link Date} result
+     * @return Date representing the passed in values.
+     */
+    protected final Date getDate(int year, int month, int day) {
+        return getDataFactory().getDate(year, month, day);
+    }
+
+    /**
+     * Returns a random date which is in the range <code>baseData</code> +
+     * <code>minDaysFromData</code> to <code>baseData</code> +
+     * <code>maxDaysFromData</code>. This method does not alter the time
+     * component and the time is set to the time value of the base date.
+     * 
+     * @param baseDate
+     *            Date to start from
+     * @param minDaysFromDate
+     *            minimum number of days from the baseDate the result can be
+     * @param maxDaysFromDate
+     *            maximum number of days from the baseDate the result can be
+     * @return A random date
+     */
+    protected final Date getDate(Date baseDate, int minDaysFromDate, int maxDaysFromDate) {
+        return getDataFactory().getDate(baseDate, minDaysFromDate, maxDaysFromDate);
+    }
+
+    /**
+     * Returns a random date between two dates. This method will alter the time
+     * component of the dates
+     * 
+     * @param minDate
+     *            Minimum date that can be returned
+     * @param maxDate
+     *            Maximum date that can be returned
+     * @return random date between these two dates.
+     */
+    protected final Date getDateBetween(Date minDate, Date maxDate) {
+        return getDataFactory().getDateBetween(minDate, maxDate);
+    }
+
+    /**
+     * Returns random text made up of english words of length
+     * <code>length</code>
+     * 
+     * @param length
+     *            length of returned string
+     * 
+     * @return string made up of actual words with length <code>length</code>
+     */
+    protected final String getRandomText(int length) {
+        return getDataFactory().getRandomText(length);
+    }
+
+    /**
+     * Returns random text made up of english words
+     * 
+     * @param minLength
+     *            minimum length of returned string
+     * @param maxLength
+     *            maximum length of returned string
+     * @return string of length between min and max length
+     */
+    protected final String getRandomText(int minLength, int maxLength) {
+        return getDataFactory().getRandomText(minLength, maxLength);
+    }
+    /**
+     * @return a random character
+     */
+    protected final char getRandomChar() {
+        return getDataFactory().getRandomChar();
+    }
+
+    /**
+     * Return a string containing <code>length</code> random characters
+     * 
+     * @param length
+     *            number of characters to use in the string
+     * @return A string containing <code>length</code> random characters
+     */
+    protected final String getRandomChars(int length) {
+        return getDataFactory().getRandomChars(length);
+    }
+
+    /**
+     * Return a string containing between <code>length</code> random characters
+     * 
+     * @param length
+     *            number of characters to use in the string
+     * @return A string containing <code>length</code> random characters
+     */
+    protected final String getRandomChars(int minLength, int maxLength) {
+        return getDataFactory().getRandomChars(minLength, maxLength);
+    }
+
+    /**
+     * Returns a word of a length between 1 and 10 characters.
+     * 
+     * @return A work of max length 10
+     */
+    protected final String getRandomWord() {
+        return getDataFactory().getRandomWord();
+    }
+
+    /**
+     * Returns a valid word with a length of <code>length</code>
+     * characters.
+     * 
+     * @param length
+     *            maximum length of the word
+     * @return a word of a length up to <code>length</code> characters
+     */
+    protected final String getRandomWord(int length) {
+        return getDataFactory().getRandomWord(length);
+    }
+
+    /**
+     * Returns a valid word with a length of up to <code>length</code>
+     * characters. If the <code>exactLength</code> parameter is set, then the
+     * word will be exactly <code>length</code> characters in length.
+     * 
+     * @param length
+     *            maximum length of the returned string
+     * @param exactLength
+     *            indicates if the word should have a length of
+     *            <code>length</code>
+     * @return a string with a length that matches the specified parameters.
+     */
+    protected final String getRandomWord(int length, boolean exactLength) {
+        return getDataFactory().getRandomWord(length, exactLength);
+    }
+
+    /**
+     * Returns a valid word based on the length range passed in. The length will
+     * always be between the min and max length range inclusive.
+     * 
+     * @param minLength minimum length of the word
+     * @param maxLength maximum length of the word
+     * @return a word of a length between min and max length
+     */
+    protected final String getRandomWord(int minLength, int maxLength) {
+        return getDataFactory().getRandomWord(minLength, maxLength);
+    }
+
+    /**
+     * 
+     * @param chance
+     *            Chance of a suffix being returned
+     * @return
+     */
+    protected final String getSuffix(int chance) {
+        return getDataFactory().getSuffix(chance);
+    }
+
+    /**
+     * Return a person prefix or null if the odds are too low.
+     * 
+     * @param chance
+     *            Odds of a prefix being returned
+     * @return Prefix string
+     */
+    protected final String getPrefix(int chance) {
+        return getDataFactory().getPrefix(chance);
+    }
+
+    /**
+     * Returns a string containing a set of numbers with a fixed number of
+     * digits
+     * 
+     * @param digits
+     *            number of digits in the final number
+     * @return Random number as a string with a fixed length
+     */
+    protected final String getNumberText(int digits) {
+        return getDataFactory().getNumberText(digits);
+    }
+
+    /**
+     * Generates a random business name by taking a city name and additing a
+     * business onto it.
+     * 
+     * @return A random business name
+     */
+    protected final String getBusinessName() {
+        return getDataFactory().getBusinessName();
+    }
+
+    /**
+     * Generates an email address
+     * 
+     * @return an email address
+     */
+    protected final String getEmailAddress() {
+        return getDataFactory().getEmailAddress();
+    }
+
+    /**
+     * Gives you a true/false based on a probability with a random number
+     * generator. Can be used to optionally add elements.
+     * 
+     * <pre>
+     * if (DataFactory.chance(70)) {
+     *  // 70% chance of this code being executed
+     * }
+     * </pre>
+     * 
+     * @param chance
+     *            % chance of returning true
+     * @return
+     */
+    protected final boolean chance(int chance) {
+        return getDataFactory().chance(chance);
+    }
+
+    protected final NameDataValues getNameDataValues() {
+        return getDataFactory().getNameDataValues();
+    }
+
+    /**
+     * Call randomize with a seed value to reset the random number generator. By
+     * using the same seed over different tests, you will should get the same
+     * results out for the same data generation calls.
+     * 
+     * @param seed
+     *            Seed value to use to generate random numbers
+     */
+    protected final void randomize(int seed) {
+        getDataFactory().randomize(seed);
+    }
+
+    /**
+     * Set this to provide your own list of name data values by passing it a
+     * class that implements the {@link NameDataValues} interface which just
+     * returns the String arrays to use for the test data.
+     * 
+     * @param nameDataValues
+     *            Object holding the set of data values to use
+     */
+    protected final void setNameDataValues(NameDataValues nameDataValues) {
+        getDataFactory().setNameDataValues(nameDataValues);
+    }
+
+    /**
+     * Set this to provide your own list of address data values by passing it a
+     * class that implements the {@link AddressDataValues} interface which just
+     * returns the String arrays to use for the test data.
+     * 
+     * @param addressDataValues
+     *            Object holding the set of data values to use
+     */
+    protected final void setAddressDataValues(AddressDataValues addressDataValues) {
+        getDataFactory().setAddressDataValues(addressDataValues);
+    }
+
+    /**
+     * Set this to provide your own list of content data values by passing it a
+     * class that implements the {@link ContentDataValues} interface which just
+     * returns the String arrays to use for the test data.
+     * 
+     * @param contentDataValues
+     *            Object holding the set of data values to use
+     */
+    protected final void setContentDataValues(ContentDataValues contentDataValues) {
+        getDataFactory().setContentDataValues(contentDataValues);
+    }
+
 }
