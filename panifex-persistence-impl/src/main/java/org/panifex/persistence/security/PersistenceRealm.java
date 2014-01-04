@@ -259,11 +259,26 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         return info;
     }
     
-    protected String getRandomPasswordSalt() {
+    /**
+     * Returns a random generated <a href="http://en.wikipedia.org/wiki/Base64">Base 64</a>-formatted 
+     * byte array of fixed length filled.
+     * <p>
+     * It is used for salting passwords.
+     * 
+     * @return a random generated <a href="http://en.wikipedia.org/wiki/Base64">Base 64</a>-formatted byte array
+     */
+    private String getRandomPasswordSalt() {
         return randomGenerator.nextBytes().toBase64();
     }
     
-    protected String getHashedPasswordBase64(String plainTextPassword, String passwordSalt) {
+    /**
+     * Returns a hashed and salted plain text password.
+     * 
+     * @param plainTextPassword the password to be hashes
+     * @param passwordSalt the salt to use for the hash
+     * @return a hashed and salted plain text password
+     */
+    private String getHashedPasswordBase64(String plainTextPassword, String passwordSalt) {
         // decode password salt
         byte[] salt = Base64.decode(passwordSalt);
             
