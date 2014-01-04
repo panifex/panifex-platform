@@ -117,49 +117,31 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
 
         // Null username is invalid
         if (username == null) {
-            throw new AccountException("Null usernames are not allowed by this realm.");
+            throw new AccountException("Null usernames are not allowed.");
         }
 
         // get account from repository
-        AccountEntity account = accountRepository.getAccountByUsername(entityManager, username);
-        
-        if (account != null) {
-            // get password
-            String password = account.getPassword();
+        AccountEntity account = getAccountByUsername(username);
             
-            // get password salt
-            String passwordSalt = account.getPasswordSalt();
-    
-            // check user's username and password
-            if (password == null || passwordSalt == null) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("No account found for user ");
-                sb.append(username);
-                throw new UnknownAccountException(sb.toString());
-            }
-            
-            // check if user's account is expired
-            if (account.getIsCredentialsExpired()) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Credentials has been expired for user ");
-                sb.append(username);
-                throw new ExpiredCredentialsException(sb.toString());
-            }
-    
-            SimpleAuthenticationInfo info =
-                    new SimpleAuthenticationInfo(
-                        username, 
-                        password,
-                        ByteSource.Util.bytes(Base64.decode(passwordSalt)),
-                        getName());
-    
-            log.debug("Authentication info resolved: username={}", username);
-    
-            return info;
-        } else {
-            // account == null
-            throw new UnknownAccountException("No account found for user [" + username + "]");
+        // check if user's account is expired
+        if (account.getIsCredentialsExpired()) {
+            // the account is expired. Throw ExpiredCredentialsException
+            StringBuilder sb = new StringBuilder();
+            sb.append("Credentials has been expired for user ");
+            sb.append(username);
+                        throw new ExpiredCredentialsException(sb.toString());
         }
+                
+        SimpleAuthenticationInfo info =
+                new SimpleAuthenticationInfo(
+                    username, 
+                    account.getPassword(),
+                    ByteSource.Util.bytes(Base64.decode(account.getPasswordSalt())),
+                    getName());
+    
+        log.debug("Authentication info resolved: username={}", username);
+    
+        return info;
     }
 
     /**
@@ -224,6 +206,39 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
     }
 
     
+    /**
+     * Returns the {@link AccountEntity} with the same username.
+     * 
+     * @param username a account's username
+     * @return the {@link AccountEntity} with the same username
+     * @throws UnknownAccountException if the account has not found, or if its password or its password's salt is null
+     */
+    private AccountEntity getAccountByUsername(String username) throws UnknownAccountException {
+        // get account from repository
+        AccountEntity account = accountRepository.getAccountByUsername(entityManager, username);
+        
+        if (account != null) {
+            // get password
+            String password = account.getPassword();
+            
+            // get password salt
+            String passwordSalt = account.getPasswordSalt();
+    
+            // check user's username and password
+            if (password == null || passwordSalt == null) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("No account found for user ");
+                sb.append(username);
+                throw new UnknownAccountException(sb.toString());
+            }
+            
+            return account;
+        } else {
+            // the account has not found. Throw UnknownAccountException.
+            throw new UnknownAccountException("No account found for user [" + username + "]");
+        }
+    }
+
     protected String getRandomPasswordSalt() {
         return randomGenerator.nextBytes().toBase64();
     }

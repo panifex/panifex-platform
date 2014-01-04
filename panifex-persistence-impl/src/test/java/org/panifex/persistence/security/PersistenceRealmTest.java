@@ -32,6 +32,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.service.api.security.AccountNotExpiredException;
+import org.panifex.service.api.security.AccountNotFoundException;
 import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -99,8 +100,8 @@ public final class PersistenceRealmTest extends TestSupport {
         expect(tokenMock.getCredentials()).andReturn(PASSWORD.toCharArray());
  
         expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, USERNAME)).andReturn(accountMock);
-        expect(accountMock.getPassword()).andReturn(PASSWORD_HASH);
-        expect(accountMock.getPasswordSalt()).andReturn(PASSWORD_SALT);
+        expect(accountMock.getPassword()).andReturn(PASSWORD_HASH).times(2);
+        expect(accountMock.getPasswordSalt()).andReturn(PASSWORD_SALT).times(2);
         expect(accountMock.getIsCredentialsExpired()).andReturn(false);
         
         replayAll();
