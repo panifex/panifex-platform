@@ -46,7 +46,6 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.panifex.service.api.security.AccountNotExpiredException;
-import org.panifex.service.api.security.AccountNotFoundException;
 import org.panifex.service.api.security.Permission;
 import org.panifex.service.api.security.SecurityService;
 import org.slf4j.Logger;
@@ -173,13 +172,9 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
 
     @Override
     public void updateAccountExpiredPassword(String username, String plainPassword) 
-            throws AccountNotFoundException, AccountNotExpiredException {
+            throws UnknownAccountException, AccountNotExpiredException {
         
-        AccountEntity account = accountRepository.getAccountByUsername(entityManager, username);
-        
-        if (account == null) {
-            throw new AccountNotFoundException();
-        }
+        AccountEntity account = getAccountByUsername(username);
         
         if (!account.getIsCredentialsExpired()) {
             throw new AccountNotExpiredException();

@@ -32,7 +32,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.service.api.security.AccountNotExpiredException;
-import org.panifex.service.api.security.AccountNotFoundException;
 import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -209,8 +208,10 @@ public final class PersistenceRealmTest extends TestSupport {
         // expect get the account from the repository
         expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, username)).andReturn(accountMock);
         
-        // expect check if the account is expired
+        // expect checking if the account is existed and if it is expired
         expect(accountMock.getIsCredentialsExpired()).andReturn(true);
+        expect(accountMock.getPassword()).andReturn(PASSWORD_HASH);
+        expect(accountMock.getPasswordSalt()).andReturn(PASSWORD_SALT);
         
         // expect generating a password salt and decoding it to Base64
         expect(randomGeneratorMock.nextBytes()).andReturn(byteSourceMock);
@@ -238,8 +239,8 @@ public final class PersistenceRealmTest extends TestSupport {
      * Tries to update a not existed accounts' password. {@link org.panifex.service.api.security.AccountNotFoundException AccountNotFoundException}
      * must be thrown because the account with the same username does not exist in db.
      */
-    @Test(expected = AccountNotFoundException.class)
-    public void updateNotExistedAccountsPasswordTest() throws AccountNotFoundException, AccountNotExpiredException {
+    @Test(expected = UnknownAccountException.class)
+    public void updateNotExistedAccountsPasswordTest() throws UnknownAccountException, AccountNotExpiredException {
         // variables
         String username = getRandomWord();
         String plainTextPassword = getRandomChars(20);
@@ -262,7 +263,7 @@ public final class PersistenceRealmTest extends TestSupport {
      * must be thrown because the account is not expired.
      */
     @Test(expected = AccountNotExpiredException.class)
-    public void updateNotExpiredAccountTest() throws AccountNotFoundException, AccountNotExpiredException {
+    public void updateNotExpiredAccountTest() throws UnknownAccountException, AccountNotExpiredException {
         // variables
         String username = getRandomWord();
         String plainTextPassword = getRandomChars(20);
@@ -275,8 +276,10 @@ public final class PersistenceRealmTest extends TestSupport {
         // expect getting the account from the repository
         expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, username)).andReturn(accountEntity);
         
-        // expect checking if the account is expired
+        // expect checking if the account is existed and it is expired
         expect(accountEntity.getIsCredentialsExpired()).andReturn(false);
+        expect(accountEntity.getPassword()).andReturn(PASSWORD_HASH);
+        expect(accountEntity.getPasswordSalt()).andReturn(PASSWORD_SALT);
         
         replayAll();
         

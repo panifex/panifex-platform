@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.service.api.security;
 
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.Authorizer;
 import org.apache.shiro.realm.Realm;
 
@@ -33,7 +34,7 @@ public interface SecurityService extends Authorizer, Realm {
      * @throws AccountNotFoundException if the account with the same username does not exists in db
      */
     void updateAccountExpiredPassword(String username, String plainPassword)
-        throws AccountNotFoundException,
+        throws UnknownAccountException,
         AccountNotExpiredException;
     
 }
