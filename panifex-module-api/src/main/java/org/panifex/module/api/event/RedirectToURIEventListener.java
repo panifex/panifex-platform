@@ -28,7 +28,7 @@ import org.zkoss.zk.ui.event.SerializableEventListener;
  * if the {@link org.zkoss.zk.ui.event.Event Event} with the specified name occurs.
  * 
  */
-public final class RedirectToURIEventListener implements SerializableEventListener<Event> {
+public class RedirectToURIEventListener implements SerializableEventListener<Event> {
     
     /**
      * Serial version UID.
@@ -69,7 +69,7 @@ public final class RedirectToURIEventListener implements SerializableEventListen
      * with the specified name occurs.
      */
     @Override
-    public void onEvent(Event event) throws Exception {
+    public final void onEvent(Event event) throws Exception {
         if (eventName.equals(event.getName())) {
             // send redirect to the login form
             Executions.sendRedirect(uri);
