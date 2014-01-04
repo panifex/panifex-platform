@@ -51,7 +51,7 @@ import org.powermock.core.classloader.annotations.SuppressStaticInitializationFo
  * to that classes. 
  *
  */
-public abstract class TestSupport extends PowerMockMemberMatcherSupport {
+public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Class that provides a number of methods for generating test data.
