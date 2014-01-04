@@ -129,15 +129,11 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
             StringBuilder sb = new StringBuilder();
             sb.append("Credentials has been expired for user ");
             sb.append(username);
-                        throw new ExpiredCredentialsException(sb.toString());
+
+            throw new ExpiredCredentialsException(sb.toString());
         }
                 
-        SimpleAuthenticationInfo info =
-                new SimpleAuthenticationInfo(
-                    username, 
-                    account.getPassword(),
-                    ByteSource.Util.bytes(Base64.decode(account.getPasswordSalt())),
-                    getName());
+        SimpleAuthenticationInfo info = createAuthenticationInfo(account);
     
         log.debug("Authentication info resolved: username={}", username);
     
@@ -239,6 +235,30 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         }
     }
 
+    /**
+     * Constructs the {@link org.apache.shiro.authc.SimpleAuthenticationInfo SimpleAuthenticationInfo}
+     * based on the persisted {@link AccountEntity}.
+     * <p>
+     * The {@link org.apache.shiro.authc.SimpleAuthenticationInfo SimpleAuthenticationInfo} is used in subsequent
+     * authentication steps.
+     * 
+     * @param account the persisted {@link AccountEntity}
+     * @return the constructed {@link org.apache.shiro.authc.SimpleAuthenticationInfo SimpleAuthenticationInfo} based on the persisted {@link AccountEntity}
+     */
+    private SimpleAuthenticationInfo createAuthenticationInfo(AccountEntity account) { 
+        // decode the password salt
+        byte[] decodedPasswordSalt = Base64.decode(account.getPasswordSalt());
+        ByteSource passwordSaltSource = ByteSource.Util.bytes(decodedPasswordSalt);
+        
+        SimpleAuthenticationInfo info =
+                new SimpleAuthenticationInfo(
+                    account.getUsername(), 
+                    account.getPassword(),
+                    passwordSaltSource,
+                    getName());
+        return info;
+    }
+    
     protected String getRandomPasswordSalt() {
         return randomGenerator.nextBytes().toBase64();
     }
