@@ -28,12 +28,10 @@ import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
-import org.fluttercode.datafactory.impl.DataFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.service.api.security.AccountNotExpiredException;
-import org.panifex.service.api.security.AccountNotFoundException;
 import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -59,12 +57,6 @@ public final class PersistenceRealmTest extends TestSupport {
     private EntityManager entityManagerMock = createMock(EntityManager.class);
     private SecureRandomNumberGenerator randomGeneratorMock = 
             createMock(SecureRandomNumberGenerator.class);
-    
-    /**
-     * {@link org.fluttercode.datafactory.impl.DataFactory DataFactory} is used
-     * for generating random data.
-     */
-    private DataFactory df = new DataFactory();
     
     // constants
     private final String USERNAME = "admin";
@@ -192,11 +184,11 @@ public final class PersistenceRealmTest extends TestSupport {
      */
     @Test
     public void successfullyUpdateExpiredPasswordTest() throws Exception {
-        String username = df.getRandomWord();
-        String plainTextPassword = df.getRandomChars(20);
-        String base64PasswordSalt = df.getRandomChars(20);
+        String username = getRandomWord();
+        String plainTextPassword = getRandomChars(20);
+        String base64PasswordSalt = getRandomChars(20);
         byte[] bytesPasswordSalt = base64PasswordSalt.getBytes();
-        String hashedSaltedPassword = df.getRandomChars(20);
+        String hashedSaltedPassword = getRandomChars(20);
         
         // create mocks
         AccountEntity accountMock = createMock(AccountEntity.class);
@@ -246,8 +238,8 @@ public final class PersistenceRealmTest extends TestSupport {
     @Test(expected = AccountNotFoundException.class)
     public void updateNotExistedAccountsPasswordTest() throws AccountNotFoundException, AccountNotExpiredException {
         // variables
-        String username = df.getRandomWord();
-        String plainTextPassword = df.getRandomChars(20);
+        String username = getRandomWord();
+        String plainTextPassword = getRandomChars(20);
         
         // expectations
         
@@ -269,8 +261,8 @@ public final class PersistenceRealmTest extends TestSupport {
     @Test(expected = AccountNotExpiredException.class)
     public void updateNotExpiredAccountTest() throws AccountNotFoundException, AccountNotExpiredException {
         // variables
-        String username = df.getRandomWord();
-        String plainTextPassword = df.getRandomChars(20);
+        String username = getRandomWord();
+        String plainTextPassword = getRandomChars(20);
         
         // mocks
         AccountEntity accountEntity = createMock(AccountEntity.class);
