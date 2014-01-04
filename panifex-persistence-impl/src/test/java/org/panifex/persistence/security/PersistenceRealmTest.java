@@ -161,6 +161,7 @@ public final class PersistenceRealmTest extends TestSupport {
         expect(tokenMock.getUsername()).andReturn(USERNAME);
  
         expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, USERNAME)).andReturn(accountMock);
+        expect(accountMock.getUsername()).andReturn(USERNAME);
         expect(accountMock.getPassword()).andReturn(PASSWORD_HASH);
         expect(accountMock.getPasswordSalt()).andReturn(PASSWORD_SALT);
         expect(accountMock.getIsCredentialsExpired()).andReturn(true);

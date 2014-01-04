@@ -124,15 +124,9 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         AccountEntity account = getAccountByUsername(username);
             
         // check if user's account is expired
-        if (account.getIsCredentialsExpired()) {
-            // the account is expired. Throw ExpiredCredentialsException
-            StringBuilder sb = new StringBuilder();
-            sb.append("Credentials has been expired for user ");
-            sb.append(username);
-
-            throw new ExpiredCredentialsException(sb.toString());
-        }
-                
+        assertCredentialsNotExpired(account);
+        
+        // create authentication info
         SimpleAuthenticationInfo info = createAuthenticationInfo(account);
     
         log.debug("Authentication info resolved: username={}", username);
@@ -257,6 +251,23 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
                     passwordSaltSource,
                     getName());
         return info;
+    }
+    
+    /**
+     * Asserts that the persisted account is not expired, and if not, throws an ExpiredCredentialsException.
+     * 
+     * @param account the persisted {@link AccountEntity}
+     * @throws ExpiredCredentialsException it the account is expired
+     */
+    private void assertCredentialsNotExpired(AccountEntity account) throws ExpiredCredentialsException {
+        if (account.getIsCredentialsExpired()) {
+            // the account is expired. Throw ExpiredCredentialsException
+            StringBuilder sb = new StringBuilder();
+            sb.append("Credentials has been expired for user ");
+            sb.append(account.getUsername());
+
+            throw new ExpiredCredentialsException(sb.toString());
+        }
     }
     
     /**
