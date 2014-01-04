@@ -54,8 +54,12 @@ public class LoginFormRichletBinder {
     }
 
     @Unbind
-    public void unbind(ZkLayoutService zkLayoutServlet) {
-        zkLayoutServlet.addRichlet(null, PATH);
+    public void unbind(ZkLayoutService zkLayoutService) {
+        log.debug("Unbind Zk layout service: {}", zkLayoutService);
+        if (zkLayoutService != null) {
+            // unregister login form richlet
+            zkLayoutService.addRichlet(null, PATH);
+        }
         this.zkLayoutService = null;
     }
 }
