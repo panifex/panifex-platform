@@ -62,6 +62,7 @@ Import-Package: \
 	org.apache.shiro.web.session.mgt;version="[1.2,2.0)", \
 	org.panifex.module.api.content;version="[1.0, 2.0)", \
 	org.panifex.module.api.environment;version="[1.0, 2.0)", \
+	org.panifex.module.api.event;version="[1.0, 2.0)", \
 	org.panifex.module.api.menu;version="[1.0, 2.0)", \
 	org.panifex.service.api.security;version="[1.0, 2.0)", \
 	org.ops4j.pax.web.service;version="[3.0,4.0)", \
