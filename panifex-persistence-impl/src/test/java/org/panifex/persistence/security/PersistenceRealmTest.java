@@ -187,7 +187,11 @@ public final class PersistenceRealmTest extends TestSupport {
     @Test
     public void successfullyUpdateExpiredPasswordTest() throws Exception {
         String username = getRandomWord();
-        String plainTextPassword = getRandomChars(20);
+        
+        String oldPassword = PASSWORD;
+        byte[] decodedOldPasswordSalt = Base64.decode(PASSWORD_SALT);
+        
+        String newPassword = getRandomChars(20);
         String base64PasswordSalt = getRandomChars(20);
         byte[] bytesPasswordSalt = base64PasswordSalt.getBytes();
         String hashedSaltedPassword = getRandomChars(20);
@@ -198,21 +202,27 @@ public final class PersistenceRealmTest extends TestSupport {
         SimpleHash simpleHashMock = createMockAndExpectNew(SimpleHash.class,
             new Class[] {String.class, Object.class, Object.class, int.class},
             PersistenceRealm.HASH_ALGORITHM,
-            plainTextPassword,
+            newPassword,
             bytesPasswordSalt,
             PersistenceRealm.HASH_ITERATIONS);
         mockStatic(Base64.class);
         
+        // suppress superclass assertCredentialsMatch method
+        suppress(method(PersistenceRealm.class, "assertCredentialsMatch"));
+       
         // expectations
         
         // expect get the account from the repository
         expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, username)).andReturn(accountMock);
         
         // expect checking if the account is existed and if it is expired
+        // expect checking if the account is existed and if it is expired
+        expect(accountMock.getUsername()).andReturn(username);
+        expect(accountMock.getPassword()).andReturn(PASSWORD_HASH).times(2);
+        expect(accountMock.getPasswordSalt()).andReturn(PASSWORD_SALT).times(2);
         expect(accountMock.getIsCredentialsExpired()).andReturn(true);
-        expect(accountMock.getPassword()).andReturn(PASSWORD_HASH);
-        expect(accountMock.getPasswordSalt()).andReturn(PASSWORD_SALT);
-        
+        expect(Base64.decode(PASSWORD_SALT)).andReturn(decodedOldPasswordSalt);
+               
         // expect generating a password salt and decoding it to Base64
         expect(randomGeneratorMock.nextBytes()).andReturn(byteSourceMock);
         expect(byteSourceMock.toBase64()).andReturn(base64PasswordSalt);
@@ -230,7 +240,7 @@ public final class PersistenceRealmTest extends TestSupport {
         replayAll();
         
         // try to update the account's password
-        realm.updateAccountExpiredPassword(username, plainTextPassword);
+        realm.updateAccountExpiredPassword(username, oldPassword, newPassword);
         
         verifyAll();
     }
@@ -243,7 +253,8 @@ public final class PersistenceRealmTest extends TestSupport {
     public void updateNotExistedAccountsPasswordTest() throws UnknownAccountException, AccountNotExpiredException {
         // variables
         String username = getRandomWord();
-        String plainTextPassword = getRandomChars(20);
+        String oldPassword = getRandomChars(20);
+        String newPassword = getRandomChars(20);
         
         // expectations
         
@@ -253,7 +264,7 @@ public final class PersistenceRealmTest extends TestSupport {
         replayAll();
         
         // try to update the account's password
-        realm.updateAccountExpiredPassword(username, plainTextPassword);
+        realm.updateAccountExpiredPassword(username, oldPassword, newPassword);
         
         fail("AccountNotFoundException must be thrown");
     }
@@ -265,8 +276,7 @@ public final class PersistenceRealmTest extends TestSupport {
     @Test(expected = AccountNotExpiredException.class)
     public void updateNotExpiredAccountTest() throws UnknownAccountException, AccountNotExpiredException {
         // variables
-        String username = getRandomWord();
-        String plainTextPassword = getRandomChars(20);
+        String newPassword = getRandomChars(20);
         
         // mocks
         AccountEntity accountEntity = createMock(AccountEntity.class);
@@ -274,17 +284,18 @@ public final class PersistenceRealmTest extends TestSupport {
         // expectations
         
         // expect getting the account from the repository
-        expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, username)).andReturn(accountEntity);
+        expect(accountRepositoryMock.getAccountByUsername(entityManagerMock, USERNAME)).andReturn(accountEntity);
         
         // expect checking if the account is existed and it is expired
         expect(accountEntity.getIsCredentialsExpired()).andReturn(false);
-        expect(accountEntity.getPassword()).andReturn(PASSWORD_HASH);
-        expect(accountEntity.getPasswordSalt()).andReturn(PASSWORD_SALT);
+        expect(accountEntity.getUsername()).andReturn(USERNAME);
+        expect(accountEntity.getPassword()).andReturn(PASSWORD_HASH).times(2);
+        expect(accountEntity.getPasswordSalt()).andReturn(PASSWORD_SALT).times(2);
         
         replayAll();
         
         // try to update the account's password
-        realm.updateAccountExpiredPassword(username, plainTextPassword);
+        realm.updateAccountExpiredPassword(USERNAME, PASSWORD, newPassword);
         
         fail("AccountNotExpiredException must be thrown.");
     }

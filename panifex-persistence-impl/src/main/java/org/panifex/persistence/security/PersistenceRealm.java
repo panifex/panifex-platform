@@ -170,18 +170,41 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         return info;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateAccountExpiredPassword(String username, String plainPassword) 
+    public void updateAccountExpiredPassword(String username, String oldPassword, String newPassword) 
             throws UnknownAccountException, AccountNotExpiredException {
         
+        // get account from repository
         AccountEntity account = getAccountByUsername(username);
         
-        if (!account.getIsCredentialsExpired()) {
-            throw new AccountNotExpiredException();
-        }
+        // create authentication info
+        SimpleAuthenticationInfo info = createAuthenticationInfo(account);
         
+        // create the authentication token
+        UsernamePasswordToken token = new UsernamePasswordToken(username, oldPassword);
+        
+        // assert that the UsernamePasswordToken's credentials match the stored account AuthenticationInfo's credentials
+        assertCredentialsMatch(token, info);
+
+        // assert that the account's credentials is expired
+        assertCredentialsExpired(account);
+        
+        // the account is expired, so change the current password
+        updateAccountPassword(account, newPassword);
+    }
+
+    /**
+     * Updates the {@link AccountEntity} password.
+     * 
+     * @param account the persisted {@link AccountEntity}
+     * @param newPassword the new plain text password
+     */
+    private void updateAccountPassword(AccountEntity account, String newPassword) {
         String passwordSalt = getRandomPasswordSalt();
-        String password = getHashedPasswordBase64(plainPassword, passwordSalt);
+        String password = getHashedPasswordBase64(newPassword, passwordSalt);
         
         account.setPassword(password);
         account.setPasswordSalt(passwordSalt);
@@ -189,7 +212,6 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         
         accountRepository.updateAccount(entityManager, account);
     }
-
     
     /**
      * Returns the {@link AccountEntity} with the same username.
@@ -258,10 +280,22 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         if (account.getIsCredentialsExpired()) {
             // the account is expired. Throw ExpiredCredentialsException
             StringBuilder sb = new StringBuilder();
-            sb.append("Credentials has been expired for user ");
+            sb.append("Credentials is expired for user ");
             sb.append(account.getUsername());
 
             throw new ExpiredCredentialsException(sb.toString());
+        }
+    }
+    
+    /**
+     * Asserts that the persisted account is expired, and if not, throws an AccountNotExpiredException.
+     * 
+     * @param account the persisted {@link AccountEntity}
+     * @throws AccountNotExpiredException it the account is not expired
+     */
+    private void assertCredentialsExpired(AccountEntity account) throws AccountNotExpiredException {
+        if (!account.getIsCredentialsExpired()) {
+            throw new AccountNotExpiredException();
         }
     }
     

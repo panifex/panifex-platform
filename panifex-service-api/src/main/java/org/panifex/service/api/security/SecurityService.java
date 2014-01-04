@@ -25,15 +25,17 @@ import org.apache.shiro.realm.Realm;
 public interface SecurityService extends Authorizer, Realm {
 
     /**
-     * Updates the {@link Account} expired password.
+     * Updates the {@link Account}'s expired password.
      * <p>
      * It must be implemented if the account can expire.
      * 
-     * @param username the Account's username
-     * @param plainPassword the new Account's plain password
-     * @throws AccountNotFoundException if the account with the same username does not exists in db
+     * @param username the {@link Account}'s username
+     * @param oldPassword the current old {@link Account}'s password
+     * @param newPassword the new {@link Account}'s plain password
+     * @throws AccountNotExpiredException if the {@link Account} has not expired
+     * @throws UnknownAccountException if the {@link Account} with the same username does not exists in db
      */
-    void updateAccountExpiredPassword(String username, String plainPassword)
+    void updateAccountExpiredPassword(String username, String oldPassword, String newPassword)
         throws UnknownAccountException,
         AccountNotExpiredException;
     
