@@ -23,6 +23,8 @@ import org.panifex.web.impl.menu.MenuActionTemplate;
 import org.panifex.web.impl.menu.MenuNodeTemplate;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.DefaultBinder;
+import org.zkoss.bind.impl.ValidationMessagesImpl;
+import org.zkoss.bind.sys.ValidationMessages;
 import org.zkoss.text.MessageFormats;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -44,12 +46,18 @@ import org.zkoss.zul.Script;
  */
 public abstract class LayoutRichlet extends GenericRichlet {
 
-    private Binder binder;
+    private DefaultBinder binder;
 
     /**
      * Contains the {@link java.lang.String String} constant in which is the view-model binded to the components.
      */
     protected static final String VM_BIND_ID = "vm";
+    
+    /**
+     * Defines the attribute in which is the {@link org.zkoss.bind.sys.ValidationMessages ValidationMessages}
+     * binded to the components.
+     */
+    protected static final String VALIDATION_MESSAGES = "vmsgs";
     
     @Override
     public final void service(Page page) throws Exception {
@@ -72,6 +80,11 @@ public abstract class LayoutRichlet extends GenericRichlet {
         binder.init(main, getViewModel(), null);
         main.setAttribute(VM_BIND_ID, binder.getViewModel());
 
+        // set validation messages
+        ValidationMessages vmessages = new ValidationMessagesImpl();
+        binder.setValidationMessages(vmessages);
+        main.setAttribute(VALIDATION_MESSAGES, vmessages);
+        
         // create components
         createComponents(main);
         
