@@ -29,6 +29,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExpiredCredentialsException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -175,7 +176,7 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
      */
     @Override
     public void updateAccountExpiredPassword(String username, String oldPassword, String newPassword) 
-            throws UnknownAccountException, AccountNotExpiredException {
+            throws AccountNotExpiredException, IncorrectCredentialsException, UnknownAccountException  {
         
         // get account from repository
         AccountEntity account = getAccountByUsername(username);

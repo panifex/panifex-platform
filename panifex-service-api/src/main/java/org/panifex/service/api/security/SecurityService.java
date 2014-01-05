@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.service.api.security;
 
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.Authorizer;
 import org.apache.shiro.realm.Realm;
@@ -32,11 +33,14 @@ public interface SecurityService extends Authorizer, Realm {
      * @param username the {@link Account}'s username
      * @param oldPassword the current old {@link Account}'s password
      * @param newPassword the new {@link Account}'s plain password
+     * 
      * @throws AccountNotExpiredException if the {@link Account} has not expired
      * @throws UnknownAccountException if the {@link Account} with the same username does not exists in db
+     * @throws IncorrectCredentialsException if the oldPassword does not match the current account's credentials
      */
     void updateAccountExpiredPassword(String username, String oldPassword, String newPassword)
-        throws UnknownAccountException,
-        AccountNotExpiredException;
+        throws AccountNotExpiredException,
+            IncorrectCredentialsException,
+            UnknownAccountException;
     
 }
