@@ -46,6 +46,11 @@ public abstract class LayoutRichlet extends GenericRichlet {
 
     private Binder binder;
 
+    /**
+     * Contains the {@link java.lang.String String} constant in which is the view-model binded to the components.
+     */
+    protected static final String VM_BIND_ID = "vm";
+    
     @Override
     public final void service(Page page) throws Exception {
         PageCtrl pageCtrl = (PageCtrl) page;
@@ -65,7 +70,7 @@ public abstract class LayoutRichlet extends GenericRichlet {
         // initialize Binder
         binder = new DefaultBinder();
         binder.init(main, getViewModel(), null);
-        main.setAttribute("vm", binder.getViewModel());
+        main.setAttribute(VM_BIND_ID, binder.getViewModel());
 
         // create components
         createComponents(main);
@@ -129,7 +134,7 @@ public abstract class LayoutRichlet extends GenericRichlet {
         logout.setIconSclass("glyphicon glyphicon-share-alt");
         logout.setParent(menubar);
         binder.addCommandBinding(logout, Events.ON_CLICK, "'logout'", null);
-        binder.addPropertyLoadBindings(logout, "visible", "vm.isUserLoggedIn", null, null, null,
+        binder.addPropertyLoadBindings(logout, "visible", VM_BIND_ID + ".isUserLoggedIn", null, null, null,
                 null, null);
     }
 
