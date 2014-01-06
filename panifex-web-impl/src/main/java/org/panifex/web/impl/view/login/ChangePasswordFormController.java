@@ -27,8 +27,10 @@ public interface ChangePasswordFormController {
    
     /**
      * It is called after the account's password has successfully been changed.
+     * 
+     * @param username the account's username for which is the password successfully updated
      */
-    void onSuccessfullyChangePassword();
+    void onSuccessfullyChangePassword(String username);
 
     /**
      * It is called if the parameters has not been correctly passed.

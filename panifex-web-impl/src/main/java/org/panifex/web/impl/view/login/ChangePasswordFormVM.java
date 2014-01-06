@@ -146,7 +146,7 @@ public final class ChangePasswordFormVM extends LayoutVM {
             // update account expired password
             securityService.updateAccountExpiredPassword(username, oldPassword, newPassword);
             
-            controller.onSuccessfullyChangePassword();
+            controller.onSuccessfullyChangePassword(username);
         }  catch (AccountNotExpiredException e) {
             log.debug("The account {} is not expired", username);
             controller.onAccountNotExpiredException();

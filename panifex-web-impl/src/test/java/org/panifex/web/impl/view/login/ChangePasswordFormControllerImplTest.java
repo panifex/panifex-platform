@@ -69,6 +69,7 @@ public final class ChangePasswordFormControllerImplTest extends TestSupport {
     @Test
     public void onSuccessfullyChangePasswordTest() throws Exception {
         // variables
+        String username = getRandomWord();
         String messageLabel = getRandomWord();
         String titleLabel = getRandomWord();
         
@@ -81,7 +82,7 @@ public final class ChangePasswordFormControllerImplTest extends TestSupport {
         expect(Labels.getLabel("changepassword.form.success.title")).andReturn(titleLabel);
         
         // expect creating redirector to the login form
-        expect(RedirectToLoginFormEventListenerFactory.createDefaultRedirector()).
+        expect(RedirectToLoginFormEventListenerFactory.createDefaultRedirector(username)).
             andReturn(listenerMock);
         
         // expect showing the message box
@@ -94,7 +95,7 @@ public final class ChangePasswordFormControllerImplTest extends TestSupport {
         
         replayAll();
         
-        controller.onSuccessfullyChangePassword();
+        controller.onSuccessfullyChangePassword(username);
         
         verifyAll();
     }

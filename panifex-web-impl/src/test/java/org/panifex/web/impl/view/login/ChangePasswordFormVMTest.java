@@ -247,7 +247,7 @@ public final class ChangePasswordFormVMTest extends TestSupport {
         securityServiceMock.updateAccountExpiredPassword(username, oldPassword, newPassword);
         
         // expect calling controller's onSuccessfullyChangePassword method
-        controllerMock.onSuccessfullyChangePassword();
+        controllerMock.onSuccessfullyChangePassword(username);
         
         // expect reseting passwords
         BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.OLD_PASSWORD_PROPERTY);

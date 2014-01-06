@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
+import org.panifex.module.api.event.RedirectToURIEventListener;
 import org.panifex.web.impl.event.RedirectToLoginFormEventListenerFactory;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Messagebox;
@@ -26,15 +27,25 @@ public class ChangePasswordFormControllerImpl implements ChangePasswordFormContr
 
     /**
      * Shows the information message box and then redirects to the login form.
+     * <p>
+     * The username parameter is going to be passed to the login form through
+     * the current {@link org.zkoss.zk.ui.Session Session}.
+     * 
+     * @param username the account's username for which is the password successfully updated
      */
     @Override
-    public void onSuccessfullyChangePassword() {
+    public void onSuccessfullyChangePassword(String username) {
+        // create the event listener which redirects the user to the login form
+        RedirectToURIEventListener eventListener = 
+                RedirectToLoginFormEventListenerFactory.createDefaultRedirector(username);
+        
+        // show message box
         Messagebox.show(
             Labels.getLabel("changepassword.form.success.message"),
             Labels.getLabel("changepassword.form.success.title"),
             Messagebox.OK, 
             Messagebox.INFORMATION,
-            RedirectToLoginFormEventListenerFactory.createDefaultRedirector());
+            eventListener);
     }
     
     /**
