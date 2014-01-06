@@ -171,7 +171,9 @@ public class LoginFormRichlet extends LayoutRichlet {
     
     @Override
     protected LayoutVM getViewModel() {
-        return new LoginFormVM();
+        LoginFormController controller = new LoginFormControllerImpl();
+        LoginFormVM vm = new LoginFormVM(controller);
+        return vm;
     }
 
 }

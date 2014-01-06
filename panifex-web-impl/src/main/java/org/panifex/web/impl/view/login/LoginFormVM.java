@@ -18,7 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
@@ -39,14 +38,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.SerializableEventListener;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
 
-public class LoginFormVM extends LayoutVM {
+public final class LoginFormVM extends LayoutVM {
 
     private Logger log = LoggerFactory.getLogger(LoginFormVM.class);
 
@@ -54,6 +49,12 @@ public class LoginFormVM extends LayoutVM {
     private String password = "";
     private boolean isRememberMe = true;
 
+    private final LoginFormController controller;
+    
+    public LoginFormVM(LoginFormController controller) {
+        this.controller = controller;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -87,35 +88,15 @@ public class LoginFormVM extends LayoutVM {
         Subject currentUser = SecurityUtils.getSubject();
 
         try {
+            // perform login
             currentUser.login(token);
-            log.info("User {} has been logged in", username);
-            Executions.sendRedirect("/zk/main");
-        } catch (ExpiredCredentialsException e) {
-            // show warning message box
-            Messagebox.show(
-                Labels.getLabel("login.form.fault.ExpiredCredentialsException.message"), 
-                Labels.getLabel("login.form.fault.ExpiredCredentialsException.title"), 
-                Messagebox.OK, 
-                Messagebox.EXCLAMATION,
-                new SerializableEventListener<Event>() {
-
-                    /**
-                     * Serial version UID
-                     */
-                    private static final long serialVersionUID = 1L;
-
-                    @Override
-                    public void onEvent(Event event) throws Exception {
-                        if (Messagebox.ON_OK.equals(event.getName())) {
-                            final HashMap<String, Object> map = new HashMap<>();
-                            map.put(ChangePasswordFormVM.USERNAME_PARAM, username);
-                            Sessions.getCurrent().setAttribute(ChangePasswordFormVM.ID, map);
-                            Executions.sendRedirect("/zk/changepassword");
-                        }       
-                    }
-                    
-                });
             
+            // the user has successfully log in
+            log.info("User {} has been logged in", username);
+            controller.onSuccessfulLoginIn();
+            
+        } catch (ExpiredCredentialsException e) {
+            controller.onExpiredCredentialsException(username);
         } catch (UnknownAccountException e) {
             Messagebox.show(Labels.getLabel("login.form.fault.UnknownAccountException"), null, 0,
                     Messagebox.ERROR);
