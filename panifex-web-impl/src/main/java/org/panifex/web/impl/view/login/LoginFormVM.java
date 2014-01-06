@@ -19,6 +19,7 @@
 package org.panifex.web.impl.view.login;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;
@@ -37,7 +38,10 @@ import org.panifex.web.impl.view.layout.LayoutVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
 
@@ -48,14 +52,37 @@ public final class LoginFormVM extends LayoutVM {
     public static final String ID = "org.panifex.web.impl.view.login.LoginFormVM";
     public static final String USERNAME_PARAM = "org.panifex.web.impl.view.login.LoginFormVM.USERNAME_PARAM";
     
-    private String username = "";
-    private String password = "";
+    private String username;
+    private String password;
     private boolean isRememberMe = true;
 
     private final LoginFormController controller;
     
     public LoginFormVM(LoginFormController controller) {
         this.controller = controller;
+    }
+    
+    /**
+     * Initializes the {@link LoginFormVM} instance.
+     * <p>
+     * It tries to get the username parameter from the current {@link org.zkoss.zk.ui.Session Session} 
+     * object. If the parameter is set in the current {@link org.zkoss.zk.ui.Session Session},
+     * then it will be set to the username field.
+     */
+    @Init
+    public void init() {
+        // get current session
+        Session currentSession = Sessions.getCurrent();
+        
+        // get parameters from current session and remove them
+        @SuppressWarnings("unchecked")
+        final Map<String, Object> params = (Map<String, Object>) 
+                currentSession.removeAttribute(ID);
+        
+        if (params != null) {
+            // get the username parameter if the parameters is not null
+            username = (String) params.get(USERNAME_PARAM);
+        }
     }
     
     public String getUsername() {

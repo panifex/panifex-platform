@@ -18,6 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -26,17 +29,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
-import org.panifex.web.impl.view.login.LoginFormVM;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 
 /**
  * Unit tests for the {@link LoginFormVM} class.
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({LoginFormVM.class, Executions.class, SecurityUtils.class})
+@PrepareForTest({
+    Executions.class, 
+    LoginFormVM.class, 
+    SecurityUtils.class,
+    Sessions.class})
 public class LoginFormVMTest extends TestSupport {
 
     /**
@@ -56,8 +64,9 @@ public class LoginFormVMTest extends TestSupport {
         vm = new LoginFormVM(controllerMock);
        
         // mock static classes
-        mockStatic(SecurityUtils.class);
         mockStatic(Executions.class);
+        mockStatic(SecurityUtils.class);
+        mockStatic(Sessions.class);
     }
 
     /**
@@ -141,5 +150,65 @@ public class LoginFormVMTest extends TestSupport {
         replayAll();
         vm.signIn();        
         verifyAll();
+    }
+    
+    /**
+     * This tests checks the successfully initialization of {@link LoginFormVM} view-model.
+     * <p>
+     * It checks functionality of the {@link LoginFormVM#init()} method when the username parameter
+     * has been passed through the current {@link org.zkoss.zk.ui.Session Session}.
+     */
+    @Test
+    public void initTest() {
+        // variables
+        String usernameParam = getRandomWord();
+        Map<String, Object> attributesMock = new HashMap<>();
+        attributesMock.put(LoginFormVM.USERNAME_PARAM, usernameParam);
+        
+        // mocks
+        Session sessionMock = createMock(Session.class);
+        
+        // expect getting current session
+        expect(Sessions.getCurrent()).andReturn(sessionMock);
+
+        // expect removing the session attribute
+        expect(sessionMock.removeAttribute(LoginFormVM.ID)).andReturn(attributesMock);
+        
+        replayAll();
+        
+        // initialize ChangePasswordFormVM
+        vm.init();
+        
+        verifyAll();
+        
+        // check if the password is correctly extracted
+        assertEquals(usernameParam, vm.getUsername());
+    }
+    
+    /**
+     * This tests checks the successfully initialization of {@link LoginFormVM} view-model
+     *  when the username parameter has not been passed through the current 
+     *  {@link org.zkoss.zk.ui.Session Session}.
+     */
+    @Test
+    public void initNullParamsTest() {
+     // mocks
+        Session sessionMock = createMock(Session.class);
+        
+        // expect getting current session
+        expect(Sessions.getCurrent()).andReturn(sessionMock);
+
+        // expect removing the session attribute
+        expect(sessionMock.removeAttribute(LoginFormVM.ID)).andReturn(null);
+        
+        replayAll();
+        
+        // initialize ChangePasswordFormVM
+        vm.init();
+        
+        verifyAll();
+        
+        // check if the password is correctly extracted
+        assertNull(vm.getUsername());
     }
 }
