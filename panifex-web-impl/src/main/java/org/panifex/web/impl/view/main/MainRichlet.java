@@ -34,6 +34,8 @@ public class MainRichlet extends LayoutRichlet {
 
     private Logger log = LoggerFactory.getLogger(MainRichlet.class);
     
+    public static final String URL = "/zk/main";
+    
     @Override
     protected Component createContent() {
         log.debug("Create content");
