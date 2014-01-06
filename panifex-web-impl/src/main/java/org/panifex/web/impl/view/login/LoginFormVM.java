@@ -45,6 +45,9 @@ public final class LoginFormVM extends LayoutVM {
 
     private Logger log = LoggerFactory.getLogger(LoginFormVM.class);
 
+    public static final String ID = "org.panifex.web.impl.view.login.LoginFormVM";
+    public static final String USERNAME_PARAM = "org.panifex.web.impl.view.login.LoginFormVM.USERNAME_PARAM";
+    
     private String username = "";
     private String password = "";
     private boolean isRememberMe = true;

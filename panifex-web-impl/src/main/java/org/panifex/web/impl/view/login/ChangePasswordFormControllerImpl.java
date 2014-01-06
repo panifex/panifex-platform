@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
-import org.panifex.web.impl.event.RedirectToLoginFormEventListener;
+import org.panifex.web.impl.event.RedirectToLoginFormEventListenerFactory;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Messagebox;
 
@@ -34,7 +34,7 @@ public class ChangePasswordFormControllerImpl implements ChangePasswordFormContr
             Labels.getLabel("changepassword.form.success.title"),
             Messagebox.OK, 
             Messagebox.INFORMATION,
-            new RedirectToLoginFormEventListener());
+            RedirectToLoginFormEventListenerFactory.createDefaultRedirector());
     }
     
     /**
@@ -48,7 +48,7 @@ public class ChangePasswordFormControllerImpl implements ChangePasswordFormContr
             Labels.getLabel("exception.messagebox.generic.title"),
             Messagebox.OK, 
             Messagebox.ERROR,
-            new RedirectToLoginFormEventListener());
+            RedirectToLoginFormEventListenerFactory.createDefaultRedirector());
     }
 
     /**
@@ -62,7 +62,7 @@ public class ChangePasswordFormControllerImpl implements ChangePasswordFormContr
             Labels.getLabel("changepassword.form.title"),
             Messagebox.OK, 
             Messagebox.EXCLAMATION,
-            new RedirectToLoginFormEventListener());
+            RedirectToLoginFormEventListenerFactory.createDefaultRedirector());
     }
     
     /**
@@ -91,6 +91,6 @@ public class ChangePasswordFormControllerImpl implements ChangePasswordFormContr
             Labels.getLabel("changepassword.form.title"),
             Messagebox.OK, 
             Messagebox.EXCLAMATION,
-            new RedirectToLoginFormEventListener());
+            RedirectToLoginFormEventListenerFactory.createDefaultRedirector());
     }
 }
