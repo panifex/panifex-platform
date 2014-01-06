@@ -40,88 +40,135 @@ public class LoginFormRichlet extends LayoutRichlet {
 
     private Logger log = LoggerFactory.getLogger(LoginFormRichlet.class);
 
+    public static final String URL = "/zk/login";
+    
     @Override
     protected Component createContent() {
         log.debug("Create content");
 
-        final Div content = new Div();
-        content.setSclass("account-container");;
+        Div content = new Div();
+        content.setSclass("account-container");
 
-        final H1 h1 = new H1();
-        h1.setParent(content);
+        // header area
+        createContentHeaderArea(content);
 
-        final Text h1Label = new Text(getLabel("login.form.header.title1"));
-        h1Label.setParent(h1);
+        // fields area
+        createContentFieldsArea(content);
 
-        final Div loginFields = new Div();
-        loginFields.setSclass("login-fields");
-        loginFields.setParent(content);
-
-        final P p = new P();
-        p.setParent(loginFields);
-
-        final Text pLabel = new Text(getLabel("login.form.header.title2"));
-        pLabel.setParent(p);
-
-        final Div usernameField = new Div();
-        usernameField.setSclass("field");
-        usernameField.setParent(loginFields);
-
-        // Creates username textbox
-        final Textbox usernameTextbox = new Textbox();
-        usernameTextbox.setId("username");
-        usernameTextbox.setSclass("username-field");
-        usernameTextbox.setPlaceholder(getLabel("login.form.field.username.placeholder"));
-        usernameTextbox.setPlaceholder(getLabel("login.form.field.username.tooltip"));
-        usernameTextbox.setParent(usernameField);
-        getBinder().addPropertyLoadBindings(usernameTextbox, "value", "vm.username", null, null,
-                null, null, null);
-        getBinder().addPropertySaveBindings(usernameTextbox, "value", "vm.username", null, null,
-                null, null, null, null, null);
-
-        final Div passwordField = new Div();
-        passwordField.setSclass("field");
-        passwordField.setParent(loginFields);
-
-        // Creates password textbox
-        final Textbox passwordTextbox = new Textbox();
-        passwordTextbox.setId("password");
-        passwordTextbox.setType("password");
-        passwordTextbox.setSclass("password-field");
-        passwordTextbox.setPlaceholder(getLabel("login.form.field.password.placeholder"));
-        passwordTextbox.setTooltip(getLabel("login.form.field.password.tooltip"));
-        passwordTextbox.setParent(passwordField);
-        getBinder().addPropertyLoadBindings(passwordTextbox, "value", "vm.password", null, null,
-                null, null, null);
-        getBinder().addPropertySaveBindings(passwordTextbox, "value", "vm.password", null, null,
-                null, null, null, null, null);
-
-        final Div loginActions = new Div();
-        loginActions.setSclass("pull-left");
-        loginActions.setParent(content);
-
-        // Creates remember me checkbox
-        final Checkbox remembermeCheckbox =
-                new Checkbox(getLabel("login.form.field.rememberme.label"));
-        remembermeCheckbox.setSclass("field login-checkbox");
-        remembermeCheckbox.setTooltip(getLabel("login.form.field.rememberme.tooltip"));
-        remembermeCheckbox.setParent(loginActions);
-        getBinder().addPropertyLoadBindings(remembermeCheckbox, "checked", "vm.isRememberMe", null,
-                null, null, null, null);
-        getBinder().addPropertySaveBindings(remembermeCheckbox, "checked", "vm.isRememberMe", null,
-                null, null, null, null, null, null);
-
-        // Creates sign in button
-        final Button signInButton = new Button(getLabel("login.form.button.login.label"));
-        signInButton.setClass("button btn btn-primary btn-large");
-        signInButton.setParent(loginActions);
-        signInButton.setType("submit");
-        getBinder().addCommandBinding(signInButton, Events.ON_CLICK, "'signIn'", null);
+        // actions area
+        createContentActionsArea(content);
 
         return content;
     }
 
 
+    private void createContentHeaderArea(Div content) {
+        // create header area
+        H1 h1 = new H1();
+        content.appendChild(h1);
+
+        Text h1Label = new Text(getLabel("login.form.header.title1"));
+        h1.appendChild(h1Label);
+    }
+    
+    private void createContentFieldsArea(Div content) {
+        // create field area
+        Div fieldsArea = new Div();
+        fieldsArea.setSclass("login-fields");
+        content.appendChild(fieldsArea);
+
+        // header field area
+        createFieldAreaHeader(fieldsArea);
+
+        // username field area
+        createUsernameFieldArea(fieldsArea);
+
+        // password field area
+        createPasswordFieldArea(fieldsArea);
+    }
+
+    private void createFieldAreaHeader(Div fieldsArea) {
+        // create field area header
+        P p = new P();
+        fieldsArea.appendChild(p);
+
+        Text pLabel = new Text(getLabel("login.form.header.title2"));
+        p.appendChild(pLabel);
+    }
+
+    private void createUsernameFieldArea(Div fieldsArea) {
+        // create username field area
+        Div fieldArea = new Div();
+        fieldArea.setSclass("field-area");
+        fieldsArea.appendChild(fieldArea);
+
+        // Create username textbox
+        Textbox textbox = new Textbox();
+        textbox.setId("username");
+        textbox.setSclass("username-field");
+        textbox.setPlaceholder(getLabel("login.form.field.username.placeholder"));
+        textbox.setTooltip(getLabel("login.form.field.username.tooltip"));
+        fieldArea.appendChild(textbox);
+        getBinder().addPropertyLoadBindings(textbox, "value", "vm.username", null, null,
+                null, null, null);
+        getBinder().addPropertySaveBindings(textbox, "value", "vm.username", null, null,
+                null, null, null, null, null);
+    }
+    
+    private void createPasswordFieldArea(Div fieldsArea) {
+        // create password field area
+        Div fieldArea = new Div();
+        fieldArea.setSclass("field-area");
+        fieldsArea.appendChild(fieldArea);
+
+        // Create password textbox
+        Textbox textbox = new Textbox();
+        textbox.setId("password");
+        textbox.setType("password");
+        textbox.setSclass("password-field");
+        textbox.setPlaceholder(getLabel("login.form.field.password.placeholder"));
+        textbox.setTooltip(getLabel("login.form.field.password.tooltip"));
+        fieldArea.appendChild(textbox);
+        getBinder().addPropertyLoadBindings(textbox, "value", "vm.password", null, null,
+                null, null, null);
+        getBinder().addPropertySaveBindings(textbox, "value", "vm.password", null, null,
+                null, null, null, null, null);
+    }
+    
+    private void createContentActionsArea(Div content) {
+        // create actions area
+        Div actionsArea = new Div();
+        actionsArea.setSclass("pull-left");
+        content.appendChild(actionsArea);
+
+        // create remember me checkbox
+        createRemembermeCheckbox(actionsArea);
+
+        // Creates sign in button
+        createSignInButton(actionsArea);
+    }
+    
+    private void createRemembermeCheckbox(Div actionsArea) {
+        Checkbox checkbox =
+                new Checkbox(getLabel("login.form.field.rememberme.label"));
+        checkbox.setSclass("field login-checkbox");
+        checkbox.setTooltip(getLabel("login.form.field.rememberme.tooltip"));
+        actionsArea.appendChild(checkbox);
+        getBinder().addPropertyLoadBindings(checkbox, "checked", "vm.isRememberMe", null,
+                null, null, null, null);
+        getBinder().addPropertySaveBindings(checkbox, "checked", "vm.isRememberMe", null,
+                null, null, null, null, null, null);
+    }
+    
+    private void createSignInButton(Div actionsArea) {
+        // create sign in button
+        Button button = new Button(getLabel("login.form.button.login.label"));
+        button.setClass("button btn btn-primary btn-large");
+        actionsArea.appendChild(button);
+        button.setType("submit");
+        getBinder().addCommandBinding(button, Events.ON_CLICK, "'signIn'", null);
+    }
+    
     @Override
     protected LayoutVM getViewModel() {
         return new LoginFormVM();
