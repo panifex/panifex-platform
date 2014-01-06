@@ -18,7 +18,8 @@
  ******************************************************************************/
 package org.panifex.module.api.menu;
 
-import org.panifex.module.api.environment.EnvironmentManager;
+import org.panifex.module.api.environment.Environment;
+
 
 public final class OpenContentMenuAction extends AbstractMenuItem implements MenuAction {
 
@@ -79,7 +80,7 @@ public final class OpenContentMenuAction extends AbstractMenuItem implements Men
     }
 
     private void setBookmark(String bookmark) {
-        EnvironmentManager.getService().setBookmark(bookmark);
+        Environment.setBookmark(bookmark);
     }
     
     @Override
