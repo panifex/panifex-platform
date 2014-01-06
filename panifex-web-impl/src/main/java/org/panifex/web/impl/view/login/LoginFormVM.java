@@ -52,6 +52,14 @@ public final class LoginFormVM extends LayoutVM {
     public static final String ID = "org.panifex.web.impl.view.login.LoginFormVM";
     public static final String USERNAME_PARAM = "org.panifex.web.impl.view.login.LoginFormVM.USERNAME_PARAM";
     
+    // commands
+    public static final String SIGN_IN_COMMAND = "signIn";
+    
+    // properties
+    public static final String USERNAME_PROPERTY = "username";
+    public static final String PASSWORD_PROPERTY = "password";
+    public static final String IS_REMEMBER_ME_PROPERTY = "isRememberMe";
+    
     private String username;
     private String password;
     private boolean isRememberMe = true;
@@ -105,11 +113,11 @@ public final class LoginFormVM extends LayoutVM {
         return isRememberMe;
     }
 
-    public void setIsRememberMe(boolean isRemember) {
-        this.isRememberMe = isRemember;
+    public void setIsRememberMe(boolean isRememberMe) {
+        this.isRememberMe = isRememberMe;
     }
 
-    @Command
+    @Command(SIGN_IN_COMMAND)
     public void signIn() {
         log.debug("User is signing in");
 
@@ -121,8 +129,8 @@ public final class LoginFormVM extends LayoutVM {
             // perform login
             currentUser.login(token);
             
-            // the user has successfully log in
-            log.info("User {} has been logged in", username);
+            // the user has successfully signed in
+            log.info("User {} has been signed in", username);
             controller.onSuccessfulLoginIn();
             
         } catch (ExpiredCredentialsException e) {

@@ -42,6 +42,14 @@ public class LoginFormRichlet extends LayoutRichlet {
 
     public static final String URL = "/zk/login";
     
+    // commands
+    private static final String SIGN_IN_COMMAND = "'" + LoginFormVM.SIGN_IN_COMMAND + "'";
+    
+    // properties
+    private static final String USERNAME_PROPERTY = VM_BIND_ID + "." + LoginFormVM.USERNAME_PROPERTY;
+    private static final String PASSWORD_PROPERTY = VM_BIND_ID + "." + LoginFormVM.PASSWORD_PROPERTY;
+    private static final String IS_REMEMBER_ME_PROPERTY = VM_BIND_ID + "." + LoginFormVM.IS_REMEMBER_ME_PROPERTY;
+    
     @Override
     protected Component createContent() {
         log.debug("Create content");
@@ -60,7 +68,6 @@ public class LoginFormRichlet extends LayoutRichlet {
 
         return content;
     }
-
 
     private void createContentHeaderArea(Div content) {
         // create header area
@@ -109,9 +116,9 @@ public class LoginFormRichlet extends LayoutRichlet {
         textbox.setPlaceholder(getLabel("login.form.field.username.placeholder"));
         textbox.setTooltip(getLabel("login.form.field.username.tooltip"));
         fieldArea.appendChild(textbox);
-        getBinder().addPropertyLoadBindings(textbox, "value", "vm.username", null, null,
+        getBinder().addPropertyLoadBindings(textbox, "value", USERNAME_PROPERTY, null, null,
                 null, null, null);
-        getBinder().addPropertySaveBindings(textbox, "value", "vm.username", null, null,
+        getBinder().addPropertySaveBindings(textbox, "value", USERNAME_PROPERTY, null, null,
                 null, null, null, null, null);
     }
     
@@ -129,9 +136,9 @@ public class LoginFormRichlet extends LayoutRichlet {
         textbox.setPlaceholder(getLabel("login.form.field.password.placeholder"));
         textbox.setTooltip(getLabel("login.form.field.password.tooltip"));
         fieldArea.appendChild(textbox);
-        getBinder().addPropertyLoadBindings(textbox, "value", "vm.password", null, null,
+        getBinder().addPropertyLoadBindings(textbox, "value", PASSWORD_PROPERTY, null, null,
                 null, null, null);
-        getBinder().addPropertySaveBindings(textbox, "value", "vm.password", null, null,
+        getBinder().addPropertySaveBindings(textbox, "value", PASSWORD_PROPERTY, null, null,
                 null, null, null, null, null);
     }
     
@@ -154,9 +161,9 @@ public class LoginFormRichlet extends LayoutRichlet {
         checkbox.setSclass("field login-checkbox");
         checkbox.setTooltip(getLabel("login.form.field.rememberme.tooltip"));
         actionsArea.appendChild(checkbox);
-        getBinder().addPropertyLoadBindings(checkbox, "checked", "vm.isRememberMe", null,
+        getBinder().addPropertyLoadBindings(checkbox, "checked", IS_REMEMBER_ME_PROPERTY, null,
                 null, null, null, null);
-        getBinder().addPropertySaveBindings(checkbox, "checked", "vm.isRememberMe", null,
+        getBinder().addPropertySaveBindings(checkbox, "checked", IS_REMEMBER_ME_PROPERTY, null,
                 null, null, null, null, null, null);
     }
     
@@ -166,7 +173,7 @@ public class LoginFormRichlet extends LayoutRichlet {
         button.setClass("button btn btn-primary btn-large");
         actionsArea.appendChild(button);
         button.setType("submit");
-        getBinder().addCommandBinding(button, Events.ON_CLICK, "'signIn'", null);
+        getBinder().addCommandBinding(button, Events.ON_CLICK, SIGN_IN_COMMAND, null);
     }
     
     @Override
