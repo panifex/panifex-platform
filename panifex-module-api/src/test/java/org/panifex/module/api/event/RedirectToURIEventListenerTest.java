@@ -18,6 +18,10 @@
  ******************************************************************************/
 package org.panifex.module.api.event;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.module.api.event.RedirectToURIEventListener;
@@ -25,6 +29,8 @@ import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 
 /**
@@ -34,13 +40,23 @@ import org.zkoss.zk.ui.event.Event;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({
     Executions.class,
-    Event.class})
+    Event.class,
+    Sessions.class})
 public final class RedirectToURIEventListenerTest extends TestSupport {
     
     /**
-     * This creates the event listener and sends the event which
+     * Prepares an environment for performing unit tests.
+     */
+    @Before
+    public void setUp() {
+        // mock static classes
+        mockStatic(Executions.class);
+        mockStatic(Sessions.class);
+    }
+    
+    /**
+     * This test case creates the event listener and sends the event which
      * occurs sending the redirection to the specified uri.
-     * 
      */
     @Test
     public void successfullyRedirectTest() throws Exception {
@@ -49,7 +65,6 @@ public final class RedirectToURIEventListenerTest extends TestSupport {
         String uri = getRandomChars(20);
 
         // mocks
-        mockStatic(Executions.class);
         Event event = createMock(Event.class);
         
         // expect getting the event name
@@ -71,6 +86,47 @@ public final class RedirectToURIEventListenerTest extends TestSupport {
     }
     
     /**
+     * This test case creates the event listener and sends the event which
+     * occurs sending the redirection to the specified uri.
+     * <p>
+     * During the redirection, a defined parameters would be passed over the
+     * current {@link org.zkoss.zk.ui.Session} instance.
+     */
+    @Test
+    public void successfullyRedirectPassedParamsTest() throws Exception {
+        // variables
+        String eventName = getRandomChars(20);
+        String uri = getRandomChars(20);
+        String paramsAttributeName = getRandomChars(20);
+        Map<String, Object> params = new HashMap<>();
+
+        // mocks
+        Event eventMock = createMock(Event.class);
+        Session sessionMock = createMock(Session.class);
+        
+        // expect getting the event name
+        expect(eventMock.getName()).andReturn(eventName);
+
+        // expect setting parameters to the current session instance
+        expect(Sessions.getCurrent()).andReturn(sessionMock);
+        expect(sessionMock.setAttribute(paramsAttributeName, params)).andReturn(null);
+        
+        // expect redirecting to the uri
+        Executions.sendRedirect(uri);
+        
+        replayAll();
+        
+        // create the event listener
+        RedirectToURIEventListener eventListener = 
+                new RedirectToURIEventListener(eventName, uri, paramsAttributeName, params);
+        
+        // send event
+        eventListener.onEvent(eventMock);
+        
+        verifyAll();
+    }
+    
+    /**
      * This test creates the event listener and sends the event which does
      * not occur the redirection to the specified uri.
      */
@@ -82,7 +138,6 @@ public final class RedirectToURIEventListenerTest extends TestSupport {
         String uri = getRandomChars(20);
 
         // mocks
-        mockStatic(Executions.class);
         Event event = createMock(Event.class);
         
         // expect getting the event name
