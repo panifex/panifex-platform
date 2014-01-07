@@ -29,14 +29,31 @@ import org.zkoss.zk.ui.util.Composer;
 import org.zkoss.zk.ui.util.Template;
 import org.zkoss.zkmax.zul.Nav;
 
+/**
+ * A {@link org.zkoss.zk.ui.util.Template Template} for building
+ * {@link org.zkoss.zkmax.zul.Nav Nav} components based on the {@link org.panifex.module.api.menu.MenuNode MenuNode}.
+ */
 public final class MenuNodeTemplate implements Template {
 
+    /**
+     * The {@link org.zkoss.bind.Binder Binder} for manage data bindings.
+     */
     private Binder binder;
     
+    /**
+     * Creates a new {@link MenuNodeTemplate} for building
+     * {@link org.zkoss.zkmax.zul.Nav Nav} components based on the 
+     * {@link org.panifex.module.api.menu.MenuNode MenuNode}.
+     * 
+     * @param binder the {@link org.zkoss.bind.Binder binder} for manage data bindings.
+     */
     public MenuNodeTemplate(Binder binder) {
         this.binder = binder;
     }
     
+    /**
+     * Creates and binds a {@link MenuNavitem} component.
+     */
     @Override
     public Component[] create(Component parent, Component insertBefore, VariableResolver resolver,
             @SuppressWarnings("rawtypes") Composer composer) {

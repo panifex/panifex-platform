@@ -31,16 +31,31 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Composer;
 import org.zkoss.zk.ui.util.Template;
 
+/**
+ * A {@link org.zkoss.zk.ui.util.Template Template} for building
+ * {@link MenuNavitem} components based on the {@link org.panifex.module.api.menu.MenuAction MenuAction}.
+ */
 public final class MenuActionTemplate implements Template {
 
+    /**
+     * The {@link org.zkoss.bind.Binder Binder} for manage data bindings.
+     */
     private Binder binder;
-    
-    
-    
+
+    /**
+     * Creates a new {@link MenuActionTemplate} for building
+     * {@link MenuNavitem} components based on the 
+     * {@link org.panifex.module.api.menu.MenuAction MenuAction}.
+     * 
+     * @param binder the {@link org.zkoss.bind.Binder binder} for manage data bindings.
+     */
     public MenuActionTemplate(Binder binder) {
         this.binder = binder;
     }
     
+    /**
+     * Creates and binds a {@link MenuNavitem} component.
+     */
     @Override
     public Component[] create(Component parent, Component insertBefore, VariableResolver resolver,
             @SuppressWarnings("rawtypes") Composer composer) {
@@ -59,15 +74,15 @@ public final class MenuActionTemplate implements Template {
         onClickArgs.put(MenuAction.ID, new String[]{ AppMenuConstants.ITEM_BIND_ID });
         Map<String, Object> parsedOnClickArgs = 
                 BindEvaluatorXUtil.parseArgs(binder.getEvaluatorX(), onClickArgs);
+        
         binder.addCommandBinding(navItem, Events.ON_CLICK, 
             LayoutVM.ON_MENU_ACTION_CLICK, parsedOnClickArgs);
         
         // append to the parent
         navItem.setParent(parent);
 
-        Component[] components = new Component[1];
-        components[0] = navItem;
-
+        // returns the
+        Component[] components = new Component[] { navItem };
         return components;
     }
 
