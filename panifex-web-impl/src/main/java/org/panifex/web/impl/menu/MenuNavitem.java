@@ -20,6 +20,15 @@ package org.panifex.web.impl.menu;
 
 import org.zkoss.zkmax.zul.Navitem;
 
+/**
+ * A specialized {@link org.zkoss.zkmax.zul.Navitem Navitem} which contains
+ * an additional bookmark property.
+ * <p>
+ * It is created to support {@link org.panifex.module.api.menu.OpenContentMenuAction OpenContentMenuAction}
+ * functionality.
+ * 
+ * @since 1.0
+ */
 public final class MenuNavitem extends Navitem {
 
     /**
@@ -27,13 +36,39 @@ public final class MenuNavitem extends Navitem {
      */
     private static final long serialVersionUID = 8048726554145580742L;
     
-    private String contentId;
+    /**
+     * The constant which can be used for binding the bookmark property
+     * to the GUI components.
+     */
+    public static final String BOOKMARK_PROPERTY = "bookmark";
     
-    public void setContentId(String contentId) {
-        this.contentId = contentId;
+    /**
+     * The {@link org.panifex.module.api.content.Content Content}'s 
+     * bookmark,
+     */
+    private String bookmark;
+    
+    /**
+     * Returns the {@link org.panifex.module.api.content.Content Content}'s 
+     * bookmark.
+     * 
+     * @return the {@link org.panifex.module.api.content.Content Content}'s bookmark
+     * 
+     * @since 1.0
+     */
+    public String getBookmark() {
+        return bookmark;
     }
     
-    public String getContentId() {
-        return contentId;
+    /**
+     * Sets the {@link org.panifex.module.api.content.Content Content}'s 
+     * bookmark.
+     * 
+     * @param bookmark the {@link org.panifex.module.api.content.Content Content}'s bookmark
+     * 
+     * @since 1.0
+     */
+    public void setBookmark(String bookmark) {
+        this.bookmark = bookmark;
     }
 }

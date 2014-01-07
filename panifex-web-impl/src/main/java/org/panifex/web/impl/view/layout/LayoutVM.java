@@ -115,7 +115,7 @@ public abstract class LayoutVM {
         for (Component item : navbar.getChildren()) {
             if (item instanceof MenuNavitem) {
                 MenuNavitem menuItem = (MenuNavitem) item;
-                if (menuItem.getContentId().equals(contentId)) {
+                if (menuItem.getBookmark().equals(contentId)) {
                     navbar.setSelectedItem(menuItem);
                     return true;
                 }
