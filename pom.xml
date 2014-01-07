@@ -59,9 +59,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>poms</module>
-        <module>provision</module>
         <module>panifex-test-support</module>
+        <module>poms</module>
         <module>panifex-module-api</module>
         <module>panifex-service-api</module>
         <module>panifex-service-impl</module>
@@ -73,6 +72,7 @@
         <module>panifex-datasource-postgresql</module>
         <module>panifex-module-dashboard-impl</module>
         <module>libs</module>
+        <module>provision</module>
     </modules>
 
     <repositories>
