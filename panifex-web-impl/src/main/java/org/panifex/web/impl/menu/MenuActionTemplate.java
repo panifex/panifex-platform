@@ -71,7 +71,7 @@ public final class MenuActionTemplate implements Template {
 
         // command binding
         Map<String, String[]> onClickArgs = new HashMap<>();
-        onClickArgs.put(MenuAction.ID, new String[]{ AppMenuConstants.ITEM_BIND_ID });
+        onClickArgs.put(MenuAction.ID, AppMenuConstants.ITEM_BIND_ARGS);
         Map<String, Object> parsedOnClickArgs = 
                 BindEvaluatorXUtil.parseArgs(binder.getEvaluatorX(), onClickArgs);
         

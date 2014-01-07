@@ -39,6 +39,14 @@ public final class AppMenuConstants {
     public static final String ITEM_BIND_ID = "item.data";
     
     /**
+     * The arguments for the command binding.
+     * 
+     * @see {@link MenuActionTemplate#create(org.zkoss.zk.ui.Component, org.zkoss.zk.ui.Component, org.zkoss.xel.VariableResolver, org.zkoss.zk.ui.util.Composer)
+     * MenuActionTemplate#create(...)}
+     */
+    public static final String[] ITEM_BIND_ARGS = new String[]{ ITEM_BIND_ID };
+    
+    /**
      * The constant which contains the condition which decides which 
      * {@link org.zkoss.zk.ui.util.Template Template} will be used.
      * <p>

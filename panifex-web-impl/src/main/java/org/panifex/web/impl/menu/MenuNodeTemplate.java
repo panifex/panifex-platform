@@ -52,7 +52,7 @@ public final class MenuNodeTemplate implements Template {
     }
     
     /**
-     * Creates and binds a {@link MenuNavitem} component.
+     * Creates and binds a {@link org.zkoss.zkmax.zul.Nav Nav} component.
      */
     @Override
     public Component[] create(Component parent, Component insertBefore, VariableResolver resolver,
