@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.panifex.module.api.menu.MenuAction;
-import org.panifex.web.impl.component.MenuNavitem;
 import org.panifex.web.impl.view.layout.LayoutVM;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.impl.BindEvaluatorXUtil;
