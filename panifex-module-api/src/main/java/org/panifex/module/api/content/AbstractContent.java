@@ -19,18 +19,31 @@
 package org.panifex.module.api.content;
 
 /**
+ * The template implementation of the {@link Content} which can be
+ * assigned to a <a href="http://en.wikipedia.org/wiki/Bookmark_(World_Wide_Web)">bookmark</a>.
+ * <p>
+ * 
  * 
  * @since 1.0
  */
 public abstract class AbstractContent implements Content {
 
+    /**
+     * The content's title which is used shown at the top of the content.
+     */
     private String title;
+    
+    /**
+     * The assigned <a href="http://en.wikipedia.org/wiki/Bookmark_(World_Wide_Web)">bookmark</a>.
+     */
     private String bookmark;
     
     /**
-     * Construct new content template.
+     * Construct the new content template with the assigned title.
      * 
-     * @param title a content title
+     * @param title the content title
+     * 
+     * @since 1.0
      */
     protected AbstractContent(String title) {
         this(title, null);
@@ -39,8 +52,10 @@ public abstract class AbstractContent implements Content {
     /**
      * Construct new content template.
      * 
-     * @param title a content title
-     * @param bookmark a bookmark identificator
+     * @param title the content title
+     * @param bookmark the assigned <a href="http://en.wikipedia.org/wiki/Bookmark_(World_Wide_Web)">bookmark</a>
+     * 
+     * @since 1.0
      */
     protected AbstractContent(String title, String bookmark) {
         this.title = title;
@@ -72,6 +87,11 @@ public abstract class AbstractContent implements Content {
         return bookmark;
     }
 
+    /**
+     * Sets the assigned <a href="http://en.wikipedia.org/wiki/Bookmark_(World_Wide_Web)">bookmark</a>.
+     * 
+     * @param bookmark the assigned <a href="http://en.wikipedia.org/wiki/Bookmark_(World_Wide_Web)">bookmark</a>
+     */
     public void setBookmark(String bookmark) {
         this.bookmark = bookmark;
     }

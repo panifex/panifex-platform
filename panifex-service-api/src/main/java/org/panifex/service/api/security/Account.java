@@ -20,12 +20,22 @@ package org.panifex.service.api.security;
 
 import org.panifex.service.api.Entity;
 
+/**
+ * A user's account.
+ * <p>
+ * It contains username and password stored account information 
+ * for signing-in process.
+ * 
+ * @since 1.0
+ */
 public interface Account extends Entity {
 
     /**
      * Returns the account's username
      * 
      * @return the account's username
+     * 
+     * @since 1.0
      */
     String getUsername();
 
@@ -37,6 +47,8 @@ public interface Account extends Entity {
      * to the repository.
      * 
      * @return the account's password
+     * 
+     * @since 1.0
      */
     String getPassword();
 
@@ -44,6 +56,8 @@ public interface Account extends Entity {
      * Sets the account's password.
      * 
      * @param password the plain text password
+     * 
+     * @since 1.0
      */
     void setPassword(String password);
     
@@ -52,6 +66,8 @@ public interface Account extends Entity {
      * before logging in.
      * 
      * @return true if the user must to change credentials before logging in
+     * 
+     * @since 1.0
      */
     boolean getIsCredentialsExpired();
 }

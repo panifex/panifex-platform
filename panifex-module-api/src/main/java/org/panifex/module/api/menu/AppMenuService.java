@@ -23,18 +23,58 @@ import java.util.List;
 import org.zkoss.zul.TreeNode;
 
 /**
- * AppMenuService provides methods to manage application menu.
+ * An {@link AppMenuService} provides methods to dynamic manage the application menu.
+ * <p>
+ * It is used for binding and unbinding the menu's {@link MenuAction actions} and
+ * {@link MenuNode nodes}.
  *
+ * @since 1.0
  */
 public interface AppMenuService {
 
+    /**
+     * Binds the {@link MenuAction} to the application menu.
+     * 
+     * @param menuAction the {@link MenuAction} to be binded to the application menu
+     * 
+     * @since 1.0
+     */
     void bindMenuItem(MenuAction menuAction);
     
+    /**
+     * Binds the {@link MenuNode} to the application menu.
+     * 
+     * @param menuNode the {@link MenuNode} to be binded to the application menu
+     * 
+     * @since 1.0
+     */
     void bindMenuItem(MenuNode menuNode);
     
+    /**
+     * Unbinds the {@link MenuAction} from the application menu.
+     * 
+     * @param menuAction the {@link MenuAction} to be unbinded from the application menu
+     * 
+     * @since 1.0
+     */
     void unbindMenuItem(MenuAction menuAction);
     
+    /**
+     * Unbinds the {@link MenuNode} from the application menu.
+     * 
+     * @param menuNode the {@link MenuNode} to be unbinded from the application menu
+     * 
+     * @since 1.0
+     */
     void unbindMenuItem(MenuNode menuNode);
     
+    /**
+     * Returns the currently binded menu's {@link MenuAction actions} and
+     * {@link MenuNode nodes}.
+     * 
+     * @return the currently binded menu's items
+     * 
+     * @since 1.0
+     */
     List<TreeNode<MenuItem>> getMenuItems();
 }

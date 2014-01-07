@@ -21,8 +21,14 @@ package org.panifex.service.api.security;
 import org.junit.Test;
 import org.panifex.test.support.TestSupport;
 
+/**
+ * Unit test for the {@link AccountImplGenerator} class.
+ */
 public final class AccountImplGeneratorTest extends TestSupport {
 
+    /**
+     * This test checks generating random persisted {@link AccountImpl} instances.
+     */
     @Test
     public void generateAccountImplTest() {
         AccountImpl account = AccountImplGenerator.generatePersistedAccount();

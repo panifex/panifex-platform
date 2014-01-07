@@ -30,6 +30,7 @@ import org.zkoss.zk.ui.event.SerializableEventListener;
  * redirects to the specified <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier">URI</a> 
  * if the {@link org.zkoss.zk.ui.event.Event Event} with the specified name occurs.
  * 
+ * @since 1.0
  */
 public class RedirectToURIEventListener implements SerializableEventListener<Event> {
     
@@ -65,6 +66,8 @@ public class RedirectToURIEventListener implements SerializableEventListener<Eve
      * 
      * @param eventName the event name when the redirect to the login form is sent
      * @param uri the URI to redirect to, or null to reload the same page
+     * 
+     * @since 1.0
      */
     public RedirectToURIEventListener(String eventName, String uri) {
        this(eventName, uri, null, null);
@@ -77,8 +80,14 @@ public class RedirectToURIEventListener implements SerializableEventListener<Eve
      * @param uri the URI to redirect to, or null to reload the same page
      * @param paramsAttributeName the attribute name on which the parameters would be passed
      * @param params The parameters which can be passed over the current {@link org.zkoss.zk.ui.Session}
+     * 
+     * @since 1.0
      */
-    public RedirectToURIEventListener(String eventName, String uri, String paramsAttributeName, Map<String, Object> params) {
+    public RedirectToURIEventListener(
+            String eventName, 
+            String uri, 
+            String paramsAttributeName, 
+            Map<String, Object> params) {
         // check the event name
         if (eventName != null) {
             this.eventName = eventName;
@@ -98,6 +107,8 @@ public class RedirectToURIEventListener implements SerializableEventListener<Eve
     /**
      * Sends the redirect to the uri when the {@link org.zkoss.zk.ui.event.Event Event}
      * with the specified name occurs.
+     * 
+     * @since 1.0
      */
     @Override
     public final void onEvent(Event event) throws Exception {

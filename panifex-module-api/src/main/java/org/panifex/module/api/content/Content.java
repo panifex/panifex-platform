@@ -21,34 +21,40 @@ package org.panifex.module.api.content;
 import org.zkoss.zk.ui.Component;
 
 /**
- * Content of web application.
+ * A content of the web application.
+ * <p>
+ * The content is shown in the center of the application's GUI.
  * 
  * @since 1.0
  */
 public interface Content {
 
     /**
-     * Returns the content title
+     * Returns the title of content.
      * 
-     * @return the content title
+     * @return the title of content
      * @since 1.0
      */
     String getTitle();
     
     /**
-     * Returns an assigned bookmark. 
+     * Returns the assigned <a href="http://en.wikipedia.org/wiki/Bookmark_(World_Wide_Web)">bookmark</a>. 
      * 
-     * <p> The content doesn't have to be assigned to any bookmark.
+     * <p> The content does not have to be assigned to any bookmark.
      * 
-     * @return the assigned bookmark
+     * @return the assigned <a href="http://en.wikipedia.org/wiki/Bookmark_(World_Wide_Web)">bookmark</a>
+     * 
      * @since 1.0
      */
     String getBookmark();
     
     /**
-     * Creates a body of content.
+     * Creates the body of content.
+     * <p>
+     * Every class which implements this interface must implement this method to 
+     * define an unique component set.
      * 
-     * @return the ZK Component which represents body
+     * @return the {@link org.zkoss.zk.ui.Component Component} which contains the body content
      */
     Component createBody();
 }

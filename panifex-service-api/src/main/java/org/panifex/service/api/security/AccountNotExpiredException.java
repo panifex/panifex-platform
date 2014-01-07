@@ -18,6 +18,14 @@
  ******************************************************************************/
 package org.panifex.service.api.security;
 
+/**
+ * Thrown during the change password process when the system determines the account
+ * has not been expired and the user can not change expired password.
+ *
+ * @see {@link SecurityService#updateAccountExpiredPassword(String, String, String)}
+ * 
+ * @since 1.0
+ */
 public class AccountNotExpiredException extends Exception {
 
     /**
@@ -25,4 +33,38 @@ public class AccountNotExpiredException extends Exception {
      */
     private static final long serialVersionUID = -5110932631541936126L;
 
+    /**
+     * Constructs a new AccountNotExpiredException.
+     */
+    public AccountNotExpiredException() {
+        super();
+    }
+    
+    /**
+     * Constructs a new AccountNotExpiredException.
+     *
+     * @param message the reason for the exception
+     */
+    public AccountNotExpiredException(String message) {
+        super(message);
+    }
+
+    /**
+     * Constructs a new AccountNotExpiredException.
+     *
+     * @param cause the underlying Throwable that caused this exception to be thrown.
+     */
+    public AccountNotExpiredException(Throwable cause) {
+        super(cause);
+    }
+
+    /**
+     * Constructs a new AccountNotExpiredException.
+     *
+     * @param message the reason for the exception
+     * @param cause the underlying Throwable that caused this exception to be thrown.
+     */
+    public AccountNotExpiredException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

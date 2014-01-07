@@ -23,6 +23,9 @@ import org.panifex.service.api.security.AccountImpl;
 import org.panifex.service.api.security.AccountImplGenerator;
 import org.panifex.test.support.TestSupport;
 
+/**
+ * Unit tests for the {@link AccountEntityBuilder} class.
+ */
 public final class AccountEntityBuilderTest extends TestSupport {
 
     @Test

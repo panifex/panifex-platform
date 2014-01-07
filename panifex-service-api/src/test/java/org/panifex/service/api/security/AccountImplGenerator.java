@@ -22,6 +22,10 @@ import org.fluttercode.datafactory.impl.DataFactory;
 import org.panifex.service.api.EntityImpl;
 import org.panifex.service.api.security.AccountImpl;
 
+/**
+ * A generator of random {@link AccountImpl} instances for using in the
+ * test cases.
+ */
 public final class AccountImplGenerator {
 
     /**

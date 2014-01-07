@@ -21,24 +21,32 @@ package org.panifex.service.api.security;
 import org.panifex.service.api.Entity;
 
 /**
- * User's role.
+ * The user's role.
+ * <p>
+ * The role contains a group of {@link Permission permissions} which allows the user
+ * to perform some actions.
  * 
- * <p>Role contains permissions which allows users to perform some actions.
- * 
+ * @since 1.0
  */
 public interface Role extends Entity {
 
     /**
-     * Returns role's name. It must be unique.
+     * Returns the role's name. 
+     * <p>
+     * It must be unique.
      * 
-     * @return role's name
+     * @return the role's name
+     * 
+     * @since 1.0
      */
     String getName();
     
     /**
-     * Returns role's description.
+     * Returns the role's description.
      * 
-     * @return role's description
+     * @return the role's description
+     * 
+     * @since 1.0
      */
     String getDescription();
 }

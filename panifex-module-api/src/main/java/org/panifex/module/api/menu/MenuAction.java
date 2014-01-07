@@ -18,6 +18,12 @@
  ******************************************************************************/
 package org.panifex.module.api.menu;
 
+/**
+ * A {@link MenuAction} is a clickable building block of the 
+ * application's menu.
+ * 
+ * @since 1.0
+ */
 public interface MenuAction extends MenuItem {
 
     public static final String ID = "org.panifex.module.api.menu.MenuAction";

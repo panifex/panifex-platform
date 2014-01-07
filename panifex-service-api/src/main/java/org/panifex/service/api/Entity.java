@@ -18,8 +18,20 @@
  ******************************************************************************/
 package org.panifex.service.api;
 
+/**
+ * An entity which can be persisted or shown in the Web application.
+ * 
+ * @see <a href="http://en.wikipedia.org/wiki/Entity_class">Entity class</a>
+ * 
+ * @since 1.0
+ */
 public interface Entity {
 
+    /**
+     * Return the entity's ID.
+     * 
+     * @return the entity's ID
+     */
     Long getId();
     
     /**
@@ -27,6 +39,8 @@ public interface Entity {
      * when performing the merge operation and for optimistic concurrency control.
      * 
      * @return the version of {@link Entity}
+     * 
+     * @since 1.0
      */
     int getOptlockVersion();
 }

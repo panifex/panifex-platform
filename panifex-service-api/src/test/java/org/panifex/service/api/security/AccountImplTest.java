@@ -23,8 +23,17 @@ import nl.jqno.equalsverifier.Warning;
 
 import org.junit.Test;
 
+/**
+ * Unit tests for the {@link AccountImpl} class.
+ */
 public final class AccountImplTest {
 
+    /**
+     * This test checks the equals contract.
+     * 
+     * @see {@link java.lang.Object#equals(Object)}
+     * @see {@link java.lang.Object#hashCode()}
+     */
     @Test
     public void equalsContractTest() {
         EqualsVerifier.

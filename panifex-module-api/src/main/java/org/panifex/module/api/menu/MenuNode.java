@@ -18,13 +18,20 @@
  ******************************************************************************/
 package org.panifex.module.api.menu;
 
+/**
+ * A {@link MenuNode} is a container of other {@link MenuItem items}.
+ * <p>
+ * It is a building block of the application's menu.
+ *
+ * @since 1.0
+ */
 public interface MenuNode extends MenuItem {
 
     /**
-     * Returns the badge text.
+     * Returns the badge text of the {@link org.zkoss.zkmax.zul.Nav}.
      * 
-     * @return the badge text of the nav.
-     * @see Nav
+     * @return the badge text of the {@link org.zkoss.zkmax.zul.Nav}.
+     * 
      * @since 1.0
      */
     String getBadgeText();

@@ -22,14 +22,44 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+/**
+ * An abstract implementation of the {@link Entity} interface.
+ * <p>
+ * It contains common fields for all entities in the web application's
+ * scope. 
+ * 
+ * @since 1.0
+ */
 public abstract class EntityImpl implements Entity {
     
+    /**
+     * The entity's ID.
+     */
     private long id;
+    
+    /**
+     * The entity's optimistic-locking version.
+     */
     private int optlockVersion;
     
+    /**
+     * Constructs a new {@link EntityImpl} which represents
+     * a new entity which has not been persisted yet.
+     * 
+     * @since 1.0
+     */
     protected EntityImpl() {
     }
     
+    /**
+     * Constructs a new {@link EntityImpl} for persisted
+     * entities with the already defined IDs and versions.
+     * 
+     * @param id the entity's ID
+     * @param optlockVersion the entity's optimistic-locking version
+     * 
+     * @since 1.0
+     */
     protected EntityImpl(
             Long id,
             int optlockVersion) {
@@ -37,15 +67,33 @@ public abstract class EntityImpl implements Entity {
         this.optlockVersion = optlockVersion;
     }
     
+    /**
+     * Returns the entity's ID.
+     * 
+     * @return the entity's ID
+     * 
+     * @since 1.0
+     */
     @Override
     public final Long getId() {
         return id;
     }
     
+    /**
+     * Returns the version of {@link Entity}. The version is used to ensure integrity 
+     * when performing the merge operation and for optimistic concurrency control.
+     * 
+     * @return the version of {@link Entity}
+     * 
+     * @since 1.0
+     */
     public final int getOptlockVersion() {
         return optlockVersion;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return new HashCodeBuilder(3, 7).
@@ -54,6 +102,9 @@ public abstract class EntityImpl implements Entity {
                 toHashCode();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -72,6 +123,9 @@ public abstract class EntityImpl implements Entity {
                 isEquals();
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this).

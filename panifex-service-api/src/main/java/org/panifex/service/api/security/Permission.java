@@ -21,29 +21,40 @@ package org.panifex.service.api.security;
 import org.panifex.service.api.Entity;
 
 /**
- * Permission identifies action which can be perfomed by user.
+ * A permission represents the ability to perform an action or access a resource.
+ * 
+ * @see <a href="https://shiro.apache.org/static/current/apidocs/org/apache/shiro/authz/Permission.html">Permission</a>
  *
+ * @since 1.0
  */
 public interface Permission extends Entity {
 
     /**
-     * Returns permission's name. It must be unique.
+     * Returns the permission's name, the easily readable free text.
+     * <p>
+     * It must be unique.
      * 
-     * @return permission's name
+     * @return the permission's name
+     * 
+     * @since 1.0
      */
     String getName();
 
     /**
-     * Returns permission's wildcard expression.
+     * Returns the permission's wildcard expression.
      * 
-     * @return wildcard expression 
+     * @return wildcard the <a href="http://shiro.apache.org/permissions.html">wildcard permission expression</a>
+     * 
+     * @since 1.0
      */
     String getWildcardExpression();
     
     /**
-     * Returns permission's description.
+     * Returns the permission's description.
      * 
-     * @return permission's description
+     * @return the permission's description
+     * 
+     * @since 1.0
      */
     String getDescription(); 
 

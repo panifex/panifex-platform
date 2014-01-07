@@ -18,27 +18,78 @@
  ******************************************************************************/
 package org.panifex.module.api.menu;
 
+/**
+ * An application menu building block which represent menu's node 
+ * which contains other menu's items.
+ * 
+ * @since 1.0
+ */
 public class DefaultMenuNode extends AbstractMenuItem implements MenuNode {
 
+    /**
+     * The badge text of the {@link org.zkoss.zkmax.zul.Nav}.
+     */
     private String badgeText;
     
+    /**
+     * Constructs the new {@link DefaultMenuNode} instance with the 
+     * specified ID.
+     * 
+     * @param id the {@link MenuItem}'s ID
+     * 
+     * @since 1.0
+     */
     public DefaultMenuNode(String id) {
         super(id);
     }
     
+    /**
+     * Constructs the {@link DefaultMenuNode} with the specified item's ID
+     * and the specified parent {@link MenuNode}'s ID.
+     * 
+     * @param id the {@link MenuItem}'s ID
+     * @param parentId the parent {@link MenuNode}'s ID
+     * 
+     * @since 1.0
+     */
     public DefaultMenuNode(String id, String parentId) {
         super(id, parentId);
     }
     
+    /**
+     * Constructs the {@link DefaultMenuNode} with the specified item's ID,
+     * the specified parent {@link MenuNode}'s ID and the priority which 
+     * defines the position in the same hierarchy level.
+     * 
+     * @param id the {@link MenuItem}'s ID
+     * @param parentId the parent {@link MenuNode node}'s ID
+     * @param priority the priority which defines the position in the same hierarchy level
+     * 
+     * @since 1.0
+     */
     public DefaultMenuNode(String id, String parentId, int priority) {
         super(id, parentId, priority);
     }
     
+    /**
+     * Returns the badge text of the {@link org.zkoss.zkmax.zul.Nav}.
+     * 
+     * @return the badge text of the {@link org.zkoss.zkmax.zul.Nav}
+     * 
+     * @since 1.0
+     */
     @Override
     public String getBadgeText() {
         return badgeText;
     }
 
+    /**
+     * Sets the badge text of the {@link org.zkoss.zkmax.zul.Nav}.
+     * 
+     * @param badgeText badge text of the {@link org.zkoss.zkmax.zul.Nav}
+     * 
+     * @since 1.0
+     */
     public void setBadgeText(String badgeText) {
         this.badgeText = badgeText;
     }

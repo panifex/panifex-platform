@@ -24,8 +24,17 @@ import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 import org.panifex.test.support.TestSupport;
 
+/**
+ * Unit tests for the {@link EntityImpl} class.
+ */
 public final class EntityImplTest extends TestSupport {
 
+    /**
+     * This test checks the equals contract.
+     * 
+     * @see {@link java.lang.Object#equals(Object)}
+     * @see {@link java.lang.Object#hashCode()}
+     */
     @Test
     public void equalsContractTest() {
         EqualsVerifier.

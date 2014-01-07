@@ -23,6 +23,15 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.Authorizer;
 import org.apache.shiro.realm.Realm;
 
+/**
+ * A SecurityService is a security component that can access application-specific security 
+ * entities such as users, roles, and permissions to determine authentication and authorization operations.
+ * 
+ * @see {@link org.apache.shiro.authz.Authorizer Authorizer}
+ * @see {@link org.apache.shiro.realm.Realm Realm}
+ * 
+ * @since 1.0
+ */
 public interface SecurityService extends Authorizer, Realm {
 
     /**
@@ -37,6 +46,8 @@ public interface SecurityService extends Authorizer, Realm {
      * @throws AccountNotExpiredException if the {@link Account} has not expired
      * @throws UnknownAccountException if the {@link Account} with the same username does not exists in db
      * @throws IncorrectCredentialsException if the oldPassword does not match the current account's credentials
+     * 
+     * @since 1.0
      */
     void updateAccountExpiredPassword(String username, String oldPassword, String newPassword)
         throws AccountNotExpiredException,
