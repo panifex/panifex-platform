@@ -28,8 +28,85 @@ package org.panifex.module.api.menu;
  */
 public interface MenuItem {
 
-    // constants which is used in a menu implementation
+    /**
+     * The constant which can be used for binding the ID property
+     * to the GUI components.
+     * 
+     * @see {@link MenuItem#getId()}
+     */
+    public static final String ID_PROPERTY = "id";
+    
+    /**
+     * The constant which can be used for binding the parent {@link MenuNode}'s
+     * ID property to the GUI components.
+     * 
+     * @see {@link MenuItem#getParentId()}
+     */
+    public static final String PARENT_ID_PROPERTY = "parentId";
+    
+    /**
+     * The constant which can be used for binding the label property
+     * to the GUI components.
+     * 
+     * @see {@link MenuItem#getLabel()}
+     */
+    public static final String LABEL_PROPERTY = "label";
+    
+    /**
+     * The constant which can be used for binding the assigned 
+     * <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">Cascading Style Sheets class</a> 
+     * property to the GUI components.
+     * 
+     * @see {@link MenuItem#getIconSclass()}
+     */
+    public static final String ICON_S_CLASS_PROPERTY = "iconSclass";
+    
+    /**
+     * The constant which can be used for binding the priority property
+     * to the GUI components.
+     * 
+     * @see {@link MenuItem#getPriority()}
+     */
+    public static final String PRIORITY_PROPERTY = "priority";
+    
+    /**
+     * The constant which can be used for binding the type property
+     * to the GUI components.
+     * 
+     * @see {@link MenuItem#getType()}
+     */
+    public static final String TYPE_PROPERTY = "type";
+    
+    /**
+     * The constant which can be used for binding the bookmark property
+     * to the GUI components.
+     * 
+     * @see {@link MenuItem#getBookmark()}
+     */
+    public static final String BOOKMARK_PROPERTY = "bookmark";
+    
+    /**
+     * The constant which can be used for binding the isPermitted
+     * property to the GUI components.
+     * 
+     * @see {@link MenuItem#getIsPermitted()}
+     */
+    public static final String IS_PERMITTED_PROPERTY = "isPermitted";
+    
+    /**
+     * The {@link MenuItem#ACTION} constant defines that the {@link MenuItem}
+     * is type of {@link MenuAction}.
+     * 
+     * @see {@link MenuItem#getType()}
+     */
     public static final String ACTION = "action";
+    
+    /**
+     * The {@link MenuItem#NODE} constant defines that the {@link MenuItem}
+     * is type of {@link MenuNode}.
+     * 
+     * @see {@link MenuItem#getType()}
+     */
     public static final String NODE = "node";
     
     /**
@@ -60,29 +137,34 @@ public interface MenuItem {
     String getLabel();
 
     /**
-     * Returns the icon font
+     * Returns the assigned item's assigned <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">
+     * Cascading Style Sheets class</a>.
      * 
-     * @return the icon font
+     * @return the assigned <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">Cascading Style Sheets class</a>
      * 
      * @since 1.0
      */
     String getIconSclass();
 
     /**
-     * A priority of item. The items will be ordered by priority in sidebar menu.
+     * Returns the item's priority which defines how the item is positioned over
+     * other items in the same hierarchy level
      * 
-     * @return the priority of item
+     * @return the position which defines how to item is positioned over other items
      * 
      * @since 1.0
      */
     int getPriority();
     
     /**
-     * Returns item's type. Type can be 'action' or 'node.
+     * Returns the concrete type of {@link MenuItem item}.
+     * <p>
+     * It returns {@link MenuItem#ACTION} if the item is type of {@link MenuAction},
+     * or it returns {@link MenuItem#NODE} if the item is type of {@link MenuNode}.
      * 
-     * <p>This method is used by ZK template resolver.
+     * @return the concrete type of {@link MenuItem item}
      * 
-     * @return item's type
+     * @see {@link org.panifex.web.impl.menu.MenuNodeTemplate}
      * 
      * @since 1.0
      */
