@@ -19,6 +19,7 @@
 package org.panifex.web.impl.view.layout;
 
 import org.panifex.module.api.menu.MenuItem;
+import org.panifex.web.impl.menu.AppMenuConstants;
 import org.panifex.web.impl.menu.MenuActionTemplate;
 import org.panifex.web.impl.menu.MenuNodeTemplate;
 import org.zkoss.bind.Binder;
@@ -160,7 +161,7 @@ public abstract class LayoutRichlet extends GenericRichlet {
         navBar.setOrient("vertical");
         
         binder.addChildrenLoadBindings(navBar, "vm.menuItems", null, null, null, null, null);
-        binder.setTemplate(navBar, "$CHILDREN$", "each.data.type", null);
+        binder.setTemplate(navBar, "$CHILDREN$", AppMenuConstants.NODE_CHILDREN_CONDITION, null);
         navBar.setTemplate(MenuItem.ACTION, new MenuActionTemplate(binder));
         navBar.setTemplate(MenuItem.NODE, new MenuNodeTemplate(binder));
         navBar.setParent(sidebar);

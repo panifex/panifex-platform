@@ -35,6 +35,8 @@ public final class MenuActionTemplate implements Template {
 
     private Binder binder;
     
+    
+    
     public MenuActionTemplate(Binder binder) {
         this.binder = binder;
     }
@@ -46,15 +48,15 @@ public final class MenuActionTemplate implements Template {
         final MenuNavitem navItem = new MenuNavitem();
         
         // property bindings
-        binder.addPropertyLoadBindings(navItem, "contentId", "item.data.contentId", null, null, null, null, null);
-        binder.addPropertyLoadBindings(navItem, "label", "item.data.label", null, null, null, null, null);
-        binder.addPropertyLoadBindings(navItem, "iconSclass", "item.data.iconSclass", null, null, null, null, null);
-        binder.addPropertyLoadBindings(navItem, "disabled", "not item.data.isPermitted", null, null, null, null, null);
-        binder.addPropertyLoadBindings(navItem, "visible", "item.data.isPermitted", null, null, null, null, null);
+        binder.addPropertyLoadBindings(navItem, MenuNavitem.BOOKMARK_PROPERTY, AppMenuConstants.BOOKMARK_PROPERTY, null, null, null, null, null);
+        binder.addPropertyLoadBindings(navItem, "label", AppMenuConstants.LABEL_PROPERTY, null, null, null, null, null);
+        binder.addPropertyLoadBindings(navItem, "iconSclass", AppMenuConstants.ICON_S_CLASS_PROPERTY, null, null, null, null, null);
+        binder.addPropertyLoadBindings(navItem, "disabled", AppMenuConstants.DISABLED_PROPERTY, null, null, null, null, null);
+        binder.addPropertyLoadBindings(navItem, "visible", AppMenuConstants.VISIBLE_PROPERTY, null, null, null, null, null);
 
         // command binding
         Map<String, String[]> onClickArgs = new HashMap<>();
-        onClickArgs.put(MenuAction.ID, new String[]{"item.data"});
+        onClickArgs.put(MenuAction.ID, new String[]{ AppMenuConstants.ITEM_BIND_ID });
         Map<String, Object> parsedOnClickArgs = 
                 BindEvaluatorXUtil.parseArgs(binder.getEvaluatorX(), onClickArgs);
         binder.addCommandBinding(navItem, Events.ON_CLICK, 

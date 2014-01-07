@@ -44,14 +44,14 @@ public final class MenuNodeTemplate implements Template {
         final Nav node = new Nav();
         
         // property bindings
-        binder.addPropertyLoadBindings(node, "label", "item.data.label", null, null, null, null, null);
-        binder.addPropertyLoadBindings(node, "iconSclass", "item.data.iconSclass", null, null, null, null, null);
-        binder.addPropertyLoadBindings(node, "disabled", "not item.data.isPermitted", null, null, null, null, null);
-        binder.addPropertyLoadBindings(node, "visible", "item.data.isPermitted", null, null, null, null, null);
+        binder.addPropertyLoadBindings(node, "label", AppMenuConstants.LABEL_PROPERTY, null, null, null, null, null);
+        binder.addPropertyLoadBindings(node, "iconSclass", AppMenuConstants.ICON_S_CLASS_PROPERTY, null, null, null, null, null);
+        binder.addPropertyLoadBindings(node, "disabled", AppMenuConstants.DISABLED_PROPERTY, null, null, null, null, null);
+        binder.addPropertyLoadBindings(node, "visible", AppMenuConstants.VISIBLE_PROPERTY, null, null, null, null, null);
         
         // children binding
         binder.addChildrenLoadBindings(node, "item.children", null, null, null, null, null);
-        binder.setTemplate(node, "$CHILDREN$", "each.data.type", null);
+        binder.setTemplate(node, "$CHILDREN$", AppMenuConstants.NODE_CHILDREN_CONDITION, null);
         node.setTemplate(MenuItem.ACTION, new MenuActionTemplate(binder));
         node.setTemplate(MenuItem.NODE, new MenuNodeTemplate(binder));
         
