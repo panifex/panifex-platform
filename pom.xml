@@ -831,4 +831,10 @@
         </dependencies>
     </dependencyManagement>
 
+    <distributionManagement>
+        <repository>
+            <id>panifex-repository</id>
+            <url>file:///var/www/html/maven</url>
+        </repository>
+    </distributionManagement>
 </project>
