@@ -849,7 +849,7 @@
     <distributionManagement>
         <repository>
             <id>panifex-repository</id>
-            <url>file:///var/www/html/maven</url>
+            <url>file://maven-repository</url>
         </repository>
     </distributionManagement>
 </project>
