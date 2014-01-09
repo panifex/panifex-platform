@@ -31,71 +31,71 @@ Embed-Dependency: \
 Export-Package: \
     org.panifex.module.api.content, \
     org.panifex.module.api.environment, \
-	org.panifex.module.api.event, \
-	org.panifex.module.api.menu, \
-	org.zkoss.bind;version="7.0", \
-	org.zkoss.bind.annotation;version="7.0", \
-	org.zkoss.bind.converter;version="7.0", \
-	org.zkoss.bind.converter.sys;version="7.0", \
-	org.zkoss.bind.impl;version="7.0", \
-	org.zkoss.bind.sys;version="7.0", \
-	org.zkoss.bind.sys.debugger;version="7.0", \
-	org.zkoss.bind.sys.debugger.impl;version="7.0", \
-	org.zkoss.bind.sys.tracker;version="7.0", \
-	org.zkoss.bind.tracker.impl;version="7.0", \
-	org.zkoss.bind.validator;version="7.0", \
-	org.zkoss.bind.xel;version="7.0", \
-	org.zkoss.bind.xel.zel;version="7.0", \
-	org.zkoss.html;version="7.0", \
-	org.zkoss.io;version="7.0", \
-	org.zkoss.lang;version="7.0", \
-	org.zkoss.mesg;version="7.0", \
-	org.zkoss.util;version="7.0", \
-	org.zkoss.util.logging;version="7.0", \
-	org.zkoss.util.media;version="7.0", \
-	org.zkoss.util.resource;version="7.0", \
-	org.zkoss.zk;version="7.0", \
-	org.zkoss.zk.au;version="7.0", \
-	org.zkoss.zk.au.http;version="7.0", \
-	org.zkoss.zk.au.out;version="7.0", \
-	org.zkoss.zk.device;version="7.0", \
-	org.zkoss.zk.fn;version="7.0", \
-	org.zkoss.zk.mesg;version="7.0", \
-	org.zkoss.zk.scripting;version="7.0", \
-	org.zkoss.zk.ui;version="7.0", \
-	org.zkoss.zk.ui.annotation;version="7.0", \
-	org.zkoss.zk.ui.event;version="7.0", \
-	org.zkoss.zk.ui.event.impl;version="7.0", \
-	org.zkoss.zk.ui.ext;version="7.0", \
-	org.zkoss.zk.ui.ext.render;version="7.0", \
-	org.zkoss.zk.ui.http;version="7.0", \
+    org.panifex.module.api.event, \
+    org.panifex.module.api.menu, \
+    org.zkoss.bind;version="7.0", \
+    org.zkoss.bind.annotation;version="7.0", \
+    org.zkoss.bind.converter;version="7.0", \
+    org.zkoss.bind.converter.sys;version="7.0", \
+    org.zkoss.bind.impl;version="7.0", \
+    org.zkoss.bind.sys;version="7.0", \
+    org.zkoss.bind.sys.debugger;version="7.0", \
+    org.zkoss.bind.sys.debugger.impl;version="7.0", \
+    org.zkoss.bind.sys.tracker;version="7.0", \
+    org.zkoss.bind.tracker.impl;version="7.0", \
+    org.zkoss.bind.validator;version="7.0", \
+    org.zkoss.bind.xel;version="7.0", \
+    org.zkoss.bind.xel.zel;version="7.0", \
+    org.zkoss.html;version="7.0", \
+    org.zkoss.io;version="7.0", \
+    org.zkoss.lang;version="7.0", \
+    org.zkoss.mesg;version="7.0", \
+    org.zkoss.util;version="7.0", \
+    org.zkoss.util.logging;version="7.0", \
+    org.zkoss.util.media;version="7.0", \
+    org.zkoss.util.resource;version="7.0", \
+    org.zkoss.zk;version="7.0", \
+    org.zkoss.zk.au;version="7.0", \
+    org.zkoss.zk.au.http;version="7.0", \
+    org.zkoss.zk.au.out;version="7.0", \
+    org.zkoss.zk.device;version="7.0", \
+    org.zkoss.zk.fn;version="7.0", \
+    org.zkoss.zk.mesg;version="7.0", \
+    org.zkoss.zk.scripting;version="7.0", \
+    org.zkoss.zk.ui;version="7.0", \
+    org.zkoss.zk.ui.annotation;version="7.0", \
+    org.zkoss.zk.ui.event;version="7.0", \
+    org.zkoss.zk.ui.event.impl;version="7.0", \
+    org.zkoss.zk.ui.ext;version="7.0", \
+    org.zkoss.zk.ui.ext.render;version="7.0", \
+    org.zkoss.zk.ui.http;version="7.0", \
     org.zkoss.zk.ui.impl;version="7.0", \
-	org.zkoss.zk.ui.metainfo;version="7.0", \
-	org.zkoss.zk.ui.metainfo.impl;version="7.0", \
-	org.zkoss.zk.ui.select;version="7.0", \
-	org.zkoss.zk.ui.select.annotation;version="7.0", \
-	org.zkoss.zk.ui.select.impl;version="7.0", \
-	org.zkoss.zk.ui.sys;version="7.0", \
-	org.zkoss.zk.ui.util;version="7.0", \
-	org.zkoss.zk.xel;version="7.0", \
-	org.zkoss.zk.xel.impl;version="7.0", \
-	org.zkoss.zel;version="7.0", \
-	org.zkoss.zkex.ui.comet;version="7.0", \
-	org.zkoss.zkex.rt;version="7.0", \
-	org.zkoss.zul;version="7.0", \
-	org.zkoss.zul.impl;version="7.0", \
-	org.zkoss.xel;version="7.0", \
-	org.zkoss.xel.util;version="7.0", \
-	org.zkoss.xel.zel;version="7.0", \
-	org.zkoss.web.fn;version="7.0", \
-	org.zkoss.web.servlet;version="7.0", \
-	org.zkoss.web.servlet.dsp;version="7.0", \
-	org.zkoss.web.servlet.dsp.action;version="7.0", \
-	org.zkoss.web.servlet.dsp.impl;version="7.0", \
-	org.zkoss.web.servlet.http;version="7.0", \
-	org.zkoss.web.servlet.xel;version="7.0", \
-	org.zkoss.web.util.resource;version="7.0", \
-	org.zkoss.web.theme;version="7.0"
+    org.zkoss.zk.ui.metainfo;version="7.0", \
+    org.zkoss.zk.ui.metainfo.impl;version="7.0", \
+    org.zkoss.zk.ui.select;version="7.0", \
+    org.zkoss.zk.ui.select.annotation;version="7.0", \
+    org.zkoss.zk.ui.select.impl;version="7.0", \
+    org.zkoss.zk.ui.sys;version="7.0", \
+    org.zkoss.zk.ui.util;version="7.0", \
+    org.zkoss.zk.xel;version="7.0", \
+    org.zkoss.zk.xel.impl;version="7.0", \
+    org.zkoss.zel;version="7.0", \
+    org.zkoss.zkex.ui.comet;version="7.0", \
+    org.zkoss.zkex.rt;version="7.0", \
+    org.zkoss.zul;version="7.0", \
+    org.zkoss.zul.impl;version="7.0", \
+    org.zkoss.xel;version="7.0", \
+    org.zkoss.xel.util;version="7.0", \
+    org.zkoss.xel.zel;version="7.0", \
+    org.zkoss.web.fn;version="7.0", \
+    org.zkoss.web.servlet;version="7.0", \
+    org.zkoss.web.servlet.dsp;version="7.0", \
+    org.zkoss.web.servlet.dsp.action;version="7.0", \
+    org.zkoss.web.servlet.dsp.impl;version="7.0", \
+    org.zkoss.web.servlet.http;version="7.0", \
+    org.zkoss.web.servlet.xel;version="7.0", \
+    org.zkoss.web.util.resource;version="7.0", \
+    org.zkoss.web.theme;version="7.0"
 
 Import-Package: \
     javax.servlet;version="[3.0,4.0)", \
@@ -110,13 +110,13 @@ Import-Package: \
     org.apache.shiro;version="[1.2,2.0)", \
     org.apache.shiro.authz;version="[1.2,2.0)", \
     org.apache.shiro.subject; version="[1.2,2.0)", \
-	org.osgi.framework;version="[1.3,2.0)", \
-	org.slf4j;version="[1.4,2.0)", \
-	org.xml.sax, \
+    org.osgi.framework;version="[1.3,2.0)", \
+    org.slf4j;version="[1.4,2.0)", \
+    org.xml.sax, \
     org.xml.sax.ext, \
     org.xml.sax.helpers, \
     org.w3c.dom
-	
+    
 Private-Package: \
     org.zkoss.bind, \
     org.zkoss.bind.converter, \

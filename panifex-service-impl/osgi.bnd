@@ -20,10 +20,10 @@ Bundle-Blueprint-Annotation: true
 Export-Package: !org.panifex.platform.service.*
 
 Import-Package: \
-	org.apache.aries.blueprint.annotation;version="[1.0,2)", \
-	org.panifex.service.api.security;version="[1.0,2)", \
-	!org.panifex.platform.service.*, \
-	org.osgi.framework;version="[1.3,2)", \
-	org.slf4j;version="[1.4,2.0)"
+    org.apache.aries.blueprint.annotation;version="[1.0,2)", \
+    org.panifex.service.api.security;version="[1.0,2)", \
+    !org.panifex.platform.service.*, \
+    org.osgi.framework;version="[1.3,2)", \
+    org.slf4j;version="[1.4,2.0)"
 
 Private-Package: org.panifex.platform.service.*

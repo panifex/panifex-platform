@@ -31,9 +31,9 @@ Export-Package: \
     !*
     
 Import-Package: \
-	javax.xml, \
-	javax.xml.namespace, \
-	javax.xml.stream, \
+    javax.xml, \
+    javax.xml.namespace, \
+    javax.xml.stream, \
     com.sun.*;resolution:=optional, \
     org.apache.commons.logging;version="[1.1,2.0)", \
     org.dom4j;version="[1.6,2.0)", \

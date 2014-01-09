@@ -19,43 +19,43 @@
 Export-Package:
 
 Import-Package: \
-	javax.sql, \
-	javax.naming, \
-	javax.persistence;version="[2.0,3.0)", \
-	javax.persistence.criteria;version="[2.0,3.0)", \
-	javax.persistence.metamodel;version="[2.0,3.0)", \
-	liquibase;version="[3.0,4.0)", \
-	liquibase.database;version="[3.0,4.0)", \
-	liquibase.database.jvm;version="[3.0,4.0)", \
-	liquibase.exception;version="[3.0,4.0)", \
-	liquibase.resource;version="[3.0,4.0)", \
-	org.apache.aries.blueprint.annotation;version="[1.0, 2.0)", \
-	org.apache.aries.transaction.annotations;version="[1.0, 2.0)", \
-	org.apache.commons.lang3.builder;version="[3.1,4.0)", \
-	org.apache.openjpa.enhance;version="[2.2,3.0)", \
-	org.apache.openjpa.util;version="[2.2,3.0)", \
-	org.apache.shiro;version="[1.2,2.0)", \
-	org.apache.shiro.authc;version="[1.2,2.0)", \
-	org.apache.shiro.authc.credential;version="[1.2,2.0)", \
-	org.apache.shiro.authz;version="[1.2,2.0)", \
-	org.apache.shiro.cache;version="[1.2,2.0)", \
-	org.apache.shiro.cache.ehcache;version="[1.2,2.0)", \
-	org.apache.shiro.codec;version="[1.2,2.0)", \
-	org.apache.shiro.config;version="[1.2,2.0)", \
-	org.apache.shiro.crypto;version="[1.2,2.0)", \
-	org.apache.shiro.crypto.hash;version="[1.2,2.0)", \
-	org.apache.shiro.mgt;version="[1.2,2.0)", \
-	org.apache.shiro.realm;version="[1.2,2.0)", \
-	org.apache.shiro.subject;version="[1.2,2.0)", \
-	org.apache.shiro.util;version="[1.2,2.0)", \
-	org.osgi.framework;version="[1.3,2.0)", \
-	org.osgi.util.tracker;version="[1.3,2.0)", \
-	org.panifex.service.api;version="[1.0,2.0)", \
-	org.panifex.service.api.security;version="[1.0,2.0)", \
-	!org.panifex.platform.persistence.*, \
-	org.slf4j;version="[1.4,2.0)"
+    javax.sql, \
+    javax.naming, \
+    javax.persistence;version="[2.0,3.0)", \
+    javax.persistence.criteria;version="[2.0,3.0)", \
+    javax.persistence.metamodel;version="[2.0,3.0)", \
+    liquibase;version="[3.0,4.0)", \
+    liquibase.database;version="[3.0,4.0)", \
+    liquibase.database.jvm;version="[3.0,4.0)", \
+    liquibase.exception;version="[3.0,4.0)", \
+    liquibase.resource;version="[3.0,4.0)", \
+    org.apache.aries.blueprint.annotation;version="[1.0, 2.0)", \
+    org.apache.aries.transaction.annotations;version="[1.0, 2.0)", \
+    org.apache.commons.lang3.builder;version="[3.1,4.0)", \
+    org.apache.openjpa.enhance;version="[2.2,3.0)", \
+    org.apache.openjpa.util;version="[2.2,3.0)", \
+    org.apache.shiro;version="[1.2,2.0)", \
+    org.apache.shiro.authc;version="[1.2,2.0)", \
+    org.apache.shiro.authc.credential;version="[1.2,2.0)", \
+    org.apache.shiro.authz;version="[1.2,2.0)", \
+    org.apache.shiro.cache;version="[1.2,2.0)", \
+    org.apache.shiro.cache.ehcache;version="[1.2,2.0)", \
+    org.apache.shiro.codec;version="[1.2,2.0)", \
+    org.apache.shiro.config;version="[1.2,2.0)", \
+    org.apache.shiro.crypto;version="[1.2,2.0)", \
+    org.apache.shiro.crypto.hash;version="[1.2,2.0)", \
+    org.apache.shiro.mgt;version="[1.2,2.0)", \
+    org.apache.shiro.realm;version="[1.2,2.0)", \
+    org.apache.shiro.subject;version="[1.2,2.0)", \
+    org.apache.shiro.util;version="[1.2,2.0)", \
+    org.osgi.framework;version="[1.3,2.0)", \
+    org.osgi.util.tracker;version="[1.3,2.0)", \
+    org.panifex.service.api;version="[1.0,2.0)", \
+    org.panifex.service.api.security;version="[1.0,2.0)", \
+    !org.panifex.platform.persistence.*, \
+    org.slf4j;version="[1.4,2.0)"
 
-	
+
 Meta-Persistence: META-INF/persistence.xml
 
 Private-Package: org.panifex.persistence.*
