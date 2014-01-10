@@ -36,7 +36,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
     MenuTreeModel.class,
     MenuTreeNodeComparator.class
 })
-public final class MenuTreeNodeModelTest extends TestSupport {
+public final class MenuTreeModelTest extends TestSupport {
 
     /**
      * The {@link MenuTreeModel} instance to be unit tested.
