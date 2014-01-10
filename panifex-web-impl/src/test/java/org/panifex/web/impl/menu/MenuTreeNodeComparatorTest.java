@@ -25,7 +25,7 @@ import org.panifex.module.api.menu.MenuItem;
 import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.zkoss.zul.DefaultTreeNode;
+import org.zkoss.zul.TreeNode;
 
 /**
  * Unit tests for the {@link MenuTreeNodeComparator} class.
@@ -76,8 +76,8 @@ public final class MenuTreeNodeComparatorTest extends TestSupport {
         int expectedResult = 0;
         
         // mocks
-        DefaultTreeNode<MenuItem> treeNode1 = createMock(DefaultTreeNode.class);
-        DefaultTreeNode<MenuItem> treeNode2 = createMock(DefaultTreeNode.class);
+        TreeNode<MenuItem> treeNode1 = createMock(TreeNode.class);
+        TreeNode<MenuItem> treeNode2 = createMock(TreeNode.class);
         MenuItem menuItem1 = createMock(MenuItem.class);
         MenuItem menuItem2 = createMock(MenuItem.class);
         

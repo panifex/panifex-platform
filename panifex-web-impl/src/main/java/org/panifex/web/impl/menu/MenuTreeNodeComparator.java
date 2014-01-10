@@ -21,17 +21,17 @@ package org.panifex.web.impl.menu;
 import java.util.Comparator;
 
 import org.panifex.module.api.menu.MenuItem;
-import org.zkoss.zul.DefaultTreeNode;
+import org.zkoss.zul.TreeNode;
 
 /**
- * A comparison function which compares two {@link org.zkoss.zul.DefaultTreeNode DefaultTreeNode}s.
+ * A comparison function which compares two {@link org.zkoss.zul.TreeNode TreeNode}s.
  * <p>
- * The function compares the {@link org.zkoss.zul.DefaultTreeNode DefaultTreeNode} which contains
+ * The function compares the {@link org.zkoss.zul.TreeNode TreeNode} which contains
  * {@link org.panifex.module.api.menu.MenuItem MenuItem} objects.
  * <p>
  * The items comparison is based on the {@link MenuItemComparator} implementation.
  */
-final class MenuTreeNodeComparator implements Comparator<DefaultTreeNode<MenuItem>> {
+final class MenuTreeNodeComparator implements Comparator<TreeNode<MenuItem>> {
 
     /**
      * The comparator which compares two {@link org.panifex.module.api.menu.MenuItem MenuItem}s.
@@ -43,11 +43,14 @@ final class MenuTreeNodeComparator implements Comparator<DefaultTreeNode<MenuIte
      * or a positive integer as the first {@link org.panifex.module.api.menu.MenuItem MenuItem}
      * is less than, equal to, or greater than the second.
      * 
-     * @param treeNode1 the first {@link org.zkoss.zul.DefaultTreeNode DefaultTreeNode} which contains the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be compared
-     * @param treeNode2 the second {@link org.zkoss.zul.DefaultTreeNode DefaultTreeNode} which contains the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be compared
+     * @param treeNode1 the first {@link org.zkoss.zul.TreeNode TreeNode} which 
+     * contains the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be compared
+     * 
+     * @param treeNode2 the second {@link org.zkoss.zul.TreeNode TreeNode} which 
+     * contains the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be compared
      */
     @Override
-    public int compare(DefaultTreeNode<MenuItem> treeNode1, DefaultTreeNode<MenuItem> treeNode2) {
+    public int compare(TreeNode<MenuItem> treeNode1, TreeNode<MenuItem> treeNode2) {
         // extract data
         MenuItem item1 = treeNode1.getData();
         MenuItem item2 = treeNode2.getData();
