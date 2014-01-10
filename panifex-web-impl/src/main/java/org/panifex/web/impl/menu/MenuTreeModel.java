@@ -59,6 +59,13 @@ public final class MenuTreeModel extends DefaultTreeModel<MenuItem> {
     private MultiMap queuedItems = new MultiValueMap();
     
     /**
+     * The {@link MenuTreeNodeComparator} which compares two
+     * {@link org.zkoss.zul.TreeNode TreeNode}s which contains
+     * {@link org.panifex.module.api.menu.MenuItem MenuItem} objects. 
+     */
+    private MenuTreeNodeComparator comparator = new MenuTreeNodeComparator();
+    
+    /**
      * Constructs a new {@link MenuTreeModel} instance.
      */
     public MenuTreeModel() {
@@ -74,7 +81,10 @@ public final class MenuTreeModel extends DefaultTreeModel<MenuItem> {
      * @param item the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be added to the model
      */
     public void addItem(MenuItem item) {
-        if (!addMenuItemToTreeNode(getRoot(), item)) {
+        if (addMenuItemToTreeNode(getRoot(), item)) {
+            this.sort(comparator, true);
+        } else {
+            // the item has not been added to the model, so add it to the queued items
             String parentId = StringUtils.defaultString(item.getParentId());
             queuedItems.put(parentId, item);
         }
@@ -165,7 +175,7 @@ public final class MenuTreeModel extends DefaultTreeModel<MenuItem> {
                     
                 // add the created tree node to the tree node
                 parentTreeNode.add(newTreeNode);
-                    
+                
                 // get all queued item with the same parent id
                 @SuppressWarnings("rawtypes")
                 Collection childItems = (Collection) queuedItems.get(menuItem.getId());
@@ -211,6 +221,9 @@ public final class MenuTreeModel extends DefaultTreeModel<MenuItem> {
     public void removeItem(MenuItem item) {
         if (queuedItems.remove(item.getParentId(), item) == null) {
             removeChildItem(getRoot().getChildren(), item);
+            
+            // sort the elements
+            sort(comparator, true);
         }
     }
     

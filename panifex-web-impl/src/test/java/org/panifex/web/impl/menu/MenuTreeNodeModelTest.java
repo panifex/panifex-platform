@@ -21,24 +21,34 @@ package org.panifex.web.impl.menu;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.panifex.module.api.menu.MenuAction;
 import org.panifex.module.api.menu.MenuNode;
 import org.panifex.test.support.TestSupport;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * Unit tests for the {@link MenuTreeModel} class.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({
+    MenuTreeModel.class,
+    MenuTreeNodeComparator.class
+})
 public final class MenuTreeNodeModelTest extends TestSupport {
 
-    private MenuTreeModel model;
+    /**
+     * The {@link MenuTreeModel} instance to be unit tested.
+     */
+    private MenuTreeModel model = new MenuTreeModel();;
     
     /**
      * Prepares an environment for performing unit tests.
      */
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         resetAll();
-        model = new MenuTreeModel();
     }
     
     /**
@@ -223,6 +233,8 @@ public final class MenuTreeNodeModelTest extends TestSupport {
     public void addTwoMenuActionAndThenItsParentNodeTest() {
         // variables
         String parentId = getRandomChars(20);
+        int actionPriority1 = 1;
+        int actionPriority2 = 2;
         
         // mocks
         MenuAction menuAction1Mock = createMock(MenuAction.class);
@@ -232,6 +244,11 @@ public final class MenuTreeNodeModelTest extends TestSupport {
         // expect the menuActions returns the menuNode's ID
         expect(menuAction1Mock.getParentId()).andReturn(parentId).anyTimes();
         expect(menuAction2Mock.getParentId()).andReturn(parentId).anyTimes();
+        
+        // expect getting the menu action's priorities because the sorting
+        // they must be sorted, because they are in the same hierarchy level
+        expect(menuAction1Mock.getPriority()).andReturn(actionPriority1).anyTimes();
+        expect(menuAction2Mock.getPriority()).andReturn(actionPriority2).anyTimes();
         
         // expect the menuNode returns the empty string - because it is in a root level
         expect(menuNodeMock.getParentId()).andReturn(StringUtils.EMPTY);
@@ -309,6 +326,8 @@ public final class MenuTreeNodeModelTest extends TestSupport {
         // variables
         String menuNodeId1 = getRandomChars(20);
         String menuNodeId2 = getRandomChars(20);
+        int nodePriority1 = 1;
+        int nodePriority2 = 2;
         
         // ids must not be equal
         while (menuNodeId1.equals(menuNodeId2)) {
@@ -326,6 +345,11 @@ public final class MenuTreeNodeModelTest extends TestSupport {
         // expect getting MenuNode#getId() for searching for their not yet added children
         expect(menuNode1Mock.getId()).andReturn(menuNodeId1);
         expect(menuNode2Mock.getId()).andReturn(menuNodeId2);
+        
+        // expect getting the menu nodes' priorities because the sorting
+        // they must be sorted, because they are in the same hierarchy level
+        expect(menuNode1Mock.getPriority()).andReturn(nodePriority1).anyTimes();
+        expect(menuNode2Mock.getPriority()).andReturn(nodePriority2).anyTimes();
         
         // perform test
         replayAll();
@@ -369,6 +393,8 @@ public final class MenuTreeNodeModelTest extends TestSupport {
     public void addAndRemoveMenuNodeWithTwoMenuActionsTest() {
         // variables
         String parentId = getRandomChars(20);
+        int actionPriority1 = 1;
+        int actionPriority2 = 2;
         
         // mocks
         MenuAction menuAction1Mock = createMock(MenuAction.class);
@@ -379,6 +405,11 @@ public final class MenuTreeNodeModelTest extends TestSupport {
         // expect getting the menu action's parent ids
         expect(menuAction1Mock.getParentId()).andReturn(parentId).anyTimes();
         expect(menuAction2Mock.getParentId()).andReturn(parentId).anyTimes();
+        
+        // expect getting the menu action's priorities because the sorting
+        // they must be sorted, because they are in the same hierarchy level
+        expect(menuAction1Mock.getPriority()).andReturn(actionPriority1).anyTimes();
+        expect(menuAction2Mock.getPriority()).andReturn(actionPriority2).anyTimes();
         
         // expect getting the first menu node id and the parent id
         expect(menuNode1Mock.getParentId()).andReturn(StringUtils.EMPTY).anyTimes();
@@ -447,6 +478,8 @@ public final class MenuTreeNodeModelTest extends TestSupport {
         // variables
         String firstParentId = getRandomChars(20);
         String secondParentId = getRandomChars(20);
+        int actionPriority1 = 1;
+        int actionPriority2 = 2;
         
         // parent ids must not be the same
         while (firstParentId.equals(secondParentId)) {
@@ -463,6 +496,11 @@ public final class MenuTreeNodeModelTest extends TestSupport {
         // expect getting the menu action's parent ids
         expect(menuAction1Mock.getParentId()).andReturn(secondParentId).anyTimes();
         expect(menuAction2Mock.getParentId()).andReturn(secondParentId).anyTimes();
+
+        // expect getting the menu action's priorities because the sorting
+        // they must be sorted, because they are in the same hierarchy level
+        expect(menuAction1Mock.getPriority()).andReturn(actionPriority1).anyTimes();
+        expect(menuAction2Mock.getPriority()).andReturn(actionPriority2).anyTimes();
         
         // expect getting the first menu node id and the parent id
         expect(firstMenuNodeMock.getParentId()).andReturn(StringUtils.EMPTY).anyTimes();
