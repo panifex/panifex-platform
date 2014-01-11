@@ -32,31 +32,37 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.zul.TreeNode;
 
-@Bean(id = AppMenuManager.ID)
+/**
+ * This class contains a reference to an active
+ * {@link AppMenuServiceImpl AppMenuServiceImpl}.
+ * <p>
+ * 
+ */
+@Bean(id = AppMenuServiceHolder.ID)
 @RegistrationListener
-public final class AppMenuManager implements Serializable {
+public final class AppMenuServiceHolder implements Serializable {
 
     /**
-     * Serial version UID
+     * Serial version UID.
      */
     private static final long serialVersionUID = 1406210037353560969L;
 
     public static final String ID = "org.panifex.web.impl.menu.AppMenuManager";
     
-    private Logger log = LoggerFactory.getLogger(AppMenuManager.class);
+    private Logger log = LoggerFactory.getLogger(AppMenuServiceHolder.class);
     
     private static AppMenuService service;
     
     @Register
     public void registerAppMenuService(Serializable service, Map<String, String> props) {
         log.debug("Bind AppMenuService: {}", service);
-        AppMenuManager.service = (AppMenuService) service;
+        AppMenuServiceHolder.service = (AppMenuService) service;
     }
     
     @Unregister
-    public void unregisterAppMenuService(AppMenuService service, Map<String, String> props) {
+    public void unregisterAppMenuService(Serializable service, Map<String, String> props) {
         log.debug("Unbind AppMenuService: {}", service);
-        AppMenuManager.service = (AppMenuService) service;
+        AppMenuServiceHolder.service = null;
     }
     
     public static List<TreeNode<MenuItem>> getMenuItems() {

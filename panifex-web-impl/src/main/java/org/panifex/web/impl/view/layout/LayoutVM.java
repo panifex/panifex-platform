@@ -25,7 +25,7 @@ import org.apache.shiro.subject.Subject;
 import org.panifex.module.api.menu.MenuAction;
 import org.panifex.module.api.menu.MenuItem;
 import org.panifex.web.impl.content.ContentManager;
-import org.panifex.web.impl.menu.AppMenuManager;
+import org.panifex.web.impl.menu.AppMenuServiceHolder;
 import org.panifex.web.impl.menu.MenuNavitem;
 import org.panifex.web.impl.view.settings.SettingsContent;
 import org.slf4j.Logger;
@@ -130,7 +130,7 @@ public abstract class LayoutVM {
     }
 
     public List<TreeNode<MenuItem>> getMenuItems() {
-        return AppMenuManager.getMenuItems();
+        return AppMenuServiceHolder.getMenuItems();
     }
     
     @Command()

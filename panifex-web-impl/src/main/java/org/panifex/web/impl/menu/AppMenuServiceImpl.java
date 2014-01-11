@@ -43,7 +43,7 @@ import org.zkoss.zul.TreeNode;
  */
 @Bean(id = AppMenuServiceImpl.ID)
 @Service(interfaces = AppMenuService.class, 
-    registerationListeners = @RegistrationListener(ref = AppMenuManager.ID))
+    registerationListeners = @RegistrationListener(ref = AppMenuServiceHolder.ID))
 public final class AppMenuServiceImpl implements AppMenuService, Serializable {
 
     /**
