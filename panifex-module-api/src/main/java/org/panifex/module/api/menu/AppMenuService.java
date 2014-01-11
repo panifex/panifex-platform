@@ -39,7 +39,7 @@ public interface AppMenuService {
      * 
      * @since 1.0
      */
-    void bindMenuItem(MenuAction menuAction);
+    void bindMenuAction(MenuAction menuAction);
     
     /**
      * Binds the {@link MenuNode} to the application menu.
@@ -48,7 +48,7 @@ public interface AppMenuService {
      * 
      * @since 1.0
      */
-    void bindMenuItem(MenuNode menuNode);
+    void bindMenuNode(MenuNode menuNode);
     
     /**
      * Unbinds the {@link MenuAction} from the application menu.
@@ -57,7 +57,7 @@ public interface AppMenuService {
      * 
      * @since 1.0
      */
-    void unbindMenuItem(MenuAction menuAction);
+    void unbindMenuAction(MenuAction menuAction);
     
     /**
      * Unbinds the {@link MenuNode} from the application menu.
@@ -66,7 +66,7 @@ public interface AppMenuService {
      * 
      * @since 1.0
      */
-    void unbindMenuItem(MenuNode menuNode);
+    void unbindMenuNode(MenuNode menuNode);
     
     /**
      * Returns the currently binded menu's {@link MenuAction actions} and

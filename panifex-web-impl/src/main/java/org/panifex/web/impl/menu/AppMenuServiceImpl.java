@@ -49,13 +49,13 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
     private MenuTreeModel model = new MenuTreeModel();
     
     @Override
-    public void bindMenuItem(MenuAction menuAction) {
+    public void bindMenuAction(MenuAction menuAction) {
         log.debug("Bind MenuAction: {}", menuAction);
         bindItem(menuAction);
     }
 
     @Override
-    public void bindMenuItem(MenuNode menuNode) {
+    public void bindMenuNode(MenuNode menuNode) {
         log.debug("Bind MenuNode: {}", menuNode);
         bindItem(menuNode);
     }
@@ -67,13 +67,13 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
     }
         
     @Override
-    public void unbindMenuItem(MenuAction menuAction) {
+    public void unbindMenuAction(MenuAction menuAction) {
         log.debug("Unbind MenuAction: {}", menuAction);
         unbindItem(menuAction);
     }
 
     @Override
-    public void unbindMenuItem(MenuNode menuNode) {
+    public void unbindMenuNode(MenuNode menuNode) {
         log.debug("Unbind MenuNode: {}", menuNode);
         unbindItem(menuNode);
     }

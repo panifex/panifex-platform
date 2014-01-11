@@ -55,14 +55,14 @@ public class AppMenuServiceListener {
     public void bindAppMenuService(AppMenuService service) {
         log.debug("Bind AppMenuService: {}", service);
         this.service = service;
-        service.bindMenuItem(action);
+        service.bindMenuAction(action);
     }
     
     @Unbind
     public void unbindAppMenuService(AppMenuService service) {
         log.debug("Unbind AppMenuService: {}", service);
         if (service != null) {
-            service.unbindMenuItem(action);
+            service.unbindMenuAction(action);
         }
         this.service = null;
     }
