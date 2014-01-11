@@ -98,9 +98,7 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
      * @param item the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be binded
      */
     private void bindItem(MenuItem item) {
-        synchronized (model) {
-            model.addItem(item);
-        }
+        model.addItem(item);
     }
 
     /**
@@ -134,9 +132,7 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
      * @param item the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be unbinded
      */
     private void unbindItem(MenuItem item) {
-        synchronized (model) {
-            model.removeItem(item);
-        }
+        model.removeItem(item);
     }
 
     /**
