@@ -105,6 +105,13 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <distributionManagement>
+        <repository>
+            <id>panifex-repository</id>
+            <url>file://maven-repository</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -846,10 +853,4 @@
         </dependencies>
     </dependencyManagement>
 
-    <distributionManagement>
-        <repository>
-            <id>panifex-repository</id>
-            <url>file://maven-repository</url>
-        </repository>
-    </distributionManagement>
 </project>
