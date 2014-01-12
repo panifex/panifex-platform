@@ -117,6 +117,15 @@
         <connection>scm:git:git://github.com/panifex/panifex-platform.git</connection>
     </scm>
 
+    <developers>
+        <developer>
+            <email>mario.krizmanic@gmail.com</email>
+            <name>Mario Krizmanic</name>
+            <url>https://github.com/mkrizmanic</url>
+            <id>mkrizmanic</id>
+        </developer>
+    </developers>
+
     <build>
         <plugins>
             <plugin>
