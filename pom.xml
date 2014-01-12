@@ -22,7 +22,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <organization>
-        <url>http://panifex.org/</url>
+        <url>http://www.panifex.org/</url>
     </organization>
 
     <licenses>
@@ -111,6 +111,11 @@
             <url>file://maven-repository</url>
         </repository>
     </distributionManagement>
+
+    <scm>
+        <url>https://github.com/panifex/panifex-platform</url>
+        <connection>scm:git:git://github.com/panifex/panifex-platform.git</connection>
+    </scm>
 
     <build>
         <plugins>
