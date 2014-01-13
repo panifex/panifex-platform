@@ -70,7 +70,8 @@ public abstract class LayoutRichlet extends GenericRichlet {
         pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/grey.css.dsp\"/>");
         pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/sidebar.css.dsp\"/>");
         pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/user-nav.css.dsp\"/>");
-
+        pageCtrl.addAfterHeadTags("<link rel=\"shortcut icon\" href=\"../img/favicon.ico\"/>");
+        
         page.setTitle(Labels.getLabel("application.name"));
         final Div main = new Div();
        

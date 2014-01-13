@@ -18,13 +18,12 @@
  ******************************************************************************/
 @import "~./zul/less/_header.less";
 body {
-    background: #444444;
+    background: #343434 url("../img/back.png") repeat;
 }
 
 .header {
-    .boxShadow ('0 1px 0 #333333');
-    .verGradient (#3F3F3F , #222222);
-    border-bottom: 1px solid #555555;
+    background: #343434 url("../img/cream.png") repeat; 
+    border-bottom: 1px solid #ccc;
 }
 
 .search {
@@ -45,16 +44,16 @@ body {
 
 .sidebar {
     > ul {
-        border-top: 1px solid #393939;
-        border-bottom: 1px solid #4E4E4E;
+        border-top: 1px solid #0993d3;
+        border-bottom: 1px solid #0993d3;
         
             .z-nav-content,
             .z-navitem-content {
-                border-top: 1px solid #4E4E4E;
-                border-bottom: 1px solid #393939;
+                border-top: 1px solid #0993d3;
+                border-bottom: 1px solid #0993d3;
                 
                 &:hover {
-                    background: #4A4A4A;
+                    background: #0993d3;
                 }
                 > .z-nav-info {
                     background: #333333;
@@ -64,9 +63,9 @@ body {
 
         .z-navitem-selected {
             > .z-navitem-content {
-                .verGradient (#333333 , #3F3F3F);
+                background: #2094ca;
                 &:hover {
-                    .verGradient (#333333 , #3F3F3F);
+                    background: #167cac;
                 }
             }
         }
@@ -100,18 +99,18 @@ body {
 
 .user-nav {
     .z-menu-content, .z-menuitem-content {
-        .verGradient (#444 , #222);
+        .verGradient (#d9d9d9 , #e6e6e6);
         &:hover {
-            background: #222;
+            .verGradient (#1aaef3, #0993d3);
         }
     }
     .z-menu-selected .z-menu-content {
-        background: #222;
+        .verGradient (#1aaef3, #0993d3);
     }
 }
 
 .navpp .z-menu-content:hover , .navpp .z-menuitem-content:hover , .navpp .z-menu-content:active , .navpp .z-menuitem-content:active {
-    .verGradient (#555 , #222);
+    .verGradient (#d9d9d9 , #e6e6e6);
 }
 
 <c:if test="${zk.ie < 9}">
@@ -146,14 +145,14 @@ body {
     .z-menuitem-content,
     .z-menu-selected .z-menu-content {
         .resetGradient();
-        background: #3F3F3F;
-        border-color: #222;
+        background: #e6e6e6;
+        border-color: #aaa;
         border-bottom-color: #000;
         
         &:hover {
             border-color: black;
             .resetGradient();
-            background: #3F3F3F;
+            background: #e6e6e6;
         }
     }
 }
