@@ -30,9 +30,6 @@ import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.exception.LiquibaseException;
 
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.Reference;
-import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.osgi.framework.BundleContext;
 import org.panifex.persistence.resource.BundleResourceAccessor;
 import org.slf4j.Logger;
@@ -43,10 +40,6 @@ public class DataSourceListener {
     private Logger log = LoggerFactory.getLogger(DataSourceListener.class);
 
     private BundleContext bundleContext;
-
-    @Inject
-    @Reference(serviceInterface = DataSource.class, filter = "(osgi.jndi.service.name=jdbc/PanifexDataSource)", referenceListeners = @ReferenceListener(ref = "org.panifex.platform.persistence.DataSourceListener"))
-    private DataSource dataSource;
 
     private String changeLogFile = "/db-changelog/db.changelog-master.xml";;
     private String defaultSchema = "";
@@ -83,7 +76,6 @@ public class DataSourceListener {
     }
 
     public void unbind(DataSource dataSource) {
-
     }
 
     protected String getChangeLogFile() {
