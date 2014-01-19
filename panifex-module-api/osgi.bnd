@@ -33,6 +33,7 @@ Export-Package: \
     org.panifex.module.api.environment, \
     org.panifex.module.api.event, \
     org.panifex.module.api.menu, \
+    org.panifex.module.api.settings, \
     org.zkoss.bind;version="7.0", \
     org.zkoss.bind.annotation;version="7.0", \
     org.zkoss.bind.converter;version="7.0", \
