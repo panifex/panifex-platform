@@ -71,7 +71,8 @@ public class ContentManager {
         Content content = getBookmarkedContent(bookmark);
         
         if (content == null) {
-            // if bookmarked content hasn't been find, return empty content
+            // if bookmarked content hasn't been found, return empty content
+            log.debug("Bookmarked content hasn't been found. The empty content is shown.");
             content = new EmptyContent();
         }
         
