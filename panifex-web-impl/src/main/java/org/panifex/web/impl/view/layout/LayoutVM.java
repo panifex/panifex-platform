@@ -27,7 +27,7 @@ import org.panifex.module.api.menu.MenuItem;
 import org.panifex.web.impl.content.ContentManager;
 import org.panifex.web.impl.menu.AppMenuServiceHolder;
 import org.panifex.web.impl.menu.MenuNavitem;
-import org.panifex.web.impl.view.settings.SettingsContent;
+import org.panifex.web.impl.view.settings.SettingsContentView;
 import org.slf4j.Logger;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -146,9 +146,12 @@ public abstract class LayoutVM {
         content.getChildren().clear();
     }
     
+    /**
+     * Shows the {@link org.panifex.web.impl.view.settings.SettingsContentView SettingsContentView}.
+     */
     @Command
     public void onSettingsClick() {
-        changeBookmark(SettingsContent.ID);
+        changeBookmark(SettingsContentView.ID);
     }
     
     private void changeBookmark(String name) {
