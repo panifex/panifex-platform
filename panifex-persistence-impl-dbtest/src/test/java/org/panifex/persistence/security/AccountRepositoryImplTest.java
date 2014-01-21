@@ -18,61 +18,28 @@
  ******************************************************************************/
 package org.panifex.persistence.security;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.sql.DataSource;
-
-import liquibase.Liquibase;
-import liquibase.database.jvm.JdbcConnection;
-import liquibase.exception.LiquibaseException;
-import liquibase.resource.FileSystemResourceAccessor;
-
-import org.apache.openjpa.conf.OpenJPAConfiguration;
-import org.apache.openjpa.persistence.OpenJPAEntityManagerFactorySPI;
-import org.apache.openjpa.persistence.OpenJPAPersistence;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.fluttercode.datafactory.impl.DataFactory;
-import org.junit.Before;
 import org.junit.Test;
+import org.panifex.persistence.RepositoryTestSupport;
 import org.panifex.service.api.security.Permission;
 import org.panifex.service.api.security.Role;
-import org.panifex.test.support.TestSupport;
 
 /**
  * Test cases for {@link AccountRepositoryImpl} class. 
  *
  */
-public final class AccountRepositoryImplTest extends TestSupport {
+public final class AccountRepositoryImplTest extends RepositoryTestSupport {
 
     private static final String ADMIN_USERNAME = "admin";
     private static final String ADMIN_PASSWORD = "admin";
     private static final String ADMINISTRATOR_ROLE = "Administrator";
     private static final String USER_PERMISSION = "user";
     
-    private EntityManager entityManager;
-    private AccountRepositoryImpl accountRepository;
-    
-    @Before
-    public void setUp() throws SQLException, LiquibaseException {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("panifex");
-        entityManager = entityManagerFactory.createEntityManager();
-        
-        OpenJPAEntityManagerFactorySPI kemf = (OpenJPAEntityManagerFactorySPI) OpenJPAPersistence.cast(entityManagerFactory);
-        OpenJPAConfiguration conf = kemf.getConfiguration();
-        DataSource dataSource = (DataSource) conf.getConnectionFactory();
-        Connection conn = dataSource.getConnection();
-        Liquibase liquibase = new Liquibase("../panifex-persistence-impl/src/main/resources/db-changelog/db.changelog-master.xml", 
-            new FileSystemResourceAccessor(), new JdbcConnection(conn));
-        liquibase.update(null);
-        
-        accountRepository = new AccountRepositoryImpl();
-    }
+    private AccountRepositoryImpl accountRepository = new AccountRepositoryImpl();;
     
     /**
      * This test tries to update an existed account. It checks functionality of
