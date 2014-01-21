@@ -56,6 +56,26 @@
         <jpa:context property="entityManager" unitname="panifex-cm" />
         <tx:transaction method="*" value="Required"/>
     </bean>
+    
+    <!-- org.panifex.persistence.security.RoleRepositoryImpl -->
+    
+    <bean id="org.panifex.persistence.security.RoleRepositoryImpl"
+            class="org.panifex.persistence.security.RoleRepositoryImpl"/>
+    
+    <!-- org.panifex.persistence.security.RoleServiceImpl -->
+    
+    <service ref="org.panifex.persistence.security.RoleServiceImpl">
+        <interfaces>
+            <value>org.panifex.service.api.security.RoleService</value>
+        </interfaces>
+    </service>
+
+    <bean id="org.panifex.persistence.security.RoleServiceImpl"
+            class="org.panifex.persistence.security.RoleServiceImpl">
+        <property name="roleRepository" ref="org.panifex.persistence.security.RoleRepositoryImpl"/>
+        <jpa:context property="entityManager" unitname="panifex-cm" />
+        <tx:transaction method="*" value="Required"/>
+    </bean>
 
 </blueprint>
 
