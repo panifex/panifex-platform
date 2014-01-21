@@ -44,6 +44,9 @@ import org.panifex.test.support.TestSupport;
  */
 public abstract class RepositoryTestSupport extends TestSupport {
 
+    private static final String MASTER_CHANGELOG = "../panifex-persistence-impl/src/main/resources/db-changelog/db.changelog-master.xml";
+    private static final String TEST_DATA_CHANGELOG = "src/test/resources/db-changelog/db.changelog-test.xml";
+    
     protected EntityManager entityManager;
     
     @Before
@@ -55,8 +58,25 @@ public abstract class RepositoryTestSupport extends TestSupport {
         OpenJPAConfiguration conf = kemf.getConfiguration();
         DataSource dataSource = (DataSource) conf.getConnectionFactory();
         Connection conn = dataSource.getConnection();
-        Liquibase liquibase = new Liquibase("../panifex-persistence-impl/src/main/resources/db-changelog/db.changelog-master.xml", 
-            new FileSystemResourceAccessor(), new JdbcConnection(conn));
-        liquibase.update(null);       
+                
+        createTables(conn);
+        insertTestData(conn);
+    }
+
+    private void createTables(Connection conn) throws LiquibaseException {
+        executeChangelogs(conn, MASTER_CHANGELOG);
+    }
+    
+    private void insertTestData(Connection conn) throws LiquibaseException {
+        executeChangelogs(conn, TEST_DATA_CHANGELOG);
+    }
+    
+    private void executeChangelogs(Connection conn, String changelog) throws LiquibaseException {
+        Liquibase liquibase = new Liquibase(
+            changelog, 
+            new FileSystemResourceAccessor(), 
+            new JdbcConnection(conn));
+        
+        liquibase.update(null);
     }
 }
