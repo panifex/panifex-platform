@@ -26,9 +26,9 @@ import java.util.List;
 public interface RoleService {
 
     /**
-     * Returns the collection of persisted {@link Role}.
+     * Returns the collection of persisted {@link RoleImpl}.
      * 
-     * @return the collection of persisted {@link Role}.
+     * @return the collection of persisted {@link RoleImpl}.
      */
-    List<Role> getRoles();
+    List<RoleImpl> getRoles();
 }
