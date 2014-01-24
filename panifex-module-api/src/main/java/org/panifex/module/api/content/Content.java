@@ -54,7 +54,8 @@ public interface Content {
      * Every class which implements this interface must implement this method to 
      * define an unique component set.
      * 
-     * @return the {@link org.zkoss.zk.ui.Component Component} which contains the body content
+     * @param parent 
+     *      the {@link org.zkoss.zk.ui.Component Component} in which the method should append specific content
      */
-    Component createBody();
+    void createBody(final Component parent);
 }

@@ -59,11 +59,12 @@ public class ChangePasswordFormRichlet extends LayoutRichlet {
     private static final String PASSWORD_NOT_EQUAL_VSMSG = VALIDATION_MESSAGES + "['" + ChangePasswordFormValidator.PASSWORDS_NOT_EQUAL + "']";
     
     @Override
-    protected final Component createContent() {
+    protected final void createContent(Component parent) {
         log.debug("Create change password form");
         
         final Div content = new Div();
         content.setSclass("changepass-container");
+        parent.appendChild(content);
         
         addFormContentBinding(content);
         
@@ -75,8 +76,6 @@ public class ChangePasswordFormRichlet extends LayoutRichlet {
         
         // actions
         createActionsArea(content);
-        
-        return content;
     }
     
     private void addFormContentBinding(final Div content) {

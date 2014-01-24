@@ -66,7 +66,7 @@ public class ContentManager {
         this.contentUiFactory = contentUiFactory;
     }
     
-    public Component render(String bookmark) {
+    public void render(Component parent, String bookmark) {
         
         Content content = getBookmarkedContent(bookmark);
         
@@ -76,7 +76,7 @@ public class ContentManager {
             content = new EmptyContent();
         }
         
-        return contentUiFactory.render(content);
+        contentUiFactory.render(parent, content);
     }
     
     private Content getBookmarkedContent(String bookmark) {

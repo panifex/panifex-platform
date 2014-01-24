@@ -51,11 +51,12 @@ public class LoginFormRichlet extends LayoutRichlet {
     private static final String IS_REMEMBER_ME_PROPERTY = VM_BIND_ID + "." + LoginFormVM.IS_REMEMBER_ME_PROPERTY;
     
     @Override
-    protected Component createContent() {
+    protected void createContent(Component parent) {
         log.debug("Create content");
 
         Div content = new Div();
         content.setSclass("account-container");
+        parent.appendChild(content);
 
         // header area
         createContentHeaderArea(content);
@@ -65,8 +66,6 @@ public class LoginFormRichlet extends LayoutRichlet {
 
         // actions area
         createContentActionsArea(content);
-
-        return content;
     }
 
     private void createContentHeaderArea(Div content) {

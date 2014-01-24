@@ -30,8 +30,9 @@ public class ContentUiFactory {
 
     public final static String ID = "org.panifex.web.impl.content.ContentUiFactory";
     
-    public Component render(Content content) {
+    public void render(Component parent, Content content) {
         final Div root = new Div();
+        parent.appendChild(root);
         
         final Div contentHeader = new Div();
         contentHeader.setSclass("content-header");
@@ -47,9 +48,6 @@ public class ContentUiFactory {
         body.setSclass("content-body");
         root.appendChild(body);
         
-        Component child = content.createBody();
-        body.appendChild(child);
-        
-        return root;
+        content.createBody(body);
     }
 }

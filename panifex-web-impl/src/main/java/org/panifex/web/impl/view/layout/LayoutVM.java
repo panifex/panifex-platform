@@ -89,8 +89,7 @@ public abstract class LayoutVM {
         
         ContentManager manager = ContentManager.getManager();
         if (manager != null) {
-            Component newContent = ContentManager.getManager().render(contentId);
-            content.appendChild(newContent);
+            ContentManager.getManager().render(content, contentId);
             
             // select application menu action
             selectOpenContentMenuAction(contentId);

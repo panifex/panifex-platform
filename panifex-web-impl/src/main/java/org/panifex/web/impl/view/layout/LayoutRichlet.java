@@ -101,16 +101,17 @@ public abstract class LayoutRichlet extends GenericRichlet {
     }
 
     private void createComponents(Component main) {
-        main.appendChild(createLogo());
-        main.appendChild(createUserNav());
-        main.appendChild(createAppMenu());
-        main.appendChild(createContent());
+        createLogo(main);
+        createUserNav(main);
+        createAppMenu(main);
+        createContent(main);
     }
 
-    private Component createLogo() {
+    private void createLogo(Component body) {
 
         final Div header = new Div();
         header.setSclass("header");
+        body.appendChild(header);
 
         final Div fill = new Div();
         fill.setSclass("fill");
@@ -120,21 +121,18 @@ public abstract class LayoutRichlet extends GenericRichlet {
         logo.setHref(Labels.getLabel("application.url"));
         logo.setImage("../img/panifex_top_logo.png");
         fill.appendChild(logo);
-
-        return header;
     }
 
-    private Component createUserNav() {
+    private void createUserNav(Component body) {
         final Div userNav = new Div();
         userNav.setSclass("user-nav");
+        body.appendChild(userNav);
 
         final Menubar menubar = new Menubar();
         menubar.setParent(userNav);
 
         addSettingsButton(menubar);
         addLogoutButton(menubar);
-
-        return userNav;
     }
 
     private void addSettingsButton(Menubar menubar) {
@@ -153,8 +151,9 @@ public abstract class LayoutRichlet extends GenericRichlet {
                 null, null);
     }
 
-    private Component createAppMenu() {
+    private void createAppMenu(Component body) {
         final Div sidebar = new Div();
+        body.appendChild(sidebar);
 
         final Navbar navBar = new Navbar();
         navBar.setId("appmenu");
@@ -166,11 +165,9 @@ public abstract class LayoutRichlet extends GenericRichlet {
         navBar.setTemplate(MenuItem.ACTION, new MenuActionTemplate(binder));
         navBar.setTemplate(MenuItem.NODE, new MenuNodeTemplate(binder));
         navBar.setParent(sidebar);
-
-        return sidebar;
     }
 
-    protected abstract Component createContent();
+    protected abstract void createContent(Component parent);
 
     protected abstract LayoutVM getViewModel();
 

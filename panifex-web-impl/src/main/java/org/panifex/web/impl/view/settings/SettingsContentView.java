@@ -51,12 +51,11 @@ public final class SettingsContentView extends AbstractContent {
     }
 
     @Override
-    public Component createBody() {
+    public void createBody(Component parent) {
         Div body = new Div();
+        parent.appendChild(body);
         
         createTabbox(body);
-        
-        return body;
     }
     
     private void createTabbox(Component body) {
@@ -77,7 +76,7 @@ public final class SettingsContentView extends AbstractContent {
             
             Tabpanel panel = new Tabpanel();
             tabpanels.appendChild(panel);
-            panel.appendChild(content.createBody());
+            content.createBody(panel);
         }
     }
 }

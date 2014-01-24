@@ -37,16 +37,15 @@ public class MainRichlet extends LayoutRichlet {
     public static final String URL = "/zk/main";
     
     @Override
-    protected Component createContent() {
+    protected void createContent(Component parent) {
         log.debug("Create content");
         
         final Div content = new Div();
         content.setId("content");
         content.setSclass("content");
+        parent.appendChild(content);
         
-        content.appendChild(ContentManager.getManager().render(""));
-        
-        return content;
+        ContentManager.getManager().render(content, "");
     }
 
     @Override

@@ -36,7 +36,8 @@ public class DashboardContent extends AbstractContent {
     }
 
     @Override
-    public Component createBody() {
-        return new Div();
+    public void createBody(Component parent) {
+        Div body = new Div();
+        parent.appendChild(body);
     }
 }
