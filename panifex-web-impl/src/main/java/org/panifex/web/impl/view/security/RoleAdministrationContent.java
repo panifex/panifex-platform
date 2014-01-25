@@ -30,7 +30,7 @@ import org.zkoss.zul.Listhead;
 import org.zkoss.zul.Listheader;
 
 /**
- * The SettingsContent for administration of users' roles.“
+ * The SettingsContent for administration of users' roles.
  */
 @Bean(id = RoleAdministrationContent.ID)
 @Service(interfaces = SettingsContent.class)
