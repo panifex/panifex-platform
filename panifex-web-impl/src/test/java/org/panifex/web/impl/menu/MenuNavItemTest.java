@@ -18,18 +18,33 @@
  ******************************************************************************/
 package org.panifex.web.impl.menu;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * Unit tests for the {@link MenuNavitem} class.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(MenuNavitem.class)
 public final class MenuNavItemTest extends TestSupport {
 
     /**
      * The {@link MenuNavitem} instance for unit testing.
      */
-    private MenuNavitem menuNavitem = new MenuNavitem();
+    private MenuNavitem menuNavitem;
+    
+    @Before
+    public void setUp() {
+        // suppress MenuNavItem constructor
+        suppress(constructor(MenuNavitem.class));
+        
+        // create an instance for unit tests
+        menuNavitem = new MenuNavitem();
+    }
     
     /**
      * Checks getting and setting the bookmark field.
