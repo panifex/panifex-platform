@@ -37,8 +37,8 @@ import org.zkoss.zul.Listitem;
  */
 class RoleListboxTemplate implements Template {
 
-    public static final String NAME_PROP = TemplateResolver.EACH_ATTR + "." + Role.NAME_PROP;
-    public static final String DESCRIPTION_PROP = TemplateResolver.EACH_ATTR + "." + Role.DESCRIPTION_PROP;
+    public static final String NAME_PROP = TemplateResolver.EACH_VAR + "." + Role.NAME_PROP;
+    public static final String DESCRIPTION_PROP = TemplateResolver.EACH_VAR + "." + Role.DESCRIPTION_PROP;
     
     /**
      * The {@link org.zkoss.bind.Binder Binder} for manage data bindings.
