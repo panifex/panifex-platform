@@ -31,6 +31,16 @@ import org.panifex.service.api.Entity;
 public interface Role extends Entity {
 
     /**
+     * The constant which can be used for binding the name property to the GUI components.
+     */
+    public static final String NAME_PROP = "name";
+    
+    /**
+     * The constant which can be used for binding the description property to the GUI components.
+     */
+    public static final String DESCRIPTION_PROP = "description";
+    
+    /**
      * Returns the role's name. 
      * <p>
      * It must be unique.
