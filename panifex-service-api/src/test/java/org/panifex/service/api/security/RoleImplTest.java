@@ -44,4 +44,29 @@ public final class RoleImplTest extends TestSupport {
             suppress(Warning.NONFINAL_FIELDS).
             verify();
     }
+    
+    /**
+     * This test checks the {@link RoleImpl#RoleImpl(Long, int, String, String)}
+     * constructor.
+     * <p>
+     * The RoleImpl must be successfully constructed.
+     */
+    @Test
+    public void constructRoleImplTest() {
+        // variables
+        Long id = new Long(getNumberUpTo(Integer.MAX_VALUE));
+        int optlockVersion = getNumberUpTo(Integer.MAX_VALUE);
+        String name = getRandomChars(20);
+        String description = getRandomChars(20);
+        
+        // construct the RoleImpl instance
+        RoleImpl role = new RoleImpl(id, optlockVersion, name, description);
+        
+        // assert has it successfully constructed
+        assertNotNull(role);
+        assertEquals(id, role.getId());
+        assertEquals(optlockVersion, role.getOptlockVersion());
+        assertEquals(name, role.getName());
+        assertEquals(description, role.getDescription());
+    }
 }
