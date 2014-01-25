@@ -40,8 +40,10 @@ public final class MenuActionTemplate implements Template {
     /**
      * The {@link org.zkoss.bind.Binder Binder} for manage data bindings.
      */
-    private Binder binder;
+    private final Binder binder;
 
+    private Map<String, Object> params;
+    
     /**
      * Creates a new {@link MenuActionTemplate} for building
      * {@link MenuNavitem} components based on the 
@@ -88,11 +90,10 @@ public final class MenuActionTemplate implements Template {
 
     @Override
     public Map<String, Object> getParameters() {
-        Map<String, Object> parameters = new HashMap<>();
-        // set binding variable
-        parameters.put("var", "item");
-
-        return parameters;
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        return params;
     }
 
 }

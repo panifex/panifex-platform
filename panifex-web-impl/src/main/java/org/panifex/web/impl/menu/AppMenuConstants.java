@@ -19,6 +19,7 @@
 package org.panifex.web.impl.menu;
 
 import org.panifex.module.api.menu.MenuItem;
+import org.zkoss.bind.sys.TemplateResolver;
 
 /**
  * A constants container for wiring {@link org.panifex.module.api.menu.MenuItem}'s
@@ -36,7 +37,7 @@ public final class AppMenuConstants {
     /**
      * The prefix constant for binding properties.
      */
-    public static final String ITEM_BIND_ID = "item.data";
+    public static final String ITEM_BIND_ID = TemplateResolver.EACH_VAR + ".data";
     
     /**
      * The arguments for the command binding.
@@ -53,7 +54,7 @@ public final class AppMenuConstants {
      * The condition is based on {@link org.panifex.module.api.menu.MenuItem#getType() MenuItem#getType()}
      * property.
      */
-    public static final String NODE_CHILDREN_CONDITION = "each.data." + MenuItem.TYPE_PROPERTY;
+    public static final String NODE_CHILDREN_CONDITION = TemplateResolver.EACH_VAR + ".data." + MenuItem.TYPE_PROPERTY;
     
     /**
      * The constant for binding the bookmark property to the GUI components.

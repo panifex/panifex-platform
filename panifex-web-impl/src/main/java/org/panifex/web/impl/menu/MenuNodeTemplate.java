@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.panifex.module.api.menu.MenuItem;
 import org.zkoss.bind.Binder;
+import org.zkoss.bind.sys.TemplateResolver;
 import org.zkoss.xel.VariableResolver;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.Composer;
@@ -35,10 +36,14 @@ import org.zkoss.zkmax.zul.Nav;
  */
 public final class MenuNodeTemplate implements Template {
 
+    public static final String CHILDREN_BINDING = TemplateResolver.EACH_VAR + ".children";
+    
     /**
      * The {@link org.zkoss.bind.Binder Binder} for manage data bindings.
      */
-    private Binder binder;
+    private final Binder binder;
+    
+    private Map<String, Object> params;
     
     /**
      * Creates a new {@link MenuNodeTemplate} for building
@@ -67,7 +72,7 @@ public final class MenuNodeTemplate implements Template {
         binder.addPropertyLoadBindings(node, "visible", AppMenuConstants.VISIBLE_PROPERTY, null, null, null, null, null);
         
         // children binding
-        binder.addChildrenLoadBindings(node, "item.children", null, null, null, null, null);
+        binder.addChildrenLoadBindings(node, CHILDREN_BINDING, null, null, null, null, null);
         binder.setTemplate(node, "$CHILDREN$", AppMenuConstants.NODE_CHILDREN_CONDITION, null);
         node.setTemplate(MenuItem.ACTION, new MenuActionTemplate(binder));
         node.setTemplate(MenuItem.NODE, new MenuNodeTemplate(binder));
@@ -83,11 +88,10 @@ public final class MenuNodeTemplate implements Template {
 
     @Override
     public Map<String, Object> getParameters() {
-        Map<String, Object> parameters = new HashMap<>();
-        // set binding variable
-        parameters.put("var", "item");
-
-        return parameters;
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        return params;
     }
 
 }

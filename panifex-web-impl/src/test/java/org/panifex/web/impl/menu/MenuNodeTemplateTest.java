@@ -85,7 +85,7 @@ public final class MenuNodeTemplateTest extends TestSupport {
         binderMock.addPropertyLoadBindings(navMock, "visible", AppMenuConstants.VISIBLE_PROPERTY, null, null, null, null, null);
         
         // expect adding a children binding
-        binderMock.addChildrenLoadBindings(navMock, "item.children", null, null, null, null, null);
+        binderMock.addChildrenLoadBindings(navMock, MenuNodeTemplate.CHILDREN_BINDING, null, null, null, null, null);
         binderMock.setTemplate(navMock, "$CHILDREN$", AppMenuConstants.NODE_CHILDREN_CONDITION, null);
         expect(navMock.setTemplate(MenuItem.ACTION, actionTemplateMock)).andReturn(null);
         expect(navMock.setTemplate(MenuItem.NODE, nodeTemplateMock)).andReturn(null);
