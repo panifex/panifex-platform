@@ -18,7 +18,10 @@
  ******************************************************************************/
 package org.panifex.web.impl.locale;
 
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.junit.Before;
@@ -88,5 +91,42 @@ public final class LabelLocatorImplTest extends TestSupport {
         assertNull(url);
     }
     
-
+    /**
+     * This test checks the equals contract.
+     * 
+     * @see {@link java.lang.Object#equals(Object)}
+     * @see {@link java.lang.Object#hashCode()}
+     */
+    @Test
+    public void equalsContractTest() throws MalformedURLException {
+        // mocks
+        Locale locale1Mock = new Locale("en");
+        Locale locale2Mock = new Locale("de");
+        URL url1Mock = new URL("http://url1");
+        URL url2Mock = new URL("http://url2");
+        
+        // create locators
+        List<LabelLocatorImpl> locators = new ArrayList<LabelLocatorImpl>();
+        
+        LabelLocatorImpl locator1 = new LabelLocatorImpl(locale1Mock, url1Mock);
+        locators.add(locator1);
+        locators.add(new LabelLocatorImpl(locale1Mock, url2Mock));
+        locators.add(new LabelLocatorImpl(locale2Mock, url1Mock));
+        locators.add(new LabelLocatorImpl(locale2Mock, url2Mock));
+        
+        LabelLocatorImpl locator2 = new LabelLocatorImpl(locale1Mock, url1Mock);
+        
+        // verify equals contract
+        assertEquals(locator1, locator2);
+        
+        // verify not equals contract
+        for (int first = 0 ; first < locators.size() ; first++) {
+            for (int second = first + 1 ; second < locators.size() ; second++) {
+                // first and second must not be equal
+                assertNotEquals(locators.get(first), locators.get(second));
+                assertNotEquals(locators.get(second), locators.get(first));
+            }
+        }
+        
+    }
 }
