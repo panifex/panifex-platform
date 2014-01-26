@@ -43,10 +43,12 @@ public final class LabelLocatorImplEqualsContractTest extends TestSupport {
     @Test
     public void equalsContractTest() throws MalformedURLException {
         // variables
-        String url1 = "http://" + getRandomChars(20) + ".com";
-        String url2 = null;
-        while(url2 == null || url1.equals(url2)) {
-            url2 = "http://" + getRandomChars(20) + ".com";
+        String url1 = generateUrl();
+        String url2 = generateUrl();
+        
+        // generate other url if they are the same
+        while(url1.equals(url2)) {
+            url2 = generateUrl();
         }
         
         // test the equals contract
@@ -54,5 +56,14 @@ public final class LabelLocatorImplEqualsContractTest extends TestSupport {
             forClass(LabelLocatorImpl.class).
             withPrefabValues(URL.class, new URL(url1), new URL(url2)).
             verify();
+    }
+    
+    /**
+     * Returns a random generated dummy url.
+     * 
+     * @return the random generated dummy url
+     */
+    private String generateUrl() {
+        return "http://" + getRandomChars(20) + ".com";
     }
 }
