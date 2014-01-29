@@ -32,7 +32,7 @@ public class DashboardContent extends AbstractContent {
     public final static String ID = "org.panifex.module.dashboard.impl.DashboardContent";
     
     public DashboardContent() {
-        super("Dashboard", ID);
+        super(DashboardLabels.TITLE, ID);
     }
 
     @Override

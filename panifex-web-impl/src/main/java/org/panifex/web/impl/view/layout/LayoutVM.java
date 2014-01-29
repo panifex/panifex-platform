@@ -29,6 +29,7 @@ import org.panifex.web.impl.menu.AppMenuServiceHolder;
 import org.panifex.web.impl.menu.MenuNavitem;
 import org.panifex.web.impl.view.settings.SettingsContentView;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Component;
@@ -48,19 +49,26 @@ import org.zkoss.zul.TreeNode;
  */
 public abstract class LayoutVM {
 
-    public final static String ON_MENU_ACTION_CLICK = "'onMenuActionClick'";
+    // commands
+    public static final String LOGOUT_COMMAND = "logout";
+    public static final String ON_MENU_ACTION_CLICK = "onMenuActionClick";
+    public static final String ON_SETTINGS_CLICK = "onSettingsClick";
     
-    protected abstract Logger getLogger();
+    // attributes
+    public static final String MENU_ITEMS_ATTR = "menuItems"; 
+    public static final String IS_USER_LOGGED_IN = "isUserLoggedIn";
+    
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     @Wire("#content")
     private Div content;
     @Wire("#appmenu")
     private Navbar navbar;
     
-    @Command
+    @Command(LOGOUT_COMMAND)
     public void logout() {
         Subject currentUser = SecurityUtils.getSubject();
-        getLogger().info("User {} is logging out", currentUser.getPrincipal());
+        log.info("User {} is logging out", currentUser.getPrincipal());
         currentUser.logout();
         Executions.sendRedirect("/zk/login");
     }
@@ -94,7 +102,7 @@ public abstract class LayoutVM {
             // select application menu action
             selectOpenContentMenuAction(contentId);
         } else {
-            getLogger().error("Content manager is null");
+            log.error("Content manager is null");
         }
     }
     
@@ -132,7 +140,7 @@ public abstract class LayoutVM {
         return AppMenuServiceHolder.getMenuItems();
     }
     
-    @Command()
+    @Command(ON_MENU_ACTION_CLICK)
     public void onMenuActionClick(@BindingParam(MenuAction.ID) MenuAction action) {
         action.onClick();
     }
@@ -148,7 +156,7 @@ public abstract class LayoutVM {
     /**
      * Shows the {@link org.panifex.web.impl.view.settings.SettingsContentView SettingsContentView}.
      */
-    @Command
+    @Command(ON_SETTINGS_CLICK)
     public void onSettingsClick() {
         changeBookmark(SettingsContentView.ID);
     }

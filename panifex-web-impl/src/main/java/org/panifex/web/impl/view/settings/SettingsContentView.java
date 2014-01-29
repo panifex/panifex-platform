@@ -26,6 +26,7 @@ import org.panifex.module.api.content.AbstractContent;
 import org.panifex.module.api.content.Content;
 import org.panifex.module.api.settings.SettingsContent;
 import org.panifex.web.impl.settings.SettingsContentManager;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Tab;
@@ -47,7 +48,7 @@ public final class SettingsContentView extends AbstractContent {
     public static final String ID = "org.panifex.web.impl.view.settings.SettingsContentView";
     
     public SettingsContentView() {
-        super("Settings", ID);
+        super(SettingsLabels.VIEW_TITLE, ID);
     }
 
     @Override
@@ -71,7 +72,7 @@ public final class SettingsContentView extends AbstractContent {
         List<SettingsContent> contents = SettingsContentManager.getContents();
 
         for (SettingsContent content : contents) {
-            Tab tab = new Tab(content.getTitle());
+            Tab tab = new Tab(Labels.getLabel(content.getTitle()));
             tabs.appendChild(tab);
             
             Tabpanel panel = new Tabpanel();

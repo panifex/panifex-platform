@@ -77,12 +77,12 @@ public final class RoleListboxTemplateTest extends TestSupport {
         // expect creating a new Listcell which shows name
         Listcell nameCellMock = createMockAndExpectNew(Listcell.class);
         expect(listitemMock.appendChild(nameCellMock)).andReturn(true);
-        binderMock.addPropertyLoadBindings(nameCellMock, "label", RoleListboxTemplate.NAME_PROP, null, null, null, null, null);
+        binderMock.addPropertyLoadBindings(nameCellMock, "label", RoleListboxTemplate.NAME_ATTR, null, null, null, null, null);
         
         // except creating a new Listcell which shows description
         Listcell descCellMock = createMockAndExpectNew(Listcell.class);
         expect(listitemMock.appendChild(descCellMock)).andReturn(true);
-        binderMock.addPropertyLoadBindings(descCellMock, "label", RoleListboxTemplate.DESCRIPTION_PROP, null, null, null, null, null);
+        binderMock.addPropertyLoadBindings(descCellMock, "label", RoleListboxTemplate.DESCRIPTION_ATTR, null, null, null, null, null);
         
         // expect appending to the parent before insertBeforeMock
         expect(parentMock.insertBefore(listitemMock, insertBeforeMock)).andReturn(true);
@@ -113,12 +113,12 @@ public final class RoleListboxTemplateTest extends TestSupport {
         // expect creating a new Listcell which shows name
         Listcell nameCellMock = createMockAndExpectNew(Listcell.class);
         expect(listitemMock.appendChild(nameCellMock)).andReturn(true);
-        binderMock.addPropertyLoadBindings(nameCellMock, "label", RoleListboxTemplate.NAME_PROP, null, null, null, null, null);
+        binderMock.addPropertyLoadBindings(nameCellMock, "label", RoleListboxTemplate.NAME_ATTR, null, null, null, null, null);
         
         // except creating a new Listcell which shows description
         Listcell descCellMock = createMockAndExpectNew(Listcell.class);
         expect(listitemMock.appendChild(descCellMock)).andReturn(true);
-        binderMock.addPropertyLoadBindings(descCellMock, "label", RoleListboxTemplate.DESCRIPTION_PROP, null, null, null, null, null);
+        binderMock.addPropertyLoadBindings(descCellMock, "label", RoleListboxTemplate.DESCRIPTION_ATTR, null, null, null, null, null);
         
         // expect appending to the parent
         expect(parentMock.appendChild(listitemMock)).andReturn(true);

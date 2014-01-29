@@ -16,10 +16,17 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.view.main;
+package org.panifex.web.impl.view.settings;
 
-import org.panifex.web.impl.view.layout.LayoutVM;
+public final class SettingsLabels {
 
-public final class AbstractVMImpl extends LayoutVM {
-
+    public static final String OPEN_SETTINGS_CONTENT_LABEL = "settings.open.settings.content.label"; // Settings
+    
+    public static final String VIEW_TITLE = "settings.view.title"; // Settings
+    
+    /**
+     * Private construct which protects any other class from instantiating.
+     */
+    private SettingsLabels() {
+    }
 }

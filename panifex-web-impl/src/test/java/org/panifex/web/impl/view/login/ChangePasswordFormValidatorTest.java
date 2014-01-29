@@ -63,12 +63,12 @@ public final class ChangePasswordFormValidatorTest extends TestSupport {
         Property repeatNewPasswordProperty = createMock(Property.class);
         
         // expect getting new password property from the validation context
-        expect(ctxMock.getProperties(ChangePasswordFormVM.NEW_PASSWORD_PROPERTY)).
+        expect(ctxMock.getProperties(ChangePasswordFormVM.NEW_PASSWORD_ATTR)).
             andReturn(new Property[]{ newPasswordProperty });
         expect(newPasswordProperty.getValue()).andReturn(newPassword);
         
         // expect getting repeated new password property from the validation context
-        expect(ctxMock.getProperties(ChangePasswordFormVM.REPEAT_NEW_PASSWORD_PROPERTY)).
+        expect(ctxMock.getProperties(ChangePasswordFormVM.REPEAT_NEW_PASSWORD_ATTR)).
             andReturn(new Property[]{ repeatNewPasswordProperty});
         expect(repeatNewPasswordProperty.getValue()).andReturn(repeatNewPassword);
         
@@ -97,12 +97,12 @@ public final class ChangePasswordFormValidatorTest extends TestSupport {
         Property repeatNewPasswordProperty = createMock(Property.class);
         
         // expect getting new password property from the validation context
-        expect(ctxMock.getProperties(ChangePasswordFormVM.NEW_PASSWORD_PROPERTY)).
+        expect(ctxMock.getProperties(ChangePasswordFormVM.NEW_PASSWORD_ATTR)).
             andReturn(new Property[]{ newPasswordProperty });
         expect(newPasswordProperty.getValue()).andReturn(newPassword);
         
         // expect getting repeated new password property from the validation context
-        expect(ctxMock.getProperties(ChangePasswordFormVM.REPEAT_NEW_PASSWORD_PROPERTY)).
+        expect(ctxMock.getProperties(ChangePasswordFormVM.REPEAT_NEW_PASSWORD_ATTR)).
             andReturn(new Property[]{ repeatNewPasswordProperty});
         expect(repeatNewPasswordProperty.getValue()).andReturn(repeatNewPassword);
         
@@ -139,12 +139,12 @@ public final class ChangePasswordFormValidatorTest extends TestSupport {
         Property repeatNewPasswordProperty = createMock(Property.class);
         
         // expect getting new password property from the validation context
-        expect(ctxMock.getProperties(ChangePasswordFormVM.NEW_PASSWORD_PROPERTY)).
+        expect(ctxMock.getProperties(ChangePasswordFormVM.NEW_PASSWORD_ATTR)).
             andReturn(new Property[]{ newPasswordProperty });
         expect(newPasswordProperty.getValue()).andReturn(null);
         
         // expect getting repeated new password property from the validation context
-        expect(ctxMock.getProperties(ChangePasswordFormVM.REPEAT_NEW_PASSWORD_PROPERTY)).
+        expect(ctxMock.getProperties(ChangePasswordFormVM.REPEAT_NEW_PASSWORD_ATTR)).
             andReturn(new Property[]{ repeatNewPasswordProperty});
         expect(repeatNewPasswordProperty.getValue()).andReturn(repeatNewPassword);
         
@@ -172,12 +172,12 @@ public final class ChangePasswordFormValidatorTest extends TestSupport {
         Property repeatNewPasswordProperty = createMock(Property.class);
         
         // expect getting new password property from the validation context
-        expect(ctxMock.getProperties(ChangePasswordFormVM.NEW_PASSWORD_PROPERTY)).
+        expect(ctxMock.getProperties(ChangePasswordFormVM.NEW_PASSWORD_ATTR)).
             andReturn(new Property[]{ newPasswordProperty });
         expect(newPasswordProperty.getValue()).andReturn(newPassword);
         
         // expect getting repeated new password property from the validation context
-        expect(ctxMock.getProperties(ChangePasswordFormVM.REPEAT_NEW_PASSWORD_PROPERTY)).
+        expect(ctxMock.getProperties(ChangePasswordFormVM.REPEAT_NEW_PASSWORD_ATTR)).
             andReturn(new Property[]{ repeatNewPasswordProperty});
         expect(repeatNewPasswordProperty.getValue()).andReturn(null);
         

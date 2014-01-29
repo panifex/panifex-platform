@@ -19,14 +19,16 @@
 package org.panifex.web.impl.view.layout;
 
 import org.panifex.module.api.menu.MenuItem;
+import org.panifex.web.impl.ApplicationLabels;
 import org.panifex.web.impl.menu.AppMenuConstants;
 import org.panifex.web.impl.menu.MenuActionTemplate;
 import org.panifex.web.impl.menu.MenuNodeTemplate;
+import org.panifex.web.impl.view.security.SecurityLabels;
+import org.panifex.web.impl.view.settings.SettingsLabels;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.bind.impl.ValidationMessagesImpl;
 import org.zkoss.bind.sys.ValidationMessages;
-import org.zkoss.text.MessageFormats;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.GenericRichlet;
@@ -47,12 +49,22 @@ import org.zkoss.zul.Script;
  */
 public abstract class LayoutRichlet extends GenericRichlet {
 
-    private DefaultBinder binder;
-
     /**
      * Contains the {@link java.lang.String String} constant in which is the view-model binded to the components.
      */
-    protected static final String VM_BIND_ID = "vm";
+    public static final String VM_BIND_ID = "vm";
+    
+    // commands
+    private static final String LOGOUT_COMMAND = "'" + LayoutVM.LOGOUT_COMMAND + "'";
+    private static final String ON_SETTINGS_CLICK = "'" + LayoutVM.ON_SETTINGS_CLICK +"'";
+    
+    // attributes
+    private static final String MENU_ITEMS_ATTR = VM_BIND_ID + "." + LayoutVM.MENU_ITEMS_ATTR;
+    private static final String IS_USER_LOGGED_IN_ATTR = VM_BIND_ID + "." + LayoutVM.IS_USER_LOGGED_IN;
+    
+    private DefaultBinder binder;
+
+
     
     /**
      * Defines the attribute in which is the {@link org.zkoss.bind.sys.ValidationMessages ValidationMessages}
@@ -118,8 +130,8 @@ public abstract class LayoutRichlet extends GenericRichlet {
         header.appendChild(fill);
 
         final A logo = new A();
-        logo.setHref(Labels.getLabel("application.url"));
-        logo.setImage("../img/panifex_top_logo.png");
+        logo.setHref(Labels.getLabel(ApplicationLabels.APPLICATION_NAME));
+        logo.setImage("../img/panifex_top_logo.png"); // TODO it have to be configurable
         fill.appendChild(logo);
     }
 
@@ -136,18 +148,18 @@ public abstract class LayoutRichlet extends GenericRichlet {
     }
 
     private void addSettingsButton(Menubar menubar) {
-        final Menuitem settings = new Menuitem(getLabel("main.form.button.settings.label"));
+        final Menuitem settings = new Menuitem(Labels.getLabel(SettingsLabels.OPEN_SETTINGS_CONTENT_LABEL));
         settings.setIconSclass("glyphicon glyphicon-cog");
         settings.setParent(menubar);
-        binder.addCommandBinding(settings, Events.ON_CLICK, "'onSettingsClick'", null);
+        binder.addCommandBinding(settings, Events.ON_CLICK, ON_SETTINGS_CLICK, null);
     }
     
     private void addLogoutButton(Menubar menubar) {
-        final Menuitem logout = new Menuitem(getLabel("main.form.button.logout.label"));
+        final Menuitem logout = new Menuitem(Labels.getLabel(SecurityLabels.LOGOUT_ACTION_LABEL));
         logout.setIconSclass("glyphicon glyphicon-share-alt");
         logout.setParent(menubar);
-        binder.addCommandBinding(logout, Events.ON_CLICK, "'logout'", null);
-        binder.addPropertyLoadBindings(logout, "visible", VM_BIND_ID + ".isUserLoggedIn", null, null, null,
+        binder.addCommandBinding(logout, Events.ON_CLICK, LOGOUT_COMMAND, null);
+        binder.addPropertyLoadBindings(logout, "visible", IS_USER_LOGGED_IN_ATTR, null, null, null,
                 null, null);
     }
 
@@ -160,7 +172,7 @@ public abstract class LayoutRichlet extends GenericRichlet {
         navBar.setSclass("sidebar");
         navBar.setOrient("vertical");
         
-        binder.addChildrenLoadBindings(navBar, "vm.menuItems", null, null, null, null, null);
+        binder.addChildrenLoadBindings(navBar, MENU_ITEMS_ATTR, null, null, null, null, null);
         binder.setTemplate(navBar, "$CHILDREN$", AppMenuConstants.NODE_CHILDREN_CONDITION, null);
         navBar.setTemplate(MenuItem.ACTION, new MenuActionTemplate(binder));
         navBar.setTemplate(MenuItem.NODE, new MenuNodeTemplate(binder));
@@ -170,37 +182,6 @@ public abstract class LayoutRichlet extends GenericRichlet {
     protected abstract void createContent(Component parent);
 
     protected abstract LayoutVM getViewModel();
-
-    /**
-     * Returns the label of the specified key based on the current Locale, or null if not found.
-     * 
-     * <p>
-     * The current locale is given by {@link org.zkoss.util.Locales#getCurrent}.
-     * 
-     * @see #getSegmentedLabels
-     * 
-     * @return the label of the specified key based on the current Locale, or null if not found
-     */
-    protected String getLabel(String key) {
-        return Labels.getLabel(key);
-    }
-
-    /**
-     * Returns the label of the specified key and formats it with the specified argument, or null if
-     * not found.
-     * 
-     * <p>
-     * It first uses {@link #getLabel(String)} to load the label. Then, it, if not null, invokes
-     * {@link MessageFormats#format} to format it.
-     * 
-     * <p>
-     * The current locale is given by {@link org.zkoss.util.Locales#getCurrent}.
-     * 
-     * @return the label of the specified key based on the current Locale, or null if not found
-     */
-    protected String getLabel(String key, Object[] args) {
-        return Labels.getLabel(key, args);
-    }
 
     /**
      * Returns the root binder.

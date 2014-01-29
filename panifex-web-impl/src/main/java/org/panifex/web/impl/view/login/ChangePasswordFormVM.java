@@ -49,11 +49,11 @@ public final class ChangePasswordFormVM extends LayoutVM {
     // commands
     public static final String CHANGE_PASSWORD_COMMAND = "changePassword";
     
-    // properties
-    public static final String USERNAME_PROPERTY = "username";
-    public static final String OLD_PASSWORD_PROPERTY = "oldPassword";
-    public static final String NEW_PASSWORD_PROPERTY = "newPassword";
-    public static final String REPEAT_NEW_PASSWORD_PROPERTY = "repeatNewPassword";
+    // attributes
+    public static final String USERNAME_ATTR = "username";
+    public static final String OLD_PASSWORD_ATTR = "oldPassword";
+    public static final String NEW_PASSWORD_ATTR = "newPassword";
+    public static final String REPEAT_NEW_PASSWORD_ATTR = "repeatNewPassword";
     
     // validators
     public static final String FORM_VALIDATOR = "formValidator";
@@ -72,11 +72,6 @@ public final class ChangePasswordFormVM extends LayoutVM {
      */
     public ChangePasswordFormVM(ChangePasswordFormController controller) {
         this.controller = controller;
-    }
-    
-    @Override
-    protected Logger getLogger() {
-        return log;
     }
     
     /**
@@ -168,15 +163,15 @@ public final class ChangePasswordFormVM extends LayoutVM {
     private void resetPasswords() {
         // reset the old password
         oldPassword = null;
-        BindUtils.postNotifyChange(null, null, this, OLD_PASSWORD_PROPERTY);
+        BindUtils.postNotifyChange(null, null, this, OLD_PASSWORD_ATTR);
         
         // reset the new password
         newPassword = null;
-        BindUtils.postNotifyChange(null, null, this, NEW_PASSWORD_PROPERTY);
+        BindUtils.postNotifyChange(null, null, this, NEW_PASSWORD_ATTR);
         
         // reset the repeated new password
         repeatNewPassword = null;
-        BindUtils.postNotifyChange(null, null, this, REPEAT_NEW_PASSWORD_PROPERTY);
+        BindUtils.postNotifyChange(null, null, this, REPEAT_NEW_PASSWORD_ATTR);
     }
     
     /**

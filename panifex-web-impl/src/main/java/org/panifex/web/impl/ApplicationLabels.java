@@ -16,10 +16,16 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.view.main;
+package org.panifex.web.impl;
 
-import org.panifex.web.impl.view.layout.LayoutVM;
+public final class ApplicationLabels {
 
-public final class AbstractVMImpl extends LayoutVM {
-
+    public static final String APPLICATION_NAME = "application.name"; // Panifex platform
+    public static final String APPLICATION_URL = "application.url"; // http://www.panifex.org
+    
+    /**
+     * Private construct which protects any other class from instantiating.
+     */
+    private ApplicationLabels() {
+    }
 }

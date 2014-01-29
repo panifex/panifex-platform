@@ -31,6 +31,9 @@ import org.zkoss.zul.ListModelList;
  */
 public final class RoleAdministrationVM {
 
+    // attributes
+    public static final String ROLES_ATTR = "roles";
+    
     /**
      * Returns the collection of {@link RoleImpl} from the active {@link RoleService}.
      * 

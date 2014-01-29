@@ -37,8 +37,8 @@ import org.zkoss.zul.Listitem;
  */
 class RoleListboxTemplate implements Template {
 
-    public static final String NAME_PROP = TemplateResolver.EACH_VAR + "." + Role.NAME_PROP;
-    public static final String DESCRIPTION_PROP = TemplateResolver.EACH_VAR + "." + Role.DESCRIPTION_PROP;
+    public static final String NAME_ATTR = TemplateResolver.EACH_VAR + "." + Role.NAME_PROP;
+    public static final String DESCRIPTION_ATTR = TemplateResolver.EACH_VAR + "." + Role.DESCRIPTION_PROP;
     
     /**
      * The {@link org.zkoss.bind.Binder Binder} for manage data bindings.
@@ -66,12 +66,12 @@ class RoleListboxTemplate implements Template {
         // Name
         Listcell nameCell = new Listcell();
         listitem.appendChild(nameCell);
-        binder.addPropertyLoadBindings(nameCell, "label", NAME_PROP, null, null, null, null, null);
+        binder.addPropertyLoadBindings(nameCell, "label", NAME_ATTR, null, null, null, null, null);
         
         // Description
         Listcell descCell = new Listcell();
         listitem.appendChild(descCell);
-        binder.addPropertyLoadBindings(descCell, "label", DESCRIPTION_PROP, null, null, null, null, null);
+        binder.addPropertyLoadBindings(descCell, "label", DESCRIPTION_ATTR, null, null, null, null, null);
         
         //append to the parent
         if (insertBefore ==null){

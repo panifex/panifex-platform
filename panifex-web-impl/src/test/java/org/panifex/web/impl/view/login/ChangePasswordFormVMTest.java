@@ -250,9 +250,9 @@ public final class ChangePasswordFormVMTest extends TestSupport {
         controllerMock.onSuccessfullyChangePassword(username);
         
         // expect reseting passwords
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.OLD_PASSWORD_PROPERTY);
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.NEW_PASSWORD_PROPERTY);
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.REPEAT_NEW_PASSWORD_PROPERTY);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.OLD_PASSWORD_ATTR);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.NEW_PASSWORD_ATTR);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.REPEAT_NEW_PASSWORD_ATTR);
         
         replayAll();
         
@@ -292,9 +292,9 @@ public final class ChangePasswordFormVMTest extends TestSupport {
         controllerMock.onUnknownAccountException();
         
         // expect reseting passwords
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.OLD_PASSWORD_PROPERTY);
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.NEW_PASSWORD_PROPERTY);
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.REPEAT_NEW_PASSWORD_PROPERTY);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.OLD_PASSWORD_ATTR);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.NEW_PASSWORD_ATTR);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.REPEAT_NEW_PASSWORD_ATTR);
         
         replayAll();
         
@@ -339,9 +339,9 @@ public final class ChangePasswordFormVMTest extends TestSupport {
         controllerMock.onIncorrectCredentialsException();
         
         // expect reseting passwords
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.OLD_PASSWORD_PROPERTY);
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.NEW_PASSWORD_PROPERTY);
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.REPEAT_NEW_PASSWORD_PROPERTY);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.OLD_PASSWORD_ATTR);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.NEW_PASSWORD_ATTR);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.REPEAT_NEW_PASSWORD_ATTR);
         
         replayAll();
         
@@ -386,9 +386,9 @@ public final class ChangePasswordFormVMTest extends TestSupport {
         controllerMock.onAccountNotExpiredException();
         
         // expect reseting passwords
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.OLD_PASSWORD_PROPERTY);
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.NEW_PASSWORD_PROPERTY);
-        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.REPEAT_NEW_PASSWORD_PROPERTY);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.OLD_PASSWORD_ATTR);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.NEW_PASSWORD_ATTR);
+        BindUtils.postNotifyChange(null, null, vm, ChangePasswordFormVM.REPEAT_NEW_PASSWORD_ATTR);
         
         replayAll();
         

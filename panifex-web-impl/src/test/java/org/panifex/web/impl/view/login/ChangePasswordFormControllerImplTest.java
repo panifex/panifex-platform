@@ -23,7 +23,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.module.api.event.RedirectToURIEventListener;
 import org.panifex.test.support.TestSupport;
+import org.panifex.web.impl.CommonLabels;
 import org.panifex.web.impl.event.RedirectToLoginFormEventListenerFactory;
+import org.panifex.web.impl.view.security.SecurityLabels;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.util.resource.Labels;
@@ -78,8 +80,8 @@ public final class ChangePasswordFormControllerImplTest extends TestSupport {
                 createMock(RedirectToURIEventListener.class);
         
         // expect resolving labels
-        expect(Labels.getLabel("changepassword.form.success.message")).andReturn(messageLabel);
-        expect(Labels.getLabel("changepassword.form.success.title")).andReturn(titleLabel);
+        expect(Labels.getLabel(SecurityLabels.CHANGEPASSWORD_SUCCESS_MESSAGE)).andReturn(messageLabel);
+        expect(Labels.getLabel(SecurityLabels.CHANGEPASSWORD_SUCCESS_TITLE)).andReturn(titleLabel);
         
         // expect creating redirector to the login form
         expect(RedirectToLoginFormEventListenerFactory.createDefaultRedirector(username)).
@@ -116,8 +118,8 @@ public final class ChangePasswordFormControllerImplTest extends TestSupport {
                 createMock(RedirectToURIEventListener.class);
         
         // expect resolving labels
-        expect(Labels.getLabel("exception.messagebox.generic.message")).andReturn(messageLabel);
-        expect(Labels.getLabel("exception.messagebox.generic.title")).andReturn(titleLabel);
+        expect(Labels.getLabel(CommonLabels.ON_EXCEPTION_MESSAGE)).andReturn(messageLabel);
+        expect(Labels.getLabel(CommonLabels.ON_EXCEPTION_TITLE)).andReturn(titleLabel);
         
         // expect creating redirector to the login form
         expect(RedirectToLoginFormEventListenerFactory.createDefaultRedirector()).
@@ -156,8 +158,8 @@ public final class ChangePasswordFormControllerImplTest extends TestSupport {
                 createMock(RedirectToURIEventListener.class);
         
         // expect resolving labels
-        expect(Labels.getLabel("changepassword.form.fault.UnknownAccountException")).andReturn(messageLabel);
-        expect(Labels.getLabel("changepassword.form.title")).andReturn(titleLabel);
+        expect(Labels.getLabel(SecurityLabels.ON_UNKNOWN_ACCOUNT_EXCEPTION_MESSAGE)).andReturn(messageLabel);
+        expect(Labels.getLabel(SecurityLabels.ON_UNKNOWN_ACCOUNT_EXCEPTION_TITLE)).andReturn(titleLabel);
         
         // expect creating redirector to the login form
         expect(RedirectToLoginFormEventListenerFactory.createDefaultRedirector()).
@@ -192,8 +194,8 @@ public final class ChangePasswordFormControllerImplTest extends TestSupport {
         String titleLabel = getRandomWord();
         
         // expect resolving labels
-        expect(Labels.getLabel("changepassword.form.fault.IncorrectCredentialsException")).andReturn(messageLabel);
-        expect(Labels.getLabel("changepassword.form.title")).andReturn(titleLabel);
+        expect(Labels.getLabel(SecurityLabels.ON_INCORRECT_CREDENTIALS_EXCEPTION_MESSAGE)).andReturn(messageLabel);
+        expect(Labels.getLabel(SecurityLabels.ON_INCORRECT_CREDENTIALS_EXCEPTION_TITLE)).andReturn(titleLabel);
         
         // expect showing the message box
         expect(Messagebox.show(
@@ -225,8 +227,8 @@ public final class ChangePasswordFormControllerImplTest extends TestSupport {
                 createMock(RedirectToURIEventListener.class);
         
         // expect resolving labels
-        expect(Labels.getLabel("changepassword.form.fault.AccountNotExpired")).andReturn(messageLabel);
-        expect(Labels.getLabel("changepassword.form.title")).andReturn(titleLabel);
+        expect(Labels.getLabel(SecurityLabels.ON_ACCOUNT_NOT_EXPIRED_EXCEPTION_MESSAGE)).andReturn(messageLabel);
+        expect(Labels.getLabel(SecurityLabels.ON_ACCOUNT_NOT_EXPIRED_EXCEPTION_TITLE)).andReturn(titleLabel);
         
         // expect creating redirector to the login form
         expect(RedirectToLoginFormEventListenerFactory.createDefaultRedirector()).

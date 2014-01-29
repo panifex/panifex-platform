@@ -21,6 +21,7 @@ package org.panifex.web.impl.view.login;
 import java.util.HashMap;
 
 import org.panifex.web.impl.view.main.MainRichlet;
+import org.panifex.web.impl.view.security.SecurityLabels;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -50,8 +51,8 @@ public final class LoginFormControllerImpl implements LoginFormController {
     public void onExpiredCredentialsException(final String username) {
      // show warning message box
         Messagebox.show(
-            Labels.getLabel("login.form.fault.ExpiredCredentialsException.message"), 
-            Labels.getLabel("login.form.fault.ExpiredCredentialsException.title"), 
+            Labels.getLabel(SecurityLabels.ON_EXPIRED_CREDENTIALS_EXCEPTION_MESSAGE), 
+            Labels.getLabel(SecurityLabels.ON_EXPIRED_CREDENTIALS_EXCEPTION_TITLE), 
             Messagebox.OK, 
             Messagebox.EXCLAMATION,
             new SerializableEventListener<Event>() {

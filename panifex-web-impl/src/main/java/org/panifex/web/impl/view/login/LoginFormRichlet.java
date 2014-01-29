@@ -20,8 +20,10 @@ package org.panifex.web.impl.view.login;
 
 import org.panifex.web.impl.view.layout.LayoutRichlet;
 import org.panifex.web.impl.view.layout.LayoutVM;
+import org.panifex.web.impl.view.security.SecurityLabels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.H1;
 import org.zkoss.zhtml.P;
 import org.zkoss.zhtml.Text;
@@ -46,9 +48,9 @@ public class LoginFormRichlet extends LayoutRichlet {
     private static final String SIGN_IN_COMMAND = "'" + LoginFormVM.SIGN_IN_COMMAND + "'";
     
     // properties
-    private static final String USERNAME_PROPERTY = VM_BIND_ID + "." + LoginFormVM.USERNAME_PROPERTY;
-    private static final String PASSWORD_PROPERTY = VM_BIND_ID + "." + LoginFormVM.PASSWORD_PROPERTY;
-    private static final String IS_REMEMBER_ME_PROPERTY = VM_BIND_ID + "." + LoginFormVM.IS_REMEMBER_ME_PROPERTY;
+    private static final String USERNAME_PROPERTY = VM_BIND_ID + "." + LoginFormVM.USERNAME_ATTR;
+    private static final String PASSWORD_PROPERTY = VM_BIND_ID + "." + LoginFormVM.PASSWORD_ATTR;
+    private static final String IS_REMEMBER_ME_PROPERTY = VM_BIND_ID + "." + LoginFormVM.IS_REMEMBER_ME_ATTR;
     
     @Override
     protected void createContent(Component parent) {
@@ -73,7 +75,7 @@ public class LoginFormRichlet extends LayoutRichlet {
         H1 h1 = new H1();
         content.appendChild(h1);
 
-        Text h1Label = new Text(getLabel("login.form.header.title1"));
+        Text h1Label = new Text(Labels.getLabel(SecurityLabels.LOGIN_FORM_TITLE));
         h1.appendChild(h1Label);
     }
     
@@ -98,7 +100,7 @@ public class LoginFormRichlet extends LayoutRichlet {
         P p = new P();
         fieldsArea.appendChild(p);
 
-        Text pLabel = new Text(getLabel("login.form.header.title2"));
+        Text pLabel = new Text(Labels.getLabel(SecurityLabels.LOGIN_FORM_HEADER));
         p.appendChild(pLabel);
     }
 
@@ -112,8 +114,7 @@ public class LoginFormRichlet extends LayoutRichlet {
         Textbox textbox = new Textbox();
         textbox.setId("username");
         textbox.setSclass("username-field");
-        textbox.setPlaceholder(getLabel("login.form.field.username.placeholder"));
-        textbox.setTooltip(getLabel("login.form.field.username.tooltip"));
+        textbox.setPlaceholder(Labels.getLabel(SecurityLabels.ACCOUNT_USERNAME_PLACEHOLDER));
         fieldArea.appendChild(textbox);
         getBinder().addPropertyLoadBindings(textbox, "value", USERNAME_PROPERTY, null, null,
                 null, null, null);
@@ -132,8 +133,7 @@ public class LoginFormRichlet extends LayoutRichlet {
         textbox.setId("password");
         textbox.setType("password");
         textbox.setSclass("password-field");
-        textbox.setPlaceholder(getLabel("login.form.field.password.placeholder"));
-        textbox.setTooltip(getLabel("login.form.field.password.tooltip"));
+        textbox.setPlaceholder(Labels.getLabel(SecurityLabels.ACCOUNT_PASSWORD_PLACEHOLDER));
         fieldArea.appendChild(textbox);
         getBinder().addPropertyLoadBindings(textbox, "value", PASSWORD_PROPERTY, null, null,
                 null, null, null);
@@ -156,9 +156,8 @@ public class LoginFormRichlet extends LayoutRichlet {
     
     private void createRemembermeCheckbox(Div actionsArea) {
         Checkbox checkbox =
-                new Checkbox(getLabel("login.form.field.rememberme.label"));
+                new Checkbox(Labels.getLabel(SecurityLabels.REMEMBER_ME_TITLE));
         checkbox.setSclass("field login-checkbox");
-        checkbox.setTooltip(getLabel("login.form.field.rememberme.tooltip"));
         actionsArea.appendChild(checkbox);
         getBinder().addPropertyLoadBindings(checkbox, "checked", IS_REMEMBER_ME_PROPERTY, null,
                 null, null, null, null);
@@ -168,7 +167,7 @@ public class LoginFormRichlet extends LayoutRichlet {
     
     private void createSignInButton(Div actionsArea) {
         // create sign in button
-        Button button = new Button(getLabel("login.form.button.login.label"));
+        Button button = new Button(Labels.getLabel(SecurityLabels.LOGIN_ACTION_LABEL));
         button.setClass("button btn btn-primary btn-large");
         actionsArea.appendChild(button);
         button.setType("submit");

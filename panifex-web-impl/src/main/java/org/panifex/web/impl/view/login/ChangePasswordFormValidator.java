@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
+import org.panifex.web.impl.view.security.SecurityLabels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.ValidationContext;
@@ -45,11 +46,11 @@ public final class ChangePasswordFormValidator extends AbstractValidator {
         
         // get the new password
         String newPassword = (String) 
-                ctx.getProperties(ChangePasswordFormVM.NEW_PASSWORD_PROPERTY)[0].getValue();
+                ctx.getProperties(ChangePasswordFormVM.NEW_PASSWORD_ATTR)[0].getValue();
         
         // get the repeated new password
         String repeatNewPassword = (String)
-                ctx.getProperties(ChangePasswordFormVM.REPEAT_NEW_PASSWORD_PROPERTY)[0].getValue();
+                ctx.getProperties(ChangePasswordFormVM.REPEAT_NEW_PASSWORD_ATTR)[0].getValue();
         
         assertEquals(ctx, newPassword, repeatNewPassword);
     }
@@ -71,7 +72,7 @@ public final class ChangePasswordFormValidator extends AbstractValidator {
                 // passwords are not equal, add an invalid message
                 addInvalidMessage(ctx, 
                     PASSWORDS_NOT_EQUAL, 
-                    Labels.getLabel("changepassword.form.fault.passwordsnotmatch"));
+                    Labels.getLabel(SecurityLabels.ON_PASSWORDS_NOT_MATCH_TITLE));
             }
         }   
     }

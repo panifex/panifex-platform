@@ -37,6 +37,8 @@ import org.zkoss.zk.ui.util.Template;
  */
 public final class MenuActionTemplate implements Template {
 
+    public static final String ON_MENU_ACTION_CLICK = "'" + LayoutVM.ON_MENU_ACTION_CLICK + "'";
+    
     /**
      * The {@link org.zkoss.bind.Binder Binder} for manage data bindings.
      */
@@ -77,8 +79,7 @@ public final class MenuActionTemplate implements Template {
         Map<String, Object> parsedOnClickArgs = 
                 BindEvaluatorXUtil.parseArgs(binder.getEvaluatorX(), onClickArgs);
         
-        binder.addCommandBinding(navItem, Events.ON_CLICK, 
-            LayoutVM.ON_MENU_ACTION_CLICK, parsedOnClickArgs);
+        binder.addCommandBinding(navItem, Events.ON_CLICK, ON_MENU_ACTION_CLICK, parsedOnClickArgs);
         
         // append to the parent
         navItem.setParent(parent);

@@ -20,6 +20,7 @@ package org.panifex.web.impl.content;
 
 import org.apache.aries.blueprint.annotation.Bean;
 import org.panifex.module.api.content.Content;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.H1;
 import org.zkoss.zhtml.Text;
 import org.zkoss.zk.ui.Component;
@@ -41,7 +42,7 @@ public class ContentUiFactory {
         final H1 title = new H1();
         contentHeader.appendChild(title);
         
-        final Text titleText = new Text(content.getTitle());
+        final Text titleText = new Text(Labels.getLabel(content.getTitle()));
         title.appendChild(titleText);
         
         final Div body = new Div();

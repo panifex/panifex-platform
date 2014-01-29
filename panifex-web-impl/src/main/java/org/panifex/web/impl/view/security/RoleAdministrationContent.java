@@ -23,6 +23,7 @@ import org.apache.aries.blueprint.annotation.Service;
 import org.panifex.module.api.content.AbstractContent;
 import org.panifex.module.api.settings.SettingsContent;
 import org.zkoss.bind.DefaultBinder;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Listbox;
@@ -41,10 +42,13 @@ public final class RoleAdministrationContent extends AbstractContent implements 
     /**
      * Contains the {@link java.lang.String String} constant in which is the view-model binded to the components.
      */
-    protected static final String VM_BIND_ID = "vm";
+    private static final String VM_BIND_ID = "vm";
+    
+    // attributes
+    private static final String ROLES_ATTR = VM_BIND_ID + "." + RoleAdministrationVM.ROLES_ATTR;
     
     public RoleAdministrationContent() {
-        super("Roles");
+        super(SecurityLabels.ROLE_VIEW_TITLE);
     }
 
     @Override
@@ -73,13 +77,13 @@ public final class RoleAdministrationContent extends AbstractContent implements 
         Listhead listhead = new Listhead();
         listbox.appendChild(listhead);
         
-        Listheader nameColumn = new Listheader("Name");
+        Listheader nameColumn = new Listheader(Labels.getLabel(SecurityLabels.ROLE_NAME_TITLE));
         listhead.appendChild(nameColumn);
         
-        Listheader descColumn = new Listheader("Description");
+        Listheader descColumn = new Listheader(Labels.getLabel(SecurityLabels.ROLE_DESCRIPTION_TITLE));
         listhead.appendChild(descColumn);
 
-        binder.addPropertyLoadBindings(listbox, "model", "vm.roles", null, null, null, null, null);
+        binder.addPropertyLoadBindings(listbox, "model", ROLES_ATTR, null, null, null, null, null);
         listbox.setTemplate("model", new RoleListboxTemplate(binder));
     }
 }

@@ -20,8 +20,10 @@ package org.panifex.web.impl.view.login;
 
 import org.panifex.web.impl.view.layout.LayoutRichlet;
 import org.panifex.web.impl.view.layout.LayoutVM;
+import org.panifex.web.impl.view.security.SecurityLabels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.H1;
 import org.zkoss.zhtml.P;
 import org.zkoss.zhtml.Text;
@@ -47,10 +49,10 @@ public class ChangePasswordFormRichlet extends LayoutRichlet {
     private static final String CHANGE_PASSWORD_COMMAND = "'" + ChangePasswordFormVM.CHANGE_PASSWORD_COMMAND + "'";
     
     // properties
-    private static final String USERNAME_PROPERTY = FORM_ID + "." + ChangePasswordFormVM.USERNAME_PROPERTY;
-    private static final String OLD_PASSWORD_PROPERTY = FORM_ID + "." + ChangePasswordFormVM.OLD_PASSWORD_PROPERTY;
-    private static final String NEW_PASSWORD_PROPERTY = FORM_ID + "." + ChangePasswordFormVM.NEW_PASSWORD_PROPERTY;
-    private static final String REPEAT_NEW_PASSWORD_PROPERTY = FORM_ID + "." + ChangePasswordFormVM.REPEAT_NEW_PASSWORD_PROPERTY;
+    private static final String USERNAME_ATTR = FORM_ID + "." + ChangePasswordFormVM.USERNAME_ATTR;
+    private static final String OLD_PASSWORD_ATTR = FORM_ID + "." + ChangePasswordFormVM.OLD_PASSWORD_ATTR;
+    private static final String NEW_PASSWORD_ATTR = FORM_ID + "." + ChangePasswordFormVM.NEW_PASSWORD_ATTR;
+    private static final String REPEAT_NEW_PASSWORD_ATTR = FORM_ID + "." + ChangePasswordFormVM.REPEAT_NEW_PASSWORD_ATTR;
     
     // validators
     private static final String FORM_VALIDATOR = VM_BIND_ID + "." + ChangePasswordFormVM.FORM_VALIDATOR;
@@ -92,7 +94,7 @@ public class ChangePasswordFormRichlet extends LayoutRichlet {
         H1 h1 = new H1();
         content.appendChild(h1);
         
-        final Text h1label = new Text(getLabel("changepassword.form.header.title1"));
+        final Text h1label = new Text(Labels.getLabel(SecurityLabels.CHANGEPASSWORD_FORM_TITLE));
         h1.appendChild(h1label);
     }
 
@@ -121,13 +123,13 @@ public class ChangePasswordFormRichlet extends LayoutRichlet {
         P paragraph1 = new P();
         fieldsArea.appendChild(paragraph1);
         
-        Text p1Label = new Text(getLabel("changepassword.form.header.paragraph1"));
+        Text p1Label = new Text(Labels.getLabel(SecurityLabels.CHANGEPASSWORD_FORM_HEADER1));
         paragraph1.appendChild(p1Label);
         
         P paragraph2 = new P();
         fieldsArea.appendChild(paragraph2);
         
-        Text p2Label = new Text(getLabel("changepassword.form.header.paragraph2"));
+        Text p2Label = new Text(Labels.getLabel(SecurityLabels.CHANGEPASSWORD_FORM_HEADER2));
         paragraph2.appendChild(p2Label);
     }
     
@@ -137,17 +139,17 @@ public class ChangePasswordFormRichlet extends LayoutRichlet {
         fieldsArea.appendChild(fieldArea);
         
         // Creates the username label
-        Label label = new Label(getLabel("changepassword.form.field.username.title"));
+        Label label = new Label(Labels.getLabel(SecurityLabels.ACCOUNT_USERNAME_TITLE));
         label.setSclass("field");
         fieldArea.appendChild(label);
         
         // Creates the username textbox
         Textbox textbox = new Textbox();
-        textbox.setId(USERNAME_PROPERTY);
+        textbox.setId(USERNAME_ATTR);
         textbox.setSclass("username-field");
         textbox.setDisabled(true);
         fieldArea.appendChild(textbox);
-        getBinder().addPropertyLoadBindings(textbox, "value", USERNAME_PROPERTY, null, null,
+        getBinder().addPropertyLoadBindings(textbox, "value", USERNAME_ATTR, null, null,
             null, null, null);
     }
     
@@ -157,20 +159,20 @@ public class ChangePasswordFormRichlet extends LayoutRichlet {
         fieldsArea.appendChild(fieldArea);
         
         // Create the old password label
-        Label label = new Label(getLabel("changepassword.form.field.oldpassword.title"));
+        Label label = new Label(Labels.getLabel(SecurityLabels.ACCOUNT_OLDPASSWORD_TITLE));
         label.setSclass("field");
         fieldArea.appendChild(label);
         
         // Creates the old password textbox
         Textbox textbox = new Textbox();
-        textbox.setId(OLD_PASSWORD_PROPERTY);
-        textbox.setPlaceholder(getLabel("changepassword.form.field.oldpassword.title"));
+        textbox.setId(OLD_PASSWORD_ATTR);
+        textbox.setPlaceholder(Labels.getLabel(SecurityLabels.ACCOUNT_OLDPASSWORD_PLACEHOLDER));
         textbox.setSclass("password-field");
         textbox.setType("password");
         fieldArea.appendChild(textbox);
-        getBinder().addPropertyLoadBindings(textbox, "value", OLD_PASSWORD_PROPERTY, null, 
+        getBinder().addPropertyLoadBindings(textbox, "value", OLD_PASSWORD_ATTR, null, 
             null, null, null, null);
-        getBinder().addPropertySaveBindings(textbox, "value", OLD_PASSWORD_PROPERTY, null, 
+        getBinder().addPropertySaveBindings(textbox, "value", OLD_PASSWORD_ATTR, null, 
             null, null, null, null, null, null);
     }
     
@@ -180,20 +182,20 @@ public class ChangePasswordFormRichlet extends LayoutRichlet {
         fieldsArea.appendChild(fieldArea);
         
         // Creates the new password label
-        Label label = new Label(getLabel("changepassword.form.field.newpassword.title"));
+        Label label = new Label(Labels.getLabel(SecurityLabels.ACCOUNT_NEWPASSWORD_TITLE));
         label.setSclass("field");
         fieldArea.appendChild(label);
         
         // Creates the new password textbox
         Textbox textbox = new Textbox();
-        textbox.setId(NEW_PASSWORD_PROPERTY);
-        textbox.setPlaceholder(getLabel("changepassword.form.field.newpassword.title"));
+        textbox.setId(NEW_PASSWORD_ATTR);
+        textbox.setPlaceholder(Labels.getLabel(SecurityLabels.ACCOUNT_NEWPASSWORD_PLACEHOLDER));
         textbox.setSclass("password-field");
         textbox.setType("password");
         fieldArea.appendChild(textbox);
-        getBinder().addPropertyLoadBindings(textbox, "value", NEW_PASSWORD_PROPERTY, null, 
+        getBinder().addPropertyLoadBindings(textbox, "value", NEW_PASSWORD_ATTR, null, 
             null, null, null, null);
-        getBinder().addPropertySaveBindings(textbox, "value", NEW_PASSWORD_PROPERTY, null, 
+        getBinder().addPropertySaveBindings(textbox, "value", NEW_PASSWORD_ATTR, null, 
             null, null, null, null, null, null);
     }
 
@@ -203,20 +205,20 @@ public class ChangePasswordFormRichlet extends LayoutRichlet {
         fieldsArea.appendChild(fieldArea);
         
         // Creates the repeat new password label
-        Label label = new Label(getLabel("changepassword.form.field.repeatnewpassword.title"));
+        Label label = new Label(Labels.getLabel(SecurityLabels.ACCOUNT_REPEATPASSWORD_TITLE));
         label.setSclass("field");
         fieldArea.appendChild(label);
         
         // Creates the repeat new password textbox
         Textbox textbox = new Textbox();
-        textbox.setId(REPEAT_NEW_PASSWORD_PROPERTY);
-        textbox.setPlaceholder(getLabel("changepassword.form.field.repeatnewpassword.title"));
+        textbox.setId(REPEAT_NEW_PASSWORD_ATTR);
+        textbox.setPlaceholder(Labels.getLabel(SecurityLabels.ACCOUNT_REPEATPASSWORD_PLACEHOLDER));
         textbox.setSclass("password-field");
         textbox.setType("password");
         fieldArea.appendChild(textbox);
-        getBinder().addPropertyLoadBindings(textbox, "value", REPEAT_NEW_PASSWORD_PROPERTY, null, 
+        getBinder().addPropertyLoadBindings(textbox, "value", REPEAT_NEW_PASSWORD_ATTR, null, 
             null, null, null, null);
-        getBinder().addPropertySaveBindings(textbox, "value", REPEAT_NEW_PASSWORD_PROPERTY, null, 
+        getBinder().addPropertySaveBindings(textbox, "value", REPEAT_NEW_PASSWORD_ATTR, null, 
             null, null, null, null, null, null);
         
         // Creates the error messages label
@@ -239,7 +241,7 @@ public class ChangePasswordFormRichlet extends LayoutRichlet {
     }
     
     private void createChangePasswordButton(final Div actionArea) {
-        final Button changePasswordButton = new Button(getLabel("changepassword.form.button.change.label"));
+        final Button changePasswordButton = new Button(Labels.getLabel(SecurityLabels.CHANGEPASSWORD_SUBMIT_TITLE));
         changePasswordButton.setSclass("button btn btn-primary btn-large");
         actionArea.appendChild(changePasswordButton);
         

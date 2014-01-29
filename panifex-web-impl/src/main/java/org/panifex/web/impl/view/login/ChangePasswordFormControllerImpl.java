@@ -19,7 +19,9 @@
 package org.panifex.web.impl.view.login;
 
 import org.panifex.module.api.event.RedirectToURIEventListener;
+import org.panifex.web.impl.CommonLabels;
 import org.panifex.web.impl.event.RedirectToLoginFormEventListenerFactory;
+import org.panifex.web.impl.view.security.SecurityLabels;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Messagebox;
 
@@ -41,8 +43,8 @@ public class ChangePasswordFormControllerImpl implements ChangePasswordFormContr
         
         // show message box
         Messagebox.show(
-            Labels.getLabel("changepassword.form.success.message"),
-            Labels.getLabel("changepassword.form.success.title"),
+            Labels.getLabel(SecurityLabels.CHANGEPASSWORD_SUCCESS_MESSAGE),
+            Labels.getLabel(SecurityLabels.CHANGEPASSWORD_SUCCESS_TITLE),
             Messagebox.OK, 
             Messagebox.INFORMATION,
             eventListener);
@@ -55,8 +57,8 @@ public class ChangePasswordFormControllerImpl implements ChangePasswordFormContr
     @Override
     public void onWrongParametersPassed() {
         Messagebox.show(
-            Labels.getLabel("exception.messagebox.generic.message"),
-            Labels.getLabel("exception.messagebox.generic.title"),
+            Labels.getLabel(CommonLabels.ON_EXCEPTION_MESSAGE),
+            Labels.getLabel(CommonLabels.ON_EXCEPTION_TITLE),
             Messagebox.OK, 
             Messagebox.ERROR,
             RedirectToLoginFormEventListenerFactory.createDefaultRedirector());
@@ -69,8 +71,8 @@ public class ChangePasswordFormControllerImpl implements ChangePasswordFormContr
     @Override
     public void onUnknownAccountException() {
         Messagebox.show(
-            Labels.getLabel("changepassword.form.fault.UnknownAccountException"),
-            Labels.getLabel("changepassword.form.title"),
+            Labels.getLabel(SecurityLabels.ON_UNKNOWN_ACCOUNT_EXCEPTION_MESSAGE),
+            Labels.getLabel(SecurityLabels.ON_UNKNOWN_ACCOUNT_EXCEPTION_TITLE),
             Messagebox.OK, 
             Messagebox.EXCLAMATION,
             RedirectToLoginFormEventListenerFactory.createDefaultRedirector());
@@ -86,8 +88,8 @@ public class ChangePasswordFormControllerImpl implements ChangePasswordFormContr
     @Override
     public void onIncorrectCredentialsException() {
         Messagebox.show(
-            Labels.getLabel("changepassword.form.fault.IncorrectCredentialsException"),
-            Labels.getLabel("changepassword.form.title"),
+            Labels.getLabel(SecurityLabels.ON_INCORRECT_CREDENTIALS_EXCEPTION_MESSAGE),
+            Labels.getLabel(SecurityLabels.ON_INCORRECT_CREDENTIALS_EXCEPTION_TITLE),
             Messagebox.OK,
             Messagebox.EXCLAMATION);
     }
@@ -98,8 +100,8 @@ public class ChangePasswordFormControllerImpl implements ChangePasswordFormContr
     @Override
     public void onAccountNotExpiredException() {
         Messagebox.show(
-            Labels.getLabel("changepassword.form.fault.AccountNotExpired"),
-            Labels.getLabel("changepassword.form.title"),
+            Labels.getLabel(SecurityLabels.ON_ACCOUNT_NOT_EXPIRED_EXCEPTION_MESSAGE),
+            Labels.getLabel(SecurityLabels.ON_ACCOUNT_NOT_EXPIRED_EXCEPTION_TITLE),
             Messagebox.OK, 
             Messagebox.EXCLAMATION,
             RedirectToLoginFormEventListenerFactory.createDefaultRedirector());

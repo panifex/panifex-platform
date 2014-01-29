@@ -26,7 +26,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.module.api.menu.MenuAction;
 import org.panifex.test.support.TestSupport;
-import org.panifex.web.impl.view.layout.LayoutVM;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.bind.Binder;
@@ -106,7 +105,7 @@ public final class MenuActionTemplateTest extends TestSupport {
         
         // expect binding command
         binderMock.addCommandBinding(navitemMock, Events.ON_CLICK, 
-            LayoutVM.ON_MENU_ACTION_CLICK, parsedOnClickArgs);
+            MenuActionTemplate.ON_MENU_ACTION_CLICK, parsedOnClickArgs);
         
         // expect appending the created item to the parent
         navitemMock.setParent(parentMock);

@@ -38,7 +38,7 @@ public class LoginFormRichletBinder {
 
     private Logger log = LoggerFactory.getLogger(LoginFormRichlet.class);
 
-    public final static String ID = "org.panifex.web.impl.login.LoginRichletBinder";
+    public final static String ID = "org.panifex.web.impl.view.login.LoginRichletBinder";
     private final static String PATH = "/login";
     
     @Inject

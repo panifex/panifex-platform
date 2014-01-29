@@ -35,6 +35,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.panifex.module.api.menu.MenuItem;
 import org.panifex.web.impl.view.layout.LayoutVM;
+import org.panifex.web.impl.view.security.SecurityLabels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.annotation.Command;
@@ -56,9 +57,9 @@ public final class LoginFormVM extends LayoutVM {
     public static final String SIGN_IN_COMMAND = "signIn";
     
     // properties
-    public static final String USERNAME_PROPERTY = "username";
-    public static final String PASSWORD_PROPERTY = "password";
-    public static final String IS_REMEMBER_ME_PROPERTY = "isRememberMe";
+    public static final String USERNAME_ATTR = "username";
+    public static final String PASSWORD_ATTR = "password";
+    public static final String IS_REMEMBER_ME_ATTR = "isRememberMe";
     
     private String username;
     private String password;
@@ -136,10 +137,10 @@ public final class LoginFormVM extends LayoutVM {
         } catch (ExpiredCredentialsException e) {
             controller.onExpiredCredentialsException(username);
         } catch (UnknownAccountException e) {
-            Messagebox.show(Labels.getLabel("login.form.fault.UnknownAccountException"), null, 0,
+            Messagebox.show(Labels.getLabel(SecurityLabels.ON_UNKNOWN_ACCOUNT_EXCEPTION_MESSAGE), null, 0,
                     Messagebox.ERROR);
         } catch (IncorrectCredentialsException e) {
-            Messagebox.show(Labels.getLabel("fault.IncorrectCredentialsException"), null, 0,
+            Messagebox.show(Labels.getLabel(SecurityLabels.ON_INCORRECT_CREDENTIALS_EXCEPTION_MESSAGE), null, 0,
                     Messagebox.ERROR);
         } catch (ExcessiveAttemptsException e) {
             Messagebox.show("", null, 0, Messagebox.ERROR);
@@ -150,11 +151,6 @@ public final class LoginFormVM extends LayoutVM {
         } catch (AuthenticationException e) {
             Messagebox.show("An error during the Authentication process");
         }
-    }
-
-    @Override
-    protected Logger getLogger() {
-        return log;
     }
 
     @Override
