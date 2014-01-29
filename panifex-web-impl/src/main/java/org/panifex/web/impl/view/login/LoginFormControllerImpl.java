@@ -20,8 +20,8 @@ package org.panifex.web.impl.view.login;
 
 import java.util.HashMap;
 
+import org.panifex.web.impl.i18n.SecurityLabels;
 import org.panifex.web.impl.view.main.MainRichlet;
-import org.panifex.web.impl.view.security.SecurityLabels;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;

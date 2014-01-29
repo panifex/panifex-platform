@@ -16,17 +16,35 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.view.settings;
+package org.panifex.module.api.i18n;
 
-public final class SettingsLabels {
+import java.net.URL;
+import java.util.Locale;
+import java.util.Set;
 
-    public static final String OPEN_SETTINGS_CONTENT_LABEL = "settings.open.settings.content.label"; // Settings
-    
-    public static final String VIEW_TITLE = "settings.view.title"; // Settings
-    
+/**
+ * A LocaleService is used to locate extra resources for 
+ * {@link org.zkoss.util.resource.Labels Labels}. 
+ * 
+ * @see {@link org.zkoss.util.resource.Labels}
+ */
+public interface LocaleService {
+
     /**
-     * Private construct which protects any other class from instantiating.
+     * Returns the {@link java.util.Locale Locale} of
+     * extra resources.
+     * <p>
+     * If the extra resources do not relate on the default language, it
+     * should return the empty language: <pre>new Locale("")</pre>
+     * 
      */
-    private SettingsLabels() {
-    }
+    Locale supportedLocale();
+
+    /** 
+     * Returns a collection of URLs containing the labels for the specified 
+     * locale or null if not available.
+     * <p>
+     * It must be thread-safe.
+     */
+    Set<URL> locates();
 }

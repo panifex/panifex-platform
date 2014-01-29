@@ -16,37 +16,31 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.dashboard.impl;
+package org.panifex.module.api.i18n;
 
 import java.util.Locale;
+import java.util.Set;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.Service;
 import org.osgi.framework.BundleContext;
-import org.panifex.module.api.locale.AbstractLocaleService;
-import org.panifex.module.api.locale.LocaleService;
+import org.panifex.module.api.i18n.AbstractLocaleService;
 
 /**
- * Registers extra resources for {@link org.zkoss.util.resource.Labels Labels}.
+ * A {@link AbstractLocaleService} implementation for using it
+ * in unit tests. 
  */
-@Bean(id = DashboardLocalService.ID)
-@Service(interfaces = LocaleService.class)
-public final class DashboardLocalService extends AbstractLocaleService {
+final class AbstractLocaleServiceImpl extends AbstractLocaleService {
 
-    public static final String ID = "org.panifex.module.dashboard.impl.DashboardLocalService";
+    public AbstractLocaleServiceImpl(Locale locale) {
+        super(locale);
+    }
 
-    @Inject(ref = "blueprintBundleContext")
-    private BundleContext bundleContext;
-    
-    public DashboardLocalService() {
-        super(new Locale(""));
-        addResource("/dashboard-label.properties");
+    public AbstractLocaleServiceImpl(Locale locale, Set<String> resources) {
+        super(locale, resources);
     }
     
     @Override
     public void setBundleContext(BundleContext bundleContext) {
         setBundleContext0(bundleContext);
-        
     }
+
 }

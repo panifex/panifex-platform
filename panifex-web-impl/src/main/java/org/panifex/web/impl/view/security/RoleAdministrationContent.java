@@ -22,6 +22,7 @@ import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Service;
 import org.panifex.module.api.content.AbstractContent;
 import org.panifex.module.api.settings.SettingsContent;
+import org.panifex.web.impl.i18n.SecurityLabels;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;

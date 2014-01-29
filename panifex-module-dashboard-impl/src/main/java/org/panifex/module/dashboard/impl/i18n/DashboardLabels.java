@@ -16,16 +16,15 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl;
+package org.panifex.module.dashboard.impl.i18n;
 
-public final class ApplicationLabels {
+public final class DashboardLabels {
 
-    public static final String APPLICATION_NAME = "application.name"; // Panifex platform
-    public static final String APPLICATION_URL = "application.url"; // http://www.panifex.org
+    public static final String TITLE = "dashboard.title";
     
     /**
      * Private construct which protects any other class from instantiating.
      */
-    private ApplicationLabels() {
+    private DashboardLabels() {
     }
 }

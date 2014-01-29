@@ -16,35 +16,16 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.api.locale;
+package org.panifex.web.impl.i18n;
 
-import java.net.URL;
-import java.util.Locale;
-import java.util.Set;
+public final class CommonLabels {
 
-/**
- * A LocaleService is used to locate extra resources for 
- * {@link org.zkoss.util.resource.Labels Labels}. 
- * 
- * @see {@link org.zkoss.util.resource.Labels}
- */
-public interface LocaleService {
+    public static final String ON_EXCEPTION_MESSAGE = "common.on.exception.message"; // We've been notified about this issue and we'll take a look at it shortly.
+    public static final String ON_EXCEPTION_TITLE = "common.on.exception.title"; // Sorry, something went wrong
 
     /**
-     * Returns the {@link java.util.Locale Locale} of
-     * extra resources.
-     * <p>
-     * If the extra resources do not relate on the default language, it
-     * should return the empty language: <pre>new Locale("")</pre>
-     * 
+     * Private construct which protects any other class from instantiating.
      */
-    Locale supportedLocale();
-
-    /** 
-     * Returns a collection of URLs containing the labels for the specified 
-     * locale or null if not available.
-     * <p>
-     * It must be thread-safe.
-     */
-    Set<URL> locates();
+    private CommonLabels() {
+    }
 }

@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.locale;
+package org.panifex.web.impl.i18n;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,12 +24,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import org.panifex.module.api.locale.LocaleService;
+import org.panifex.module.api.i18n.LocaleService;
 import org.zkoss.util.resource.LabelLocator;
 
 /**
  * A builder which builds {@link org.zkoss.util.resource.LabelLocator LabelLocator}
- * based on the provided {@link org.panifex.module.api.locale.LocaleService LocaleService}.
+ * based on the provided {@link org.panifex.module.api.i18n.LocaleService LocaleService}.
  */
 final class LabelLocatorBuilder {
 
@@ -39,7 +39,7 @@ final class LabelLocatorBuilder {
     /**
      * Construct a new LabelLocatorBuilder.
      * 
-     * @param localeService the provided {@link org.panifex.module.api.locale.LocaleService LocaleService}
+     * @param localeService the provided {@link org.panifex.module.api.i18n.LocaleService LocaleService}
      */
     public LabelLocatorBuilder(LocaleService localeService) {
         if (localeService == null) {
@@ -57,7 +57,7 @@ final class LabelLocatorBuilder {
     
     /**
      * Builds the collection of {@link org.zkoss.util.resource.LabelLocator LabelLocator}
-     * based on the provided {@link org.panifex.module.api.locale.LocaleService LocaleService}.
+     * based on the provided {@link org.panifex.module.api.i18n.LocaleService LocaleService}.
      * 
      * @return the collection of {@link org.zkoss.util.resource.LabelLocator LabelLocator}
      */

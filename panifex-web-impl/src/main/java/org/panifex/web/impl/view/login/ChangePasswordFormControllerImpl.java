@@ -19,9 +19,9 @@
 package org.panifex.web.impl.view.login;
 
 import org.panifex.module.api.event.RedirectToURIEventListener;
-import org.panifex.web.impl.CommonLabels;
 import org.panifex.web.impl.event.RedirectToLoginFormEventListenerFactory;
-import org.panifex.web.impl.view.security.SecurityLabels;
+import org.panifex.web.impl.i18n.CommonLabels;
+import org.panifex.web.impl.i18n.SecurityLabels;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Messagebox;
 

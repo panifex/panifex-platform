@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.locale;
+package org.panifex.web.impl.i18n;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,6 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
+import org.panifex.web.impl.i18n.LabelLocatorImpl;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 

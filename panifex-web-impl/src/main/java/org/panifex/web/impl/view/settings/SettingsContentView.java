@@ -25,6 +25,7 @@ import org.apache.aries.blueprint.annotation.Service;
 import org.panifex.module.api.content.AbstractContent;
 import org.panifex.module.api.content.Content;
 import org.panifex.module.api.settings.SettingsContent;
+import org.panifex.web.impl.i18n.SettingsLabels;
 import org.panifex.web.impl.settings.SettingsContentManager;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;

@@ -22,6 +22,7 @@ import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.aries.blueprint.annotation.Service;
 import org.panifex.module.api.content.AbstractContent;
 import org.panifex.module.api.content.Content;
+import org.panifex.module.dashboard.impl.i18n.DashboardLabels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Div;
 

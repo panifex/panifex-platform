@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
-import org.panifex.web.impl.view.security.SecurityLabels;
+import org.panifex.web.impl.i18n.SecurityLabels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.ValidationContext;

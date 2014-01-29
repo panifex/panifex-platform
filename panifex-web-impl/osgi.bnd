@@ -65,7 +65,7 @@ Import-Package: \
     org.panifex.module.api.content;version="[1.0, 2.0)", \
     org.panifex.module.api.environment;version="[1.0, 2.0)", \
     org.panifex.module.api.event;version="[1.0, 2.0)", \
-    org.panifex.module.api.locale;version="[1.0, 2.0)", \
+    org.panifex.module.api.i18n;version="[1.0, 2.0)", \
     org.panifex.module.api.menu;version="[1.0, 2.0)", \
     org.panifex.module.api.settings;version="[1.0, 2.0)", \
     org.panifex.service.api.security;version="[1.0, 2.0)", \

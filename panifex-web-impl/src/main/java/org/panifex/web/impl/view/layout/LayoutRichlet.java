@@ -19,12 +19,12 @@
 package org.panifex.web.impl.view.layout;
 
 import org.panifex.module.api.menu.MenuItem;
-import org.panifex.web.impl.ApplicationLabels;
+import org.panifex.web.impl.i18n.ApplicationLabels;
+import org.panifex.web.impl.i18n.SecurityLabels;
+import org.panifex.web.impl.i18n.SettingsLabels;
 import org.panifex.web.impl.menu.AppMenuConstants;
 import org.panifex.web.impl.menu.MenuActionTemplate;
 import org.panifex.web.impl.menu.MenuNodeTemplate;
-import org.panifex.web.impl.view.security.SecurityLabels;
-import org.panifex.web.impl.view.settings.SettingsLabels;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.bind.impl.ValidationMessagesImpl;

@@ -16,16 +16,17 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl;
+package org.panifex.web.impl.i18n;
 
-public final class CommonLabels {
+public final class SettingsLabels {
 
-    public static final String ON_EXCEPTION_MESSAGE = "common.on.exception.message"; // We've been notified about this issue and we'll take a look at it shortly.
-    public static final String ON_EXCEPTION_TITLE = "common.on.exception.title"; // Sorry, something went wrong
-
+    public static final String OPEN_SETTINGS_CONTENT_LABEL = "settings.open.settings.content.label"; // Settings
+    
+    public static final String VIEW_TITLE = "settings.view.title"; // Settings
+    
     /**
      * Private construct which protects any other class from instantiating.
      */
-    private CommonLabels() {
+    private SettingsLabels() {
     }
 }

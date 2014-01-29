@@ -18,9 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
+import org.panifex.web.impl.i18n.SecurityLabels;
 import org.panifex.web.impl.view.layout.LayoutRichlet;
 import org.panifex.web.impl.view.layout.LayoutVM;
-import org.panifex.web.impl.view.security.SecurityLabels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.util.resource.Labels;

@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.locale;
+package org.panifex.web.impl.i18n;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +28,14 @@ import org.apache.aries.blueprint.annotation.Inject;
 import org.apache.aries.blueprint.annotation.ReferenceList;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
 import org.apache.aries.blueprint.annotation.Unbind;
-import org.panifex.module.api.locale.LocaleService;
+import org.panifex.module.api.i18n.LocaleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.util.resource.LabelLocator;
 import org.zkoss.util.resource.Labels;
 
 /**
- * A {@link org.panifex.module.api.locale.LocaleService LocaleService} reference
+ * A {@link org.panifex.module.api.i18n.LocaleService LocaleService} reference
  * listener which registers/unregisters new resources which is used to load the 
  * Locale-dependent labels.
  */
@@ -88,10 +88,10 @@ public final class LocaleServiceListener {
     }
     
     /**
-     * Registers the {@link org.panifex.module.api.locale.LocaleService LocaleService}
+     * Registers the {@link org.panifex.module.api.i18n.LocaleService LocaleService}
      * which is used to load the Locale-dependent labels.
      * 
-     * @param localeService the provided {@link org.panifex.module.api.locale.LocaleService LocaleService}
+     * @param localeService the provided {@link org.panifex.module.api.i18n.LocaleService LocaleService}
      */
     @Bind
     public void bind(LocaleService localeService) {
@@ -102,10 +102,10 @@ public final class LocaleServiceListener {
     }
 
     /**
-     * Unregisters the {@link org.panifex.module.api.locale.LocaleService LocaleService}
+     * Unregisters the {@link org.panifex.module.api.i18n.LocaleService LocaleService}
      * which is used to load the Locale-dependent labels.
      * 
-     * @param localeService the provided {@link org.panifex.module.api.locale.LocaleService LocaleService}
+     * @param localeService the provided {@link org.panifex.module.api.i18n.LocaleService LocaleService}
      */
     @Unbind
     public void unbind(LocaleService localeService) {
@@ -116,14 +116,14 @@ public final class LocaleServiceListener {
     }
 
     /**
-     * Registers the {@link org.panifex.module.api.locale.LocaleService LocaleService}
+     * Registers the {@link org.panifex.module.api.i18n.LocaleService LocaleService}
      * to the {@link org.zkoss.util.resource.Labels Labels}.
      * <p>
      * This method uses {@link LabelLocatorBuilder} for building 
      * {@link org.zkoss.util.resource.LabelLocator LabelLocator} based
-     * on the provided {@link org.panifex.module.api.locale.LocaleService LocaleService}.
+     * on the provided {@link org.panifex.module.api.i18n.LocaleService LocaleService}.
      * 
-     * @param localeService the provided {@link org.panifex.module.api.locale.LocaleService LocaleService}
+     * @param localeService the provided {@link org.panifex.module.api.i18n.LocaleService LocaleService}
      */
     private void registerLocaleService(LocaleService localeService) {
         List<LabelLocator> locators = new LabelLocatorBuilder(localeService).build();
