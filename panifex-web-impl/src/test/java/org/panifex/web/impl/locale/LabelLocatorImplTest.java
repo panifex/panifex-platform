@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -68,6 +69,23 @@ public final class LabelLocatorImplTest extends TestSupport {
         verifyAll();
         
         // the resources must be the same
+        assertEquals(locatorUrlMock, url);
+    }
+    
+    /**
+     * This test tries to match the unknown locale. It is used
+     * when the locale is not specified.
+     */
+    @Test
+    public void matchUnknownLocaleTest() {
+        // expect getting the not specified language
+        expect(locatorLocaleMock.getLanguage()).andReturn(StringUtils.EMPTY);
+        
+        // perform test
+        replayAll();
+        URL url = labelLocator.locate(null);
+        verifyAll();
+        
         assertEquals(locatorUrlMock, url);
     }
     

@@ -55,7 +55,17 @@ final class LabelLocatorImpl implements LabelLocator {
                 log.debug("InputStream is returning");
                 return url;
             } 
+        } else {
+            if (supportedLocale == null) {
+                log.debug("InputStream is returning");
+                return url;                
+            } else if (supportedLocale.getLanguage().isEmpty()) {
+                log.debug("InputStream is returning");
+                return url;
+            }
         }
+        
+        // the locale does not match the supported locale, so return null
         return null;
     }
 

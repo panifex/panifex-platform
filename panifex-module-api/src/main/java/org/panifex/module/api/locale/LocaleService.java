@@ -33,6 +33,10 @@ public interface LocaleService {
     /**
      * Returns the {@link java.util.Locale Locale} of
      * extra resources.
+     * <p>
+     * If the extra resources do not relate on the default language, it
+     * should return the empty language: <pre>new Locale("")</pre>
+     * 
      */
     Locale supportedLocale();
 
