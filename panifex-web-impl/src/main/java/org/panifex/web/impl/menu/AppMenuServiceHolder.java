@@ -49,7 +49,7 @@ public final class AppMenuServiceHolder implements Serializable {
 
     public static final String ID = "org.panifex.web.impl.menu.AppMenuManager";
     
-    private Logger log = LoggerFactory.getLogger(AppMenuServiceHolder.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     private static AppMenuService service;
     

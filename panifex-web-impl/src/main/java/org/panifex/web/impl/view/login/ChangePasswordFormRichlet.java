@@ -41,7 +41,7 @@ import org.zkoss.zul.Textbox;
  */
 public class ChangePasswordFormRichlet extends LayoutRichlet {
 
-    private final Logger log = LoggerFactory.getLogger(ChangePasswordFormRichlet.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     private static final String FORM_ID = "fx";
 

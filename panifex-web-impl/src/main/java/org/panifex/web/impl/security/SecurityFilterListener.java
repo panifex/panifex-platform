@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 @ReferenceListener
 public class SecurityFilterListener {
 
-    private Logger log = LoggerFactory.getLogger(SecurityFilterListener.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     public final static String ID = "org.panifex.web.impl.security.SecurityFilterListener";
 

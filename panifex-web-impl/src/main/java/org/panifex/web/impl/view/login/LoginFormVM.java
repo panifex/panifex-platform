@@ -48,7 +48,7 @@ import org.zkoss.zul.TreeNode;
 
 public final class LoginFormVM extends LayoutVM {
 
-    private Logger log = LoggerFactory.getLogger(LoginFormVM.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     public static final String ID = "org.panifex.web.impl.view.login.LoginFormVM";
     public static final String USERNAME_PARAM = "org.panifex.web.impl.view.login.LoginFormVM.USERNAME_PARAM";

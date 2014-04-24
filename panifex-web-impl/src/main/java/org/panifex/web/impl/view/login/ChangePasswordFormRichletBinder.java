@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 @ReferenceListener
 public class ChangePasswordFormRichletBinder {
 
-    private Logger log = LoggerFactory.getLogger(ChangePasswordFormRichletBinder.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     public final static String ID = "org.panifex.web.impl.view.login.ChangePasswordFormRichletBinder";
 

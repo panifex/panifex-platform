@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  */
 public class RoleRepositoryImpl implements RoleRepository {
 
-    private final Logger log = LoggerFactory.getLogger(RoleRepositoryImpl.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     /**
      * {@inheritDoc}

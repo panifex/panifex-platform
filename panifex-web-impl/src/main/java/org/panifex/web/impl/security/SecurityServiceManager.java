@@ -35,7 +35,7 @@ public final class SecurityServiceManager {
 
     public static final String ID = "org.panifex.web.impl.security.SecurityServiceManager";
     
-    private static final Logger log = LoggerFactory.getLogger(SecurityServiceManager.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     /**
      * The singleton instance of {@link SecurityServiceManager} class.
@@ -65,7 +65,6 @@ public final class SecurityServiceManager {
      * @return the {@link SecurityServiceManager} singleton instance
      */
     public static SecurityServiceManager init() {
-        log.debug("Initialize SecurityServiceManager");
         if (manager == null) {
             synchronized(SecurityServiceManager.class) {
                 if (manager == null) {

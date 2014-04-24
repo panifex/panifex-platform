@@ -32,7 +32,7 @@ import org.zkoss.util.resource.Labels;
  */
 public final class ChangePasswordFormValidator extends AbstractValidator {
 
-    private final Logger log = LoggerFactory.getLogger(ChangePasswordFormValidator.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     public static final String PASSWORDS_NOT_EQUAL = "passwordsNotEqual";
     

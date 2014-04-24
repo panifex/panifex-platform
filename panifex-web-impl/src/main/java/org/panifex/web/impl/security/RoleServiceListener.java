@@ -39,7 +39,7 @@ public class RoleServiceListener {
 
     public static final String ID = "org.panifex.web.impl.security.RoleServiceListener";
     
-    private static final Logger log = LoggerFactory.getLogger(RoleServiceListener.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     /**
      * The singleton instance of {@link RoleServiceListener} class.
@@ -69,7 +69,6 @@ public class RoleServiceListener {
      * @return the {@link RoleServiceListener} singleton instance
      */
     public static RoleServiceListener init() {
-        log.debug("Initialize RoleServiceListener");
         if (manager == null) {
             synchronized(RoleServiceListener.class) {
                 if (manager == null) {

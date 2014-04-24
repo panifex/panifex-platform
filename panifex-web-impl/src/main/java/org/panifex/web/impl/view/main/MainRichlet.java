@@ -32,7 +32,7 @@ import org.zkoss.zul.Div;
  */
 public class MainRichlet extends LayoutRichlet {
 
-    private Logger log = LoggerFactory.getLogger(MainRichlet.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     public static final String URL = "/zk/main";
     

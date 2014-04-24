@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
  */
 public class PersistenceRealm extends AuthorizingRealm implements SecurityService {
 
-    private final Logger log = LoggerFactory.getLogger(PersistenceRealm.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     /**
      * Hash algorithm name to use when performing hashes for credentials matching.

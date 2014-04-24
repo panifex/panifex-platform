@@ -40,7 +40,7 @@ import org.zkoss.zul.Textbox;
  */
 public class LoginFormRichlet extends LayoutRichlet {
 
-    private Logger log = LoggerFactory.getLogger(LoginFormRichlet.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     public static final String URL = "/zk/login";
     

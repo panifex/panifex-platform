@@ -39,7 +39,7 @@ import org.zkoss.zk.ui.Component;
 @ReferenceListener
 public class ContentManager {
 
-    private Logger log = LoggerFactory.getLogger(ContentManager.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     public final static String ID = "org.panifex.web.impl.content.ContentManager";
     

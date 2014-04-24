@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 
 public class AccountRepositoryImpl implements AccountRepository<AccountEntity> {
 
-    private final Logger log = LoggerFactory.getLogger(AccountRepositoryImpl.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     @Override
     public void insertAccount(EntityManager entityManager, AccountEntity account) {

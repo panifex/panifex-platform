@@ -41,7 +41,7 @@ import org.zkoss.zk.ui.Sessions;
  */
 public final class ChangePasswordFormVM extends LayoutVM {
 
-    private final Logger log = LoggerFactory.getLogger(ChangePasswordFormVM.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     public static final String ID = "org.panifex.web.impl.view.login.ChangePasswordFormVM";
     public static final String USERNAME_PARAM = "org.panifex.web.impl.view.login.ChangePasswordFormVM.USERNAME_PARAM";

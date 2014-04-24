@@ -35,7 +35,7 @@ import org.zkoss.util.resource.LabelLocator;
  */
 final class LabelLocatorImpl implements LabelLocator {
 
-    private final Logger log = LoggerFactory.getLogger(LabelLocatorImpl.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     private final Locale supportedLocale;
     private final URL url;

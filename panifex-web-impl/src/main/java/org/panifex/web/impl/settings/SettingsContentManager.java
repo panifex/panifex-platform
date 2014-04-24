@@ -46,7 +46,7 @@ public final class SettingsContentManager {
     /**
      * Logger
      */
-    private static final Logger log = LoggerFactory.getLogger(SettingsContentManager.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     /**
      * The singleton instance of {@link SettingsContentManager} class.
@@ -109,7 +109,6 @@ public final class SettingsContentManager {
      * @return the {@link SettingsContentManager} singleton instance
      */
     public static SettingsContentManager init() {
-        log.debug("Initialize SecurityServiceManager");
         if (manager == null) {
             synchronized(SettingsContentManager.class) {
                 if (manager == null) {

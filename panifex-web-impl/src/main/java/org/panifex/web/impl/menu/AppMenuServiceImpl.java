@@ -60,7 +60,7 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
     /**
      * The logger
      */
-    private final Logger log = LoggerFactory.getLogger(AppMenuServiceImpl.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     /**
      * The {@link MenuTreeModel} in which the menu items will be binded to.

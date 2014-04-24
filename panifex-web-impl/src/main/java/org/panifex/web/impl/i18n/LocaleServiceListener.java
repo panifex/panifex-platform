@@ -45,7 +45,7 @@ public final class LocaleServiceListener {
 
     public static final String ID = "org.panifex.web.impl.local.LocalServiceListener";
     
-    private static Logger log = LoggerFactory.getLogger(LocaleServiceListener.class);;
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     private static volatile LocaleServiceListener instance;
     
@@ -68,7 +68,6 @@ public final class LocaleServiceListener {
      * @return the {@link LocaleServiceListener} singleton instance
      */
     public static LocaleServiceListener init() {
-        log.debug("Initialize LocalServiceListener");
         if (instance == null) {
             synchronized (LocaleServiceListener.class) {
                 if (instance == null) {

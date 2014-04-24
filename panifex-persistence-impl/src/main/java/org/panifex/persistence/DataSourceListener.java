@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 
 public class DataSourceListener {
 
-    private Logger log = LoggerFactory.getLogger(DataSourceListener.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private BundleContext bundleContext;
 

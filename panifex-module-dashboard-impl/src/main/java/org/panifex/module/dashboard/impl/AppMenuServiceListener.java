@@ -35,7 +35,7 @@ public class AppMenuServiceListener {
 
     public static final String ID = "org.panifex.module.dashboard.impl.AppMenuServiceListener";
     
-    private Logger log = LoggerFactory.getLogger(AppMenuServiceListener.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
     
     @Inject
     @Reference(

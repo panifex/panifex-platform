@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 @ReferenceListener
 public class LoginFormRichletBinder {
 
-    private Logger log = LoggerFactory.getLogger(LoginFormRichlet.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     public final static String ID = "org.panifex.web.impl.view.login.LoginRichletBinder";
     private final static String PATH = "/login";
