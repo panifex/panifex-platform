@@ -18,12 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Bind;
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.Reference;
-import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Unbind;
 import org.panifex.web.impl.servlet.ZkLayoutService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +26,6 @@ import org.slf4j.LoggerFactory;
  * Binds login form richlet to ZK layout servlet.
  *
  */
-@Bean(id = LoginFormRichletBinder.ID)
-@ReferenceListener
 public class LoginFormRichletBinder {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -41,25 +33,16 @@ public class LoginFormRichletBinder {
     public final static String ID = "org.panifex.web.impl.view.login.LoginRichletBinder";
     private final static String PATH = "/login";
     
-    @Inject
-    @Reference(availability = "optional", serviceInterface = ZkLayoutService.class, referenceListeners = @ReferenceListener(ref = ID))
-    private ZkLayoutService zkLayoutService;
-
-    @Bind
     public void bind(ZkLayoutService zkLayoutService) {
         log.debug("Bind Zk layout service: {}", zkLayoutService);
-        this.zkLayoutService = zkLayoutService;
-
         zkLayoutService.addRichlet(LoginFormRichlet.class, PATH);
     }
 
-    @Unbind
     public void unbind(ZkLayoutService zkLayoutService) {
         log.debug("Unbind Zk layout service: {}", zkLayoutService);
         if (zkLayoutService != null) {
             // unregister login form richlet
             zkLayoutService.addRichlet(null, PATH);
         }
-        this.zkLayoutService = null;
     }
 }

@@ -20,10 +20,7 @@ package org.panifex.web.impl.view.settings;
 
 import java.util.List;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Service;
 import org.panifex.module.api.content.AbstractContent;
-import org.panifex.module.api.content.Content;
 import org.panifex.module.api.settings.SettingsContent;
 import org.panifex.web.impl.i18n.SettingsLabels;
 import org.panifex.web.impl.settings.SettingsContentManager;
@@ -42,8 +39,6 @@ import org.zkoss.zul.Tabs;
  * <p>
  * Each SettingsContent are placed in the own {@link org.zkoss.zul.Tab Tab}.
  */
-@Bean(id = SettingsContentView.ID)
-@Service(interfaces = Content.class)
 public final class SettingsContentView extends AbstractContent {
 
     public static final String ID = "org.panifex.web.impl.view.settings.SettingsContentView";

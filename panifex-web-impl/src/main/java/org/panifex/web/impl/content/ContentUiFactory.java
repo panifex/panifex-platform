@@ -18,7 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.impl.content;
 
-import org.apache.aries.blueprint.annotation.Bean;
 import org.panifex.module.api.content.Content;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.H1;
@@ -26,7 +25,6 @@ import org.zkoss.zhtml.Text;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Div;
 
-@Bean(id = ContentUiFactory.ID)
 public class ContentUiFactory {
 
     public final static String ID = "org.panifex.web.impl.content.ContentUiFactory";

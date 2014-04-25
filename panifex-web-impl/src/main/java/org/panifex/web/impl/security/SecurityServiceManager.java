@@ -18,19 +18,10 @@
  ******************************************************************************/
 package org.panifex.web.impl.security;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Bind;
-import org.apache.aries.blueprint.annotation.Destroy;
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.Reference;
-import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Unbind;
 import org.panifex.service.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Bean(id = SecurityServiceManager.ID, factoryMethod = "init")
-@ReferenceListener
 public final class SecurityServiceManager {
 
     public static final String ID = "org.panifex.web.impl.security.SecurityServiceManager";
@@ -47,10 +38,6 @@ public final class SecurityServiceManager {
      * The reference is dynamically updated when the implementations of the {@link org.panifex.service.api.security.SecurityService SecurityService}
      * appear or disappear.
      */
-    @Inject
-    @Reference(
-        serviceInterface = SecurityService.class,
-        referenceListeners = @ReferenceListener(ref = ID))
     private SecurityService securityService;
     
     /**
@@ -78,7 +65,6 @@ public final class SecurityServiceManager {
     /**
      * Frees linked objects.
      */
-    @Destroy
     public void destroy() {
         manager = null;
     }
@@ -88,7 +74,6 @@ public final class SecurityServiceManager {
      * 
      * @param securityService the appeared {@link org.panifex.service.api.security.SecurityService SecurityService}
      */
-    @Bind
     public void bind(SecurityService securityService) {
         log.debug("Bind SecurityService: {}", securityService);
         this.securityService = securityService;
@@ -99,7 +84,6 @@ public final class SecurityServiceManager {
      * 
      * @param securityService the disappeared {@link org.panifex.service.api.security.SecurityService SecurityService}
      */
-    @Unbind
     public void unbind(SecurityService securityService) {
         log.debug("Unbind SecurityService: {}", securityService);
         this.securityService = null;

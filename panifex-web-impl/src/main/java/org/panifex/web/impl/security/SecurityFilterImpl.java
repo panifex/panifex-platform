@@ -18,11 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.impl.security;
 
-import org.apache.aries.blueprint.annotation.Bean;
 import org.apache.shiro.web.servlet.ShiroFilter;
 
-@Bean(id = SecurityFilterImpl.ID)
 public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
-    
-    public final static String ID = "org.panifex.web.impl.security.SecurityFilter";
 }

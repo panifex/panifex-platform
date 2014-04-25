@@ -20,13 +20,11 @@ package org.panifex.web.impl.servlet;
 
 import java.util.Map;
 
-import org.apache.aries.blueprint.annotation.Bean;
 import org.zkoss.zk.ui.Richlet;
 import org.zkoss.zk.ui.http.DHtmlLayoutServlet;
 import org.zkoss.zk.ui.http.WebManager;
 import org.zkoss.zk.ui.util.Configuration;
 
-@Bean(id = ZkLayoutServiceImpl.ID)
 public class ZkLayoutServiceImpl extends DHtmlLayoutServlet implements ZkLayoutService {
 
     public final static String ID = "org.panifex.web.impl.servlet.ZkLayoutServlet";

@@ -22,10 +22,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Register;
-import org.apache.aries.blueprint.annotation.RegistrationListener;
-import org.apache.aries.blueprint.annotation.Unregister;
 import org.panifex.module.api.menu.AppMenuService;
 import org.panifex.module.api.menu.MenuItem;
 import org.slf4j.Logger;
@@ -38,8 +34,6 @@ import org.zkoss.zul.TreeNode;
  * <p>
  * 
  */
-@Bean(id = AppMenuServiceHolder.ID)
-@RegistrationListener
 public final class AppMenuServiceHolder implements Serializable {
 
     /**
@@ -53,13 +47,11 @@ public final class AppMenuServiceHolder implements Serializable {
     
     private static AppMenuService service;
     
-    @Register
     public void registerAppMenuService(Serializable service, Map<String, String> props) {
         log.debug("Bind AppMenuService: {}", service);
         AppMenuServiceHolder.service = (AppMenuService) service;
     }
     
-    @Unregister
     public void unregisterAppMenuService(Serializable service, Map<String, String> props) {
         log.debug("Unbind AppMenuService: {}", service);
         AppMenuServiceHolder.service = null;

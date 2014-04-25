@@ -18,8 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.security;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Service;
 import org.panifex.module.api.content.AbstractContent;
 import org.panifex.module.api.settings.SettingsContent;
 import org.panifex.web.impl.i18n.SecurityLabels;
@@ -34,8 +32,6 @@ import org.zkoss.zul.Listheader;
 /**
  * The SettingsContent for administration of users' roles.
  */
-@Bean(id = RoleAdministrationContent.ID)
-@Service(interfaces = SettingsContent.class)
 public final class RoleAdministrationContent extends AbstractContent implements SettingsContent {
 
     public static final String ID = "org.panifex.web.impl.view.security.RoleSettingsContent";

@@ -21,9 +21,6 @@ package org.panifex.web.impl.menu;
 import java.io.Serializable;
 import java.util.List;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.RegistrationListener;
-import org.apache.aries.blueprint.annotation.Service;
 import org.panifex.module.api.menu.AppMenuService;
 import org.panifex.module.api.menu.MenuAction;
 import org.panifex.module.api.menu.MenuItem;
@@ -41,9 +38,6 @@ import org.zkoss.zul.TreeNode;
  * {@link org.panifex.module.api.menu.MenuNode MenuNode}s from the model.
  *
  */
-@Bean(id = AppMenuServiceImpl.ID)
-@Service(interfaces = AppMenuService.class, 
-    registerationListeners = @RegistrationListener(ref = AppMenuServiceHolder.ID))
 public final class AppMenuServiceImpl implements AppMenuService, Serializable {
 
     /**

@@ -22,13 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Bind;
-import org.apache.aries.blueprint.annotation.Destroy;
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.ReferenceList;
-import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Unbind;
 import org.panifex.module.api.settings.SettingsContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,8 +30,6 @@ import org.slf4j.LoggerFactory;
  * This manager keeps references to active {@link org.panifex.module.api.settings.SettingsContent SettingsContent}
  * instances.
  */
-@Bean(id = SettingsContentManager.ID, factoryMethod = "init")
-@ReferenceListener
 public final class SettingsContentManager {
 
     public final static String ID = "org.panifex.web.impl.settings.SettingsContentManager";
@@ -56,11 +47,6 @@ public final class SettingsContentManager {
     /**
      * The references of the {@link org.panifex.module.api.settings.SettingsContent SettingsContent}.
      */
-    @Inject
-    @ReferenceList(
-        availability = "optional", 
-        serviceInterface = SettingsContent.class, 
-        referenceListeners = @ReferenceListener(ref = ID))
     private List<SettingsContent> contents = new ArrayList<>();
     
     /**
@@ -75,7 +61,6 @@ public final class SettingsContentManager {
      * 
      * @param content the {@link org.panifex.module.api.settings.SettingsContent SettingsContent} to be binded to
      */
-    @Bind
     public void bind(SettingsContent content) {
         log.debug("Bind settings content: {}", content);
         contents.add(content);
@@ -87,7 +72,6 @@ public final class SettingsContentManager {
      * 
      * @param content the {@link org.panifex.module.api.settings.SettingsContent SettingsContent} to be unbinded from
      */
-    @Unbind
     public void unbind(SettingsContent content) {
         log.debug("Unbind settings content: {}", content);
         contents.remove(content);
@@ -122,7 +106,6 @@ public final class SettingsContentManager {
     /**
      * Frees linked objects.
      */
-    @Destroy
     public void destroy() {
         manager = null;
     }

@@ -37,6 +37,8 @@ public final class SecurityServiceManagerTest extends TestSupport {
      */
     @Before
     public void setUp() {
+        resetAll();
+        
         // initialize the manager
         manager = SecurityServiceManager.init();
     }

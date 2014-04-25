@@ -18,18 +18,10 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.login;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Bind;
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.Reference;
-import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Unbind;
 import org.panifex.web.impl.servlet.ZkLayoutService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Bean(id = ChangePasswordFormRichletBinder.ID)
-@ReferenceListener
 public class ChangePasswordFormRichletBinder {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -38,28 +30,17 @@ public class ChangePasswordFormRichletBinder {
 
     private final static String PATH = "/changepassword";
     
-    @Inject
-    @Reference(
-        availability = "optional", 
-        serviceInterface = ZkLayoutService.class, 
-        referenceListeners = @ReferenceListener(ref = ID))
-    private ZkLayoutService zkLayoutService;
-
-    @Bind
     public void bind(ZkLayoutService zkLayoutService) throws ClassNotFoundException {
         log.debug("Bind Zk layout service: {}", zkLayoutService);
-        this.zkLayoutService = zkLayoutService;
 
         zkLayoutService.addRichlet(ChangePasswordFormRichlet.class, PATH);
     }
 
-    @Unbind
     public void unbind(ZkLayoutService zkLayoutService) {
         log.debug("Unbind Zk layout service: {}", zkLayoutService);
         if (zkLayoutService != null) {
             // unregister change password form richlet
             zkLayoutService.addRichlet(null, PATH);
         }
-        this.zkLayoutService = null;
     }
 }

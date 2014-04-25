@@ -23,11 +23,7 @@ import java.util.Hashtable;
 import javax.servlet.ServletException;
 
 import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Bind;
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.Reference;
 import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Unbind;
 import org.apache.shiro.web.env.EnvironmentLoaderListener;
 import org.ops4j.pax.web.service.WebContainer;
 import org.osgi.framework.BundleContext;
@@ -37,7 +33,6 @@ import org.osgi.service.http.NamespaceException;
 import org.panifex.web.impl.security.SecurityFilter;
 import org.panifex.web.impl.security.SecurityFilterImpl;
 import org.panifex.web.impl.servlet.ZkLayoutService;
-import org.panifex.web.impl.servlet.ZkLayoutServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.web.servlet.dsp.InterpreterServlet;
@@ -52,18 +47,11 @@ public class WebContainerListener {
 
     public final static String ID = "org.panifex.web.impl.PaxWebServiceListener";
 
-    @Inject(ref = "blueprintBundleContext")
     private BundleContext bundleContext;
 
-    @Inject
-    @Reference(availability = "optional", serviceInterface = WebContainer.class, referenceListeners = @ReferenceListener(ref = ID))
-    private WebContainer container;
-
-    @Inject(ref = SecurityFilterImpl.ID)
     private SecurityFilter securityFilter;
     private ServiceRegistration<SecurityFilter> securityFilterServiceRegistration;
 
-    @Inject(ref = ZkLayoutServiceImpl.ID)
     private ZkLayoutService zkLayoutService;
     private ServiceRegistration<ZkLayoutService> zkLayoutServiceRegistration;
     
@@ -80,7 +68,6 @@ public class WebContainerListener {
         this.zkLayoutService = zkLayoutService;
     }
 
-    @Bind
     public void bind(WebContainer container) throws Exception {
         // configure zkLoader servlet
         log.debug("Configure ZkLoader servlet");
@@ -146,7 +133,6 @@ public class WebContainerListener {
         }
     }
 
-    @Unbind
     public void unbind(WebContainer container) {
         // unregister layout service
         if (zkLayoutServiceRegistration != null) {

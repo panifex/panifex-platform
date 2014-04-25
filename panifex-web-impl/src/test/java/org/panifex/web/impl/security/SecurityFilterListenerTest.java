@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.impl.security;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.panifex.service.api.security.SecurityService;
 import org.panifex.test.support.TestSupport;
@@ -25,10 +26,20 @@ import org.panifex.test.support.TestSupport;
 /**
  * Tests binding and unbinding realms to SecurityFilterListener
  *
+ * TODO
  */
-public class SecurityFilterListenerBindingRealmsTest extends TestSupport {
+public class SecurityFilterListenerTest extends TestSupport {
 
-    private SecurityFilterListener listener = new SecurityFilterListener();;
+    private SecurityFilterListener listener = new SecurityFilterListener();
+    
+    // mocks
+    private SecurityFilter securityFilterMock = createMock(SecurityFilter.class);
+    
+    @Before
+    public void setUp() {
+        resetAll();
+        listener.setSecurityFilter(securityFilterMock);
+    }
     
     @Test
     public void bindSecurityServiceTest() {

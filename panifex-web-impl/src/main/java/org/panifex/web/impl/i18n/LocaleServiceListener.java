@@ -21,13 +21,6 @@ package org.panifex.web.impl.i18n;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Bind;
-import org.apache.aries.blueprint.annotation.Destroy;
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.ReferenceList;
-import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Unbind;
 import org.panifex.module.api.i18n.LocaleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,8 +32,6 @@ import org.zkoss.util.resource.Labels;
  * listener which registers/unregisters new resources which is used to load the 
  * Locale-dependent labels.
  */
-@Bean(id = LocaleServiceListener.ID, factoryMethod = "init")
-@ReferenceListener
 public final class LocaleServiceListener {
 
     public static final String ID = "org.panifex.web.impl.local.LocalServiceListener";
@@ -49,11 +40,6 @@ public final class LocaleServiceListener {
     
     private static volatile LocaleServiceListener instance;
     
-    @Inject
-    @ReferenceList(
-        availability = "optional",
-        serviceInterface = LocaleService.class,
-        referenceListeners = @ReferenceListener(ref = ID))
     private List<LocaleService> localeServices = new ArrayList<>();
     
     /**
@@ -81,7 +67,6 @@ public final class LocaleServiceListener {
     /**
      * Frees linked objects.
      */
-    @Destroy
     public void destroy() {
         instance = null;
     }
@@ -92,7 +77,6 @@ public final class LocaleServiceListener {
      * 
      * @param localeService the provided {@link org.panifex.module.api.i18n.LocaleService LocaleService}
      */
-    @Bind
     public void bind(LocaleService localeService) {
         log.debug("Bind LocaleService: {}", localeService);
         localeServices.add(localeService);
@@ -106,7 +90,6 @@ public final class LocaleServiceListener {
      * 
      * @param localeService the provided {@link org.panifex.module.api.i18n.LocaleService LocaleService}
      */
-    @Unbind
     public void unbind(LocaleService localeService) {
         log.debug("Unbind LocaleService: {}", localeService);
         localeServices.remove(localeService);

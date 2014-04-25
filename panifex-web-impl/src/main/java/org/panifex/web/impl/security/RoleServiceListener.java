@@ -18,13 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.impl.security;
 
-import org.apache.aries.blueprint.annotation.Bean;
-import org.apache.aries.blueprint.annotation.Bind;
-import org.apache.aries.blueprint.annotation.Destroy;
-import org.apache.aries.blueprint.annotation.Inject;
-import org.apache.aries.blueprint.annotation.Reference;
-import org.apache.aries.blueprint.annotation.ReferenceListener;
-import org.apache.aries.blueprint.annotation.Unbind;
 import org.panifex.service.api.security.RoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +26,6 @@ import org.slf4j.LoggerFactory;
  * Contains a reference to the active {@link org.panifex.service.api.security.RoleService RoleService}
  * implementation.
  */
-@Bean(id = RoleServiceListener.ID, factoryMethod = "init")
-@ReferenceListener
 public class RoleServiceListener {
 
     public static final String ID = "org.panifex.web.impl.security.RoleServiceListener";
@@ -51,10 +42,6 @@ public class RoleServiceListener {
      * The reference is dynamically updated when the implementations of the {@link org.panifex.service.api.security.RoleService RoleService}
      * appear or disappear.
      */
-    @Inject
-    @Reference(
-        serviceInterface = RoleService.class,
-        referenceListeners = @ReferenceListener(ref = ID))
     private RoleService roleService;
     
     /**
@@ -82,7 +69,6 @@ public class RoleServiceListener {
     /**
      * Frees linked objects.
      */
-    @Destroy
     public void destroy() {
         manager = null;
     }
@@ -92,7 +78,6 @@ public class RoleServiceListener {
      * 
      * @param roleService the appeared {@link org.panifex.service.api.security.RoleService RoleService}
      */
-    @Bind
     public void bind(RoleService roleService) {
         log.debug("Bind RoleService: {}", roleService);
         this.roleService = roleService;
@@ -103,7 +88,6 @@ public class RoleServiceListener {
      * 
      * @param roleService the disappeared {@link org.panifex.service.api.security.RoleService RoleService}
      */
-    @Unbind
     public void unbind(RoleService roleService) {
         log.debug("Unbind RoleService: {}", roleService);
         this.roleService = null;
