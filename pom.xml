@@ -54,6 +54,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- Defines dependency versions -->
         <openjpa.version>2.2.2</openjpa.version>
+        <pax.logging.version>1.7.2</pax.logging.version>
         <pax.web.version>3.1.0</pax.web.version>
         <shiro.version>1.2.2</shiro.version>
         <zk.framework.version>7.0.0</zk.framework.version>
@@ -707,17 +708,17 @@
             <dependency>
                 <groupId>org.ops4j.pax.logging</groupId>
                 <artifactId>pax-logging-api</artifactId>
-                <version>1.7.1</version>
+                <version>${pax.logging.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.ops4j.pax.logging</groupId>
                 <artifactId>pax-logging-service</artifactId>
-                <version>1.7.1</version>
+                <version>${pax.logging.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.ops4j.pax.logging</groupId>
                 <artifactId>pax-logging-logback</artifactId>
-                <version>1.7.1</version>
+                <version>${pax.logging.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>ch.qos.logback</groupId>
