@@ -54,6 +54,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- Defines dependency versions -->
         <openjpa.version>2.2.2</openjpa.version>
+        <pax.web.version>3.1.0</pax.web.version>
         <shiro.version>1.2.2</shiro.version>
         <zk.framework.version>7.0.0</zk.framework.version>
     </properties>
@@ -738,12 +739,12 @@
             <dependency>
                 <groupId>org.ops4j.pax.web</groupId>
                 <artifactId>pax-web-extender-whiteboard</artifactId>
-                <version>3.0.2</version>
+                <version>${pax.web.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.ops4j.pax.web</groupId>
                 <artifactId>pax-web-jetty-bundle</artifactId>
-                <version>3.0.2</version>
+                <version>${pax.web.version}</version>
             </dependency>
             <!-- Samba Dependencies -->
             <dependency>
