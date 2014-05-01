@@ -219,12 +219,12 @@ public final class MenuTreeModel extends DefaultTreeModel<MenuItem> {
      * @param item the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be removed from the model
      */
     public void removeItem(MenuItem item) {
-        if (queuedItems.remove(item.getParentId(), item) == null) {
+        /*if (queuedItems.remove(item.getParentId(), item) == null) {
             removeChildItem(getRoot().getChildren(), item);
             
             // sort the elements
             sort(comparator, true);
-        }
+        }*/
     }
     
     /**
@@ -234,6 +234,7 @@ public final class MenuTreeModel extends DefaultTreeModel<MenuItem> {
      * @param treeNodes the collection of the {@link org.zkoss.zul.TreeNode TreeNode}s in which will be the {@link org.panifex.module.api.menu.MenuItem MenuItem} removed
      * @param itemToRemove the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be removed from the collection of the {@link org.zkoss.zul.TreeNode TreeNode}s
      */
+    /*
     private void removeChildItem(List<TreeNode<MenuItem>> treeNodes, MenuItem itemToRemove) {
         for (TreeNode<MenuItem> treeNode : treeNodes) {
             // get the tree node's data
@@ -263,7 +264,7 @@ public final class MenuTreeModel extends DefaultTreeModel<MenuItem> {
                 }
             }
         }
-    }
+    }*/
     
     /**
      * Removes the collection of the {@link org.zkoss.zul.TreeNode TreeNode}s to be removed
@@ -275,7 +276,7 @@ public final class MenuTreeModel extends DefaultTreeModel<MenuItem> {
      * 
      * @param treeNodes the collection of the {@link org.zkoss.zul.TreeNode TreeNode}s to be removed from the model
      */
-    private void removeTreeNodesFromModel(List<TreeNode<MenuItem>> treeNodes) {
+    /*private void removeTreeNodesFromModel(List<TreeNode<MenuItem>> treeNodes) {
         for (TreeNode<MenuItem> treeNode : treeNodes) {
             // put the TreeNode's MenuItem to the queuedItems list
             queuedItems.put(treeNode.getData().getParentId(), treeNode.getData());
@@ -288,6 +289,6 @@ public final class MenuTreeModel extends DefaultTreeModel<MenuItem> {
         
         // clear the tree nodes list
         treeNodes.clear();
-    }
+    }*/
 
 }
