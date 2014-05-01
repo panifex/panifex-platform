@@ -57,7 +57,7 @@
         <pax.logging.version>1.7.2</pax.logging.version>
         <pax.web.version>3.1.0</pax.web.version>
         <shiro.version>1.2.2</shiro.version>
-        <zk.framework.version>7.0.0</zk.framework.version>
+        <zk.framework.version>7.0.2-SNAPSHOT</zk.framework.version>
     </properties>
 
     <packaging>pom</packaging>
