@@ -46,15 +46,19 @@
     <properties>
         <!-- Panifex Platform properties -->
         <panifex.platform.version>0.1.0-SNAPSHOT</panifex.platform.version>
+        
         <!-- | some example OSGi runtime properties -->
         <org.osgi.service.http.port>8080</org.osgi.service.http.port>
         <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
+        
         <!-- Defines project encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        
         <!-- Defines dependency versions -->
         <openjpa.version>2.2.2</openjpa.version>
         <pax.logging.version>1.7.2</pax.logging.version>
+        <pax.runner.version>1.8.6-SNAPSHOT</pax.runner.version>
         <pax.web.version>3.1.0</pax.web.version>
         <shiro.version>1.2.2</shiro.version>
         <zk.framework.version>7.0.2-SNAPSHOT</zk.framework.version>
@@ -740,7 +744,7 @@
             <dependency>
                 <groupId>org.ops4j.pax.runner</groupId>
                 <artifactId>pax-runner</artifactId>
-                <version>1.8.5</version>
+                <version>${pax.runner.version}</version>
             </dependency>
             <!-- Pax Web Dependencies -->
             <dependency>
