@@ -50,9 +50,9 @@ Import-Package: \
     org.apache.shiro.util;version="[1.2,2.0)", \
     org.osgi.framework;version="[1.3,2.0)", \
     org.osgi.util.tracker;version="[1.3,2.0)", \
+    org.panifex.persistence.spi;version="[1.0,2.0)", \
     org.panifex.service.api;version="[1.0,2.0)", \
     org.panifex.service.api.security;version="[1.0,2.0)", \
-    !org.panifex.platform.persistence.*, \
     org.slf4j;version="[1.4,2.0)"
 
 

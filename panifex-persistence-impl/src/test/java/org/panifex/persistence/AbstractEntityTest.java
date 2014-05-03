@@ -22,6 +22,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
 import org.junit.Test;
+import org.panifex.persistence.spi.AbstractEntity;
 
 /**
  * Unit tests for the {@link AbstractEntity} class.

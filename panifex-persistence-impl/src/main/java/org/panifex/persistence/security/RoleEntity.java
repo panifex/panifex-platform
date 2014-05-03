@@ -31,7 +31,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.panifex.persistence.AbstractEntity;
+import org.panifex.persistence.spi.AbstractEntity;
 import org.panifex.service.api.security.Role;
 
 @Entity

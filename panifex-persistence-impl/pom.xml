@@ -84,7 +84,7 @@
         <!-- Panifex Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-service-api</artifactId>
+            <artifactId>panifex-persistence-spi</artifactId>
         </dependency>
         <!-- Test Dependencies -->
         <dependency>

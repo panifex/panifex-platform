@@ -69,6 +69,7 @@
         <module>panifex-service-api</module>
         <module>panifex-service-impl</module>
         <module>panifex-web-impl</module>
+        <module>panifex-persistence-spi</module>
         <module>panifex-persistence-impl</module>
         <module>panifex-persistence-impl-dbtest</module>
         <module>panifex-datasource-derby</module>
@@ -675,6 +676,11 @@
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-persistence-impl</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
+                <artifactId>panifex-persistence-spi</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>
