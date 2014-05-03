@@ -29,13 +29,13 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>panifex-persistence-impl</bundle.symbolicName>
-        <bundle.namespace>org.panifex.persistence.impl</bundle.namespace>
+        <bundle.symbolicName>panifex-security-persistence</bundle.symbolicName>
+        <bundle.namespace>org.panifex.security.persistence</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
-    <artifactId>panifex-persistence-impl</artifactId>
+    <artifactId>panifex-security-persistence</artifactId>
 
     <name>${bundle.symbolicName}</name>
 
