@@ -20,23 +20,15 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
 	version="1.0">
 
-	<persistence-unit name="panifex" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit transaction-type="JTA" name="panifex-persistence-spi">
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/PanifexDataSource)</jta-data-source>
 
         <class>org.panifex.persistence.spi.AbstractEntity</class>
-		<class>org.panifex.security.persistence.AccountEntity</class>
-        <class>org.panifex.security.persistence.AccountRoleAssociationEntity</class>
-        <class>org.panifex.security.persistence.RoleEntity</class>
-        <class>org.panifex.security.persistence.RolePermissionAssociationEntity</class>
-        <class>org.panifex.security.persistence.PermissionEntity</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        
+
         <properties>
-            <property name="openjpa.ConnectionURL" value="jdbc:hsqldb:mem:unit-testing-jpa"/>
-            <property name="openjpa.ConnectionDriverName" value="org.hsqldb.jdbcDriver"/>
-            <property name="openjpa.ConnectionUserName" value="sa"/>
-            <property name="openjpa.ConnectionPassword" value=""/>
-            <property name="openjpa.Log" value="SQL=TRACE"/>
             <property name="openjpa.DynamicEnhancementAgent" value="false"/> 
         </properties>
 	</persistence-unit>

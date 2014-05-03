@@ -24,55 +24,53 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
 
-    <!-- org.panifex.persistence.security.AccountRepositoryImpl -->
+    <!-- AccountRepository -->
     
-    <bean id="org.panifex.persistence.security.AccountRepositoryImpl"
+    <bean id="accountRepository"
             class="org.panifex.persistence.security.AccountRepositoryImpl"/>
     
-    <!-- org.panifex.persistence.DataSourceListener -->
+    <!-- DataSourceListener -->
     
     <reference interface="javax.sql.DataSource" filter="(osgi.jndi.service.name=jdbc/PanifexDataSource)">
-        <reference-listener ref="org.panifex.persistence.DataSourceListener"
+        <reference-listener ref="dataSourceListener"
             bind-method="bind"
             unbind-method="unbind"/>
     </reference>
     
-    <bean id="org.panifex.persistence.DataSourceListener" 
-            class="org.panifex.persistence.DataSourceListener">
+    <bean id="dataSourceListener" 
+            class="org.panifex.security.persistence.dbschema.DataSourceListener">
         <property name="bundleContext" ref="blueprintBundleContext"/>
     </bean>
     
-    <!-- org.panifex.persistence.security.PersistenceRealm -->
+    <!-- PersistenceRealm -->
     
-    <service ref="org.panifex.persistence.security.PersistenceRealm">
+    <service ref="persistenceRealm">
         <interfaces>
             <value>org.panifex.service.api.security.SecurityService</value>
         </interfaces>
     </service>
     
-    <bean id="org.panifex.persistence.security.PersistenceRealm"
-            class="org.panifex.persistence.security.PersistenceRealm">
-        <property name="accountRepository" ref="org.panifex.persistence.security.AccountRepositoryImpl"/>
+    <bean id="persistenceRealm"
+            class="org.panifex.security.persistence.PersistenceRealm">
+        <property name="accountRepository" ref="accountRepository"/>
         <jpa:context property="entityManager" unitname="panifex-cm" />
         <tx:transaction method="*" value="Required"/>
     </bean>
     
-    <!-- org.panifex.persistence.security.RoleRepositoryImpl -->
+    <!-- roleRepository -->
     
-    <bean id="org.panifex.persistence.security.RoleRepositoryImpl"
-            class="org.panifex.persistence.security.RoleRepositoryImpl"/>
+    <bean id="roleRepository"
+            class="org.panifex.security.persistence.RoleRepositoryImpl"/>
     
-    <!-- org.panifex.persistence.security.RoleServiceImpl -->
-    
-    <service ref="org.panifex.persistence.security.RoleServiceImpl">
+    <service ref="roleService">
         <interfaces>
             <value>org.panifex.service.api.security.RoleService</value>
         </interfaces>
     </service>
 
-    <bean id="org.panifex.persistence.security.RoleServiceImpl"
-            class="org.panifex.persistence.security.RoleServiceImpl">
-        <property name="roleRepository" ref="org.panifex.persistence.security.RoleRepositoryImpl"/>
+    <bean id="roleService"
+            class="org.panifex.security.persistence.RoleServiceImpl">
+        <property name="roleRepository" ref="roleRepository"/>
         <jpa:context property="entityManager" unitname="panifex-cm" />
         <tx:transaction method="*" value="Required"/>
     </bean>

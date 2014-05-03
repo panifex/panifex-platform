@@ -26,11 +26,11 @@
 		<!-- <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/NoTxPanifexDataSource)</non-jta-data-source> -->
 
         <class>org.panifex.persistence.spi.AbstractEntity</class>
-		<class>org.panifex.persistence.security.AccountEntity</class>
-        <class>org.panifex.persistence.security.AccountRoleAssociationEntity</class>
-        <class>org.panifex.persistence.security.RoleEntity</class>
-        <class>org.panifex.persistence.security.RolePermissionAssociationEntity</class>
-        <class>org.panifex.persistence.security.PermissionEntity</class>
+		<class>org.panifex.security.persistence.AccountEntity</class>
+        <class>org.panifex.security.persistence.AccountRoleAssociationEntity</class>
+        <class>org.panifex.security.persistence.RoleEntity</class>
+        <class>org.panifex.security.persistence.RolePermissionAssociationEntity</class>
+        <class>org.panifex.security.persistence.PermissionEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="openjpa.DynamicEnhancementAgent" value="false"/> 

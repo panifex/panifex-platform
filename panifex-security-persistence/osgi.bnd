@@ -58,4 +58,4 @@ Import-Package: \
 
 Meta-Persistence: META-INF/persistence.xml
 
-Private-Package: org.panifex.persistence.*
+Private-Package: org.panifex.security.persistence.*
