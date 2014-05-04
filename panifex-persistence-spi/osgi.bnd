@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 # Bundle does not export anything
-Export-Package:
+Export-Package: \
 	org.panifex.persistence.spi
 
 Import-Package: \
