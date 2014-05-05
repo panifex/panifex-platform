@@ -72,13 +72,12 @@ public final class SecContainerTest {
             mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.serp"),
             mavenBundle("org.apache.shiro", "shiro-core"),
             mavenBundle("org.apache.shiro", "shiro-ehcache"),
-            mavenBundle("org.liquibase", "liquibase-osgi", "3.0.7"),
+            mavenBundle("org.liquibase", "liquibase-osgi"),
             mavenBundle("org.osgi", "org.osgi.compendium", "4.3.1"),
             mavenBundle("org.panifex", "panifex-datasource-derby"),
             mavenBundle("org.panifex", "panifex-persistence-spi"),
             mavenBundle("org.panifex", "panifex-security-persistence"),
             mavenBundle("org.panifex", "panifex-service-api"),
-            
             junitBundles());
 
     }

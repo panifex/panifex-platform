@@ -56,6 +56,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         
         <!-- Defines dependency versions -->
+        <liquibase.version>3.1.1</liquibase.version>
         <openjpa.version>2.2.2</openjpa.version>
         <pax.exam.version>3.5.0</pax.exam.version>
         <pax.logging.version>1.7.2</pax.logging.version>
@@ -639,7 +640,7 @@
             <dependency>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-osgi</artifactId>
-                <version>3.0.7</version>
+                <version>${liquibase.version}</version>
             </dependency>
             <!-- OSGi Dependencies -->
             <dependency>

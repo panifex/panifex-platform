@@ -26,6 +26,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.sql.DataSource;
 
+import liquibase.Contexts;
 import liquibase.Liquibase;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.LiquibaseException;
@@ -77,6 +78,10 @@ public abstract class RepositoryTestSupport extends TestSupport {
             new FileSystemResourceAccessor(), 
             new JdbcConnection(conn));
         
-        liquibase.update(null);
+        // all contexts will be applied
+        Contexts contexts = new Contexts();
+        
+        // execute update
+        liquibase.update(contexts);
     }
 }
