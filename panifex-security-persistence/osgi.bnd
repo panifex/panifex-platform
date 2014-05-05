@@ -29,8 +29,6 @@ Import-Package: \
     liquibase.database.jvm;version="[3.0,4.0)", \
     liquibase.exception;version="[3.0,4.0)", \
     liquibase.resource;version="[3.0,4.0)", \
-    org.apache.aries.blueprint.annotation;version="[1.0, 2.0)", \
-    org.apache.aries.transaction.annotations;version="[1.0, 2.0)", \
     org.apache.commons.lang3.builder;version="[3.1,4.0)", \
     org.apache.openjpa.enhance;version="[2.2,3.0)", \
     org.apache.openjpa.util;version="[2.2,3.0)", \

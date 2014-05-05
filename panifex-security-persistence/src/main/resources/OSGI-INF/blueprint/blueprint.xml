@@ -22,12 +22,21 @@
     xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
     xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
+    xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+    xsi:schemaLocation="
+        http://www.osgi.org/xmlns/blueprint/v1.0.0
+            http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+        http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+            http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd
+        http://aries.apache.org/xmlns/jpa/v1.1.0
+            http://aries.apache.org/schemas/jpa/jpa_110.xsd
+        http://aries.apache.org/xmlns/transactions/v1.0.0
+            http://aries.apache.org/schemas/transaction/transactionv10.xsd">
 
     <!-- AccountRepository -->
     
     <bean id="accountRepository"
-            class="org.panifex.persistence.security.AccountRepositoryImpl"/>
+            class="org.panifex.security.persistence.AccountRepositoryImpl"/>
     
     <!-- DataSourceListener -->
     
@@ -53,8 +62,8 @@
     <bean id="persistenceRealm"
             class="org.panifex.security.persistence.PersistenceRealm">
         <property name="accountRepository" ref="accountRepository"/>
-        <jpa:context property="entityManager" unitname="panifex-cm" />
-        <tx:transaction method="*" value="Required"/>
+        <jpa:context property="entityManager" unitname="panifex-security-persistence" />
+        <!-- <tx:transaction method="*" value="Required"/> -->
     </bean>
     
     <!-- roleRepository -->
@@ -71,8 +80,8 @@
     <bean id="roleService"
             class="org.panifex.security.persistence.RoleServiceImpl">
         <property name="roleRepository" ref="roleRepository"/>
-        <jpa:context property="entityManager" unitname="panifex-cm" />
-        <tx:transaction method="*" value="Required"/>
+        <jpa:context property="entityManager" unitname="panifex-security-persistence" />
+        <!-- <tx:transaction method="*" value="Required"/> -->
     </bean>
 
 </blueprint>

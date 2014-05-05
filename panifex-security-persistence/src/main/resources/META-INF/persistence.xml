@@ -17,16 +17,20 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 -->
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-	version="1.0">
+<persistence
+    xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://java.sun.com/xml/ns/persistence 
+            http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+    version="1.0">
 
-	<persistence-unit transaction-type="JTA" name="panifex-cm">
-		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-		<jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/PanifexDataSource)</jta-data-source>
-		<!-- <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/NoTxPanifexDataSource)</non-jta-data-source> -->
+    <persistence-unit name="panifex-security-persistence" transaction-type="JTA">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/PanifexDataSource)</jta-data-source>
 
         <class>org.panifex.persistence.spi.AbstractEntity</class>
-		<class>org.panifex.security.persistence.AccountEntity</class>
+        <class>org.panifex.security.persistence.AccountEntity</class>
         <class>org.panifex.security.persistence.AccountRoleAssociationEntity</class>
         <class>org.panifex.security.persistence.RoleEntity</class>
         <class>org.panifex.security.persistence.RolePermissionAssociationEntity</class>
