@@ -194,19 +194,19 @@
     <changeSet id="panifex-security-persistence-0.1.0-15" author="mariokr">
         <comment>Inserts admin account</comment>
         <insert tableName="sec_account">
-            <column name="optlock_version">0</column>
-            <column name="username">admin</column>
-            <column name="password">lA2jtiWHI3Yp35rRL/50CzAvGvTVb2PsULtZ3GeKdtDwS8V54sUAQ3g7wF6KCT3wE9OMRXLtTQ/PLJjbEaF4yg==</column>
-            <column name="password_salt">1dfpY4vWFRtQIqOxejFVJg==</column>
+            <column name="optlock_version" valueNumeric="0"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="lA2jtiWHI3Yp35rRL/50CzAvGvTVb2PsULtZ3GeKdtDwS8V54sUAQ3g7wF6KCT3wE9OMRXLtTQ/PLJjbEaF4yg=="/>
+            <column name="password_salt" value="1dfpY4vWFRtQIqOxejFVJg=="/>
         </insert>
     </changeSet>
 
     <changeSet id="panifex-security-persistence-0.1.0-16" author="mariokr">
         <comment>Inserts administrator role</comment>
         <insert tableName="sec_role">
-            <column name="optlock_version">0</column>
-            <column name="name">Administrator</column>
-            <column name="description">Application administrator</column>
+            <column name="optlock_version" valueNumeric="0"/>
+            <column name="name" value="Administrator"/>
+            <column name="description" value="Application administrator"/>
         </insert>
     </changeSet>
     
@@ -218,10 +218,10 @@
     <changeSet id="panifex-security-persistence-0.1.0-18" author="mariokr">
         <comment>Inserts user permission</comment>
         <insert tableName="sec_permission">
-            <column name="optlock_version">0</column>
-            <column name="name">User</column>
-            <column name="wildcard_expression">user</column>
-            <column name="description">Basic user permission. All users must have that permission.</column>
+            <column name="optlock_version" valueNumeric="0"/>
+            <column name="name" value="User"/>
+            <column name="wildcard_expression" value="user"/>
+            <column name="description" value="Basic user permission. All users must have that permission."/>
         </insert>
     </changeSet>
     
