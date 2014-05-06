@@ -65,21 +65,6 @@
     </build>
 
     <dependencies>
-        <!-- Apache Shiro Dependencies -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-ehcache</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <!-- Beanshell Dependencies -->
         <dependency>
             <groupId>org.beanshell</groupId>

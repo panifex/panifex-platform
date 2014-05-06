@@ -56,11 +56,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         
         <!-- Defines dependency versions -->
+        <httpcomponents.version>4.3.2</httpcomponents.version>
         <liquibase.version>3.1.1</liquibase.version>
         <openjpa.version>2.2.2</openjpa.version>
         <pax.exam.version>3.5.0</pax.exam.version>
         <pax.logging.version>1.7.2</pax.logging.version>
         <pax.runner.version>1.8.5</pax.runner.version>
+        <pax.swissbox.version>1.7.0</pax.swissbox.version>
         <pax.url.version>2.0.0</pax.url.version>
         <pax.web.version>3.1.0</pax.web.version>
         <shiro.version>1.2.2</shiro.version>
@@ -76,6 +78,8 @@
         <module>panifex-service-api</module>
         <module>panifex-service-impl</module>
         <module>panifex-web-impl</module>
+        <module>panifex-web-shiro</module>
+        <module>panifex-web-shiro-itest</module>
         <module>panifex-persistence-spi</module>
         <module>panifex-security-persistence</module>
         <module>panifex-security-persistence-dbtest</module>
@@ -320,7 +324,7 @@
                 <artifactId>org.apache.aries.jpa.container.context</artifactId>
                 <version>1.0.1</version>
             </dependency>
-            <!-- Apache Aries Transaction Depedencies -->
+            <!-- Apache Aries Transaction Dependencies -->
             <dependency>
                 <groupId>org.apache.aries.transaction</groupId>
                 <artifactId>org.apache.aries.transaction.blueprint</artifactId>
@@ -335,6 +339,58 @@
                 <groupId>org.apache.aries.transaction</groupId>
                 <artifactId>org.apache.aries.transaction.wrappers</artifactId>
                 <version>1.0.0</version>
+            </dependency>
+            <!-- Apache Commons Dependencies -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.8.3</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.9</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.commons-dbcp</artifactId>
+                <version>1.4_3</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.commons-pool</artifactId>
+                <version>1.5.4_4</version>
             </dependency>
             <!-- Apache Felix Dependencies -->
             <dependency>
@@ -380,6 +436,11 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-jta_1.1_spec</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
                 <artifactId>geronimo-servlet_3.0_spec</artifactId>
                 <version>1.0</version>
             </dependency>
@@ -389,16 +450,27 @@
                 <version>1.1</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.geronimo.specs</groupId>
-                <artifactId>geronimo-jta_1.1_spec</artifactId>
-                <version>1.1.1</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.geronimo.components</groupId>
                 <artifactId>geronimo-transaction</artifactId>
                 <version>3.1.1</version>
             </dependency>
-            <!-- Apache JPA Dependencies -->
+            <!-- Apache HTTP Client Dependencies -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpcomponents.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${httpcomponents.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${httpcomponents.version}</version>
+            </dependency>
+            <!-- Apache OpenJPA Dependencies -->
             <dependency>
                 <groupId>org.apache.openjpa</groupId>
                 <artifactId>openjpa</artifactId>
@@ -511,6 +583,12 @@
                 <artifactId>bsh</artifactId>
                 <version>2.0b5</version>
             </dependency>
+            <!-- Bnd Dependencies -->
+            <dependency>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bndlib</artifactId>
+                <version>2.2.0</version>
+            </dependency>
             <!-- Codehaus Depedencies -->
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
@@ -521,53 +599,6 @@
                 <groupId>org.codehaus.janino</groupId>
                 <artifactId>commons-compiler</artifactId>
                 <version>2.6.1</version>
-            </dependency>
-            <!-- Commons Dependencies -->
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.1</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-beanutils</groupId>
-                <artifactId>commons-beanutils</artifactId>
-                <version>1.8.3</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>3.2.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.servicemix.bundles</groupId>
-                <artifactId>org.apache.servicemix.bundles.commons-dbcp</artifactId>
-                <version>1.4_3</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-fileupload</groupId>
-                <artifactId>commons-fileupload</artifactId>
-                <version>1.3</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.4</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>2.6</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.servicemix.bundles</groupId>
-                <artifactId>org.apache.servicemix.bundles.commons-pool</artifactId>
-                <version>1.5.4_4</version>
             </dependency>
             <!-- Database Connectors Dependencies -->
             <dependency>
@@ -653,6 +684,12 @@
                 <artifactId>org.osgi.compendium</artifactId>
                 <version>4.3.1</version>
             </dependency>
+            <!-- OSGi Container Dependencies -->
+            <dependency>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>org.eclipse.osgi</artifactId>
+                <version>3.7.0.v20110613</version>
+            </dependency>
             <!-- Panifex Platform Dependencies -->
             <dependency>
                 <groupId>org.panifex</groupId>
@@ -723,6 +760,11 @@
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.panifex</groupId>
+                <artifactId>panifex-web-shiro</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.panifex.parent.build</groupId>
                 <artifactId>provision</artifactId>
                 <version>${panifex.platform.version}</version>
@@ -732,6 +774,22 @@
                 <groupId>org.ops4j.pax.confman</groupId>
                 <artifactId>pax-confman-propsloader</artifactId>
                 <version>0.2.3</version>
+            </dependency>
+            <!-- Pax Exam Dependencies -->
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-junit4</artifactId>
+                <version>${pax.exam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-container-native</artifactId>
+                <version>${pax.exam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-link-mvn</artifactId>
+                <version>${pax.exam.version}</version>
             </dependency>
             <!-- Pax Logging Dependencies -->
             <dependency>
@@ -764,6 +822,28 @@
                 <groupId>org.ops4j.pax.runner</groupId>
                 <artifactId>pax-runner</artifactId>
                 <version>${pax.runner.version}</version>
+            </dependency>
+            <!-- Pax Swissbox Dependencies -->
+            <dependency>
+                <groupId>org.ops4j.pax.swissbox</groupId>
+                <artifactId>pax-swissbox-bnd</artifactId>
+                <version>${pax.swissbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.swissbox</groupId>
+                <artifactId>pax-swissbox-property</artifactId>
+                <version>${pax.swissbox.version}</version>
+            </dependency>
+            <!-- Pax URL Dependencies -->
+            <dependency>
+                <groupId>org.ops4j.pax.url</groupId>
+                <artifactId>pax-url-aether</artifactId>
+                <version>${pax.url.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.url</groupId>
+                <artifactId>pax-url-wrap</artifactId>
+                <version>${pax.url.version}</version>
             </dependency>
             <!-- Pax Web Dependencies -->
             <dependency>
@@ -812,11 +892,6 @@
                 <version>1.3.1</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.framework</artifactId>
-                <version>4.0.2</version>
-            </dependency>
-            <dependency>
                 <groupId>org.easymock</groupId>
                 <artifactId>easymock</artifactId>
                 <version>3.1</version>
@@ -825,26 +900,6 @@
                 <groupId>org.fluttercode.datafactory</groupId>
                 <artifactId>datafactory</artifactId>
                 <version>0.8</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.exam</groupId>
-                <artifactId>pax-exam-junit4</artifactId>
-                <version>${pax.exam.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.exam</groupId>
-                <artifactId>pax-exam-container-native</artifactId>
-                <version>${pax.exam.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.exam</groupId>
-                <artifactId>pax-exam-link-mvn</artifactId>
-                <version>${pax.exam.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.url</groupId>
-                <artifactId>pax-url-aether</artifactId>
-                <version>${pax.url.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.powermock</groupId>

@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.security;
+package org.panifex.web.shiro;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,21 +24,18 @@ import org.panifex.service.api.security.SecurityService;
 import org.panifex.test.support.TestSupport;
 
 /**
- * Tests binding and unbinding realms to SecurityFilterListener
+ * Tests binding and unbinding realms to SecurityFilter
  *
  * TODO
  */
-public class SecurityFilterListenerTest extends TestSupport {
+public class SecurityFilterImplTest extends TestSupport {
 
-    private SecurityFilterListener listener = new SecurityFilterListener();
+    private SecurityFilterImpl listener = new SecurityFilterImpl();
     
-    // mocks
-    private SecurityFilter securityFilterMock = createMock(SecurityFilter.class);
     
     @Before
     public void setUp() {
         resetAll();
-        listener.setSecurityFilter(securityFilterMock);
     }
     
     @Test

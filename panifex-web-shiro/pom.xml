@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Panifex platform
+  Copyright (C) 2013  Mario Krizmanic
+  
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or any later version.
+  
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+  
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+-->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="
+        http://maven.apache.org/POM/4.0.0 
+            http://maven.apache.org/maven-v4_0_0.xsd">
+    
+    <parent>
+        <relativePath>../poms/compiled/</relativePath>
+        <groupId>org.panifex.parent.build</groupId>
+        <artifactId>compiled-bundle-settings</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+    
+    <properties>
+        <bundle.symbolicName>panifex-web-shiro</bundle.symbolicName>
+        <bundle.namespace>org.panifex.web.shiro</bundle.namespace>
+    </properties>
+    
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.panifex</groupId>
+    <artifactId>panifex-web-shiro</artifactId>
+    
+    <name>${bundle.symbolicName}</name>
+    
+    <packaging>bundle</packaging>
+    
+    <dependencies>
+        <!-- Apache Shiro Dependencies -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+        </dependency>
+        <!-- Panifex Platform Dependencies -->
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-service-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Pax Web Dependencies -->
+        <dependency>
+            <groupId>org.ops4j.pax.web</groupId>
+            <artifactId>pax-web-extender-whiteboard</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.web</groupId>
+            <artifactId>pax-web-jetty-bundle</artifactId>
+        </dependency>
+    </dependencies>
+</project>

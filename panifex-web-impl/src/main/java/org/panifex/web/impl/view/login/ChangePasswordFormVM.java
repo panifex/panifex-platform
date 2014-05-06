@@ -20,15 +20,9 @@ package org.panifex.web.impl.view.login;
 
 import java.util.Map;
 
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.panifex.service.api.security.AccountNotExpiredException;
-import org.panifex.service.api.security.SecurityService;
-import org.panifex.web.impl.security.SecurityServiceManager;
 import org.panifex.web.impl.view.layout.LayoutVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.Validator;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
@@ -136,6 +130,7 @@ public final class ChangePasswordFormVM extends LayoutVM {
      */
     @Command(CHANGE_PASSWORD_COMMAND)
     public void changePassword() {
+        /* TODO
         SecurityService securityService = SecurityServiceManager.getService();
         try {
             // update account expired password
@@ -154,12 +149,13 @@ public final class ChangePasswordFormVM extends LayoutVM {
         } finally {
             // resets password after performing the change password action
             resetPasswords();
-        }
+        }*/
     }
     
     /**
      * Resets inputed passwords and notifies view about the reseted passwords.
      */
+    /*
     private void resetPasswords() {
         // reset the old password
         oldPassword = null;
@@ -172,7 +168,7 @@ public final class ChangePasswordFormVM extends LayoutVM {
         // reset the repeated new password
         repeatNewPassword = null;
         BindUtils.postNotifyChange(null, null, this, REPEAT_NEW_PASSWORD_ATTR);
-    }
+    }*/
     
     /**
      * Returns the account's username.

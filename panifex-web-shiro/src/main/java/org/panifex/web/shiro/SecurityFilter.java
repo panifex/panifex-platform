@@ -16,9 +16,13 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.security;
+package org.panifex.web.shiro;
 
-import org.apache.shiro.web.servlet.ShiroFilter;
+import javax.servlet.Filter;
 
-public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
+import org.apache.shiro.web.mgt.WebSecurityManager;
+
+public interface SecurityFilter extends Filter {
+
+    WebSecurityManager getSecurityManager();
 }

@@ -21,6 +21,7 @@ package org.panifex.security.persistence.itest;
 import static org.junit.Assert.assertNotNull;
 import static org.ops4j.pax.exam.CoreOptions.junitBundles;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
+import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import javax.inject.Inject;
 
@@ -32,7 +33,6 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
-import org.osgi.framework.InvalidSyntaxException;
 import org.panifex.service.api.security.SecurityService;
 
 @RunWith(PaxExam.class)
@@ -45,45 +45,45 @@ public final class SecContainerTest {
     @Configuration
     public Option[] config() {
         return CoreOptions.options(
-            mavenBundle("asm", "asm-all", "3.2"),
-            mavenBundle("commons-collections", "commons-collections", "3.2.1"),
-            mavenBundle("commons-lang", "commons-lang", "2.6"),
-            mavenBundle("org.apache.aries", "org.apache.aries.util", "1.1.0"),
-            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.api", "1.0.0"),
-            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.core", "1.3.0"),
-            mavenBundle("org.apache.aries.jndi", "org.apache.aries.jndi", "1.0.0"),
-            mavenBundle("org.apache.aries.jpa", "org.apache.aries.jpa.api", "1.0.0"),
-            mavenBundle("org.apache.aries.jpa", "org.apache.aries.jpa.blueprint.aries", "1.0.1"),
-            mavenBundle("org.apache.aries.jpa", "org.apache.aries.jpa.container", "1.0.0"),
-            mavenBundle("org.apache.aries.jpa", "org.apache.aries.jpa.container.context", "1.0.1"),
-            mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy", "1.0.1"),
-            mavenBundle("org.apache.aries.transaction", "org.apache.aries.transaction.blueprint", "1.0.0"),
-            mavenBundle("org.apache.aries.transaction", "org.apache.aries.transaction.manager", "1.0.0"),
-            mavenBundle("org.apache.aries.transaction", "org.apache.aries.transaction.wrappers", "1.0.0"),
-            mavenBundle("org.apache.commons", "commons-lang3", "3.1"),
-            mavenBundle("org.apache.derby", "derby", "10.10.1.1"),
-            mavenBundle("org.apache.geronimo.specs", "geronimo-jpa_2.0_spec", "1.1"),
-            mavenBundle("org.apache.geronimo.specs", "geronimo-jta_1.1_spec", "1.1.1"),
-            mavenBundle("org.apache.geronimo.specs", "geronimo-servlet_3.0_spec", "1.0"),
-            mavenBundle("org.apache.openjpa", "openjpa", "2.2.2"),
-            mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.commons-dbcp", "1.4_3"),
-            mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.commons-pool", "1.5.4_4"),
-            mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.ehcache", "2.6.6_1"),
-            mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.serp"),
-            mavenBundle("org.apache.shiro", "shiro-core"),
-            mavenBundle("org.apache.shiro", "shiro-ehcache"),
-            mavenBundle("org.liquibase", "liquibase-osgi"),
-            mavenBundle("org.osgi", "org.osgi.compendium", "4.3.1"),
-            mavenBundle("org.panifex", "panifex-datasource-derby"),
-            mavenBundle("org.panifex", "panifex-persistence-spi"),
-            mavenBundle("org.panifex", "panifex-security-persistence"),
-            mavenBundle("org.panifex", "panifex-service-api"),
+            mavenBundle("asm", "asm-all").version(asInProject()),
+            mavenBundle("commons-collections", "commons-collections").version(asInProject()),
+            mavenBundle("commons-lang", "commons-lang").version(asInProject()),
+            mavenBundle("org.apache.aries", "org.apache.aries.util").version(asInProject()),
+            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.api").version(asInProject()),
+            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.core").version(asInProject()),
+            mavenBundle("org.apache.aries.jndi", "org.apache.aries.jndi").version(asInProject()),
+            mavenBundle("org.apache.aries.jpa", "org.apache.aries.jpa.api").version(asInProject()),
+            mavenBundle("org.apache.aries.jpa", "org.apache.aries.jpa.blueprint.aries").version(asInProject()),
+            mavenBundle("org.apache.aries.jpa", "org.apache.aries.jpa.container").version(asInProject()),
+            mavenBundle("org.apache.aries.jpa", "org.apache.aries.jpa.container.context").version(asInProject()),
+            mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy").version(asInProject()),
+            mavenBundle("org.apache.aries.transaction", "org.apache.aries.transaction.blueprint").version(asInProject()),
+            mavenBundle("org.apache.aries.transaction", "org.apache.aries.transaction.manager").version(asInProject()),
+            mavenBundle("org.apache.aries.transaction", "org.apache.aries.transaction.wrappers").version(asInProject()),
+            mavenBundle("org.apache.commons", "commons-lang3").version(asInProject()),
+            mavenBundle("org.apache.derby", "derby").version(asInProject()),
+            mavenBundle("org.apache.geronimo.specs", "geronimo-jpa_2.0_spec").version(asInProject()),
+            mavenBundle("org.apache.geronimo.specs", "geronimo-jta_1.1_spec").version(asInProject()),
+            mavenBundle("org.apache.geronimo.specs", "geronimo-servlet_3.0_spec").version(asInProject()),
+            mavenBundle("org.apache.openjpa", "openjpa").version(asInProject()),
+            mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.commons-dbcp").version(asInProject()),
+            mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.commons-pool").version(asInProject()),
+            mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.ehcache").version(asInProject()),
+            mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.serp").version(asInProject()),
+            mavenBundle("org.apache.shiro", "shiro-core").version(asInProject()),
+            mavenBundle("org.apache.shiro", "shiro-ehcache").version(asInProject()),
+            mavenBundle("org.liquibase", "liquibase-osgi").version(asInProject()),
+            mavenBundle("org.osgi", "org.osgi.compendium").version(asInProject()),
+            mavenBundle("org.panifex", "panifex-datasource-derby").version(asInProject()),
+            mavenBundle("org.panifex", "panifex-persistence-spi").version(asInProject()),
+            mavenBundle("org.panifex", "panifex-security-persistence").version(asInProject()),
+            mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
             junitBundles());
 
     }
     
     @Test
-    public void getSecurityServiceTest() throws InvalidSyntaxException {
+    public void getSecurityServiceTest() {
         assertNotNull(securityService);
     }
 }

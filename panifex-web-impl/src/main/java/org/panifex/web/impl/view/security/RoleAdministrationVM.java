@@ -18,13 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.security;
 
-import java.util.List;
-
 import org.panifex.service.api.security.RoleImpl;
 import org.panifex.service.api.security.RoleService;
-import org.panifex.web.impl.security.RoleServiceListener;
 import org.zkoss.zul.ListModel;
-import org.zkoss.zul.ListModelList;
 
 /**
  * The view-model for users' roles administration.
@@ -40,6 +36,7 @@ public final class RoleAdministrationVM {
      * @return the collection of {@link RoleImpl} from the active {@link RoleService}
      */
     public ListModel<RoleImpl> getRoles() {
+        /* TODO
         // get an active RoleService
         RoleService roleService = RoleServiceListener.getService();
         
@@ -50,7 +47,8 @@ public final class RoleAdministrationVM {
             return new ListModelList<RoleImpl>(roles);
         } else {
             return null;
-        }
+        }*/
+        return null;
     }
     
 }

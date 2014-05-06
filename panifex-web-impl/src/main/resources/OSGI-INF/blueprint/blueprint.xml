@@ -88,52 +88,6 @@
     <bean id="mainRichletBinder"
         class="org.panifex.web.impl.view.main.MainRichletBinder"/>
     
-    <!-- Security -->
-    
-    <reference interface="org.panifex.service.api.security.RoleService"
-            availability="optional">
-        <reference-listener ref="roleServiceListener"
-            bind-method="bind"
-            unbind-method="unbind"/>
-    </reference>
-    
-    <bean id="roleServiceListener"
-        class="org.panifex.web.impl.security.RoleServiceListener"
-        factory-method="init"
-        destroy-method="destroy"/>
-    
-    <service ref="roleAdministrationContent">
-        <interfaces>
-            <value>org.panifex.module.api.settings.SettingsContent</value>
-        </interfaces>
-    </service>
-    
-    <bean id="roleAdministrationContent"
-        class="org.panifex.web.impl.view.security.RoleAdministrationContent"/>
-    
-    <bean id="securityFilter"
-        class="org.panifex.web.impl.security.SecurityFilterImpl"/>
-
-    <reference-list interface="org.panifex.service.api.security.SecurityService"
-            availability="optional">
-        <reference-listener ref="securityFilterListener"
-            bind-method="bind"
-            unbind-method="unbind"/>
-        <reference-listener ref="securityServiceManager"
-            bind-method="bind"
-            unbind-method="unbind"/>
-    </reference-list>
-    
-    <bean id="securityFilterListener"
-        class="org.panifex.web.impl.security.SecurityFilterListener">
-        <property name="securityFilter" ref="securityFilter"/>
-    </bean>
-    
-    <bean id="securityServiceManager"
-        class="org.panifex.web.impl.security.SecurityServiceManager"
-        factory-method="init"
-        destroy-method="destroy"/>
-    
     <!-- Settings Content -->
     
     <reference-list interface="org.panifex.module.api.settings.SettingsContent"

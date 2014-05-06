@@ -16,35 +16,39 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.security;
+package org.panifex.web.shiro;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.shiro.realm.Realm;
-import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.env.EnvironmentLoader;
+import org.apache.shiro.web.servlet.ShiroFilter;
 import org.panifex.service.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Listens to active Realm services and register or unregister its to the Shiro's security manager.
- * 
- */
-public class SecurityFilterListener {
-
-    private final Logger log = LoggerFactory.getLogger(getClass());
-
-    public final static String ID = "org.panifex.web.impl.security.SecurityFilterListener";
-
-    private SecurityFilter securityFilter;
-
-    private Set<SecurityService> securityServices = new HashSet<>();
+public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
     
-    public void setSecurityFilter(SecurityFilter securityFilter) {
-        this.securityFilter = securityFilter;
+    private final Logger log = LoggerFactory.getLogger(getClass());
+    
+    private List<SecurityService> securityServices = new ArrayList<>();
+    
+    private EnvironmentLoader loader = new EnvironmentLoader();
+    
+    @Override
+    public void init() throws Exception {
+        log.info("Initialize security filter");
+        loader.initEnvironment(getServletContext());
+        
+        super.init();
     }
     
+    @Override
+    public void destroy() {
+        loader.destroyEnvironment(getServletContext());
+        super.destroy();
+    }
+
     public void bind(SecurityService securityService) {
         log.debug("Bind security service: {}", securityService);
         securityServices.add(securityService);
@@ -56,17 +60,10 @@ public class SecurityFilterListener {
         securityServices.remove(securityService);
         updateRealms();
     }
-    
-    private DefaultWebSecurityManager getSecurityManager() {
-        if (securityFilter != null) {
-            return (DefaultWebSecurityManager) securityFilter.getSecurityManager();
-        } else {
-            return null;
-        }
-    }
-    
+
     private void updateRealms() {
-        DefaultWebSecurityManager manager = getSecurityManager();
+        /*
+        DefaultWebSecurityManager manager = (DefaultWebSecurityManager) getSecurityManager();
         if (manager != null && !securityServices.isEmpty()) {
             // TODO Check what to do when realms is empty
             
@@ -77,6 +74,6 @@ public class SecurityFilterListener {
             log.debug("Realms has been updated");
         } else {
             log.debug("Unable to update realms. Security manager has not been registered");
-        }
+        }*/
     }
 }

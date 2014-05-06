@@ -16,13 +16,24 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.impl.security;
+package org.panifex.web.shiro.itest;
 
-import javax.servlet.Filter;
+import java.io.IOException;
 
-import org.apache.shiro.web.mgt.WebSecurityManager;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-public interface SecurityFilter extends Filter {
+public class WhiteboardServlet extends HttpServlet {
 
-    WebSecurityManager getSecurityManager();
+    @Override
+    protected void doGet(
+        HttpServletRequest request,
+        HttpServletResponse response) throws ServletException, IOException {
+        
+        response.setContentType("text/html");
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.getWriter().println("<h1>Hello Whiteboard Extender</h1>");
+    }
 }
