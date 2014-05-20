@@ -46,9 +46,6 @@ public class WebContainerListener {
 
     private BundleContext bundleContext;
 
-    //private SecurityFilter securityFilter;
-    //private ServiceRegistration<SecurityFilter> securityFilterServiceRegistration;
-
     private ZkLayoutService zkLayoutService;
     private ServiceRegistration<ZkLayoutService> zkLayoutServiceRegistration;
     
@@ -56,11 +53,6 @@ public class WebContainerListener {
     public void setBundleContext(BundleContext bundleContext) {
         this.bundleContext = bundleContext;
     }
-
-    /*
-    public void setSecurityFilter(SecurityFilterImpl securityFilter) {
-        this.securityFilter = securityFilter;
-    }*/
     
     public void setZkLayoutService(ZkLayoutService zkLayoutService) {
         this.zkLayoutService = zkLayoutService;
@@ -88,14 +80,6 @@ public class WebContainerListener {
         dspParams.put("class-resource", "true");
         String dspMapping[] = {"*.dsp"}; // mapping of DSP files
 
-        // configure security filter
-        /* TODO
-        log.debug("Configure security filter");
-        EnvironmentLoaderListener secListener = new EnvironmentLoaderListener();
-        String secServletNames[] = {"zkLoader"};
-        String secFilterMapping[] = {"/*"};
-        */
-
         // get the http context (zk servlets should be registered with the same
         // http context)
         HttpContext ctx = container.createDefaultHttpContext();
@@ -113,15 +97,6 @@ public class WebContainerListener {
             zkLayoutServiceRegistration =
                     bundleContext.registerService(ZkLayoutService.class, zkLayoutService, new Hashtable<String, String>());
             log.debug("Zk layout service has been registered");
-
-            // register security filter
-            /*
-            container.registerEventListener(secListener, ctx);
-            container.registerFilter(securityFilter, secFilterMapping, secServletNames, null, ctx);
-            securityFilterServiceRegistration =
-                    bundleContext.registerService(SecurityFilter.class, securityFilter, new Hashtable<String, String>());
-            log.debug("Security filter has been registered");
-            */
             
             // register resources
             container.registerResources("/", "/", ctx);
@@ -141,12 +116,5 @@ public class WebContainerListener {
             zkLayoutServiceRegistration.unregister();
             log.debug("Zk layout service has been unregistered");
         }
-        
-        // unregister shiro filter
-        /*
-        if (securityFilterServiceRegistration != null) {
-            securityFilterServiceRegistration.unregister();
-            log.debug("Shiro filter has been unregistered");
-        }*/
     }
 }
