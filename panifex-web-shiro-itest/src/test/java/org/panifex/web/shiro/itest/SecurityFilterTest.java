@@ -28,7 +28,6 @@ import static org.ops4j.pax.exam.CoreOptions.workingDirectory;
 import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpResponse;
@@ -43,29 +42,25 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
-import org.osgi.framework.BundleContext;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerMethod.class)
 public final class SecurityFilterTest {
 
-    @Inject
-    protected BundleContext bundleContext;
-    
     @Configuration
     public Option[] config() {
         return CoreOptions.options(
             workingDirectory("target/paxexam/"),
             cleanCaches(true),
             junitBundles(),
-            
+
             systemProperty("java.protocol.handler.pkgs").value("org.ops4j.pax.url"),
             systemProperty("org.osgi.service.http.hostname").value("127.0.0.1"),
             systemProperty("org.osgi.service.http.port").value("8181"),
-            
+
             frameworkProperty("osgi.console").value("6666"),
             frameworkProperty("osgi.console.enable.builtin").value("true"),
-            
+
             mavenBundle("biz.aQute.bnd", "bndlib").version(asInProject()),
             mavenBundle("commons-beanutils", "commons-beanutils").version(asInProject()),
             mavenBundle("commons-codec", "commons-codec").version(asInProject()),
@@ -89,28 +84,18 @@ public final class SecurityFilterTest {
             mavenBundle("org.ops4j.pax.web", "pax-web-extender-whiteboard").version(asInProject()),
             mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
             mavenBundle("org.panifex", "panifex-web-shiro").version(asInProject()),
-            
+
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpcore").version(asInProject())),
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpmime").version(asInProject())),
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpclient").version(asInProject())));
     }
-    
+
     @Test
-    public void registerServletTest() throws Exception {
-        // register default servlet
-        //Dictionary<String, String> servletProps = new Hashtable<>();
-        //servletProps.put("urlPatterns", "/test");
-        
-        //Servlet defaultServlet = new WhiteboardServlet();
-        //ServiceRegistration<Servlet> servlet = bundleContext.registerService(
-        //    Servlet.class, defaultServlet, servletProps);
-        
+    public void httpGetFromServletTest() throws Exception {
         HttpClient httpclient = HttpClientBuilder.create().build();
         HttpGet httpget = new HttpGet("http://localhost:8181/");
         HttpResponse response = httpclient.execute(httpget);
-        
+
         assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
-        
-        //servlet.unregister();
     }
 }
