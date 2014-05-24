@@ -27,6 +27,7 @@ Embed-Dependency: \
     zkex;groupId=org.zkoss.zk;inline=false
 
 Export-Package: \
+    org.panifex.module.api;version="1.0", \
     org.panifex.module.api.content;version="1.0", \
     org.panifex.module.api.environment;version="1.0", \
     org.panifex.module.api.event;version="1.0", \
