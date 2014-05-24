@@ -17,13 +17,12 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 -->
-<persistence
-    xmlns="http://java.sun.com/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="
-        http://java.sun.com/xml/ns/persistence 
-            http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
-    version="1.0">
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            http://java.sun.com/xml/ns/persistence 
+                http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+        version="1.0">
 
     <persistence-unit name="panifex-security-persistence" transaction-type="JTA">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
@@ -36,9 +35,5 @@
         <class>org.panifex.security.persistence.RolePermissionAssociationEntity</class>
         <class>org.panifex.security.persistence.PermissionEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <properties>
-            <property name="openjpa.DynamicEnhancementAgent" value="false"/> 
-        </properties>
-	</persistence-unit>
-
+    </persistence-unit>
 </persistence>

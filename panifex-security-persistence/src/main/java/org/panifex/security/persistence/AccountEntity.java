@@ -1,17 +1,17 @@
 /*******************************************************************************
  * Panifex platform
  * Copyright (C) 2013  Mario Krizmanic
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -42,14 +42,14 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
      * Serial version UID
      */
     private static final long serialVersionUID = 6039053761668790089L;
-    
+
     private String username;
     private String password;
     private String passwordSalt;
     private boolean isCredentialsExpired;
-    
+
     private List<AccountRoleAssociationEntity> accountRoleAssociations;
-    
+
     public AccountEntity(
             Long id,
             int optlockVersion,
@@ -61,7 +61,7 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
         this.password = password;
         this.passwordSalt = passwordSalt;
     }
-    
+
     public AccountEntity(
             String username,
             String password,
@@ -73,7 +73,7 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
 
     protected AccountEntity() {
     }
-    
+
     @Column(name = "username", nullable = false, unique = true)
     @Override
     public String getUsername() {
@@ -83,45 +83,46 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
     protected void setUsername(String username) {
         this.username = username;
     }
-    
+
     @Column(name = "password", nullable = false)
     @Override
     public String getPassword() {
         return password;
     }
 
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     @Column(name = "password_salt", nullable = false)
     public String getPasswordSalt() {
         return passwordSalt;
     }
-    
+
     protected void setPasswordSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
     }
-    
+
     @Column(name = "is_credentials_expired", nullable = false)
     @Override
     public boolean getIsCredentialsExpired() {
         return isCredentialsExpired;
     }
-    
+
     protected void setIsCredentialsExpired(boolean isCredentialsExpired) {
         this.isCredentialsExpired = isCredentialsExpired;
     }
-    
+
     @OneToMany(mappedBy = "account")
     protected List<AccountRoleAssociationEntity> getAccountRoleAssociations() {
         return accountRoleAssociations;
     }
-    
+
     protected void setAccountRoleAssociations(List<AccountRoleAssociationEntity> accountRoleAssociations) {
         this.accountRoleAssociations = accountRoleAssociations;
     }
-    
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder(3, 7).
@@ -155,7 +156,7 @@ public class AccountEntity extends AbstractEntity implements Account, Serializab
                 append(accountRoleAssociations, other.accountRoleAssociations).
                 isEquals();
     }
-    
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).

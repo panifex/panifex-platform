@@ -54,7 +54,15 @@
         <!-- Panifex Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
+            <artifactId>panifex-persistence-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
             <artifactId>panifex-security-persistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-service-api</artifactId>
         </dependency>
     </dependencies>
 

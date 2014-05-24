@@ -18,31 +18,30 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="
-			http://maven.apache.org/POM/4.0.0 
-				http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            http://maven.apache.org/POM/4.0.0 
+                http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <relativePath>../poms/compiled/</relativePath>
         <groupId>org.panifex.parent.build</groupId>
         <artifactId>compiled-bundle-settings</artifactId>
         <version>0.1.0-SNAPSHOT</version>
     </parent>
-    
+
     <properties>
         <bundle.symbolicName>panifex-persistence-spi</bundle.symbolicName>
         <bundle.namespace>org.panifex.persistence.spi</bundle.namespace>
     </properties>
-    
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
-	<artifactId>panifex-persistence-spi</artifactId>
-	<name>${bundle.symbolicName}</name>
-	
-	<packaging>bundle</packaging>
-	
-	<build>
+    <artifactId>panifex-persistence-spi</artifactId>
+    <name>${bundle.symbolicName}</name>
+    <packaging>bundle</packaging>
+
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.openjpa</groupId>
@@ -50,9 +49,9 @@
             </plugin>
         </plugins>
     </build>
-	
-	<dependencies>
-		<!-- Apache Geronimo Dependencies -->
+
+    <dependencies>
+        <!-- Apache Geronimo Dependencies -->
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jpa_2.0_spec</artifactId>
@@ -62,5 +61,5 @@
             <groupId>org.panifex</groupId>
             <artifactId>panifex-service-api</artifactId>
         </dependency>
-	</dependencies>
+    </dependencies>
 </project>

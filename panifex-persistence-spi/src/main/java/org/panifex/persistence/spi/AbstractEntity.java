@@ -72,8 +72,8 @@ public abstract class AbstractEntity implements Entity {
      * {@inheritDoc}
      */
     @Column(name = "optlock_version")
-    @Override
     @Version
+    @Override
     public int getOptlockVersion() {
         return optlockVersion;
     }
