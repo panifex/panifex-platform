@@ -1,17 +1,17 @@
 /*******************************************************************************
  * Panifex platform
  * Copyright (C) 2013  Mario Krizmanic
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -38,17 +38,17 @@ public abstract class AbstractEntity implements Entity {
 
     private Long id;
     private int optlockVersion;
-    
+
     protected AbstractEntity() {
     }
-    
+
     protected AbstractEntity(
             Long id,
             int optlockVersion) {
         this.id = id;
         this.optlockVersion = optlockVersion;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -58,34 +58,35 @@ public abstract class AbstractEntity implements Entity {
     public Long getId() {
         return id;
     }
-    
+
     /**
      * Sets the entity id.
-     * 
+     *
      * @param id the entity id
      */
     protected void setId(Long id) {
         this.id = id;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Column(name = "optlock_version")
+    @Override
     @Version
     public int getOptlockVersion() {
         return optlockVersion;
     }
-    
+
     /**
      * Sets the optimistic lock version.
-     * 
+     *
      * @param optlockVersion the optimistic lock version
      */
     protected void setOptlockVersion(int optlockVersion) {
         this.optlockVersion = optlockVersion;
     }
-    
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder(3, 7).
@@ -111,7 +112,7 @@ public abstract class AbstractEntity implements Entity {
                 append(optlockVersion, other.optlockVersion).
                 isEquals();
     }
-    
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).
