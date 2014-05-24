@@ -27,12 +27,12 @@ Embed-Dependency: \
     zkex;groupId=org.zkoss.zk;inline=false
 
 Export-Package: \
-    org.panifex.module.api.content, \
-    org.panifex.module.api.environment, \
-    org.panifex.module.api.event, \
-    org.panifex.module.api.i18n, \
-    org.panifex.module.api.menu, \
-    org.panifex.module.api.settings, \
+    org.panifex.module.api.content;version="1.0", \
+    org.panifex.module.api.environment;version="1.0", \
+    org.panifex.module.api.event;version="1.0", \
+    org.panifex.module.api.i18n;version="1.0", \
+    org.panifex.module.api.menu;version="1.0", \
+    org.panifex.module.api.settings;version="1.0", \
     org.zkoss.bind;version="7.0", \
     org.zkoss.bind.annotation;version="7.0", \
     org.zkoss.bind.converter;version="7.0", \
