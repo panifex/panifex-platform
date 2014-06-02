@@ -215,7 +215,7 @@
                         <addDefaultConstructor>true</addDefaultConstructor>               
                         <enforcePropertyRestrictions>true</enforcePropertyRestrictions>
                     </configuration>
-                    <executions>
+                    <!-- <executions>
                         <execution>
                             <id>enhancer</id>
                             <phase>prepare-package</phase>
@@ -223,7 +223,7 @@
                                 <goal>enhance</goal>
                             </goals>
                         </execution>
-                    </executions>
+                    </executions>-->
                     <dependencies>
                         <dependency>
                             <groupId>org.apache.openjpa</groupId>
@@ -660,6 +660,12 @@
                 <groupId>org.codehaus.janino</groupId>
                 <artifactId>com.springsource.org.codehaus.commons.compiler</artifactId>
                 <version>2.6.1</version>
+            </dependency>
+            <!-- JasperReports Dependencies -->
+            <dependency>
+                <groupId>net.sf.jasperreports</groupId>
+                <artifactId>jasperreports</artifactId>
+                <version>5.5.2</version>
             </dependency>
             <!-- JSON Depedencies -->
             <dependency>
