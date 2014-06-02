@@ -26,7 +26,7 @@ public class DefaultPageletMapping implements PageletMapping {
     /**
      * Pagelet.
      */
-    private Pagelet<?, ?> pagelet;
+    private final String pageletName;
 
     /**
      * Url patterns.
@@ -39,17 +39,27 @@ public class DefaultPageletMapping implements PageletMapping {
      * @param pagelet a pagelet
      * @param urlPatterns an url patterns pagelet maps to
      */
-    public DefaultPageletMapping(Pagelet<?, ?> pagelet, String[] urlPatterns) {
-        if ((pagelet == null) || (urlPatterns == null)) {
+    public DefaultPageletMapping(String pageletName, String[] urlPatterns) {
+        if ((pageletName == null) || (urlPatterns == null)) {
             throw new IllegalArgumentException();
         }
-        this.pagelet = pagelet;
+        this.pageletName = pageletName;
         this.urlPatterns = urlPatterns;
     }
 
+    /**
+     * Constructs new pagelet mapping.
+     *
+     * @param pagelet a pagelet
+     * @param urlPatterns an url patterns pagelet maps to
+     */
+    public DefaultPageletMapping(Pagelet<?, ?> pagelet, String[] urlPatterns) {
+        this(pagelet.getClass().getCanonicalName(), urlPatterns);
+    }
+
     @Override
-    public final Pagelet<?, ?> getPagelet() {
-        return pagelet;
+    public final String getPageletName() {
+        return pageletName;
     }
 
     @Override

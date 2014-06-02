@@ -41,7 +41,7 @@ public class ZkPageletTracker extends PageletTracker<ZkPagelet>
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private ServletContext servletContext;
-    private Set<ZkPagelet> registeredPagelet = new HashSet<>();
+    private Set<String> registeredPagelet = new HashSet<>();
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -99,8 +99,9 @@ public class ZkPageletTracker extends PageletTracker<ZkPagelet>
         ZkPagelet zkPagelet = (ZkPagelet) pagelet;
         Configuration config = getConfiguration();
         if (config != null) {
-            config.addRichlet(zkPagelet.getClass().getCanonicalName(), zkPagelet);
-            registeredPagelet.add(zkPagelet);
+            String pageletName = zkPagelet.getClass().getCanonicalName();
+            config.addRichlet(pageletName, zkPagelet);
+            registeredPagelet.add(pageletName);
             registerPageletMappings(zkPagelet);
         }
     }
@@ -108,7 +109,8 @@ public class ZkPageletTracker extends PageletTracker<ZkPagelet>
     private void registerPageletMappings(Pagelet<?, ?> pagelet) {
         List<PageletMapping> mappings = getMappings();
         for (PageletMapping mapping : mappings) {
-            if (pagelet.equals(mapping.getPagelet())) {
+            String pageletName = pagelet.getClass().getCanonicalName();
+            if (pageletName.equals(mapping.getPageletName())) {
                 registerPageletMapping(mapping);
             }
         }
@@ -118,11 +120,11 @@ public class ZkPageletTracker extends PageletTracker<ZkPagelet>
         log.debug("Register pagelet mapping: {}", mapping);
         Configuration config = getConfiguration();
         if (config != null) {
-            Pagelet<?, ?> pagelet = mapping.getPagelet();
-            if (registeredPagelet.contains(pagelet)) {
+            String pageletName = mapping.getPageletName();
+            if (registeredPagelet.contains(pageletName)) {
                 for (String path : mapping.getUrlPatterns()) {
                     config.addRichletMapping(
-                        pagelet.getClass().getCanonicalName(),
+                        pageletName,
                         path);
                  }
             }

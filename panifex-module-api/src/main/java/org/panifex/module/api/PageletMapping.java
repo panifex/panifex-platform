@@ -26,7 +26,7 @@ public interface PageletMapping {
     /**
      * Gets mapped pagelet.
      */
-    Pagelet<?, ?> getPagelet();
+    String getPageletName();
 
     /**
      * Gets an array of url patterns pagelet maps to.
