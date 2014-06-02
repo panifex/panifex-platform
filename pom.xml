@@ -131,7 +131,7 @@
     <distributionManagement>
         <repository>
             <id>panifex-repository</id>
-            <url>file://maven-repository</url>
+            <url>file:../../maven-repository</url>
         </repository>
     </distributionManagement>
 
