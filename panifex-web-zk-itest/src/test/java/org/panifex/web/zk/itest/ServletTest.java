@@ -19,7 +19,6 @@
 package org.panifex.web.zk.itest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.ops4j.pax.exam.CoreOptions.cleanCaches;
 import static org.ops4j.pax.exam.CoreOptions.frameworkProperty;
 import static org.ops4j.pax.exam.CoreOptions.junitBundles;
@@ -39,6 +38,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -47,14 +47,12 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
+import org.ops4j.pax.web.service.spi.WebListener;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.Filter;
 import org.osgi.framework.ServiceRegistration;
-import org.osgi.util.tracker.ServiceTracker;
 import org.panifex.module.api.DefaultPageletMapping;
 import org.panifex.module.api.PageletMapping;
 import org.panifex.module.zk.api.ZkPagelet;
-import org.panifex.web.zk.ZkPageletTracker;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerMethod.class)
@@ -62,6 +60,8 @@ public class ServletTest {
 
     @Inject
     private BundleContext bundleContext;
+
+    protected WebListener webListener;
 
     @Configuration
     public Option[] config() {
@@ -108,6 +108,12 @@ public class ServletTest {
                 wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpclient").version(asInProject())));
     }
 
+    @Before
+    public void setUp() {
+        initWebListener();
+        waitForWebListener();
+    }
+
     @Test
     public void httpGetFromServletTest() throws Exception {
         // register zk pagelet
@@ -123,9 +129,6 @@ public class ServletTest {
         ServiceRegistration<PageletMapping> mapping = bundleContext.
                 registerService(PageletMapping.class, helloMapping, mappingProps);
 
-        waitForZkPageletTracker();
-        //Thread.sleep(10000);
-
         HttpClient httpclient = HttpClientBuilder.create().build();
         HttpGet httpget = new HttpGet("http://localhost:8181/");
         HttpResponse response = httpclient.execute(httpget);
@@ -136,14 +139,17 @@ public class ServletTest {
         pagelet.unregister();
     }
 
-    private void waitForZkPageletTracker() throws Exception {
-        Filter filter = bundleContext
-                .createFilter("(osgi.service.blueprint.compname=zkPageletTracker)");
+    protected void initWebListener() {
+        webListener = new WebListenerImpl();
+        bundleContext.registerService(WebListener.class, webListener, null);
+    }
 
-        ServiceTracker<ZkPageletTracker, ZkPageletTracker> serviceTracker = new ServiceTracker<>(bundleContext, filter, null);
-        serviceTracker.open();
-        serviceTracker.waitForService(20000);
-        Object pageletTracker = serviceTracker.getService();
-        assertNotNull(pageletTracker);
+    protected void waitForWebListener() {
+        new WaitCondition("webapp startup") {
+            @Override
+            protected boolean isFulfilled() {
+                return ((WebListenerImpl) webListener).gotEvent();
+            }
+        }.waitForCondition();
     }
 }
