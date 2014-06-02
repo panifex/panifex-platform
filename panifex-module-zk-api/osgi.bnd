@@ -22,6 +22,7 @@ Embed-Dependency: \
     zcommon;groupId=org.zkoss.common;inline=false, \
     zcommons-el;groupId=org.zkoss.zkforge.el; inline=false, \
     zel;groupId=org.zkoss.common;inline=false, \
+    zhtml;groupId=org.zkoss.zk;inline=false, \
     zkex;groupId=org.zkoss.zk;inline=false
 
 Export-Package: \
@@ -47,6 +48,7 @@ Export-Package: \
     org.zkoss.util.logging;version="7.0", \
     org.zkoss.util.media;version="7.0", \
     org.zkoss.util.resource;version="7.0", \
+    org.zkoss.zhtml;version="7.0", \
     org.zkoss.zk;version="7.0", \
     org.zkoss.zk.au;version="7.0", \
     org.zkoss.zk.au.http;version="7.0", \

@@ -18,9 +18,16 @@
 Export-Package:
 
 Import-Package: \
+    org.osgi.service.blueprint.container;version="[1.0,2.0)", \
     org.panifex.module.api;version="[1.0,2.0)", \
     org.panifex.module.zk.api;version="[1.0,2.0)", \
-    org.zkoss.zk.ui.sys;version="[7.0,8.0)"
+    org.slf4j;version="[1.4,2.0)", \
+    org.zkoss.bind;version="[7.0,8.0)", \
+    org.zkoss.bind.annotation;version="[7.0,8.0)", \
+    org.zkoss.zhtml;version="[7.0,8.0)", \
+    org.zkoss.zk.ui;version="[7.0,8.0)", \
+    org.zkoss.zk.ui.sys;version="[7.0,8.0)", \
+    org.zkoss.zul;version="[7.0,8.0)"
 
 Private-Package: \
     org.panifex.web.zk.impl.*

@@ -42,10 +42,20 @@
     <packaging>bundle</packaging>
 
     <dependencies>
+        <!-- Apache Aries Blueprint Dependencies -->
+        <dependency>
+            <groupId>org.apache.aries.blueprint</groupId>
+            <artifactId>org.apache.aries.blueprint.api</artifactId>
+        </dependency>
         <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
             <artifactId>panifex-module-zk-api</artifactId>
+        </dependency>
+        <!-- ZK Framework Dependencies -->
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zhtml</artifactId>
         </dependency>
     </dependencies>
 </project>
