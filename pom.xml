@@ -84,6 +84,8 @@
         <module>panifex-web-shiro-itest</module>
         <module>panifex-web-zk</module>
         <module>panifex-web-zk-itest</module>
+        <module>panifex-web-zk-impl</module>
+        <module>panifex-web-zk-impl-itest</module>
         <module>panifex-persistence-spi</module>
         <module>panifex-security-persistence</module>
         <module>panifex-security-persistence-dbtest</module>
@@ -787,6 +789,11 @@
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-zk</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
+                <artifactId>panifex-web-zk-impl</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>
