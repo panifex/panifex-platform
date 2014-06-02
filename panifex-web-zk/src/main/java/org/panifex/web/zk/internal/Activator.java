@@ -36,28 +36,35 @@ public class Activator implements BundleActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
+        registerDHtmlLayoutServlet(context);
+        registerDHtmlUpdateServlet(context);
+    }
+
+    @Override
+    public void stop(BundleContext context) throws Exception {
+        unregister(dhtmlLayoutServlet);
+        unregister(dhtmlUpdateServlet);
+    }
+
+    private void registerDHtmlLayoutServlet(BundleContext context) {
         Dictionary<String, String> dhtmlLayoutServletProps = new Hashtable<>();
         dhtmlLayoutServletProps.put("init.update-uri", "/zkau");
         dhtmlLayoutServletProps.put("load-on-startup", "1");
-        dhtmlLayoutServletProps.put("urlPatterns", "/*");
+        dhtmlLayoutServletProps.put("urlPatterns", "/zk/*");
         dhtmlLayoutServlet = context.
                 registerService(Servlet.class, new DHtmlLayoutServlet(), dhtmlLayoutServletProps);
+    }
 
+    private void registerDHtmlUpdateServlet(BundleContext context) {
         Dictionary<String, String> dhtmlUpdateServletProps = new Hashtable<>();
         dhtmlUpdateServletProps.put("urlPatterns", "/zkau/*");
         dhtmlUpdateServlet = context.
                 registerService(Servlet.class, new DHtmlUpdateServlet(), dhtmlUpdateServletProps);
     }
 
-    @Override
-    public void stop(BundleContext context) throws Exception {
-        if (dhtmlUpdateServlet != null) {
-            dhtmlUpdateServlet.unregister();
-        }
-
-        if (dhtmlLayoutServlet != null) {
-            dhtmlLayoutServlet.unregister();
+    private void unregister(ServiceRegistration<?> serviceRegistration) {
+        if (serviceRegistration != null) {
+            serviceRegistration.unregister();
         }
     }
-
 }
