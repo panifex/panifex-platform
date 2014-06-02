@@ -34,13 +34,13 @@ public abstract class LayoutZkPagelet extends GenericZkPagelet {
         pageCtrl.addAfterHeadTags(css("/css/bootstrap/css/bootstrap.min.css"));
 
         Div main = new Div();
+        main.setId("main");
+        main.setPage(page);
         createComponents(main);
 
         Script s = new Script();
         s.setSrc("../css/bootstrap/js/bootstrap.min.js");
         s.setParent(main);
-
-        main.setPage(page);
     }
 
     private void createComponents(Component parent) {
@@ -70,7 +70,7 @@ public abstract class LayoutZkPagelet extends GenericZkPagelet {
                 append("type=\"text/css\" ").
                 append("href=\"").
                 append(css).
-                append("/>").
+                append("\"/>").
                 toString();
     }
 

@@ -111,7 +111,7 @@ public class LoginZkPageletTest {
     @Test
     public void httpGetFromServletTest() throws Exception {
         HttpClient httpclient = HttpClientBuilder.create().build();
-        HttpGet httpget = new HttpGet("http://localhost:8181/login");
+        HttpGet httpget = new HttpGet("http://localhost:8181/zk/login");
         HttpResponse response = httpclient.execute(httpget);
 
         assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());

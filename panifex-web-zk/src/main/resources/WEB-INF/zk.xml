@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk>
+    <language-config>
+        <addon-uri>/metainfo/lang-addon-bind.xml</addon-uri>
+    </language-config>
+    
+    
+    <listener>
+        <listener-class>org.zkoss.bind.tracker.impl.BindUiLifeCycle</listener-class>
+    </listener>
+    
+    <system-config>
+        <disable-zscript>true</disable-zscript>
+        <ui-factory-class>org.zkoss.zk.ui.http.SerializableUiFactory</ui-factory-class>
+    </system-config>
+</zk>

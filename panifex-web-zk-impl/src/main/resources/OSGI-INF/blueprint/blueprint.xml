@@ -58,4 +58,17 @@
     <bean id="LoginViewModel"
         class="org.panifex.web.zk.impl.login.LoginViewModelImpl"/>
 
+    <!-- Resource mapping -->
+
+    <bean id="cssResourceMapping"
+            class="org.ops4j.pax.web.extender.whiteboard.runtime.DefaultResourceMapping">
+        <property name="alias" value="/css"/>
+        <property name="path" value="/css"/>
+    </bean>
+
+    <service ref="cssResourceMapping">
+        <interfaces>
+            <value>org.ops4j.pax.web.extender.whiteboard.ResourceMapping</value>
+        </interfaces>
+    </service>
 </blueprint>
