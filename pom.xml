@@ -215,7 +215,7 @@
                         <addDefaultConstructor>true</addDefaultConstructor>               
                         <enforcePropertyRestrictions>true</enforcePropertyRestrictions>
                     </configuration>
-                    <executions>
+                    <!-- <executions>
                         <execution>
                             <id>enhancer</id>
                             <phase>prepare-package</phase>
@@ -223,7 +223,7 @@
                                 <goal>enhance</goal>
                             </goals>
                         </execution>
-                    </executions>
+                    </executions>-->
                     <dependencies>
                         <dependency>
                             <groupId>org.apache.openjpa</groupId>
