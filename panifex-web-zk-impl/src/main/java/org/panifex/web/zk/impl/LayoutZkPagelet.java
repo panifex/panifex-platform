@@ -19,14 +19,60 @@
 package org.panifex.web.zk.impl;
 
 import org.panifex.module.zk.api.GenericZkPagelet;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.sys.PageCtrl;
+import org.zkoss.zul.A;
+import org.zkoss.zul.Div;
+import org.zkoss.zul.Script;
 
 public abstract class LayoutZkPagelet extends GenericZkPagelet {
 
     @Override
     public final void service(Page page) {
         PageCtrl pageCtrl = (PageCtrl) page;
-        pageCtrl.addAfterHeadTags("<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/bootstrap/css/bootstrap.min.css\"/>");
+        pageCtrl.addAfterHeadTags(css("/css/bootstrap/css/bootstrap.min.css"));
+
+        Div main = new Div();
+        createComponents(main);
+
+        Script s = new Script();
+        s.setSrc("../css/bootstrap/js/bootstrap.min.js");
+        s.setParent(main);
+
+        main.setPage(page);
     }
+
+    private void createComponents(Component parent) {
+        createLogo(parent);
+        createContent(parent);
+    }
+
+    private void createLogo(Component parent) {
+
+        final Div header = new Div();
+        header.setSclass("header");
+        parent.appendChild(header);
+
+        final Div fill = new Div();
+        fill.setSclass("fill");
+        header.appendChild(fill);
+
+        final A logo = new A();
+        //logo.setHref(Labels.getLabel(ApplicationLabels.APPLICATION_NAME));
+        logo.setImage("../img/panifex_top_logo.png"); // TODO it have to be configurable
+        fill.appendChild(logo);
+    }
+
+    private String css(String css) {
+        return new StringBuilder("<link ").
+                append("rel=\"stylesheet\" ").
+                append("type=\"text/css\" ").
+                append("href=\"").
+                append(css).
+                append("/>").
+                toString();
+    }
+
+    protected abstract void createContent(Component parent);
 }

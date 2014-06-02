@@ -27,8 +27,10 @@
     <!-- Login Pagelet -->
 
     <bean id="loginPagelet"
-        class="org.panifex.web.zk.impl.login.LoginZkPagelet"/>
-
+            class="org.panifex.web.zk.impl.login.LoginZkPagelet">
+        <property name="blueprintContainer" ref="blueprintContainer"/>
+    </bean>
+    
     <service ref="loginPagelet">
         <interfaces>
             <value>org.panifex.module.zk.api.ZkPagelet</value>
@@ -50,5 +52,10 @@
             <value>org.panifex.module.api.PageletMapping</value>
         </interfaces>
     </service>
+
+    <!-- Login View Model -->
+
+    <bean id="LoginViewModel"
+        class="org.panifex.web.zk.impl.login.LoginViewModelImpl"/>
 
 </blueprint>
