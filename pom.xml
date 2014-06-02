@@ -35,7 +35,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
     <artifactId>panifex-parent</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.2.0-SNAPSHOT</version>
 
     <name>org.panifex.parent (OSGi project)</name>
 
@@ -45,7 +45,7 @@
 
     <properties>
         <!-- Panifex Platform properties -->
-        <panifex.platform.version>0.1.0-SNAPSHOT</panifex.platform.version>
+        <panifex.platform.version>0.2.0-SNAPSHOT</panifex.platform.version>
         
         <!-- | some example OSGi runtime properties -->
         <org.osgi.service.http.port>8080</org.osgi.service.http.port>

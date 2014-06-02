@@ -130,7 +130,7 @@ public class ServletTest {
                 registerService(PageletMapping.class, helloMapping, mappingProps);
 
         HttpClient httpclient = HttpClientBuilder.create().build();
-        HttpGet httpget = new HttpGet("http://localhost:8181/");
+        HttpGet httpget = new HttpGet("http://localhost:8181/zk/");
         HttpResponse response = httpclient.execute(httpget);
 
         assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
