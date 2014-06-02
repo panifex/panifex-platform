@@ -75,11 +75,15 @@
         <module>panifex-test-support</module>
         <module>poms</module>
         <module>panifex-module-api</module>
+        <module>panifex-module-zk-api</module>
         <module>panifex-service-api</module>
         <module>panifex-service-impl</module>
+        <module>panifex-web-controller</module>
         <module>panifex-web-impl</module>
         <module>panifex-web-shiro</module>
         <module>panifex-web-shiro-itest</module>
+        <!-- <module>panifex-web-zk</module>
+        <module>panifex-web-zk-itest</module> -->
         <module>panifex-persistence-spi</module>
         <module>panifex-security-persistence</module>
         <module>panifex-security-persistence-dbtest</module>
@@ -90,6 +94,7 @@
         <module>panifex-module-dashboard-impl</module>
         <module>libs</module>
         <module>provision</module>
+        
     </modules>
 
     <repositories>
@@ -741,6 +746,11 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
+                <artifactId>panifex-module-zk-api</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
                 <artifactId>panifex-persistence-spi</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
@@ -762,12 +772,22 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
+                <artifactId>panifex-web-controller</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-impl</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-shiro</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
+                <artifactId>panifex-web-zk</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>

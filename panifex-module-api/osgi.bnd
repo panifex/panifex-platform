@@ -15,17 +15,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-DynamicImport-Package: *
-
-Embed-Dependency: \
-    zk;groupId=org.zkoss.zk;inline=org.zkoss.zk.ui, \
-    zk;groupId=org.zkoss.zk;inline=org.zkoss.bind, \
-    zul;groupId=org.zkoss.zk;inline=true, \
-    zcommon;groupId=org.zkoss.common;inline=false, \
-    zcommons-el;groupId=org.zkoss.zkforge.el; inline=false, \
-    zel;groupId=org.zkoss.common;inline=false, \
-    zkex;groupId=org.zkoss.zk;inline=false
-
 Export-Package: \
     org.panifex.module.api;version="1.0", \
     org.panifex.module.api.content;version="1.0", \
@@ -34,69 +23,6 @@ Export-Package: \
     org.panifex.module.api.i18n;version="1.0", \
     org.panifex.module.api.menu;version="1.0", \
     org.panifex.module.api.settings;version="1.0", \
-    org.zkoss.bind;version="7.0", \
-    org.zkoss.bind.annotation;version="7.0", \
-    org.zkoss.bind.converter;version="7.0", \
-    org.zkoss.bind.converter.sys;version="7.0", \
-    org.zkoss.bind.impl;version="7.0", \
-    org.zkoss.bind.sys;version="7.0", \
-    org.zkoss.bind.sys.debugger;version="7.0", \
-    org.zkoss.bind.sys.debugger.impl;version="7.0", \
-    org.zkoss.bind.sys.tracker;version="7.0", \
-    org.zkoss.bind.tracker.impl;version="7.0", \
-    org.zkoss.bind.validator;version="7.0", \
-    org.zkoss.bind.xel;version="7.0", \
-    org.zkoss.bind.xel.zel;version="7.0", \
-    org.zkoss.html;version="7.0", \
-    org.zkoss.io;version="7.0", \
-    org.zkoss.lang;version="7.0", \
-    org.zkoss.mesg;version="7.0", \
-    org.zkoss.util;version="7.0", \
-    org.zkoss.util.logging;version="7.0", \
-    org.zkoss.util.media;version="7.0", \
-    org.zkoss.util.resource;version="7.0", \
-    org.zkoss.zk;version="7.0", \
-    org.zkoss.zk.au;version="7.0", \
-    org.zkoss.zk.au.http;version="7.0", \
-    org.zkoss.zk.au.out;version="7.0", \
-    org.zkoss.zk.device;version="7.0", \
-    org.zkoss.zk.fn;version="7.0", \
-    org.zkoss.zk.mesg;version="7.0", \
-    org.zkoss.zk.scripting;version="7.0", \
-    org.zkoss.zk.ui;version="7.0", \
-    org.zkoss.zk.ui.annotation;version="7.0", \
-    org.zkoss.zk.ui.event;version="7.0", \
-    org.zkoss.zk.ui.event.impl;version="7.0", \
-    org.zkoss.zk.ui.ext;version="7.0", \
-    org.zkoss.zk.ui.ext.render;version="7.0", \
-    org.zkoss.zk.ui.http;version="7.0", \
-    org.zkoss.zk.ui.impl;version="7.0", \
-    org.zkoss.zk.ui.metainfo;version="7.0", \
-    org.zkoss.zk.ui.metainfo.impl;version="7.0", \
-    org.zkoss.zk.ui.select;version="7.0", \
-    org.zkoss.zk.ui.select.annotation;version="7.0", \
-    org.zkoss.zk.ui.select.impl;version="7.0", \
-    org.zkoss.zk.ui.sys;version="7.0", \
-    org.zkoss.zk.ui.util;version="7.0", \
-    org.zkoss.zk.xel;version="7.0", \
-    org.zkoss.zk.xel.impl;version="7.0", \
-    org.zkoss.zel;version="7.0", \
-    org.zkoss.zkex.ui.comet;version="7.0", \
-    org.zkoss.zkex.rt;version="7.0", \
-    org.zkoss.zul;version="7.0", \
-    org.zkoss.zul.impl;version="7.0", \
-    org.zkoss.xel;version="7.0", \
-    org.zkoss.xel.util;version="7.0", \
-    org.zkoss.xel.zel;version="7.0", \
-    org.zkoss.web.fn;version="7.0", \
-    org.zkoss.web.servlet;version="7.0", \
-    org.zkoss.web.servlet.dsp;version="7.0", \
-    org.zkoss.web.servlet.dsp.action;version="7.0", \
-    org.zkoss.web.servlet.dsp.impl;version="7.0", \
-    org.zkoss.web.servlet.http;version="7.0", \
-    org.zkoss.web.servlet.xel;version="7.0", \
-    org.zkoss.web.util.resource;version="7.0", \
-    org.zkoss.web.theme;version="7.0"
 
 Import-Package: \
     javax.servlet;version="[3.0,4.0)", \
@@ -116,58 +42,6 @@ Import-Package: \
     org.xml.sax.ext, \
     org.xml.sax.helpers, \
     org.w3c.dom
-    
+
 Private-Package: \
-    org.zkoss.bind, \
-    org.zkoss.bind.converter, \
-    org.zkoss.bind.converter.sys, \
-    org.zkoss.bind.impl, \
-    org.zkoss.bind.sys, \
-    org.zkoss.bind.sys.debugger, \
-    org.zkoss.bind.tracker.impl, \
-    org.zkoss.html, \
-    org.zkoss.io, \
-    org.zkoss.lang, \
-    org.zkoss.mesg, \
-    org.zkoss.util, \
-    org.zkoss.util.logging, \
-    org.zkoss.util.media, \
-    org.zkoss.util.resource, \
-    org.zkoss.zk, \
-    org.zkoss.zk.au, \
-    org.zkoss.zk.au.http, \
-    org.zkoss.zk.au.out, \
-    org.zkoss.zk.device, \
-    org.zkoss.zk.mesg, \
-    org.zkoss.zk.scripting, \
-    org.zkoss.zk.ui, \
-    org.zkoss.zk.ui.annotation, \
-    org.zkoss.zk.ui.event, \
-    org.zkoss.zk.ui.event.impl, \
-    org.zkoss.zk.ui.ext, \
-    org.zkoss.zk.ui.ext.render, \
-    org.zkoss.zk.ui.http, \
-    org.zkoss.zk.ui.impl, \
-    org.zkoss.zk.ui.metainfo, \
-    org.zkoss.zk.ui.metainfo.impl, \
-    org.zkoss.zk.ui.select, \
-    org.zkoss.zk.ui.select.annotation, \
-    org.zkoss.zk.ui.select.impl, \
-    org.zkoss.zk.ui.sys, \
-    org.zkoss.zk.ui.util, \
-    org.zkoss.zk.xel, \
-    org.zkoss.zk.xel.impl, \
-    org.zkoss.zel, \
-    !org.zkoss.zel.impl, \
-    !org.zkoss.zel.impl.lang, \
-    org.zkoss.zkex.ui.comet, \
-    org.zkoss.zkex.rt, \
-    org.zkoss.zul, \
-    org.zkoss.web.fn, \
-    org.zkoss.web.servlet, \
-    org.zkoss.web.servlet.dsp, \
-    org.zkoss.web.servlet.http, \
-    org.zkoss.web.servlet.xel, \
-    org.zkoss.web.util.resource, \
-    org.zkoss.web.theme
-    
+    org.panifex.module.api.*

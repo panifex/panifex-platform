@@ -47,41 +47,5 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
         </dependency>
-        <!-- ZK Framework Depedencies -->
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkbind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zul</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.common</groupId>
-            <artifactId>zcommon</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-fileupload</groupId>
-                    <artifactId>commons-fileupload</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zkforge.el</groupId>
-            <artifactId>zcommons-el</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.common</groupId>
-            <artifactId>zel</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkex</artifactId>
-        </dependency>
     </dependencies>
-
 </project>

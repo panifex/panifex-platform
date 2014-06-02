@@ -1,17 +1,17 @@
 /*******************************************************************************
  * Panifex platform
  * Copyright (C) 2013  Mario Krizmanic
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -42,35 +42,35 @@ import org.zkoss.zul.Tabs;
 public final class SettingsContentView extends AbstractContent {
 
     public static final String ID = "org.panifex.web.impl.view.settings.SettingsContentView";
-    
+
     public SettingsContentView() {
         super(SettingsLabels.VIEW_TITLE, ID);
     }
 
     @Override
-    public void createBody(Component parent) {
+    public void createBody(Object parent) {
         Div body = new Div();
-        parent.appendChild(body);
-        
+        ((Component) parent).appendChild(body);
+
         createTabbox(body);
     }
-    
+
     private void createTabbox(Component body) {
         Tabbox tabbox = new Tabbox();
         body.appendChild(tabbox);
-        
+
         Tabs tabs = new Tabs();
         tabbox.appendChild(tabs);
-        
+
         Tabpanels tabpanels = new Tabpanels();
         tabbox.appendChild(tabpanels);
-        
+
         List<SettingsContent> contents = SettingsContentManager.getContents();
 
         for (SettingsContent content : contents) {
             Tab tab = new Tab(Labels.getLabel(content.getTitle()));
             tabs.appendChild(tab);
-            
+
             Tabpanel panel = new Tabpanel();
             tabpanels.appendChild(panel);
             content.createBody(panel);

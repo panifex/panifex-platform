@@ -1,17 +1,17 @@
 /*******************************************************************************
  * Panifex platform
  * Copyright (C) 2013  Mario Krizmanic
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -50,21 +50,21 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
      * which represents it in a blueprint container.
      */
     public static final String ID = "org.panifex.web.impl.menu.AppMenuServiceImpl";
-    
+
     /**
      * The logger
      */
     private final Logger log = LoggerFactory.getLogger(getClass());
-    
+
     /**
      * The {@link MenuTreeModel} in which the menu items will be binded to.
      */
     private final MenuTreeModel model = new MenuTreeModel();
-    
+
     /**
-     * Binds the {@link org.panifex.module.api.menu.MenuAction MenuAction} 
+     * Binds the {@link org.panifex.module.api.menu.MenuAction MenuAction}
      * to the {@link AppMenuServiceImpl#model model}.
-     * 
+     *
      * @param the {@link org.panifex.module.api.menu.MenuAction MenuAction} to be binded
      */
     @Override
@@ -76,7 +76,7 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
     /**
      * Binds the {@link org.panifex.module.api.menu.MenuNode MenuNode}
      * to the {@link AppMenuServiceImpl#model model}.
-     * 
+     *
      * @param the {@link org.panifex.module.api.menu.MenuNode MenuNode} to be binded
      */
     @Override
@@ -88,7 +88,7 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
     /**
      * Binds the {@link org.panifex.module.api.menu.MenuItem MenuItem}
      * to the {@link AppMenuServiceImpl#model model}.
-     * 
+     *
      * @param item the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be binded
      */
     private void bindItem(MenuItem item) {
@@ -96,9 +96,9 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
     }
 
     /**
-     * Unbinds the {@link org.panifex.module.api.menu.MenuAction MenuAction} 
+     * Unbinds the {@link org.panifex.module.api.menu.MenuAction MenuAction}
      * from the {@link AppMenuServiceImpl#model model}.
-     * 
+     *
      * @param the {@link org.panifex.module.api.menu.MenuAction MenuAction} to be unbinded
      */
     @Override
@@ -110,7 +110,7 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
     /**
      * Unbinds the {@link org.panifex.module.api.menu.MenuNode MenuNode}
      * from the {@link AppMenuServiceImpl#model model}.
-     * 
+     *
      * @param the {@link org.panifex.module.api.menu.MenuNode MenuNode} to be unbinded
      */
     @Override
@@ -122,7 +122,7 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
     /**
      * Unbinds the {@link org.panifex.module.api.menu.MenuItem MenuItem}
      * from the {@link AppMenuServiceImpl#model model}.
-     * 
+     *
      * @param item the {@link org.panifex.module.api.menu.MenuItem MenuItem} to be unbinded
      */
     private void unbindItem(MenuItem item) {
@@ -131,12 +131,12 @@ public final class AppMenuServiceImpl implements AppMenuService, Serializable {
 
     /**
      * Return the collection of {@link org.panifex.module.api.menu.MenuItem MenuItem}.
-     * 
+     *
      * @return the collection of {@link org.panifex.module.api.menu.MenuItem MenuItem}
      */
-    @Override
+    //@Override
     public List<TreeNode<MenuItem>> getMenuItems() {
         return model.getRoot().getChildren();
     }
-    
+
 }
