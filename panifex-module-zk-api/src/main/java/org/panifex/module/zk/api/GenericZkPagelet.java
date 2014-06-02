@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.module.zk.api;
 
+import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.bind.impl.ValidationMessagesImpl;
 import org.zkoss.bind.sys.ValidationMessages;
@@ -29,6 +30,30 @@ public abstract class GenericZkPagelet extends GenericRichlet implements ZkPagel
     private final String FX_BIND_ID = "FX";
     private final String VM_BIND_ID = "VM";
     private final String VMSGS_BIND_ID = "VMSGS";
+
+    private BlueprintContainer container;
+
+    public void setBlueprintContainer(BlueprintContainer container) {
+        this.container = container;
+    }
+
+    protected BlueprintContainer getContainer() {
+        return container;
+    }
+
+    protected Object getComponentInstance(String id) {
+        return container.getComponentInstance(id);
+    }
+
+    @SuppressWarnings("unchecked")
+    protected <T> T getComponentInstance(Class<T> clazz) {
+        Object instance = getComponentInstance(clazz.getSimpleName());
+        if (clazz.isInstance(instance)) {
+            return (T) instance;
+        } else {
+            throw new ClassCastException();
+        }
+    }
 
     protected String fx(String property) {
         return new StringBuilder(FX_BIND_ID).
