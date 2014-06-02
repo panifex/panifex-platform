@@ -1,1 +1,0 @@
-exec java -jar pax-runner-1.8.6-SNAPSHOT.jar

@@ -56,9 +56,23 @@
             </includes>
         </repository>
     </repositories>
+    <files>
+        <file>
+            <source>../../src/main/resources/bin/start.bat</source>
+            <outputDirectory>/bin</outputDirectory>
+            <fileMode>0755</fileMode>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>../../src/main/resources/bin/start.sh</source>
+            <outputDirectory>/bin</outputDirectory>
+            <fileMode>0755</fileMode>
+            <filtered>true</filtered>
+        </file>
+    </files>
     <fileSets>
         <fileSet>
-            <directory>../src/main/etc</directory>
+            <directory>../../src/main/etc</directory>
             <fileMode>0755</fileMode>
             <outputDirectory></outputDirectory>
         </fileSet>

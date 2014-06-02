@@ -19,7 +19,9 @@
 -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xsi:schemaLocation="
+        http://maven.apache.org/POM/4.0.0
+            http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <relativePath>../provision/</relativePath>
@@ -34,14 +36,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>dist</artifactId>
-
     <name>${bundle.symbolicName}</name>
-
     <packaging>pom</packaging>
 
     <modules>
-        <module>dist-mssql</module>
-        <module>dist-postgresql</module>
+        <module>dist-zk</module>
     </modules>
 
     <build>
@@ -52,7 +51,7 @@
                     <configuration>
                         <finalName>panifex-${project.version}</finalName>
                         <descriptors>
-                            <descriptor>../src/main/assembly/assembly.xml</descriptor>
+                            <descriptor>../../src/main/assembly/assembly.xml</descriptor>
                         </descriptors>
                     </configuration>
                     <executions>
@@ -137,7 +136,7 @@
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-web-impl</artifactId>
+            <artifactId>panifex-web-controller</artifactId>
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
@@ -154,5 +153,4 @@
             <artifactId>pax-runner</artifactId>
         </dependency>
     </dependencies>
-
 </project>

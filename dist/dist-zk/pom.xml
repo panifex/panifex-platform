@@ -17,9 +17,11 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 -->
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://maven.apache.org/POM/4.0.0
+            http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
         <groupId>org.panifex.parent.build</groupId>
@@ -27,41 +29,33 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <properties>
-        <bundle.symbolicName>dist-mssql</bundle.symbolicName>
-    </properties>
-
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>dist-mssql</artifactId>
-
-    <name>${bundle.symbolicName}</name>
-
+    <artifactId>dist-zk</artifactId>
     <packaging>pom</packaging>
 
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+    <modules>
+        <module>dist-zk-mssql</module>
+        <module>dist-zk-postgresql</module>
+    </modules>
 
     <dependencies>
-        <!-- Database Connectors Dependencies -->
+        <!-- JasperReports Dependencies -->
         <dependency>
-            <groupId>net.sourceforge.jtds</groupId>
-            <artifactId>com.springsource.net.sourceforge.jtds</artifactId>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
         </dependency>
-        <!-- Panifex Platform Depedencies -->
+        <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-datasource-mssql</artifactId>
+            <artifactId>panifex-module-zk-api</artifactId>
         </dependency>
-        <!-- Samba Dependencies -->
         <dependency>
-            <groupId>org.samba.jcifs</groupId>
-            <artifactId>com.springsource.jcifs</artifactId>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-web-zk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-web-zk-impl</artifactId>
         </dependency>
     </dependencies>
-
 </project>
