@@ -18,8 +18,50 @@
  ******************************************************************************/
 package org.panifex.module.zk.api;
 
+import org.zkoss.bind.DefaultBinder;
+import org.zkoss.bind.impl.ValidationMessagesImpl;
+import org.zkoss.bind.sys.ValidationMessages;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.GenericRichlet;
 
 public abstract class GenericZkPagelet extends GenericRichlet implements ZkPagelet {
 
+    private final String FX_BIND_ID = "FX";
+    private final String VM_BIND_ID = "VM";
+    private final String VMSGS_BIND_ID = "VMSGS";
+
+    protected String fx(String property) {
+        return new StringBuilder(FX_BIND_ID).
+                append('.').
+                append(property).
+                toString();
+    }
+
+    protected String vm(String property) {
+        return new StringBuilder(VM_BIND_ID).
+                append('.').
+                append(property).
+                toString();
+    }
+
+    protected String vmsgs(String vmessage) {
+        return new StringBuilder(VMSGS_BIND_ID).
+                append('.').
+                append(vmessage).
+                toString();
+    }
+
+    protected DefaultBinder createBinder(Component parent, Object viewModel) {
+        DefaultBinder binder = new DefaultBinder();
+        binder.init(parent, viewModel, null);
+        parent.setAttribute(VM_BIND_ID, binder.getViewModel());
+        return binder;
+    }
+
+    protected ValidationMessages createValidationMessages(Component parent, DefaultBinder binder) {
+        ValidationMessages vmessages = new ValidationMessagesImpl();
+        binder.setValidationMessages(vmessages);
+        parent.setAttribute(VMSGS_BIND_ID, vmessages);
+        return vmessages;
+    }
 }
