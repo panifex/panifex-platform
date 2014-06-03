@@ -20,7 +20,6 @@ package org.panifex.web.zk.itest;
 
 import static org.junit.Assert.assertEquals;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import java.util.Dictionary;
@@ -78,11 +77,7 @@ public class ServletTest extends ITestSupport {
                 mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-controller").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-zk").version(asInProject()),
-
-                wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpcore").version(asInProject())),
-                wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpmime").version(asInProject())),
-                wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpclient").version(asInProject())));
+                mavenBundle("org.panifex", "panifex-web-zk").version(asInProject()));
     }
 
     @Before

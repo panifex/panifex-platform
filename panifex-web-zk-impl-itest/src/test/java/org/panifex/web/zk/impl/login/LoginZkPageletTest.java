@@ -20,7 +20,6 @@ package org.panifex.web.zk.impl.login;
 
 import static org.junit.Assert.assertEquals;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import javax.servlet.http.HttpServletResponse;
@@ -72,11 +71,7 @@ public class LoginZkPageletTest extends ITestSupport {
                 mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-controller").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-zk").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-zk-impl").version(asInProject()),
-
-                wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpcore").version(asInProject())),
-                wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpmime").version(asInProject())),
-                wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpclient").version(asInProject())));
+                mavenBundle("org.panifex", "panifex-web-zk-impl").version(asInProject()));
     }
 
     @Before

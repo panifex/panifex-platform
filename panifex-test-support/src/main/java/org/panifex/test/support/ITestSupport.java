@@ -21,8 +21,11 @@ package org.panifex.test.support;
 import static org.ops4j.pax.exam.CoreOptions.cleanCaches;
 import static org.ops4j.pax.exam.CoreOptions.frameworkProperty;
 import static org.ops4j.pax.exam.CoreOptions.junitBundles;
+import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.systemProperty;
 import static org.ops4j.pax.exam.CoreOptions.workingDirectory;
+import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
+import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import javax.inject.Inject;
 
@@ -57,7 +60,11 @@ public abstract class ITestSupport {
             systemProperty("org.osgi.service.http.port").value("8181"),
 
             frameworkProperty("osgi.console").value("6666"),
-            frameworkProperty("osgi.console.enable.builtin").value("true"));
+            frameworkProperty("osgi.console.enable.builtin").value("true"),
+
+            wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpcore").version(asInProject())),
+            wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpmime").version(asInProject())),
+            wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpclient").version(asInProject())));
     }
 
     protected void initServletListener() {
