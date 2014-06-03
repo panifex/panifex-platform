@@ -69,11 +69,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        <!-- Apache Geronimo Dependencies -->
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-atinject_1.0_spec</artifactId>
-        </dependency>
         <!-- Apache HTTP Client Dependencies -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

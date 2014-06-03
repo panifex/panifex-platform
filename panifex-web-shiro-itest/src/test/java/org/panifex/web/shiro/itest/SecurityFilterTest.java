@@ -31,7 +31,6 @@ import static org.ops4j.pax.exam.MavenUtils.asInProject;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-import javax.inject.Inject;
 import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletResponse;
 
@@ -48,22 +47,14 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
-import org.ops4j.pax.web.service.spi.WebListener;
-import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.panifex.module.api.security.DefaultFilterPath;
 import org.panifex.module.api.security.FilterPath;
-import org.panifex.test.support.WaitCondition;
-import org.panifex.test.support.WebListenerImpl;
+import org.panifex.test.support.ITestSupport;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerMethod.class)
-public final class SecurityFilterTest {
-
-    @Inject
-    protected BundleContext bundleContext;
-
-    protected WebListener webListener;
+public final class SecurityFilterTest extends ITestSupport {
 
     @Configuration
     public Option[] config() {
@@ -147,19 +138,5 @@ public final class SecurityFilterTest {
 
         filterPathRegistration.unregister();
         servletRegistration.unregister();
-    }
-
-    protected void initWebListener() {
-        webListener = new WebListenerImpl();
-        bundleContext.registerService(WebListener.class, webListener, null);
-    }
-
-    protected void waitForWebListener() {
-        new WaitCondition("webapp startup") {
-            @Override
-            protected boolean isFulfilled() {
-                return ((WebListenerImpl) webListener).gotEvent();
-            }
-        }.waitForCondition();
     }
 }

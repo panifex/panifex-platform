@@ -28,7 +28,6 @@ import static org.ops4j.pax.exam.CoreOptions.workingDirectory;
 import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpResponse;
@@ -44,19 +43,11 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
-import org.ops4j.pax.web.service.spi.WebListener;
-import org.osgi.framework.BundleContext;
-import org.panifex.test.support.WaitCondition;
-import org.panifex.test.support.WebListenerImpl;
+import org.panifex.test.support.ITestSupport;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerMethod.class)
-public class LoginZkPageletTest {
-
-    @Inject
-    private BundleContext bundleContext;
-
-    protected WebListener webListener;
+public class LoginZkPageletTest extends ITestSupport {
 
     @Configuration
     public Option[] config() {
@@ -118,19 +109,5 @@ public class LoginZkPageletTest {
         HttpResponse response = httpclient.execute(httpget);
 
         assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
-    }
-
-    protected void initWebListener() {
-        webListener = new WebListenerImpl();
-        bundleContext.registerService(WebListener.class, webListener, null);
-    }
-
-    protected void waitForWebListener() {
-        new WaitCondition("webapp startup") {
-            @Override
-            protected boolean isFulfilled() {
-                return ((WebListenerImpl) webListener).gotEvent();
-            }
-        }.waitForCondition();
     }
 }
