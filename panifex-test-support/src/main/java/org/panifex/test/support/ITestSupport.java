@@ -22,6 +22,7 @@ import javax.inject.Inject;
 
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
+import org.ops4j.pax.web.service.spi.ServletListener;
 import org.ops4j.pax.web.service.spi.WebListener;
 import org.osgi.framework.BundleContext;
 
@@ -31,7 +32,31 @@ public abstract class ITestSupport {
     @Inject
     protected BundleContext bundleContext;
 
+    protected ServletListener servletListener;
+
     protected WebListener webListener;
+
+    protected void initServletListener() {
+        initServletListener(null);
+    }
+
+    protected void initServletListener(String servletName) {
+        if (servletName == null)
+            servletListener = new ServletListenerImpl();
+        else
+            servletListener = new ServletListenerImpl(servletName);
+        bundleContext.registerService(ServletListener.class, servletListener,
+                null);
+    }
+
+    protected void waitForServletListener() {
+        new WaitCondition("servlet startup") {
+            @Override
+            protected boolean isFulfilled() {
+                return ((ServletListenerImpl) servletListener).gotEvent();
+            }
+        }.waitForCondition();
+    }
 
     protected void initWebListener() {
         webListener = new WebListenerImpl();

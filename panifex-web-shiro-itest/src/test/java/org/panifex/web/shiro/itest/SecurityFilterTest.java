@@ -45,6 +45,8 @@ import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.CoreOptions;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
+import org.ops4j.pax.web.extender.whiteboard.ExtenderConstants;
+import org.ops4j.pax.web.service.WebContainerConstants;
 import org.osgi.framework.ServiceRegistration;
 import org.panifex.module.api.security.DefaultFilterPath;
 import org.panifex.module.api.security.FilterPath;
@@ -121,11 +123,16 @@ public final class SecurityFilterTest extends ITestSupport {
                 bundleContext.registerService(FilterPath.class, filterPath, null);
 
         // register login servlet
+        String servletName = "loginServlet";
         Dictionary<String, String> servletProps = new Hashtable<>();
-        servletProps.put("urlPatterns", "/login.jsp");
+        servletProps.put(WebContainerConstants.SERVLET_NAME, servletName);
+        servletProps.put(ExtenderConstants.PROPERTY_URL_PATTERNS, "/login.jsp");
         OkServlet servlet = new OkServlet();
         ServiceRegistration<Servlet> servletRegistration =
                 bundleContext.registerService(Servlet.class, servlet, servletProps);
+
+        initServletListener(servletName);
+        waitForServletListener();
 
         HttpClient httpclient = HttpClientBuilder.create().build();
         HttpGet httpget = new HttpGet("http://localhost:8181/zk/");
