@@ -24,7 +24,9 @@ import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
 import org.ops4j.pax.web.service.spi.ServletListener;
 import org.ops4j.pax.web.service.spi.WebListener;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 
 @ExamReactorStrategy(PerMethod.class)
 public abstract class ITestSupport {
@@ -32,8 +34,8 @@ public abstract class ITestSupport {
     @Inject
     protected BundleContext bundleContext;
 
+    // listeners
     protected ServletListener servletListener;
-
     protected WebListener webListener;
 
     protected void initServletListener() {
@@ -74,5 +76,18 @@ public abstract class ITestSupport {
                 return ((WebListenerImpl) webListener).gotEvent();
             }
         }.waitForCondition();
+    }
+
+    protected Bundle installAndStartBundle(String bundlePath)
+            throws BundleException {
+        final Bundle bundle = bundleContext.installBundle(bundlePath);
+        bundle.start();
+        new WaitCondition("bundle startup") {
+            @Override
+            protected boolean isFulfilled() {
+                return bundle.getState() == Bundle.ACTIVE;
+            }
+        }.waitForCondition();
+        return bundle;
     }
 }
