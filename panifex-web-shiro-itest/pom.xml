@@ -110,6 +110,11 @@
             <groupId>org.apache.servicemix.bundles</groupId>
             <artifactId>org.apache.servicemix.bundles.ehcache</artifactId>
         </dependency>
+        <!-- OSGi Dependencies -->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+        </dependency>
         <!-- OSGi Container Dependencies -->
         <dependency>
             <groupId>org.eclipse.tycho</groupId>

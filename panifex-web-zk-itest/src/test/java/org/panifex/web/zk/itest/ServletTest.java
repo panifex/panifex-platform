@@ -53,6 +53,8 @@ import org.osgi.framework.ServiceRegistration;
 import org.panifex.module.api.DefaultPageletMapping;
 import org.panifex.module.api.PageletMapping;
 import org.panifex.module.zk.api.ZkPagelet;
+import org.panifex.test.support.WaitCondition;
+import org.panifex.test.support.WebListenerImpl;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerMethod.class)
@@ -100,6 +102,7 @@ public class ServletTest {
                 mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-module-zk-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
+                mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-controller").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-zk").version(asInProject()),
 

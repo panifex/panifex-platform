@@ -53,6 +53,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.panifex.module.api.security.DefaultFilterPath;
 import org.panifex.module.api.security.FilterPath;
+import org.panifex.test.support.WaitCondition;
+import org.panifex.test.support.WebListenerImpl;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerMethod.class)
@@ -100,6 +102,7 @@ public final class SecurityFilterTest {
             mavenBundle("org.ops4j.pax.web", "pax-web-extender-whiteboard").version(asInProject()),
             mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
             mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
+            mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
             mavenBundle("org.panifex", "panifex-web-shiro").version(asInProject()),
 
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpcore").version(asInProject())),

@@ -46,6 +46,8 @@ import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
 import org.ops4j.pax.web.service.spi.WebListener;
 import org.osgi.framework.BundleContext;
+import org.panifex.test.support.WaitCondition;
+import org.panifex.test.support.WebListenerImpl;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerMethod.class)
@@ -93,6 +95,7 @@ public class LoginZkPageletTest {
                 mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-module-zk-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
+                mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-controller").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-zk").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-zk-impl").version(asInProject()),

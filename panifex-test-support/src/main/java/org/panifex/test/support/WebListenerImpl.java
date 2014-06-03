@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.zk.impl.login;
+package org.panifex.test.support;
 
 import org.ops4j.pax.web.service.spi.WebEvent;
 import org.ops4j.pax.web.service.spi.WebListener;
