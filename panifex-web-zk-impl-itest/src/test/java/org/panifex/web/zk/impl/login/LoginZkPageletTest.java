@@ -19,12 +19,7 @@
 package org.panifex.web.zk.impl.login;
 
 import static org.junit.Assert.assertEquals;
-import static org.ops4j.pax.exam.CoreOptions.cleanCaches;
-import static org.ops4j.pax.exam.CoreOptions.frameworkProperty;
-import static org.ops4j.pax.exam.CoreOptions.junitBundles;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.CoreOptions.systemProperty;
-import static org.ops4j.pax.exam.CoreOptions.workingDirectory;
 import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
@@ -38,8 +33,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
-import org.ops4j.pax.exam.CoreOptions;
 import org.ops4j.pax.exam.Option;
+import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.panifex.test.support.ITestSupport;
 
@@ -48,17 +43,8 @@ public class LoginZkPageletTest extends ITestSupport {
 
     @Configuration
     public Option[] config() {
-        return CoreOptions.options(
-                workingDirectory("target/paxexam/"),
-                cleanCaches(true),
-                junitBundles(),
-
-                systemProperty("java.protocol.handler.pkgs").value("org.ops4j.pax.url"),
-                systemProperty("org.osgi.service.http.hostname").value("127.0.0.1"),
-                systemProperty("org.osgi.service.http.port").value("8181"),
-
-                frameworkProperty("osgi.console").value("6666"),
-                frameworkProperty("osgi.console.enable.builtin").value("true"),
+        return OptionUtils.combine(
+                baseConfigure(),
 
                 mavenBundle("biz.aQute.bnd", "bndlib").version(asInProject()),
                 mavenBundle("commons-beanutils", "commons-beanutils").version(asInProject()),

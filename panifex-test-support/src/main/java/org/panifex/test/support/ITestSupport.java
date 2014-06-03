@@ -18,8 +18,16 @@
  ******************************************************************************/
 package org.panifex.test.support;
 
+import static org.ops4j.pax.exam.CoreOptions.cleanCaches;
+import static org.ops4j.pax.exam.CoreOptions.frameworkProperty;
+import static org.ops4j.pax.exam.CoreOptions.junitBundles;
+import static org.ops4j.pax.exam.CoreOptions.systemProperty;
+import static org.ops4j.pax.exam.CoreOptions.workingDirectory;
+
 import javax.inject.Inject;
 
+import org.ops4j.pax.exam.CoreOptions;
+import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
 import org.ops4j.pax.web.service.spi.ServletListener;
@@ -37,6 +45,20 @@ public abstract class ITestSupport {
     // listeners
     protected ServletListener servletListener;
     protected WebListener webListener;
+
+    protected Option[] baseConfigure() {
+        return CoreOptions.options(
+            workingDirectory("target/paxexam/"),
+            cleanCaches(true),
+            junitBundles(),
+
+            systemProperty("java.protocol.handler.pkgs").value("org.ops4j.pax.url"),
+            systemProperty("org.osgi.service.http.hostname").value("127.0.0.1"),
+            systemProperty("org.osgi.service.http.port").value("8181"),
+
+            frameworkProperty("osgi.console").value("6666"),
+            frameworkProperty("osgi.console.enable.builtin").value("true"));
+    }
 
     protected void initServletListener() {
         initServletListener(null);
