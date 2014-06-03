@@ -28,7 +28,11 @@ import static org.ops4j.pax.exam.CoreOptions.workingDirectory;
 import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 import javax.inject.Inject;
+import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpResponse;
@@ -46,6 +50,9 @@ import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
 import org.ops4j.pax.web.service.spi.WebListener;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
+import org.panifex.module.api.security.DefaultFilterPath;
+import org.panifex.module.api.security.FilterPath;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerMethod.class)
@@ -91,6 +98,7 @@ public final class SecurityFilterTest {
             mavenBundle("org.ops4j.pax.url", "pax-url-wrap").version(asInProject()),
             mavenBundle("org.ops4j.pax.web", "pax-web-jetty-bundle").version(asInProject()),
             mavenBundle("org.ops4j.pax.web", "pax-web-extender-whiteboard").version(asInProject()),
+            mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
             mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
             mavenBundle("org.panifex", "panifex-web-shiro").version(asInProject()),
 
@@ -106,12 +114,36 @@ public final class SecurityFilterTest {
     }
 
     @Test
-    public void httpGetFromServletTest() throws Exception {
+    public void unfilteredGetFromServletTest() throws Exception {
         HttpClient httpclient = HttpClientBuilder.create().build();
         HttpGet httpget = new HttpGet("http://localhost:8181/");
         HttpResponse response = httpclient.execute(httpget);
 
+        assertEquals(HttpServletResponse.SC_NOT_FOUND, response.getStatusLine().getStatusCode());
+    }
+
+    @Test
+    public void filteredGetFromServletTest() throws Exception {
+        // register filter path
+        DefaultFilterPath filterPath = new DefaultFilterPath("/zk/*", "authc");
+        ServiceRegistration<FilterPath> filterPathRegistration =
+                bundleContext.registerService(FilterPath.class, filterPath, null);
+
+        // register login servlet
+        Dictionary<String, String> servletProps = new Hashtable<>();
+        servletProps.put("urlPatterns", "/login.jsp");
+        OkServlet servlet = new OkServlet();
+        ServiceRegistration<Servlet> servletRegistration =
+                bundleContext.registerService(Servlet.class, servlet, servletProps);
+
+        HttpClient httpclient = HttpClientBuilder.create().build();
+        HttpGet httpget = new HttpGet("http://localhost:8181/zk/");
+        HttpResponse response = httpclient.execute(httpget);
+
         assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
+
+        filterPathRegistration.unregister();
+        servletRegistration.unregister();
     }
 
     protected void initWebListener() {

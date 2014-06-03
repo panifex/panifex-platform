@@ -24,7 +24,27 @@
         http://www.osgi.org/xmlns/blueprint/v1.0.0
             http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
-    <!-- Security -->
+    <!-- Environment -->
+
+    <bean id="environmentLoader"
+            class="org.panifex.web.shiro.env.ModularEnvironmentLoader">
+        <property name="environment" ref="environment"/>
+    </bean>
+
+    <bean id="environment"
+            class="org.panifex.web.shiro.env.ModularWebEnvironment">
+        <property name="bundleContext" ref="blueprintBundleContext"/>
+    </bean>
+
+    <reference-list interface="org.panifex.module.api.security.FilterPath"
+            availability="optional"
+            member-type="service-reference">
+        <reference-listener ref="environment"
+            bind-method="bindFilterPath"
+            unbind-method="unbindFilterPath"/>
+    </reference-list>
+
+    <!-- Security Filter -->
 
     <service ref="securityFilter" interface="javax.servlet.Filter">
         <service-properties>
@@ -33,15 +53,17 @@
     </service>
 
     <bean id="securityFilter"
-        class="org.panifex.web.shiro.SecurityFilterImpl"/>
+            class="org.panifex.web.shiro.SecurityFilterImpl">
+        <property name="environmentLoader" ref="environmentLoader"/>
+    </bean>
 
-    <service ref="whiteboardServlet" interface="javax.servlet.Servlet">
+    <service ref="notFoundServlet" interface="javax.servlet.Servlet">
         <service-properties>
-            <entry key="urlPatterns" value="/"/>
+            <entry key="urlPatterns" value="/*"/>
         </service-properties>
     </service>
     
-    <bean id="whiteboardServlet"
-        class="org.panifex.web.shiro.WhiteboardServlet"/>
+    <bean id="notFoundServlet"
+        class="org.panifex.web.shiro.NotFoundServlet"/>
 
 </blueprint>

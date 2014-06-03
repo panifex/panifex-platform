@@ -60,8 +60,11 @@
         <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
+            <artifactId>panifex-module-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
             <artifactId>panifex-service-api</artifactId>
-            <scope>provided</scope>
         </dependency>
         <!-- Pax Web Dependencies -->
         <dependency>

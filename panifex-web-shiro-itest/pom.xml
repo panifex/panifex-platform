@@ -118,6 +118,10 @@
         <!-- Panifex Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
+            <artifactId>panifex-module-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
             <artifactId>panifex-service-api</artifactId>
         </dependency>
         <dependency>
