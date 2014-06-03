@@ -20,9 +20,12 @@ package org.panifex.test.support;
 
 import javax.inject.Inject;
 
+import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
+import org.ops4j.pax.exam.spi.reactors.PerMethod;
 import org.ops4j.pax.web.service.spi.WebListener;
 import org.osgi.framework.BundleContext;
 
+@ExamReactorStrategy(PerMethod.class)
 public abstract class ITestSupport {
 
     @Inject

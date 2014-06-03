@@ -68,6 +68,11 @@
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
         </dependency>
+        <!-- Pax Exam Dependencies -->
+        <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-spi</artifactId>
+        </dependency>
         <!-- Pax Logging Dependencies -->
         <dependency>
             <groupId>org.ops4j.pax.logging</groupId>

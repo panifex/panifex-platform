@@ -44,8 +44,6 @@ import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.CoreOptions;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
-import org.ops4j.pax.exam.spi.reactors.PerMethod;
 import org.osgi.framework.ServiceRegistration;
 import org.panifex.module.api.DefaultPageletMapping;
 import org.panifex.module.api.PageletMapping;
@@ -53,7 +51,6 @@ import org.panifex.module.zk.api.ZkPagelet;
 import org.panifex.test.support.ITestSupport;
 
 @RunWith(PaxExam.class)
-@ExamReactorStrategy(PerMethod.class)
 public class ServletTest extends ITestSupport {
 
     @Configuration
