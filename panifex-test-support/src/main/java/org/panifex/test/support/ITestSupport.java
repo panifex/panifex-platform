@@ -27,6 +27,8 @@ import static org.ops4j.pax.exam.CoreOptions.workingDirectory;
 import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
+import java.util.Dictionary;
+
 import javax.inject.Inject;
 
 import org.ops4j.pax.exam.CoreOptions;
@@ -39,12 +41,13 @@ import org.ops4j.pax.web.service.spi.WebListener;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
+import org.osgi.framework.ServiceRegistration;
 
 @ExamReactorStrategy(PerMethod.class)
 public abstract class ITestSupport {
 
     @Inject
-    protected BundleContext bundleContext;
+    private BundleContext bundleContext;
 
     // listeners
     protected ServletListener servletListener;
@@ -145,5 +148,39 @@ public abstract class ITestSupport {
             }
         }.waitForCondition();
         return bundle;
+    }
+
+    /**
+     * Registers the specified service object with the specified properties
+     * under the name of the specified class with the Framework.
+     *
+     * @param <S> Type of Service.
+     * @param clazz The class under whose name the service can be located.
+     * @param service The service object or a {@code ServiceFactory} object.
+     * @param properties The properties for this service.
+     * @return A {@code ServiceRegistration} object for use by the bundle
+     *         registering the service to update the service's properties or to
+     *         unregister the service.
+     * @throws IllegalStateException If this BundleContext is no longer valid.
+     */
+    protected <S> ServiceRegistration<S> registerService(Class<S> clazz, S service,
+            Dictionary<String, ? > properties) {
+        return bundleContext.registerService(clazz, service, properties);
+    }
+
+    /**
+     * Registers the specified service object with the specified properties
+     * under the name of the specified class with the Framework.
+     *
+     * @param <S> Type of Service.
+     * @param clazz The class under whose name the service can be located.
+     * @param service The service object or a {@code ServiceFactory} object.
+     * @return A {@code ServiceRegistration} object for use by the bundle
+     *         registering the service to update the service's properties or to
+     *         unregister the service.
+     * @throws IllegalStateException If this BundleContext is no longer valid.
+     */
+    protected <S> ServiceRegistration<S> registerService(Class<S> clazz, S service) {
+        return bundleContext.registerService(clazz, service, null);
     }
 }

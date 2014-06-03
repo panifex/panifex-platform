@@ -83,7 +83,7 @@ public final class SecurityFilterTest extends ITestSupport {
         // register filter path
         DefaultFilterPath filterPath = new DefaultFilterPath("/zk/*", "authc");
         ServiceRegistration<FilterPath> filterPathRegistration =
-                bundleContext.registerService(FilterPath.class, filterPath, null);
+                registerService(FilterPath.class, filterPath);
 
         // register login servlet
         String servletName = "loginServlet";
@@ -92,7 +92,7 @@ public final class SecurityFilterTest extends ITestSupport {
         servletProps.put(ExtenderConstants.PROPERTY_URL_PATTERNS, "/login.jsp");
         OkServlet servlet = new OkServlet();
         ServiceRegistration<Servlet> servletRegistration =
-                bundleContext.registerService(Servlet.class, servlet, servletProps);
+                registerService(Servlet.class, servlet, servletProps);
 
         initServletListener(servletName);
         waitForServletListener();

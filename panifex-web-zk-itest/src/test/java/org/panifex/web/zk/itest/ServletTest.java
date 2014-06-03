@@ -22,9 +22,6 @@ import static org.junit.Assert.assertEquals;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
-import java.util.Dictionary;
-import java.util.Hashtable;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpResponse;
@@ -70,17 +67,15 @@ public class ServletTest extends ITestSupport {
     @Test
     public void httpGetFromServletTest() throws Exception {
         // register zk pagelet
-        Dictionary<String, String> pageletProps = new Hashtable<>();
-        ZkPagelet helloPagelet = new HelloZkPagelet();
-        ServiceRegistration<ZkPagelet> pagelet = bundleContext.
-                registerService(ZkPagelet.class, helloPagelet, pageletProps);
+        ZkPagelet pagelet = new HelloZkPagelet();
+        ServiceRegistration<ZkPagelet> pageletRegistration =
+                registerService(ZkPagelet.class, pagelet);
 
         // register pagelet mapping
-        Dictionary<String, String> mappingProps = new Hashtable<>();
         String[] urlPatterns = new String[]{ "/*" };
-        PageletMapping helloMapping = new DefaultPageletMapping(helloPagelet, urlPatterns);
-        ServiceRegistration<PageletMapping> mapping = bundleContext.
-                registerService(PageletMapping.class, helloMapping, mappingProps);
+        PageletMapping mapping = new DefaultPageletMapping(pagelet, urlPatterns);
+        ServiceRegistration<PageletMapping> mappingRegistration =
+                registerService(PageletMapping.class, mapping);
 
         HttpClient httpclient = HttpClientBuilder.create().build();
         HttpGet httpget = new HttpGet("http://localhost:8181/zk/");
@@ -88,7 +83,7 @@ public class ServletTest extends ITestSupport {
 
         assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
 
-        mapping.unregister();
-        pagelet.unregister();
+        mappingRegistration.unregister();
+        pageletRegistration.unregister();
     }
 }
