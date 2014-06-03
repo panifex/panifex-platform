@@ -95,7 +95,6 @@ public class LoginZkPageletTest extends ITestSupport {
 
     @Before
     public void setUp() {
-        initWebListener();
         waitForWebListener();
     }
 

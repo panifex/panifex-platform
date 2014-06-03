@@ -102,7 +102,6 @@ public final class SecurityFilterTest extends ITestSupport {
 
     @Before
     public void setUp() {
-        initWebListener();
         waitForWebListener();
     }
 

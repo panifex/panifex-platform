@@ -64,6 +64,10 @@ public abstract class ITestSupport {
     }
 
     protected void waitForWebListener() {
+        // register web listener if it is not registered yet
+        if (webListener == null) {
+            initWebListener();
+        }
         new WaitCondition("webapp startup") {
             @Override
             protected boolean isFulfilled() {

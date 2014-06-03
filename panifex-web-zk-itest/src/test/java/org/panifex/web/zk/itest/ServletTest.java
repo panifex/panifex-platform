@@ -101,7 +101,6 @@ public class ServletTest extends ITestSupport {
 
     @Before
     public void setUp() {
-        initWebListener();
         waitForWebListener();
     }
 
