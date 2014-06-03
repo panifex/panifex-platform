@@ -31,6 +31,7 @@ import javax.inject.Inject;
 
 import org.ops4j.pax.exam.CoreOptions;
 import org.ops4j.pax.exam.Option;
+import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
 import org.ops4j.pax.web.service.spi.ServletListener;
@@ -62,9 +63,35 @@ public abstract class ITestSupport {
             frameworkProperty("osgi.console").value("6666"),
             frameworkProperty("osgi.console.enable.builtin").value("true"),
 
+            mavenBundle("biz.aQute.bnd", "bndlib").version(asInProject()),
+            mavenBundle("commons-beanutils", "commons-beanutils").version(asInProject()),
+            mavenBundle("commons-collections", "commons-collections").version(asInProject()),
+            mavenBundle("commons-fileupload", "commons-fileupload").version(asInProject()),
+            mavenBundle("commons-io", "commons-io").version(asInProject()),
+            mavenBundle("org.apache.aries", "org.apache.aries.util").version(asInProject()),
+            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.api").version(asInProject()),
+            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.core").version(asInProject()),
+            mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy").version(asInProject()),
+            mavenBundle("org.apache.commons", "commons-lang3").version(asInProject()),
+            mavenBundle("org.apache.shiro", "shiro-core").version(asInProject()),
+
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpcore").version(asInProject())),
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpmime").version(asInProject())),
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpclient").version(asInProject())));
+    }
+
+    protected Option[] webConfigure() {
+        return OptionUtils.combine(
+            baseConfigure(),
+
+            mavenBundle("org.ops4j.pax.logging", "pax-logging-service").version(asInProject()),
+            mavenBundle("org.ops4j.pax.swissbox", "pax-swissbox-bnd").version(asInProject()),
+            mavenBundle("org.ops4j.pax.swissbox", "pax-swissbox-property").version(asInProject()),
+            mavenBundle("org.ops4j.pax.url", "pax-url-aether").version(asInProject()),
+            mavenBundle("org.ops4j.pax.url", "pax-url-commons").version(asInProject()),
+            mavenBundle("org.ops4j.pax.url", "pax-url-wrap").version(asInProject()),
+            mavenBundle("org.ops4j.pax.web", "pax-web-jetty-bundle").version(asInProject()),
+            mavenBundle("org.ops4j.pax.web", "pax-web-extender-whiteboard").version(asInProject()));
     }
 
     protected void initServletListener() {
