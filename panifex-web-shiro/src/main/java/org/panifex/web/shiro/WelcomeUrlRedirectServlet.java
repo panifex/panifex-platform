@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.panifex.module.web.api.WebApplicationConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Servlet which redirects a user to welcome url.<p>
@@ -35,6 +37,8 @@ import org.panifex.module.web.api.WebApplicationConstants;
  * redirects users to the another welcome url.
  */
 public class WelcomeUrlRedirectServlet extends HttpServlet {
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     /**
      * The welcome url to used to redirect a user.
@@ -51,9 +55,11 @@ public class WelcomeUrlRedirectServlet extends HttpServlet {
 
         if (!request.getRequestURI().equals(welcomeUrl)) {
             // redirect to welcome url
+            log.debug("Redirect to welcome url {}", welcomeUrl);
             response.sendRedirect(welcomeUrl);
         } else {
             // return Http 404 - Not found because welcome servlet is not defined
+            log.debug("Returns Http 404 - Not found because welcome servlet {} is not defined", welcomeUrl);
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
@@ -73,6 +79,7 @@ public class WelcomeUrlRedirectServlet extends HttpServlet {
      * @param welcomeUrl the welcome URL which contains base content
      */
     public void setWelcomeUrl(String welcomeUrl) {
+        log.debug("Set new welcome url {}", welcomeUrl);
         if ((welcomeUrl == null) || welcomeUrl.isEmpty()) {
             welcomeUrl = WebApplicationConstants.DEFAULT_WELCOME_URL;
         }
