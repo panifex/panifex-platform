@@ -16,25 +16,28 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.shiro;
+package org.panifex.module.web.api;
 
-import javax.servlet.Filter;
-
-import org.apache.shiro.web.mgt.WebSecurityManager;
-
-public interface SecurityFilter extends Filter {
-
-    WebSecurityManager getSecurityManager();
+/**
+ * Web Application related constants.
+ */
+public class WebApplicationConstants {
 
     /**
-     * Returns the login URL used to authenticate a user.
-     *
-     * @return the login URL used to authenticate a user, used when redirecting users if authentication is required.
+     * Service PID used for configuration.
      */
-    String getLoginUrl();
+    public static final String PID = "org.panifex.web";
 
     /**
-     * Sets the login URL used to authenticate a user.
+     * Simple default login URL equal to <code>/login</code>
      */
-    void setLoginUrl(String loginUrl);
+    public static final String DEFAULT_LOGIN_URL = "/login";
+
+    public static final String PROPERTY_LOGIN_URL = "loginUrl";
+
+    /**
+     * Private constructors prevents instantiation.
+     */
+    private WebApplicationConstants() {
+    }
 }

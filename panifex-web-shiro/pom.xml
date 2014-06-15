@@ -64,6 +64,10 @@
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
+            <artifactId>panifex-module-web-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
             <artifactId>panifex-service-api</artifactId>
         </dependency>
         <!-- Pax Web Dependencies -->

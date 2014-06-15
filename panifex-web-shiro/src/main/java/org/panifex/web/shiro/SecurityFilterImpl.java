@@ -20,9 +20,17 @@ package org.panifex.web.shiro;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.Filter;
 
 import org.apache.shiro.web.env.EnvironmentLoader;
+import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.filter.mgt.DefaultFilter;
+import org.apache.shiro.web.filter.mgt.FilterChainManager;
+import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
 import org.apache.shiro.web.servlet.ShiroFilter;
+import org.panifex.module.web.api.WebApplicationConstants;
 import org.panifex.service.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +42,7 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
     private List<SecurityService> securityServices = new ArrayList<>();
 
     private EnvironmentLoader loader;
+    private String loginUrl;
 
     @Override
     public void init() throws Exception {
@@ -41,6 +50,7 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
         loader.initEnvironment(getServletContext());
 
         super.init();
+        setLoginUrl(loginUrl);
     }
 
     @Override
@@ -56,28 +66,45 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
     public void bind(SecurityService securityService) {
         log.debug("Bind security service: {}", securityService);
         securityServices.add(securityService);
-        updateRealms();
     }
 
     public void unbind(SecurityService securityService) {
         log.debug("Unbind security service: {}", securityService);
         securityServices.remove(securityService);
-        updateRealms();
     }
 
-    private void updateRealms() {
-        /*
-        DefaultWebSecurityManager manager = (DefaultWebSecurityManager) getSecurityManager();
-        if (manager != null && !securityServices.isEmpty()) {
-            // TODO Check what to do when realms is empty
+    @Override
+    public String getLoginUrl() {
+        return loginUrl;
+    }
 
-            Set<Realm> realms = new HashSet<>();
-            realms.addAll(securityServices);
+    @Override
+    public void setLoginUrl(String loginUrl) {
+        log.debug("Set new login url {}", loginUrl);
+        if ((loginUrl == null) || loginUrl.isEmpty()) {
+            loginUrl = WebApplicationConstants.DEFAULT_LOGIN_URL;
+        }
+        this.loginUrl = loginUrl;
+        bindLoginUrlToAccessControlFilter();
+    }
 
-            manager.setRealms(realms);
-            log.debug("Realms has been updated");
-        } else {
-            log.debug("Unable to update realms. Security manager has not been registered");
-        }*/
+    private void bindLoginUrlToAccessControlFilter() {
+        PathMatchingFilterChainResolver filterChainResolver =
+                (PathMatchingFilterChainResolver) getFilterChainResolver();
+
+        if (filterChainResolver != null) {
+
+            FilterChainManager filterChainManager = filterChainResolver.getFilterChainManager();
+
+            Map<String, Filter> filters = filterChainManager.getFilters();
+
+            AccessControlFilter accessControlFilter =
+                    (AccessControlFilter) filters.get(DefaultFilter.authc.toString());
+
+            if (accessControlFilter != null) {
+                log.debug("Bind login url {}", loginUrl);
+                accessControlFilter.setLoginUrl(loginUrl);
+            }
+        }
     }
 }

@@ -49,6 +49,10 @@
             <artifactId>org.apache.aries.blueprint.core</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.apache.aries.blueprint</groupId>
+            <artifactId>org.apache.aries.blueprint.cm</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.aries.proxy</groupId>
             <artifactId>org.apache.aries.proxy</artifactId>
         </dependency>
@@ -72,6 +76,11 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <!-- Apache Felix Dependencies -->
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.configadmin</artifactId>
         </dependency>
         <!-- Apache HTTP Client Dependencies -->
         <dependency>
@@ -114,6 +123,10 @@
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+        </dependency>
         <!-- OSGi Container Dependencies -->
         <dependency>
             <groupId>org.eclipse.tycho</groupId>
@@ -123,6 +136,10 @@
         <dependency>
             <groupId>org.panifex</groupId>
             <artifactId>panifex-module-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-module-web-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
