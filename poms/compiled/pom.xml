@@ -34,8 +34,25 @@
     <packaging>pom</packaging>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <!-- | example additional resource entries, useful when building 
+                Eclipse RCP applications -->
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>plugin.xml</include>
+                    <include>plugin.properties</include>
+                    <include>icons/**</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
+                <!-- | the following instructions build a simple set of public/private 
+                    classes into an OSGi bundle -->
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
