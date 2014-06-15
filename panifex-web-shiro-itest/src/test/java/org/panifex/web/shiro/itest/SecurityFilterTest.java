@@ -58,8 +58,6 @@ public final class SecurityFilterTest extends ITestSupport {
     @Inject
     private ConfigurationAdmin configurationAdmin;
 
-    private HttpClient httpclient = HttpClientBuilder.create().build();
-
     @Configuration
     public Option[] config() {
         return OptionUtils.combine(
@@ -101,10 +99,7 @@ public final class SecurityFilterTest extends ITestSupport {
         ServiceRegistration<Servlet> servletRegistration =
                 registerServlet("loginServlet", WebApplicationConstants.DEFAULT_LOGIN_URL, new OkServlet());
 
-        HttpGet httpget = new HttpGet("http://localhost:8181/zk/");
-        HttpResponse response = httpclient.execute(httpget);
-
-        assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
+        testGet("http://localhost:8181/zk/", HttpServletResponse.SC_OK);
 
         filterPathRegistration.unregister();
         servletRegistration.unregister();
@@ -123,10 +118,7 @@ public final class SecurityFilterTest extends ITestSupport {
         ServiceRegistration<Servlet> servletRegistration =
                 registerServlet("loginServlet", newLoginUrl, new OkServlet());
 
-        HttpGet httpget = new HttpGet("http://localhost:8181/zk/");
-        HttpResponse response = httpclient.execute(httpget);
-
-        assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
+        testGet("http://localhost:8181/zk/", HttpServletResponse.SC_OK);
 
         resetLoginUrl();
         servletRegistration.unregister();
@@ -141,10 +133,7 @@ public final class SecurityFilterTest extends ITestSupport {
                     WebApplicationConstants.DEFAULT_WELCOME_URL,
                     new OkServlet());
 
-        HttpGet httpget = new HttpGet("http://localhost:8181/");
-        HttpResponse response = httpclient.execute(httpget);
-
-        assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
+        testGet("http://localhost:8181/", HttpServletResponse.SC_OK);
 
         resetWelcomeUrl();
         servletRegistration.unregister();
@@ -159,10 +148,7 @@ public final class SecurityFilterTest extends ITestSupport {
         ServiceRegistration<Servlet> servletRegistration =
                 registerServlet("welcomeServlet", newWelcomeUrl, new OkServlet());
 
-        HttpGet httpget = new HttpGet("http://localhost:8181/");
-        HttpResponse response = httpclient.execute(httpget);
-
-        assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
+        testGet("http://localhost:8181/", HttpServletResponse.SC_OK);
 
         resetWelcomeUrl();
         servletRegistration.unregister();

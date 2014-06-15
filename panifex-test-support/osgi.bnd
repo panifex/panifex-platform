@@ -20,6 +20,12 @@ Export-Package: \
 
 Import-Package: \
     javax.inject, \
+    org.apache.http, \
+    org.apache.http.client, \
+    org.apache.http.impl.client, \
+    org.apache.http.client.methods, \
+    org.apache.http.util, \
+    org.junit, \
     org.ops4j.pax.exam;version="[3.5,4.0)", \
     org.ops4j.pax.exam.options;version="[3.5,4.0)", \
     org.ops4j.pax.web.service.spi;version="[3.0,4.0)", \

@@ -18,16 +18,11 @@
  ******************************************************************************/
 package org.panifex.web.zk.impl.login;
 
-import static org.junit.Assert.assertEquals;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,10 +58,6 @@ public class LoginZkPageletTest extends ITestSupport {
 
     @Test
     public void httpGetFromServletTest() throws Exception {
-        HttpClient httpclient = HttpClientBuilder.create().build();
-        HttpGet httpget = new HttpGet("http://localhost:8181/zk/login");
-        HttpResponse response = httpclient.execute(httpget);
-
-        assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
+        testGet("http://localhost:8181/zk/login", HttpServletResponse.SC_OK);
     }
 }

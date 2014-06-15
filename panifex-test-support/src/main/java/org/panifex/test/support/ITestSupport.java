@@ -44,16 +44,16 @@ import org.osgi.framework.BundleException;
 import org.osgi.framework.ServiceRegistration;
 
 @ExamReactorStrategy(PerClass.class)
-public abstract class ITestSupport {
+public abstract class ITestSupport extends HttpClientTestSupport {
 
     @Inject
     private BundleContext bundleContext;
 
     // listeners
-    protected ServletListener servletListener;
-    protected WebListener webListener;
+    private ServletListener servletListener;
+    private WebListener webListener;
 
-    protected Option[] baseConfigure() {
+    protected final Option[] baseConfigure() {
         return CoreOptions.options(
             workingDirectory("target/paxexam/"),
             cleanCaches(true),
@@ -83,7 +83,7 @@ public abstract class ITestSupport {
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpclient").version(asInProject())));
     }
 
-    protected Option[] webConfigure() {
+    protected final Option[] webConfigure() {
         return OptionUtils.combine(
             baseConfigure(),
 
@@ -97,11 +97,11 @@ public abstract class ITestSupport {
             mavenBundle("org.ops4j.pax.web", "pax-web-extender-whiteboard").version(asInProject()));
     }
 
-    protected void initServletListener() {
+    protected final void initServletListener() {
         initServletListener(null);
     }
 
-    protected void initServletListener(String servletName) {
+    protected final void initServletListener(String servletName) {
         if (servletName == null)
             servletListener = new ServletListenerImpl();
         else
@@ -110,7 +110,7 @@ public abstract class ITestSupport {
                 null);
     }
 
-    protected void waitForServletListener() {
+    protected final void waitForServletListener() {
         new WaitCondition("servlet startup") {
             @Override
             protected boolean isFulfilled() {
@@ -119,12 +119,12 @@ public abstract class ITestSupport {
         }.waitForCondition();
     }
 
-    protected void initWebListener() {
+    protected final void initWebListener() {
         webListener = new WebListenerImpl();
         bundleContext.registerService(WebListener.class, webListener, null);
     }
 
-    protected void waitForWebListener() {
+    protected final void waitForWebListener() {
         // register web listener if it is not registered yet
         if (webListener == null) {
             initWebListener();
@@ -137,7 +137,7 @@ public abstract class ITestSupport {
         }.waitForCondition();
     }
 
-    protected Bundle installAndStartBundle(String bundlePath)
+    protected final Bundle installAndStartBundle(String bundlePath)
             throws BundleException {
         final Bundle bundle = bundleContext.installBundle(bundlePath);
         bundle.start();
@@ -163,7 +163,7 @@ public abstract class ITestSupport {
      *         unregister the service.
      * @throws IllegalStateException If this BundleContext is no longer valid.
      */
-    protected <S> ServiceRegistration<S> registerService(Class<S> clazz, S service,
+    protected final <S> ServiceRegistration<S> registerService(Class<S> clazz, S service,
             Dictionary<String, ? > properties) {
         return bundleContext.registerService(clazz, service, properties);
     }
@@ -180,7 +180,7 @@ public abstract class ITestSupport {
      *         unregister the service.
      * @throws IllegalStateException If this BundleContext is no longer valid.
      */
-    protected <S> ServiceRegistration<S> registerService(Class<S> clazz, S service) {
+    protected final <S> ServiceRegistration<S> registerService(Class<S> clazz, S service) {
         return bundleContext.registerService(clazz, service, null);
     }
 }
