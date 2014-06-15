@@ -33,7 +33,14 @@ public class WebApplicationConstants {
      */
     public static final String DEFAULT_LOGIN_URL = "/login";
 
+    /**
+     * Simple default welcome URL equal to <code>/welcome</code>
+     */
+    public static final String DEFAULT_WELCOME_URL = "/index";
+
     public static final String PROPERTY_LOGIN_URL = "loginUrl";
+
+    public static final String PROPERTY_WELCOME_URL = "welcomeUrl";
 
     /**
      * Private constructors prevents instantiation.

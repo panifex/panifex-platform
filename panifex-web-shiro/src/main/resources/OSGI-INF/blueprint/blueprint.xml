@@ -30,6 +30,7 @@
     <cm:property-placeholder persistent-id="org.panifex.web" update-strategy="reload">
         <cm:default-properties>
             <cm:property name="loginUrl" value=""/>
+            <cm:property name="welcomeUrl" value=""/>
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -67,13 +68,15 @@
         <property name="loginUrl" value="${loginUrl}"/>
     </bean>
 
-    <service ref="notFoundServlet" interface="javax.servlet.Servlet">
+    <service ref="welcomeUrlRedirectServlet" interface="javax.servlet.Servlet">
         <service-properties>
             <entry key="urlPatterns" value="/*"/>
         </service-properties>
     </service>
     
-    <bean id="notFoundServlet"
-        class="org.panifex.web.shiro.NotFoundServlet"/>
+    <bean id="welcomeUrlRedirectServlet"
+            class="org.panifex.web.shiro.WelcomeUrlRedirectServlet">
+        <property name="welcomeUrl" value="${welcomeUrl}"/>
+    </bean>
 
 </blueprint>

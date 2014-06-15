@@ -134,11 +134,58 @@ public final class SecurityFilterTest extends ITestSupport {
         filterPathRegistration.unregister();
     }
 
+    @Test
+    public void testRedirectToDefaultWelcomeUrl() throws Exception {
+        // register welcome servlet
+        ServiceRegistration<Servlet> servletRegistration =
+                registerServlet("welcomeServlet",
+                    WebApplicationConstants.DEFAULT_WELCOME_URL,
+                    new OkServlet());
+
+        HttpGet httpget = new HttpGet("http://localhost:8181/");
+        HttpResponse response = httpclient.execute(httpget);
+
+        assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
+
+        resetWelcomeUrl();
+        servletRegistration.unregister();
+    }
+
+    @Test
+    public void testSetValidWelcomeUrl() throws Exception {
+        String newWelcomeUrl = "/welcome";
+        registerNewWelcomeUrl(newWelcomeUrl);
+
+        // register welcome servlet
+        ServiceRegistration<Servlet> servletRegistration =
+                registerServlet("welcomeServlet", newWelcomeUrl, new OkServlet());
+
+        HttpGet httpget = new HttpGet("http://localhost:8181/");
+        HttpResponse response = httpclient.execute(httpget);
+
+        assertEquals(HttpServletResponse.SC_OK, response.getStatusLine().getStatusCode());
+
+        resetWelcomeUrl();
+        servletRegistration.unregister();
+    }
+
     private void resetLoginUrl() throws Exception {
         registerNewLoginUrl(WebApplicationConstants.DEFAULT_LOGIN_URL);
     }
 
     private void registerNewLoginUrl(String loginUrl) throws Exception {
+        setWebApplicationProperty(WebApplicationConstants.PROPERTY_LOGIN_URL, loginUrl);
+    }
+
+    private void resetWelcomeUrl() throws Exception {
+        registerNewWelcomeUrl(WebApplicationConstants.DEFAULT_WELCOME_URL);
+    }
+
+    private void registerNewWelcomeUrl(String welcomeUrl) throws Exception {
+        setWebApplicationProperty(WebApplicationConstants.PROPERTY_WELCOME_URL, welcomeUrl);
+    }
+
+    private void setWebApplicationProperty(String propertyKey, Object propertyValue) throws Exception {
         org.osgi.service.cm.Configuration conf =
                 configurationAdmin.getConfiguration(WebApplicationConstants.PID, "?");
 
@@ -147,7 +194,7 @@ public final class SecurityFilterTest extends ITestSupport {
             dict = new Hashtable<>();
         }
 
-        dict.put(WebApplicationConstants.PROPERTY_LOGIN_URL, loginUrl);
+        dict.put(propertyKey, propertyValue);
         conf.update(dict);
     }
 
