@@ -42,7 +42,7 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
     private List<SecurityService> securityServices = new ArrayList<>();
 
     private EnvironmentLoader loader;
-    private String loginUrl;
+    private String loginUrl = WebApplicationConstants.DEFAULT_LOGIN_URL;
 
     @Override
     public void init() throws Exception {
@@ -50,7 +50,7 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
         loader.initEnvironment(getServletContext());
 
         super.init();
-        setLoginUrl(loginUrl);
+        bindLoginUrlToAccessControlFilter();
     }
 
     @Override
