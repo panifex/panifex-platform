@@ -75,7 +75,6 @@
         <module>panifex-test-support</module>
         <module>poms</module>
         <module>panifex-module-api</module>
-        <module>panifex-module-web-api</module>
         <module>panifex-module-zk-api</module>
         <module>panifex-service-api</module>
         <module>panifex-service-impl</module>
@@ -749,11 +748,6 @@
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-module-dashboard-impl</artifactId>
-                <version>${panifex.platform.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.panifex</groupId>
-                <artifactId>panifex-module-web-api</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>

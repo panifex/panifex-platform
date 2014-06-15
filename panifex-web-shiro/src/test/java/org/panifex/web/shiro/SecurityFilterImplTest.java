@@ -35,7 +35,7 @@ import org.apache.shiro.web.servlet.ShiroFilter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.panifex.module.web.api.WebApplicationConstants;
+import org.panifex.module.api.WebApplicationConstants;
 import org.panifex.service.api.security.SecurityService;
 import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;

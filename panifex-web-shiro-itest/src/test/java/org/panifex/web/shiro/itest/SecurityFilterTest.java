@@ -46,9 +46,9 @@ import org.ops4j.pax.web.extender.whiteboard.ExtenderConstants;
 import org.ops4j.pax.web.service.WebContainerConstants;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.cm.ConfigurationAdmin;
+import org.panifex.module.api.WebApplicationConstants;
 import org.panifex.module.api.security.DefaultFilterPath;
 import org.panifex.module.api.security.FilterPath;
-import org.panifex.module.web.api.WebApplicationConstants;
 import org.panifex.test.support.ITestSupport;
 
 @ExamReactorStrategy(PerMethod.class)
@@ -72,7 +72,6 @@ public final class SecurityFilterTest extends ITestSupport {
             mavenBundle("org.apache.shiro", "shiro-ehcache").version(asInProject()),
             mavenBundle("org.apache.shiro", "shiro-web").version(asInProject()),
             mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
-            mavenBundle("org.panifex", "panifex-module-web-api").version(asInProject()),
             mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
             mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
             mavenBundle("org.panifex", "panifex-web-shiro").version(asInProject()));

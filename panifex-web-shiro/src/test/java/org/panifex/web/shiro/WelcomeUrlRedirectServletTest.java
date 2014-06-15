@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
-import org.panifex.module.web.api.WebApplicationConstants;
+import org.panifex.module.api.WebApplicationConstants;
 import org.panifex.test.support.TestSupport;
 
 /**
