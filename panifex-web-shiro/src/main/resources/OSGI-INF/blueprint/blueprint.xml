@@ -54,6 +54,14 @@
             unbind-method="unbindFilterPath"/>
     </reference-list>
 
+    <reference-list interface="org.panifex.service.api.security.SecurityService"
+            availability="optional"
+            member-type="service-reference">
+        <reference-listener ref="environment"
+            bind-method="bindSecurityService"
+            unbind-method="unbindSecurityService"/>
+    </reference-list>
+
     <!-- Security Filter -->
 
     <service ref="securityFilter" interface="javax.servlet.Filter">

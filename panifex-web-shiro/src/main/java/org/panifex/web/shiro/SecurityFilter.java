@@ -20,11 +20,7 @@ package org.panifex.web.shiro;
 
 import javax.servlet.Filter;
 
-import org.apache.shiro.web.mgt.WebSecurityManager;
-
 public interface SecurityFilter extends Filter {
-
-    WebSecurityManager getSecurityManager();
 
     /**
      * Returns the login URL used to authenticate a user.
@@ -37,4 +33,24 @@ public interface SecurityFilter extends Filter {
      * Sets the login URL used to authenticate a user.
      */
     void setLoginUrl(String loginUrl);
+
+    /**
+     * Returns the success url to use as the default location a user is sent after logging in. Typically a redirect
+     * after login will redirect to the originally request URL; this property is provided mainly as a fallback in case
+     * the original request URL is not available or not specified.
+     * <p/>
+     *
+     * @return the success url to use as the default location a user is sent after logging in.
+     */
+    String getSuccessUrl();
+
+    /**
+     * Sets the default/fallback success url to use as the default location a user is sent after logging in.  Typically
+     * a redirect after login will redirect to the originally request URL; this property is provided mainly as a
+     * fallback in case the original request URL is not available or not specified.
+     * <p/>
+     *
+     * @param successUrl the success URL to redirect the user to after a successful login.
+     */
+    void setSuccessUrl(String successUrl);
 }

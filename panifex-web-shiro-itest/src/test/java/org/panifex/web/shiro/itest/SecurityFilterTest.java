@@ -23,7 +23,9 @@ import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.Servlet;
@@ -33,6 +35,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,8 +52,13 @@ import org.osgi.service.cm.ConfigurationAdmin;
 import org.panifex.module.api.WebApplicationConstants;
 import org.panifex.module.api.security.DefaultFilterPath;
 import org.panifex.module.api.security.FilterPath;
+import org.panifex.service.api.security.SecurityService;
 import org.panifex.test.support.ITestSupport;
+import org.panifex.web.shiro.SecurityFilterImpl;
 
+/**
+ * Integration tests for {@link SecurityFilterImpl} class.
+ */
 @ExamReactorStrategy(PerMethod.class)
 @RunWith(PaxExam.class)
 public final class SecurityFilterTest extends ITestSupport {
@@ -93,7 +101,7 @@ public final class SecurityFilterTest extends ITestSupport {
     public void filteredGetFromServletTest() throws Exception {
         // register filter path
         ServiceRegistration<FilterPath> filterPathRegistration =
-                registerFilterPath("/zk/*", "authc");
+                registerFilterPath("/zk/*", DefaultFilter.authc.toString());
 
         // register login servlet
         ServiceRegistration<Servlet> servletRegistration =
@@ -112,7 +120,7 @@ public final class SecurityFilterTest extends ITestSupport {
 
         // register filter path
         ServiceRegistration<FilterPath> filterPathRegistration =
-                registerFilterPath("/zk/*", "authc");
+                registerFilterPath("/zk/*", DefaultFilter.authc.toString());
 
         // register login servlet
         ServiceRegistration<Servlet> servletRegistration =
@@ -152,6 +160,44 @@ public final class SecurityFilterTest extends ITestSupport {
 
         resetWelcomeUrl();
         servletRegistration.unregister();
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        String username = "mario";
+        String password = "1234";
+
+        ServiceRegistration<FilterPath> filterPathRegistration = null;
+        ServiceRegistration<SecurityService> securityServiceRegistration = null;
+
+        try {
+            // register filter path
+            filterPathRegistration =
+                    registerFilterPath("/*", DefaultFilter.authc.toString());
+
+            // register security service
+            SimpleSecurityService simpleSecurityService = new SimpleSecurityService();
+            simpleSecurityService.addAccount(username, password);
+
+            securityServiceRegistration =
+                    registerService(SecurityService.class, simpleSecurityService, null);
+
+            Map<String, String> params = new HashMap<>();
+            params.put("username", username);
+            params.put("password", password);
+
+            testPost("http://localhost:8181".concat(WebApplicationConstants.DEFAULT_LOGIN_URL),
+                    HttpServletResponse.SC_FOUND,
+                    null,
+                    params);
+        } finally {
+            if (filterPathRegistration != null) {
+                filterPathRegistration.unregister();
+            }
+            if (securityServiceRegistration != null) {
+                securityServiceRegistration.unregister();
+            }
+        }
     }
 
     private void resetLoginUrl() throws Exception {

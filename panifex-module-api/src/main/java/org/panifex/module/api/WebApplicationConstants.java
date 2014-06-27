@@ -34,11 +34,20 @@ public class WebApplicationConstants {
     public static final String DEFAULT_LOGIN_URL = "/login";
 
     /**
+     * Default success url to use as the default location a user is sent after logging in. Typically a redirect
+     * after login will redirect to the originally request URL; this property is provided mainly as a fallback in case
+     * the original request URL is not available or not specified.
+     */
+    public static final String DEFAULT_SUCCESS_URL = "/main";
+
+    /**
      * Simple default welcome URL equal to <code>/welcome</code>
      */
     public static final String DEFAULT_WELCOME_URL = "/index";
 
     public static final String PROPERTY_LOGIN_URL = "loginUrl";
+
+    public static final String PROPERTY_SUCCESS_URL = "successUrl";
 
     public static final String PROPERTY_WELCOME_URL = "welcomeUrl";
 

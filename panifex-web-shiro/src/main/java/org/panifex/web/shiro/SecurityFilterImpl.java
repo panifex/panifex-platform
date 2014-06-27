@@ -18,20 +18,18 @@
  ******************************************************************************/
 package org.panifex.web.shiro;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Filter;
 
 import org.apache.shiro.web.env.EnvironmentLoader;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.filter.authc.AuthenticationFilter;
 import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.filter.mgt.FilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
 import org.apache.shiro.web.servlet.ShiroFilter;
 import org.panifex.module.api.WebApplicationConstants;
-import org.panifex.service.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,10 +37,9 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private List<SecurityService> securityServices = new ArrayList<>();
-
     private EnvironmentLoader loader;
     private String loginUrl = WebApplicationConstants.DEFAULT_LOGIN_URL;
+    private String successUrl = WebApplicationConstants.DEFAULT_SUCCESS_URL;
 
     @Override
     public void init() throws Exception {
@@ -51,6 +48,7 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
 
         super.init();
         bindLoginUrlToAccessControlFilter();
+        bindSuccessUrlToAuthenticationFilter();
     }
 
     @Override
@@ -63,16 +61,6 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
         this.loader = loader;
     }
 
-    public void bind(SecurityService securityService) {
-        log.debug("Bind security service: {}", securityService);
-        securityServices.add(securityService);
-    }
-
-    public void unbind(SecurityService securityService) {
-        log.debug("Unbind security service: {}", securityService);
-        securityServices.remove(securityService);
-    }
-
     @Override
     public String getLoginUrl() {
         return loginUrl;
@@ -81,30 +69,59 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
     @Override
     public void setLoginUrl(String loginUrl) {
         log.debug("Set new login url {}", loginUrl);
-        if ((loginUrl == null) || loginUrl.isEmpty()) {
+        if (loginUrl == null || loginUrl.isEmpty()) {
             loginUrl = WebApplicationConstants.DEFAULT_LOGIN_URL;
         }
         this.loginUrl = loginUrl;
         bindLoginUrlToAccessControlFilter();
     }
 
+    @Override
+    public String getSuccessUrl() {
+        return successUrl;
+    }
+
+    @Override
+    public void setSuccessUrl(String successUrl) {
+        log.debug("Set new success url {}", successUrl);
+        if (successUrl == null || successUrl.isEmpty()) {
+            successUrl = WebApplicationConstants.DEFAULT_SUCCESS_URL;
+        }
+        this.successUrl = successUrl;
+        bindSuccessUrlToAuthenticationFilter();
+    }
+
     private void bindLoginUrlToAccessControlFilter() {
+        AccessControlFilter accessControlFilter =
+                (AccessControlFilter) getFilter(DefaultFilter.authc.toString());
+
+        if (accessControlFilter != null) {
+            log.debug("Bind login url {}", loginUrl);
+            accessControlFilter.setLoginUrl(loginUrl);
+        }
+    }
+
+    private void bindSuccessUrlToAuthenticationFilter() {
+        AuthenticationFilter authenticationFilter =
+                (AuthenticationFilter) getFilter(DefaultFilter.authc.toString());
+
+        if (authenticationFilter != null) {
+            log.debug("Bind success url {}", successUrl);
+            authenticationFilter.setSuccessUrl(successUrl);
+        }
+    }
+
+    private Filter getFilter(String filterName) {
         PathMatchingFilterChainResolver filterChainResolver =
                 (PathMatchingFilterChainResolver) getFilterChainResolver();
 
         if (filterChainResolver != null) {
-
             FilterChainManager filterChainManager = filterChainResolver.getFilterChainManager();
 
             Map<String, Filter> filters = filterChainManager.getFilters();
 
-            AccessControlFilter accessControlFilter =
-                    (AccessControlFilter) filters.get(DefaultFilter.authc.toString());
-
-            if (accessControlFilter != null) {
-                log.debug("Bind login url {}", loginUrl);
-                accessControlFilter.setLoginUrl(loginUrl);
-            }
+            return filters.get(filterName);
         }
+        return null;
     }
 }

@@ -18,27 +18,23 @@
  ******************************************************************************/
 package org.panifex.web.shiro.itest;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.realm.SimpleAccountRealm;
+import org.panifex.service.api.security.AccountNotExpiredException;
+import org.panifex.service.api.security.SecurityService;
 
 /**
- * Simple servlet which returns HTTP 200 - OK as response for any request.
- * <p>
- * It should be used only in test cases.
+ * A simple security service that uses a set of configured user accounts and roles to
+ * support authentication and authorization.  Each account entry specifies the username, password,
+ * and roles for a user.  Roles can also be mapped to permissions and associated with users.
  */
-public class OkServlet extends HttpServlet  {
+public class SimpleSecurityService extends SimpleAccountRealm implements SecurityService {
 
     @Override
-    protected void doGet(
-        HttpServletRequest request,
-        HttpServletResponse response) throws ServletException, IOException {
-
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println("<h1>Hello Whiteboard Extender</h1>");
+    public void updateAccountExpiredPassword(String username,
+            String oldPassword, String newPassword)
+            throws AccountNotExpiredException, IncorrectCredentialsException,
+            UnknownAccountException {
     }
 }

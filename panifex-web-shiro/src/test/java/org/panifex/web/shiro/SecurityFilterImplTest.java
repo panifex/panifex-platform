@@ -28,6 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.env.EnvironmentLoader;
 import org.apache.shiro.web.env.WebEnvironment;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.filter.authc.AuthenticationFilter;
 import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.filter.mgt.FilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
@@ -36,7 +37,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.module.api.WebApplicationConstants;
-import org.panifex.service.api.security.SecurityService;
 import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -70,38 +70,13 @@ public class SecurityFilterImplTest extends TestSupport {
     }
 
     @Test
-    public void testBindSecurityService() {
-        // create mocks
-        SecurityService securityServiceMock = createMock(SecurityService.class);
-
-        replay(securityServiceMock);
-
-        // bind realm
-        filter.bind(securityServiceMock);
-
-        verify(securityServiceMock);
-    }
-
-    @Test
-    public void testUnbindSecurityService() {
-        // create mocks
-        SecurityService securityServiceMock = createMock(SecurityService.class);
-
-        replay(securityServiceMock);
-
-        // unbind realm
-        filter.unbind(securityServiceMock);
-
-        verify(securityServiceMock);
-    }
-
-    @Test
     public void testInitSecurityFilter() throws Exception {
         // expect initializing environment
         expect(environmentLoaderMock.initEnvironment(servletContextMock)).
             andReturn(createMock(WebEnvironment.class));
 
         expectSettingDefaultLoginUrl();
+        expectSettingDefaultSuccessUrl();
 
         // perform test
         replayAll();
@@ -141,6 +116,38 @@ public class SecurityFilterImplTest extends TestSupport {
         verifyAll();
     }
 
+    @Test
+    public void testSetUnknownSuccessUrl() throws Exception {
+        expectSettingDefaultSuccessUrl();
+
+        // perform test
+        replayAll();
+        filter.setSuccessUrl(null);
+        verifyAll();
+    }
+
+    @Test
+    public void testSetEmptySuccessUrl() throws Exception {
+        expectSettingDefaultSuccessUrl();
+
+        // perform test
+        replayAll();
+        filter.setSuccessUrl(StringUtils.EMPTY);
+        verifyAll();
+    }
+
+    @Test
+    public void testSetValidSuccessUrl() throws Exception {
+        String validSuccessUrl = "/validsuccess";
+
+        expectSettingSuccessUrl(validSuccessUrl);
+
+        // perform test
+        replayAll();
+        filter.setSuccessUrl(validSuccessUrl);
+        verifyAll();
+    }
+
     private void expectSettingDefaultLoginUrl() {
         expectSettingLoginUrl(WebApplicationConstants.DEFAULT_LOGIN_URL);
     }
@@ -158,5 +165,25 @@ public class SecurityFilterImplTest extends TestSupport {
 
         // expect setting login url
         accessControlFilter.setLoginUrl(loginUrl);
+    }
+
+    private void expectSettingDefaultSuccessUrl() {
+        expectSettingSuccessUrl(WebApplicationConstants.DEFAULT_SUCCESS_URL);
+    }
+
+    private void expectSettingSuccessUrl(String successUrl) {
+        // expect getting filterChainManager
+        FilterChainManager filterChainManagerMock = createMock(FilterChainManager.class);
+        expect(filterChainResolverMock.getFilterChainManager()).andReturn(filterChainManagerMock);
+
+        // expect getting form authentication filters
+        Map<String, Filter> filters = new HashMap<>();
+        AuthenticationFilter authenticationFilter = createMock(AuthenticationFilter.class);
+        filters.put(DefaultFilter.authc.toString(), authenticationFilter);
+        expect(filterChainManagerMock.getFilters()).andReturn(filters);
+
+        // expect setting success url
+        authenticationFilter.setSuccessUrl(successUrl);
+
     }
 }

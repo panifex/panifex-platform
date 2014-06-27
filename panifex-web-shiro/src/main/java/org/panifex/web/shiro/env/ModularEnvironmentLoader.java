@@ -22,14 +22,13 @@ import javax.servlet.ServletContext;
 
 import org.apache.shiro.util.LifecycleUtils;
 import org.apache.shiro.web.env.EnvironmentLoader;
-import org.apache.shiro.web.env.MutableWebEnvironment;
 import org.apache.shiro.web.env.WebEnvironment;
 
 public class ModularEnvironmentLoader extends EnvironmentLoader {
 
-    private MutableWebEnvironment environment;
+    private ModularWebEnvironment environment;
 
-    public void setEnvironment(MutableWebEnvironment environment) {
+    public void setEnvironment(ModularWebEnvironment environment) {
         this.environment = environment;
     }
 
