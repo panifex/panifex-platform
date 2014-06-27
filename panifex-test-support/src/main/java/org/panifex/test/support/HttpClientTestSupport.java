@@ -21,9 +21,13 @@ package org.panifex.test.support;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Map;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
@@ -42,11 +46,30 @@ public abstract class HttpClientTestSupport {
         return testGet(path, httpSC, null);
     }
 
-    protected final String testGet(String path, int httpSC, String expectedContent) {
+    protected final String testPost(String path, int httpSC) {
+        return testPost(path, httpSC, null, null);
+    }
 
-        HttpGet httpget = new HttpGet(path);
+    protected final String testPost(String path, int httpSC, String expectedContent, Map<String, String> params) {
+        RequestBuilder requestBuilder = RequestBuilder.post()
+            .setUri(path);
+
+        if (params != null) {
+            for (Map.Entry<String, String> param : params.entrySet()) {
+                requestBuilder.addParameter(param.getKey(), param.getValue());
+            }
+        }
+
+        return testSendHttpRequest(requestBuilder.build(), httpSC, expectedContent);
+    }
+
+    protected final String testGet(String path, int httpSC, String expectedContent) {
+        return testSendHttpRequest(new HttpGet(path), httpSC, expectedContent);
+    }
+
+    protected final String testSendHttpRequest(HttpUriRequest httpRequest, int httpSC, String expectedContent) {
         try {
-            HttpResponse response = getHttpClient().execute(httpget);
+            HttpResponse response = getHttpClient().execute(httpRequest);
 
             assertEquals("HttpResponseCode", httpSC, response.getStatusLine().getStatusCode());
 
