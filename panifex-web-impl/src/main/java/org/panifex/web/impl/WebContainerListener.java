@@ -1,17 +1,17 @@
 /*******************************************************************************
  * Panifex platform
  * Copyright (C) 2013  Mario Krizmanic
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -67,8 +67,8 @@ public class WebContainerListener {
     @Inject(ref = ZkLayoutServiceImpl.ID)
     private ZkLayoutService zkLayoutService;
     private ServiceRegistration<ZkLayoutService> zkLayoutServiceRegistration;
-    
-    
+
+
     public void setBundleContext(BundleContext bundleContext) {
         this.bundleContext = bundleContext;
     }
@@ -76,7 +76,7 @@ public class WebContainerListener {
     public void setSecurityFilter(SecurityFilterImpl securityFilter) {
         this.securityFilter = securityFilter;
     }
-    
+
     public void setZkLayoutService(ZkLayoutService zkLayoutService) {
         this.zkLayoutService = zkLayoutService;
     }
@@ -86,6 +86,7 @@ public class WebContainerListener {
         // configure zkLoader servlet
         log.debug("Configure ZkLoader servlet");
         Hashtable<String, String> loaderParams = new Hashtable<>();
+        loaderParams.put("compress", "false");
         loaderParams.put("servlet-name", "zkLoader");
         loaderParams.put("update-uri", "/zkau"); // URI mapped to auEngine
         String loaderMapping[] = {"/zk/*"}; // mapping of UI files
@@ -134,7 +135,7 @@ public class WebContainerListener {
             securityFilterServiceRegistration =
                     bundleContext.registerService(SecurityFilter.class, securityFilter, new Hashtable<String, String>());
             log.debug("Security filter has been registered");
-            
+
             // register resources
             container.registerResources("/", "/", ctx);
             container.registerResources("/css", "/css", ctx);
@@ -154,7 +155,7 @@ public class WebContainerListener {
             zkLayoutServiceRegistration.unregister();
             log.debug("Zk layout service has been unregistered");
         }
-        
+
         // unregister shiro filter
         if (securityFilterServiceRegistration != null) {
             securityFilterServiceRegistration.unregister();
