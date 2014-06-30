@@ -37,7 +37,6 @@
             <property name="openjpa.ConnectionUserName" value="sa"/>
             <property name="openjpa.ConnectionPassword" value=""/>
             <property name="openjpa.Log" value="SQL=TRACE"/>
-            <property name="openjpa.DynamicEnhancementAgent" value="false"/> 
         </properties>
 	</persistence-unit>
 
