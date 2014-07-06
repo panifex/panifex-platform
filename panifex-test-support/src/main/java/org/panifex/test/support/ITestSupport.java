@@ -46,6 +46,11 @@ import org.osgi.framework.ServiceRegistration;
 @ExamReactorStrategy(PerClass.class)
 public abstract class ITestSupport extends HttpClientTestSupport {
 
+    protected static final String CONSOLE_PORT = "6666";
+    protected static final String HOSTNAME = "127.0.0.1";
+    protected static final String PORT = "8181";
+    protected static final String URL = "http://" + HOSTNAME + ":" + PORT;
+
     @Inject
     private BundleContext bundleContext;
 
@@ -59,11 +64,7 @@ public abstract class ITestSupport extends HttpClientTestSupport {
             cleanCaches(true),
             junitBundles(),
 
-            systemProperty("java.protocol.handler.pkgs").value("org.ops4j.pax.url"),
-            systemProperty("org.osgi.service.http.hostname").value("127.0.0.1"),
-            systemProperty("org.osgi.service.http.port").value("8181"),
-
-            frameworkProperty("osgi.console").value("6666"),
+            frameworkProperty("osgi.console").value(CONSOLE_PORT),
             frameworkProperty("osgi.console.enable.builtin").value("true"),
 
             mavenBundle("biz.aQute.bnd", "bndlib").version(asInProject()),
@@ -87,6 +88,10 @@ public abstract class ITestSupport extends HttpClientTestSupport {
         return OptionUtils.combine(
             baseConfigure(),
 
+            systemProperty("java.protocol.handler.pkgs").value("org.ops4j.pax.url"),
+            systemProperty("org.osgi.service.http.hostname").value(HOSTNAME),
+            systemProperty("org.osgi.service.http.port").value(PORT),
+
             mavenBundle("org.ops4j.pax.logging", "pax-logging-service").version(asInProject()),
             mavenBundle("org.ops4j.pax.swissbox", "pax-swissbox-bnd").version(asInProject()),
             mavenBundle("org.ops4j.pax.swissbox", "pax-swissbox-property").version(asInProject()),
@@ -102,10 +107,11 @@ public abstract class ITestSupport extends HttpClientTestSupport {
     }
 
     protected final void initServletListener(String servletName) {
-        if (servletName == null)
+        if (servletName == null) {
             servletListener = new ServletListenerImpl();
-        else
+        } else {
             servletListener = new ServletListenerImpl(servletName);
+        }
         bundleContext.registerService(ServletListener.class, servletListener,
                 null);
     }

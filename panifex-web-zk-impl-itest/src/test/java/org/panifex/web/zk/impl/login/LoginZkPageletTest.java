@@ -58,6 +58,6 @@ public class LoginZkPageletTest extends ITestSupport {
 
     @Test
     public void httpGetFromServletTest() throws Exception {
-        testGet("http://localhost:8181/zk/login", HttpServletResponse.SC_OK);
+        testGet(URL + "/zk/login", HttpServletResponse.SC_OK);
     }
 }

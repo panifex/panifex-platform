@@ -72,7 +72,7 @@ public class ServletTest extends ITestSupport {
         ServiceRegistration<PageletMapping> mappingRegistration =
                 registerService(PageletMapping.class, mapping);
 
-        testGet("http://localhost:8181/zk/", HttpServletResponse.SC_OK);
+        testGet(URL + "/zk/", HttpServletResponse.SC_OK);
 
         mappingRegistration.unregister();
         pageletRegistration.unregister();
