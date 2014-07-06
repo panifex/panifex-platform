@@ -35,6 +35,39 @@ public interface SecurityFilter extends Filter {
     void setLoginUrl(String loginUrl);
 
     /**
+     * Returns a HTTP login request parameter which contains an user's password. The
+     * parameter is used in login process.
+     *
+     * @return the HTTP parameter which contains an user's password
+     */
+    String getPasswordParam();
+
+    /**
+     * Sets a HTTP login request parameter which contains an user's password. The
+     * parameter is used in login process.
+     *
+     * @param passwordParam the HTTP parameter which contains an user's password
+     */
+    void setPasswordParam(String passwordParam);
+
+    /**
+     * Returns a HTTP login request parameter which contains a <i>remember me</i>
+     * property. The parameter is used in login process.
+     *
+     * @return the HTTP parameter which contains a <i>remember me</i> property
+     */
+    String getRememberMeParam();
+
+    /**
+     * Sets a HTTP login request parameter which contains a <i>remember me</i> property.
+     * The parameter is used in login process.
+     *
+     * @param rememberMeParam
+     *      the HTTP parameter which contains a <i>remember me</i> property
+     */
+    void setRememberMeParam(String rememberMeParam);
+
+    /**
      * Returns the success url to use as the default location a user is sent after logging in. Typically a redirect
      * after login will redirect to the originally request URL; this property is provided mainly as a fallback in case
      * the original request URL is not available or not specified.
@@ -53,4 +86,20 @@ public interface SecurityFilter extends Filter {
      * @param successUrl the success URL to redirect the user to after a successful login.
      */
     void setSuccessUrl(String successUrl);
+
+    /**
+     * Returns the HTTP login request parameter which contains an username. The parameter
+     * is used in login process.
+     *
+     * @return the HTTP parameter which contains an username
+     */
+    String getUsernameParam();
+
+    /**
+     * Sets the HTTP login request parameter which contains an username. The parameter
+     * is used in login process.
+     *
+     * @param usernameParam the HTTP parameter which contains an username
+     */
+    void setUsernameParam(String usernameParam);
 }

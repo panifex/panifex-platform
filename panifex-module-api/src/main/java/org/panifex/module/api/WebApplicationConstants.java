@@ -30,8 +30,27 @@ public class WebApplicationConstants {
 
     /**
      * Simple default login URL equal to <code>/login</code>
+     *
+     * @see #PROPERTY_LOGIN_URL
      */
     public static final String DEFAULT_LOGIN_URL = "/login";
+
+    /**
+     * Default HTTP login request parameter which contains an user's password. The parameter is used
+     * in login process.
+     *
+     * @see org.apache.shiro.web.filter.authc.FormAuthenticationFilter
+     * @see #PROPERTY_PASSWORD_PARAM
+     */
+    public static final String DEFAULT_PASSWORD_PARAM = "password";
+
+    /**
+     * Default HTTP login request parameter which contains a <i>remember me</i> property. The
+     * parameter is used in login process.
+     *
+     * @see org.apache.shiro.web.filter.authc.FormAuthenticationFilter
+     */
+    public static final String DEFAULT_REMEMBER_ME_PARAM = "rememberMe";
 
     /**
      * Default success url to use as the default location a user is sent after logging in. Typically a redirect
@@ -41,14 +60,57 @@ public class WebApplicationConstants {
     public static final String DEFAULT_SUCCESS_URL = "/main";
 
     /**
+     * Default HTTP login request parameter which contains an username. The parameter is used
+     * in login process.
+     *
+     * @see org.apache.shiro.web.filter.authc.FormAuthenticationFilter
+     */
+    public static final String DEFAULT_USERNAME_PARAM = "username";
+
+    /**
      * Simple default welcome URL equal to <code>/welcome</code>
      */
     public static final String DEFAULT_WELCOME_URL = "/index";
 
+    /**
+     * Property which can be used to register a new login url.
+     *
+     * @see #DEFAULT_LOGIN_URL
+     */
     public static final String PROPERTY_LOGIN_URL = "loginUrl";
 
+    /**
+     * Property which can be used to register a new user's password parameter in HTTP login requests.
+     *
+     * @see #DEFAULT_PASSWORD_PARAM
+     */
+    public static final String PROPERTY_PASSWORD_PARAM = "passwordParam";
+
+    /**
+     * Property which can be used to register a new <i>remember me</i> parameter in HTTP login
+     * requests.
+     *
+     * @see #DEFAULT_REMEMBER_ME_PARAM
+     */
+    public static final String PROPERTY_REMEMBER_ME_PARAM = "rememberMeParam";
+
+    /**
+     * Property which can be used to register a new username parameter in HTTP login requests.
+     *
+     * @see #DEFAULT_USERNAME_PARAM
+     */
+    public static final String PROPERTY_USERNAME_PARAM = "usernameParam";
+
+    /**
+     * Property which can be used to register a new success url.
+     *
+     * @see #DEFAULT_SUCCESS_URL
+     */
     public static final String PROPERTY_SUCCESS_URL = "successUrl";
 
+    /**
+     * Property which can be used to register a new welcome url.
+     */
     public static final String PROPERTY_WELCOME_URL = "welcomeUrl";
 
     /**

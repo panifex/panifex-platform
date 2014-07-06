@@ -18,7 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.shiro.itest;
 
-import static org.junit.Assert.assertEquals;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
@@ -31,15 +30,10 @@ import javax.inject.Inject;
 import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
@@ -48,6 +42,7 @@ import org.ops4j.pax.exam.spi.reactors.PerMethod;
 import org.ops4j.pax.web.extender.whiteboard.ExtenderConstants;
 import org.ops4j.pax.web.service.WebContainerConstants;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.panifex.module.api.WebApplicationConstants;
 import org.panifex.module.api.security.DefaultFilterPath;
@@ -66,7 +61,7 @@ public final class SecurityFilterTest extends ITestSupport {
     @Inject
     private ConfigurationAdmin configurationAdmin;
 
-    @Configuration
+    @org.ops4j.pax.exam.Configuration
     public Option[] config() {
         return OptionUtils.combine(
             webConfigure(),
@@ -86,94 +81,154 @@ public final class SecurityFilterTest extends ITestSupport {
     @Before
     public void setUp() throws Exception {
         waitForWebListener();
+        resetWebApplicationProperties();
     }
 
     @Test
     public void unfilteredGetFromServletTest() throws Exception {
-        HttpClient httpclient = HttpClientBuilder.create().build();
-        HttpGet httpget = new HttpGet("http://localhost:8181/");
-        HttpResponse response = httpclient.execute(httpget);
-
-        assertEquals(HttpServletResponse.SC_NOT_FOUND, response.getStatusLine().getStatusCode());
+        testGet(URL, HttpServletResponse.SC_NOT_FOUND);
     }
 
     @Test
     public void filteredGetFromServletTest() throws Exception {
-        // register filter path
-        ServiceRegistration<FilterPath> filterPathRegistration =
-                registerFilterPath("/zk/*", DefaultFilter.authc.toString());
+        ServiceRegistration<FilterPath> filterPathRegistration = null;
+        ServiceRegistration<Servlet> servletRegistration = null;
 
-        // register login servlet
-        ServiceRegistration<Servlet> servletRegistration =
-                registerServlet("loginServlet", WebApplicationConstants.DEFAULT_LOGIN_URL, new OkServlet());
+        try {
+            // register filter path
+            filterPathRegistration =
+                    registerFilterPath("/zk/*", DefaultFilter.authc);
 
-        testGet("http://localhost:8181/zk/", HttpServletResponse.SC_OK);
+            // register login servlet
+            servletRegistration =
+                    registerServlet("loginServlet",
+                            WebApplicationConstants.DEFAULT_LOGIN_URL,
+                            new OkServlet());
 
-        filterPathRegistration.unregister();
-        servletRegistration.unregister();
+            testGet(URL + "/zk/", HttpServletResponse.SC_OK);
+        } finally {
+            if (filterPathRegistration != null) {
+                filterPathRegistration.unregister();
+            }
+            if (servletRegistration != null) {
+                servletRegistration.unregister();
+            }
+        }
     }
 
     @Test
     public void testSetValidLoginUrl() throws Exception {
-        String newLoginUrl = "/new";
-        registerNewLoginUrl(newLoginUrl);
+        ServiceRegistration<FilterPath> filterPathRegistration = null;
+        ServiceRegistration<Servlet> servletRegistration = null;
 
-        // register filter path
-        ServiceRegistration<FilterPath> filterPathRegistration =
-                registerFilterPath("/zk/*", DefaultFilter.authc.toString());
+        try {
+            String newLoginUrl = "/new";
+            registerNewLoginUrl(newLoginUrl);
 
-        // register login servlet
-        ServiceRegistration<Servlet> servletRegistration =
-                registerServlet("loginServlet", newLoginUrl, new OkServlet());
+            // register filter path
+            filterPathRegistration =
+                    registerFilterPath("/zk/*", DefaultFilter.authc);
 
-        testGet("http://localhost:8181/zk/", HttpServletResponse.SC_OK);
+            // register login servlet
+            servletRegistration =
+                    registerServlet("loginServlet", newLoginUrl, new OkServlet());
 
-        resetLoginUrl();
-        servletRegistration.unregister();
-        filterPathRegistration.unregister();
+            testGet(URL + "/zk/", HttpServletResponse.SC_OK);
+        } finally {
+            if (servletRegistration != null) {
+                servletRegistration.unregister();
+            }
+            if (filterPathRegistration != null) {
+                filterPathRegistration.unregister();
+            }
+        }
     }
 
     @Test
     public void testRedirectToDefaultWelcomeUrl() throws Exception {
-        // register welcome servlet
-        ServiceRegistration<Servlet> servletRegistration =
-                registerServlet("welcomeServlet",
-                    WebApplicationConstants.DEFAULT_WELCOME_URL,
-                    new OkServlet());
+        ServiceRegistration<Servlet> servletRegistration = null;
 
-        testGet("http://localhost:8181/", HttpServletResponse.SC_OK);
+        try {
+            // register welcome servlet
+            servletRegistration =
+                    registerServlet("welcomeServlet",
+                        WebApplicationConstants.DEFAULT_WELCOME_URL,
+                        new OkServlet());
 
-        resetWelcomeUrl();
-        servletRegistration.unregister();
+            testGet(URL, HttpServletResponse.SC_OK);
+        } finally {
+            if (servletRegistration != null) {
+                servletRegistration.unregister();
+            }
+        }
     }
 
     @Test
-    public void testSetValidWelcomeUrl() throws Exception {
-        String newWelcomeUrl = "/welcome";
-        registerNewWelcomeUrl(newWelcomeUrl);
+    public void testSetValidWelcomeUrlAndRedirectToIt() throws Exception {
+        ServiceRegistration<Servlet> servletRegistration = null;
 
-        // register welcome servlet
-        ServiceRegistration<Servlet> servletRegistration =
-                registerServlet("welcomeServlet", newWelcomeUrl, new OkServlet());
+        try {
+            String newWelcomeUrl = "/welcome";
+            registerNewWelcomeUrl(newWelcomeUrl);
 
-        testGet("http://localhost:8181/", HttpServletResponse.SC_OK);
+            // register welcome servlet
+            servletRegistration =
+                    registerServlet("welcomeServlet", newWelcomeUrl, new OkServlet());
 
-        resetWelcomeUrl();
-        servletRegistration.unregister();
+            testGet(URL, HttpServletResponse.SC_OK);
+        } finally {
+            if (servletRegistration != null) {
+                servletRegistration.unregister();
+            }
+        }
     }
 
     @Test
-    public void testLogin() throws Exception {
-        String username = "mario";
-        String password = "1234";
+    public void testLoginWithDefaultParams() throws Exception {
+        testLoginWithSpecifiedParams(
+                WebApplicationConstants.DEFAULT_USERNAME_PARAM,
+                WebApplicationConstants.DEFAULT_PASSWORD_PARAM,
+                WebApplicationConstants.DEFAULT_REMEMBER_ME_PARAM);
+    }
+
+    @Test
+    public void testLoginWithCustomParams() throws Exception {
+        testLoginWithSpecifiedParams(
+                "customUsernameParam",
+                "customPasswordParam",
+                "customRememberMeParam");
+    }
+
+    private void testLoginWithSpecifiedParams(
+            String usernameParam,
+            String passwordParam,
+            String rememberMeParam) throws Exception {
+        String username = "username1";
+        String password = "userPass1";
 
         ServiceRegistration<FilterPath> filterPathRegistration = null;
         ServiceRegistration<SecurityService> securityServiceRegistration = null;
 
         try {
+            // register properties
+            setWebApplicationProperty(
+                    WebApplicationConstants.PROPERTY_USERNAME_PARAM,
+                    usernameParam,
+                    WebApplicationConstants.DEFAULT_USERNAME_PARAM);
+
+            setWebApplicationProperty(
+                    WebApplicationConstants.PROPERTY_PASSWORD_PARAM,
+                    passwordParam,
+                    WebApplicationConstants.DEFAULT_PASSWORD_PARAM);
+
+            setWebApplicationProperty(
+                    WebApplicationConstants.PROPERTY_REMEMBER_ME_PARAM,
+                    rememberMeParam,
+                    WebApplicationConstants.DEFAULT_REMEMBER_ME_PARAM);
+
             // register filter path
             filterPathRegistration =
-                    registerFilterPath("/*", DefaultFilter.authc.toString());
+                    registerFilterPath("/*", DefaultFilter.authc);
 
             // register security service
             SimpleSecurityService simpleSecurityService = new SimpleSecurityService();
@@ -183,10 +238,10 @@ public final class SecurityFilterTest extends ITestSupport {
                     registerService(SecurityService.class, simpleSecurityService, null);
 
             Map<String, String> params = new HashMap<>();
-            params.put("username", username);
-            params.put("password", password);
+            params.put(usernameParam, username);
+            params.put(passwordParam, password);
 
-            testPost("http://localhost:8181".concat(WebApplicationConstants.DEFAULT_LOGIN_URL),
+            testPost(URL + WebApplicationConstants.DEFAULT_LOGIN_URL,
                     HttpServletResponse.SC_FOUND,
                     null,
                     params);
@@ -200,25 +255,32 @@ public final class SecurityFilterTest extends ITestSupport {
         }
     }
 
-    private void resetLoginUrl() throws Exception {
-        registerNewLoginUrl(WebApplicationConstants.DEFAULT_LOGIN_URL);
-    }
-
     private void registerNewLoginUrl(String loginUrl) throws Exception {
         setWebApplicationProperty(WebApplicationConstants.PROPERTY_LOGIN_URL, loginUrl);
-    }
-
-    private void resetWelcomeUrl() throws Exception {
-        registerNewWelcomeUrl(WebApplicationConstants.DEFAULT_WELCOME_URL);
     }
 
     private void registerNewWelcomeUrl(String welcomeUrl) throws Exception {
         setWebApplicationProperty(WebApplicationConstants.PROPERTY_WELCOME_URL, welcomeUrl);
     }
 
-    private void setWebApplicationProperty(String propertyKey, Object propertyValue) throws Exception {
-        org.osgi.service.cm.Configuration conf =
-                configurationAdmin.getConfiguration(WebApplicationConstants.PID, "?");
+    private void resetWebApplicationProperties() throws Exception {
+        getWebAppConfiguration().delete();
+    }
+
+    private void setWebApplicationProperty(
+            String propertyKey,
+            Object propertyValue,
+            Object defaultValue) throws Exception {
+        if (propertyValue != null) {
+            if (!propertyValue.equals(defaultValue)) {
+                setWebApplicationProperty(propertyKey, propertyValue);
+            }
+        }
+    }
+
+    private void setWebApplicationProperty(String propertyKey, Object propertyValue)
+            throws Exception {
+        Configuration conf = getWebAppConfiguration();
 
         Dictionary<String, Object> dict = conf.getProperties();
         if (dict == null) {
@@ -226,10 +288,21 @@ public final class SecurityFilterTest extends ITestSupport {
         }
 
         dict.put(propertyKey, propertyValue);
+
         conf.update(dict);
     }
 
-    private ServiceRegistration<FilterPath> registerFilterPath(String path, String filterName) {
+    private Configuration getWebAppConfiguration() throws Exception {
+        return configurationAdmin.getConfiguration(WebApplicationConstants.PID, "?");
+    }
+
+    private ServiceRegistration<FilterPath> registerFilterPath(
+            String path, DefaultFilter filter) {
+        return registerFilterPath(path, filter.toString());
+    }
+
+    private ServiceRegistration<FilterPath> registerFilterPath(
+            String path, String filterName) {
         DefaultFilterPath filterPath = new DefaultFilterPath(path, filterName);
         return registerService(FilterPath.class, filterPath);
     }

@@ -25,6 +25,7 @@ import javax.servlet.Filter;
 import org.apache.shiro.web.env.EnvironmentLoader;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.filter.authc.AuthenticationFilter;
+import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.filter.mgt.FilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
@@ -39,7 +40,10 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
 
     private EnvironmentLoader loader;
     private String loginUrl = WebApplicationConstants.DEFAULT_LOGIN_URL;
+    private String passwordParam = WebApplicationConstants.DEFAULT_PASSWORD_PARAM;
+    private String rememberMeParam = WebApplicationConstants.DEFAULT_REMEMBER_ME_PARAM;
     private String successUrl = WebApplicationConstants.DEFAULT_SUCCESS_URL;
+    private String usernameParam = WebApplicationConstants.DEFAULT_USERNAME_PARAM;
 
     @Override
     public void init() throws Exception {
@@ -47,8 +51,12 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
         loader.initEnvironment(getServletContext());
 
         super.init();
+
         bindLoginUrlToAccessControlFilter();
+        bindPasswordParamToFormAuthenticationFilter();
+        bindRememberMeParamToFormAuthenticationFilter();
         bindSuccessUrlToAuthenticationFilter();
+        bindUsernameParamToFormAuthenticationFilter();
     }
 
     @Override
@@ -77,6 +85,36 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
     }
 
     @Override
+    public String getPasswordParam() {
+        return passwordParam;
+    }
+
+    @Override
+    public void setPasswordParam(String passwordParam) {
+        log.debug("Set new password param {}", passwordParam);
+        if (passwordParam == null || passwordParam.isEmpty()) {
+            passwordParam = WebApplicationConstants.DEFAULT_PASSWORD_PARAM;
+        }
+        this.passwordParam = passwordParam;
+        bindPasswordParamToFormAuthenticationFilter();
+    }
+
+    @Override
+    public String getRememberMeParam() {
+        return rememberMeParam;
+    }
+
+    @Override
+    public void setRememberMeParam(String rememberMeParam) {
+        log.debug("Set new remember me param {}", rememberMeParam);
+        if (rememberMeParam == null || rememberMeParam.isEmpty()) {
+            rememberMeParam = WebApplicationConstants.DEFAULT_REMEMBER_ME_PARAM;
+        }
+        this.rememberMeParam = rememberMeParam;
+        bindRememberMeParamToFormAuthenticationFilter();
+    }
+
+    @Override
     public String getSuccessUrl() {
         return successUrl;
     }
@@ -91,9 +129,24 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
         bindSuccessUrlToAuthenticationFilter();
     }
 
-    private void bindLoginUrlToAccessControlFilter() {
+    @Override
+    public String getUsernameParam() {
+        return usernameParam;
+    }
+
+    @Override
+    public void setUsernameParam(String usernameParam) {
+        log.debug("Set new username param {}", usernameParam);
+        if (usernameParam == null || usernameParam.isEmpty()) {
+            usernameParam = WebApplicationConstants.DEFAULT_USERNAME_PARAM;
+        }
+        this.usernameParam = usernameParam;
+        bindUsernameParamToFormAuthenticationFilter();
+    }
+
+    protected void bindLoginUrlToAccessControlFilter() {
         AccessControlFilter accessControlFilter =
-                (AccessControlFilter) getFilter(DefaultFilter.authc.toString());
+                getAccessControlFilter();
 
         if (accessControlFilter != null) {
             log.debug("Bind login url {}", loginUrl);
@@ -101,9 +154,27 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
         }
     }
 
-    private void bindSuccessUrlToAuthenticationFilter() {
+    protected void bindPasswordParamToFormAuthenticationFilter() {
+        FormAuthenticationFilter formAuthenticationFilter = getFormAuthenticationFilter();
+
+        if (formAuthenticationFilter != null) {
+            log.debug("Bind password param {}", passwordParam);
+            formAuthenticationFilter.setPasswordParam(passwordParam);
+        }
+    }
+
+    protected void bindRememberMeParamToFormAuthenticationFilter() {
+        FormAuthenticationFilter formAuthenticationFilter = getFormAuthenticationFilter();
+
+        if (formAuthenticationFilter != null) {
+            log.debug("Bind remember me param {}", rememberMeParam);
+            formAuthenticationFilter.setRememberMeParam(rememberMeParam);
+        }
+    }
+
+    protected void bindSuccessUrlToAuthenticationFilter() {
         AuthenticationFilter authenticationFilter =
-                (AuthenticationFilter) getFilter(DefaultFilter.authc.toString());
+                getAuthenticationFilter();
 
         if (authenticationFilter != null) {
             log.debug("Bind success url {}", successUrl);
@@ -111,7 +182,59 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
         }
     }
 
-    private Filter getFilter(String filterName) {
+    protected void bindUsernameParamToFormAuthenticationFilter() {
+        FormAuthenticationFilter formAuthenticationFilter = getFormAuthenticationFilter();
+
+        if (formAuthenticationFilter != null) {
+            log.debug("Bind username param {}", usernameParam);
+            formAuthenticationFilter.setUsernameParam(usernameParam);
+        }
+    }
+
+    /**
+     * Returns the active {@link AccessControlFilter}. The superclass for any filter that
+     * controls access to a resource and may redirect the user to the login page if they
+     * are not authenticated.
+     *
+     * @return the active {@link AccessControlFilter}
+     */
+    protected AccessControlFilter getAccessControlFilter() {
+        return (AccessControlFilter) getFilter(DefaultFilter.authc.toString());
+    }
+
+    /**
+     * Returns the active {@link AuthenticationFilter}. The base class for all Filters
+     * that require the current user to be authenticated. This class encapsulates
+     * the logic of checking whether a user is already authenticated in the system
+     * while subclasses are required to perform specific logic for unauthenticated
+     * requests.
+     *
+     * @return the active {@link AuthenticationFilter}
+     */
+    protected AuthenticationFilter getAuthenticationFilter() {
+        return (AuthenticationFilter) getFilter(DefaultFilter.authc.toString());
+    }
+
+    /**
+     * Returns the active {@link FormAuthenticationFilter}. It requires the requesting
+     * user to be authenticated for the request to continue, and if they are not,
+     * forces the user to login via by redirecting them to the loginUrl you configure.
+     *
+     * @return the active {@link FormAuthenticationFilter}
+     */
+    protected FormAuthenticationFilter getFormAuthenticationFilter() {
+        return (FormAuthenticationFilter) getFilter(DefaultFilter.authc.toString());
+    }
+
+    /**
+     * Returns a {@link Filter} registered to {@link FilterChainManager} with the
+     * specified name. The default filter instances are typically named  of the
+     * {@link DefaultFilter} enum constant.
+     *
+     * @param filterName the filter's name
+     * @return the {@link Filter} registered with the specified name
+     */
+    protected Filter getFilter(String filterName) {
         PathMatchingFilterChainResolver filterChainResolver =
                 (PathMatchingFilterChainResolver) getFilterChainResolver();
 

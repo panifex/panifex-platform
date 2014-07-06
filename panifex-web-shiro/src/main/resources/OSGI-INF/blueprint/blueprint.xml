@@ -30,6 +30,10 @@
     <cm:property-placeholder persistent-id="org.panifex.web" update-strategy="reload">
         <cm:default-properties>
             <cm:property name="loginUrl" value=""/>
+            <cm:property name="passwordParam" value=""/>
+            <cm:property name="rememberMeParam" value=""/>
+            <cm:property name="successUrl" value=""/>
+            <cm:property name="usernameParam" value=""/>
             <cm:property name="welcomeUrl" value=""/>
         </cm:default-properties>
     </cm:property-placeholder>
@@ -74,6 +78,10 @@
             class="org.panifex.web.shiro.SecurityFilterImpl">
         <property name="environmentLoader" ref="environmentLoader"/>
         <property name="loginUrl" value="${loginUrl}"/>
+        <property name="passwordParam" value="${passwordParam}"/>
+        <property name="rememberMeParam" value="${rememberMeParam}"/>
+        <property name="successUrl" value="${successUrl}"/>
+        <property name="usernameParam" value="${usernameParam}"/>
     </bean>
 
     <service ref="welcomeUrlRedirectServlet" interface="javax.servlet.Servlet">
