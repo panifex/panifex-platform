@@ -18,14 +18,14 @@
  ******************************************************************************/
 package org.panifex.module.api.security;
 
-public class DefaultFilterPath implements FilterPath {
+public class DefaultSecFilterMapping implements SecFilterMapping {
 
     private final String url;
-    private final String filter;
+    private final String filterName;
 
-    public DefaultFilterPath(String url, String filter) {
+    public DefaultSecFilterMapping(String url, String filterName) {
         this.url = url;
-        this.filter = filter;
+        this.filterName = filterName;
     }
 
     @Override
@@ -34,8 +34,8 @@ public class DefaultFilterPath implements FilterPath {
     }
 
     @Override
-    public String getFilter() {
-        return filter;
+    public String getFilterName() {
+        return filterName;
     }
 
 }

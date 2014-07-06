@@ -46,16 +46,13 @@
     </bean>
 
     <bean id="environment"
-            class="org.panifex.web.shiro.env.ModularWebEnvironment">
-        <property name="bundleContext" ref="blueprintBundleContext"/>
-    </bean>
+            class="org.panifex.web.shiro.env.ModularWebEnvironment"/>
 
-    <reference-list interface="org.panifex.module.api.security.FilterPath"
-            availability="optional"
-            member-type="service-reference">
+    <reference-list interface="org.panifex.module.api.security.SecFilterMapping"
+            availability="optional">
         <reference-listener ref="environment"
-            bind-method="bindFilterPath"
-            unbind-method="unbindFilterPath"/>
+            bind-method="bindFilterMapping"
+            unbind-method="unbindFilterMapping"/>
     </reference-list>
 
     <reference-list interface="org.panifex.service.api.security.SecurityService"

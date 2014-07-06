@@ -45,8 +45,8 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.panifex.module.api.WebApplicationConstants;
-import org.panifex.module.api.security.DefaultFilterPath;
-import org.panifex.module.api.security.FilterPath;
+import org.panifex.module.api.security.DefaultSecFilterMapping;
+import org.panifex.module.api.security.SecFilterMapping;
 import org.panifex.service.api.security.SecurityService;
 import org.panifex.test.support.ITestSupport;
 import org.panifex.web.shiro.SecurityFilterImpl;
@@ -91,7 +91,7 @@ public final class SecurityFilterTest extends ITestSupport {
 
     @Test
     public void filteredGetFromServletTest() throws Exception {
-        ServiceRegistration<FilterPath> filterPathRegistration = null;
+        ServiceRegistration<SecFilterMapping> filterPathRegistration = null;
         ServiceRegistration<Servlet> servletRegistration = null;
 
         try {
@@ -118,7 +118,7 @@ public final class SecurityFilterTest extends ITestSupport {
 
     @Test
     public void testSetValidLoginUrl() throws Exception {
-        ServiceRegistration<FilterPath> filterPathRegistration = null;
+        ServiceRegistration<SecFilterMapping> filterPathRegistration = null;
         ServiceRegistration<Servlet> servletRegistration = null;
 
         try {
@@ -206,7 +206,7 @@ public final class SecurityFilterTest extends ITestSupport {
         String username = "username1";
         String password = "userPass1";
 
-        ServiceRegistration<FilterPath> filterPathRegistration = null;
+        ServiceRegistration<SecFilterMapping> filterPathRegistration = null;
         ServiceRegistration<SecurityService> securityServiceRegistration = null;
 
         try {
@@ -296,15 +296,15 @@ public final class SecurityFilterTest extends ITestSupport {
         return configurationAdmin.getConfiguration(WebApplicationConstants.PID, "?");
     }
 
-    private ServiceRegistration<FilterPath> registerFilterPath(
+    private ServiceRegistration<SecFilterMapping> registerFilterPath(
             String path, DefaultFilter filter) {
         return registerFilterPath(path, filter.toString());
     }
 
-    private ServiceRegistration<FilterPath> registerFilterPath(
+    private ServiceRegistration<SecFilterMapping> registerFilterPath(
             String path, String filterName) {
-        DefaultFilterPath filterPath = new DefaultFilterPath(path, filterName);
-        return registerService(FilterPath.class, filterPath);
+        DefaultSecFilterMapping filterPath = new DefaultSecFilterMapping(path, filterName);
+        return registerService(SecFilterMapping.class, filterPath);
     }
 
     private ServiceRegistration<Servlet> registerServlet(

@@ -30,9 +30,7 @@ import org.apache.shiro.web.env.IniWebEnvironment;
 import org.apache.shiro.web.filter.mgt.FilterChainManager;
 import org.apache.shiro.web.filter.mgt.FilterChainResolver;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
-import org.panifex.module.api.security.FilterPath;
+import org.panifex.module.api.security.SecFilterMapping;
 import org.panifex.service.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,25 +39,20 @@ public class ModularWebEnvironment extends IniWebEnvironment {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private BundleContext context;
-
     /**
      * Internal collection of registered security services.
      */
     private Collection<Realm> securityServices = new ArrayList<>();
 
-    public void bindFilterPath(ServiceReference<FilterPath> filterPathReference) {
-        FilterPath filterPath = context.getService(filterPathReference);
+    public void bindFilterMapping(SecFilterMapping filterMapping) {
+        log.debug("Bind sec filter mapping: {}", filterMapping);
         FilterChainManager manager = getFilterChainManager();
-        manager.createChain(filterPath.getUrl(), filterPath.getFilter());
+        manager.createChain(filterMapping.getUrl(), filterMapping.getFilterName());
     }
 
-    public void unbindFilterPath(FilterPath filter) {
+    public void unbindFilterMapping(SecFilterMapping filterMapping) {
+        log.debug("Unbind sec filter mapping: {}", filterMapping);
         // TODO
-    }
-
-    public void setBundleContext(BundleContext context) {
-        this.context = context;
     }
 
     /**
@@ -126,6 +119,6 @@ public class ModularWebEnvironment extends IniWebEnvironment {
         PathMatchingFilterChainResolver resolver =
                 (PathMatchingFilterChainResolver) getFilterChainResolver();
 
-    return resolver.getFilterChainManager();
+        return resolver.getFilterChainManager();
     }
 }

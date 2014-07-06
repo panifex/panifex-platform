@@ -18,9 +18,23 @@
  ******************************************************************************/
 package org.panifex.module.api.security;
 
-public interface FilterPath {
+import org.junit.Test;
+import org.panifex.test.support.TestSupport;
 
-    String getUrl();
+/**
+ * Unit tests for {@link DefaultSecFilterMapping} class.
+ */
+public class DefaultSecFilterMappingTest extends TestSupport {
 
-    String getFilter();
+    final String url = "/url";
+
+    @Test
+    public void testConstructMappingWithFilterName() {
+        String filterName = "filter";
+
+        SecFilterMapping mapping = new DefaultSecFilterMapping(url, filterName);
+
+        assertEquals(url, mapping.getUrl());
+        assertEquals(filterName, mapping.getFilterName());
+    }
 }
