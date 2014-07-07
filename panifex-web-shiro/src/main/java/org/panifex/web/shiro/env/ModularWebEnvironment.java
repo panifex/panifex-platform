@@ -35,6 +35,9 @@ import org.panifex.service.api.security.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * A ModularWebEnvironment that stores Shiro's objects that can be dynamically updated.
+ */
 public class ModularWebEnvironment extends IniWebEnvironment {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -44,19 +47,29 @@ public class ModularWebEnvironment extends IniWebEnvironment {
      */
     private Collection<Realm> securityServices = new ArrayList<>();
 
+    /**
+     * Binds a {@link SecFilterMapping} to the Shiro's environment.
+     *
+     * @param filterMapping the {@link SecFilterMapping} to be binded
+     */
     public void bindFilterMapping(SecFilterMapping filterMapping) {
         log.debug("Bind sec filter mapping: {}", filterMapping);
         FilterChainManager manager = getFilterChainManager();
         manager.createChain(filterMapping.getUrl(), filterMapping.getFilterName());
     }
 
+    /**
+     * Unbinds a {@link SecFilterMapping} from the Shiro's environment.
+     *
+     * @param filterMapping the {@link SecFilterMapping} to be unbinded
+     */
     public void unbindFilterMapping(SecFilterMapping filterMapping) {
         log.debug("Unbind sec filter mapping: {}", filterMapping);
         // TODO
     }
 
     /**
-     * Binds a new security service to the security manager.
+     * Binds a {@link SecurityService} to the Shiro's security manager.
      *
      * @param securityService the security service to be binded
      */
@@ -68,7 +81,7 @@ public class ModularWebEnvironment extends IniWebEnvironment {
     }
 
     /**
-     * Unbinds a registered security service from the security manager.
+     * Unbinds a {@link SecurityService} from the Shiro's security manager.
      *
      * @param securityService the security service to be unbinded
      */
@@ -115,7 +128,7 @@ public class ModularWebEnvironment extends IniWebEnvironment {
         return resolver;
     }
 
-    private FilterChainManager getFilterChainManager() {
+    protected FilterChainManager getFilterChainManager() {
         PathMatchingFilterChainResolver resolver =
                 (PathMatchingFilterChainResolver) getFilterChainResolver();
 

@@ -23,20 +23,52 @@ import javax.servlet.ServletContext;
 import org.apache.shiro.util.LifecycleUtils;
 import org.apache.shiro.web.env.EnvironmentLoader;
 import org.apache.shiro.web.env.WebEnvironment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * A ModularEnvironmentLoader extends an {@link EnvironmentLoader} which is responsible
+ * for loading a web application's Shiro {@link org.apache.shiro.web.env.WebEnvironment
+ * WebEnvironment}.
+ * <p>
+ * It loads {@link ModularWebEnvironment} which supports dynamic registering and
+ * unregistering filters and their mapping.
+ */
 public class ModularEnvironmentLoader extends EnvironmentLoader {
 
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
+    /**
+     * A ModularWebEnvironment to be registered to the servlet context.
+     */
     private ModularWebEnvironment environment;
 
+    /**
+     * Sets a ModularWebEnvironment to be registered to the servlet context. It is
+     * set by the OSGi container.
+     *
+     * @param environment the ModularWebEnvironment to be registered
+     */
     public void setEnvironment(ModularWebEnvironment environment) {
         this.environment = environment;
     }
 
+    /**
+     * Registers the ModularWebEnvironment to the specified servlet context.
+     *
+     * @param sc current servlet context
+     * @throws IllegalStateException
+     *      if an existing WebEnvironment has already been initialized and associated with
+     *      the specified {@code ServletContext} or if ModularWebEnvironment is not
+     *      prepared to be associated
+     */
     @Override
     protected WebEnvironment createEnvironment(ServletContext sc) {
-
         if (environment == null) {
-            throw new IllegalStateException();
+            String errMsg = "ModularWebEnvironment must be initialized before setting it "
+                    + "to servlet context";
+            log.error(errMsg);
+            throw new IllegalStateException(errMsg);
         }
 
         environment.setServletContext(sc);
