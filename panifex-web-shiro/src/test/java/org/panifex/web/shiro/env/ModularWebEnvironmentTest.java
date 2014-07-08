@@ -97,7 +97,7 @@ public class ModularWebEnvironmentTest extends TestSupport {
         SimpleAccountRealm simpleRealmMock = createMockAndExpectNew(SimpleAccountRealm.class);
 
         // expect binding simple account realm
-        securityManagerMock.setRealms(buildRealmCollection(simpleRealmMock));
+        securityManagerMock.setRealm(simpleRealmMock);
 
         // perform test
         replayAll();
@@ -138,7 +138,7 @@ public class ModularWebEnvironmentTest extends TestSupport {
         SimpleAccountRealm simpleRealmMock = createMockAndExpectNew(SimpleAccountRealm.class);
 
         // expect binding simple account realm
-        securityManagerMock.setRealms(buildRealmCollection(simpleRealmMock));
+        securityManagerMock.setRealm(simpleRealmMock);
 
         // perform test
         replayAll();
@@ -184,7 +184,7 @@ public class ModularWebEnvironmentTest extends TestSupport {
      * @return a collection of provided realms
      */
     private Collection<Realm> buildRealmCollection(Realm[] realmList, Realm... realms) {
-        Collection<Realm> realmArray = new ArrayList<Realm>();
+        Collection<Realm> realmArray = new ArrayList<Realm>(realmList.length + realms.length);
 
         Collections.addAll(realmArray, realmList);
         Collections.addAll(realmArray, realms);

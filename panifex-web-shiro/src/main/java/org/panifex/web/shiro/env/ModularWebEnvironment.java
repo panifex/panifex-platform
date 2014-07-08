@@ -103,9 +103,7 @@ public class ModularWebEnvironment extends IniWebEnvironment {
                 securityManager.setRealms(securityServices);
             } else {
                 // bind simple realm because it should be at least one realm
-                Collection<Realm> realms = new ArrayList<>();
-                realms.add(new SimpleAccountRealm());
-                securityManager.setRealms(realms);
+                securityManager.setRealm(new SimpleAccountRealm());
             }
         } else {
             log.warn("Realm security manager is not available. Realms have not been updated");
