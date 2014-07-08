@@ -46,14 +46,9 @@
     </bean>
 
     <bean id="environment"
-            class="org.panifex.web.shiro.env.ModularWebEnvironment"/>
-
-    <reference-list interface="org.panifex.module.api.security.SecFilterMapping"
-            availability="optional">
-        <reference-listener ref="environment"
-            bind-method="bindFilterMapping"
-            unbind-method="unbindFilterMapping"/>
-    </reference-list>
+            class="org.panifex.web.shiro.env.ModularWebEnvironment">
+        <property name="filterChainManager" ref="filterChainManager"/>
+    </bean>
 
     <reference-list interface="org.panifex.service.api.security.SecurityService"
             availability="optional"
@@ -61,6 +56,32 @@
         <reference-listener ref="environment"
             bind-method="bindSecurityService"
             unbind-method="unbindSecurityService"/>
+    </reference-list>
+
+    <!-- Sec Filter Mapping Map -->
+
+    <bean id="filterMappingMap"
+        class="org.panifex.web.shiro.mgt.SecFilterMappingMapImpl"/>
+
+    <!-- Filter Chain Manager -->
+
+    <bean id="filterChainManager"
+            class="org.panifex.web.shiro.mgt.ModularFilterChainManager">
+        <argument ref="filterMappingMap"/>
+    </bean>
+
+    <reference-list interface="org.panifex.module.api.security.SecFilter"
+            availability="optional">
+        <reference-listener ref="filterChainManager"
+            bind-method="bindFilter"
+            unbind-method="unbindFilter"/>
+    </reference-list>
+
+    <reference-list interface="org.panifex.module.api.security.SecFilterMapping"
+            availability="optional">
+        <reference-listener ref="filterChainManager"
+            bind-method="bindFilterMapping"
+            unbind-method="unbindFilterMapping"/>
     </reference-list>
 
     <!-- Security Filter -->
@@ -80,6 +101,8 @@
         <property name="successUrl" value="${successUrl}"/>
         <property name="usernameParam" value="${usernameParam}"/>
     </bean>
+
+    <!-- Redirect to welcome url servlet -->
 
     <service ref="welcomeUrlRedirectServlet" interface="javax.servlet.Servlet">
         <service-properties>

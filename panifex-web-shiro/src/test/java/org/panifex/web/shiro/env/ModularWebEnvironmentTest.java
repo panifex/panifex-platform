@@ -30,6 +30,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.service.api.security.SecurityService;
 import org.panifex.test.support.TestSupport;
+import org.panifex.web.shiro.mgt.ModularFilterChainManager;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -51,6 +52,21 @@ public class ModularWebEnvironmentTest extends TestSupport {
 
         environment = new ModularWebEnvironment();
         environment.setSecurityManager(securityManagerMock);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testInitEnvironmentWithoutFilterChainManager() {
+        environment.init();
+    }
+
+    public void testInitEnvironmentWithFilterChainManager() {
+        ModularFilterChainManager filterChainManagerMock = createMock(ModularFilterChainManager.class);
+
+        environment.setFilterChainManager(filterChainManagerMock);
+
+        replayAll();
+        environment.init();
+        verifyAll();
     }
 
     /**

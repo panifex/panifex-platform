@@ -297,13 +297,8 @@ public final class SecurityFilterTest extends ITestSupport {
     }
 
     private ServiceRegistration<SecFilterMapping> registerFilterPath(
-            String path, DefaultFilter filter) {
-        return registerFilterPath(path, filter.toString());
-    }
-
-    private ServiceRegistration<SecFilterMapping> registerFilterPath(
-            String path, String filterName) {
-        DefaultSecFilterMapping filterPath = new DefaultSecFilterMapping(path, filterName);
+            String path, DefaultFilter defaultFilter) {
+        DefaultSecFilterMapping filterPath = new DefaultSecFilterMapping(path, defaultFilter);
         return registerService(SecFilterMapping.class, filterPath);
     }
 

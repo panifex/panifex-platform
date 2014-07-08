@@ -30,8 +30,8 @@ import org.apache.shiro.web.env.IniWebEnvironment;
 import org.apache.shiro.web.filter.mgt.FilterChainManager;
 import org.apache.shiro.web.filter.mgt.FilterChainResolver;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
-import org.panifex.module.api.security.SecFilterMapping;
 import org.panifex.service.api.security.SecurityService;
+import org.panifex.web.shiro.mgt.ModularFilterChainManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,24 +48,19 @@ public class ModularWebEnvironment extends IniWebEnvironment {
     private Collection<Realm> securityServices = new ArrayList<>();
 
     /**
-     * Binds a {@link SecFilterMapping} to the Shiro's environment.
-     *
-     * @param filterMapping the {@link SecFilterMapping} to be binded
+     * The filter chain manager which enables dynamically registering filters and their
+     * mapping.
      */
-    public void bindFilterMapping(SecFilterMapping filterMapping) {
-        log.debug("Bind sec filter mapping: {}", filterMapping);
-        FilterChainManager manager = getFilterChainManager();
-        manager.createChain(filterMapping.getUrl(), filterMapping.getFilterName());
-    }
+    private ModularFilterChainManager filterChainManager;
 
     /**
-     * Unbinds a {@link SecFilterMapping} from the Shiro's environment.
-     *
-     * @param filterMapping the {@link SecFilterMapping} to be unbinded
+     * Initializes this instance by calling {@link #configure() configure} for actual
+     * instance configuration. This method overrides {@link super#init()} to avoid
+     * processing INI instance or config locations.
      */
-    public void unbindFilterMapping(SecFilterMapping filterMapping) {
-        log.debug("Unbind sec filter mapping: {}", filterMapping);
-        // TODO
+    @Override
+    public void init() {
+        configure();
     }
 
     /**
@@ -119,19 +114,28 @@ public class ModularWebEnvironment extends IniWebEnvironment {
 
     @Override
     protected FilterChainResolver createFilterChainResolver() {
-        FilterChainResolver resolver = super.createFilterChainResolver();
+        PathMatchingFilterChainResolver resolver = (PathMatchingFilterChainResolver)
+                super.createFilterChainResolver();
         if (resolver == null) {
             Ini ini = getIni();
             IniFilterChainResolverFactory factory = new IniFilterChainResolverFactory(ini, objects);
-            resolver = factory.getInstance();
+            resolver = (PathMatchingFilterChainResolver) factory.getInstance();
+
+            if (filterChainManager == null) {
+                String msg = "filterChainManager must be initialized before creating FilterChainManager";
+                log.error(msg);
+                throw new IllegalStateException(msg);
+            }
+            resolver.setFilterChainManager(filterChainManager);
         }
         return resolver;
     }
 
-    protected FilterChainManager getFilterChainManager() {
-        PathMatchingFilterChainResolver resolver =
-                (PathMatchingFilterChainResolver) getFilterChainResolver();
+    public void setFilterChainManager(ModularFilterChainManager filterChainManager) {
+        this.filterChainManager = filterChainManager;
+    }
 
-        return resolver.getFilterChainManager();
+    protected FilterChainManager getFilterChainManager() {
+        return filterChainManager;
     }
 }

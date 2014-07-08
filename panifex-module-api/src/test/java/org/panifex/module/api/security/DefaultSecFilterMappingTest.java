@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.module.api.security;
 
+import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.junit.Test;
 import org.panifex.test.support.TestSupport;
 
@@ -26,15 +27,39 @@ import org.panifex.test.support.TestSupport;
  */
 public class DefaultSecFilterMappingTest extends TestSupport {
 
+    final String filterName = "filter";
     final String url = "/url";
 
     @Test
-    public void testConstructMappingWithFilterName() {
-        String filterName = "filter";
-
+    public void testConstructMappingOfSpecifiedFilterName() {
         SecFilterMapping mapping = new DefaultSecFilterMapping(url, filterName);
 
         assertEquals(url, mapping.getUrl());
         assertEquals(filterName, mapping.getFilterName());
+    }
+
+    @Test
+    public void testConstructMappingOfConcreateFilter() {
+        SecFilter filter = createMock(SecFilter.class);
+        expect(filter.getFilterName()).andReturn(filterName);
+
+        replayAll();
+        SecFilterMapping mapping = new DefaultSecFilterMapping(url, filter);
+        verifyAll();
+
+        assertEquals(url, mapping.getUrl());
+        assertEquals(filterName, mapping.getFilterName());
+    }
+
+    @Test
+    public void testConstructMappingOfDefaultShiroFilter() {
+        DefaultFilter defaultFilter = DefaultFilter.anon;
+
+        replayAll();
+        SecFilterMapping mapping = new DefaultSecFilterMapping(url, defaultFilter);
+        verifyAll();
+
+        assertEquals(url, mapping.getUrl());
+        assertEquals(defaultFilter.toString(), mapping.getFilterName());
     }
 }

@@ -18,21 +18,84 @@
  ******************************************************************************/
 package org.panifex.module.api.security;
 
+import org.apache.shiro.web.filter.mgt.DefaultFilter;
+
+/**
+ * The default {@link SecFilterMapping} implementation.
+ *
+ * @since 1.0
+ */
 public class DefaultSecFilterMapping implements SecFilterMapping {
 
+    /**
+     * The URL pattern to {@link SecFilter} is mapped to
+     */
     private final String url;
+
+    /**
+     * The {@link SecFilter}'s name to be mapped to the specified URL pattern
+     */
     private final String filterName;
 
+    /**
+     * Initializes a newly creted {@link SecFilterMapping} object which associates the
+     * default Shiro's filter to the specified URL pattern.
+     *
+     * @param url
+     *      the URL pattern which the default Shiro's filter is mapped to
+     * @param defaultFilter
+     *      the default Shiro's filter instance to be mapped
+     */
+    public DefaultSecFilterMapping(String url, DefaultFilter defaultFilter) {
+        this(url, defaultFilter.toString());
+    }
+
+    /**
+     * Initializes a newly created {@link SecFilterMapping} object which associates
+     * the {@link SecFilter} to the specified URL pattern.
+     * <p/>
+     * The filter is mapped to the {@link SecFilter}'s canonical class name.
+     *
+     * @param url
+     *      the URL pattern which the {@link SecFilter} is mapped to
+     * @param filter
+     *      the {@link SecFilter} to be mapped to the specified URL pattern
+     * @since 1.0
+     */
+    public DefaultSecFilterMapping(String url, SecFilter filter) {
+        this (url, filter.getFilterName());
+    }
+
+    /**
+     * Initializes a newly created {@link SecFilterMapping} object which associates
+     * the {@link SecFilter}'s name to the specified URL pattern.
+     *
+     * @param url
+     *      the URL pattern to the {@link SecFilter}'s name is mapped to
+     * @param filterName
+     *      the {@link SecFilter}'s name to be mapped to the specified URL pattern
+     * @since 1.0
+     */
     public DefaultSecFilterMapping(String url, String filterName) {
         this.url = url;
         this.filterName = filterName;
     }
 
+    /**
+     * Returns the URL pattern to {@link SecFilter} is mapped to.
+     *
+     * @since 1.0
+     */
     @Override
     public String getUrl() {
         return url;
     }
 
+    /**
+     * Returns the {@link SecFilter}'s name that is mapped to the specified URL
+     *
+     * @since 1.0
+     */
     @Override
     public String getFilterName() {
         return filterName;
