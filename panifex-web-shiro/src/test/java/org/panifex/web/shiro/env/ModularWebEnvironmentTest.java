@@ -45,25 +45,22 @@ public class ModularWebEnvironmentTest extends TestSupport {
 
     // mocks
     private DefaultWebSecurityManager securityManagerMock = createMock(DefaultWebSecurityManager.class);
-
+    private ModularFilterChainManager filterChainManagerMock = createMock(ModularFilterChainManager.class);
     @Before
     public void setUp() {
         resetAll();
 
-        environment = new ModularWebEnvironment();
+        environment = new ModularWebEnvironment(filterChainManagerMock);
         environment.setSecurityManager(securityManagerMock);
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void testInitEnvironmentWithoutFilterChainManager() {
-        environment.init();
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructEnvironmentWithoutFilterChainManager() {
+        environment = new ModularWebEnvironment(null);
     }
 
+    @Test
     public void testInitEnvironmentWithFilterChainManager() {
-        ModularFilterChainManager filterChainManagerMock = createMock(ModularFilterChainManager.class);
-
-        environment.setFilterChainManager(filterChainManagerMock);
-
         replayAll();
         environment.init();
         verifyAll();

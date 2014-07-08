@@ -47,7 +47,7 @@
 
     <bean id="environment"
             class="org.panifex.web.shiro.env.ModularWebEnvironment">
-        <property name="filterChainManager" ref="filterChainManager"/>
+        <argument ref="filterChainManager"/>
     </bean>
 
     <reference-list interface="org.panifex.service.api.security.SecurityService"

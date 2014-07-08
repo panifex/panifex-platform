@@ -51,7 +51,20 @@ public class ModularWebEnvironment extends IniWebEnvironment {
      * The filter chain manager which enables dynamically registering filters and their
      * mapping.
      */
-    private ModularFilterChainManager filterChainManager;
+    private final ModularFilterChainManager filterChainManager;
+
+    /**
+     * Initializes a new ModularWebEnvironment object instance.
+     *
+     * @param filterChainManager
+     *      the modular filter chain manager
+     */
+    public ModularWebEnvironment(ModularFilterChainManager filterChainManager) {
+        if (filterChainManager == null) {
+            throw new IllegalArgumentException("modularFilterChainManager cannot be null");
+        }
+        this.filterChainManager = filterChainManager;
+    }
 
     /**
      * Initializes this instance by calling {@link #configure() configure} for actual
@@ -106,7 +119,7 @@ public class ModularWebEnvironment extends IniWebEnvironment {
                 securityManager.setRealm(new SimpleAccountRealm());
             }
         } else {
-            log.warn("Realm security manager is not available. Realms have not been updated");
+            log.warn("Realm security manager is not available. Realms is not updated");
         }
     }
 
@@ -119,18 +132,9 @@ public class ModularWebEnvironment extends IniWebEnvironment {
             IniFilterChainResolverFactory factory = new IniFilterChainResolverFactory(ini, objects);
             resolver = (PathMatchingFilterChainResolver) factory.getInstance();
 
-            if (filterChainManager == null) {
-                String msg = "filterChainManager must be initialized before creating FilterChainManager";
-                log.error(msg);
-                throw new IllegalStateException(msg);
-            }
             resolver.setFilterChainManager(filterChainManager);
         }
         return resolver;
-    }
-
-    public void setFilterChainManager(ModularFilterChainManager filterChainManager) {
-        this.filterChainManager = filterChainManager;
     }
 
     protected FilterChainManager getFilterChainManager() {
