@@ -50,12 +50,18 @@
         <argument ref="filterChainManager"/>
     </bean>
 
-    <reference-list interface="org.panifex.service.api.security.SecurityService"
-            availability="optional"
-            member-type="service-reference">
+    <reference-list interface="org.panifex.module.api.security.AuthenticationService"
+            availability="optional">
         <reference-listener ref="environment"
-            bind-method="bindSecurityService"
-            unbind-method="unbindSecurityService"/>
+            bind-method="bindAuthenticationService"
+            unbind-method="unbindAuthenticationService"/>
+    </reference-list>
+
+    <reference-list interface="org.panifex.module.api.security.AuthorizationService"
+            availability="optional">
+        <reference-listener ref="environment"
+            bind-method="bindAuthorizationService"
+            unbind-method="unbindAuthorizationService"/>
     </reference-list>
 
     <!-- Sec Filter Mapping Map -->

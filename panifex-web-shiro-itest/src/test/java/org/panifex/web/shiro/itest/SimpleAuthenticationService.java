@@ -18,23 +18,13 @@
  ******************************************************************************/
 package org.panifex.web.shiro.itest;
 
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.realm.SimpleAccountRealm;
-import org.panifex.service.api.security.AccountNotExpiredException;
-import org.panifex.service.api.security.SecurityService;
+import org.panifex.module.api.security.AuthenticationService;
 
 /**
  * A simple security service that uses a set of configured user accounts and roles to
  * support authentication and authorization.  Each account entry specifies the username, password,
  * and roles for a user.  Roles can also be mapped to permissions and associated with users.
  */
-public class SimpleSecurityService extends SimpleAccountRealm implements SecurityService {
-
-    @Override
-    public void updateAccountExpiredPassword(String username,
-            String oldPassword, String newPassword)
-            throws AccountNotExpiredException, IncorrectCredentialsException,
-            UnknownAccountException {
-    }
+public class SimpleAuthenticationService extends SimpleAccountRealm implements AuthenticationService {
 }

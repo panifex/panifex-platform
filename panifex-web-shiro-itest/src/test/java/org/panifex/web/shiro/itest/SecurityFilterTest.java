@@ -45,9 +45,9 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.panifex.module.api.WebApplicationConstants;
+import org.panifex.module.api.security.AuthenticationService;
 import org.panifex.module.api.security.DefaultSecFilterMapping;
 import org.panifex.module.api.security.SecFilterMapping;
-import org.panifex.service.api.security.SecurityService;
 import org.panifex.test.support.ITestSupport;
 import org.panifex.web.shiro.SecurityFilterImpl;
 
@@ -207,7 +207,7 @@ public final class SecurityFilterTest extends ITestSupport {
         String password = "userPass1";
 
         ServiceRegistration<SecFilterMapping> filterPathRegistration = null;
-        ServiceRegistration<SecurityService> securityServiceRegistration = null;
+        ServiceRegistration<AuthenticationService> authcServiceRegistration = null;
 
         try {
             // register properties
@@ -231,11 +231,11 @@ public final class SecurityFilterTest extends ITestSupport {
                     registerFilterPath("/*", DefaultFilter.authc);
 
             // register security service
-            SimpleSecurityService simpleSecurityService = new SimpleSecurityService();
-            simpleSecurityService.addAccount(username, password);
+            SimpleAuthenticationService simpleAuthcService = new SimpleAuthenticationService();
+            simpleAuthcService.addAccount(username, password);
 
-            securityServiceRegistration =
-                    registerService(SecurityService.class, simpleSecurityService, null);
+            authcServiceRegistration =
+                    registerService(AuthenticationService.class, simpleAuthcService, null);
 
             Map<String, String> params = new HashMap<>();
             params.put(usernameParam, username);
@@ -249,8 +249,8 @@ public final class SecurityFilterTest extends ITestSupport {
             if (filterPathRegistration != null) {
                 filterPathRegistration.unregister();
             }
-            if (securityServiceRegistration != null) {
-                securityServiceRegistration.unregister();
+            if (authcServiceRegistration != null) {
+                authcServiceRegistration.unregister();
             }
         }
     }
