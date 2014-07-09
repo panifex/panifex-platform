@@ -77,7 +77,6 @@
         <module>panifex-module-api</module>
         <module>panifex-module-zk-api</module>
         <module>panifex-service-api</module>
-        <module>panifex-service-impl</module>
         <module>panifex-web-controller</module>
         <module>panifex-web-impl</module>
         <module>panifex-web-shiro</module>
