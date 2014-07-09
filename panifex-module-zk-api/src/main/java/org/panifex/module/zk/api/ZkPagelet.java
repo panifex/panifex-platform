@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.module.zk.api;
 
-import org.panifex.module.api.Pagelet;
+import org.panifex.module.api.pagelet.Pagelet;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.Richlet;
 import org.zkoss.zk.ui.RichletConfig;

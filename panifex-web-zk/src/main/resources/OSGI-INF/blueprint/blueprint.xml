@@ -31,7 +31,7 @@
         <property name="bundleContext" ref="blueprintBundleContext"/>
     </bean>
 
-    <reference-list interface="org.panifex.module.api.PageletMapping"
+    <reference-list interface="org.panifex.module.api.pagelet.PageletMapping"
             availability="optional"
             member-type="service-reference">
         <reference-listener ref="zkPageletTracker"

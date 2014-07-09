@@ -16,9 +16,12 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.api;
+package org.panifex.module.api.pagelet;
 
 import org.junit.Test;
+import org.panifex.module.api.pagelet.DefaultPageletMapping;
+import org.panifex.module.api.pagelet.Pagelet;
+import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.test.support.TestSupport;
 
 /**

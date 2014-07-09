@@ -20,7 +20,7 @@ Export-Package:
 Import-Package: \
     org.ops4j.pax.web.extender.whiteboard;version="[3.1,4.0)", \
     org.ops4j.pax.web.extender.whiteboard.runtime;version="[3.1,4.0)", \
-    org.panifex.module.api;version="[1.0,2.0)", \
+    org.panifex.module.api.pagelet;version="[1.0,2.0)", \
     org.panifex.module.zk.api;version="[1.0,2.0)", \
     org.slf4j;version="[1.4,2.0)", \
     org.zkoss.bind;version="[7.0,8.0)", \

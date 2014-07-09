@@ -25,8 +25,8 @@ import java.util.Set;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-import org.panifex.module.api.Pagelet;
-import org.panifex.module.api.PageletMapping;
+import org.panifex.module.api.pagelet.Pagelet;
+import org.panifex.module.api.pagelet.PageletMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

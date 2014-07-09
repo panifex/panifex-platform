@@ -26,8 +26,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.panifex.module.api.Pagelet;
-import org.panifex.module.api.PageletMapping;
+import org.panifex.module.api.pagelet.Pagelet;
+import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.zk.api.ZkPagelet;
 import org.panifex.web.controller.PageletTracker;
 import org.slf4j.Logger;

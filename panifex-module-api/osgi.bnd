@@ -22,6 +22,7 @@ Export-Package: \
     org.panifex.module.api.event;version="1.0", \
     org.panifex.module.api.i18n;version="1.0", \
     org.panifex.module.api.menu;version="1.0", \
+    org.panifex.module.api.pagelet;version="1.0", \
     org.panifex.module.api.security;version="1.0", \
     org.panifex.module.api.settings;version="1.0"
 
