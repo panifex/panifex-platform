@@ -63,6 +63,15 @@ class AuthzAwareRealm implements Authorizer, Realm {
     }
 
     /**
+     * Gets the extended {@link AuthorizationService}.
+     *
+     * @return the extended {@link AuthorizationService}
+     */
+    public AuthorizationService getAuthorizationService() {
+        return authzService;
+    }
+
+    /**
      * Returns the (application-unique) name assigned to this <code>AuthorizationService</code>.
      * All services configured for a single application must have a unique name.
      *
