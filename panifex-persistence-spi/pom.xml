@@ -59,7 +59,7 @@
         <!-- Panifex Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-service-api</artifactId>
+            <artifactId>panifex-module-api</artifactId>
         </dependency>
     </dependencies>
 </project>

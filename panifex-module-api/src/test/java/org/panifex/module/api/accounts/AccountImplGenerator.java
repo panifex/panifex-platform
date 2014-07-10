@@ -16,46 +16,38 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.service.api.security;
+package org.panifex.module.api.accounts;
 
-import org.panifex.service.api.Entity;
+import org.fluttercode.datafactory.impl.DataFactory;
+import org.panifex.module.api.EntityImpl;
+import org.panifex.module.api.accounts.AccountImpl;
 
 /**
- * A permission represents the ability to perform an action or access a resource.
- * 
- * @see <a href="https://shiro.apache.org/static/current/apidocs/org/apache/shiro/authz/Permission.html">Permission</a>
- *
- * @since 1.0
+ * A generator of random {@link AccountImpl} instances for using in the
+ * test cases.
  */
-public interface Permission extends Entity {
+public final class AccountImplGenerator {
 
     /**
-     * Returns the permission's name, the easily readable free text.
-     * <p>
-     * It must be unique.
-     * 
-     * @return the permission's name
-     * 
-     * @since 1.0
+     * Private constructor protects {@link EntityImpl EntityImpl} from instancing - singleton.
      */
-    String getName();
-
-    /**
-     * Returns the permission's wildcard expression.
-     * 
-     * @return wildcard the <a href="http://shiro.apache.org/permissions.html">wildcard permission expression</a>
-     * 
-     * @since 1.0
-     */
-    String getWildcardExpression();
+    private AccountImplGenerator() {
+    }
     
     /**
-     * Returns the permission's description.
+     * Returns generated persisted {@link AccountImpl AccountImpl}.
      * 
-     * @return the permission's description
-     * 
-     * @since 1.0
+     * @return generated persisted {@link AccountImpl AccountImpl}
      */
-    String getDescription(); 
-
+    public static AccountImpl generatePersistedAccount() {
+        DataFactory df = new DataFactory();
+        
+        AccountImpl account = new AccountImpl(
+            new Long(df.getNumberBetween(0, Integer.MAX_VALUE)),
+            df.getNumberBetween(0, Integer.MAX_VALUE),
+            df.getRandomWord(),
+            df.getRandomText(255),
+            false);
+        return account;
+    }
 }

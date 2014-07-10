@@ -16,47 +16,27 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.service.api.security;
+package org.panifex.module.api.accounts;
 
-import org.panifex.service.api.Entity;
+import org.junit.Test;
+import org.panifex.module.api.accounts.AccountImpl;
+import org.panifex.test.support.TestSupport;
 
 /**
- * The user's role.
- * <p>
- * The role contains a group of {@link Permission permissions} which allows the user
- * to perform some actions.
- * 
- * @since 1.0
+ * Unit test for the {@link AccountImplGenerator} class.
  */
-public interface Role extends Entity {
+public final class AccountImplGeneratorTest extends TestSupport {
 
     /**
-     * The constant which can be used for binding the name property to the GUI components.
+     * This test checks generating random persisted {@link AccountImpl} instances.
      */
-    public static final String NAME_PROP = "name";
+    @Test
+    public void generateAccountImplTest() {
+        AccountImpl account = AccountImplGenerator.generatePersistedAccount();
     
-    /**
-     * The constant which can be used for binding the description property to the GUI components.
-     */
-    public static final String DESCRIPTION_PROP = "description";
-    
-    /**
-     * Returns the role's name. 
-     * <p>
-     * It must be unique.
-     * 
-     * @return the role's name
-     * 
-     * @since 1.0
-     */
-    String getName();
-    
-    /**
-     * Returns the role's description.
-     * 
-     * @return the role's description
-     * 
-     * @since 1.0
-     */
-    String getDescription();
+        assertNotNull(account.getId());
+        assertNotNull(account.getOptlockVersion());
+        assertNotNull(account.getUsername());
+        assertNotNull(account.getPassword());
+    }
 }

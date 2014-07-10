@@ -22,9 +22,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.panifex.service.api.security.Account;
-import org.panifex.service.api.security.Permission;
-import org.panifex.service.api.security.Role;
+import org.panifex.module.api.accounts.Account;
+import org.panifex.module.api.accounts.Permission;
+import org.panifex.module.api.accounts.Role;
 
 /**
  * Repository of {@link AccountEntity}.
@@ -39,7 +39,7 @@ public interface AccountRepository<T extends Account> {
     T getAccountByUsername(EntityManager entityManager, String username);
     
     /**
-     * Returns a distinct list of {@link org.panifex.service.api.security.Role} for 
+     * Returns a distinct list of {@link org.panifex.module.api.accounts.Role} for 
      * specified account.
      * 
      * <p>If the account does not have any role, than the empty list is returned.
@@ -50,7 +50,7 @@ public interface AccountRepository<T extends Account> {
     List<? extends Role> getRolesForAccount(EntityManager entityManager, T account);
 
     /**
-     * Returns a distinct list of {@link org.panifex.service.api.security.Permission} for 
+     * Returns a distinct list of {@link org.panifex.module.api.accounts.Permission} for 
      * specified account.
      * 
      * <p>If the account does not have any permission, than the empty list is returned.

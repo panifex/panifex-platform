@@ -24,11 +24,11 @@ import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.junit.Test;
+import org.panifex.module.api.accounts.Permission;
+import org.panifex.module.api.accounts.Role;
 import org.panifex.security.persistence.AccountEntity;
 import org.panifex.security.persistence.AccountRepositoryImpl;
 import org.panifex.security.persistence.PersistenceRealm;
-import org.panifex.service.api.security.Permission;
-import org.panifex.service.api.security.Role;
 
 /**
  * Test cases for {@link AccountRepositoryImpl} class. 

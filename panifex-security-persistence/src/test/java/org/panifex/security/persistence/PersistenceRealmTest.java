@@ -31,10 +31,10 @@ import org.apache.shiro.util.ByteSource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.panifex.module.api.accounts.AccountNotExpiredException;
 import org.panifex.security.persistence.AccountEntity;
 import org.panifex.security.persistence.AccountRepositoryImpl;
 import org.panifex.security.persistence.PersistenceRealm;
-import org.panifex.service.api.security.AccountNotExpiredException;
 import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -276,7 +276,7 @@ public final class PersistenceRealmTest extends TestSupport {
     }
     
     /**
-     * Tries to update a not expired account. {@link org.panifex.service.api.security.AccountNotExpiredException AccountNotExpiredException}
+     * Tries to update a not expired account. {@link org.panifex.module.api.accounts.AccountNotExpiredException AccountNotExpiredException}
      * must be thrown because the account is not expired.
      */
     @Test(expected = AccountNotExpiredException.class)

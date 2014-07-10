@@ -16,18 +16,18 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.service.api.security;
+package org.panifex.module.api.accounts;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
 import org.junit.Test;
-import org.panifex.test.support.TestSupport;
+import org.panifex.module.api.accounts.AccountImpl;
 
 /**
- * Unit tests for the {@link RoleImpl} class.
+ * Unit tests for the {@link AccountImpl} class.
  */
-public final class RoleImplTest extends TestSupport {
+public final class AccountImplTest {
 
     /**
      * This test checks the equals contract.
@@ -38,35 +38,10 @@ public final class RoleImplTest extends TestSupport {
     @Test
     public void equalsContractTest() {
         EqualsVerifier.
-            forClass(RoleImpl.class).
+            forClass(AccountImpl.class).
             usingGetClass().
             allFieldsShouldBeUsed().
             suppress(Warning.NONFINAL_FIELDS).
             verify();
-    }
-    
-    /**
-     * This test checks the {@link RoleImpl#RoleImpl(Long, int, String, String)}
-     * constructor.
-     * <p>
-     * The RoleImpl must be successfully constructed.
-     */
-    @Test
-    public void constructRoleImplTest() {
-        // variables
-        Long id = new Long(getNumberUpTo(Integer.MAX_VALUE));
-        int optlockVersion = getNumberUpTo(Integer.MAX_VALUE);
-        String name = getRandomChars(20);
-        String description = getRandomChars(20);
-        
-        // construct the RoleImpl instance
-        RoleImpl role = new RoleImpl(id, optlockVersion, name, description);
-        
-        // assert has it successfully constructed
-        assertNotNull(role);
-        assertEquals(id, role.getId());
-        assertEquals(optlockVersion, role.getOptlockVersion());
-        assertEquals(name, role.getName());
-        assertEquals(description, role.getDescription());
     }
 }

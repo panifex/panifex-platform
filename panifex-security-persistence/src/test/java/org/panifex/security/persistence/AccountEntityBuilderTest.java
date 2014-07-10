@@ -19,10 +19,10 @@
 package org.panifex.security.persistence;
 
 import org.junit.Test;
+import org.panifex.module.api.accounts.AccountImpl;
+import org.panifex.module.api.accounts.AccountImplGenerator;
 import org.panifex.security.persistence.AccountEntity;
 import org.panifex.security.persistence.AccountEntityBuilder;
-import org.panifex.service.api.security.AccountImpl;
-import org.panifex.service.api.security.AccountImplGenerator;
 import org.panifex.test.support.TestSupport;
 
 /**

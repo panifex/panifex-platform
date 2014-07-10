@@ -48,7 +48,6 @@ public class ServletTest extends ITestSupport {
                 mavenBundle("org.apache.shiro", "shiro-core").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-module-zk-api").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-controller").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-zk").version(asInProject()));

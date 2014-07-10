@@ -27,8 +27,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
-import org.panifex.service.api.security.Permission;
-import org.panifex.service.api.security.Role;
+import org.panifex.module.api.accounts.Permission;
+import org.panifex.module.api.accounts.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -19,7 +19,7 @@ Export-Package: \
 	org.panifex.persistence.spi;version="1.0"
 
 Import-Package: \
-    org.panifex.service.api;version="[1.0,2.0)", \
+    org.panifex.module.api;version="[1.0,2.0)", \
     org.slf4j;version="[1.4,2.0)"
 
 Private-Package: org.panifex.persistence.spi.*

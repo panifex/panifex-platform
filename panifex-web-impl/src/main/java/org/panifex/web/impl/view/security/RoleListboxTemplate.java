@@ -21,7 +21,7 @@ package org.panifex.web.impl.view.security;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.panifex.service.api.security.Role;
+import org.panifex.module.api.accounts.Role;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.sys.TemplateResolver;
 import org.zkoss.xel.VariableResolver;
@@ -33,7 +33,7 @@ import org.zkoss.zul.Listitem;
 
 /**
  * A {@link org.zkoss.zk.ui.util.Template Template} for building
- * {@link org.zkoss.zul.Listitem Listitem} components based on the {@link org.panifex.module.api.menu.RoleImpl RoleImpl}.
+ * {@link org.zkoss.zul.Listitem Listitem} components based on the {@link org.panifex.module.api.accounts.RoleImpl RoleImpl}.
  */
 class RoleListboxTemplate implements Template {
 

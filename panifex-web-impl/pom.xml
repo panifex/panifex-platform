@@ -84,11 +84,6 @@
             <groupId>org.panifex</groupId>
             <artifactId>panifex-module-zk-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-service-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <!-- Pax Web Dependencies -->
         <dependency>
             <groupId>org.ops4j.pax.web</groupId>

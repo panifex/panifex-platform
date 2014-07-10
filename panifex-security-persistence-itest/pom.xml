@@ -170,15 +170,15 @@
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
+            <artifactId>panifex-module-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
             <artifactId>panifex-persistence-spi</artifactId>
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
             <artifactId>panifex-security-persistence</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-service-api</artifactId>
         </dependency>
         <!-- Pax Exam Dependencies -->
         <dependency>

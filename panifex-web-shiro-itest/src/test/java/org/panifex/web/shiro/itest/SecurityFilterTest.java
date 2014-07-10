@@ -73,7 +73,6 @@ public final class SecurityFilterTest extends ITestSupport {
             mavenBundle("org.apache.shiro", "shiro-ehcache").version(asInProject()),
             mavenBundle("org.apache.shiro", "shiro-web").version(asInProject()),
             mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
-            mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
             mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
             mavenBundle("org.panifex", "panifex-web-shiro").version(asInProject()));
     }

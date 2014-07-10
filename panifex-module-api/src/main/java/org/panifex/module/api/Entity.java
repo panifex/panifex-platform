@@ -16,38 +16,31 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.service.api.security;
-
-import org.fluttercode.datafactory.impl.DataFactory;
-import org.panifex.service.api.EntityImpl;
-import org.panifex.service.api.security.AccountImpl;
+package org.panifex.module.api;
 
 /**
- * A generator of random {@link AccountImpl} instances for using in the
- * test cases.
+ * An entity which can be persisted or shown in the Web application.
+ * 
+ * @see <a href="http://en.wikipedia.org/wiki/Entity_class">Entity class</a>
+ * 
+ * @since 1.0
  */
-public final class AccountImplGenerator {
+public interface Entity {
 
     /**
-     * Private constructor protects {@link EntityImpl EntityImpl} from instancing - singleton.
+     * Return the entity's ID.
+     * 
+     * @return the entity's ID
      */
-    private AccountImplGenerator() {
-    }
+    Long getId();
     
     /**
-     * Returns generated persisted {@link AccountImpl AccountImpl}.
+     * Returns the version of {@link Entity}. The version is used to ensure integrity 
+     * when performing the merge operation and for optimistic concurrency control.
      * 
-     * @return generated persisted {@link AccountImpl AccountImpl}
+     * @return the version of {@link Entity}
+     * 
+     * @since 1.0
      */
-    public static AccountImpl generatePersistedAccount() {
-        DataFactory df = new DataFactory();
-        
-        AccountImpl account = new AccountImpl(
-            new Long(df.getNumberBetween(0, Integer.MAX_VALUE)),
-            df.getNumberBetween(0, Integer.MAX_VALUE),
-            df.getRandomWord(),
-            df.getRandomText(255),
-            false);
-        return account;
-    }
+    int getOptlockVersion();
 }

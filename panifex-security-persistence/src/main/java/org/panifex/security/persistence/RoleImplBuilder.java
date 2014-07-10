@@ -18,10 +18,10 @@
  ******************************************************************************/
 package org.panifex.security.persistence;
 
-import org.panifex.service.api.security.RoleImpl;
+import org.panifex.module.api.accounts.RoleImpl;
 
 /**
- * A RoleImplBuilder builds the {@link org.panifex.service.api.security.RoleImpl RoleImpl} 
+ * A RoleImplBuilder builds the {@link org.panifex.module.api.accounts.RoleImpl RoleImpl} 
  * instance based on the existed {@link RoleEntity}.
  */
 public final class RoleImplBuilder {

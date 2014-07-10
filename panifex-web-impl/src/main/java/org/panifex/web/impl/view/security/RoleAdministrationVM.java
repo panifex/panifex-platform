@@ -18,8 +18,8 @@
  ******************************************************************************/
 package org.panifex.web.impl.view.security;
 
-import org.panifex.service.api.security.RoleImpl;
-import org.panifex.service.api.security.RoleService;
+import org.panifex.module.api.accounts.RoleImpl;
+import org.panifex.module.api.accounts.RoleService;
 import org.zkoss.zul.ListModel;
 
 /**

@@ -55,7 +55,7 @@
     
     <service ref="persistenceRealm">
         <interfaces>
-            <value>org.panifex.service.api.security.SecurityService</value>
+            <value>org.panifex.module.api.accounts.SecurityService</value>
         </interfaces>
     </service>
     
@@ -73,7 +73,7 @@
     
     <service ref="roleService">
         <interfaces>
-            <value>org.panifex.service.api.security.RoleService</value>
+            <value>org.panifex.module.api.accounts.RoleService</value>
         </interfaces>
     </service>
 

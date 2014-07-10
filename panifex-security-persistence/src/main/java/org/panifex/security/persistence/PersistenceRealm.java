@@ -46,9 +46,9 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.panifex.service.api.security.AccountNotExpiredException;
-import org.panifex.service.api.security.Permission;
-import org.panifex.service.api.security.SecurityService;
+import org.panifex.module.api.accounts.AccountNotExpiredException;
+import org.panifex.module.api.accounts.Permission;
+import org.panifex.module.api.accounts.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

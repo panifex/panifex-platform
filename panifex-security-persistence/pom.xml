@@ -73,12 +73,16 @@
         <!-- Panifex Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
+            <artifactId>panifex-module-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
             <artifactId>panifex-persistence-spi</artifactId>
         </dependency>
         <!-- Test Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-service-api</artifactId>
+            <artifactId>panifex-module-api</artifactId>
             <type>test-jar</type>
         </dependency>
     </dependencies>

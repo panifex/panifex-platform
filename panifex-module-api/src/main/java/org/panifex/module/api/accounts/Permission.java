@@ -16,26 +16,46 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.service.api.security;
+package org.panifex.module.api.accounts;
 
-import org.junit.Test;
-import org.panifex.test.support.TestSupport;
+import org.panifex.module.api.Entity;
 
 /**
- * Unit test for the {@link AccountImplGenerator} class.
+ * A permission represents the ability to perform an action or access a resource.
+ * 
+ * @see <a href="https://shiro.apache.org/static/current/apidocs/org/apache/shiro/authz/Permission.html">Permission</a>
+ *
+ * @since 1.0
  */
-public final class AccountImplGeneratorTest extends TestSupport {
+public interface Permission extends Entity {
 
     /**
-     * This test checks generating random persisted {@link AccountImpl} instances.
+     * Returns the permission's name, the easily readable free text.
+     * <p>
+     * It must be unique.
+     * 
+     * @return the permission's name
+     * 
+     * @since 1.0
      */
-    @Test
-    public void generateAccountImplTest() {
-        AccountImpl account = AccountImplGenerator.generatePersistedAccount();
+    String getName();
+
+    /**
+     * Returns the permission's wildcard expression.
+     * 
+     * @return wildcard the <a href="http://shiro.apache.org/permissions.html">wildcard permission expression</a>
+     * 
+     * @since 1.0
+     */
+    String getWildcardExpression();
     
-        assertNotNull(account.getId());
-        assertNotNull(account.getOptlockVersion());
-        assertNotNull(account.getUsername());
-        assertNotNull(account.getPassword());
-    }
+    /**
+     * Returns the permission's description.
+     * 
+     * @return the permission's description
+     * 
+     * @since 1.0
+     */
+    String getDescription(); 
+
 }

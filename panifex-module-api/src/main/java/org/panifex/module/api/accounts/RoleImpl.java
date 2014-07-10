@@ -16,12 +16,12 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.service.api.security;
+package org.panifex.module.api.accounts;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.panifex.service.api.EntityImpl;
+import org.panifex.module.api.EntityImpl;
 
 /**
  * The user's role.
@@ -40,8 +40,8 @@ public final class RoleImpl extends EntityImpl implements Role {
      * Constructs a new {@link Role} instance for persisted
      * roles.
      * 
-     * @param id the {@link org.panifex.service.api.Entity Entity}'s ID
-     * @param optlockVersion the {@link org.panifex.service.api.Entity Entity}'s version
+     * @param id the {@link org.panifex.module.api.Entity Entity}'s ID
+     * @param optlockVersion the {@link org.panifex.module.api.Entity Entity}'s version
      * @param name the role name
      * @param description the role description
      * 

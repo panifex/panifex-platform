@@ -1,46 +1,47 @@
 /*******************************************************************************
  * Panifex platform
  * Copyright (C) 2013  Mario Krizmanic
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.service.api;
+package org.panifex.module.api;
+
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+
+import org.junit.Test;
+import org.panifex.test.support.TestSupport;
 
 /**
- * An entity which can be persisted or shown in the Web application.
- * 
- * @see <a href="http://en.wikipedia.org/wiki/Entity_class">Entity class</a>
- * 
- * @since 1.0
+ * Unit tests for the {@link EntityImpl} class.
  */
-public interface Entity {
+public final class EntityImplTest extends TestSupport {
 
     /**
-     * Return the entity's ID.
-     * 
-     * @return the entity's ID
+     * This test checks the equals contract.
+     *
+     * @see {@link java.lang.Object#equals(Object)}
+     * @see {@link java.lang.Object#hashCode()}
      */
-    Long getId();
-    
-    /**
-     * Returns the version of {@link Entity}. The version is used to ensure integrity 
-     * when performing the merge operation and for optimistic concurrency control.
-     * 
-     * @return the version of {@link Entity}
-     * 
-     * @since 1.0
-     */
-    int getOptlockVersion();
+    @Test
+    public void equalsContractTest() {
+        EqualsVerifier.
+            forClass(EntityImpl.class).
+            usingGetClass().
+            allFieldsShouldBeUsed().
+            suppress(Warning.NONFINAL_FIELDS).
+            verify();
+    }
 }

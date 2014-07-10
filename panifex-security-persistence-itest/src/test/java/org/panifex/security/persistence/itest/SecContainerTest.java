@@ -1,17 +1,17 @@
 /*******************************************************************************
  * Panifex platform
  * Copyright (C) 2013  Mario Krizmanic
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -33,7 +33,7 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
-import org.panifex.service.api.security.SecurityService;
+import org.panifex.module.api.accounts.SecurityService;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerMethod.class)
@@ -41,7 +41,7 @@ public final class SecContainerTest {
 
     @Inject
     private SecurityService securityService;
-    
+
     @Configuration
     public Option[] config() {
         return CoreOptions.options(
@@ -75,13 +75,13 @@ public final class SecContainerTest {
             mavenBundle("org.liquibase", "liquibase-osgi").version(asInProject()),
             mavenBundle("org.osgi", "org.osgi.compendium").version(asInProject()),
             mavenBundle("org.panifex", "panifex-datasource-derby").version(asInProject()),
+            mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
             mavenBundle("org.panifex", "panifex-persistence-spi").version(asInProject()),
             mavenBundle("org.panifex", "panifex-security-persistence").version(asInProject()),
-            mavenBundle("org.panifex", "panifex-service-api").version(asInProject()),
             junitBundles());
 
     }
-    
+
     @Test
     public void getSecurityServiceTest() {
         assertNotNull(securityService);

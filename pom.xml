@@ -76,7 +76,6 @@
         <module>poms</module>
         <module>panifex-module-api</module>
         <module>panifex-module-zk-api</module>
-        <module>panifex-service-api</module>
         <module>panifex-web-controller</module>
         <module>panifex-web-impl</module>
         <module>panifex-web-shiro</module>
@@ -714,18 +713,6 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-service-api</artifactId>
-                <version>${panifex.platform.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.panifex</groupId>
-                <artifactId>panifex-service-api</artifactId>
-                <version>${panifex.platform.version}</version>
-                <type>test-jar</type>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.panifex</groupId>
                 <artifactId>panifex-datasource-derby</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
@@ -746,6 +733,13 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
+                <artifactId>panifex-module-api</artifactId>
+                <version>${panifex.platform.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
                 <artifactId>panifex-module-dashboard-impl</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
@@ -762,11 +756,6 @@
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-security-persistence</artifactId>
-                <version>${panifex.platform.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.panifex</groupId>
-                <artifactId>panifex-service-impl</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>

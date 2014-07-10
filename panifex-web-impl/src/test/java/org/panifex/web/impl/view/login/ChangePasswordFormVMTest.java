@@ -258,7 +258,7 @@ public final class ChangePasswordFormVMTest extends TestSupport {
     
     /**
      * This test checks the {@link ChangePasswordFormVM#changePassword()} method in case
-     * the {@link org.panifex.service.api.security.SecurityService#updateAccountExpiredPassword(String, String, String)
+     * the {@link org.panifex.module.api.accounts.SecurityService#updateAccountExpiredPassword(String, String, String)
      * SecurityService#updateAccountExpiredPassword(...)} throws the 
      * {@link org.apache.shiro.authc.UnknownAccountException UnknownAccountException} exception.
      */
@@ -306,7 +306,7 @@ public final class ChangePasswordFormVMTest extends TestSupport {
     
     /**
      * This test checks the {@link ChangePasswordFormVM#changePassword()} method in case
-     * the {@link org.panifex.service.api.security.SecurityService#updateAccountExpiredPassword(String, String, String)
+     * the {@link org.panifex.module.api.accounts.SecurityService#updateAccountExpiredPassword(String, String, String)
      * SecurityService#updateAccountExpiredPassword(...)} throws the 
      * {@link org.apache.shiro.authc.IncorrectCredentialsException IncorrectCredentialsException} exception.
      */
@@ -354,9 +354,9 @@ public final class ChangePasswordFormVMTest extends TestSupport {
     
     /**
      * This test checks the {@link ChangePasswordFormVM#changePassword()} method in case
-     * the {@link org.panifex.service.api.security.SecurityService#updateAccountExpiredPassword(String, String, String)
+     * the {@link org.panifex.module.api.accounts.SecurityService#updateAccountExpiredPassword(String, String, String)
      * SecurityService#updateAccountExpiredPassword(...)} throws the 
-     * {@link org.panifex.service.api.security.AccountNotExpiredException AccountNotExpiredException} exception.
+     * {@link org.panifex.module.api.accounts.AccountNotExpiredException AccountNotExpiredException} exception.
      */
     @Test
     public void changePasswordCommandAccountNotExpiredTest() throws Exception {

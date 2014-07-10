@@ -26,10 +26,10 @@ import javax.persistence.Version;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.panifex.service.api.Entity;
+import org.panifex.module.api.Entity;
 
 /**
- * An abstract base {@link org.panifex.service.api.Entity} class for implement
+ * An abstract base {@link org.panifex.module.api.Entity} class for implement
  * JPA entities.
  *
  */

@@ -16,31 +16,19 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.service.api.security;
+package org.panifex.module.api.accounts;
 
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
-
-import org.junit.Test;
+import java.util.List;
 
 /**
- * Unit tests for the {@link AccountImpl} class.
+ * A RoleService is responsible for managing the {@link Role} entities.
  */
-public final class AccountImplTest {
+public interface RoleService {
 
     /**
-     * This test checks the equals contract.
+     * Returns the collection of persisted {@link RoleImpl}.
      * 
-     * @see {@link java.lang.Object#equals(Object)}
-     * @see {@link java.lang.Object#hashCode()}
+     * @return the collection of persisted {@link RoleImpl}.
      */
-    @Test
-    public void equalsContractTest() {
-        EqualsVerifier.
-            forClass(AccountImpl.class).
-            usingGetClass().
-            allFieldsShouldBeUsed().
-            suppress(Warning.NONFINAL_FIELDS).
-            verify();
-    }
+    List<RoleImpl> getRoles();
 }

@@ -30,8 +30,8 @@ import javax.persistence.metamodel.StaticMetamodel;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.panifex.module.api.accounts.Account;
 import org.panifex.persistence.spi.AbstractEntity;
-import org.panifex.service.api.security.Account;
 
 @Entity
 @StaticMetamodel(AccountEntity_.class)

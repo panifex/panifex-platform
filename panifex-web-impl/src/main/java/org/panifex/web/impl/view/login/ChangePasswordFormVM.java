@@ -120,7 +120,7 @@ public final class ChangePasswordFormVM extends LayoutVM {
     /**
      * This method is called when the user clicks on the change password button.
      * <p>
-     * It calls the {@link org.panifex.service.api.security.SecurityService#updateAccountExpiredPassword(String, String, String)}
+     * It calls the {@link org.panifex.module.api.accounts.SecurityService#updateAccountExpiredPassword(String, String, String)}
      * method which persists a new password.
      * <p>
      * After changing password, it calls the {@link ChangePasswordFormController#onSuccessfullyChangePassword()} method.

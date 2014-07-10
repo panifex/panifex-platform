@@ -19,9 +19,9 @@
 package org.panifex.security.persistence;
 
 import org.junit.Test;
+import org.panifex.module.api.accounts.RoleImpl;
 import org.panifex.security.persistence.RoleEntity;
 import org.panifex.security.persistence.RoleImplBuilder;
-import org.panifex.service.api.security.RoleImpl;
 import org.panifex.test.support.TestSupport;
 
 /**
@@ -30,10 +30,10 @@ import org.panifex.test.support.TestSupport;
 public final class RoleImplBuilderTest extends TestSupport {
 
     /**
-     * This test tries to build a {@link org.panifex.service.api.security.RoleImpl RoleImpl}
+     * This test tries to build a {@link org.panifex.module.api.accounts.RoleImpl RoleImpl}
      * based on the mocked {@link RoleEntity} using the {@link RoleImplBuilder} class.
      * <p>
-     * The {@link org.panifex.service.api.security.RoleImpl RoleImpl} must be successfully
+     * The {@link org.panifex.module.api.accounts.RoleImpl RoleImpl} must be successfully
      * builded.
      */
     @Test

@@ -23,9 +23,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.panifex.service.api.security.Role;
-import org.panifex.service.api.security.RoleImpl;
-import org.panifex.service.api.security.RoleService;
+import org.panifex.module.api.accounts.Role;
+import org.panifex.module.api.accounts.RoleImpl;
+import org.panifex.module.api.accounts.RoleService;
 
 /**
  * A RoleService is responsible for managing the {@link Role} entities.
