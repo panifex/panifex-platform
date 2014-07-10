@@ -1,17 +1,17 @@
 /*******************************************************************************
  * Panifex platform
  * Copyright (C) 2013  Mario Krizmanic
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -29,7 +29,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExpiredCredentialsException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -39,24 +38,22 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
-import org.apache.shiro.crypto.RandomNumberGenerator;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Sha512Hash;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.panifex.module.api.accounts.AccountNotExpiredException;
 import org.panifex.module.api.accounts.Permission;
-import org.panifex.module.api.accounts.SecurityService;
+import org.panifex.module.api.security.AuthenticationService;
+import org.panifex.module.api.security.AuthorizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Realm that allows authentication and authorization via persisted data.
- * 
+ *
  */
-public class PersistenceRealm extends AuthorizingRealm implements SecurityService {
+public class PersistenceRealm extends AuthorizingRealm
+        implements AuthenticationService, AuthorizationService {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -64,41 +61,41 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
      * Hash algorithm name to use when performing hashes for credentials matching.
      */
     public static final String HASH_ALGORITHM = Sha512Hash.ALGORITHM_NAME;
-    
+
     /**
      * The number of times a submitted {@code AuthenticationToken}'s credentials will be hashed before comparing
      * to the credentials stored in the system.
      */
     public static final int HASH_ITERATIONS = 1024;
-    
+
     private AccountRepositoryImpl accountRepository;
-    
+
     /**
      * {@link org.apache.shiro.crypto.RandomNumberGenerator RandomNumberGenerator} is used
      * for creating random numbers for generating password salts.
      */
-    private RandomNumberGenerator randomGenerator = new SecureRandomNumberGenerator();
-    
+    //private RandomNumberGenerator randomGenerator = new SecureRandomNumberGenerator();
+
     private EntityManager entityManager;
-    
+
     /**
      * Constructor adds EhCacheManager.
      */
     public PersistenceRealm() {
         super(
             new EhCacheManager());
-        
+
         // set hashed credentials matcher
         HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher(HASH_ALGORITHM);
         credentialsMatcher.setHashIterations(HASH_ITERATIONS);
         credentialsMatcher.setStoredCredentialsHexEncoded(false);
         setCredentialsMatcher(credentialsMatcher);
     }
-    
+
     public void setAccountRepository(AccountRepositoryImpl accountRepository) {
         this.accountRepository = accountRepository;
     }
-    
+
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -122,15 +119,15 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
 
         // get account from repository
         AccountEntity account = getAccountByUsername(username);
-            
+
         // check if user's account is expired
         assertCredentialsNotExpired(account);
-        
+
         // create authentication info
         SimpleAuthenticationInfo info = createAuthenticationInfo(account);
-    
+
         log.debug("Authentication info resolved: username={}", username);
-    
+
         return info;
     }
 
@@ -148,24 +145,24 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
         String username = (String) getAvailablePrincipal(principals);
 
         log.debug("Get authorization info for username: {}", username);
-        
+
         // get account from repository
         AccountEntity account = accountRepository.getAccountByUsername(entityManager, username);
-       
+
         // create empty sets
         Set<String> roleNames = new HashSet<>();
         Set<String> permissionWildcardExpressions = new HashSet<>();
-        
+
         if (account != null ) {
-            List<? extends Permission> permissions = 
+            List<? extends Permission> permissions =
                     accountRepository.getPermissionsForAccount(entityManager, account);
-            
+
             for (Permission permission : permissions) {
                 String wildcardExpression = permission.getWildcardExpression();
                 permissionWildcardExpressions.add(wildcardExpression);
             }
-        } 
-        
+        }
+
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
         info.setStringPermissions(permissionWildcardExpressions);
         return info;
@@ -174,49 +171,51 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
     /**
      * {@inheritDoc}
      */
+    /*
     @Override
-    public void updateAccountExpiredPassword(String username, String oldPassword, String newPassword) 
+    public void updateAccountExpiredPassword(String username, String oldPassword, String newPassword)
             throws AccountNotExpiredException, IncorrectCredentialsException, UnknownAccountException  {
-        
+
         // get account from repository
         AccountEntity account = getAccountByUsername(username);
-        
+
         // create authentication info
         SimpleAuthenticationInfo info = createAuthenticationInfo(account);
-        
+
         // create the authentication token
         UsernamePasswordToken token = new UsernamePasswordToken(username, oldPassword);
-        
+
         // assert that the UsernamePasswordToken's credentials match the stored account AuthenticationInfo's credentials
         assertCredentialsMatch(token, info);
 
         // assert that the account's credentials is expired
         assertCredentialsExpired(account);
-        
+
         // the account is expired, so change the current password
         updateAccountPassword(account, newPassword);
-    }
+    }*/
 
     /**
      * Updates the {@link AccountEntity} password.
-     * 
+     *
      * @param account the persisted {@link AccountEntity}
      * @param newPassword the new plain text password
      */
+    /*
     private void updateAccountPassword(AccountEntity account, String newPassword) {
         String passwordSalt = getRandomPasswordSalt();
         String password = getHashedPasswordBase64(newPassword, passwordSalt);
-        
+
         account.setPassword(password);
         account.setPasswordSalt(passwordSalt);
         account.setIsCredentialsExpired(false);
-        
+
         accountRepository.updateAccount(entityManager, account);
-    }
-    
+    }*/
+
     /**
      * Returns the {@link AccountEntity} with the same username.
-     * 
+     *
      * @param username a account's username
      * @return the {@link AccountEntity} with the same username
      * @throws UnknownAccountException if the account has not found, or if its password or its password's salt is null
@@ -224,14 +223,14 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
     private AccountEntity getAccountByUsername(String username) throws UnknownAccountException {
         // get account from repository
         AccountEntity account = accountRepository.getAccountByUsername(entityManager, username);
-        
+
         if (account != null) {
             // get password
             String password = account.getPassword();
-            
+
             // get password salt
             String passwordSalt = account.getPasswordSalt();
-    
+
             // check user's username and password
             if (password == null || passwordSalt == null) {
                 StringBuilder sb = new StringBuilder();
@@ -239,7 +238,7 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
                 sb.append(username);
                 throw new UnknownAccountException(sb.toString());
             }
-            
+
             return account;
         } else {
             // the account has not found. Throw UnknownAccountException.
@@ -253,27 +252,27 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
      * <p>
      * The {@link org.apache.shiro.authc.SimpleAuthenticationInfo SimpleAuthenticationInfo} is used in subsequent
      * authentication steps.
-     * 
+     *
      * @param account the persisted {@link AccountEntity}
      * @return the constructed {@link org.apache.shiro.authc.SimpleAuthenticationInfo SimpleAuthenticationInfo} based on the persisted {@link AccountEntity}
      */
-    private SimpleAuthenticationInfo createAuthenticationInfo(AccountEntity account) { 
+    private SimpleAuthenticationInfo createAuthenticationInfo(AccountEntity account) {
         // decode the password salt
         byte[] decodedPasswordSalt = Base64.decode(account.getPasswordSalt());
         ByteSource passwordSaltSource = ByteSource.Util.bytes(decodedPasswordSalt);
-        
+
         SimpleAuthenticationInfo info =
                 new SimpleAuthenticationInfo(
-                    account.getUsername(), 
+                    account.getUsername(),
                     account.getPassword(),
                     passwordSaltSource,
                     getName());
         return info;
     }
-    
+
     /**
      * Asserts that the persisted account is not expired, and if not, throws an ExpiredCredentialsException.
-     * 
+     *
      * @param account the persisted {@link AccountEntity}
      * @throws ExpiredCredentialsException it the account is expired
      */
@@ -287,49 +286,52 @@ public class PersistenceRealm extends AuthorizingRealm implements SecurityServic
             throw new ExpiredCredentialsException(sb.toString());
         }
     }
-    
+
     /**
      * Asserts that the persisted account is expired, and if not, throws an AccountNotExpiredException.
-     * 
+     *
      * @param account the persisted {@link AccountEntity}
      * @throws AccountNotExpiredException it the account is not expired
      */
+    /*
     private void assertCredentialsExpired(AccountEntity account) throws AccountNotExpiredException {
         if (!account.getIsCredentialsExpired()) {
             throw new AccountNotExpiredException();
         }
-    }
-    
+    }*/
+
     /**
-     * Returns a random generated <a href="http://en.wikipedia.org/wiki/Base64">Base 64</a>-formatted 
+     * Returns a random generated <a href="http://en.wikipedia.org/wiki/Base64">Base 64</a>-formatted
      * byte array of fixed length filled.
      * <p>
      * It is used for salting passwords.
-     * 
+     *
      * @return a random generated <a href="http://en.wikipedia.org/wiki/Base64">Base 64</a>-formatted byte array
      */
+    /*
     private String getRandomPasswordSalt() {
         return randomGenerator.nextBytes().toBase64();
-    }
-    
+    }*/
+
     /**
      * Returns a hashed and salted plain text password.
-     * 
+     *
      * @param plainTextPassword the password to be hashes
      * @param passwordSalt the salt to use for the hash
      * @return a hashed and salted plain text password
      */
+    /*
     private String getHashedPasswordBase64(String plainTextPassword, String passwordSalt) {
         // decode password salt
         byte[] salt = Base64.decode(passwordSalt);
-            
+
         // hash salted password
         String hashedPasswordBase64 = new SimpleHash(
-            PersistenceRealm.HASH_ALGORITHM, 
-            plainTextPassword, 
-            salt, 
+            PersistenceRealm.HASH_ALGORITHM,
+            plainTextPassword,
+            salt,
             PersistenceRealm.HASH_ITERATIONS).toBase64();
-        
+
         return hashedPasswordBase64;
-    }
+    }*/
 }

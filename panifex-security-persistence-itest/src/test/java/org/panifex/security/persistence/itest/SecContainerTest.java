@@ -33,14 +33,14 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerMethod;
-import org.panifex.module.api.accounts.SecurityService;
+import org.panifex.module.api.security.AuthenticationService;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerMethod.class)
 public final class SecContainerTest {
 
     @Inject
-    private SecurityService securityService;
+    private AuthenticationService authenticationService;
 
     @Configuration
     public Option[] config() {
@@ -83,7 +83,7 @@ public final class SecContainerTest {
     }
 
     @Test
-    public void getSecurityServiceTest() {
-        assertNotNull(securityService);
+    public void testAuthenticationServiceRegistered() {
+        assertNotNull(authenticationService);
     }
 }
