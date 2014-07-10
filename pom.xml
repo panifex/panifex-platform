@@ -78,8 +78,8 @@
         <module>panifex-module-zk-api</module>
         <module>panifex-web-controller</module>
         <module>panifex-web-impl</module>
-        <module>panifex-web-shiro</module>
-        <module>panifex-web-shiro-itest</module>
+        <module>panifex-security-shiro</module>
+        <module>panifex-security-shiro-itest</module>
         <module>panifex-web-zk</module>
         <module>panifex-web-zk-itest</module>
         <module>panifex-web-zk-impl</module>
@@ -760,6 +760,11 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
+                <artifactId>panifex-security-shiro</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
                 <artifactId>panifex-test-support</artifactId>
                 <version>${panifex.platform.version}</version>
                 <scope>test</scope>
@@ -772,11 +777,6 @@
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-impl</artifactId>
-                <version>${panifex.platform.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.panifex</groupId>
-                <artifactId>panifex-web-shiro</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>
