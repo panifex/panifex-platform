@@ -19,12 +19,12 @@
 package org.panifex.module.api.pagelet;
 
 /**
- * Default implementation of {@link PageletMapping}.
+ * The default implementation of {@link PageletMapping}.
  */
-public class DefaultPageletMapping implements PageletMapping {
+public class DefaultPageletMapping<TPagelet extends Pagelet<?,?>> implements PageletMapping {
 
     /**
-     * Pagelet.
+     * The pagelet's name.
      */
     private final String pageletName;
 
@@ -40,7 +40,7 @@ public class DefaultPageletMapping implements PageletMapping {
      * @param urlPatterns an url patterns pagelet maps to
      */
     public DefaultPageletMapping(String pageletName, String[] urlPatterns) {
-        if ((pageletName == null) || (urlPatterns == null)) {
+        if (pageletName == null || urlPatterns == null) {
             throw new IllegalArgumentException();
         }
         this.pageletName = pageletName;
@@ -53,8 +53,8 @@ public class DefaultPageletMapping implements PageletMapping {
      * @param pagelet a pagelet
      * @param urlPatterns an url patterns pagelet maps to
      */
-    public DefaultPageletMapping(Pagelet<?, ?> pagelet, String[] urlPatterns) {
-        this(pagelet.getClass().getCanonicalName(), urlPatterns);
+    public DefaultPageletMapping(TPagelet pagelet, String[] urlPatterns) {
+        this(pagelet.getName(), urlPatterns);
     }
 
     @Override

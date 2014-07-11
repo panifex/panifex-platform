@@ -41,4 +41,8 @@ public class DashboardContent extends AbstractContent {
         Div body = new Div();
         ((Component) parent).appendChild(body);
     }
+
+    public String getName() {
+        return "DashboardContent";
+    }
 }

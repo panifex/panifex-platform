@@ -16,27 +16,17 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.api.pagelet;
+package org.panifex.module.zk.api;
 
-/**
- * Creates all necessary components for a given page in response to user's
- * request.<p/>
- *
- * @since 1.0
- */
-public interface Pagelet<Config, Request> {
+import org.panifex.module.api.pagelet.DefaultPageletMapping;
 
-    /**
-     * Returns the (application-unique) name assigned to this <code>Pagelet</code>.
-     * All pageleta configured for a single application must have a unique name.
-     *
-     * @return the (application-unique) name assigned to this <code>Pagelet</code>.
-     *
-     * @since 1.0
-     */
-    String getName();
+public class DefaultZkPageletMapping extends DefaultPageletMapping<ZkPagelet> {
 
-    void init(Config config);
+    public DefaultZkPageletMapping(String pageletName, String[] urlPatterns) {
+        super(pageletName, urlPatterns);
+    }
 
-    void service(Request request);
+    public DefaultZkPageletMapping(ZkPagelet pagelet, String[] urlPatterns) {
+        super(pagelet, urlPatterns);
+    }
 }

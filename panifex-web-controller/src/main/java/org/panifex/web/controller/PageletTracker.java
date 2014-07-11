@@ -19,12 +19,8 @@
 package org.panifex.web.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
 import org.panifex.module.api.pagelet.Pagelet;
 import org.panifex.module.api.pagelet.PageletMapping;
 import org.slf4j.Logger;
@@ -37,45 +33,41 @@ public abstract class PageletTracker<TPagelet extends Pagelet<?, ?>> {
      */
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private Set<TPagelet> pagelets = new HashSet<>();
-    private Set<PageletMapping> mappings = new HashSet<>();
+    private List<TPagelet> pagelets = new ArrayList<>();
+    private List<PageletMapping> pageletMappings = new ArrayList<>();
 
-    private BundleContext bundleContext;
-
-    public final void addPagelet(ServiceReference<TPagelet> pageletReference) {
-        TPagelet pagelet = bundleContext.getService(pageletReference);
+    public final void bindPagelet(TPagelet pagelet) {
         log.debug("Bind pagelet: {}", pagelet);
-        pagelets.add(pagelet);
-        onPageletAdded(pagelet);
-    }
-
-    public final void removePagelet(ServiceReference<TPagelet> pageletReference) {
-        if (pageletReference != null) {
-            TPagelet pagelet = bundleContext.getService(pageletReference);
-            log.debug("Unbind pagelet: {}", pagelet);
-            pagelets.remove(pagelet);
-            onPageletRemoved(pagelet);
+        if (pagelet != null) {
+            pagelets.add(pagelet);
+            onPageletBinded(pagelet);
         }
     }
 
-    public final void addPageletMapping(ServiceReference<PageletMapping> mappingReference) {
-        PageletMapping mapping = bundleContext.getService(mappingReference);
-        log.debug("Bind pagelet mapping: {}", mapping);
-        mappings.add(mapping);
-        onPageletMappingAdded(mapping);
-    }
-
-    public final void removePageletMapping(ServiceReference<PageletMapping> mappingReference) {
-        if (mappingReference != null) {
-            PageletMapping mapping = bundleContext.getService(mappingReference);
-            log.debug("Unbind pagelet mapping: {}", mapping);
-            mappings.remove(mapping);
-            onPageletMappingRemoved(mapping);
+    public final void unbindPagelet(TPagelet pagelet) {
+        log.debug("Unbind pagelet: {}", pagelet);
+        if (pagelet != null) {
+            if (pagelets.remove(pagelet)) {
+                onPageletUnbinded(pagelet);
+            }
         }
     }
 
-    public final void setBundleContext(BundleContext bundleContext) {
-        this.bundleContext = bundleContext;
+    public final void bindPageletMapping(PageletMapping pageletMapping) {
+        log.debug("Bind pagelet mapping: {}", pageletMapping);
+        if (pageletMapping != null) {
+            pageletMappings.add(pageletMapping);
+            onPageletMappingBinded(pageletMapping);
+        }
+    }
+
+    public final void unbindPageletMapping(PageletMapping pageletMapping) {
+        log.debug("Unbind pagelet mapping: {}", pageletMapping);
+        if (pageletMapping != null) {
+            if (pageletMappings.remove(pageletMapping)) {
+                onPageletMappingUnbinded(pageletMapping);
+            }
+        }
     }
 
     protected final boolean containsPagelet(Pagelet<?, ?> pagelet) {
@@ -83,18 +75,18 @@ public abstract class PageletTracker<TPagelet extends Pagelet<?, ?>> {
     }
 
     protected final List<TPagelet> getPagelets() {
-        return new ArrayList<TPagelet>(pagelets);
+        return pagelets;
     }
 
-    protected final List<PageletMapping> getMappings() {
-        return new ArrayList<PageletMapping>(mappings);
+    protected final List<PageletMapping> getPageletMappings() {
+        return pageletMappings;
     }
 
-    protected abstract void onPageletAdded(TPagelet pagelet);
+    protected abstract void onPageletBinded(TPagelet pagelet);
 
-    protected abstract void onPageletRemoved(TPagelet pagelet);
+    protected abstract void onPageletUnbinded(TPagelet pagelet);
 
-    protected abstract void onPageletMappingAdded(PageletMapping mapping);
+    protected abstract void onPageletMappingBinded(PageletMapping mapping);
 
-    protected abstract void onPageletMappingRemoved(PageletMapping mapping);
+    protected abstract void onPageletMappingUnbinded(PageletMapping mapping);
 }

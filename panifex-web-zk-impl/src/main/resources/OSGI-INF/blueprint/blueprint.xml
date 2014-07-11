@@ -38,8 +38,8 @@
     </service>
 
     <bean id="loginPageletMapping"
-            class="org.panifex.module.api.pagelet.DefaultPageletMapping">
-        <argument value="org.panifex.web.zk.impl.login.LoginZkPagelet"/>
+            class="org.panifex.module.zk.api.DefaultZkPageletMapping">
+        <argument ref="loginPagelet"/>
         <argument>
             <array value-type="java.lang.String">
                 <value>/login</value>

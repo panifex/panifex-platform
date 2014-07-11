@@ -30,4 +30,9 @@ public class HelloZkPagelet extends GenericZkPagelet {
         label.setPage(request);
     }
 
+    @Override
+    public String getName() {
+        return "HelloZkPagelet";
+    }
+
 }

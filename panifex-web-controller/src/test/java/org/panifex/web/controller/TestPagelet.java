@@ -16,27 +16,22 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.api.pagelet;
+package org.panifex.web.controller;
 
-/**
- * Creates all necessary components for a given page in response to user's
- * request.<p/>
- *
- * @since 1.0
- */
-public interface Pagelet<Config, Request> {
+import org.panifex.module.api.pagelet.Pagelet;
 
-    /**
-     * Returns the (application-unique) name assigned to this <code>Pagelet</code>.
-     * All pageleta configured for a single application must have a unique name.
-     *
-     * @return the (application-unique) name assigned to this <code>Pagelet</code>.
-     *
-     * @since 1.0
-     */
-    String getName();
+public class TestPagelet implements Pagelet<Object, Object> {
 
-    void init(Config config);
+    @Override
+    public void init(Object config) {
+    }
 
-    void service(Request request);
+    @Override
+    public void service(Object request) {
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }

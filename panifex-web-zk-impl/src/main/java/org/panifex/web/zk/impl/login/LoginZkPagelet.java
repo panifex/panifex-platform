@@ -41,6 +41,11 @@ public class LoginZkPagelet extends LayoutZkPagelet {
     private final String IS_REMEMBER_ME_PROPERTY = vm(LoginViewModel.IS_REMEMBER_ME_ATTR);
 
     @Override
+    public String getName() {
+        return "LoginZkPagelet";
+    }
+
+    @Override
     protected void createContent(Component parent) {
         log.debug("Create login zk pagelet content");
 

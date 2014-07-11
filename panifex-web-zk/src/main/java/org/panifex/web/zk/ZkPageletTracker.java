@@ -55,25 +55,25 @@ public class ZkPageletTracker extends PageletTracker<ZkPagelet>
     }
 
     @Override
-    protected void onPageletAdded(ZkPagelet pagelet) {
+    protected void onPageletBinded(ZkPagelet pagelet) {
         registerPagelet(pagelet);
     }
 
     @Override
-    protected void onPageletRemoved(ZkPagelet pagelet) {
+    protected void onPageletUnbinded(ZkPagelet pagelet) {
         Configuration config = getConfiguration();
         if (config != null) {
-            config.removeRichlet(pagelet.getClass().getCanonicalName());
+            config.removeRichlet(pagelet.getName());
         }
     }
 
     @Override
-    protected void onPageletMappingAdded(PageletMapping mapping) {
+    protected void onPageletMappingBinded(PageletMapping mapping) {
         registerPageletMapping(mapping);
     }
 
     @Override
-    protected void onPageletMappingRemoved(PageletMapping mapping) {
+    protected void onPageletMappingUnbinded(PageletMapping mapping) {
         Configuration config = getConfiguration();
         if (config != null) {
             // TODO remove pagelet mapping
@@ -99,7 +99,7 @@ public class ZkPageletTracker extends PageletTracker<ZkPagelet>
         ZkPagelet zkPagelet = (ZkPagelet) pagelet;
         Configuration config = getConfiguration();
         if (config != null) {
-            String pageletName = zkPagelet.getClass().getCanonicalName();
+            String pageletName = zkPagelet.getName();
             config.addRichlet(pageletName, zkPagelet);
             registeredPagelet.add(pageletName);
             registerPageletMappings(zkPagelet);
@@ -107,9 +107,9 @@ public class ZkPageletTracker extends PageletTracker<ZkPagelet>
     }
 
     private void registerPageletMappings(Pagelet<?, ?> pagelet) {
-        List<PageletMapping> mappings = getMappings();
+        List<PageletMapping> mappings = getPageletMappings();
         for (PageletMapping mapping : mappings) {
-            String pageletName = pagelet.getClass().getCanonicalName();
+            String pageletName = pagelet.getName();
             if (pageletName.equals(mapping.getPageletName())) {
                 registerPageletMapping(mapping);
             }

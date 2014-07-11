@@ -27,24 +27,20 @@
     <!-- ZkPageletTracker -->
 
     <bean id="zkPageletTracker"
-            class="org.panifex.web.zk.ZkPageletTracker">
-        <property name="bundleContext" ref="blueprintBundleContext"/>
-    </bean>
+            class="org.panifex.web.zk.ZkPageletTracker"/>
 
     <reference-list interface="org.panifex.module.api.pagelet.PageletMapping"
-            availability="optional"
-            member-type="service-reference">
+            availability="optional">
         <reference-listener ref="zkPageletTracker"
-            bind-method="addPageletMapping"
-            unbind-method="removePageletMapping"/>
+            bind-method="bindPageletMapping"
+            unbind-method="unbindPageletMapping"/>
     </reference-list>
 
     <reference-list interface="org.panifex.module.zk.api.ZkPagelet"
-            availability="optional"
-            member-type="service-reference">
+            availability="optional">
         <reference-listener ref="zkPageletTracker"
-            bind-method="addPagelet"
-            unbind-method="removePagelet"/>
+            bind-method="bindPagelet"
+            unbind-method="unbindPagelet"/>
     </reference-list>
 
     <service ref="zkPageletTracker" 

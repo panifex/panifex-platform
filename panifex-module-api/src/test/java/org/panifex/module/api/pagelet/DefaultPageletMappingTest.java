@@ -19,9 +19,6 @@
 package org.panifex.module.api.pagelet;
 
 import org.junit.Test;
-import org.panifex.module.api.pagelet.DefaultPageletMapping;
-import org.panifex.module.api.pagelet.Pagelet;
-import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.test.support.TestSupport;
 
 /**
@@ -35,7 +32,7 @@ public class DefaultPageletMappingTest extends TestSupport {
     public void testConstructWithPageletName() {
         String pageletName = "pageletName";
 
-        PageletMapping mapping = new DefaultPageletMapping(pageletName, urlPatterns);
+        PageletMapping mapping = new DefaultPageletMapping<TestPagelet>(pageletName, urlPatterns);
 
         assertEquals(pageletName, mapping.getPageletName());
         assertEquals(urlPatterns, mapping.getUrlPatterns());
@@ -43,11 +40,15 @@ public class DefaultPageletMappingTest extends TestSupport {
 
     @Test
     public void testConstructWithConcretePagelet() {
-        Pagelet<?, ?> pageletMock = createMock(Pagelet.class);
+        String pageletName = "pageletName";
+        TestPagelet pageletMock = createMock(TestPagelet.class);
+        expect(pageletMock.getName()).andReturn(pageletName);
 
-        PageletMapping mapping = new DefaultPageletMapping(pageletMock, urlPatterns);
+        replayAll();
+        PageletMapping mapping = new DefaultPageletMapping<TestPagelet>(pageletMock, urlPatterns);
+        verifyAll();
 
-        assertEquals(pageletMock.getClass().getCanonicalName(), mapping.getPageletName());
+        assertEquals(pageletName, mapping.getPageletName());
         assertEquals(urlPatterns, mapping.getUrlPatterns());
     }
 }

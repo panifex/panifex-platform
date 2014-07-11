@@ -19,24 +19,20 @@
 package org.panifex.module.api.pagelet;
 
 /**
- * Creates all necessary components for a given page in response to user's
- * request.<p/>
- *
- * @since 1.0
+ * Simple {@link Pagelet} implementation for unit test cases.
  */
-public interface Pagelet<Config, Request> {
+public class TestPagelet implements Pagelet<Object,Object> {
 
-    /**
-     * Returns the (application-unique) name assigned to this <code>Pagelet</code>.
-     * All pageleta configured for a single application must have a unique name.
-     *
-     * @return the (application-unique) name assigned to this <code>Pagelet</code>.
-     *
-     * @since 1.0
-     */
-    String getName();
+    @Override
+    public String getName() {
+        return null;
+    }
 
-    void init(Config config);
+    @Override
+    public void init(Object config) {
+    }
 
-    void service(Request request);
+    @Override
+    public void service(Object request) {
+    }
 }
