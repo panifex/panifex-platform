@@ -31,8 +31,8 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.osgi.framework.ServiceRegistration;
-import org.panifex.module.api.pagelet.DefaultPageletMapping;
 import org.panifex.module.api.pagelet.PageletMapping;
+import org.panifex.module.zk.api.DefaultZkPageletMapping;
 import org.panifex.module.zk.api.ZkPagelet;
 import org.panifex.test.support.ITestSupport;
 
@@ -67,7 +67,7 @@ public class ServletTest extends ITestSupport {
 
         // register pagelet mapping
         String[] urlPatterns = new String[]{ "/*" };
-        PageletMapping mapping = new DefaultPageletMapping(pagelet, urlPatterns);
+        PageletMapping mapping = new DefaultZkPageletMapping(pagelet, urlPatterns);
         ServiceRegistration<PageletMapping> mappingRegistration =
                 registerService(PageletMapping.class, mapping);
 
