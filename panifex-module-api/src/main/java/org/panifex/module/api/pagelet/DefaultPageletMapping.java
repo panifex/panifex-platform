@@ -21,7 +21,7 @@ package org.panifex.module.api.pagelet;
 /**
  * The default implementation of {@link PageletMapping}.
  */
-public class DefaultPageletMapping<TPagelet extends Pagelet<?,?>> implements PageletMapping {
+public class DefaultPageletMapping<TPagelet extends Pagelet<?>> implements PageletMapping {
 
     /**
      * The pagelet's name.

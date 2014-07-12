@@ -23,6 +23,8 @@ import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.Richlet;
 import org.zkoss.zk.ui.RichletConfig;
 
-public interface ZkPagelet extends Pagelet<RichletConfig, Page>, Richlet {
+public interface ZkPagelet extends Pagelet<Page>, Richlet {
 
+    @Override
+    void init(RichletConfig config);
 }

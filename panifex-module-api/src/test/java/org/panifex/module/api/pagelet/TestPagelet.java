@@ -21,15 +21,11 @@ package org.panifex.module.api.pagelet;
 /**
  * Simple {@link Pagelet} implementation for unit test cases.
  */
-public class TestPagelet implements Pagelet<Object,Object> {
+public class TestPagelet implements Pagelet<Object> {
 
     @Override
     public String getName() {
         return null;
-    }
-
-    @Override
-    public void init(Object config) {
     }
 
     @Override

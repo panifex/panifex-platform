@@ -20,11 +20,7 @@ package org.panifex.web.controller;
 
 import org.panifex.module.api.pagelet.Pagelet;
 
-public class TestPagelet implements Pagelet<Object, Object> {
-
-    @Override
-    public void init(Object config) {
-    }
+public class TestPagelet implements Pagelet<Object> {
 
     @Override
     public void service(Object request) {

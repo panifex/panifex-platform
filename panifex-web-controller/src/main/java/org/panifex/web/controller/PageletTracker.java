@@ -26,7 +26,7 @@ import org.panifex.module.api.pagelet.PageletMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class PageletTracker<TPagelet extends Pagelet<?, ?>> {
+public abstract class PageletTracker<TPagelet extends Pagelet<?>> {
 
     /**
      * Logger.
@@ -70,7 +70,7 @@ public abstract class PageletTracker<TPagelet extends Pagelet<?, ?>> {
         }
     }
 
-    protected final boolean containsPagelet(Pagelet<?, ?> pagelet) {
+    protected final boolean containsPagelet(Pagelet<?> pagelet) {
         return pagelets.contains(pagelet);
     }
 

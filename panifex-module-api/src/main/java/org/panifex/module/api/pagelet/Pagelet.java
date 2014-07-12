@@ -24,7 +24,7 @@ package org.panifex.module.api.pagelet;
  *
  * @since 1.0
  */
-public interface Pagelet<Config, Request> {
+public interface Pagelet<Request> {
 
     /**
      * Returns the (application-unique) name assigned to this <code>Pagelet</code>.
@@ -35,8 +35,6 @@ public interface Pagelet<Config, Request> {
      * @since 1.0
      */
     String getName();
-
-    void init(Config config);
 
     void service(Request request);
 }

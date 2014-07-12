@@ -26,7 +26,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.panifex.module.api.pagelet.Pagelet;
 import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.zk.api.ZkPagelet;
 import org.panifex.web.controller.PageletTracker;
@@ -89,14 +88,14 @@ public class ZkPageletTracker extends PageletTracker<ZkPagelet>
     }
 
     private void registerPagelets() {
-        for (Pagelet<?, ?> pagelet : getPagelets()) {
+        for (ZkPagelet pagelet : getPagelets()) {
             registerPagelet(pagelet);
         }
     }
 
-    private void registerPagelet(Pagelet<?, ?> pagelet) {
+    private void registerPagelet(ZkPagelet pagelet) {
         log.debug("Register pagelet: {}", pagelet);
-        ZkPagelet zkPagelet = (ZkPagelet) pagelet;
+        ZkPagelet zkPagelet = pagelet;
         Configuration config = getConfiguration();
         if (config != null) {
             String pageletName = zkPagelet.getName();
@@ -106,7 +105,7 @@ public class ZkPageletTracker extends PageletTracker<ZkPagelet>
         }
     }
 
-    private void registerPageletMappings(Pagelet<?, ?> pagelet) {
+    private void registerPageletMappings(ZkPagelet pagelet) {
         List<PageletMapping> mappings = getPageletMappings();
         for (PageletMapping mapping : mappings) {
             String pageletName = pagelet.getName();
