@@ -70,15 +70,15 @@ public abstract class PageletTracker<TPagelet extends Pagelet<?>> {
         }
     }
 
-    protected final boolean containsPagelet(Pagelet<?> pagelet) {
+    public final boolean containsPagelet(Pagelet<?> pagelet) {
         return pagelets.contains(pagelet);
     }
 
-    protected final List<TPagelet> getPagelets() {
+    public final List<TPagelet> getPagelets() {
         return pagelets;
     }
 
-    protected final List<PageletMapping> getPageletMappings() {
+    public final List<PageletMapping> getPageletMappings() {
         return pageletMappings;
     }
 
