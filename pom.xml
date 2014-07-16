@@ -56,6 +56,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         
         <!-- Defines dependency versions -->
+        <htmlunit.version>2.13</htmlunit.version>
         <httpcomponents.version>4.3.2</httpcomponents.version>
         <liquibase.version>3.1.1</liquibase.version>
         <openjpa.version>2.2.2</openjpa.version>
@@ -66,6 +67,7 @@
         <pax.url.version>2.0.0</pax.url.version>
         <pax.web.version>3.1.0</pax.web.version>
         <shiro.version>1.2.3</shiro.version>
+        <vaadin.version>7.4.0.alpha3</vaadin.version>
         <zk.framework.version>7.0.2</zk.framework.version>
     </properties>
 
@@ -75,11 +77,14 @@
         <module>panifex-test-support</module>
         <module>poms</module>
         <module>panifex-module-api</module>
+        <module>panifex-module-vaadin-api</module>
         <module>panifex-module-zk-api</module>
         <module>panifex-web-controller</module>
         <module>panifex-web-impl</module>
         <module>panifex-security-shiro</module>
         <module>panifex-security-shiro-itest</module>
+        <module>panifex-web-vaadin</module>
+        <module>panifex-web-vaadin-itest</module>
         <module>panifex-web-zk</module>
         <module>panifex-web-zk-itest</module>
         <module>panifex-web-zk-impl</module>
@@ -664,6 +669,12 @@
                 <artifactId>org.eclipse.osgi.util</artifactId>
                 <version>3.2.100.v20100503</version>
             </dependency>
+            <!-- HtmlUnit Dependencies -->
+            <dependency>
+                <groupId>net.sourceforge.htmlunit</groupId>
+                <artifactId>htmlunit</artifactId>
+                <version>${htmlunit.version}</version>
+            </dependency>
             <!-- Janino Dependencies -->
             <dependency>
                 <groupId>org.codehaus.janino</groupId>
@@ -676,11 +687,17 @@
                 <artifactId>jasperreports</artifactId>
                 <version>5.5.2</version>
             </dependency>
-            <!-- JSON Depedencies -->
+            <!-- JSON Dependencies -->
             <dependency>
                 <groupId>org.json</groupId>
                 <artifactId>com.springsource.org.json</artifactId>
                 <version>1.0.0</version>
+            </dependency>
+            <!-- Jsoup Dependencies -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.6.3</version>
             </dependency>
             <!-- Liquibase Depedencies -->
             <dependency>
@@ -745,6 +762,11 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
+                <artifactId>panifex-module-vaadin-api</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
                 <artifactId>panifex-module-zk-api</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
@@ -777,6 +799,11 @@
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-impl</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
+                <artifactId>panifex-web-vaadin</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>
@@ -915,6 +942,42 @@
                 <artifactId>super-csv</artifactId>
                 <version>2.1.0</version>
             </dependency>
+            <!-- Vaadin Dependencies -->
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-client-compiled</artifactId>
+                <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-server</artifactId>
+                <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-themes</artifactId>
+                <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin.external.flute</groupId>
+                <artifactId>flute</artifactId>
+                <version>1.3.0.gg2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin.external.google</groupId>
+                <artifactId>android-json</artifactId>
+                <version>0.0.20131108.vaadin1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin.external.google</groupId>
+                <artifactId>guava</artifactId>
+                <version>16.0.1.vaadin1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin.external.streamhtmlparser</groupId>
+                <artifactId>streamhtmlparser-jsilver</artifactId>
+                <version>0.0.10.vaadin1</version>
+            </dependency>
             <!-- Test Dependencies -->
             <dependency>
                 <groupId>junit</groupId>
@@ -945,6 +1008,23 @@
                 <groupId>org.powermock</groupId>
                 <artifactId>powermock-module-junit4</artifactId>
                 <version>1.5.1</version>
+            </dependency>
+            <!-- W3C Dependencies -->
+            <dependency>
+                <groupId>org.w3c.css</groupId>
+                <artifactId>sac</artifactId>
+                <version>1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>xml-apis</groupId>
+                <artifactId>xml-apis</artifactId>
+                <version>1.4.01</version>
+            </dependency>
+            <!-- Xalan Dependencies -->
+            <dependency>
+                <groupId>xalan</groupId>
+                <artifactId>serializer</artifactId>
+                <version>2.7.1</version>
             </dependency>
             <!-- ZK Framework Dependencies -->
             <dependency>
