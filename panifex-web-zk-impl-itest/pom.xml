@@ -127,7 +127,7 @@
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-web-controller</artifactId>
+            <artifactId>panifex-web-spi</artifactId>
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>

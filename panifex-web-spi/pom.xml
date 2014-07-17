@@ -31,13 +31,13 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>panifex-web-controller</bundle.symbolicName>
-        <bundle.namespace>org.panifex.web.controller</bundle.namespace>
+        <bundle.symbolicName>panifex-web-spi</bundle.symbolicName>
+        <bundle.namespace>org.panifex.web.spi</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
-    <artifactId>panifex-web-controller</artifactId>
+    <artifactId>panifex-web-spi</artifactId>
     <name>${bundle.symbolicName}</name>
     <packaging>bundle</packaging>
  

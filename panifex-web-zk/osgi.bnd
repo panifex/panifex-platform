@@ -52,7 +52,7 @@ Import-Package: \
     org.osgi.util.tracker;version="[1.3,2.0)", \
     org.panifex.module.api.pagelet;version="[1.0,2.0)", \
     org.panifex.module.zk.api;version="[1.0,2.0)", \
-    org.panifex.web.controller;version="[1.0, 2.0)", \
+    org.panifex.web.spi;version="[1.0, 2.0)", \
     org.slf4j;version="[1.4,2.0)", \
     org.xml.sax, \
     org.xml.sax.ext, \

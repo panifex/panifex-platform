@@ -28,7 +28,7 @@ import javax.servlet.ServletContextListener;
 
 import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.zk.api.ZkPagelet;
-import org.panifex.web.controller.PageletTracker;
+import org.panifex.web.spi.PageletTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.http.WebManager;

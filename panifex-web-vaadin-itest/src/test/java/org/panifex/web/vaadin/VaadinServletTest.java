@@ -66,7 +66,7 @@ public class VaadinServletTest extends ITestSupport {
                 mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-module-vaadin-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-controller").version(asInProject()),
+                mavenBundle("org.panifex", "panifex-web-spi").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-vaadin").version(asInProject()),
                 wrappedBundle(mavenBundle("org.w3c.css", "sac").version(asInProject())),
                 wrappedBundle(mavenBundle("xalan", "xalan").version(asInProject())),

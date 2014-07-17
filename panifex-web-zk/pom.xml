@@ -59,7 +59,7 @@
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-web-controller</artifactId>
+            <artifactId>panifex-web-spi</artifactId>
         </dependency>
         <!-- ZK Framework Dependencies -->
         <dependency>

@@ -16,26 +16,18 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.controller;
+package org.panifex.web.spi;
 
-import org.panifex.module.api.pagelet.PageletMapping;
+import org.panifex.module.api.pagelet.Pagelet;
 
-
-class TestPageletTracker extends PageletTracker<TestPagelet> {
+public class TestPagelet implements Pagelet<Object> {
 
     @Override
-    protected void onPageletBinded(TestPagelet pagelet) {
+    public void service(Object request) {
     }
 
     @Override
-    protected void onPageletUnbinded(TestPagelet pagelet) {
-    }
-
-    @Override
-    protected void onPageletMappingBinded(PageletMapping mapping) {
-    }
-
-    @Override
-    protected void onPageletMappingUnbinded(PageletMapping mapping) {
+    public String getName() {
+        return null;
     }
 }

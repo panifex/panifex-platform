@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 Export-Package: \
-    org.panifex.web.controller;version="1.0"
+    org.panifex.web.spi;version="1.0"
 
 Import-Package: \
     org.panifex.module.api.pagelet;version="[1.0,2.0)", \

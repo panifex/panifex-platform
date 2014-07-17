@@ -20,7 +20,7 @@ package org.panifex.web.vaadin;
 
 import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.vaadin.api.VaadinPagelet;
-import org.panifex.web.controller.PageletTracker;
+import org.panifex.web.spi.PageletTracker;
 
 public class VaadinPageletTracker extends PageletTracker<VaadinPagelet> {
 
