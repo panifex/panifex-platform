@@ -30,10 +30,10 @@ import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.panifex.test.support.ITestSupport;
+import org.panifex.test.support.IWebTestSupport;
 
 @RunWith(PaxExam.class)
-public class LoginZkPageletTest extends ITestSupport {
+public class LoginZkPageletTest extends IWebTestSupport {
 
     @Configuration
     public Option[] config() {
@@ -41,10 +41,8 @@ public class LoginZkPageletTest extends ITestSupport {
                 webConfigure(),
 
                 mavenBundle("net.sf.jasperreports", "jasperreports").version(asInProject()),
-
                 mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-module-zk-api").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-spi").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-zk").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-zk-impl").version(asInProject()));

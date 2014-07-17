@@ -49,14 +49,14 @@ import org.panifex.module.api.security.AuthenticationService;
 import org.panifex.module.api.security.DefaultSecFilterMapping;
 import org.panifex.module.api.security.SecFilterMapping;
 import org.panifex.security.shiro.SecurityFilterImpl;
-import org.panifex.test.support.ITestSupport;
+import org.panifex.test.support.IWebTestSupport;
 
 /**
  * Integration tests for {@link SecurityFilterImpl} class.
  */
 @ExamReactorStrategy(PerMethod.class)
 @RunWith(PaxExam.class)
-public final class SecurityFilterTest extends ITestSupport {
+public final class SecurityFilterTest extends IWebTestSupport {
 
     @Inject
     private ConfigurationAdmin configurationAdmin;

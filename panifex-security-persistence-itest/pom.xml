@@ -35,27 +35,6 @@
     <artifactId>panifex-security-persistence-itest</artifactId>
 
     <dependencies>
-        <!-- Apache Aries Blueprint Dependencies -->
-        <dependency>
-            <groupId>org.apache.aries</groupId>
-            <artifactId>org.apache.aries.util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.aries.blueprint</groupId>
-            <artifactId>org.apache.aries.blueprint.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.aries.blueprint</groupId>
-            <artifactId>org.apache.aries.blueprint.core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.aries.jndi</groupId>
-            <artifactId>org.apache.aries.jndi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.aries.proxy</groupId>
-            <artifactId>org.apache.aries.proxy</artifactId>
-        </dependency>
         <!-- Apache Aries JPA Depedencies -->
         <dependency>
             <groupId>org.apache.aries.jpa</groupId>
@@ -88,18 +67,6 @@
         </dependency>
         <!-- Apache Commons Dependencies -->
         <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.apache.servicemix.bundles</groupId>
             <artifactId>org.apache.servicemix.bundles.commons-dbcp</artifactId>
         </dependency>
@@ -110,19 +77,11 @@
         <!-- Apache Geronimo Dependencies -->
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-atinject_1.0_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jpa_2.0_spec</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jta_1.1_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-servlet_3.0_spec</artifactId>
         </dependency>
         <!-- Apache OpenJPA Dependencies -->
         <dependency>
@@ -130,10 +89,6 @@
             <artifactId>openjpa</artifactId>
         </dependency>
         <!-- Apache Shiro Depedencies -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-ehcache</artifactId>
@@ -153,16 +108,6 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-osgi</artifactId>
         </dependency>
-        <!-- OSGi Dependencies -->
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-        </dependency>
-        <!-- OSGi Container Dependencies -->
-        <dependency>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>org.eclipse.osgi</artifactId>
-        </dependency>
         <!-- Panifex Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
@@ -179,24 +124,6 @@
         <dependency>
             <groupId>org.panifex</groupId>
             <artifactId>panifex-security-persistence</artifactId>
-        </dependency>
-        <!-- Pax Exam Dependencies -->
-        <dependency>
-            <groupId>org.ops4j.pax.exam</groupId>
-            <artifactId>pax-exam-junit4</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.ops4j.pax.exam</groupId>
-            <artifactId>pax-exam-container-native</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.ops4j.pax.exam</groupId>
-            <artifactId>pax-exam-link-mvn</artifactId>
-        </dependency>
-        <!-- Pax URL Dependencies -->
-        <dependency>
-            <groupId>org.ops4j.pax.url</groupId>
-            <artifactId>pax-url-aether</artifactId>
         </dependency>
         <!-- SERP Depedencies -->
         <dependency>

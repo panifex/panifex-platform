@@ -34,10 +34,10 @@ import org.osgi.framework.ServiceRegistration;
 import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.zk.api.DefaultZkPageletMapping;
 import org.panifex.module.zk.api.ZkPagelet;
-import org.panifex.test.support.ITestSupport;
+import org.panifex.test.support.IWebTestSupport;
 
 @RunWith(PaxExam.class)
-public class ServletTest extends ITestSupport {
+public class ServletTest extends IWebTestSupport {
 
     @Configuration
     public Option[] config() {
@@ -45,10 +45,8 @@ public class ServletTest extends ITestSupport {
                 webConfigure(),
 
                 mavenBundle("net.sf.jasperreports", "jasperreports").version(asInProject()),
-                mavenBundle("org.apache.shiro", "shiro-core").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-module-zk-api").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-test-support").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-spi").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-zk").version(asInProject()));
     }
