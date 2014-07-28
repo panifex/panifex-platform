@@ -31,7 +31,7 @@ public final class LoginViewModelImplTest extends TestSupport {
     @Test
     public void setAndGetUsernameTest() {
         String username = getRandomChars(20);
-        viewModel.setUserName(username);
+        viewModel.setUsername(username);
         assertEquals(username, viewModel.getUsername());
     }
 

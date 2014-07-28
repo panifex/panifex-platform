@@ -30,7 +30,7 @@ public interface LoginViewModel {
     String IS_REMEMBER_ME_ATTR = "isRememberMe";
 
     String getUsername();
-    void setUserName(String username);
+    void setUsername(String username);
 
     String getPassword();
     void setPassword(String password);
