@@ -96,7 +96,6 @@
         <module>panifex-datasource-derby</module>
         <module>panifex-datasource-mssql</module>
         <module>panifex-datasource-postgresql</module>
-        <module>panifex-module-dashboard-impl</module>
         <module>libs</module>
         <module>provision</module>
     </modules>
@@ -754,11 +753,6 @@
                 <version>${panifex.platform.version}</version>
                 <type>test-jar</type>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.panifex</groupId>
-                <artifactId>panifex-module-dashboard-impl</artifactId>
-                <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
