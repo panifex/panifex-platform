@@ -112,15 +112,7 @@
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-service-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
             <artifactId>panifex-module-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-module-dashboard-impl</artifactId>
         </dependency>
         <dependency>
         	<groupId>org.panifex</groupId>
@@ -132,15 +124,7 @@
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-service-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-web-controller</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-web-shiro</artifactId>
+            <artifactId>panifex-web-spi</artifactId>
         </dependency>
         <!-- Pax Logging Dependencies -->
         <dependency>
