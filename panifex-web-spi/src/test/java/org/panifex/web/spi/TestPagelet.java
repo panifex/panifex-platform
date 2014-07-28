@@ -20,7 +20,9 @@ package org.panifex.web.spi;
 
 import org.panifex.module.api.pagelet.Pagelet;
 
-public class TestPagelet implements Pagelet<Object> {
+abstract class TestPagelet implements Pagelet<Object> {
+
+    public static final String PAGELET_NAME = "pageletName";
 
     @Override
     public void service(Object request) {
@@ -28,6 +30,6 @@ public class TestPagelet implements Pagelet<Object> {
 
     @Override
     public String getName() {
-        return null;
+        return PAGELET_NAME;
     }
 }

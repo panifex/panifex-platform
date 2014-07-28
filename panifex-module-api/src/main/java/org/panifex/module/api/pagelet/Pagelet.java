@@ -36,5 +36,5 @@ public interface Pagelet<Request> {
      */
     String getName();
 
-    void service(Request request);
+    void service(Request request) throws Exception;
 }

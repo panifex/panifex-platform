@@ -18,54 +18,36 @@
  ******************************************************************************/
 package org.panifex.web.vaadin;
 
-import java.util.List;
-
-import org.apache.shiro.util.PatternMatcher;
-import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.vaadin.api.VaadinPagelet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 
 public class PageletAwareUI extends UI {
 
-    private final List<PageletMapping> pageletMappings;
-    private final List<VaadinPagelet> pagelets;
-    private final PatternMatcher patternMatcher;
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public PageletAwareUI(
-            List<PageletMapping> pageletMappings,
-            List<VaadinPagelet> pagelets,
-            PatternMatcher patternMatcher) {
-        if (pageletMappings == null) {
-            throw new IllegalArgumentException("pageletMappings cannot be null");
+    private final VaadinPageletTracker pageletTracker;
+
+    public PageletAwareUI(VaadinPageletTracker pageletTracker) {
+        if (pageletTracker == null) {
+            throw new IllegalArgumentException("pageletTracker cannot be null");
         }
-        if (pagelets == null) {
-            throw new IllegalArgumentException("pagelets cannot be null");
-        }
-        if (patternMatcher == null) {
-            throw new IllegalArgumentException("pathMatcher cannot be null");
-        }
-        this.pageletMappings = pageletMappings;
-        this.pagelets = pagelets;
-        this.patternMatcher = patternMatcher;
+        this.pageletTracker = pageletTracker;
     }
 
     @Override
     protected void init(VaadinRequest request) {
-        for (PageletMapping mapping : pageletMappings) {
-            String[] urlPatterns = mapping.getUrlPatterns();
-            for (String urlPattern : urlPatterns) {
-                if (patternMatcher.matches(urlPattern, request.getPathInfo())) {
-                    for (VaadinPagelet pagelet : pagelets) {
-                        if (mapping.getPageletName().equals(pagelet.getName())) {
-                            pagelet.service(request);
-                            return;
-                        }
-                    }
-                }
+        VaadinPagelet pagelet = pageletTracker.matchPathToPagelet(request.getPathInfo());
+        if (pagelet != null) {
+            try {
+                pagelet.service(request);
+            } catch (Exception e) {
+                log.error("Unable to service request", e);
+                throw new RuntimeException(e);
             }
         }
     }
-
 }

@@ -16,18 +16,33 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.module.zk.api;
+package org.panifex.web.zk;
 
-import org.panifex.module.api.pagelet.Pagelet;
+import org.panifex.module.zk.api.GenericZkPagelet;
+import org.panifex.module.zk.api.ZkPagelet;
 import org.zkoss.zk.ui.Page;
-import org.zkoss.zk.ui.Richlet;
-import org.zkoss.zk.ui.RichletConfig;
 
-public interface ZkPagelet extends Pagelet<Page>, Richlet {
+public class ZkRichletDispatcher extends GenericZkPagelet {
+
+    private final ZkPageletTracker pageletTracker;
+
+    public ZkRichletDispatcher(ZkPageletTracker pageletTracker) {
+        if (pageletTracker == null) {
+            throw new IllegalArgumentException("pageletTracker cannot be null");
+        }
+        this.pageletTracker = pageletTracker;
+    }
 
     @Override
-    void init(RichletConfig config);
+    public String getName() {
+        return getClass().getCanonicalName();
+    }
 
     @Override
-    void service(Page request) throws Exception;
+    public void service(Page request) throws Exception {
+        ZkPagelet pagelet = pageletTracker.matchPathToPagelet(request.getRequestPath());
+        if (pagelet != null) {
+            pagelet.service(request);
+        }
+    }
 }

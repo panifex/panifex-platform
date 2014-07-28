@@ -18,8 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.vaadin;
 
-import org.apache.shiro.util.PatternMatcher;
-
 import com.vaadin.server.DefaultUIProvider;
 import com.vaadin.server.UIClassSelectionEvent;
 import com.vaadin.server.UICreateEvent;
@@ -27,19 +25,12 @@ import com.vaadin.ui.UI;
 
 public class ModularUIProvider extends DefaultUIProvider {
 
-    private final PatternMatcher patternMatcher;
     private final VaadinPageletTracker pageletTracker;
 
-    public ModularUIProvider(
-            PatternMatcher patternMatcher,
-            VaadinPageletTracker pageletTracker) {
-        if (patternMatcher == null) {
-            throw new IllegalArgumentException("patternMatcher cannot be null");
-        }
+    public ModularUIProvider(VaadinPageletTracker pageletTracker) {
         if (pageletTracker == null) {
             throw new IllegalArgumentException("pageletTracker cannot be null");
         }
-        this.patternMatcher = patternMatcher;
         this.pageletTracker = pageletTracker;
     }
 
@@ -50,11 +41,6 @@ public class ModularUIProvider extends DefaultUIProvider {
 
     @Override
     public UI createInstance(UICreateEvent event) {
-        PageletAwareUI ui = new PageletAwareUI(
-                pageletTracker.getPageletMappings(),
-                pageletTracker.getPagelets(),
-                patternMatcher);
-        return ui;
+        return new PageletAwareUI(pageletTracker);
     }
-
 }

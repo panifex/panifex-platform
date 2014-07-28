@@ -18,15 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.vaadin;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.shiro.util.PatternMatcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.panifex.module.api.pagelet.PageletMapping;
-import org.panifex.module.vaadin.api.VaadinPagelet;
 import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -40,11 +34,9 @@ import com.vaadin.ui.UI;
 public class ModularUIProviderTest extends TestSupport {
 
     // mocks
-    private PatternMatcher patternMatcherMock = createMock(PatternMatcher.class);
     private VaadinPageletTracker pageletTrackerMock = createMock(VaadinPageletTracker.class);
 
-    private ModularUIProvider provider = new ModularUIProvider(
-            patternMatcherMock, pageletTrackerMock);
+    private ModularUIProvider provider = new ModularUIProvider(pageletTrackerMock);
 
     @Before
     public void setUp() {
@@ -52,13 +44,8 @@ public class ModularUIProviderTest extends TestSupport {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testConstructWithNullPatternMatcher() {
-        provider = new ModularUIProvider(null, pageletTrackerMock);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void testConstructWithNullPageletTracker() {
-        provider = new ModularUIProvider(patternMatcherMock, null);
+        provider = new ModularUIProvider(null);
     }
 
     /**
@@ -76,17 +63,9 @@ public class ModularUIProviderTest extends TestSupport {
 
     @Test
     public void testCreateUIInstance() throws Exception {
-        // expect getting active pagelets
-        List<VaadinPagelet> pagelets = new ArrayList<>();
-        expect(pageletTrackerMock.getPagelets()).andReturn(pagelets);
-
-        // expect getting active pagelet mappings
-        List<PageletMapping> mappings = new ArrayList<>();
-        expect(pageletTrackerMock.getPageletMappings()).andReturn(mappings);
-
         // expect constructing new UI instance
         PageletAwareUI ui = createMockAndExpectNew(PageletAwareUI.class,
-                mappings, pagelets, patternMatcherMock);
+                pageletTrackerMock);
 
         UICreateEvent event = createMock(UICreateEvent.class);
 

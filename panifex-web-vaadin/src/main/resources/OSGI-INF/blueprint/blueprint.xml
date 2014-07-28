@@ -40,7 +40,6 @@
 
     <bean id="uiProvider"
             class="org.panifex.web.vaadin.ModularUIProvider">
-        <argument ref="patternMatcher"/>
         <argument ref="vaadinPageletTracker"/>
     </bean>
 

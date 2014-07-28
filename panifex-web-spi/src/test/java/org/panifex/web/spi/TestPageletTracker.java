@@ -18,25 +18,13 @@
  ******************************************************************************/
 package org.panifex.web.spi;
 
-import org.panifex.module.api.pagelet.PageletMapping;
-import org.panifex.web.spi.PageletTracker;
-
-
-class TestPageletTracker extends PageletTracker<TestPagelet> {
+abstract class TestPageletTracker extends PageletTracker<TestPagelet> {
 
     @Override
-    protected void onPageletBinded(TestPagelet pagelet) {
+    public void onUrlMappingAdded(String urlPattern, TestPagelet pagelet) {
     }
 
     @Override
-    protected void onPageletUnbinded(TestPagelet pagelet) {
-    }
-
-    @Override
-    protected void onPageletMappingBinded(PageletMapping mapping) {
-    }
-
-    @Override
-    protected void onPageletMappingUnbinded(PageletMapping mapping) {
+    public void onUrlMappingRemoved(String urlPattern, TestPagelet pagelet) {
     }
 }

@@ -24,10 +24,20 @@
         http://www.osgi.org/xmlns/blueprint/v1.0.0
             http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
+    <!-- ZkContextListener -->
+
+    <bean id="zkContextListener"
+            class="org.panifex.web.zk.ZkContextListener">
+        <argument ref="zkRichletDispatcher"/>
+    </bean>
+
+    <service ref="zkContextListener" 
+        interface="java.util.EventListener"/>
+
     <!-- ZkPageletTracker -->
 
     <bean id="zkPageletTracker"
-            class="org.panifex.web.zk.ZkPageletTracker"/>
+        class="org.panifex.web.zk.ZkPageletTracker"/>
 
     <reference-list interface="org.panifex.module.api.pagelet.PageletMapping"
             availability="optional">
@@ -43,6 +53,10 @@
             unbind-method="unbindPagelet"/>
     </reference-list>
 
-    <service ref="zkPageletTracker" 
-        interface="java.util.EventListener"/>
+    <!-- ZkRichletDispatcher -->
+
+    <bean id="zkRichletDispatcher"
+            class="org.panifex.web.zk.ZkRichletDispatcher">
+        <argument ref="zkPageletTracker"/>
+    </bean>
 </blueprint>

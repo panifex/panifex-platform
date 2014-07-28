@@ -18,26 +18,8 @@
  ******************************************************************************/
 package org.panifex.web.vaadin;
 
-import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.vaadin.api.VaadinPagelet;
 import org.panifex.web.spi.PageletTracker;
 
 public class VaadinPageletTracker extends PageletTracker<VaadinPagelet> {
-
-    @Override
-    protected void onPageletBinded(VaadinPagelet pagelet) {
-    }
-
-    @Override
-    protected void onPageletUnbinded(VaadinPagelet pagelet) {
-    }
-
-    @Override
-    protected void onPageletMappingBinded(PageletMapping mapping) {
-    }
-
-    @Override
-    protected void onPageletMappingUnbinded(PageletMapping mapping) {
-    }
-
 }
