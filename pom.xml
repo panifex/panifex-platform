@@ -80,7 +80,6 @@
         <module>panifex-module-vaadin-api</module>
         <module>panifex-module-zk-api</module>
         <module>panifex-web-spi</module>
-        <module>panifex-web-impl</module>
         <module>panifex-security-shiro</module>
         <module>panifex-security-shiro-itest</module>
         <module>panifex-web-vaadin</module>
@@ -794,11 +793,6 @@
                 <artifactId>panifex-test-support</artifactId>
                 <version>${panifex.platform.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.panifex</groupId>
-                <artifactId>panifex-web-impl</artifactId>
-                <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
