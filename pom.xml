@@ -83,7 +83,6 @@
         <module>panifex-security-shiro</module>
         <module>panifex-security-shiro-itest</module>
         <module>panifex-web-vaadin</module>
-        <module>panifex-web-vaadin-itest</module>
         <module>panifex-web-zk</module>
         <module>panifex-web-zk-itest</module>
         <module>panifex-web-zk-impl</module>
@@ -801,7 +800,7 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
-                <artifactId>panifex-web-vaadin</artifactId>
+                <artifactId>panifex-web-vaadin-runtime</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>

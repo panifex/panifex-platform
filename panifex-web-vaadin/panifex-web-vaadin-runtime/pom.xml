@@ -24,45 +24,26 @@
                 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <relativePath>../poms/compiled/</relativePath>
-        <groupId>org.panifex.parent.build</groupId>
-        <artifactId>compiled-bundle-settings</artifactId>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-web-vaadin</artifactId>
         <version>0.2.0-SNAPSHOT</version>
     </parent>
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.panifex</groupId>
-    <artifactId>panifex-web-vaadin</artifactId>
-    <name>panifex-web-vaadin</name>
-    <packaging>pom</packaging>
+    <properties>
+        <bundle.symbolicName>panifex-web-vaadin-runtime</bundle.symbolicName>
+        <bundle.namespace>org.panifex.web.vaadin.runtime</bundle.namespace>
+    </properties>
 
-    <modules>
-        <module>panifex-web-vaadin-runtime</module>
-        <module>panifex-web-vaadin-runtime-itest</module>
-    </modules>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>panifex-web-vaadin-runtime</artifactId>
+    <name>${bundle.symbolicName}</name>
+    <packaging>bundle</packaging>
 
     <dependencies>
         <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
             <artifactId>panifex-module-vaadin-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-web-spi</artifactId>
-        </dependency>
-        <!-- Vaadin Dependencies -->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-client-compiled</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-themes</artifactId>
         </dependency>
     </dependencies>
 </project>
