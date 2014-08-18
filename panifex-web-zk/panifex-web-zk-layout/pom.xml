@@ -24,30 +24,31 @@
                 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <relativePath>../poms/compiled/</relativePath>
-        <groupId>org.panifex.parent.build</groupId>
-        <artifactId>compiled-bundle-settings</artifactId>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-web-zk</artifactId>
         <version>0.2.0-SNAPSHOT</version>
     </parent>
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.panifex</groupId>
-    <artifactId>panifex-web-zk</artifactId>
-    <name>panifex-web-zk</name>
-    <packaging>pom</packaging>
+    <properties>
+        <bundle.symbolicName>panifex-web-zk-layout</bundle.symbolicName>
+        <bundle.namespace>org.panifex.web.zk.layout</bundle.namespace>
+    </properties>
 
-    <modules>
-        <module>panifex-web-zk-runtime</module>
-        <module>panifex-web-zk-runtime-itest</module>
-        <module>panifex-web-zk-layout</module>
-        <module>panifex-web-zk-layout-itest</module>
-    </modules>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>panifex-web-zk-layout</artifactId>
+    <name>${bundle.symbolicName}</name>
+    <packaging>bundle</packaging>
 
     <dependencies>
         <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
             <artifactId>panifex-module-zk-api</artifactId>
+        </dependency>
+        <!-- ZK Framework Dependencies -->
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zhtml</artifactId>
         </dependency>
     </dependencies>
 </project>

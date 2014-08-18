@@ -18,25 +18,19 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="
-        http://maven.apache.org/POM/4.0.0
-            http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            http://maven.apache.org/POM/4.0.0
+                http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>org.panifex.parent.build</groupId>
-        <artifactId>dist</artifactId>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-web-zk</artifactId>
         <version>0.2.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>dist-zk</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>dist-zk-mssql</module>
-        <module>dist-zk-postgresql</module>
-    </modules>
+    <artifactId>panifex-web-zk-layout-itest</artifactId>
 
     <dependencies>
         <!-- JasperReports Dependencies -->
@@ -47,7 +41,15 @@
         <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
+            <artifactId>panifex-module-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
             <artifactId>panifex-module-zk-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-web-spi</artifactId>
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
@@ -58,4 +60,23 @@
             <artifactId>panifex-web-zk-runtime</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- generate dependencies versions -->
+            <plugin>
+                <groupId>org.apache.servicemix.tooling</groupId>
+                <artifactId>depends-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>generate-depends-file</id>
+                        <goals>
+                            <goal>generate-depends-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
