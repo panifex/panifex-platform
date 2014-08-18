@@ -46,7 +46,7 @@
     <!-- VaadinPageletTracker -->
 
     <bean id="vaadinPageletTracker"
-        class="org.panifex.web.vaadin.VaadinPageletTracker"/>
+        class="org.panifex.web.vaadin.runtime.VaadinPageletTracker"/>
 
     <reference-list interface="org.panifex.module.api.pagelet.PageletMapping"
             availability="optional">
