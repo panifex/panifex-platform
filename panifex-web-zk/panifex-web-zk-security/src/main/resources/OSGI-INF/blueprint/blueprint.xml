@@ -27,7 +27,7 @@
     <!-- Login Pagelet -->
 
     <bean id="loginPagelet"
-            class="org.panifex.web.zk.layout.login.LoginZkPagelet">
+            class="org.panifex.web.zk.security.login.LoginZkPagelet">
         <property name="blueprintContainer" ref="blueprintContainer"/>
     </bean>
     
@@ -56,7 +56,7 @@
     <!-- Login View Model -->
 
     <bean id="LoginViewModel"
-        class="org.panifex.web.zk.layout.login.LoginViewModelImpl"/>
+        class="org.panifex.web.zk.security.login.LoginViewModelImpl"/>
 
     <!-- Resource mapping -->
 

@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.zk.runtime.itest;
+package org.panifex.web.zk.security.login;
 
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
@@ -30,14 +30,10 @@ import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.osgi.framework.ServiceRegistration;
-import org.panifex.module.api.pagelet.PageletMapping;
-import org.panifex.module.zk.api.DefaultZkPageletMapping;
-import org.panifex.module.zk.api.ZkPagelet;
 import org.panifex.test.support.IWebTestSupport;
 
 @RunWith(PaxExam.class)
-public class ServletTest extends IWebTestSupport {
+public class LoginZkPageletTest extends IWebTestSupport {
 
     @Configuration
     public Option[] config() {
@@ -48,7 +44,9 @@ public class ServletTest extends IWebTestSupport {
                 mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-module-zk-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-spi").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-zk-runtime").version(asInProject()));
+                mavenBundle("org.panifex", "panifex-web-zk-layout").version(asInProject()),
+                mavenBundle("org.panifex", "panifex-web-zk-runtime").version(asInProject()),
+                mavenBundle("org.panifex", "panifex-web-zk-security").version(asInProject()));
     }
 
     @Before
@@ -58,35 +56,6 @@ public class ServletTest extends IWebTestSupport {
 
     @Test
     public void httpGetFromServletTest() throws Exception {
-        ServiceRegistration<ZkPagelet> pageletRegistration = null;
-        ServiceRegistration<PageletMapping> mappingRegistration = null;
-        try {
-            // register zk pagelet
-            ZkPagelet pagelet = new HelloZkPagelet();
-            pageletRegistration =
-                    registerService(ZkPagelet.class, pagelet);
-
-            // register pagelet mapping
-            String[] urlPatterns = new String[]{ "/*" };
-            PageletMapping mapping = new DefaultZkPageletMapping(pagelet, urlPatterns);
-            mappingRegistration =
-                    registerService(PageletMapping.class, mapping);
-
-            testGet(URL + "/zk/", HttpServletResponse.SC_OK);
-        } finally {
-            if (mappingRegistration != null) {
-                mappingRegistration.unregister();
-            }
-            if (pageletRegistration != null) {
-                pageletRegistration.unregister();
-            }
-        }
-    }
-
-    @Test
-    public void httpGetNotFoundPageletTest() {
-        // TODO It should return HttpServletResponse.SC_NOT_FOUND instead of
-        // SC_INTERNAL_SERVER_ERROR
-        testGet(URL + "/zk/", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        testGet(URL + "/zk/login", HttpServletResponse.SC_OK);
     }
 }

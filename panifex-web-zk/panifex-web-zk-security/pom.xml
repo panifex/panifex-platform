@@ -17,12 +17,12 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="
-            http://maven.apache.org/POM/4.0.0 
+            http://maven.apache.org/POM/4.0.0
                 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  
+
     <parent>
         <groupId>org.panifex</groupId>
         <artifactId>panifex-web-zk</artifactId>
@@ -30,30 +30,20 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>panifex-web-zk-runtime</bundle.symbolicName>
-        <bundle.namespace>org.panifex.web.zk.runtime</bundle.namespace>
+        <bundle.symbolicName>panifex-web-zk-security</bundle.symbolicName>
+        <bundle.namespace>org.panifex.web.zk.security</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>panifex-web-zk-runtime</artifactId>
+    <artifactId>panifex-web-zk-security</artifactId>
     <name>${bundle.symbolicName}</name>
     <packaging>bundle</packaging>
 
     <dependencies>
-        <!-- Apache Geronimo Dependencies -->
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-servlet_3.0_spec</artifactId>
-        </dependency>
-        <!-- Beanshell Dependencies -->
-        <dependency>
-            <groupId>org.beanshell</groupId>
-            <artifactId>bsh</artifactId>
-        </dependency>
         <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-web-spi</artifactId>
+            <artifactId>panifex-web-zk-layout</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -811,6 +811,11 @@
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.panifex</groupId>
+                <artifactId>panifex-web-zk-security</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.panifex.parent.build</groupId>
                 <artifactId>provision</artifactId>
                 <version>${panifex.platform.version}</version>

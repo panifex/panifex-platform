@@ -16,11 +16,11 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.zk.layout.login;
+package org.panifex.web.zk.security.login;
 
 import org.junit.Test;
 import org.panifex.test.support.TestSupport;
-import org.panifex.web.zk.impl.layout.LoginViewModelImpl;
+import org.panifex.web.zk.security.login.LoginViewModelImpl;
 
 /**
  * Unit tests for {@link LoginViewModelImpl} class.

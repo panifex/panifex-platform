@@ -34,15 +34,14 @@ public class ZkRichletDispatcher extends GenericZkPagelet {
     }
 
     @Override
-    public String getName() {
-        return getClass().getCanonicalName();
-    }
-
-    @Override
     public void service(Page request) throws Exception {
         ZkPagelet pagelet = pageletTracker.matchPathToPagelet(request.getRequestPath());
         if (pagelet != null) {
             pagelet.service(request);
+        } else {
+            // TODO: it should return HTTP 404 - Not found because associated pagelet
+            // is not mapped to requested url
+            throw new Exception("Not found");
         }
     }
 }

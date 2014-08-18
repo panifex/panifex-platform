@@ -16,27 +16,15 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.zk.impl.layout;
+package org.panifex.web.zk.layout.login;
 
-public interface LoginViewModel {
+import org.panifex.web.zk.layout.LayoutZkPagelet;
+import org.zkoss.zk.ui.Component;
 
-    // commands
-    String SIGN_IN_COMMAND_ = "signIn";
-    String SIGN_IN_COMMAND = "'" + SIGN_IN_COMMAND_ + "'";
+public class TempZkPagelet extends LayoutZkPagelet {
 
-    // attributes
-    String USERNAME_ATTR = "username";
-    String PASSWORD_ATTR = "password";
-    String IS_REMEMBER_ME_ATTR = "isRememberMe";
-
-    String getUsername();
-    void setUsername(String username);
-
-    String getPassword();
-    void setPassword(String password);
-
-    boolean getIsRememberMe();
-    void setIsRememberMe(boolean isRememberMe);
-
-    void signIn();
+    @Override
+    protected void createContent(Component parent) {
+        // empty content
+    }
 }

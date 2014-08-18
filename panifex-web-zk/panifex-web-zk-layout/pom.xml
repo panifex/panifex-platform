@@ -38,17 +38,4 @@
     <artifactId>panifex-web-zk-layout</artifactId>
     <name>${bundle.symbolicName}</name>
     <packaging>bundle</packaging>
-
-    <dependencies>
-        <!-- Panifex Platform Dependencies -->
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-module-zk-api</artifactId>
-        </dependency>
-        <!-- ZK Framework Dependencies -->
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zhtml</artifactId>
-        </dependency>
-    </dependencies>
 </project>

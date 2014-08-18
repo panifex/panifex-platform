@@ -33,20 +33,25 @@ public abstract class GenericZkPagelet extends GenericRichlet implements ZkPagel
 
     private BlueprintContainer container;
 
-    public void setBlueprintContainer(BlueprintContainer container) {
+    public final void setBlueprintContainer(BlueprintContainer container) {
         this.container = container;
     }
 
-    protected BlueprintContainer getContainer() {
+    @Override
+    public String getName() {
+        return getClass().getCanonicalName();
+    }
+
+    protected final BlueprintContainer getContainer() {
         return container;
     }
 
-    protected Object getComponentInstance(String id) {
+    protected final Object getComponentInstance(String id) {
         return container.getComponentInstance(id);
     }
 
     @SuppressWarnings("unchecked")
-    protected <T> T getComponentInstance(Class<T> clazz) {
+    protected final <T> T getComponentInstance(Class<T> clazz) {
         Object instance = getComponentInstance(clazz.getSimpleName());
         if (clazz.isInstance(instance)) {
             return (T) instance;
@@ -55,35 +60,35 @@ public abstract class GenericZkPagelet extends GenericRichlet implements ZkPagel
         }
     }
 
-    protected String fx(String property) {
+    protected final String fx(String property) {
         return new StringBuilder(FX_BIND_ID).
                 append('.').
                 append(property).
                 toString();
     }
 
-    protected String vm(String property) {
+    protected final String vm(String property) {
         return new StringBuilder(VM_BIND_ID).
                 append('.').
                 append(property).
                 toString();
     }
 
-    protected String vmsgs(String vmessage) {
+    protected final String vmsgs(String vmessage) {
         return new StringBuilder(VMSGS_BIND_ID).
                 append('.').
                 append(vmessage).
                 toString();
     }
 
-    protected DefaultBinder createBinder(Component parent, Object viewModel) {
+    protected final DefaultBinder createBinder(Component parent, Object viewModel) {
         DefaultBinder binder = new DefaultBinder();
         binder.init(parent, viewModel, null);
         parent.setAttribute(VM_BIND_ID, binder.getViewModel());
         return binder;
     }
 
-    protected ValidationMessages createValidationMessages(Component parent, DefaultBinder binder) {
+    protected final ValidationMessages createValidationMessages(Component parent, DefaultBinder binder) {
         ValidationMessages vmessages = new ValidationMessagesImpl();
         binder.setValidationMessages(vmessages);
         parent.setAttribute(VMSGS_BIND_ID, vmessages);

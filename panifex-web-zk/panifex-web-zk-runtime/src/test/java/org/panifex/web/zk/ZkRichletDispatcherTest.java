@@ -74,7 +74,7 @@ public class ZkRichletDispatcherTest extends TestSupport {
         verifyAll();
     }
 
-    @Test
+    @Test(expected = Exception.class)
     public void testServiceNotMatchedPagelet() throws Exception {
         // mocks
         Page request = createRequestMock();

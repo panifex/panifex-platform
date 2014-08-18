@@ -30,10 +30,14 @@ import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
+import org.osgi.framework.ServiceRegistration;
+import org.panifex.module.api.pagelet.PageletMapping;
+import org.panifex.module.zk.api.DefaultZkPageletMapping;
+import org.panifex.module.zk.api.ZkPagelet;
 import org.panifex.test.support.IWebTestSupport;
 
 @RunWith(PaxExam.class)
-public class LoginZkPageletTest extends IWebTestSupport {
+public class TempZkPageletTest extends IWebTestSupport {
 
     @Configuration
     public Option[] config() {
@@ -55,6 +59,28 @@ public class LoginZkPageletTest extends IWebTestSupport {
 
     @Test
     public void httpGetFromServletTest() throws Exception {
-        testGet(URL + "/zk/login", HttpServletResponse.SC_OK);
+        ServiceRegistration<ZkPagelet> pageletRegistration = null;
+        ServiceRegistration<PageletMapping> mappingRegistration = null;
+        try {
+            // register zk pagelet
+            ZkPagelet pagelet = new TempZkPagelet();
+            pageletRegistration =
+                    registerService(ZkPagelet.class, pagelet);
+
+            // register pagelet mapping
+            String[] urlPatterns = new String[]{ "/*" };
+            PageletMapping mapping = new DefaultZkPageletMapping(pagelet, urlPatterns);
+            mappingRegistration =
+                    registerService(PageletMapping.class, mapping);
+
+            testGet(URL + "/zk/", HttpServletResponse.SC_OK);
+        } finally {
+            if (mappingRegistration != null) {
+                mappingRegistration.unregister();
+            }
+            if (pageletRegistration != null) {
+                pageletRegistration.unregister();
+            }
+        }
     }
 }
