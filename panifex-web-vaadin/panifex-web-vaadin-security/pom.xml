@@ -30,12 +30,12 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>panifex-web-vaadin-runtime</bundle.symbolicName>
-        <bundle.namespace>org.panifex.web.vaadin.runtime</bundle.namespace>
+        <bundle.symbolicName>panifex-web-vaadin-security</bundle.symbolicName>
+        <bundle.namespace>org.panifex.web.vaadin.security</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>panifex-web-vaadin-runtime</artifactId>
+    <artifactId>panifex-web-vaadin-security</artifactId>
     <name>${bundle.symbolicName}</name>
     <packaging>bundle</packaging>
 </project>

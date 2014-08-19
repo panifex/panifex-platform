@@ -24,29 +24,39 @@
                 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <relativePath>../poms/compiled/</relativePath>
-        <groupId>org.panifex.parent.build</groupId>
-        <artifactId>compiled-bundle-settings</artifactId>
+        <groupId>org.panifex</groupId>
+        <artifactId>panifex-web-vaadin</artifactId>
         <version>0.2.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.panifex</groupId>
-    <artifactId>panifex-web-vaadin</artifactId>
-    <name>panifex-web-vaadin</name>
-    <packaging>pom</packaging>
+    <artifactId>panifex-web-vaadin-layout-itest</artifactId>
 
-    <modules>
-        <module>panifex-web-vaadin-runtime</module>
-        <module>panifex-web-vaadin-runtime-itest</module>
-        <module>panifex-web-vaadin-layout</module>
-        <module>panifex-web-vaadin-layout-itest</module>
-        <module>panifex-web-vaadin-security</module>
-        <module>panifex-web-vaadin-security-itest</module>
-    </modules>
+    <build>
+        <plugins>
+            <!-- generate dependencies versions -->
+            <plugin>
+                <groupId>org.apache.servicemix.tooling</groupId>
+                <artifactId>depends-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>generate-depends-file</id>
+                        <goals>
+                            <goal>generate-depends-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <!-- Panifex Platform Dependencies -->
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-module-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.panifex</groupId>
             <artifactId>panifex-module-vaadin-api</artifactId>
@@ -54,6 +64,14 @@
         <dependency>
             <groupId>org.panifex</groupId>
             <artifactId>panifex-web-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-web-vaadin-layout</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-web-vaadin-runtime</artifactId>
         </dependency>
         <!-- Vaadin Dependencies -->
         <dependency>
@@ -68,5 +86,22 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-themes</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin.external.flute</groupId>
+            <artifactId>flute</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin.external.google</groupId>
+            <artifactId>android-json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin.external.google</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin.external.streamhtmlparser</groupId>
+            <artifactId>streamhtmlparser-jsilver</artifactId>
+        </dependency>
     </dependencies>
+
 </project>

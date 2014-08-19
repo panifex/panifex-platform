@@ -797,7 +797,17 @@
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
+                <artifactId>panifex-web-vaadin-layout</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-vaadin-runtime</artifactId>
+                <version>${panifex.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.panifex</groupId>
+                <artifactId>panifex-web-vaadin-security</artifactId>
                 <version>${panifex.platform.version}</version>
             </dependency>
             <dependency>

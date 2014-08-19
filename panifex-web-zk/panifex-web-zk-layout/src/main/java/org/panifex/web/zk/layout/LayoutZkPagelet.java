@@ -36,16 +36,16 @@ public abstract class LayoutZkPagelet extends GenericZkPagelet {
         Div main = new Div();
         main.setId("main");
         main.setPage(page);
-        createComponents(main);
+        createComponents(page, main);
 
         Script s = new Script();
         s.setSrc("../css/bootstrap/js/bootstrap.min.js");
         s.setParent(main);
     }
 
-    private void createComponents(Component parent) {
+    private void createComponents(Page page, Component parent) {
         createLogo(parent);
-        createContent(parent);
+        createContent(page, parent);
     }
 
     private void createLogo(Component parent) {
@@ -74,5 +74,5 @@ public abstract class LayoutZkPagelet extends GenericZkPagelet {
                 toString();
     }
 
-    protected abstract void createContent(Component parent);
+    protected abstract void createContent(Page page, Component parent);
 }

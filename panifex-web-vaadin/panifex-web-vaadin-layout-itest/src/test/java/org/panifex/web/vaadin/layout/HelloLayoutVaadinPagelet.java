@@ -16,16 +16,15 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.zk.layout.login;
+package org.panifex.web.vaadin.layout;
 
-import org.panifex.web.zk.layout.LayoutZkPagelet;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Page;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.VerticalLayout;
 
-public class TempZkPagelet extends LayoutZkPagelet {
+public class HelloLayoutVaadinPagelet extends LayoutVaadinPagelet {
 
     @Override
-    protected void createContent(Page page, Component parent) {
+    protected void createContent(VaadinRequest request, VerticalLayout layout) {
         // empty content
     }
 }

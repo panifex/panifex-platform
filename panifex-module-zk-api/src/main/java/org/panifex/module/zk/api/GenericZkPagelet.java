@@ -18,47 +18,20 @@
  ******************************************************************************/
 package org.panifex.module.zk.api;
 
-import org.osgi.service.blueprint.container.BlueprintContainer;
+import org.panifex.module.api.pagelet.GenericPagelet;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.bind.impl.ValidationMessagesImpl;
 import org.zkoss.bind.sys.ValidationMessages;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.GenericRichlet;
+import org.zkoss.zk.ui.Page;
+import org.zkoss.zk.ui.RichletConfig;
+import org.zkoss.zk.ui.metainfo.LanguageDefinition;
 
-public abstract class GenericZkPagelet extends GenericRichlet implements ZkPagelet {
+public abstract class GenericZkPagelet extends GenericPagelet<Page> implements ZkPagelet {
 
     private final String FX_BIND_ID = "FX";
     private final String VM_BIND_ID = "VM";
     private final String VMSGS_BIND_ID = "VMSGS";
-
-    private BlueprintContainer container;
-
-    public final void setBlueprintContainer(BlueprintContainer container) {
-        this.container = container;
-    }
-
-    @Override
-    public String getName() {
-        return getClass().getCanonicalName();
-    }
-
-    protected final BlueprintContainer getContainer() {
-        return container;
-    }
-
-    protected final Object getComponentInstance(String id) {
-        return container.getComponentInstance(id);
-    }
-
-    @SuppressWarnings("unchecked")
-    protected final <T> T getComponentInstance(Class<T> clazz) {
-        Object instance = getComponentInstance(clazz.getSimpleName());
-        if (clazz.isInstance(instance)) {
-            return (T) instance;
-        } else {
-            throw new ClassCastException();
-        }
-    }
 
     protected final String fx(String property) {
         return new StringBuilder(FX_BIND_ID).
@@ -93,5 +66,35 @@ public abstract class GenericZkPagelet extends GenericRichlet implements ZkPagel
         binder.setValidationMessages(vmessages);
         parent.setAttribute(VMSGS_BIND_ID, vmessages);
         return vmessages;
+    }
+
+    /** Called by the richlet container to indicate to a richlet that
+     * the richlet is being placed into service.
+     *
+     * <p>Default: does nothing.
+     */
+    @Override
+    public void init(RichletConfig config) {
+    }
+
+    /** Called by the richlet container to indicate to a richlet that
+     * the richlet is being taken out of service.
+     *
+     * <p>Default: does nothing.
+     */
+    @Override
+    public void destroy() {
+    }
+
+    /** Returns the language definition that this richlet belongs to.
+     * Don't return null.
+     *
+     * <p> It is called when creating a new page for this richlet to serve.
+     *
+     * <p>Default: return the language definition called "xul/html".
+     */
+    @Override
+    public LanguageDefinition getLanguageDefinition() {
+        return LanguageDefinition.lookup("xul/html");
     }
 }

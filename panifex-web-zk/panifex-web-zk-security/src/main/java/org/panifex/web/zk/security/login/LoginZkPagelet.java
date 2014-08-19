@@ -26,6 +26,7 @@ import org.zkoss.bind.DefaultBinder;
 import org.zkoss.zhtml.H1;
 import org.zkoss.zhtml.P;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -46,7 +47,7 @@ public class LoginZkPagelet extends LayoutZkPagelet {
     }
 
     @Override
-    protected void createContent(Component parent) {
+    protected void createContent(Page page, Component parent) {
         log.debug("Create login zk pagelet content");
 
         LoginViewModel viewModel = getComponentInstance(LoginViewModel.class);

@@ -29,13 +29,6 @@
         <version>0.2.0-SNAPSHOT</version>
     </parent>
 
-    <properties>
-        <bundle.symbolicName>panifex-web-vaadin-runtime</bundle.symbolicName>
-        <bundle.namespace>org.panifex.web.vaadin.runtime</bundle.namespace>
-    </properties>
-
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>panifex-web-vaadin-runtime</artifactId>
-    <name>${bundle.symbolicName}</name>
-    <packaging>bundle</packaging>
+    <artifactId>panifex-web-vaadin-security-itest</artifactId>
 </project>
