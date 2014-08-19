@@ -19,12 +19,16 @@
 package org.panifex.web.vaadin.layout;
 
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 public class HelloLayoutVaadinPagelet extends LayoutVaadinPagelet {
 
+    static final String CONTENT = "Hello world";
+
     @Override
     protected void createContent(VaadinRequest request, VerticalLayout layout) {
-        // empty content
+        Label label = new Label(CONTENT);
+        layout.addComponent(label);
     }
 }

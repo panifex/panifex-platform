@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.vaadin.layout;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
@@ -84,7 +84,7 @@ public class LayoutVaadinPageletTest extends IWebTestSupport {
             WebClient webClient = new WebClient();
             HtmlPage page = webClient.getPage(URL + "/");
             webClient.waitForBackgroundJavaScript(10000L);
-            assertNotNull(page.asText());
+            assertEquals(HelloLayoutVaadinPagelet.CONTENT, page.asText());
         } finally {
             if (mappingRegistration != null) {
                 mappingRegistration.unregister();
