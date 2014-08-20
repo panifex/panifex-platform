@@ -19,6 +19,7 @@
 package org.panifex.web.vaadin.runtime;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
@@ -92,5 +93,15 @@ public class VaadinServletTest extends IWebTestSupport {
                 pageletRegistration.unregister();
             }
         }
+    }
+
+    @Test
+    public void testGetNotMappedUrl() throws Exception {
+        WebClient webClient = new WebClient();
+        HtmlPage page = webClient.getPage(URL + "/login");
+        webClient.waitForBackgroundJavaScript(10000L);
+
+        // response should be HTTP 404 - Not found
+        assertTrue(page.asText().contains("HTTP ERROR 404"));
     }
 }

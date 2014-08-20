@@ -25,7 +25,9 @@ Export-Package:
 Import-Package: \
     com.vaadin.server;version="[7.4,8.0)", \
     com.vaadin.ui;version="[7.4,8.0)", \
+    com.vaadin.util;version="[7.4,8.0)", \
     javax.servlet;version="[3.0,4.0)", \
+    javax.servlet.http;version="[3.0,4.0)", \
     org.apache.shiro.util;version="[1.2,2.0)", \
     org.panifex.module.api.pagelet;version="[1.0,2.0)", \
     org.panifex.module.vaadin.api;version="[1.0,2.0)", \

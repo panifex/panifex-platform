@@ -18,12 +18,18 @@
  ******************************************************************************/
 package org.panifex.web.vaadin.runtime;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.panifex.module.vaadin.api.VaadinPagelet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinResponse;
 import com.vaadin.ui.UI;
+import com.vaadin.util.CurrentInstance;
 
 public class PageletAwareUI extends UI {
 
@@ -47,6 +53,14 @@ public class PageletAwareUI extends UI {
             } catch (Exception e) {
                 log.error("Unable to service request", e);
                 throw new RuntimeException(e);
+            }
+        } else {
+            // pagelet not found - return HTTP 404 - Not found
+            VaadinResponse response = CurrentInstance.get(VaadinResponse.class);
+            try {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Not found");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

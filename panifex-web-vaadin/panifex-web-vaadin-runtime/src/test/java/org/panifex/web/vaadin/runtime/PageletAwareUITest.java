@@ -18,23 +18,35 @@
  ******************************************************************************/
 package org.panifex.web.vaadin.runtime;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.module.vaadin.api.VaadinPagelet;
 import org.panifex.test.support.TestSupport;
-import org.panifex.web.vaadin.runtime.PageletAwareUI;
-import org.panifex.web.vaadin.runtime.VaadinPageletTracker;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinResponse;
+import com.vaadin.util.CurrentInstance;
 
 /**
  * Unit tests for {@link PageletAwareUI} class.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(VaadinPageletTracker.class)
+@PrepareForTest({
+    CurrentInstance.class,
+    VaadinPageletTracker.class})
 public class PageletAwareUITest extends TestSupport {
+
+    @Before
+    public void setUp() {
+        resetAll();
+
+        mockStatic(CurrentInstance.class);
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructWithNullPageletTracker() {
@@ -68,7 +80,7 @@ public class PageletAwareUITest extends TestSupport {
     }
 
     @Test
-    public void testInitNotMatchedPagelet() {
+    public void testInitNotMatchedPagelet() throws Exception {
         // variables
         String path = "/test";
 
@@ -81,6 +93,11 @@ public class PageletAwareUITest extends TestSupport {
 
         // expect matching path to pagelet
         expect(pageletTracker.matchPathToPagelet(path)).andReturn(null);
+
+        // except returning HTTP 404
+        VaadinResponse response = createMock(VaadinResponse.class);
+        expect(CurrentInstance.get(VaadinResponse.class)).andReturn(response);
+        response.sendError(HttpServletResponse.SC_NOT_FOUND, "Not found");
 
         // perform test
         replayAll();
