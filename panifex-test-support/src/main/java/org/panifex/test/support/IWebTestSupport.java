@@ -34,6 +34,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.junit.Before;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.web.service.spi.ServletListener;
@@ -79,6 +80,11 @@ public abstract class IWebTestSupport extends ITestSupport {
             wrappedBundle(mavenBundle("xalan", "xalan").version(asInProject())),
             wrappedBundle(mavenBundle("xerces", "xercesImpl").version(asInProject())));
 
+    }
+
+    @Before
+    public final void before () {
+        waitForWebListener();
     }
 
     protected final void initServletListener() {

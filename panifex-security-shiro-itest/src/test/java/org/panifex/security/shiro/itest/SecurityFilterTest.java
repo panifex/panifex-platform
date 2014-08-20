@@ -79,7 +79,6 @@ public final class SecurityFilterTest extends IWebTestSupport {
 
     @Before
     public void setUp() throws Exception {
-        waitForWebListener();
         resetWebApplicationProperties();
     }
 

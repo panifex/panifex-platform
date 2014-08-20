@@ -23,7 +23,6 @@ import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -50,11 +49,6 @@ public class TempZkPageletTest extends IWebTestSupport {
                 mavenBundle("org.panifex", "panifex-web-spi").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-zk-layout").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-zk-runtime").version(asInProject()));
-    }
-
-    @Before
-    public void setUp() {
-        waitForWebListener();
     }
 
     @Test

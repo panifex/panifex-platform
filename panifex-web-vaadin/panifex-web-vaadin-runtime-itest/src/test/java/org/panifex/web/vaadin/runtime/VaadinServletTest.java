@@ -25,7 +25,6 @@ import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -59,11 +58,6 @@ public class VaadinServletTest extends IWebTestSupport {
                 mavenBundle("org.panifex", "panifex-module-vaadin-api").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-spi").version(asInProject()),
                 mavenBundle("org.panifex", "panifex-web-vaadin-runtime").version(asInProject()));
-    }
-
-    @Before
-    public void setUp() {
-        waitForWebListener();
     }
 
     @Test
