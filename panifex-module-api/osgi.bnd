@@ -20,7 +20,6 @@ Export-Package: \
     org.panifex.module.api.accounts;version="1.0", \
     org.panifex.module.api.content;version="1.0", \
     org.panifex.module.api.environment;version="1.0", \
-    org.panifex.module.api.event;version="1.0", \
     org.panifex.module.api.i18n;version="1.0", \
     org.panifex.module.api.menu;version="1.0", \
     org.panifex.module.api.pagelet;version="1.0", \
