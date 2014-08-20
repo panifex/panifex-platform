@@ -112,7 +112,7 @@
 
     <service ref="welcomeUrlRedirectServlet" interface="javax.servlet.Servlet">
         <service-properties>
-            <entry key="urlPatterns" value="/*"/>
+            <entry key="urlPatterns" value="/"/>
         </service-properties>
     </service>
     
