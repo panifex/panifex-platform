@@ -70,7 +70,7 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="description" type="text">
+            <column name="description" type="varchar(510)">
                 <constraints nullable="false" />
             </column>
         </createTable>
@@ -139,7 +139,7 @@
             <column name="wildcard_expression" type="varchar(510)">
                 <constraints nullable="false" />
             </column>
-            <column name="description" type="text">
+            <column name="description" type="varchar(510)">
                 <constraints nullable="false" />
             </column>
         </createTable>
