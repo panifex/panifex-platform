@@ -56,6 +56,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         
         <!-- Defines dependency versions -->
+        <easymock.version>3.2</easymock.version>
         <htmlunit.version>2.13</htmlunit.version>
         <httpcomponents.version>4.3.2</httpcomponents.version>
         <liquibase.version>3.1.1</liquibase.version>
@@ -66,6 +67,7 @@
         <pax.swissbox.version>1.7.0</pax.swissbox.version>
         <pax.url.version>2.0.0</pax.url.version>
         <pax.web.version>3.1.0</pax.web.version>
+        <powermock.version>1.5.5</powermock.version>
         <shiro.version>1.2.3</shiro.version>
         <vaadin.version>7.4.0.alpha3</vaadin.version>
         <zk.framework.version>7.0.2</zk.framework.version>
@@ -1001,7 +1003,7 @@
             <dependency>
                 <groupId>org.easymock</groupId>
                 <artifactId>easymock</artifactId>
-                <version>3.1</version>
+                <version>${easymock.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.fluttercode.datafactory</groupId>
@@ -1011,12 +1013,12 @@
             <dependency>
                 <groupId>org.powermock</groupId>
                 <artifactId>powermock-api-easymock</artifactId>
-                <version>1.5.1</version>
+                <version>${powermock.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.powermock</groupId>
                 <artifactId>powermock-module-junit4</artifactId>
-                <version>1.5.1</version>
+                <version>${powermock.version}</version>
             </dependency>
             <!-- W3C Dependencies -->
             <dependency>
