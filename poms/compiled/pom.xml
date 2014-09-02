@@ -51,8 +51,6 @@
         </resources>
         <plugins>
             <plugin>
-                <!-- | the following instructions build a simple set of public/private 
-                    classes into an OSGi bundle -->
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
@@ -62,6 +60,12 @@
                         <_include>-osgi.bnd</_include>
                     </instructions>
                     <unpackBundle>true</unpackBundle>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-XX:-UseSplitVerifier</argLine>
                 </configuration>
             </plugin>
             <plugin>
