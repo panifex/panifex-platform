@@ -116,7 +116,7 @@
 
     <scm>
         <url>https://github.com/panifex/panifex-platform</url>
-        <connection>scm:git:git://github.com/panifex/panifex-platform.git</connection>
+        <connection>scm:git:git://github.com:panifex:panifex-platform.git</connection>
     </scm>
 
     <issueManagement>
