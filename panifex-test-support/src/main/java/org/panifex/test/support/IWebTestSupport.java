@@ -83,7 +83,7 @@ public abstract class IWebTestSupport extends ITestSupport {
     }
 
     @Before
-    public final void before () {
+    public void before () {
         waitForWebListener();
     }
 
