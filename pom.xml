@@ -21,10 +21,6 @@
     xmlns="http://maven.apache.org/POM/4.0.0"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <organization>
-        <url>http://www.panifex.org/</url>
-    </organization>
-
     <licenses>
         <license>
             <name>GNU Lesser General Public License, version 2.1</name>
@@ -37,11 +33,9 @@
     <artifactId>panifex-parent</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
-    <name>org.panifex.parent (OSGi project)</name>
-
-    <!-- | describe your project here -->
-
-    <description>Generated using Pax-Construct</description>
+    <name>Panifex Platform</name>
+    <description>A platform for building and running OSGified web applications</description>
+    <url>http://www.panifex.org</url>
 
     <properties>
         <!-- Panifex Platform properties -->
@@ -77,46 +71,21 @@
         <module>provision</module>
     </modules>
 
-    <repositories>
-    	<!-- SpringSource Repositories -->
-        <repository>
-            <id>com.springsource.repository.bundles.release</id>
-            <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
-            <url>http://repository.springsource.com/maven/bundles/release</url>
-        </repository>
-        <repository>
-            <id>com.springsource.repository.bundles.external</id>
-            <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
-            <url>http://repository.springsource.com/maven/bundles/external</url>
-        </repository>
-        <!-- ZK Framework Repositories -->
-        <repository>
-            <id>ZK CE</id>
-            <name>ZK CE repository</name>
-            <url>http://mavensync.zkoss.org/maven2</url>
-        </repository>
-        <!-- ZK PE/EE repository should be defined in .m2/setting.xml -->
-    </repositories>
-
-    <pluginRepositories>
-        <!-- ZK Framework Repositories -->
-        <pluginRepository>
-            <id>ZK CE</id>
-            <name>ZK CE repository</name>
-            <url>http://mavensync.zkoss.org/maven2</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
         <repository>
-            <id>panifex-repository</id>
-            <url>file:../../maven-repository</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
 
     <scm>
-        <url>https://github.com/panifex/panifex-platform</url>
-        <developerConnection>scm:git:git://github.com/panifex/panifex-platform.git</developerConnection>
+        <connection>scm:git:git@github.com:panifex/panifex-platform.git</connection>
+        <developerConnection>scm:git:git@github.com:panifex/panifex-platform.git</developerConnection>
+        <url>git@github.com:panifex/panifex-platform</url>
     </scm>
 
     <issueManagement>
@@ -169,6 +138,20 @@
                     <execution>
                         <goals>
                             <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>
