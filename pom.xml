@@ -67,7 +67,6 @@
         <module>panifex-datasource-mssql</module>
         <module>panifex-datasource-postgresql</module>
         <module>panifex-module-dashboard-impl</module>
-        <module>libs</module>
         <module>provision</module>
     </modules>
 
@@ -380,32 +379,6 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <!-- Apache POI Dependencies -->
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi</artifactId>
-                <version>3.9</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-contrib</artifactId>
-                <version>3.6</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>3.9</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>ooxml-schemas</artifactId>
-                <version>1.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-scratchpad</artifactId>
-                <version>3.9</version>
-            </dependency>
             <!-- Apache Shiro Dependencies -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
@@ -462,12 +435,6 @@
                         <artifactId>slf4j-api</artifactId>
                     </exclusion>
                 </exclusions>
-            </dependency>
-            <!-- Apache XmlBeans Dependencies -->
-            <dependency>
-                <groupId>org.apache.xmlbeans</groupId>
-                <artifactId>xmlbeans</artifactId>
-                <version>2.3.0</version>
             </dependency>
             <!-- ASM Depedencies -->
             <dependency>
@@ -619,11 +586,6 @@
                 <version>4.3.1</version>
             </dependency>
             <!-- Panifex Platform Dependencies -->
-            <dependency>
-                <groupId>org.panifex</groupId>
-                <artifactId>panifex-lib-poi</artifactId>
-                <version>${panifex.platform.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-service-api</artifactId>
