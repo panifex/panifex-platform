@@ -38,8 +38,6 @@
     <url>http://www.panifex.org</url>
 
     <properties>
-        <!-- Panifex Platform properties -->
-        <panifex.platform.version>0.1.0-SNAPSHOT</panifex.platform.version>
         <!-- | some example OSGi runtime properties -->
         <org.osgi.service.http.port>8080</org.osgi.service.http.port>
         <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
@@ -84,7 +82,7 @@
     <scm>
         <connection>scm:git:git@github.com:panifex/panifex-platform.git</connection>
         <developerConnection>scm:git:git@github.com:panifex/panifex-platform.git</developerConnection>
-        <url>git@github.com:panifex/panifex-platform</url>
+        <url>scm:git:git@github.com:panifex/panifex-platform</url>
     </scm>
 
     <issueManagement>
@@ -575,65 +573,65 @@
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-service-api</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-service-api</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
                 <type>test-jar</type>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-datasource-derby</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-datasource-mssql</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-datasource-postgresql</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-module-api</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-module-dashboard-impl</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-persistence-impl</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-service-impl</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-test-support</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-impl</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex.parent.build</groupId>
                 <artifactId>provision</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <!-- Pax Configuration Loader Dependencies -->
             <dependency>
