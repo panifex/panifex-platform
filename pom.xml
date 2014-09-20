@@ -91,7 +91,6 @@
         <module>panifex-datasource-derby</module>
         <module>panifex-datasource-mssql</module>
         <module>panifex-datasource-postgresql</module>
-        <module>libs</module>
         <module>provision</module>
     </modules>
 
@@ -718,11 +717,6 @@
                 <version>3.7.0.v20110613</version>
             </dependency>
             <!-- Panifex Platform Dependencies -->
-            <dependency>
-                <groupId>org.panifex</groupId>
-                <artifactId>panifex-lib-poi</artifactId>
-                <version>${panifex.platform.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-datasource-derby</artifactId>
