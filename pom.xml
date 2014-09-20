@@ -44,9 +44,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <!-- Panifex Platform properties -->
-        <panifex.platform.version>0.2.0-SNAPSHOT</panifex.platform.version>
-
         <!-- | some example OSGi runtime properties -->
         <org.osgi.service.http.port>8080</org.osgi.service.http.port>
         <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
@@ -721,100 +718,100 @@
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-datasource-derby</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-datasource-mssql</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-datasource-postgresql</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-module-api</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-module-api</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
                 <type>test-jar</type>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-module-vaadin-api</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-module-zk-api</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-persistence-spi</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-security-persistence</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-security-shiro</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-test-support</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-spi</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-vaadin-layout</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-vaadin-runtime</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-vaadin-security</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-zk-layout</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-zk-runtime</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex</groupId>
                 <artifactId>panifex-web-zk-security</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.panifex.parent.build</groupId>
                 <artifactId>provision</artifactId>
-                <version>${panifex.platform.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <!-- Pax Configuration Loader Dependencies -->
             <dependency>
