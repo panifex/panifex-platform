@@ -85,6 +85,7 @@ Export-Package: \
     org.zkoss.zkex.ui.comet;version="7.0", \
     org.zkoss.zkex.rt;version="7.0", \
     org.zkoss.zul;version="7.0", \
+    org.zkoss.zul.ext;version="7.0", \
     org.zkoss.zul.impl;version="7.0", \
     org.zkoss.xel;version="7.0", \
     org.zkoss.xel.util;version="7.0", \

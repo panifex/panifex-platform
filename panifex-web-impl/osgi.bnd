@@ -131,6 +131,7 @@ Import-Package: \
     org.zkoss.xel.zel;version="[7.0,8.0)", \
     org.zkoss.zel;version="[7.0,8.0)", \
     org.zkoss.zul;version="[7.0,8.0)", \
+    org.zkoss.zul.ext;version="[7.0,8.0)", \
     org.zkoss.zul.impl;version="[7.0,8.0)", \
     org.zkoss.web.fn;version="[7.0,8.0)", \
     org.zkoss.web.servlet;version="[7.0,8.0)", \
