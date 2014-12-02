@@ -19,17 +19,23 @@
 package org.panifex.module.api.pagelet;
 
 /**
- * Pagelet mapping.
+ * Pagelet mapping maps a {@link Pagelet} to the specified url patterns.
+ *
+ * @since 1.0
  */
 public interface PageletMapping {
 
     /**
-     * Gets mapped pagelet.
+     * Gets mapped pagelet's name.
+     *
+     * @since 1.0
      */
     String getPageletName();
 
     /**
      * Gets an array of url patterns pagelet maps to.
+     *
+     * @since 1.0
      */
     String[] getUrlPatterns();
 }

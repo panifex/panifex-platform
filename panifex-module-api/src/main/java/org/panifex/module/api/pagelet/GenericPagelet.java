@@ -20,14 +20,23 @@ package org.panifex.module.api.pagelet;
 
 import org.osgi.service.blueprint.container.BlueprintContainer;
 
+/**
+ * Generic template for implementing various pagelets.
+ *
+ * @param <Request> the request
+ * @since 1.0
+ */
 public abstract class GenericPagelet<Request> implements Pagelet<Request> {
 
+    private BlueprintContainer container;
+
+    /**
+     * Returns pagelet's class canonical name as pagelet's name.
+     */
     @Override
     public String getName() {
         return getClass().getCanonicalName();
     }
-
-    private BlueprintContainer container;
 
     public final void setBlueprintContainer(BlueprintContainer container) {
         this.container = container;

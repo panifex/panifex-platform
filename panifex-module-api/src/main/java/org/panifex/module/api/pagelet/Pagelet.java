@@ -28,13 +28,21 @@ public interface Pagelet<Request> {
 
     /**
      * Returns the (application-unique) name assigned to this <code>Pagelet</code>.
-     * All pageleta configured for a single application must have a unique name.
+     * All configured pagelet for a single application must have a unique name.
      *
      * @return the (application-unique) name assigned to this <code>Pagelet</code>.
-     *
      * @since 1.0
      */
     String getName();
 
+    /**
+     * Creates a pagelet content for given request. The request could be a
+     * ZK's {@link org.zkoss.zk.ui.Page Page} or Vaadin's {@link com.vaadin.server.VaadinRequest
+     * VaadinRequest}.
+     *
+     * @param request the request
+     * @throws Exception if content could not be successfully builded
+     * @since 1.0
+     */
     void service(Request request) throws Exception;
 }
