@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.module.zk.api;
 
+import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.panifex.module.api.pagelet.GenericPagelet;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.bind.impl.ValidationMessagesImpl;
@@ -32,6 +33,23 @@ public abstract class GenericZkPagelet extends GenericPagelet<Page> implements Z
     private final String FX_BIND_ID = "FX";
     private final String VM_BIND_ID = "VM";
     private final String VMSGS_BIND_ID = "VMSGS";
+
+    /**
+     * Construct instance in case the implemented pagelet does not plan to use the blueprint
+     * container, or it will implement its usage on its own.
+     */
+    public GenericZkPagelet() {
+        super();
+    }
+
+    /**
+     * Construct instance with the associated blueprint container.
+     *
+     * @param container the blueprint container to be associated
+     */
+    public GenericZkPagelet(BlueprintContainer container) {
+        super(container);
+    }
 
     protected final String fx(String property) {
         return new StringBuilder(FX_BIND_ID).

@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.module.vaadin.api;
 
+import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.panifex.module.api.pagelet.GenericPagelet;
 
 import com.vaadin.server.VaadinRequest;
@@ -25,4 +26,21 @@ import com.vaadin.server.VaadinRequest;
 public abstract class GenericVaadinPagelet
         extends GenericPagelet<VaadinRequest>
         implements VaadinPagelet {
+
+    /**
+     * Construct instance in case the implemented pagelet does not plan to use the blueprint
+     * container, or it will implement its usage on its own.
+     */
+    public GenericVaadinPagelet() {
+        super();
+    }
+
+    /**
+     * Construct instance with the associated blueprint container.
+     *
+     * @param container the blueprint container to be associated
+     */
+    public GenericVaadinPagelet(BlueprintContainer container) {
+        super(container);
+    }
 }

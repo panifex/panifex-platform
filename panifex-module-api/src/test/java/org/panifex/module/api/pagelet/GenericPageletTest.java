@@ -28,16 +28,21 @@ import org.panifex.test.support.TestSupport;
  */
 public class GenericPageletTest extends TestSupport {
 
-    private GenericPagelet<Object> pagelet = new TestGenericPagelet();
-
     // mocks
-    private BlueprintContainer blueprintContainer = createMock(BlueprintContainer.class);
+    private final BlueprintContainer blueprintContainer =
+            createMock(BlueprintContainer.class);
+
+    private final GenericPagelet<Object> pagelet =
+            new TestGenericPagelet(blueprintContainer);
 
     @Before
     public void setUp() {
         resetAll();
+    }
 
-        pagelet.setBlueprintContainer(blueprintContainer);
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructPageletWithUnknownContainer() {
+        new TestGenericPagelet(null);
     }
 
     @Test
@@ -47,13 +52,32 @@ public class GenericPageletTest extends TestSupport {
     }
 
     @Test
-    public void testSetAndGetBlueprintContainer() {
-        BlueprintContainer container = createMock(BlueprintContainer.class);
-        pagelet.setBlueprintContainer(container);
-        assertEquals(container, pagelet.getContainer());
+    public void testGetAssociatedBlueprintContainer() {
+        assertEquals(blueprintContainer, pagelet.getContainer());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testGetNotAssociatedBlueprintContainer() {
+        GenericPagelet<Object> pagelet = null;
+        try {
+            // construct pagelet without blueprint container
+            pagelet = new TestGenericPagelet();
+        } catch (Throwable throwable) {
+            fail("Exception should not be thrown");
+        }
+
+        pagelet.getContainer();
+        fail("Exception should be thrown");
     }
 
     class TestGenericPagelet extends GenericPagelet<Object> {
+        TestGenericPagelet() {
+        }
+
+        TestGenericPagelet(BlueprintContainer container) {
+            super(container);
+        }
+
         @Override
         public void service(Object request) throws Exception {
             // do nothing
