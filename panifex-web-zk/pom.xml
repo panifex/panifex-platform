@@ -36,14 +36,28 @@
     <name>panifex-web-zk</name>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>panifex-web-zk-runtime</module>
-        <module>panifex-web-zk-runtime-itest</module>
-        <module>panifex-web-zk-layout</module>
-        <module>panifex-web-zk-layout-itest</module>
-        <module>panifex-web-zk-security</module>
-        <module>panifex-web-zk-security-itest</module>
-    </modules>
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>panifex-web-zk-runtime</module>
+                <module>panifex-web-zk-layout</module>
+                <module>panifex-web-zk-security</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>itest</id>
+            <modules>
+                <module>panifex-web-zk-runtime-itest</module>
+                <module>panifex-web-zk-layout-itest</module>
+                <module>panifex-web-zk-security-itest</module>
+            </modules>
+        </profile>
+    </profiles>
 
     <dependencies>
         <!-- Panifex Platform Dependencies -->

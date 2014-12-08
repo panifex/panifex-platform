@@ -70,26 +70,40 @@
         <zk.framework.version>7.0.2</zk.framework.version>
     </properties>
 
-    <modules>
-        <module>panifex-test-support</module>
-        <module>poms</module>
-        <module>panifex-module-api</module>
-        <module>panifex-module-vaadin-api</module>
-        <module>panifex-module-zk-api</module>
-        <module>panifex-web-spi</module>
-        <module>panifex-security-shiro</module>
-        <module>panifex-security-shiro-itest</module>
-        <module>panifex-web-vaadin</module>
-        <module>panifex-web-zk</module>
-        <module>panifex-persistence-spi</module>
-        <module>panifex-security-persistence</module>
-        <module>panifex-security-persistence-dbtest</module>
-        <module>panifex-security-persistence-itest</module>
-        <module>panifex-datasource-derby</module>
-        <module>panifex-datasource-mssql</module>
-        <module>panifex-datasource-postgresql</module>
-        <module>provision</module>
-    </modules>
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>panifex-test-support</module>
+                <module>poms</module>
+                <module>panifex-module-api</module>
+                <module>panifex-module-vaadin-api</module>
+                <module>panifex-module-zk-api</module>
+                <module>panifex-web-spi</module>
+                <module>panifex-security-shiro</module>
+                <module>panifex-web-vaadin</module>
+                <module>panifex-web-zk</module>
+                <module>panifex-persistence-spi</module>
+                <module>panifex-security-persistence</module>
+                <module>panifex-security-persistence-dbtest</module>
+                <module>panifex-datasource-derby</module>
+                <module>panifex-datasource-mssql</module>
+                <module>panifex-datasource-postgresql</module>
+                <module>provision</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>itest</id>
+            <modules>
+                <module>panifex-security-shiro-itest</module>
+                <module>panifex-security-persistence-itest</module>
+            </modules>
+        </profile>
+    </profiles>
 
     <repositories>
         <!-- SpringSource Repositories -->
