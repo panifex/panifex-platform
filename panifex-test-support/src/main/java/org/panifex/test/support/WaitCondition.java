@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 public abstract class WaitCondition {
     private static final long WAIT_TIMEOUT_MILLIS = 100_000;
-    private final Logger LOG = LoggerFactory.getLogger(getClass());
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     private final String description;
 
@@ -38,20 +38,20 @@ public abstract class WaitCondition {
     protected abstract boolean isFulfilled() throws Exception;
 
     public void waitForCondition() {
-        //CHECKSTYLE:OFF
         long startTime = System.currentTimeMillis();
         try {
-            while (!isFulfilled() && System.currentTimeMillis() < startTime + WAIT_TIMEOUT_MILLIS) {
+            boolean fulfilled = isFulfilled();
+            while (!fulfilled && System.currentTimeMillis() < startTime + WAIT_TIMEOUT_MILLIS) {
                 Thread.sleep(100);
+                fulfilled = isFulfilled();
             }
-            if (!isFulfilled()) {
-                LOG.warn("Waited for {} for {} ms but condition is still not fulfilled", getDescription(), System.currentTimeMillis() - startTime);
+            if (!fulfilled) {
+                log.warn("Waited for {} for {} ms but condition is still not fulfilled", getDescription(), System.currentTimeMillis() - startTime);
             } else {
-                LOG.info("Successfully waited for {} for {} ms", getDescription(), System.currentTimeMillis() - startTime);
+                log.info("Successfully waited for {} for {} ms", getDescription(), System.currentTimeMillis() - startTime);
             }
         } catch (Exception e) {
             throw new RuntimeException("Error waiting for " + getDescription(), e);
         }
-        //CHECKSTYLE:ON
     }
 }
