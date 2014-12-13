@@ -81,9 +81,11 @@
                 <module>poms</module>
                 <module>panifex-module-api</module>
                 <module>panifex-module-vaadin-api</module>
+                <module>panifex-module-zk-api</module>
                 <module>panifex-web-spi</module>
                 <module>panifex-security-shiro</module>
                 <module>panifex-web-vaadin</module>
+                <module>panifex-web-zk</module>
                 <module>panifex-persistence-spi</module>
                 <module>panifex-security-persistence</module>
                 <module>panifex-security-persistence-dbtest</module>
@@ -91,14 +93,6 @@
                 <module>panifex-datasource-mssql</module>
                 <module>panifex-datasource-postgresql</module>
                 <module>provision</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>zk</id>
-            <modules>
-                <module>panifex-module-zk-api</module>
-                <module>panifex-web-zk</module>
             </modules>
         </profile>
 
