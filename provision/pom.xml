@@ -156,7 +156,7 @@
         </dependency>
         <!-- ASM Depedencies -->
         <dependency>
-            <groupId>asm</groupId>
+            <groupId>org.ow2.asm</groupId>
             <artifactId>asm-all</artifactId>
         </dependency>
         <!-- Codehaus Dependencies -->

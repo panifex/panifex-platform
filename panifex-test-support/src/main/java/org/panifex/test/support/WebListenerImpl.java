@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 public class WebListenerImpl implements WebListener {
 
-    protected Logger log = LoggerFactory.getLogger(getClass());
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     private boolean event;
 

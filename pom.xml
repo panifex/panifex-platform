@@ -58,15 +58,16 @@
         <httpcomponents.version>4.3.2</httpcomponents.version>
         <liquibase.version>3.1.1</liquibase.version>
         <openjpa.version>2.2.2</openjpa.version>
-        <pax.exam.version>3.5.0</pax.exam.version>
+        <pax.exam.version>4.4.0</pax.exam.version>
         <pax.logging.version>1.7.2</pax.logging.version>
         <pax.runner.version>1.8.5</pax.runner.version>
         <pax.swissbox.version>1.7.0</pax.swissbox.version>
         <pax.url.version>2.0.0</pax.url.version>
-        <pax.web.version>3.1.0</pax.web.version>
+        <pax.web.version>4.0.0</pax.web.version>
         <powermock.version>1.5.5</powermock.version>
         <shiro.version>1.2.3</shiro.version>
         <vaadin.version>7.4.0.alpha3</vaadin.version>
+        <xbean.version>3.18</xbean.version>
         <zk.framework.version>7.0.2</zk.framework.version>
     </properties>
 
@@ -560,7 +561,7 @@
             <dependency>
                 <groupId>org.apache.xbean</groupId>
                 <artifactId>xbean-bundleutils</artifactId>
-                <version>3.7</version>
+                <version>${xbean.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.slf4j</groupId>
@@ -571,7 +572,7 @@
             <dependency>
                 <groupId>org.apache.xbean</groupId>
                 <artifactId>xbean-finder</artifactId>
-                <version>3.7</version>
+                <version>${xbean.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.slf4j</groupId>
@@ -587,9 +588,9 @@
             </dependency>
             <!-- ASM Depedencies -->
             <dependency>
-                <groupId>asm</groupId>
+                <groupId>org.ow2.asm</groupId>
                 <artifactId>asm-all</artifactId>
-                <version>3.2</version>
+                <version>5.0.3</version>
             </dependency>
             <!-- Beanshell Dependencies -->
             <dependency>
@@ -913,6 +914,11 @@
                 <version>${pax.url.version}</version>
             </dependency>
             <!-- Pax Web Dependencies -->
+            <dependency>
+                <groupId>org.ops4j.pax.web</groupId>
+                <artifactId>pax-web-extender-war</artifactId>
+                <version>${pax.web.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.ops4j.pax.web</groupId>
                 <artifactId>pax-web-extender-whiteboard</artifactId>

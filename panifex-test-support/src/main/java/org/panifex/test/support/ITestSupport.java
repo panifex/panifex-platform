@@ -42,7 +42,7 @@ import org.osgi.framework.ServiceRegistration;
 public class ITestSupport {
 
     @Inject
-    protected BundleContext bundleContext;
+    public BundleContext bundleContext;
 
     protected static final String CONSOLE_PORT = "6666";
 

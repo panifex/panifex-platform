@@ -21,6 +21,7 @@ package org.panifex.test.support;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
+import static org.ops4j.pax.exam.CoreOptions.systemPackages;
 import static org.ops4j.pax.exam.CoreOptions.systemProperty;
 import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
 import static org.ops4j.pax.exam.MavenUtils.asInProject;
@@ -59,6 +60,8 @@ public abstract class IWebTestSupport extends ITestSupport {
             systemProperty("org.osgi.service.http.hostname").value(HOSTNAME),
             systemProperty("org.osgi.service.http.port").value(PORT),
 
+            systemPackages("javax.annotation.security;version=1.1"),
+
             mavenBundle("commons-codec", "commons-codec").version(asInProject()),
             wrappedBundle(mavenBundle("net.sourceforge.cssparser", "cssparser").version(asInProject())),
             wrappedBundle(mavenBundle("net.sourceforge.htmlunit", "htmlunit").version(asInProject())),
@@ -67,6 +70,8 @@ public abstract class IWebTestSupport extends ITestSupport {
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpcore").version(asInProject())),
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpmime").version(asInProject())),
             wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpclient").version(asInProject())),
+            mavenBundle("org.apache.xbean", "xbean-bundleutils").version(asInProject()),
+            mavenBundle("org.apache.xbean", "xbean-finder").version(asInProject()),
             mavenBundle("org.ops4j.pax.logging", "pax-logging-service").version(asInProject()),
             mavenBundle("org.ops4j.pax.swissbox", "pax-swissbox-bnd").version(asInProject()),
             mavenBundle("org.ops4j.pax.swissbox", "pax-swissbox-property").version(asInProject()),
@@ -74,12 +79,13 @@ public abstract class IWebTestSupport extends ITestSupport {
             mavenBundle("org.ops4j.pax.url", "pax-url-commons").version(asInProject()),
             mavenBundle("org.ops4j.pax.url", "pax-url-wrap").version(asInProject()),
             mavenBundle("org.ops4j.pax.web", "pax-web-jetty-bundle").version(asInProject()),
+            mavenBundle("org.ops4j.pax.web", "pax-web-extender-war").version(asInProject()),
             mavenBundle("org.ops4j.pax.web", "pax-web-extender-whiteboard").version(asInProject()),
+            mavenBundle("org.ow2.asm", "asm-all").version(asInProject()),
             mavenBundle("org.jsoup", "jsoup").version(asInProject()),
             wrappedBundle(mavenBundle("org.w3c.css", "sac").version(asInProject())),
             wrappedBundle(mavenBundle("xalan", "xalan").version(asInProject())),
             wrappedBundle(mavenBundle("xerces", "xercesImpl").version(asInProject())));
-
     }
 
     @Before
