@@ -100,7 +100,7 @@
         <profile>
             <id>itest</id>
             <modules>
-                <module>panifex-security-shiro-itest</module>
+                <module>itest</module>
                 <module>panifex-security-persistence-itest</module>
             </modules>
         </profile>
@@ -1116,4 +1116,7 @@
         </dependencies>
     </dependencyManagement>
 
+    <modules>
+        <module>itest</module>
+    </modules>
 </project>
