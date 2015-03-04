@@ -23,7 +23,6 @@ import static org.ops4j.pax.exam.CoreOptions.frameworkProperty;
 import static org.ops4j.pax.exam.CoreOptions.junitBundles;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.workingDirectory;
-import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import java.util.Dictionary;
 
@@ -55,19 +54,19 @@ public class ITestSupport {
             frameworkProperty("osgi.console").value(CONSOLE_PORT),
             frameworkProperty("osgi.console.enable.builtin").value("true"),
 
-            mavenBundle("biz.aQute.bnd", "bndlib").version(asInProject()),
-            mavenBundle("commons-beanutils", "commons-beanutils").version(asInProject()),
-            mavenBundle("commons-collections", "commons-collections").version(asInProject()),
-            mavenBundle("commons-fileupload", "commons-fileupload").version(asInProject()),
-            mavenBundle("commons-io", "commons-io").version(asInProject()),
-            mavenBundle("org.apache.aries", "org.apache.aries.util").version(asInProject()),
-            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.api").version(asInProject()),
-            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.core").version(asInProject()),
-            mavenBundle("org.apache.aries.jndi", "org.apache.aries.jndi").version(asInProject()),
-            mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy").version(asInProject()),
-            mavenBundle("org.apache.commons", "commons-lang3").version(asInProject()),
-            mavenBundle("org.apache.shiro", "shiro-core").version(asInProject()),
-            mavenBundle("org.panifex", "panifex-test-support").version(asInProject()));
+            mavenBundle("biz.aQute.bnd", "bndlib").versionAsInProject(),
+            mavenBundle("commons-beanutils", "commons-beanutils").versionAsInProject(),
+            mavenBundle("commons-collections", "commons-collections").versionAsInProject(),
+            mavenBundle("commons-fileupload", "commons-fileupload").versionAsInProject(),
+            mavenBundle("commons-io", "commons-io").versionAsInProject(),
+            mavenBundle("org.apache.aries", "org.apache.aries.util").versionAsInProject(),
+            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.api").versionAsInProject(),
+            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.core").versionAsInProject(),
+            mavenBundle("org.apache.aries.jndi", "org.apache.aries.jndi").versionAsInProject(),
+            mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy").versionAsInProject(),
+            mavenBundle("org.apache.commons", "commons-lang3").versionAsInProject(),
+            mavenBundle("org.apache.shiro", "shiro-core").versionAsInProject(),
+            mavenBundle("org.panifex", "panifex-test-support").versionAsInProject());
     }
 
     protected final Bundle installAndStartBundle(String bundlePath)

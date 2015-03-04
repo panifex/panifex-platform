@@ -24,7 +24,6 @@ import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.systemPackages;
 import static org.ops4j.pax.exam.CoreOptions.systemProperty;
 import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
-import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import java.util.Map;
 
@@ -61,29 +60,29 @@ public abstract class IWebTestSupport extends ITestSupport {
 
             systemPackages("javax.annotation.security;version=1.1"),
 
-            mavenBundle("commons-codec", "commons-codec").version(asInProject()),
-            wrappedBundle(mavenBundle("net.sourceforge.cssparser", "cssparser").version(asInProject())),
-            wrappedBundle(mavenBundle("net.sourceforge.htmlunit", "htmlunit").version(asInProject())),
-            wrappedBundle(mavenBundle("net.sourceforge.htmlunit", "htmlunit-core-js").version(asInProject())),
-            wrappedBundle(mavenBundle("net.sourceforge.nekohtml", "nekohtml").version(asInProject())),
-            wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpcore").version(asInProject())),
-            wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpmime").version(asInProject())),
-            wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpclient").version(asInProject())),
-            mavenBundle("org.apache.xbean", "xbean-bundleutils").version(asInProject()),
-            mavenBundle("org.apache.xbean", "xbean-finder").version(asInProject()),
-            mavenBundle("org.ops4j.pax.logging", "pax-logging-service").version(asInProject()),
-            mavenBundle("org.ops4j.pax.swissbox", "pax-swissbox-bnd").version(asInProject()),
-            mavenBundle("org.ops4j.pax.swissbox", "pax-swissbox-property").version(asInProject()),
-            mavenBundle("org.ops4j.pax.url", "pax-url-aether").version(asInProject()),
-            mavenBundle("org.ops4j.pax.url", "pax-url-commons").version(asInProject()),
-            mavenBundle("org.ops4j.pax.url", "pax-url-wrap").version(asInProject()),
-            mavenBundle("org.ops4j.pax.web", "pax-web-jetty-bundle").version(asInProject()),
-            mavenBundle("org.ops4j.pax.web", "pax-web-extender-whiteboard").version(asInProject()),
-            mavenBundle("org.ow2.asm", "asm-all").version(asInProject()),
-            mavenBundle("org.jsoup", "jsoup").version(asInProject()),
-            wrappedBundle(mavenBundle("org.w3c.css", "sac").version(asInProject())),
-            wrappedBundle(mavenBundle("xalan", "xalan").version(asInProject())),
-            wrappedBundle(mavenBundle("xerces", "xercesImpl").version(asInProject())));
+            mavenBundle("commons-codec", "commons-codec").versionAsInProject(),
+            wrappedBundle(mavenBundle("net.sourceforge.cssparser", "cssparser").versionAsInProject()),
+            wrappedBundle(mavenBundle("net.sourceforge.htmlunit", "htmlunit").versionAsInProject()),
+            wrappedBundle(mavenBundle("net.sourceforge.htmlunit", "htmlunit-core-js").versionAsInProject()),
+            wrappedBundle(mavenBundle("net.sourceforge.nekohtml", "nekohtml").versionAsInProject()),
+            wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpcore").versionAsInProject()),
+            wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpmime").versionAsInProject()),
+            wrappedBundle(mavenBundle("org.apache.httpcomponents", "httpclient").versionAsInProject()),
+            mavenBundle("org.apache.xbean", "xbean-bundleutils").versionAsInProject(),
+            mavenBundle("org.apache.xbean", "xbean-finder").versionAsInProject(),
+            mavenBundle("org.ops4j.pax.logging", "pax-logging-service").versionAsInProject(),
+            mavenBundle("org.ops4j.pax.swissbox", "pax-swissbox-bnd").versionAsInProject(),
+            mavenBundle("org.ops4j.pax.swissbox", "pax-swissbox-property").versionAsInProject(),
+            mavenBundle("org.ops4j.pax.url", "pax-url-aether").versionAsInProject(),
+            mavenBundle("org.ops4j.pax.url", "pax-url-commons").versionAsInProject(),
+            mavenBundle("org.ops4j.pax.url", "pax-url-wrap").versionAsInProject(),
+            mavenBundle("org.ops4j.pax.web", "pax-web-jetty-bundle").versionAsInProject(),
+            mavenBundle("org.ops4j.pax.web", "pax-web-extender-whiteboard").versionAsInProject(),
+            mavenBundle("org.ow2.asm", "asm-all").versionAsInProject(),
+            mavenBundle("org.jsoup", "jsoup").versionAsInProject(),
+            wrappedBundle(mavenBundle("org.w3c.css", "sac").versionAsInProject()),
+            wrappedBundle(mavenBundle("xalan", "xalan").versionAsInProject()),
+            wrappedBundle(mavenBundle("xerces", "xercesImpl").versionAsInProject()));
     }
 
     protected final void initServletListener() {

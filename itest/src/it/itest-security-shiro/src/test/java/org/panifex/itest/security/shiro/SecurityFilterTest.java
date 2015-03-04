@@ -19,7 +19,6 @@
 package org.panifex.itest.security.shiro;
 
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -66,15 +65,15 @@ public final class SecurityFilterTest extends IWebTestSupport {
         return OptionUtils.combine(
             webConfigure(),
 
-            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.cm").version(asInProject()),
-            mavenBundle("org.apache.felix", "org.apache.felix.configadmin").version(asInProject()),
-            mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.ehcache").version(asInProject()),
-            mavenBundle("org.apache.shiro", "shiro-core").version(asInProject()),
-            mavenBundle("org.apache.shiro", "shiro-ehcache").version(asInProject()),
-            mavenBundle("org.apache.shiro", "shiro-web").version(asInProject()),
-            mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
-            mavenBundle("org.panifex", "panifex-security-shiro").version(asInProject()),
-            mavenBundle("org.panifex", "panifex-test-support").version(asInProject()));
+            mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.cm").versionAsInProject(),
+            mavenBundle("org.apache.felix", "org.apache.felix.configadmin").versionAsInProject(),
+            mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.ehcache").versionAsInProject(),
+            mavenBundle("org.apache.shiro", "shiro-core").versionAsInProject(),
+            mavenBundle("org.apache.shiro", "shiro-ehcache").versionAsInProject(),
+            mavenBundle("org.apache.shiro", "shiro-web").versionAsInProject(),
+            mavenBundle("org.panifex", "panifex-module-api").versionAsInProject(),
+            mavenBundle("org.panifex", "panifex-security-shiro").versionAsInProject(),
+            mavenBundle("org.panifex", "panifex-test-support").versionAsInProject());
     }
 
     @Before
