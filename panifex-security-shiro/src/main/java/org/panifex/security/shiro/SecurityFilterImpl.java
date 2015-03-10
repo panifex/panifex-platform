@@ -21,6 +21,7 @@ package org.panifex.security.shiro;
 import java.util.Map;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
 
 import org.apache.shiro.web.env.EnvironmentLoader;
 import org.apache.shiro.web.filter.AccessControlFilter;
@@ -48,7 +49,10 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
     @Override
     public void init() throws Exception {
         log.info("Initialize security filter");
-        loader.initEnvironment(getServletContext());
+        ServletContext servletContext = getServletContext();
+        if (servletContext.getAttribute(EnvironmentLoader.ENVIRONMENT_ATTRIBUTE_KEY) == null) {
+            loader.initEnvironment(getServletContext());
+        }
 
         super.init();
 

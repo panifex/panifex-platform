@@ -234,6 +234,8 @@ public final class SecurityFilterTest extends IWebTestSupport {
             authcServiceRegistration =
                     registerService(AuthenticationService.class, simpleAuthcService, null);
 
+            Thread.sleep(1_000L);
+
             Map<String, String> params = new HashMap<>();
             params.put(usernameParam, username);
             params.put(passwordParam, password);
@@ -307,12 +309,13 @@ public final class SecurityFilterTest extends IWebTestSupport {
         servletProps.put(WebContainerConstants.SERVLET_NAME, servletName);
         servletProps.put(ExtenderConstants.PROPERTY_URL_PATTERNS, path);
 
+        initServletListener(servletName);
+
         // register servlet
         ServiceRegistration<Servlet> servletRegistration =
                 registerService(Servlet.class, servlet, servletProps);
 
         // wait servlet to be deployed
-        initServletListener(servletName);
         waitForServletListener();
 
         return servletRegistration;

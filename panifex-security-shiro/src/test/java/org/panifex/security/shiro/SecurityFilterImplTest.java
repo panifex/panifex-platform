@@ -38,7 +38,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.module.api.WebApplicationConstants;
-import org.panifex.security.shiro.SecurityFilterImpl;
 import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -82,6 +81,8 @@ public class SecurityFilterImplTest extends TestSupport {
         expectSettingDefaultRememberMeParam();
         expectSettingDefaultSuccessUrl();
         expectSettingDefaultUsernameParam();
+
+        expect(servletContextMock.getAttribute(EnvironmentLoader.ENVIRONMENT_ATTRIBUTE_KEY)).andReturn(null);
 
         // perform test
         replayAll();

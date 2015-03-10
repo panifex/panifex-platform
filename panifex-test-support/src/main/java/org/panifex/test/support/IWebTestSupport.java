@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -38,6 +38,7 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.web.service.spi.ServletListener;
 import org.ops4j.pax.web.service.spi.WebListener;
+import org.osgi.framework.ServiceRegistration;
 
 public abstract class IWebTestSupport extends ITestSupport {
 
@@ -47,8 +48,15 @@ public abstract class IWebTestSupport extends ITestSupport {
 
     // listeners
     private HttpClient httpClient;
+    private final Object httpClientLock = new Object();
+
     private ServletListener servletListener;
+    private final Object servletListenerLock = new Object();
+    private ServiceRegistration<ServletListener> servletListenerServiceRegistration;
+
     private WebListener webListener;
+    private final Object webListenerLock = new Object();
+    private ServiceRegistration<WebListener> webListenerServiceRegistration;
 
     protected final Option[] webConfigure() {
         return OptionUtils.combine(
@@ -90,13 +98,19 @@ public abstract class IWebTestSupport extends ITestSupport {
     }
 
     protected final void initServletListener(String servletName) {
-        if (servletName == null) {
-            servletListener = new ServletListenerImpl();
-        } else {
-            servletListener = new ServletListenerImpl(servletName);
+        synchronized (servletListenerLock) {
+            if (servletListener == null) {
+                if (servletName == null) {
+                    servletListener = new ServletListenerImpl();
+                } else {
+                    servletListener = new ServletListenerImpl(servletName);
+                }
+                servletListenerServiceRegistration = bundleContext.
+                        registerService(ServletListener.class, servletListener, null);
+            } else {
+                throw new IllegalStateException("only one servlet listener can be registered at the same time");
+            }
         }
-        bundleContext.registerService(ServletListener.class, servletListener,
-                null);
     }
 
     protected final void waitForServletListener() {
@@ -106,29 +120,46 @@ public abstract class IWebTestSupport extends ITestSupport {
                 return ((ServletListenerImpl) servletListener).gotEvent();
             }
         }.waitForCondition();
+
+        if (servletListenerServiceRegistration != null) {
+            servletListenerServiceRegistration.unregister();
+            servletListener = null;
+        }
     }
 
     protected final void initWebListener() {
-        webListener = new WebListenerImpl();
-        bundleContext.registerService(WebListener.class, webListener, null);
+        synchronized (webListenerLock) {
+            if (webListener == null) {
+                webListener = new WebListenerImpl();
+                webListenerServiceRegistration = bundleContext.
+                        registerService(WebListener.class, webListener, null);
+            } else {
+                throw new IllegalStateException("Only one web listener can be registered at the same time");
+            }
+        }
     }
 
     protected final void waitForWebListener() {
-        // register web listener if it is not registered yet
-        if (webListener == null) {
-            initWebListener();
-        }
         new WaitCondition("webapp startup") {
             @Override
             protected boolean isFulfilled() {
                 return ((WebListenerImpl) webListener).gotEvent();
             }
         }.waitForCondition();
+
+        if (webListenerServiceRegistration != null) {
+            webListenerServiceRegistration.unregister();
+            webListener = null;
+        }
     }
 
     protected final HttpClient getHttpClient() {
         if (httpClient == null) {
-            httpClient = HttpClientBuilder.create().build();
+            synchronized (httpClientLock) {
+                if (httpClient == null) {
+                    httpClient = HttpClientBuilder.create().build();
+                }
+            }
         }
         return httpClient;
     }
@@ -162,7 +193,12 @@ public abstract class IWebTestSupport extends ITestSupport {
         try {
             HttpResponse response = getHttpClient().execute(httpRequest);
 
-            assertEquals("HttpResponseCode", httpSC, response.getStatusLine().getStatusCode());
+            int actualStatusCode = response.getStatusLine().getStatusCode();
+
+            if (httpSC != actualStatusCode) {
+                String errMsg = "Invalid HttpResponseCode: " + EntityUtils.toString(response.getEntity());
+                assertEquals(errMsg, httpSC, actualStatusCode);
+            }
 
             String responseBodyAsString = EntityUtils.toString(response.getEntity());
 
