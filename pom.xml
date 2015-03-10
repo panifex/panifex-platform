@@ -101,7 +101,6 @@
             <id>itest</id>
             <modules>
                 <module>itest</module>
-                <module>panifex-security-persistence-itest</module>
             </modules>
         </profile>
     </profiles>
