@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,10 +16,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.zk.security.login;
+package org.panifex.itest.web.zk.security;
 
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,13 +38,13 @@ public class LoginZkPageletTest extends IWebTestSupport {
         return OptionUtils.combine(
                 webConfigure(),
 
-                mavenBundle("net.sf.jasperreports", "jasperreports").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-module-zk-api").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-spi").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-zk-layout").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-zk-runtime").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-zk-security").version(asInProject()));
+                mavenBundle("net.sf.jasperreports", "jasperreports").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-module-api").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-module-zk-api").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-spi").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-zk-layout").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-zk-runtime").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-zk-security").versionAsInProject());
     }
 
     @Test

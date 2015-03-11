@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.zk.security.login;
 
+import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.panifex.web.zk.layout.LayoutZkPagelet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,10 @@ public class LoginZkPagelet extends LayoutZkPagelet {
     private final String USERNAME_PROPERTY = vm(LoginViewModel.USERNAME_ATTR);
     private final String PASSWORD_PROPERTY = vm(LoginViewModel.PASSWORD_ATTR);
     private final String IS_REMEMBER_ME_PROPERTY = vm(LoginViewModel.IS_REMEMBER_ME_ATTR);
+
+    public LoginZkPagelet(BlueprintContainer container) {
+        super(container);
+    }
 
     @Override
     public String getName() {

@@ -22,7 +22,7 @@
         xsi:schemaLocation="
             http://maven.apache.org/POM/4.0.0 
                 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <relativePath>../poms/compiled/</relativePath>
         <groupId>org.panifex.parent.build</groupId>
@@ -30,32 +30,16 @@
         <version>0.2.0-SNAPSHOT</version>
     </parent>
 
-    <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
     <artifactId>panifex-web-zk</artifactId>
     <name>panifex-web-zk</name>
     <packaging>pom</packaging>
 
-    <profiles>
-        <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>panifex-web-zk-runtime</module>
-                <module>panifex-web-zk-layout</module>
-                <module>panifex-web-zk-security</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>itest</id>
-            <modules>
-                <module>panifex-web-zk-security-itest</module>
-            </modules>
-        </profile>
-    </profiles>
+    <modules>
+        <module>panifex-web-zk-runtime</module>
+        <module>panifex-web-zk-layout</module>
+        <module>panifex-web-zk-security</module>
+    </modules>
 
     <dependencies>
         <!-- Panifex Platform Dependencies -->

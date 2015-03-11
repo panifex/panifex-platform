@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.zk.layout;
 
+import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.panifex.module.zk.api.GenericZkPagelet;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
@@ -27,6 +28,13 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Script;
 
 public abstract class LayoutZkPagelet extends GenericZkPagelet {
+
+    protected LayoutZkPagelet() {
+    }
+
+    protected LayoutZkPagelet(BlueprintContainer container) {
+        super(container);
+    }
 
     @Override
     public final void service(Page page) {
