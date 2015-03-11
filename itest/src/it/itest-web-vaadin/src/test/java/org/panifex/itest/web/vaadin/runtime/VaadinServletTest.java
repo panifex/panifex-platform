@@ -21,7 +21,6 @@ package org.panifex.itest.web.vaadin.runtime;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -48,16 +47,16 @@ public class VaadinServletTest extends IWebTestSupport {
         return OptionUtils.combine(
                 webConfigure(),
 
-                mavenBundle("com.vaadin", "vaadin-server").version(asInProject()),
-                mavenBundle("com.vaadin", "vaadin-shared").version(asInProject()),
-                mavenBundle("com.vaadin.external.flute", "flute").version(asInProject()),
-                mavenBundle("com.vaadin.external.google", "android-json").version(asInProject()),
-                mavenBundle("com.vaadin.external.google", "guava").version(asInProject()),
-                mavenBundle("com.vaadin.external.streamhtmlparser", "streamhtmlparser-jsilver").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-module-vaadin-api").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-spi").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-vaadin-runtime").version(asInProject()));
+                mavenBundle("com.vaadin", "vaadin-server").versionAsInProject(),
+                mavenBundle("com.vaadin", "vaadin-shared").versionAsInProject(),
+                mavenBundle("com.vaadin.external.flute", "flute").versionAsInProject(),
+                mavenBundle("com.vaadin.external.google", "android-json").versionAsInProject(),
+                mavenBundle("com.vaadin.external.google", "guava").versionAsInProject(),
+                mavenBundle("com.vaadin.external.streamhtmlparser", "streamhtmlparser-jsilver").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-module-api").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-module-vaadin-api").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-spi").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-vaadin-runtime").versionAsInProject());
     }
 
     @Test
