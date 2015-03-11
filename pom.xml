@@ -89,7 +89,6 @@
                 <module>panifex-web-zk</module>
                 <module>panifex-persistence-spi</module>
                 <module>panifex-security-persistence</module>
-                <module>panifex-security-persistence-dbtest</module>
                 <module>panifex-datasource-derby</module>
                 <module>panifex-datasource-mssql</module>
                 <module>panifex-datasource-postgresql</module>
