@@ -52,7 +52,6 @@
         <profile>
             <id>itest</id>
             <modules>
-                <module>panifex-web-zk-runtime-itest</module>
                 <module>panifex-web-zk-security-itest</module>
             </modules>
         </profile>
