@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,11 +16,10 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.vaadin.layout;
+package org.panifex.itest.web.vaadin.layout;
 
 import static org.junit.Assert.assertEquals;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.MavenUtils.asInProject;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -47,17 +46,17 @@ public class LayoutVaadinPageletTest extends IWebTestSupport {
         return OptionUtils.combine(
                 webConfigure(),
 
-                mavenBundle("com.vaadin", "vaadin-server").version(asInProject()),
-                mavenBundle("com.vaadin", "vaadin-shared").version(asInProject()),
-                mavenBundle("com.vaadin.external.flute", "flute").version(asInProject()),
-                mavenBundle("com.vaadin.external.google", "android-json").version(asInProject()),
-                mavenBundle("com.vaadin.external.google", "guava").version(asInProject()),
-                mavenBundle("com.vaadin.external.streamhtmlparser", "streamhtmlparser-jsilver").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-module-api").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-module-vaadin-api").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-spi").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-vaadin-layout").version(asInProject()),
-                mavenBundle("org.panifex", "panifex-web-vaadin-runtime").version(asInProject()));
+                mavenBundle("com.vaadin", "vaadin-server").versionAsInProject(),
+                mavenBundle("com.vaadin", "vaadin-shared").versionAsInProject(),
+                mavenBundle("com.vaadin.external.flute", "flute").versionAsInProject(),
+                mavenBundle("com.vaadin.external.google", "android-json").versionAsInProject(),
+                mavenBundle("com.vaadin.external.google", "guava").versionAsInProject(),
+                mavenBundle("com.vaadin.external.streamhtmlparser", "streamhtmlparser-jsilver").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-module-api").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-module-vaadin-api").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-spi").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-vaadin-layout").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-vaadin-runtime").versionAsInProject());
     }
 
     @Test

@@ -36,6 +36,7 @@
             <modules>
                 <module>src/it/itest-security-persistence</module>
                 <module>src/it/itest-security-shiro</module>
+                <module>src/it/itest-web-vaadin</module>
             </modules>
         </profile>
     </profiles>

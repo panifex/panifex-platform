@@ -53,7 +53,6 @@
             <id>itest</id>
             <modules>
                 <module>panifex-web-vaadin-runtime-itest</module>
-                <module>panifex-web-vaadin-layout-itest</module>
                 <module>panifex-web-vaadin-security-itest</module>
             </modules>
         </profile>
