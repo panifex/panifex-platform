@@ -173,11 +173,6 @@
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.compendium</artifactId>
         </dependency>
-        <!-- OSGi Container Dependencies -->
-        <dependency>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>org.eclipse.osgi</artifactId>
-        </dependency>
         <!-- Pax Exam Dependencies -->
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>

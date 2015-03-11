@@ -79,6 +79,8 @@ public final class SecurityFilterTest extends IWebTestSupport {
     @Before
     public void setUp() throws Exception {
         resetWebApplicationProperties();
+
+        Thread.sleep(1_000L);
     }
 
     @Test
