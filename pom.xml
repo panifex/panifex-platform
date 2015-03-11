@@ -321,16 +321,6 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.aries.blueprint</groupId>
-                <artifactId>org.apache.aries.blueprint.annotation.api</artifactId>
-                <version>1.0.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.aries.blueprint</groupId>
-                <artifactId>org.apache.aries.blueprint.annotation.impl</artifactId>
-                <version>1.0.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.aries.blueprint</groupId>
                 <artifactId>org.apache.aries.blueprint.cm</artifactId>
                 <version>1.0.3</version>
             </dependency>
