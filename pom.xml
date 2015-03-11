@@ -1129,8 +1129,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <modules>
-        <module>itest</module>
-    </modules>
 </project>
