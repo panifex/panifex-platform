@@ -23,6 +23,7 @@
     xsi:schemaLocation="
         http://maven.apache.org/POM/4.0.0
             http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
     <organization>
         <url>http://www.panifex.org/</url>
@@ -35,7 +36,6 @@
         </license>
     </licenses>
 
-    <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
     <artifactId>panifex-parent</artifactId>
     <version>0.2.0-SNAPSHOT</version>
@@ -122,7 +122,7 @@
             <name>ZK CE repository</name>
             <url>http://mavensync.zkoss.org/maven2</url>
         </repository>
-        <!-- ZK PE/EE repository should be defined in .m2/setting.xml -->
+        <!-- ZK PE/EE repository should be defined in .m2/settings.xml -->
     </repositories>
 
     <pluginRepositories>
@@ -255,6 +255,19 @@
                             <version>${openjpa.version}</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.servicemix.tooling</groupId>
+                    <artifactId>depends-maven-plugin</artifactId>
+                    <version>1.2</version>
+                    <executions>
+                        <execution>
+                            <id>generate-depends-file</id>
+                            <goals>
+                                <goal>generate-depends-file</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.bsc.maven</groupId>
