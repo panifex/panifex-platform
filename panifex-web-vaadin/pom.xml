@@ -36,26 +36,11 @@
     <name>panifex-web-vaadin</name>
     <packaging>pom</packaging>
 
-    <profiles>
-        <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>panifex-web-vaadin-runtime</module>
-                <module>panifex-web-vaadin-layout</module>
-                <module>panifex-web-vaadin-security</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>itest</id>
-            <modules>
-                <module>panifex-web-vaadin-security-itest</module>
-            </modules>
-        </profile>
-    </profiles>
+    <modules>
+        <module>panifex-web-vaadin-runtime</module>
+        <module>panifex-web-vaadin-layout</module>
+        <module>panifex-web-vaadin-security</module>
+    </modules>
 
     <dependencies>
         <!-- Panifex Platform Dependencies -->
