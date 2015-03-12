@@ -87,4 +87,21 @@
             </dependencies>
         </profile>
     </profiles>
+
+    <dependencies>
+        <!-- Panifex Platform Dependencies -->
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-test-support</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.servicemix.tooling</groupId>
+                <artifactId>depends-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

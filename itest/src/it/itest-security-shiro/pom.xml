@@ -43,18 +43,5 @@
             <groupId>org.panifex</groupId>
             <artifactId>panifex-security-shiro</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-test-support</artifactId>
-        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.servicemix.tooling</groupId>
-                <artifactId>depends-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
