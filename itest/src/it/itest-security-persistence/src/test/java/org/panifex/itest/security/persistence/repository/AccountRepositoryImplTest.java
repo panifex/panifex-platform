@@ -24,6 +24,7 @@ import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.junit.Test;
+import org.panifex.itest.security.persistence.support.RepositoryTestSupport;
 import org.panifex.module.api.accounts.Permission;
 import org.panifex.module.api.accounts.Role;
 import org.panifex.security.persistence.AccountEntity;

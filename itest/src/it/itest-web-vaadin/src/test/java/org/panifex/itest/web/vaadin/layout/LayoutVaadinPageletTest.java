@@ -30,6 +30,7 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.osgi.framework.ServiceRegistration;
+import org.panifex.itest.web.vaadin.support.HelloLayoutVaadinPagelet;
 import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.vaadin.api.DefaultVaadinPageletMapping;
 import org.panifex.module.vaadin.api.VaadinPagelet;

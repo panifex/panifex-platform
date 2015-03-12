@@ -16,16 +16,15 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.itest.web.zk.layout;
+package org.panifex.itest.security.shiro.support;
 
-import org.panifex.web.zk.layout.LayoutZkPagelet;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Page;
+import org.apache.shiro.realm.SimpleAccountRealm;
+import org.panifex.module.api.security.AuthenticationService;
 
-public class HelloZkPagelet extends LayoutZkPagelet {
-
-    @Override
-    protected void createContent(Page page, Component parent) {
-        // empty content
-    }
+/**
+ * A simple security service that uses a set of configured user accounts and roles to
+ * support authentication and authorization.  Each account entry specifies the username, password,
+ * and roles for a user.  Roles can also be mapped to permissions and associated with users.
+ */
+public class SimpleAuthenticationService extends SimpleAccountRealm implements AuthenticationService {
 }

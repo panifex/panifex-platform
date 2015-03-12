@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.itest.security.shiro;
+package org.panifex.itest.security.shiro.container;
 
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 
@@ -43,6 +43,8 @@ import org.ops4j.pax.web.service.WebContainerConstants;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
+import org.panifex.itest.security.shiro.support.OkServlet;
+import org.panifex.itest.security.shiro.support.SimpleAuthenticationService;
 import org.panifex.module.api.WebApplicationConstants;
 import org.panifex.module.api.security.AuthenticationService;
 import org.panifex.module.api.security.DefaultSecFilterMapping;

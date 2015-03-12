@@ -16,13 +16,13 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.itest.web.zk.runtime;
+package org.panifex.itest.web.zk.support;
 
 import org.panifex.module.zk.api.GenericZkPagelet;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zul.Label;
 
-public class HelloZkPagelet extends GenericZkPagelet {
+public class HelloGenericZkPagelet extends GenericZkPagelet {
 
     @Override
     public void service(Page request) {

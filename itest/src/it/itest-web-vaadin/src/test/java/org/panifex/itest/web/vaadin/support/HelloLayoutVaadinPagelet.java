@@ -16,29 +16,21 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.itest.security.shiro;
+package org.panifex.itest.web.vaadin.support;
 
-import java.io.IOException;
+import org.panifex.web.vaadin.layout.LayoutVaadinPagelet;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 
-/**
- * Simple servlet which returns HTTP 200 - OK as response for any request.
- * <p>
- * It should be used only in test cases.
- */
-public class OkServlet extends HttpServlet  {
+public class HelloLayoutVaadinPagelet extends LayoutVaadinPagelet {
+
+    public static final String CONTENT = "Hello world";
 
     @Override
-    protected void doGet(
-        HttpServletRequest request,
-        HttpServletResponse response) throws ServletException, IOException {
-
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println("<h1>Hello Whiteboard Extender</h1>");
+    protected void createContent(VaadinRequest request, VerticalLayout layout) {
+        Label label = new Label(CONTENT);
+        layout.addComponent(label);
     }
 }

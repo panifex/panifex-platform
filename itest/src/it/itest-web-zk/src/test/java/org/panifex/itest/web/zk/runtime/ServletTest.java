@@ -29,6 +29,7 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.osgi.framework.ServiceRegistration;
+import org.panifex.itest.web.zk.support.HelloGenericZkPagelet;
 import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.zk.api.DefaultZkPageletMapping;
 import org.panifex.module.zk.api.ZkPagelet;
@@ -55,7 +56,7 @@ public class ServletTest extends IWebTestSupport {
         ServiceRegistration<PageletMapping> mappingRegistration = null;
         try {
             // register zk pagelet
-            ZkPagelet pagelet = new HelloZkPagelet();
+            ZkPagelet pagelet = new HelloGenericZkPagelet();
             pageletRegistration =
                     registerService(ZkPagelet.class, pagelet);
 

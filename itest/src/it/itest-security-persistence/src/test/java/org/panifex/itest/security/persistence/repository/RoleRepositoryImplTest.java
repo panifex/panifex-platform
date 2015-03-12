@@ -21,6 +21,7 @@ package org.panifex.itest.security.persistence.repository;
 import java.util.List;
 
 import org.junit.Test;
+import org.panifex.itest.security.persistence.support.RepositoryTestSupport;
 import org.panifex.security.persistence.RoleEntity;
 import org.panifex.security.persistence.RoleRepository;
 import org.panifex.security.persistence.RoleRepositoryImpl;
