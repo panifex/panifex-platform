@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.itest.security.persistence;
+package org.panifex.itest.security.persistence.container;
 
 import static org.junit.Assert.assertNotNull;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
@@ -68,7 +68,6 @@ public final class SecContainerTest extends ITestSupport {
                 mavenBundle("org.panifex", "panifex-module-api").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-persistence-spi").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-security-persistence").versionAsInProject());
-
     }
 
     @Test
