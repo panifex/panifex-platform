@@ -308,7 +308,7 @@ public final class SecurityFilterTest extends IWebTestSupport {
     private ServiceRegistration<Servlet> registerServlet(
             String servletName,
             String path,
-            Servlet servlet) {
+            Servlet servlet) throws Exception {
         Dictionary<String, String> servletProps = new Hashtable<>();
         servletProps.put(WebContainerConstants.SERVLET_NAME, servletName);
         servletProps.put(ExtenderConstants.PROPERTY_URL_PATTERNS, path);
@@ -321,6 +321,8 @@ public final class SecurityFilterTest extends IWebTestSupport {
 
         // wait servlet to be deployed
         waitForServletListener();
+
+        Thread.sleep(1_000L);
 
         return servletRegistration;
     }
