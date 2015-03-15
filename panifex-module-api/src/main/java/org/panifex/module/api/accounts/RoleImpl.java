@@ -21,7 +21,7 @@ package org.panifex.module.api.accounts;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.panifex.module.api.EntityImpl;
+import org.panifex.module.api.persistence.EntityImpl;
 
 /**
  * The user's role.
@@ -40,8 +40,8 @@ public final class RoleImpl extends EntityImpl implements Role {
      * Constructs a new {@link Role} instance for persisted
      * roles.
      * 
-     * @param id the {@link org.panifex.module.api.Entity Entity}'s ID
-     * @param optlockVersion the {@link org.panifex.module.api.Entity Entity}'s version
+     * @param id the {@link org.panifex.module.api.persistence.Entity Entity}'s ID
+     * @param optlockVersion the {@link org.panifex.module.api.persistence.Entity Entity}'s version
      * @param name the role name
      * @param description the role description
      * 

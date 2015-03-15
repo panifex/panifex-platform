@@ -21,7 +21,7 @@ package org.panifex.module.api.accounts;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.panifex.module.api.EntityImpl;
+import org.panifex.module.api.persistence.EntityImpl;
 
 /**
  * An implementation of the {@link Account} interface which contains
@@ -52,8 +52,8 @@ public final class AccountImpl extends EntityImpl implements Account {
      * Constructs a new {@link AccountImpl} instance for persisted
      * accounts.
      * 
-     * @param id the {@link org.panifex.module.api.Entity Entity}'s ID
-     * @param optlockVersion the {@link org.panifex.module.api.Entity Entity}'s version
+     * @param id the {@link org.panifex.module.api.persistence.Entity Entity}'s ID
+     * @param optlockVersion the {@link org.panifex.module.api.persistence.Entity Entity}'s version
      * @param username the account's username
      * @param password the account's password
      * @param isCredentialsExpired if the account's credentials have been expired

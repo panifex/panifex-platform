@@ -22,6 +22,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
 import org.junit.Test;
+import org.panifex.module.api.persistence.EntityImpl;
 import org.panifex.test.support.TestSupport;
 
 /**

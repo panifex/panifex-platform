@@ -19,8 +19,8 @@
 package org.panifex.module.api.accounts;
 
 import org.fluttercode.datafactory.impl.DataFactory;
-import org.panifex.module.api.EntityImpl;
 import org.panifex.module.api.accounts.AccountImpl;
+import org.panifex.module.api.persistence.EntityImpl;
 
 /**
  * A generator of random {@link AccountImpl} instances for using in the

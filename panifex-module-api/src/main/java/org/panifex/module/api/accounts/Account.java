@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.module.api.accounts;
 
-import org.panifex.module.api.Entity;
+import org.panifex.module.api.persistence.Entity;
 
 /**
  * A user's account.

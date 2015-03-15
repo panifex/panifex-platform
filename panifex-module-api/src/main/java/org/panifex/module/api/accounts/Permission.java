@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.module.api.accounts;
 
-import org.panifex.module.api.Entity;
+import org.panifex.module.api.persistence.Entity;
 
 /**
  * A permission represents the ability to perform an action or access a resource.
