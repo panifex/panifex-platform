@@ -1,5 +1,5 @@
 # Panifex platform
-# Copyright (C) 2013  Mario Krizmanic
+# Copyright (C) 2015  Mario Krizmanic
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,9 +18,11 @@
 Export-Package:
 
 Import-Package: \
+    com.vaadin.data.util;version="[7.4,8.0)", \
     com.vaadin.server;version="[7.4,8.0)", \
     com.vaadin.ui;version="[7.4,8.0)", \
     javax.servlet;version="[3.0,4.0)", \
+    org.apache.commons.lang3;version="[3.1, 4.0)", \
     org.apache.shiro.util;version="[1.2,2.0)", \
     org.panifex.module.api.pagelet;version="[1.0,2.0)", \
     org.panifex.module.vaadin.api;version="[1.0,2.0)", \

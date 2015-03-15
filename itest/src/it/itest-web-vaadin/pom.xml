@@ -50,6 +50,10 @@
             <groupId>org.panifex</groupId>
             <artifactId>panifex-web-vaadin-runtime</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-web-vaadin-security</artifactId>
+        </dependency>
         <!-- Vaadin Dependencies -->
         <dependency>
             <groupId>com.vaadin</groupId>
