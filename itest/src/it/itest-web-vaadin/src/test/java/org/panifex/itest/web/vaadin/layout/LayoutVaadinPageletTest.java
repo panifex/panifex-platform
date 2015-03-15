@@ -21,8 +21,6 @@ package org.panifex.itest.web.vaadin.layout;
 import static org.junit.Assert.assertEquals;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -74,10 +72,11 @@ public class LayoutVaadinPageletTest extends IWebTestSupport {
             PageletMapping mapping = new DefaultVaadinPageletMapping(pagelet, urlPatterns);
             mappingRegistration = registerService(PageletMapping.class, mapping);
 
-            testGet(URL + "/", HttpServletResponse.SC_OK);
             WebClient webClient = new WebClient();
             HtmlPage page = webClient.getPage(URL + "/");
-            webClient.waitForBackgroundJavaScript(10000L);
+
+            webClient.waitForBackgroundJavaScript(20_000L);
+
             assertEquals(HelloLayoutVaadinPagelet.CONTENT, page.asText());
         } finally {
             if (mappingRegistration != null) {
