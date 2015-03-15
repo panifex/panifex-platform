@@ -19,6 +19,7 @@
 package org.panifex.web.zk.security.login;
 
 import org.osgi.service.blueprint.container.BlueprintContainer;
+import org.panifex.web.spi.security.LoginViewModel;
 import org.panifex.web.zk.layout.LayoutZkPagelet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

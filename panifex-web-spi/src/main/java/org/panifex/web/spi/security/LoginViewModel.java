@@ -16,35 +16,31 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.zk.security.login;
+package org.panifex.web.spi.security;
 
 public interface LoginViewModel {
 
-    // commands
-    String RESET_COMMAND_ = "reset";
-    String RESET_COMMAND = "'" +  RESET_COMMAND_ + "'";
-
-    String SIGN_IN_COMMAND_ = "signIn";
-    String SIGN_IN_COMMAND = "'" + SIGN_IN_COMMAND_ + "'";
-
     // attributes
     String USERNAME_ATTR = "username";
-    String PASSWORD_ATTR = "password";
-    String IS_REMEMBER_ME_ATTR = "isRememberMe";
-
     String getUsername();
     void setUsername(String username);
 
+    String PASSWORD_ATTR = "password";
     String getPassword();
     void setPassword(String password);
 
+    String IS_REMEMBER_ME_ATTR = "isRememberMe";
     boolean getIsRememberMe();
     void setIsRememberMe(boolean isRememberMe);
 
+    String SIGN_IN_COMMAND_ = "signIn";
+    String SIGN_IN_COMMAND = "'" + SIGN_IN_COMMAND_ + "'";
     void signIn();
 
     /**
      * Resets username and password fields.
      */
+    String RESET_COMMAND_ = "reset";
+    String RESET_COMMAND = "'" + RESET_COMMAND_ + "'";
     void reset();
 }

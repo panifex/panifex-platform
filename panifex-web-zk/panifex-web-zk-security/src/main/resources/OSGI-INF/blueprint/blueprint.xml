@@ -56,7 +56,8 @@
     <!-- Login View Model -->
 
     <bean id="LoginViewModel"
-        class="org.panifex.web.zk.security.login.LoginViewModelImpl"/>
+        class="org.panifex.web.zk.security.login.ZkLoginViewModelImpl"
+        scope="prototype"/>
 
     <!-- Resource mapping -->
 

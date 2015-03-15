@@ -19,6 +19,8 @@
 package org.panifex.web.vaadin.security.login;
 
 import org.panifex.module.vaadin.api.VaadinPagelet;
+import org.panifex.web.spi.security.LoginViewModel;
+import org.panifex.web.spi.security.LoginViewModelImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

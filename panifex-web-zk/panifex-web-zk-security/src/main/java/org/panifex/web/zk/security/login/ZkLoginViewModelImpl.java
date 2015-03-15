@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,28 +16,28 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.vaadin.security.login;
+package org.panifex.web.zk.security.login;
 
-public interface LoginViewModel {
+import org.panifex.web.spi.security.LoginViewModel;
+import org.panifex.web.spi.security.LoginViewModelImpl;
+import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.annotation.Command;
 
-    // attributes
-    String USERNAME_ATTR = "username";
-    String PASSWORD_ATTR = "password";
-    String IS_REMEMBER_ME_ATTR = "isRememberMe";
+public class ZkLoginViewModelImpl extends LoginViewModelImpl {
 
-    String getUsername();
-    void setUsername(String username);
+    @Command(LoginViewModel.SIGN_IN_COMMAND_)
+    @Override
+    public void signIn() {
+        super.signIn();
+    }
 
-    String getPassword();
-    void setPassword(String password);
+    @Command(RESET_COMMAND_)
+    @Override
+    public void reset() {
+        super.reset();
 
-    boolean getIsRememberMe();
-    void setIsRememberMe(boolean isRememberMe);
-
-    void signIn();
-
-    /**
-     * Resets username and password fields.
-     */
-    void reset();
+        // notify view
+        BindUtils.postNotifyChange(null, null, this, USERNAME_ATTR);
+        BindUtils.postNotifyChange(null, null, this, PASSWORD_ATTR);
+    }
 }

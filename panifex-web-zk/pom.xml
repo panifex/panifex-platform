@@ -47,6 +47,10 @@
             <groupId>org.panifex</groupId>
             <artifactId>panifex-module-zk-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-web-spi</artifactId>
+        </dependency>
         <!-- ZK Framework Dependencies -->
         <dependency>
             <groupId>org.zkoss.zk</groupId>

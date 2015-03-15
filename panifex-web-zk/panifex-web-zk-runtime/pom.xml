@@ -50,10 +50,5 @@
             <groupId>org.beanshell</groupId>
             <artifactId>bsh</artifactId>
         </dependency>
-        <!-- Panifex Platform Dependencies -->
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-web-spi</artifactId>
-        </dependency>
     </dependencies>
 </project>

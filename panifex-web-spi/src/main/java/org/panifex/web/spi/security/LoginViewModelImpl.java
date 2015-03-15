@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2015  Mario Krizmanic
+ * Copyright (C) 2013  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,13 +16,12 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.zk.security.login;
+package org.panifex.web.spi.security;
 
 import org.apache.commons.lang3.StringUtils;
+import org.panifex.web.spi.security.LoginViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zkoss.bind.BindUtils;
-import org.zkoss.bind.annotation.Command;
 
 public class LoginViewModelImpl implements LoginViewModel {
 
@@ -30,7 +29,7 @@ public class LoginViewModelImpl implements LoginViewModel {
 
     private String username = StringUtils.EMPTY;
     private String password = StringUtils.EMPTY;
-    private boolean isRememberMe;
+    private boolean isRememberMe = false;
 
     @Override
     public String getUsername() {
@@ -62,21 +61,15 @@ public class LoginViewModelImpl implements LoginViewModel {
         this.isRememberMe = isRememberMe;
     }
 
-    @Command(SIGN_IN_COMMAND_)
     @Override
     public void signIn() {
         log.info("Sign in {} user", username);
     }
 
-    @Command(RESET_COMMAND_)
     @Override
     public void reset() {
         log.info("Reset login view model");
         username = StringUtils.EMPTY;
         password = StringUtils.EMPTY;
-
-        // notify view
-        BindUtils.postNotifyChange(null, null, this, USERNAME_ATTR);
-        BindUtils.postNotifyChange(null, null, this, PASSWORD_ATTR);
     }
 }
