@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.zk.security.login;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -91,7 +92,7 @@ public final class LoginViewModelImplTest extends TestSupport {
         verifyAll();
 
         // assert username and password are null
-        assertNull(viewModel.getUsername());
-        assertNull(viewModel.getPassword());
+        assertEquals(StringUtils.EMPTY, viewModel.getUsername());
+        assertEquals(StringUtils.EMPTY, viewModel.getPassword());
     }
 }

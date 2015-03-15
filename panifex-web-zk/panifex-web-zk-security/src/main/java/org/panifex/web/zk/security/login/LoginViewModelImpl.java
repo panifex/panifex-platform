@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.zk.security.login;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.BindUtils;
@@ -27,8 +28,8 @@ public class LoginViewModelImpl implements LoginViewModel {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private String username;
-    private String password;
+    private String username = StringUtils.EMPTY;
+    private String password = StringUtils.EMPTY;
     private boolean isRememberMe;
 
     @Override
@@ -71,8 +72,8 @@ public class LoginViewModelImpl implements LoginViewModel {
     @Override
     public void reset() {
         log.info("Reset login view model");
-        username = null;
-        password = null;
+        username = StringUtils.EMPTY;
+        password = StringUtils.EMPTY;
 
         // notify view
         BindUtils.postNotifyChange(null, null, this, USERNAME_ATTR);

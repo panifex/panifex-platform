@@ -18,6 +18,7 @@
 Export-Package:
 
 Import-Package: \
+    org.apache.commons.lang3;version="[3.1, 4.0)", \
     org.ops4j.pax.web.extender.whiteboard;version="[3.1,5.0)", \
     org.ops4j.pax.web.extender.whiteboard.runtime;version="[3.1,5.0)", \
     org.osgi.service.blueprint.container;version="[1.0,2.0)", \
