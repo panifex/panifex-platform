@@ -112,7 +112,7 @@ public class LoginZkPagelet extends LayoutZkPagelet {
 
         // Create username textbox
         Textbox textbox = new Textbox();
-        textbox.setId("username");
+        textbox.setId("username-txt");
         textbox.setSclass("username-field");
         //textbox.setPlaceholder(Labels.getLabel(SecurityLabels.ACCOUNT_USERNAME_PLACEHOLDER));
         fieldArea.appendChild(textbox);
@@ -130,7 +130,7 @@ public class LoginZkPagelet extends LayoutZkPagelet {
 
         // Create password textbox
         Textbox textbox = new Textbox();
-        textbox.setId("password");
+        textbox.setId("password-txt");
         textbox.setType("password");
         textbox.setSclass("password-field");
 //        textbox.setPlaceholder(Labels.getLabel(SecurityLabels.ACCOUNT_PASSWORD_PLACEHOLDER));
@@ -169,6 +169,7 @@ public class LoginZkPagelet extends LayoutZkPagelet {
         // create sign in button
         //Button button = new Button(Labels.getLabel(SecurityLabels.LOGIN_ACTION_LABEL));
         Button button = new Button();
+        button.setId("login-btn");
         button.setClass("button btn btn-primary btn-large");
         actionsArea.appendChild(button);
         button.setType("submit");

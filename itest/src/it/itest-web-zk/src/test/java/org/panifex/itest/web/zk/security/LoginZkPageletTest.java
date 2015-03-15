@@ -19,8 +19,7 @@
 package org.panifex.itest.web.zk.security;
 
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-
-import javax.servlet.http.HttpServletResponse;
+import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +28,11 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.panifex.test.support.IWebTestSupport;
+
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 
 @RunWith(PaxExam.class)
 public class LoginZkPageletTest extends IWebTestSupport {
@@ -49,6 +53,25 @@ public class LoginZkPageletTest extends IWebTestSupport {
 
     @Test
     public void httpGetFromServletTest() throws Exception {
-        testGet(URL + "/zk/login", HttpServletResponse.SC_OK);
+        WebClient webClient = new WebClient();
+        HtmlPage page = webClient.getPage(URL + "/zk/login");
+
+        // find username and password text input elements
+        HTMLInputElement usernameInputElement = (HTMLInputElement) (
+                (NativeObject) page.executeJavaScript("jq('$username-txt')")
+                .getJavaScriptResult()).get(0);
+        HTMLInputElement passwordInputElement = (HTMLInputElement) (
+                (NativeObject) page.executeJavaScript("jq('$password-txt')")
+                .getJavaScriptResult()).get(0);
+
+        // type username and password
+        usernameInputElement.setValue("user");
+        passwordInputElement.setValue("pass");
+
+        // click on login
+        HTMLButtonElement loginButtonElement = (HTMLButtonElement) (
+                (NativeObject) page.executeJavaScript("jq('$login-btn')")
+                .getJavaScriptResult()).get(0);
+        loginButtonElement.click();
     }
 }
