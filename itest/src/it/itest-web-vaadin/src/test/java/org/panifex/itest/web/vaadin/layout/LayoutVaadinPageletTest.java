@@ -72,6 +72,8 @@ public class LayoutVaadinPageletTest extends IWebTestSupport {
             PageletMapping mapping = new DefaultVaadinPageletMapping(pagelet, urlPatterns);
             mappingRegistration = registerService(PageletMapping.class, mapping);
 
+            Thread.sleep(1_000L);
+
             WebClient webClient = new WebClient();
             HtmlPage page = webClient.getPage(URL + "/");
 
