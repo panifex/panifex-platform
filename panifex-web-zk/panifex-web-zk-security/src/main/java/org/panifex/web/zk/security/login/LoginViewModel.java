@@ -21,6 +21,9 @@ package org.panifex.web.zk.security.login;
 public interface LoginViewModel {
 
     // commands
+    String RESET_COMMAND_ = "reset";
+    String RESET_COMMAND = "'" +  RESET_COMMAND_ + "'";
+
     String SIGN_IN_COMMAND_ = "signIn";
     String SIGN_IN_COMMAND = "'" + SIGN_IN_COMMAND_ + "'";
 
@@ -39,4 +42,9 @@ public interface LoginViewModel {
     void setIsRememberMe(boolean isRememberMe);
 
     void signIn();
+
+    /**
+     * Resets username and password fields.
+     */
+    void reset();
 }

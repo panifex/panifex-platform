@@ -152,6 +152,9 @@ public class LoginZkPagelet extends LayoutZkPagelet {
 
         // Creates sign in button
         createSignInButton(actionsArea, binder);
+
+        // Creates reset button
+        createResetButton(actionsArea, binder);
     }
 
     private void createRemembermeCheckbox(Div actionsArea, Binder binder) {
@@ -174,5 +177,15 @@ public class LoginZkPagelet extends LayoutZkPagelet {
         actionsArea.appendChild(button);
         button.setType("submit");
         binder.addCommandBinding(button, Events.ON_CLICK, LoginViewModel.SIGN_IN_COMMAND, null);
+    }
+
+    private void createResetButton(Div actionsArea, Binder binder) {
+        // create reset button
+        Button button = new Button();
+        button.setId("reset-btn");
+        button.setClass("button btn btn-large");
+        actionsArea.appendChild(button);
+
+        binder.addCommandBinding(button, Events.ON_CLICK, LoginViewModel.RESET_COMMAND, null);
     }
 }

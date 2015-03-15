@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,16 +18,27 @@
  ******************************************************************************/
 package org.panifex.web.zk.security.login;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
-import org.panifex.web.zk.security.login.LoginViewModelImpl;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.zkoss.bind.BindUtils;
 
 /**
  * Unit tests for {@link LoginViewModelImpl} class.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(BindUtils.class)
 public final class LoginViewModelImplTest extends TestSupport {
 
     private LoginViewModelImpl viewModel = new LoginViewModelImpl();
+
+    @Before
+    public void setUp() {
+        mockStatic(BindUtils.class);
+    }
 
     @Test
     public void setAndGetUsernameTest() {
@@ -56,5 +67,31 @@ public final class LoginViewModelImplTest extends TestSupport {
     private void setAndGetIsRememberMeTest(boolean isRememberMe) {
         viewModel.setIsRememberMe(isRememberMe);
         assertEquals(isRememberMe, viewModel.getIsRememberMe());
+    }
+
+    @Test
+    public void testResetButton() {
+        // set initial username and password
+        String initialUsername = getRandomChars(20);
+        String initialPassword = getRandomChars(20);
+        viewModel.setUsername(initialUsername);
+        viewModel.setPassword(initialPassword);
+
+        // assert initial username and password are not null
+        assertEquals(initialUsername, viewModel.getUsername());
+        assertEquals(initialPassword, viewModel.getPassword());
+
+        // expect notifying view
+        BindUtils.postNotifyChange(null, null, viewModel, LoginViewModel.USERNAME_ATTR);
+        BindUtils.postNotifyChange(null, null, viewModel, LoginViewModel.PASSWORD_ATTR);
+
+        // perform test
+        replayAll();
+        viewModel.reset();
+        verifyAll();
+
+        // assert username and password are null
+        assertNull(viewModel.getUsername());
+        assertNull(viewModel.getPassword());
     }
 }

@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.itest.web.zk.security;
 
+import static org.junit.Assert.assertTrue;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 
@@ -73,5 +74,42 @@ public class LoginZkPageletTest extends IWebTestSupport {
                 (NativeObject) page.executeJavaScript("jq('$login-btn')")
                 .getJavaScriptResult()).get(0);
         loginButtonElement.click();
+
+        webClient.closeAllWindows();
+    }
+
+    @Test
+    public void testResetButton() throws Exception {
+        WebClient webClient = new WebClient();
+        HtmlPage page = webClient.getPage(URL + "/zk/login");
+
+        // find username and password text input elements
+        HTMLInputElement usernameInputElement = (HTMLInputElement) (
+                (NativeObject) page.executeJavaScript("jq('$username-txt')")
+                .getJavaScriptResult()).get(0);
+        HTMLInputElement passwordInputElement = (HTMLInputElement) (
+                (NativeObject) page.executeJavaScript("jq('$password-txt')")
+                .getJavaScriptResult()).get(0);
+
+        // type username and password
+        usernameInputElement.focus();
+        usernameInputElement.setValue("user");
+        passwordInputElement.focus();
+        passwordInputElement.setValue("pass");
+
+        // click on reset button
+        HTMLButtonElement resetButtonElement = (HTMLButtonElement) (
+                (NativeObject) page.executeJavaScript("jq('$reset-btn')")
+                .getJavaScriptResult()).get(0);
+        resetButtonElement.click();
+
+        Thread.sleep(1_000L);
+
+        // assert username and password input elements are empty
+
+        assertTrue(usernameInputElement.getValue().isEmpty());
+        assertTrue(passwordInputElement.getValue().isEmpty());
+
+        webClient.closeAllWindows();
     }
 }

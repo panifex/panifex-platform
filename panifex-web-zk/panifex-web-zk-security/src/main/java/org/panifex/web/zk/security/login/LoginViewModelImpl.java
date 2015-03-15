@@ -20,6 +20,7 @@ package org.panifex.web.zk.security.login;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
 
 public class LoginViewModelImpl implements LoginViewModel {
@@ -64,5 +65,17 @@ public class LoginViewModelImpl implements LoginViewModel {
     @Override
     public void signIn() {
         log.info("Sign in {} user", username);
+    }
+
+    @Command(RESET_COMMAND_)
+    @Override
+    public void reset() {
+        log.info("Reset login view model");
+        username = null;
+        password = null;
+
+        // notify view
+        BindUtils.postNotifyChange(null, null, this, USERNAME_ATTR);
+        BindUtils.postNotifyChange(null, null, this, PASSWORD_ATTR);
     }
 }
