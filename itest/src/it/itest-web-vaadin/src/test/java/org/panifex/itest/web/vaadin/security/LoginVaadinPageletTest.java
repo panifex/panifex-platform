@@ -62,7 +62,7 @@ public class LoginVaadinPageletTest extends IWebTestSupport {
         WebClient webClient = new WebClient();
         HtmlPage page = webClient.getPage(URL + "/login");
 
-        webClient.waitForBackgroundJavaScript(5_000L);
+        webClient.waitForBackgroundJavaScript(10_000L);
 
         // find username and password text input elements
         HtmlTextInput usernameTextInput = page.getHtmlElementById("username-txt");
