@@ -36,8 +36,6 @@ import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
-import org.ops4j.pax.exam.spi.reactors.PerMethod;
 import org.ops4j.pax.web.extender.whiteboard.ExtenderConstants;
 import org.ops4j.pax.web.service.WebContainerConstants;
 import org.osgi.framework.ServiceRegistration;
@@ -55,7 +53,6 @@ import org.panifex.test.support.IWebTestSupport;
 /**
  * Integration tests for {@link SecurityFilterImpl} class.
  */
-@ExamReactorStrategy(PerMethod.class)
 @RunWith(PaxExam.class)
 public final class SecurityFilterTest extends IWebTestSupport {
 
