@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,7 @@ import static org.ops4j.pax.exam.CoreOptions.frameworkProperty;
 import static org.ops4j.pax.exam.CoreOptions.junitBundles;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.workingDirectory;
+import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
 
 import java.util.Dictionary;
 
@@ -55,6 +56,7 @@ public class ITestSupport {
             frameworkProperty("osgi.console.enable.builtin").value("true"),
 
             mavenBundle("biz.aQute.bnd", "bndlib").versionAsInProject(),
+            wrappedBundle(mavenBundle("cglib", "cglib-nodep").versionAsInProject()),
             mavenBundle("commons-beanutils", "commons-beanutils").versionAsInProject(),
             mavenBundle("commons-collections", "commons-collections").versionAsInProject(),
             mavenBundle("commons-fileupload", "commons-fileupload").versionAsInProject(),
@@ -66,6 +68,7 @@ public class ITestSupport {
             mavenBundle("org.apache.aries.proxy", "org.apache.aries.proxy").versionAsInProject(),
             mavenBundle("org.apache.commons", "commons-lang3").versionAsInProject(),
             mavenBundle("org.apache.shiro", "shiro-core").versionAsInProject(),
+            mavenBundle("org.easymock", "easymock").versionAsInProject(),
             mavenBundle("org.panifex", "panifex-test-support").versionAsInProject());
     }
 
