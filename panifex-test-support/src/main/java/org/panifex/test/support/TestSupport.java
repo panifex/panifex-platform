@@ -1,17 +1,17 @@
 /*******************************************************************************
  * Panifex platform
  * Copyright (C) 2013  Mario Krizmanic
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -45,10 +45,10 @@ import org.powermock.core.classloader.annotations.SuppressStaticInitializationFo
 
 /**
  * The template class for unit tests.
- * 
+ *
  * <p>The class inlines methods from {@link org.junit.Assert}, {@link org.easymock.EasyMock} and
- * {@link org.powermock.api.easymock.PowerMock} classes in order to subclasses do not have the reference 
- * to that classes. 
+ * {@link org.powermock.api.easymock.PowerMock} classes in order to subclasses do not have the reference
+ * to that classes.
  *
  */
 public abstract class TestSupport extends PowerMockMemberModifierSupport {
@@ -57,7 +57,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Class that provides a number of methods for generating test data.
      */
     private DataFactory df;
-    
+
     /**
      * Asserts that a condition is true. If it isn't it throws an
      * {@link AssertionError} with the given message.
@@ -699,11 +699,11 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
             Matcher<? super T> matcher) {
         Assert.assertThat(reason, actual, matcher);
     }
-    
+
     /**
      * Creates a mock object that implements the given interface, order checking
      * is enabled by default.
-     * 
+     *
      * @param name
      *            the name of the mock object.
      * @param toMock
@@ -722,13 +722,13 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Creates a mock object that implements the given interface, order checking
      * is disabled by default.
-     * 
+     *
      * @param name
      *            the name of the mock object.
      * @param toMock
      *            the class of the interface that the mock object should
      *            implement.
-     * 
+     *
      * @param <T>
      *            the interface that the mock object should implement.
      * @return the mock object.
@@ -743,13 +743,13 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Creates a mock object that implements the given interface, order checking
      * is disabled by default, and the mock object will return <code>0</code>,
      * <code>null</code> or <code>false</code> for unexpected invocations.
-     * 
+     *
      * @param name
      *            the name of the mock object.
      * @param toMock
      *            the class of the interface that the mock object should
      *            implement.
-     * 
+     *
      * @param <T>
      *            the interface that the mock object should implement.
      * @return the mock object.
@@ -763,7 +763,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Create a mock builder allowing to create a partial mock for the given
      * class or interface.
-     * 
+     *
      * @param <T>
      *            the interface that the mock object should implement.
      * @param toMock
@@ -777,7 +777,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Creates a control, order checking is enabled by default.
-     * 
+     *
      * @return the control.
      */
     protected final IMocksControl createStrictControl() {
@@ -786,7 +786,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Creates a control, order checking is disabled by default.
-     * 
+     *
      * @return the control.
      */
     protected final IMocksControl createControl() {
@@ -797,7 +797,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Creates a control, order checking is disabled by default, and the mock
      * objects created by this control will return <code>0</code>,
      * <code>null</code> or <code>false</code> for unexpected invocations.
-     * 
+     *
      * @return the control.
      */
     protected final IMocksControl createNiceControl() {
@@ -807,7 +807,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Returns the expectation setter for the last expected invocation in the
      * current thread.
-     * 
+     *
      * @param <T>
      *            type returned by the expected method
      * @param value
@@ -815,7 +815,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      *            ExpectationSetter. It allows writing the expected call as
      *            argument, i.e.
      *            <code>expect(mock.getName()).andReturn("John Doe")<code>.
-     * 
+     *
      * @return the expectation setter.
      */
     protected final <T> IExpectationSetters<T> expect(final T value) {
@@ -825,7 +825,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects any boolean argument. For details, see the EasyMock
      * documentation.
-     * 
+     *
      * @return <code>false</code>.
      */
     protected final boolean anyBoolean() {
@@ -834,7 +834,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects any byte argument. For details, see the EasyMock documentation.
-     * 
+     *
      * @return <code>0</code>.
      */
     protected final byte anyByte() {
@@ -843,7 +843,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects any char argument. For details, see the EasyMock documentation.
-     * 
+     *
      * @return <code>0</code>.
      */
     protected final char anyChar() {
@@ -852,7 +852,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects any int argument. For details, see the EasyMock documentation.
-     * 
+     *
      * @return <code>0</code>.
      */
     protected final int anyInt() {
@@ -861,7 +861,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects any long argument. For details, see the EasyMock documentation.
-     * 
+     *
      * @return <code>0</code>.
      */
     protected final long anyLong() {
@@ -870,7 +870,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects any float argument. For details, see the EasyMock documentation.
-     * 
+     *
      * @return <code>0</code>.
      */
     protected final float anyFloat() {
@@ -879,7 +879,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects any double argument. For details, see the EasyMock documentation.
-     * 
+     *
      * @return <code>0</code>.
      */
     protected final double anyDouble() {
@@ -888,7 +888,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects any short argument. For details, see the EasyMock documentation.
-     * 
+     *
      * @return <code>0</code>.
      */
     protected final short anyShort() {
@@ -908,7 +908,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * <code>EasyMock.anyObject(T.class) // pass the returned type in parameter</code>
      * </li>
      * </ul>
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @return <code>null</code>.
@@ -921,7 +921,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Expects any Object argument. For details, see the EasyMock documentation.
      * To work well with generics, this matcher can be used in three different
      * ways. See {@link #anyObject()}.
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @param clazz
@@ -935,7 +935,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a comparable argument greater than or equal the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @param value
@@ -949,7 +949,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a byte argument greater than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -961,7 +961,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a double argument greater than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -973,7 +973,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a float argument greater than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -985,7 +985,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects an int argument greater than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -997,7 +997,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a long argument greater than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1009,7 +1009,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a short argument greater than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1021,7 +1021,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a comparable argument less than or equal the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @param value
@@ -1035,7 +1035,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a byte argument less than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1047,7 +1047,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a double argument less than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1059,7 +1059,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a float argument less than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1071,7 +1071,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects an int argument less than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1083,7 +1083,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a long argument less than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1095,7 +1095,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a short argument less than or equal to the given value. For
      * details, see the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1107,7 +1107,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a comparable argument greater than the given value. For details,
      * see the EasyMock documentation.
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @param value
@@ -1121,7 +1121,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a byte argument greater than the given value. For details, see
      * the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1133,7 +1133,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a double argument greater than the given value. For details, see
      * the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1145,7 +1145,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a float argument greater than the given value. For details, see
      * the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1157,7 +1157,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects an int argument greater than the given value. For details, see
      * the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1169,7 +1169,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a long argument greater than the given value. For details, see
      * the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1181,7 +1181,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a short argument greater than the given value. For details, see
      * the EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1193,7 +1193,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a comparable argument less than the given value. For details, see
      * the EasyMock documentation.
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @param value
@@ -1207,7 +1207,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a byte argument less than the given value. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1219,7 +1219,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a double argument less than the given value. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1231,7 +1231,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a float argument less than the given value. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1243,7 +1243,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects an int argument less than the given value. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1255,7 +1255,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a long argument less than the given value. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1267,7 +1267,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a short argument less than the given value. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1279,7 +1279,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects an object implementing the given class. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param <T>
      *            the accepted type.
      * @param clazz
@@ -1293,7 +1293,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a string that contains the given substring. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param substring
      *            the substring.
      * @return <code>null</code>.
@@ -1304,7 +1304,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a boolean that matches both given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1317,7 +1317,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a byte that matches both given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1330,7 +1330,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a char that matches both given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1343,7 +1343,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a double that matches both given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1356,7 +1356,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a float that matches both given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1369,7 +1369,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects an int that matches both given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1382,7 +1382,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a long that matches both given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1395,7 +1395,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a short that matches both given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1408,7 +1408,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects an Object that matches both given expectations.
-     * 
+     *
      * @param <T>
      *            the type of the object, it is passed through to prevent casts.
      * @param first
@@ -1423,7 +1423,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a boolean that matches one of the given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1436,7 +1436,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a byte that matches one of the given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1449,7 +1449,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a char that matches one of the given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1462,7 +1462,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a double that matches one of the given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1475,7 +1475,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a float that matches one of the given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1488,7 +1488,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects an int that matches one of the given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1501,7 +1501,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a long that matches one of the given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1514,7 +1514,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a short that matches one of the given expectations.
-     * 
+     *
      * @param first
      *            placeholder for the first expectation.
      * @param second
@@ -1527,7 +1527,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects an Object that matches one of the given expectations.
-     * 
+     *
      * @param <T>
      *            the type of the object, it is passed through to prevent casts.
      * @param first
@@ -1542,7 +1542,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a boolean that does not match the given expectation.
-     * 
+     *
      * @param first
      *            placeholder for the expectation.
      * @return <code>false</code>.
@@ -1553,7 +1553,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a byte that does not match the given expectation.
-     * 
+     *
      * @param first
      *            placeholder for the expectation.
      * @return <code>0</code>.
@@ -1564,7 +1564,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a char that does not match the given expectation.
-     * 
+     *
      * @param first
      *            placeholder for the expectation.
      * @return <code>0</code>.
@@ -1575,7 +1575,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a double that does not match the given expectation.
-     * 
+     *
      * @param first
      *            placeholder for the expectation.
      * @return <code>0</code>.
@@ -1586,7 +1586,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a float that does not match the given expectation.
-     * 
+     *
      * @param first
      *            placeholder for the expectation.
      * @return <code>0</code>.
@@ -1597,7 +1597,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects an int that does not match the given expectation.
-     * 
+     *
      * @param first
      *            placeholder for the expectation.
      * @return <code>0</code>.
@@ -1608,7 +1608,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a long that does not match the given expectation.
-     * 
+     *
      * @param first
      *            placeholder for the expectation.
      * @return <code>0</code>.
@@ -1619,7 +1619,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a short that does not match the given expectation.
-     * 
+     *
      * @param first
      *            placeholder for the expectation.
      * @return <code>0</code>.
@@ -1630,7 +1630,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects an Object that does not match the given expectation.
-     * 
+     *
      * @param <T>
      *            the type of the object, it is passed through to prevent casts.
      * @param first
@@ -1643,7 +1643,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a boolean that is equal to the given value.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1654,7 +1654,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a byte that is equal to the given value.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1665,7 +1665,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a char that is equal to the given value.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1676,7 +1676,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a double that is equal to the given value.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1687,7 +1687,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a float that is equal to the given value.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1698,7 +1698,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects an int that is equal to the given value.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1709,7 +1709,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a long that is equal to the given value.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1720,7 +1720,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects a short that is equal to the given value.
-     * 
+     *
      * @param value
      *            the given value.
      * @return <code>0</code>.
@@ -1731,7 +1731,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expects an Object that is equal to the given value.
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @param value
@@ -1745,7 +1745,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a boolean array that is equal to the given array, i.e. it has to
      * have the same length, and each element has to be equal.
-     * 
+     *
      * @param value
      *            the given arry.
      * @return <code>null</code>.
@@ -1757,7 +1757,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a byte array that is equal to the given array, i.e. it has to
      * have the same length, and each element has to be equal.
-     * 
+     *
      * @param value
      *            the given arry.
      * @return <code>null</code>.
@@ -1769,7 +1769,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a char array that is equal to the given array, i.e. it has to
      * have the same length, and each element has to be equal.
-     * 
+     *
      * @param value
      *            the given arry.
      * @return <code>null</code>.
@@ -1781,7 +1781,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a double array that is equal to the given array, i.e. it has to
      * have the same length, and each element has to be equal.
-     * 
+     *
      * @param value
      *            the given arry.
      * @return <code>null</code>.
@@ -1793,7 +1793,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a float array that is equal to the given array, i.e. it has to
      * have the same length, and each element has to be equal.
-     * 
+     *
      * @param value
      *            the given arry.
      * @return <code>null</code>.
@@ -1805,7 +1805,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects an int array that is equal to the given array, i.e. it has to
      * have the same length, and each element has to be equal.
-     * 
+     *
      * @param value
      *            the given arry.
      * @return <code>null</code>.
@@ -1817,7 +1817,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a long array that is equal to the given array, i.e. it has to
      * have the same length, and each element has to be equal.
-     * 
+     *
      * @param value
      *            the given arry.
      * @return <code>null</code>.
@@ -1829,7 +1829,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a short array that is equal to the given array, i.e. it has to
      * have the same length, and each element has to be equal.
-     * 
+     *
      * @param value
      *            the given arry.
      * @return <code>null</code>.
@@ -1841,7 +1841,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects an Object array that is equal to the given array, i.e. it has to
      * have the same type, length, and each element has to be equal.
-     * 
+     *
      * @param <T>
      *            the type of the array, it is passed through to prevent casts.
      * @param value
@@ -1863,7 +1863,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * <code>EasyMock.isNull(T.class) // pass the returned type in parameter</code>
      * </li>
      * </ul>
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @return <code>null</code>.
@@ -1875,13 +1875,13 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects null. To work well with generics, this matcher can be used in
      * three different ways. See {@link #isNull()}.
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @param clazz
      *            the class of the argument to match
      * @return <code>null</code>.
-     * 
+     *
      * @see #isNull()
      */
     protected final <T> T isNull(final Class<T> clazz) {
@@ -1899,7 +1899,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * <code>EasyMock.notNull(T.class) // pass the returned type in parameter</code>
      * </li>
      * </ul>
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @return <code>null</code>.
@@ -1911,13 +1911,13 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects not null. To work well with generics, this matcher can be used in
      * three different ways. See {@link #notNull()}.
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @param clazz
      *            the class of the argument to match
      * @return <code>null</code>.
-     * 
+     *
      * @see #notNull()
      */
     protected final <T> T notNull(final Class<T> clazz) {
@@ -1927,7 +1927,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a string that contains a substring that matches the given regular
      * expression. For details, see the EasyMock documentation.
-     * 
+     *
      * @param regex
      *            the regular expression.
      * @return <code>null</code>.
@@ -1939,7 +1939,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a string that matches the given regular expression. For details,
      * see the EasyMock documentation.
-     * 
+     *
      * @param regex
      *            the regular expression.
      * @return <code>null</code>.
@@ -1951,7 +1951,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a string that starts with the given prefix. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param prefix
      *            the prefix.
      * @return <code>null</code>.
@@ -1963,7 +1963,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a string that ends with the given suffix. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param suffix
      *            the suffix.
      * @return <code>null</code>.
@@ -1976,7 +1976,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Expects a double that has an absolute difference to the given value that
      * is less than the given delta. For details, see the EasyMock
      * documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @param delta
@@ -1991,7 +1991,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Expects a float that has an absolute difference to the given value that
      * is less than the given delta. For details, see the EasyMock
      * documentation.
-     * 
+     *
      * @param value
      *            the given value.
      * @param delta
@@ -2005,7 +2005,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects an Object that is the same as the given value. For details, see
      * the EasyMock documentation.
-     * 
+     *
      * @param <T>
      *            the type of the object, it is passed through to prevent casts.
      * @param value
@@ -2019,7 +2019,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Expects a comparable argument equals to the given value according to
      * their compareTo method. For details, see the EasMock documentation.
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @param value
@@ -2037,7 +2037,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * <code>comparator.compare(actual, expected) operator 0</code>
      * </p>
      * For details, see the EasyMock documentation.
-     * 
+     *
      * @param <T>
      *            type of the method argument to match
      * @param value
@@ -2055,7 +2055,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expect any object but captures it for later use.
-     * 
+     *
      * @param <T>
      *            Type of the captured object
      * @param captured
@@ -2068,7 +2068,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expect any boolean but captures it for later use.
-     * 
+     *
      * @param captured
      *            Where the parameter is captured
      * @return <code>false</code>
@@ -2079,7 +2079,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expect any int but captures it for later use.
-     * 
+     *
      * @param captured
      *            Where the parameter is captured
      * @return <code>0</code>
@@ -2090,7 +2090,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expect any long but captures it for later use.
-     * 
+     *
      * @param captured
      *            Where the parameter is captured
      * @return <code>0</code>
@@ -2101,7 +2101,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expect any float but captures it for later use.
-     * 
+     *
      * @param captured
      *            Where the parameter is captured
      * @return <code>0</code>
@@ -2112,7 +2112,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expect any double but captures it for later use.
-     * 
+     *
      * @param captured
      *            Where the parameter is captured
      * @return <code>0</code>
@@ -2123,7 +2123,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expect any byte but captures it for later use.
-     * 
+     *
      * @param captured
      *            Where the parameter is captured
      * @return <code>0</code>
@@ -2134,7 +2134,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Expect any char but captures it for later use.
-     * 
+     *
      * @param captured
      *            Where the parameter is captured
      * @return <code>0</code>
@@ -2147,7 +2147,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Resets the given mock objects (more exactly: the controls of the mock
      * objects) and turn them to a mock with nice behavior. For details, see the
      * EasyMock documentation.
-     * 
+     *
      * @param mocks
      *            the mock objects
      */
@@ -2159,7 +2159,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Resets the given mock objects (more exactly: the controls of the mock
      * objects) and turn them to a mock with default behavior. For details, see
      * the EasyMock documentation.
-     * 
+     *
      * @param mocks
      *            the mock objects
      */
@@ -2171,7 +2171,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Resets the given mock objects (more exactly: the controls of the mock
      * objects) and turn them to a mock with strict behavior. For details, see
      * the EasyMock documentation.
-     * 
+     *
      * @param mocks
      *            the mock objects
      */
@@ -2183,7 +2183,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Switches order checking of the given mock object (more exactly: the
      * control of the mock object) the on and off. For details, see the EasyMock
      * documentation.
-     * 
+     *
      * @param mock
      *            the mock object.
      * @param state
@@ -2197,7 +2197,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Reports an argument matcher. This method is needed to define own argument
      * matchers. For details, see the EasyMock documentation.
-     * 
+     *
      * @param matcher
      */
     protected final void reportMatcher(final IArgumentMatcher matcher) {
@@ -2208,7 +2208,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Returns the arguments of the current mock method call, if inside an
      * <code>IAnswer</code> callback - be careful here, reordering parameters of
      * method changes the semantics of your tests.
-     * 
+     *
      * @return the arguments of the current mock method call.
      * @throws IllegalStateException
      *             if called outside of <code>IAnswer</code> callbacks.
@@ -2222,7 +2222,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * {@link #NOT_THREAD_SAFE_BY_DEFAULT} is set). This method can change this
      * behavior. Two reasons are known for someone to do that: Performance or
      * dead-locking issues.
-     * 
+     *
      * @param mock
      *            the mock to make thread safe
      * @param threadSafe
@@ -2238,7 +2238,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * object that isn't thread safe to make sure it is used correctly in a
      * multithreaded environment. By default, no check is done unless
      * {@link #ENABLE_THREAD_SAFETY_CHECK_BY_DEFAULT} was set to true.
-     * 
+     *
      * @param mock
      *            the mock
      * @param shouldBeUsedInOneThread
@@ -2250,7 +2250,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Get the current value for an EasyMock property
-     * 
+     *
      * @param key
      *            key for the property
      * @return the property value
@@ -2267,7 +2267,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * <p>
      * <b>Note:</b> This method is static. Setting a property will change the
      * entire EasyMock behavior.
-     * 
+     *
      * @param key
      *            property key
      * @param value
@@ -2484,7 +2484,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * @param methods
      *            optionally what methods to mock
      */
-    protected final synchronized void mockStatic(Class<?> type, Method... methods) {
+    protected static final synchronized void mockStatic(Class<?> type, Method... methods) {
         PowerMock.mockStatic(type, methods);
     }
 
@@ -2494,7 +2494,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * @param type
      *            the class to enable static mocking
      */
-    protected final synchronized void mockStatic(Class<?> type) {
+    protected static final synchronized void mockStatic(Class<?> type) {
         PowerMock.mockStatic(type);
     }
 
@@ -2506,7 +2506,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * @param methods
      *            optionally what methods to mock
      */
-    protected final synchronized void mockStaticStrict(Class<?> type, Method... methods) {
+    protected static final synchronized void mockStaticStrict(Class<?> type, Method... methods) {
         PowerMock.mockStatic(type, methods);
     }
 
@@ -2516,7 +2516,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * @param type
      *            the class to enable static mocking
      */
-    protected final synchronized void mockStaticStrict(Class<?> type) {
+    protected static final synchronized void mockStaticStrict(Class<?> type) {
         PowerMock.mockStaticStrict(type);
     }
 
@@ -2528,7 +2528,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * @param methods
      *            optionally what methods to mock
      */
-    protected final synchronized void mockStaticNice(Class<?> type, Method... methods) {
+    protected static final synchronized void mockStaticNice(Class<?> type, Method... methods) {
         PowerMock.mockStaticNice(type, methods);
     }
 
@@ -2538,7 +2538,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * @param type
      *            the class to enable static mocking
      */
-    protected final synchronized void mockStaticNice(Class<?> type) {
+    protected static final synchronized void mockStaticNice(Class<?> type) {
         PowerMock.mockStaticNice(type);
     }
 
@@ -3839,7 +3839,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
             Object... arguments) throws Exception {
         return PowerMock.expectNiceNew(type, parameterTypes, arguments);
     }
-    
+
     /**
      * Returns the {@link org.fluttercode.datafactory.impl.DataFactory DataFactory} instance.
      * @return
@@ -3855,10 +3855,10 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
         }
         return df;
     }
-    
+
     /**
      * Returns a random item from a list of items.
-     * 
+     *
      * @param <T>
      *            Item type in the list and to return
      * @param items
@@ -3873,7 +3873,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Returns a random item from a list of items or the null depending on the
      * probability parameter. The probability determines the chance (in %) of
      * returning an item off the list versus null.
-     * 
+     *
      * @param <T>
      *            Item type in the list and to return
      * @param items
@@ -3891,7 +3891,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Returns a random item from a list of items or the defaultItem depending
      * on the probability parameter. The probability determines the chance (in
      * %) of returning an item off the list versus the default value.
-     * 
+     *
      * @param <T>
      *            Item type in the list and to return
      * @param items
@@ -3909,7 +3909,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Returns a random item from an array of items
-     * 
+     *
      * @param <T>
      *            Array item type and the type to return
      * @param items
@@ -3924,7 +3924,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Returns a random item from an array of items or null depending on the
      * probability parameter. The probability determines the chance (in %) of
      * returning an item from the array versus null.
-     * 
+     *
      * @param <T>
      *            Array item type and the type to return
      * @param items
@@ -3942,7 +3942,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Returns a random item from an array of items or the defaultItem depending
      * on the probability parameter. The probability determines the chance (in
      * %) of returning an item from the array versus the default value.
-     * 
+     *
      * @param <T>
      *            Array item type and the type to return
      * @param items
@@ -3967,7 +3967,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Returns a combination of first and last name values in one string
-     * 
+     *
      * @return
      */
     protected final String getName() {
@@ -3997,7 +3997,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Generates a random city value
-     * 
+     *
      * @return City as a string
      */
     protected final String getCity() {
@@ -4007,7 +4007,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Generates an address value consisting of house number, street name and
      * street suffix. i.e. <code>543 Larkhill Road</code>
-     * 
+     *
      * @return Address as a string
      */
     protected final String getAddress() {
@@ -4017,7 +4017,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Generates line 2 for a street address (usually an Apt. or Suite #).
      * Returns null if the probabilty test fails.
-     * 
+     *
      * @param probability
      *            Chance as % of have a value returned instead of null.
      * @return Street address line two or null if the probability test fails
@@ -4029,7 +4029,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Generates line 2 for a street address (usually an Apt. or Suite #).
      * Returns default value if the probabilty test fails.
-     * 
+     *
      * @param probability
      *            Chance as % of have a value returned instead of null.
      * @param defaultValue
@@ -4043,7 +4043,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Generates line 2 for a street address (usually an Apt. or Suite #).
      * Returns default value if the probabilty test fails.
-     * 
+     *
      * @return Street address line 2
      */
     protected final String getAddressLine2() {
@@ -4052,7 +4052,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Creates a random birthdate within the range of 1955 to 1985
-     * 
+     *
      * @return Date representing a birthdate
      */
     protected final Date getBirthDate() {
@@ -4061,7 +4061,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Returns a random int value.
-     * 
+     *
      * @return random number
      */
     protected final int getNumber() {
@@ -4070,7 +4070,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Returns a random number between 0 and max
-     * 
+     *
      * @param max
      *            Maximum value of result
      * @return random number no more than max
@@ -4081,7 +4081,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Returns a number betwen min and max
-     * 
+     *
      * @param min
      *            minimum value of result
      * @param max
@@ -4094,7 +4094,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Builds a date from the year, month, day values passed in
-     * 
+     *
      * @param year
      *            The year of the final {@link Date} result
      * @param month
@@ -4112,7 +4112,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * <code>minDaysFromData</code> to <code>baseData</code> +
      * <code>maxDaysFromData</code>. This method does not alter the time
      * component and the time is set to the time value of the base date.
-     * 
+     *
      * @param baseDate
      *            Date to start from
      * @param minDaysFromDate
@@ -4128,7 +4128,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Returns a random date between two dates. This method will alter the time
      * component of the dates
-     * 
+     *
      * @param minDate
      *            Minimum date that can be returned
      * @param maxDate
@@ -4142,10 +4142,10 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Returns random text made up of english words of length
      * <code>length</code>
-     * 
+     *
      * @param length
      *            length of returned string
-     * 
+     *
      * @return string made up of actual words with length <code>length</code>
      */
     protected final String getRandomText(int length) {
@@ -4154,7 +4154,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Returns random text made up of english words
-     * 
+     *
      * @param minLength
      *            minimum length of returned string
      * @param maxLength
@@ -4173,7 +4173,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Return a string containing <code>length</code> random characters
-     * 
+     *
      * @param length
      *            number of characters to use in the string
      * @return A string containing <code>length</code> random characters
@@ -4184,7 +4184,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Return a string containing between <code>length</code> random characters
-     * 
+     *
      * @param length
      *            number of characters to use in the string
      * @return A string containing <code>length</code> random characters
@@ -4195,7 +4195,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Returns a word of a length between 1 and 10 characters.
-     * 
+     *
      * @return A work of max length 10
      */
     protected final String getRandomWord() {
@@ -4205,7 +4205,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Returns a valid word with a length of <code>length</code>
      * characters.
-     * 
+     *
      * @param length
      *            maximum length of the word
      * @return a word of a length up to <code>length</code> characters
@@ -4218,7 +4218,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Returns a valid word with a length of up to <code>length</code>
      * characters. If the <code>exactLength</code> parameter is set, then the
      * word will be exactly <code>length</code> characters in length.
-     * 
+     *
      * @param length
      *            maximum length of the returned string
      * @param exactLength
@@ -4233,7 +4233,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Returns a valid word based on the length range passed in. The length will
      * always be between the min and max length range inclusive.
-     * 
+     *
      * @param minLength minimum length of the word
      * @param maxLength maximum length of the word
      * @return a word of a length between min and max length
@@ -4243,7 +4243,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     }
 
     /**
-     * 
+     *
      * @param chance
      *            Chance of a suffix being returned
      * @return
@@ -4254,7 +4254,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Return a person prefix or null if the odds are too low.
-     * 
+     *
      * @param chance
      *            Odds of a prefix being returned
      * @return Prefix string
@@ -4266,7 +4266,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Returns a string containing a set of numbers with a fixed number of
      * digits
-     * 
+     *
      * @param digits
      *            number of digits in the final number
      * @return Random number as a string with a fixed length
@@ -4278,7 +4278,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Generates a random business name by taking a city name and additing a
      * business onto it.
-     * 
+     *
      * @return A random business name
      */
     protected final String getBusinessName() {
@@ -4287,7 +4287,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
 
     /**
      * Generates an email address
-     * 
+     *
      * @return an email address
      */
     protected final String getEmailAddress() {
@@ -4297,13 +4297,13 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
     /**
      * Gives you a true/false based on a probability with a random number
      * generator. Can be used to optionally add elements.
-     * 
+     *
      * <pre>
      * if (DataFactory.chance(70)) {
      *  // 70% chance of this code being executed
      * }
      * </pre>
-     * 
+     *
      * @param chance
      *            % chance of returning true
      * @return
@@ -4320,7 +4320,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Call randomize with a seed value to reset the random number generator. By
      * using the same seed over different tests, you will should get the same
      * results out for the same data generation calls.
-     * 
+     *
      * @param seed
      *            Seed value to use to generate random numbers
      */
@@ -4332,7 +4332,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Set this to provide your own list of name data values by passing it a
      * class that implements the {@link NameDataValues} interface which just
      * returns the String arrays to use for the test data.
-     * 
+     *
      * @param nameDataValues
      *            Object holding the set of data values to use
      */
@@ -4344,7 +4344,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Set this to provide your own list of address data values by passing it a
      * class that implements the {@link AddressDataValues} interface which just
      * returns the String arrays to use for the test data.
-     * 
+     *
      * @param addressDataValues
      *            Object holding the set of data values to use
      */
@@ -4356,7 +4356,7 @@ public abstract class TestSupport extends PowerMockMemberModifierSupport {
      * Set this to provide your own list of content data values by passing it a
      * class that implements the {@link ContentDataValues} interface which just
      * returns the String arrays to use for the test data.
-     * 
+     *
      * @param contentDataValues
      *            Object holding the set of data values to use
      */
