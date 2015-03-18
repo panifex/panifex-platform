@@ -24,6 +24,7 @@ Import-Package: \
     javax.servlet;version="[3.0,4.0)", \
     org.apache.commons.lang3;version="[3.1, 4.0)", \
     org.apache.shiro.util;version="[1.2,2.0)", \
+    org.osgi.service.blueprint.container;version="[1.0,2.0)", \
     org.panifex.module.api.pagelet;version="[1.0,2.0)", \
     org.panifex.module.api.security;version="[1.0,2.0)", \
     org.panifex.module.vaadin.api;version="[1.0,2.0)", \

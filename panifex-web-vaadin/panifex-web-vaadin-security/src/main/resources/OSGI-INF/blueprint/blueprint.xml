@@ -55,7 +55,7 @@
 
     <!-- login view model -->
 
-    <bean id="loginViewModel"
+    <bean id="LoginViewModel"
             class="org.panifex.web.spi.security.LoginViewModelImpl"
             scope="prototype">
         <argument ref="securityUtilServiceTracker"/>

@@ -18,16 +18,22 @@
  ******************************************************************************/
 package org.panifex.itest.web.vaadin.security;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.reset;
 import static org.junit.Assert.assertEquals;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
+import org.osgi.framework.ServiceRegistration;
+import org.panifex.module.api.security.SecurityUtilService;
 import org.panifex.test.support.IWebTestSupport;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -37,6 +43,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 @RunWith(PaxExam.class)
 public class LoginVaadinPageletTest extends IWebTestSupport {
+
+    // mocks
+    private final SecurityUtilService securityUtilServiceMock =
+            createMock(SecurityUtilService.class);
+
+    // service registration
+    private ServiceRegistration<SecurityUtilService> securityUtilServiceRegistration;
 
     @Configuration
     public Option[] config() {
@@ -55,6 +68,20 @@ public class LoginVaadinPageletTest extends IWebTestSupport {
                 mavenBundle("org.panifex", "panifex-web-vaadin-layout").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-vaadin-runtime").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-vaadin-security").versionAsInProject());
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        // register service
+        securityUtilServiceRegistration =
+                registerService(SecurityUtilService.class, securityUtilServiceMock);
+    }
+
+    @After
+    public void cleanup() throws Exception {
+        reset(securityUtilServiceMock);
+
+        securityUtilServiceRegistration.unregister();
     }
 
     @Test
