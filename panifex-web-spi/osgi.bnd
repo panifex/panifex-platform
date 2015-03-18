@@ -21,6 +21,9 @@ Export-Package: \
 
 Import-Package: \
     org.apache.commons.lang3;version="[3.1,4.0)", \
+    org.apache.shiro.authc;version="[1.2,2.0)";resolution:="optional", \
+    org.apache.shiro.subject;version="[1.2,2.0)";resolution:="optional", \
     org.panifex.module.api.pagelet;version="[1.0,2.0)", \
+    org.panifex.module.api.security;version="[1.0,2.0)", \
     org.osgi.framework;version="[1.3,2.0)", \
     org.slf4j;version="[1.4,2.0)"

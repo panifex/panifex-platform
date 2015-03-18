@@ -20,14 +20,16 @@ package org.panifex.itest.web.zk.security;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertTrue;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 
-import org.apache.shiro.subject.Subject;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +39,7 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.osgi.framework.ServiceRegistration;
-import org.panifex.module.api.security.SecurityUtilService;
+import org.panifex.module.api.security.AuthenticationService;
 import org.panifex.test.support.IWebTestSupport;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -46,14 +48,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 
 @RunWith(PaxExam.class)
-public class LoginZkPageletTest extends IWebTestSupport {
+public class LoginZkPageletShiroTest extends IWebTestSupport {
 
-    // mocks
-    private final SecurityUtilService securityUtilServiceMock =
-            createMock(SecurityUtilService.class);
+    private final AuthenticationService authServiceMock =
+            EasyMock.createMock(AuthenticationService.class);
 
-    // service registration
-    private ServiceRegistration<SecurityUtilService> securityUtilServiceRegistration;
+    private ServiceRegistration<AuthenticationService> authServiceRegistration;
 
     @Configuration
     public Option[] config() {
@@ -61,8 +61,15 @@ public class LoginZkPageletTest extends IWebTestSupport {
                 webConfigure(),
 
                 mavenBundle("net.sf.jasperreports", "jasperreports").versionAsInProject(),
+                mavenBundle("org.apache.aries.blueprint", "org.apache.aries.blueprint.cm").versionAsInProject(),
+                mavenBundle("org.apache.felix", "org.apache.felix.configadmin").versionAsInProject(),
+                mavenBundle("org.apache.servicemix.bundles", "org.apache.servicemix.bundles.ehcache").versionAsInProject(),
+                mavenBundle("org.apache.shiro", "shiro-core").versionAsInProject(),
+                mavenBundle("org.apache.shiro", "shiro-ehcache").versionAsInProject(),
+                mavenBundle("org.apache.shiro", "shiro-web").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-module-api").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-module-zk-api").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-security-shiro").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-spi").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-layout").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-runtime").versionAsInProject(),
@@ -71,29 +78,37 @@ public class LoginZkPageletTest extends IWebTestSupport {
 
     @Before
     public void setUp() throws Exception {
-        // register service
-        securityUtilServiceRegistration =
-                registerService(SecurityUtilService.class, securityUtilServiceMock);
+        // expect getting auth service name
+        expect(authServiceMock.getName()).andReturn("authService").atLeastOnce();
+
+        // register auth service
+        replay(authServiceMock);
+        authServiceRegistration = registerService(AuthenticationService.class, authServiceMock);
+
+        Thread.sleep(1_000L);
+
+        reset(authServiceMock);
     }
 
     @After
-    public void cleanup() throws Exception {
-        reset(securityUtilServiceMock);
-
-        securityUtilServiceRegistration.unregister();
+    public void cleanup() {
+        authServiceRegistration.unregister();
     }
 
     @Test
     public void testLogin() throws Exception {
+        // variables
+        String username = "user";
+        String password = "pass";
+
         // mocks
-        Subject subjectMock = createMock(Subject.class);
+        AuthenticationInfo authInfo = createMock(AuthenticationInfo.class);
 
-        // expect getting subject
-        expect(securityUtilServiceMock.getSubject()).andReturn(subjectMock);
+        // expect successfully authentication
+        expect(authServiceMock.supports(isA(UsernamePasswordToken.class))).andReturn(Boolean.TRUE);
+        expect(authServiceMock.getAuthenticationInfo(isA(UsernamePasswordToken.class))).andReturn(authInfo);
 
-        // run tests
-        Object[] mocks = new Object[] { subjectMock, securityUtilServiceMock };
-        replay(mocks);
+        replay(authServiceMock);
 
         WebClient webClient = new WebClient();
         HtmlPage page = webClient.getPage(URL + "/zk/login");
@@ -107,8 +122,10 @@ public class LoginZkPageletTest extends IWebTestSupport {
                 .getJavaScriptResult()).get(0);
 
         // type username and password
-        usernameInputElement.setValue("user");
-        passwordInputElement.setValue("pass");
+        usernameInputElement.setValue(username);
+        passwordInputElement.setValue(password);
+
+        Thread.sleep(1_000L);
 
         // click on login
         HTMLButtonElement loginButtonElement = (HTMLButtonElement) (
@@ -120,40 +137,6 @@ public class LoginZkPageletTest extends IWebTestSupport {
 
         webClient.closeAllWindows();
 
-        verify(mocks);
-    }
-
-    @Test
-    public void testResetButton() throws Exception {
-        WebClient webClient = new WebClient();
-        HtmlPage page = webClient.getPage(URL + "/zk/login");
-
-        // find username and password text input elements
-        HTMLInputElement usernameInputElement = (HTMLInputElement) (
-                (NativeObject) page.executeJavaScript("jq('$username-txt')")
-                .getJavaScriptResult()).get(0);
-        HTMLInputElement passwordInputElement = (HTMLInputElement) (
-                (NativeObject) page.executeJavaScript("jq('$password-txt')")
-                .getJavaScriptResult()).get(0);
-
-        // type username and password
-        usernameInputElement.focus();
-        usernameInputElement.setValue("user");
-        passwordInputElement.focus();
-        passwordInputElement.setValue("pass");
-
-        // click on reset button
-        HTMLButtonElement resetButtonElement = (HTMLButtonElement) (
-                (NativeObject) page.executeJavaScript("jq('$reset-btn')")
-                .getJavaScriptResult()).get(0);
-        resetButtonElement.click();
-
-        Thread.sleep(1_000L);
-
-        // assert username and password input elements are empty
-        assertTrue(usernameInputElement.getValue().isEmpty());
-        assertTrue(passwordInputElement.getValue().isEmpty());
-
-        webClient.closeAllWindows();
+        verify(authServiceMock);
     }
 }

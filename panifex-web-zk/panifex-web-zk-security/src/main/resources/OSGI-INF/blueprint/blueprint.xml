@@ -56,8 +56,21 @@
     <!-- Login View Model -->
 
     <bean id="LoginViewModel"
-        class="org.panifex.web.zk.security.login.ZkLoginViewModelImpl"
-        scope="prototype"/>
+            class="org.panifex.web.zk.security.login.ZkLoginViewModelImpl"
+            scope="prototype">
+        <argument ref="securityUtilServiceTracker"/>
+     </bean>
+
+    <!-- trackers -->
+
+    <bean id="securityUtilServiceTracker"
+            class="org.panifex.module.api.security.SecurityUtilServiceTracker"/>
+
+    <reference interface="org.panifex.module.api.security.SecurityUtilService">
+        <reference-listener ref="securityUtilServiceTracker"
+            bind-method="bind"
+            unbind-method="unbind"/>
+    </reference>
 
     <!-- Resource mapping -->
 

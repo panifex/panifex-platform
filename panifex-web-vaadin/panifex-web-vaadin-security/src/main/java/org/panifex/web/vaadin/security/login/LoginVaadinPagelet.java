@@ -18,9 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.vaadin.security.login;
 
-import org.panifex.module.vaadin.api.VaadinPagelet;
+import org.osgi.service.blueprint.container.BlueprintContainer;
+import org.panifex.module.vaadin.api.GenericVaadinPagelet;
 import org.panifex.web.spi.security.LoginViewModel;
-import org.panifex.web.spi.security.LoginViewModelImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,9 +35,13 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-public class LoginVaadinPagelet implements VaadinPagelet {
+public class LoginVaadinPagelet extends GenericVaadinPagelet {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
+
+    public LoginVaadinPagelet(BlueprintContainer blueprintContainer) {
+        super(blueprintContainer);
+    }
 
     @Override
     public String getName() {
@@ -48,7 +52,7 @@ public class LoginVaadinPagelet implements VaadinPagelet {
     public void service(VaadinRequest request) throws Exception {
         log.debug("Create login vaadin pagelet content");
 
-        LoginViewModel bean = new LoginViewModelImpl();
+        LoginViewModel bean = getComponentInstance(LoginViewModel.class);
         BeanItem<LoginViewModel> viewModel = new BeanItem<>(bean);
 
         VerticalLayout layout = new VerticalLayout();

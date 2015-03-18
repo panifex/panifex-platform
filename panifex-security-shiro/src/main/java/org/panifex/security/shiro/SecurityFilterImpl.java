@@ -46,6 +46,11 @@ public class SecurityFilterImpl extends ShiroFilter implements SecurityFilter {
     private String successUrl = WebApplicationConstants.DEFAULT_SUCCESS_URL;
     private String usernameParam = WebApplicationConstants.DEFAULT_USERNAME_PARAM;
 
+    public SecurityFilterImpl() {
+        // bound security manager to static memory
+        setStaticSecurityManagerEnabled(true);
+    }
+
     @Override
     public void init() throws Exception {
         log.info("Initialize security filter");

@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.panifex.module.api.security.SecurityUtilServiceTracker;
 import org.panifex.test.support.TestSupport;
 import org.panifex.web.spi.security.LoginViewModel;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -35,7 +36,12 @@ import org.zkoss.bind.BindUtils;
 @PrepareForTest(BindUtils.class)
 public final class LoginViewModelImplTest extends TestSupport {
 
-    private ZkLoginViewModelImpl viewModel = new ZkLoginViewModelImpl();
+    // mocks
+    private SecurityUtilServiceTracker securityUtilServiceTrackerMock =
+            createMock(SecurityUtilServiceTracker.class);
+
+    private ZkLoginViewModelImpl viewModel =
+            new ZkLoginViewModelImpl(securityUtilServiceTrackerMock);
 
     @Before
     public void setUp() {

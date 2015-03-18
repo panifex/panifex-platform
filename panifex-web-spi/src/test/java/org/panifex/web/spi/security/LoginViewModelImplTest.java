@@ -19,7 +19,9 @@
 package org.panifex.web.spi.security;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Before;
 import org.junit.Test;
+import org.panifex.module.api.security.SecurityUtilServiceTracker;
 import org.panifex.test.support.TestSupport;
 
 /**
@@ -27,7 +29,17 @@ import org.panifex.test.support.TestSupport;
  */
 public final class LoginViewModelImplTest extends TestSupport {
 
-    private LoginViewModelImpl viewModel = new LoginViewModelImpl();
+    // trackers
+    private final SecurityUtilServiceTracker securityUtilServiceTrackerMock =
+            createMock(SecurityUtilServiceTracker.class);
+
+    private final LoginViewModelImpl viewModel =
+            new LoginViewModelImpl(securityUtilServiceTrackerMock);
+
+    @Before
+    public void setUp() {
+        resetAll();
+    }
 
     @Test
     public void setAndGetUsernameTest() {

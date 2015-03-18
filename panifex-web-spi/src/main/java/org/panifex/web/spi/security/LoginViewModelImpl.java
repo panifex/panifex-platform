@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,10 @@
 package org.panifex.web.spi.security;
 
 import org.apache.commons.lang3.StringUtils;
-import org.panifex.web.spi.security.LoginViewModel;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.panifex.module.api.security.SecurityUtilService;
+import org.panifex.module.api.security.SecurityUtilServiceTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,9 +30,17 @@ public class LoginViewModelImpl implements LoginViewModel {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
+    // trackers
+    private final SecurityUtilServiceTracker securityUtilServiceTracker;
+
     private String username = StringUtils.EMPTY;
     private String password = StringUtils.EMPTY;
     private boolean isRememberMe = false;
+
+    public LoginViewModelImpl(
+            SecurityUtilServiceTracker securityUtilServiceTracker) {
+        this.securityUtilServiceTracker = securityUtilServiceTracker;
+    }
 
     @Override
     public String getUsername() {
@@ -64,6 +75,10 @@ public class LoginViewModelImpl implements LoginViewModel {
     @Override
     public void signIn() {
         log.info("Sign in {} user", username);
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password, isRememberMe);
+        SecurityUtilService service = securityUtilServiceTracker.service();
+        Subject currentSubject = service.getSubject();
+        currentSubject.login(token);
     }
 
     @Override

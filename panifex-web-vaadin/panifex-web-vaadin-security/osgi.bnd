@@ -25,6 +25,7 @@ Import-Package: \
     org.apache.commons.lang3;version="[3.1, 4.0)", \
     org.apache.shiro.util;version="[1.2,2.0)", \
     org.panifex.module.api.pagelet;version="[1.0,2.0)", \
+    org.panifex.module.api.security;version="[1.0,2.0)", \
     org.panifex.module.vaadin.api;version="[1.0,2.0)", \
     org.panifex.web.spi;version="[1.0,2.0)", \
     org.panifex.web.spi.security;version="[1.0,2.0)", \

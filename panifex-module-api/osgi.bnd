@@ -40,6 +40,7 @@ Import-Package: \
     org.apache.shiro;version="[1.2,2.0)";resolution:="optional", \
     org.apache.shiro.authc;version="[1.2,2.0)";resolution:="optional", \
     org.apache.shiro.authz;version="[1.2,2.0)";resolution:="optional", \
+    org.apache.shiro.mgt;version="[1.2,2.0)";resolution:="optional", \
     org.apache.shiro.realm;version="[1.2,2.0)";resolution:="optional", \
     org.apache.shiro.subject;version="[1.2,2.0)";resolution:="optional", \
     org.apache.shiro.web.filter.mgt;version="[1.2,2.0)";resolution:="optional", \

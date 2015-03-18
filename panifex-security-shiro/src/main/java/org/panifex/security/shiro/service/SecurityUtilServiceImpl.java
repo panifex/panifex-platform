@@ -16,34 +16,17 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.zk.security.login;
+package org.panifex.security.shiro.service;
 
-import org.panifex.module.api.security.SecurityUtilServiceTracker;
-import org.panifex.web.spi.security.LoginViewModel;
-import org.panifex.web.spi.security.LoginViewModelImpl;
-import org.zkoss.bind.BindUtils;
-import org.zkoss.bind.annotation.Command;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.panifex.module.api.security.SecurityUtilService;
 
-public class ZkLoginViewModelImpl extends LoginViewModelImpl {
+public class SecurityUtilServiceImpl implements SecurityUtilService {
 
-    public ZkLoginViewModelImpl(
-            SecurityUtilServiceTracker securityUtilServiceTracker) {
-        super(securityUtilServiceTracker);
-    }
-
-    @Command(LoginViewModel.SIGN_IN_COMMAND_)
     @Override
-    public void signIn() {
-        super.signIn();
+    public Subject getSubject() {
+        return SecurityUtils.getSubject();
     }
 
-    @Command(RESET_COMMAND_)
-    @Override
-    public void reset() {
-        super.reset();
-
-        // notify view
-        BindUtils.postNotifyChange(null, null, this, USERNAME_ATTR);
-        BindUtils.postNotifyChange(null, null, this, PASSWORD_ATTR);
-    }
 }
