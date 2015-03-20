@@ -39,8 +39,9 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.osgi.framework.ServiceRegistration;
+import org.panifex.itest.web.base.support.PageletTestSupport;
+import org.panifex.itest.web.zk.support.ZkPageletTestHelper;
 import org.panifex.module.api.security.AuthenticationService;
-import org.panifex.test.support.IWebTestSupport;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -48,7 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 
 @RunWith(PaxExam.class)
-public class LoginZkPageletShiroTest extends IWebTestSupport {
+public class LoginZkPageletShiroTest extends PageletTestSupport {
 
     private final AuthenticationService authServiceMock =
             EasyMock.createMock(AuthenticationService.class);
@@ -73,7 +74,12 @@ public class LoginZkPageletShiroTest extends IWebTestSupport {
                 mavenBundle("org.panifex", "panifex-web-spi").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-layout").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-runtime").versionAsInProject(),
-                mavenBundle("org.panifex", "panifex-web-zk-security").versionAsInProject());
+                mavenBundle("org.panifex", "panifex-web-zk-security").versionAsInProject(),
+                mavenBundle("org.panifex.itest.web", "itest-web-base").versionAsInProject());
+    }
+
+    public LoginZkPageletShiroTest() {
+        super(new ZkPageletTestHelper());
     }
 
     @Before
@@ -111,7 +117,7 @@ public class LoginZkPageletShiroTest extends IWebTestSupport {
         replay(authServiceMock);
 
         WebClient webClient = new WebClient();
-        HtmlPage page = webClient.getPage(URL + "/zk/login");
+        HtmlPage page = webClient.getPage(URL + "/login");
 
         // find username and password text input elements
         HTMLInputElement usernameInputElement = (HTMLInputElement) (

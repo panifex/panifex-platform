@@ -23,7 +23,6 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertTrue;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 
@@ -37,8 +36,9 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.osgi.framework.ServiceRegistration;
+import org.panifex.itest.web.base.security.LoginPageletTest;
+import org.panifex.itest.web.zk.support.ZkPageletTestHelper;
 import org.panifex.module.api.security.SecurityUtilService;
-import org.panifex.test.support.IWebTestSupport;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 
 @RunWith(PaxExam.class)
-public class LoginZkPageletTest extends IWebTestSupport {
+public class LoginZkPageletTest extends LoginPageletTest {
 
     // mocks
     private final SecurityUtilService securityUtilServiceMock =
@@ -67,6 +67,10 @@ public class LoginZkPageletTest extends IWebTestSupport {
                 mavenBundle("org.panifex", "panifex-web-zk-layout").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-runtime").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-security").versionAsInProject());
+    }
+
+    public LoginZkPageletTest() {
+        super(new ZkPageletTestHelper());
     }
 
     @Before
@@ -96,7 +100,7 @@ public class LoginZkPageletTest extends IWebTestSupport {
         replay(mocks);
 
         WebClient webClient = new WebClient();
-        HtmlPage page = webClient.getPage(URL + "/zk/login");
+        HtmlPage page = webClient.getPage(URL + "/login");
 
         // find username and password text input elements
         HTMLInputElement usernameInputElement = (HTMLInputElement) (
@@ -121,39 +125,5 @@ public class LoginZkPageletTest extends IWebTestSupport {
         webClient.closeAllWindows();
 
         verify(mocks);
-    }
-
-    @Test
-    public void testResetButton() throws Exception {
-        WebClient webClient = new WebClient();
-        HtmlPage page = webClient.getPage(URL + "/zk/login");
-
-        // find username and password text input elements
-        HTMLInputElement usernameInputElement = (HTMLInputElement) (
-                (NativeObject) page.executeJavaScript("jq('$username-txt')")
-                .getJavaScriptResult()).get(0);
-        HTMLInputElement passwordInputElement = (HTMLInputElement) (
-                (NativeObject) page.executeJavaScript("jq('$password-txt')")
-                .getJavaScriptResult()).get(0);
-
-        // type username and password
-        usernameInputElement.focus();
-        usernameInputElement.setValue("user");
-        passwordInputElement.focus();
-        passwordInputElement.setValue("pass");
-
-        // click on reset button
-        HTMLButtonElement resetButtonElement = (HTMLButtonElement) (
-                (NativeObject) page.executeJavaScript("jq('$reset-btn')")
-                .getJavaScriptResult()).get(0);
-        resetButtonElement.click();
-
-        Thread.sleep(1_000L);
-
-        // assert username and password input elements are empty
-        assertTrue(usernameInputElement.getValue().isEmpty());
-        assertTrue(passwordInputElement.getValue().isEmpty());
-
-        webClient.closeAllWindows();
     }
 }

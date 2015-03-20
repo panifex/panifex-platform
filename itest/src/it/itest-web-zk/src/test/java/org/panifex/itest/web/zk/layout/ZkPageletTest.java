@@ -29,14 +29,15 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.osgi.framework.ServiceRegistration;
+import org.panifex.itest.web.base.support.PageletTestSupport;
 import org.panifex.itest.web.zk.support.HelloLayoutZkPagelet;
+import org.panifex.itest.web.zk.support.ZkPageletTestHelper;
 import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.zk.api.DefaultZkPageletMapping;
 import org.panifex.module.zk.api.ZkPagelet;
-import org.panifex.test.support.IWebTestSupport;
 
 @RunWith(PaxExam.class)
-public class ZkPageletTest extends IWebTestSupport {
+public class ZkPageletTest extends PageletTestSupport {
 
     @Configuration
     public Option[] config() {
@@ -49,6 +50,10 @@ public class ZkPageletTest extends IWebTestSupport {
                 mavenBundle("org.panifex", "panifex-web-spi").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-layout").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-runtime").versionAsInProject());
+    }
+
+    public ZkPageletTest() {
+        super(new ZkPageletTestHelper());
     }
 
     @Test
@@ -67,7 +72,7 @@ public class ZkPageletTest extends IWebTestSupport {
             mappingRegistration =
                     registerService(PageletMapping.class, mapping);
 
-            testGet(URL + "/zk/", HttpServletResponse.SC_OK);
+            testGet(URL + "/", HttpServletResponse.SC_OK);
         } finally {
             if (mappingRegistration != null) {
                 mappingRegistration.unregister();

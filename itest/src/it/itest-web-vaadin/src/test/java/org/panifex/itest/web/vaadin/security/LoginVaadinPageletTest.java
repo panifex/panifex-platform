@@ -20,29 +20,22 @@ package org.panifex.itest.web.vaadin.security;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.reset;
-import static org.junit.Assert.assertEquals;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.osgi.framework.ServiceRegistration;
+import org.panifex.itest.web.base.security.LoginPageletTest;
+import org.panifex.itest.web.vaadin.support.VaadinPageletTestHelper;
 import org.panifex.module.api.security.SecurityUtilService;
-import org.panifex.test.support.IWebTestSupport;
-
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 @RunWith(PaxExam.class)
-public class LoginVaadinPageletTest extends IWebTestSupport {
+public class LoginVaadinPageletTest extends LoginPageletTest {
 
     // mocks
     private final SecurityUtilService securityUtilServiceMock =
@@ -70,6 +63,10 @@ public class LoginVaadinPageletTest extends IWebTestSupport {
                 mavenBundle("org.panifex", "panifex-web-vaadin-security").versionAsInProject());
     }
 
+    public LoginVaadinPageletTest() {
+        super(new VaadinPageletTestHelper());
+    }
+
     @Before
     public void setUp() throws Exception {
         // register service
@@ -82,37 +79,5 @@ public class LoginVaadinPageletTest extends IWebTestSupport {
         reset(securityUtilServiceMock);
 
         securityUtilServiceRegistration.unregister();
-    }
-
-    @Test
-    public void testResetButton() throws Exception {
-        WebClient webClient = new WebClient();
-        HtmlPage page = webClient.getPage(URL + "/login");
-
-        webClient.waitForBackgroundJavaScript(20_000L);
-
-        // find username and password text input elements
-        HtmlTextInput usernameTextInput = page.getHtmlElementById("username-txt");
-        HtmlTextInput passwordTextInput = page.getHtmlElementById("password-txt");
-
-        // assert username and password input fields are empty
-        assertEquals(StringUtils.EMPTY, usernameTextInput.getValueAttribute());
-        assertEquals(StringUtils.EMPTY, passwordTextInput.getValueAttribute());
-
-        // type username and password
-        usernameTextInput.setValueAttribute("user");
-        passwordTextInput.setValueAttribute("pass");
-
-        // reset form
-        HtmlDivision resetButton = page.getHtmlElementById("reset-btn");
-        resetButton.dblClick();
-
-        webClient.waitForBackgroundJavaScript(1_000L);
-
-        // assert username and password input fields are empty
-        assertEquals(StringUtils.EMPTY, usernameTextInput.getValueAttribute());
-        assertEquals(StringUtils.EMPTY, passwordTextInput.getValueAttribute());
-
-        webClient.closeAllWindows();
     }
 }

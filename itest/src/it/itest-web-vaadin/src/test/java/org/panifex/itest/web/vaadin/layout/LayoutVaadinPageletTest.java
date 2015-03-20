@@ -28,17 +28,18 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.osgi.framework.ServiceRegistration;
+import org.panifex.itest.web.base.support.PageletTestSupport;
 import org.panifex.itest.web.vaadin.support.HelloLayoutVaadinPagelet;
+import org.panifex.itest.web.vaadin.support.VaadinPageletTestHelper;
 import org.panifex.module.api.pagelet.PageletMapping;
 import org.panifex.module.vaadin.api.DefaultVaadinPageletMapping;
 import org.panifex.module.vaadin.api.VaadinPagelet;
-import org.panifex.test.support.IWebTestSupport;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 @RunWith(PaxExam.class)
-public class LayoutVaadinPageletTest extends IWebTestSupport {
+public class LayoutVaadinPageletTest extends PageletTestSupport {
 
     @Configuration
     public Option[] config() {
@@ -56,6 +57,10 @@ public class LayoutVaadinPageletTest extends IWebTestSupport {
                 mavenBundle("org.panifex", "panifex-web-spi").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-vaadin-layout").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-vaadin-runtime").versionAsInProject());
+    }
+
+    public LayoutVaadinPageletTest() {
+        super(new VaadinPageletTestHelper());
     }
 
     @Test

@@ -50,7 +50,7 @@ public class Activator implements BundleActivator {
         Dictionary<String, String> dhtmlLayoutServletProps = new Hashtable<>();
         dhtmlLayoutServletProps.put("init.update-uri", "/zkau");
         dhtmlLayoutServletProps.put("load-on-startup", "1");
-        dhtmlLayoutServletProps.put("urlPatterns", "/zk/*");
+        dhtmlLayoutServletProps.put("urlPatterns", "/*");
         dhtmlLayoutServlet = context.
                 registerService(Servlet.class, new DHtmlLayoutServlet(), dhtmlLayoutServletProps);
     }

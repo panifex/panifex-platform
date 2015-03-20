@@ -58,7 +58,7 @@ public abstract class IWebTestSupport extends ITestSupport {
     private final Object webListenerLock = new Object();
     private ServiceRegistration<WebListener> webListenerServiceRegistration;
 
-    protected final Option[] webConfigure() {
+    protected Option[] webConfigure() {
         return OptionUtils.combine(
             baseConfigure(),
 
