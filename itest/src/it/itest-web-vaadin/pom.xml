@@ -25,7 +25,7 @@
         <relativePath>../../../</relativePath>
     </parent>
 
-    <groupId>org.panifex.itest.security</groupId>
+    <groupId>org.panifex.itest.web</groupId>
     <artifactId>itest-web-vaadin</artifactId>
 
     <dependencies>
