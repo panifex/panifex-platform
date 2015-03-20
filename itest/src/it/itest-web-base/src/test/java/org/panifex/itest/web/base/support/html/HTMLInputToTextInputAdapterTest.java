@@ -58,6 +58,9 @@ public class HTMLInputToTextInputAdapterTest extends TestSupport {
     public void testSetValueAttribute() {
         String newValue = getRandomChars(20);
 
+        // expect focusing element
+        inputElementMock.focus();
+
         // expect setting new attribute value
         inputElementMock.setValue(newValue);
 

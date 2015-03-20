@@ -41,7 +41,7 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         WebClient webClient = new WebClient();
         HtmlPage page = webClient.getPage(URL + "/login");
 
-        webClient.waitForBackgroundJavaScript(20_000L);
+        webClient.waitForBackgroundJavaScript(5_000L);
 
         // find username and password text input elements
         TextInputElement usernameTextInput = getTextInputElementById(page, "username-txt");
@@ -61,7 +61,6 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         ButtonElement resetButton = getButtonElementById(page, "reset-btn");
         resetButton.click();
 
-        webClient.waitForBackgroundJavaScript(1_000L);
         Thread.sleep(1_000L);
 
         // assert username and password input fields are empty

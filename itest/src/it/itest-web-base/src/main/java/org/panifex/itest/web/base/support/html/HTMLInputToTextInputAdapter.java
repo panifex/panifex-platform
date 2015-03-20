@@ -38,6 +38,7 @@ public class HTMLInputToTextInputAdapter implements TextInputElement {
 
     @Override
     public void setValueAttribute(String newValue) {
+        inputElement.focus();
         inputElement.setValue(newValue);;
     }
 }
