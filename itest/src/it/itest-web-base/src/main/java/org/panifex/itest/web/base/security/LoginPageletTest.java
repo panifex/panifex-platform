@@ -41,7 +41,7 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         WebClient webClient = new WebClient();
         HtmlPage page = webClient.getPage(URL + "/login");
 
-        webClient.waitForBackgroundJavaScript(10_000L);
+        webClient.waitForBackgroundJavaScript(20_000L);
 
         // find username and password text input elements
         TextInputElement usernameTextInput = getTextInputElementById(page, "username-txt");
