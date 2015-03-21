@@ -25,7 +25,6 @@ Import-Package: \
     org.apache.shiro.util;version="[1.2,2.0)", \
     org.panifex.module.api.pagelet;version="[1.0,2.0)", \
     org.panifex.module.vaadin.api;version="[1.0,2.0)", \
-    org.panifex.web.spi;version="[1.0,2.0)", \
     org.slf4j;version="[1.4,2.0)"
 
 Private-Package: \

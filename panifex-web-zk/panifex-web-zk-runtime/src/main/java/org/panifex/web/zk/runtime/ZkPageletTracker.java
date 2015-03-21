@@ -19,7 +19,7 @@
 package org.panifex.web.zk.runtime;
 
 import org.panifex.module.zk.api.ZkPagelet;
-import org.panifex.web.spi.PageletTracker;
+import org.panifex.web.spi.tracker.PageletTracker;
 
 public class ZkPageletTracker extends PageletTracker<ZkPagelet> {
 }

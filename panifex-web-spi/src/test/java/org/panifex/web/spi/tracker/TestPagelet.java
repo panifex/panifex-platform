@@ -16,15 +16,20 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.spi;
+package org.panifex.web.spi.tracker;
 
-abstract class TestPageletTracker extends PageletTracker<TestPagelet> {
+import org.panifex.module.api.pagelet.Pagelet;
+
+abstract class TestPagelet implements Pagelet<Object> {
+
+    public static final String PAGELET_NAME = "pageletName";
 
     @Override
-    public void onUrlMappingAdded(String urlPattern, TestPagelet pagelet) {
+    public void service(Object request) {
     }
 
     @Override
-    public void onUrlMappingRemoved(String urlPattern, TestPagelet pagelet) {
+    public String getName() {
+        return PAGELET_NAME;
     }
 }
