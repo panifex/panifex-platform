@@ -79,7 +79,7 @@ public final class SecurityFilterTest extends IWebTestSupport {
     public void setUp() throws Exception {
         resetWebApplicationProperties();
 
-        Thread.sleep(1_000L);
+        Thread.sleep(5_000L);
     }
 
     @Test
@@ -319,7 +319,7 @@ public final class SecurityFilterTest extends IWebTestSupport {
         // wait servlet to be deployed
         waitForServletListener();
 
-        Thread.sleep(1_000L);
+        Thread.sleep(5_000L);
 
         return servletRegistration;
     }
