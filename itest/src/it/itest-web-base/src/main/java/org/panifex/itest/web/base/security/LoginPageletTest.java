@@ -18,22 +18,49 @@
  ******************************************************************************/
 package org.panifex.itest.web.base.security;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.reset;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.osgi.framework.ServiceRegistration;
 import org.panifex.itest.web.base.support.PageletTestHelper;
 import org.panifex.itest.web.base.support.PageletTestSupport;
 import org.panifex.itest.web.base.support.html.ButtonElement;
 import org.panifex.itest.web.base.support.html.TextInputElement;
+import org.panifex.module.api.security.SecurityUtilService;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public abstract class LoginPageletTest extends PageletTestSupport {
 
+    // mocks
+    protected final SecurityUtilService securityUtilServiceMock =
+            createMock(SecurityUtilService.class);
+
+    // service registration
+    private ServiceRegistration<SecurityUtilService> securityUtilServiceRegistration;
+
     public LoginPageletTest(PageletTestHelper testHelper) {
         super(testHelper);
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        // register service
+        securityUtilServiceRegistration =
+                registerService(SecurityUtilService.class, securityUtilServiceMock);
+    }
+
+    @After
+    public void cleanup() throws Exception {
+        reset(securityUtilServiceMock);
+
+        securityUtilServiceRegistration.unregister();
     }
 
     @Test

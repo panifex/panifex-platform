@@ -47,6 +47,11 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+        <!-- Panifex Platform Dependencies -->
+        <dependency>
+            <groupId>org.panifex</groupId>
+            <artifactId>panifex-module-api</artifactId>
+        </dependency>
         <!-- Panifex Platform Test Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>

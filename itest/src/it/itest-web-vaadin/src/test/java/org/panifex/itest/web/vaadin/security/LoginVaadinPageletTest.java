@@ -18,31 +18,18 @@
  ******************************************************************************/
 package org.panifex.itest.web.vaadin.security;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.reset;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.osgi.framework.ServiceRegistration;
 import org.panifex.itest.web.base.security.LoginPageletTest;
 import org.panifex.itest.web.vaadin.support.VaadinPageletTestHelper;
-import org.panifex.module.api.security.SecurityUtilService;
 
 @RunWith(PaxExam.class)
 public class LoginVaadinPageletTest extends LoginPageletTest {
-
-    // mocks
-    private final SecurityUtilService securityUtilServiceMock =
-            createMock(SecurityUtilService.class);
-
-    // service registration
-    private ServiceRegistration<SecurityUtilService> securityUtilServiceRegistration;
 
     @Configuration
     public Option[] config() {
@@ -65,19 +52,5 @@ public class LoginVaadinPageletTest extends LoginPageletTest {
 
     public LoginVaadinPageletTest() {
         super(new VaadinPageletTestHelper());
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        // register service
-        securityUtilServiceRegistration =
-                registerService(SecurityUtilService.class, securityUtilServiceMock);
-    }
-
-    @After
-    public void cleanup() throws Exception {
-        reset(securityUtilServiceMock);
-
-        securityUtilServiceRegistration.unregister();
     }
 }
