@@ -18,15 +18,8 @@
  ******************************************************************************/
 package org.panifex.itest.web.zk.security;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 
-import org.apache.shiro.subject.Subject;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
@@ -34,11 +27,6 @@ import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.panifex.itest.web.base.security.LoginPageletTest;
 import org.panifex.itest.web.zk.support.ZkPageletTestHelper;
-
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 
 @RunWith(PaxExam.class)
 public class LoginZkPageletTest extends LoginPageletTest {
@@ -59,45 +47,5 @@ public class LoginZkPageletTest extends LoginPageletTest {
 
     public LoginZkPageletTest() {
         super(new ZkPageletTestHelper());
-    }
-
-    @Test
-    public void testLogin() throws Exception {
-        // mocks
-        Subject subjectMock = createMock(Subject.class);
-
-        // expect getting subject
-        expect(securityUtilServiceMock.getSubject()).andReturn(subjectMock);
-
-        // run tests
-        Object[] mocks = new Object[] { subjectMock, securityUtilServiceMock };
-        replay(mocks);
-
-        WebClient webClient = new WebClient();
-        HtmlPage page = webClient.getPage(URL + "/login");
-
-        // find username and password text input elements
-        HTMLInputElement usernameInputElement = (HTMLInputElement) (
-                (NativeObject) page.executeJavaScript("jq('$username-txt')")
-                .getJavaScriptResult()).get(0);
-        HTMLInputElement passwordInputElement = (HTMLInputElement) (
-                (NativeObject) page.executeJavaScript("jq('$password-txt')")
-                .getJavaScriptResult()).get(0);
-
-        // type username and password
-        usernameInputElement.setValue("user");
-        passwordInputElement.setValue("pass");
-
-        // click on login
-        HTMLButtonElement loginButtonElement = (HTMLButtonElement) (
-                (NativeObject) page.executeJavaScript("jq('$login-btn')")
-                .getJavaScriptResult()).get(0);
-        loginButtonElement.click();
-
-        Thread.sleep(1_000L);
-
-        webClient.closeAllWindows();
-
-        verify(mocks);
     }
 }

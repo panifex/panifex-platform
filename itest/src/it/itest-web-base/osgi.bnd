@@ -24,6 +24,7 @@ Import-Package: \
     com.gargoylesoftware.htmlunit.javascript.host.html, \
     com.gargoylesoftware.htmlunit.html, \
     org.apache.commons.lang3;version="[3.1,4.0)", \
+    org.apache.shiro.subject;version="[1.2,2.0)", \
     org.easymock;version="[3.2,4.0)", \
     org.junit;version="[4.11,5.0)",\
     org.ops4j.pax.exam;version="[4.4,5.0)", \

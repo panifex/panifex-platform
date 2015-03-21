@@ -19,10 +19,14 @@
 package org.panifex.itest.web.base.security;
 
 import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.subject.Subject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -98,4 +102,41 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         webClient.closeAllWindows();
     }
 
+    @Test
+    public void testLogin() throws Exception {
+        // mocks
+        Subject subjectMock = createMock(Subject.class);
+
+        // expect getting subject
+        expect(securityUtilServiceMock.getSubject()).andReturn(subjectMock);
+
+        // run tests
+        Object[] mocks = new Object[] { subjectMock, securityUtilServiceMock };
+        replay(mocks);
+
+        WebClient webClient = new WebClient();
+        HtmlPage page = webClient.getPage(URL + "/login");
+
+        webClient.waitForBackgroundJavaScript(20_000L);
+
+        // find username and password text input elements
+        TextInputElement usernameInputElement = getTextInputElementById(page, "username-txt");
+        TextInputElement passwordInputElement = getTextInputElementById(page, "password-txt");
+
+        // type username and password
+        usernameInputElement.setValueAttribute("user");
+        passwordInputElement.setValueAttribute("pass");
+
+        Thread.sleep(1_000L);
+
+        // click on login
+        ButtonElement loginButtonElement = getButtonElementById(page, "login-btn");
+        loginButtonElement.click();
+
+        Thread.sleep(1_000L);
+
+        webClient.closeAllWindows();
+
+        verify(mocks);
+    }
 }

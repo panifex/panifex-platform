@@ -118,7 +118,20 @@ public class LoginVaadinPagelet extends GenericVaadinPagelet {
         HorizontalLayout actionsArea = new HorizontalLayout();
         layout.addComponent(actionsArea);
 
+        createLoginButton(actionsArea, viewModel);
         createResetButton(actionsArea, viewModel);
+    }
+
+    private void createLoginButton(Layout layout, final BeanItem<LoginViewModel> viewModel) {
+        Button button = new Button();
+        button.setId("login-btn");
+        layout.addComponent(button);
+        button.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                viewModel.getBean().signIn();
+            }
+        });
     }
 
     private void createResetButton(Layout layout, final BeanItem<LoginViewModel> viewModel) {
