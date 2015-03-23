@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.itest.web.zk.security;
+package org.panifex.itest.web.vaadin.security;
 
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 
@@ -25,27 +25,30 @@ import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.panifex.itest.web.base.security.LoginPageletTest;
-import org.panifex.itest.web.zk.support.ZkPageletTestHelper;
+import org.panifex.itest.web.base.security.LoginPageletShiroTest;
+import org.panifex.itest.web.vaadin.support.VaadinPageletTestHelper;
 
 @RunWith(PaxExam.class)
-public class LoginZkPageletTest extends LoginPageletTest {
+public class LoginVaadinPageletShiroTest extends LoginPageletShiroTest {
 
     @Configuration
     public Option[] config() {
         return OptionUtils.combine(
                 webConfigure(),
 
-                mavenBundle("net.sf.jasperreports", "jasperreports").versionAsInProject(),
-                mavenBundle("org.panifex", "panifex-module-api").versionAsInProject(),
-                mavenBundle("org.panifex", "panifex-module-zk-api").versionAsInProject(),
-                mavenBundle("org.panifex", "panifex-web-spi").versionAsInProject(),
-                mavenBundle("org.panifex", "panifex-web-zk-layout").versionAsInProject(),
-                mavenBundle("org.panifex", "panifex-web-zk-runtime").versionAsInProject(),
-                mavenBundle("org.panifex", "panifex-web-zk-security").versionAsInProject());
+                mavenBundle("com.vaadin", "vaadin-server").versionAsInProject(),
+                mavenBundle("com.vaadin", "vaadin-shared").versionAsInProject(),
+                mavenBundle("com.vaadin.external.flute", "flute").versionAsInProject(),
+                mavenBundle("com.vaadin.external.google", "android-json").versionAsInProject(),
+                mavenBundle("com.vaadin.external.google", "guava").versionAsInProject(),
+                mavenBundle("com.vaadin.external.streamhtmlparser", "streamhtmlparser-jsilver").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-module-vaadin-api").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-vaadin-layout").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-vaadin-runtime").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-vaadin-security").versionAsInProject());
     }
 
-    public LoginZkPageletTest() {
-        super(new ZkPageletTestHelper());
+    public LoginVaadinPageletShiroTest() {
+        super(new VaadinPageletTestHelper());
     }
 }

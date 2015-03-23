@@ -18,53 +18,34 @@
  ******************************************************************************/
 package org.panifex.itest.web.base.security;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.reset;
-import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.subject.Subject;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.osgi.framework.ServiceRegistration;
+import org.ops4j.pax.exam.Option;
+import org.ops4j.pax.exam.OptionUtils;
 import org.panifex.itest.web.base.support.PageletTestHelper;
 import org.panifex.itest.web.base.support.PageletTestSupport;
 import org.panifex.itest.web.base.support.html.ButtonElement;
 import org.panifex.itest.web.base.support.html.TextInputElement;
-import org.panifex.module.api.security.SecurityUtilService;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-public abstract class LoginPageletTest extends PageletTestSupport {
-
-    // mocks
-    protected final SecurityUtilService securityUtilServiceMock =
-            createMock(SecurityUtilService.class);
-
-    // service registration
-    private ServiceRegistration<SecurityUtilService> securityUtilServiceRegistration;
+/* package */ abstract class LoginPageletTest extends PageletTestSupport {
 
     public LoginPageletTest(PageletTestHelper testHelper) {
         super(testHelper);
     }
 
-    @Before
-    public void setUp() throws Exception {
-        // register service
-        securityUtilServiceRegistration =
-                registerService(SecurityUtilService.class, securityUtilServiceMock);
-    }
+    @Override
+    protected Option[] webConfigure() {
+        return OptionUtils.combine(
+                super.webConfigure(),
 
-    @After
-    public void cleanup() throws Exception {
-        reset(securityUtilServiceMock);
-
-        securityUtilServiceRegistration.unregister();
+                mavenBundle("org.panifex", "panifex-module-api").versionAsInProject(),
+                mavenBundle("org.panifex", "panifex-web-spi").versionAsInProject());
     }
 
     @Test
@@ -104,16 +85,6 @@ public abstract class LoginPageletTest extends PageletTestSupport {
 
     @Test
     public void testLogin() throws Exception {
-        // mocks
-        Subject subjectMock = createMock(Subject.class);
-
-        // expect getting subject
-        expect(securityUtilServiceMock.getSubject()).andReturn(subjectMock);
-
-        // run tests
-        Object[] mocks = new Object[] { subjectMock, securityUtilServiceMock };
-        replay(mocks);
-
         WebClient webClient = new WebClient();
         HtmlPage page = webClient.getPage(URL + "/login");
 
@@ -136,7 +107,5 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         Thread.sleep(1_000L);
 
         webClient.closeAllWindows();
-
-        verify(mocks);
     }
 }

@@ -25,11 +25,11 @@ import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.panifex.itest.web.base.security.LoginPageletTest;
+import org.panifex.itest.web.base.security.LoginPageletSecUtilTest;
 import org.panifex.itest.web.vaadin.support.VaadinPageletTestHelper;
 
 @RunWith(PaxExam.class)
-public class LoginVaadinPageletTest extends LoginPageletTest {
+public class LoginVaadinPageletSecUtilTest extends LoginPageletSecUtilTest {
 
     @Configuration
     public Option[] config() {
@@ -42,15 +42,13 @@ public class LoginVaadinPageletTest extends LoginPageletTest {
                 mavenBundle("com.vaadin.external.google", "android-json").versionAsInProject(),
                 mavenBundle("com.vaadin.external.google", "guava").versionAsInProject(),
                 mavenBundle("com.vaadin.external.streamhtmlparser", "streamhtmlparser-jsilver").versionAsInProject(),
-                mavenBundle("org.panifex", "panifex-module-api").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-module-vaadin-api").versionAsInProject(),
-                mavenBundle("org.panifex", "panifex-web-spi").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-vaadin-layout").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-vaadin-runtime").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-vaadin-security").versionAsInProject());
     }
 
-    public LoginVaadinPageletTest() {
+    public LoginVaadinPageletSecUtilTest() {
         super(new VaadinPageletTestHelper());
     }
 }

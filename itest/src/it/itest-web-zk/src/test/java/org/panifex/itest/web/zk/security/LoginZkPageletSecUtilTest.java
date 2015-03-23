@@ -25,24 +25,25 @@ import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.panifex.itest.web.base.security.LoginPageletShiroTest;
+import org.panifex.itest.web.base.security.LoginPageletSecUtilTest;
 import org.panifex.itest.web.zk.support.ZkPageletTestHelper;
 
 @RunWith(PaxExam.class)
-public class LoginZkPageletShiroTest extends LoginPageletShiroTest {
+public class LoginZkPageletSecUtilTest extends LoginPageletSecUtilTest {
 
     @Configuration
     public Option[] config() {
         return OptionUtils.combine(
                 webConfigure(),
 
+                mavenBundle("net.sf.jasperreports", "jasperreports").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-module-zk-api").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-layout").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-runtime").versionAsInProject(),
                 mavenBundle("org.panifex", "panifex-web-zk-security").versionAsInProject());
     }
 
-    public LoginZkPageletShiroTest() {
+    public LoginZkPageletSecUtilTest() {
         super(new ZkPageletTestHelper());
     }
 }
