@@ -20,10 +20,12 @@ package org.panifex.itest.web.base.security;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
+import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.junit.After;
 import org.junit.Before;
@@ -71,6 +73,9 @@ public abstract class LoginPageletSecUtilTest extends LoginPageletTest {
 
         // expect getting subject
         expect(securityUtilServiceMock.getSubject()).andReturn(subjectMock);
+
+        // expect logging authentication token
+        subjectMock.login(isA(AuthenticationToken.class));
 
         // run tests
         Object[] mocks = new Object[] { subjectMock, securityUtilServiceMock };

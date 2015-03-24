@@ -105,7 +105,7 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         ButtonElement loginButtonElement = getButtonElementById(page, LoginPagelet.LOGIN_BUTTON_ID);
         loginButtonElement.click();
 
-        Thread.sleep(1_000L);
+        Thread.sleep(5_000L);
 
         webClient.closeAllWindows();
     }

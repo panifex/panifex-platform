@@ -28,6 +28,7 @@ import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
@@ -72,7 +73,7 @@ public abstract class LoginPageletShiroTest extends LoginPageletTest {
     @Before
     public void setUp() throws Exception {
         // expect getting auth service name
-        expect(authServiceMock.getName()).andReturn("authService").atLeastOnce();
+        expect(authServiceMock.getName()).andReturn("authService").anyTimes();
 
         // register auth service
         replay(authServiceMock);
@@ -80,28 +81,48 @@ public abstract class LoginPageletShiroTest extends LoginPageletTest {
 
         Thread.sleep(1_000L);
 
+        verify(authServiceMock);
         reset(authServiceMock);
     }
 
     @After
-    public void cleanup() {
+    public void cleanup() throws Exception {
+        reset(authServiceMock);
+
+        // expect getting auth service name
+        expect(authServiceMock.getName()).andReturn("authService").anyTimes();
+
+        replay(authServiceMock);
+
         authServiceRegistration.unregister();
+
+        Thread.sleep(1_000L);
+
+        verify(authServiceMock);
+        reset(authServiceMock);
     }
 
     @Override
     @Test
     public void testLogin() throws Exception {
         // mocks
-        AuthenticationInfo authInfo = createMock(AuthenticationInfo.class);
+        AuthenticationInfo authInfoMock = createMock(AuthenticationInfo.class);
+        PrincipalCollection principalsMock = createMock(PrincipalCollection.class);
 
         // expect successfully authentication
         expect(authServiceMock.supports(isA(UsernamePasswordToken.class))).andReturn(Boolean.TRUE);
-        expect(authServiceMock.getAuthenticationInfo(isA(UsernamePasswordToken.class))).andReturn(authInfo);
+        expect(authServiceMock.getAuthenticationInfo(isA(UsernamePasswordToken.class))).andReturn(authInfoMock);
 
-        replay(authServiceMock);
+        // expect getting principals
+        expect(authInfoMock.getPrincipals()).andReturn(principalsMock).atLeastOnce();
+        expect(principalsMock.isEmpty()).andReturn(true).atLeastOnce();
+
+        Object[] mocks = new Object[] {authInfoMock, principalsMock, authServiceMock};
+
+        replay(mocks);
 
         super.testLogin();
 
-        verify(authServiceMock);
+        verify(mocks);
     }
 }

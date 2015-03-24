@@ -29,32 +29,10 @@
     <artifactId>itest-web-zk</artifactId>
 
     <dependencies>
-        <!-- EhCache Dependencies -->
-        <dependency>
-            <groupId>org.apache.servicemix.bundles</groupId>
-            <artifactId>org.apache.servicemix.bundles.ehcache</artifactId>
-        </dependency>
-        <!-- JasperReports Dependencies -->
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports</artifactId>
-        </dependency>
         <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-module-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
             <artifactId>panifex-module-zk-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-security-shiro</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-web-spi</artifactId>
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>

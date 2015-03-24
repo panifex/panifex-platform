@@ -32,15 +32,7 @@
         <!-- Panifex Platform Dependencies -->
         <dependency>
             <groupId>org.panifex</groupId>
-            <artifactId>panifex-module-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
             <artifactId>panifex-module-vaadin-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.panifex</groupId>
-            <artifactId>panifex-web-spi</artifactId>
         </dependency>
         <dependency>
             <groupId>org.panifex</groupId>

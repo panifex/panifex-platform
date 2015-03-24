@@ -25,10 +25,13 @@ import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.ops4j.pax.exam.junit.PaxExam;
+import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
+import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.panifex.itest.web.base.security.LoginPageletShiroTest;
 import org.panifex.itest.web.vaadin.support.VaadinPageletTestHelper;
 
 @RunWith(PaxExam.class)
+@ExamReactorStrategy(PerClass.class)
 public class LoginVaadinPageletShiroTest extends LoginPageletShiroTest {
 
     @Configuration
