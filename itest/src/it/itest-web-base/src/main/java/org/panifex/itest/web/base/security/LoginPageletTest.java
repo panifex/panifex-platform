@@ -33,7 +33,7 @@ import org.panifex.itest.web.base.support.html.TextInputElement;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-/* package */ abstract class LoginPageletTest extends PageletTestSupport {
+public abstract class LoginPageletTest extends PageletTestSupport {
 
     public LoginPageletTest(PageletTestHelper testHelper) {
         super(testHelper);
