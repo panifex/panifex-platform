@@ -30,4 +30,5 @@ Import-Package: \
     org.ops4j.pax.exam;version="[4.4,5.0)", \
     org.osgi.framework;version="[1.3,2.0)", \
     org.panifex.module.api.security;version="[1.0,2.0)", \
+    org.panifex.web.spi.security;version="[1.0,2.0)", \
     org.panifex.test.support;version="[1.0,2.0)"

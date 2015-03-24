@@ -29,6 +29,7 @@ import org.panifex.itest.web.base.support.PageletTestHelper;
 import org.panifex.itest.web.base.support.PageletTestSupport;
 import org.panifex.itest.web.base.support.html.ButtonElement;
 import org.panifex.itest.web.base.support.html.TextInputElement;
+import org.panifex.web.spi.security.LoginPagelet;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -56,8 +57,8 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         webClient.waitForBackgroundJavaScript(20_000L);
 
         // find username and password text input elements
-        TextInputElement usernameTextInput = getTextInputElementById(page, "username-txt");
-        TextInputElement passwordTextInput = getTextInputElementById(page, "password-txt");
+        TextInputElement usernameTextInput = getTextInputElementById(page, LoginPagelet.USERNAME_TXT_ID);
+        TextInputElement passwordTextInput = getTextInputElementById(page, LoginPagelet.PASSWORD_TXT_ID);
 
         // assert username and password input fields are empty
         assertEquals(StringUtils.EMPTY, usernameTextInput.getValueAttribute());
@@ -70,7 +71,7 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         Thread.sleep(1_000L);
 
         // reset form
-        ButtonElement resetButton = getButtonElementById(page, "reset-btn");
+        ButtonElement resetButton = getButtonElementById(page, LoginPagelet.RESET_BUTTON_ID);
         resetButton.click();
 
         webClient.waitForBackgroundJavaScript(1_000L);
@@ -91,8 +92,8 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         webClient.waitForBackgroundJavaScript(20_000L);
 
         // find username and password text input elements
-        TextInputElement usernameInputElement = getTextInputElementById(page, "username-txt");
-        TextInputElement passwordInputElement = getTextInputElementById(page, "password-txt");
+        TextInputElement usernameInputElement = getTextInputElementById(page, LoginPagelet.USERNAME_TXT_ID);
+        TextInputElement passwordInputElement = getTextInputElementById(page, LoginPagelet.PASSWORD_TXT_ID);
 
         // type username and password
         usernameInputElement.setValueAttribute("user");
@@ -101,7 +102,7 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         Thread.sleep(1_000L);
 
         // click on login
-        ButtonElement loginButtonElement = getButtonElementById(page, "login-btn");
+        ButtonElement loginButtonElement = getButtonElementById(page, LoginPagelet.LOGIN_BUTTON_ID);
         loginButtonElement.click();
 
         Thread.sleep(1_000L);

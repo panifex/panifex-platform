@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,8 +19,9 @@
 package org.panifex.web.zk.security.login;
 
 import org.osgi.service.blueprint.container.BlueprintContainer;
+import org.panifex.module.zk.api.ZkPagelet;
+import org.panifex.web.spi.security.LoginPagelet;
 import org.panifex.web.spi.security.LoginViewModel;
-import org.panifex.web.zk.layout.LayoutZkPagelet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.Binder;
@@ -29,19 +30,19 @@ import org.zkoss.zhtml.H1;
 import org.zkoss.zhtml.P;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
+import org.zkoss.zk.ui.RichletConfig;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.metainfo.LanguageDefinition;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Textbox;
 
-public class LoginZkPagelet extends LayoutZkPagelet {
+public class LoginZkPagelet extends LoginPagelet<Page> implements ZkPagelet {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private final String USERNAME_PROPERTY = vm(LoginViewModel.USERNAME_ATTR);
-    private final String PASSWORD_PROPERTY = vm(LoginViewModel.PASSWORD_ATTR);
-    private final String IS_REMEMBER_ME_PROPERTY = vm(LoginViewModel.IS_REMEMBER_ME_ATTR);
+    private final String VM_BIND_ID = "VM";
 
     public LoginZkPagelet(BlueprintContainer container) {
         super(container);
@@ -53,10 +54,14 @@ public class LoginZkPagelet extends LayoutZkPagelet {
     }
 
     @Override
-    protected void createContent(Page page, Component parent) {
+    public void service(Page page) {
         log.debug("Create login zk pagelet content");
 
         LoginViewModel viewModel = getComponentInstance(LoginViewModel.class);
+
+        Div parent = new Div();
+        parent.setId("main");
+        parent.setPage(page);
 
         DefaultBinder binder = createBinder(parent, viewModel);
 
@@ -69,6 +74,20 @@ public class LoginZkPagelet extends LayoutZkPagelet {
         createContentActionsArea(content, binder);
 
         binder.loadComponent(parent, true);
+    }
+
+    protected final DefaultBinder createBinder(Component parent, Object viewModel) {
+        DefaultBinder binder = new DefaultBinder();
+        binder.init(parent, viewModel, null);
+        parent.setAttribute(VM_BIND_ID, binder.getViewModel());
+        return binder;
+    }
+
+    private final String vm(String property) {
+        return new StringBuilder(VM_BIND_ID).
+                append('.').
+                append(property).
+                toString();
     }
 
     private void createContentHeaderArea(Div content) {
@@ -113,13 +132,13 @@ public class LoginZkPagelet extends LayoutZkPagelet {
 
         // Create username textbox
         Textbox textbox = new Textbox();
-        textbox.setId("username-txt");
+        textbox.setId(USERNAME_TXT_ID);
         textbox.setSclass("username-field");
         //textbox.setPlaceholder(Labels.getLabel(SecurityLabels.ACCOUNT_USERNAME_PLACEHOLDER));
         fieldArea.appendChild(textbox);
-        binder.addPropertyLoadBindings(textbox, "value", USERNAME_PROPERTY, null, null,
+        binder.addPropertyLoadBindings(textbox, "value", vm(LoginViewModel.USERNAME_ATTR), null, null,
                 null, null, null);
-        binder.addPropertySaveBindings(textbox, "value", USERNAME_PROPERTY, null, null,
+        binder.addPropertySaveBindings(textbox, "value", vm(LoginViewModel.USERNAME_ATTR), null, null,
                 null, null, null, null, null);
     }
 
@@ -131,14 +150,14 @@ public class LoginZkPagelet extends LayoutZkPagelet {
 
         // Create password textbox
         Textbox textbox = new Textbox();
-        textbox.setId("password-txt");
+        textbox.setId(PASSWORD_TXT_ID);
         textbox.setType("password");
         textbox.setSclass("password-field");
 //        textbox.setPlaceholder(Labels.getLabel(SecurityLabels.ACCOUNT_PASSWORD_PLACEHOLDER));
         fieldArea.appendChild(textbox);
-        binder.addPropertyLoadBindings(textbox, "value", PASSWORD_PROPERTY, null, null,
+        binder.addPropertyLoadBindings(textbox, "value", vm(LoginViewModel.PASSWORD_ATTR), null, null,
                 null, null, null);
-        binder.addPropertySaveBindings(textbox, "value", PASSWORD_PROPERTY, null, null,
+        binder.addPropertySaveBindings(textbox, "value", vm(LoginViewModel.PASSWORD_ATTR), null, null,
                 null, null, null, null, null);
     }
 
@@ -163,9 +182,9 @@ public class LoginZkPagelet extends LayoutZkPagelet {
 //                new Checkbox(Labels.getLabel(SecurityLabels.REMEMBER_ME_TITLE));
         checkbox.setSclass("field login-checkbox");
         actionsArea.appendChild(checkbox);
-        binder.addPropertyLoadBindings(checkbox, "checked", IS_REMEMBER_ME_PROPERTY, null,
+        binder.addPropertyLoadBindings(checkbox, "checked", vm(LoginViewModel.IS_REMEMBER_ME_ATTR), null,
                 null, null, null, null);
-        binder.addPropertySaveBindings(checkbox, "checked", IS_REMEMBER_ME_PROPERTY, null,
+        binder.addPropertySaveBindings(checkbox, "checked", vm(LoginViewModel.IS_REMEMBER_ME_ATTR), null,
                 null, null, null, null, null, null);
     }
 
@@ -173,7 +192,7 @@ public class LoginZkPagelet extends LayoutZkPagelet {
         // create sign in button
         //Button button = new Button(Labels.getLabel(SecurityLabels.LOGIN_ACTION_LABEL));
         Button button = new Button();
-        button.setId("login-btn");
+        button.setId(LOGIN_BUTTON_ID);
         button.setClass("button btn btn-primary btn-large");
         actionsArea.appendChild(button);
         button.setType("submit");
@@ -183,10 +202,23 @@ public class LoginZkPagelet extends LayoutZkPagelet {
     private void createResetButton(Div actionsArea, Binder binder) {
         // create reset button
         Button button = new Button();
-        button.setId("reset-btn");
+        button.setId(RESET_BUTTON_ID);
         button.setClass("button btn btn-large");
         actionsArea.appendChild(button);
 
         binder.addCommandBinding(button, Events.ON_CLICK, LoginViewModel.RESET_COMMAND, null);
+    }
+
+    @Override
+    public void destroy() {
+    }
+
+    @Override
+    public LanguageDefinition getLanguageDefinition() {
+        return LanguageDefinition.lookup("xul/html");
+    }
+
+    @Override
+    public void init(RichletConfig config) {
     }
 }

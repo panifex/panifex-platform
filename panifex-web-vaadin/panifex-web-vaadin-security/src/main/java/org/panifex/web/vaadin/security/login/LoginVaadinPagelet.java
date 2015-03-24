@@ -19,7 +19,8 @@
 package org.panifex.web.vaadin.security.login;
 
 import org.osgi.service.blueprint.container.BlueprintContainer;
-import org.panifex.module.vaadin.api.GenericVaadinPagelet;
+import org.panifex.module.vaadin.api.VaadinPagelet;
+import org.panifex.web.spi.security.LoginPagelet;
 import org.panifex.web.spi.security.LoginViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,9 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-public class LoginVaadinPagelet extends GenericVaadinPagelet {
+public class LoginVaadinPagelet
+        extends LoginPagelet<VaadinRequest>
+        implements VaadinPagelet {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
