@@ -22,6 +22,7 @@ import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.panifex.module.zk.api.ZkPagelet;
 import org.panifex.web.spi.security.LoginPagelet;
 import org.panifex.web.spi.security.LoginViewModel;
+import org.panifex.web.spi.tracker.GuiFactoryTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.Binder;
@@ -44,8 +45,10 @@ public class LoginZkPagelet extends LoginPagelet<Page> implements ZkPagelet {
 
     private final String VM_BIND_ID = "VM";
 
-    public LoginZkPagelet(BlueprintContainer container) {
-        super(container);
+    public LoginZkPagelet(
+            BlueprintContainer blueprintContainer,
+            GuiFactoryTracker guiFactoryTracker) {
+        super(blueprintContainer, guiFactoryTracker);
     }
 
     @Override

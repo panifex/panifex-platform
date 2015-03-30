@@ -18,36 +18,34 @@
  ******************************************************************************/
 package org.panifex.web.spi.security;
 
-import org.apache.commons.lang3.Validate;
+import org.junit.Test;
 import org.osgi.service.blueprint.container.BlueprintContainer;
-import org.panifex.module.api.pagelet.GenericPagelet;
-import org.panifex.module.api.pagelet.Pagelet;
+import org.panifex.test.support.TestSupport;
 import org.panifex.web.spi.tracker.GuiFactoryTracker;
 
 /**
- * Base login pagelet template that can be used for implementing
- * concrete pagelet.
+ * Unit tests for {@link LoginPagelet} class.
  */
-public abstract class LoginPagelet<Request>
-        extends GenericPagelet<Request>
-        implements Pagelet<Request> {
+public class LoginPageletTest extends TestSupport {
 
-    // text fields
-    public static final String USERNAME_TXT_ID = "username-txt";
-    public static final String PASSWORD_TXT_ID = "password-txt";
+    // mocks
+    private final BlueprintContainer blueprintContainer = createMock(BlueprintContainer.class);
 
-    // buttons
-    public static final String LOGIN_BUTTON_ID = "login-btn";
-    public static final String RESET_BUTTON_ID = "reset-btn";
-
-    private final GuiFactoryTracker guiFactoryTracker;
-
-    public LoginPagelet(
-            BlueprintContainer container,
-            GuiFactoryTracker guiFactoryTracker) {
-        super(container);
-
-        this.guiFactoryTracker = Validate.notNull(guiFactoryTracker);
+    @Test(expected = NullPointerException.class)
+    public void testConstructWithNullGuiFactoryTracker() {
+        new SimpleLoginPagelet(blueprintContainer, null);
     }
 
+    private class SimpleLoginPagelet extends LoginPagelet<Object> {
+
+        public SimpleLoginPagelet(BlueprintContainer container,
+                GuiFactoryTracker guiFactoryTracker) {
+            super(container, guiFactoryTracker);
+        }
+
+        @Override
+        public void service(Object request) throws Exception {
+            // do nothing
+        }
+    }
 }

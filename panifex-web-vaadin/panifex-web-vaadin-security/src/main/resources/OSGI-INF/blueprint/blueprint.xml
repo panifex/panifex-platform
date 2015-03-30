@@ -29,6 +29,8 @@
     <bean id="loginPagelet"
             class="org.panifex.web.vaadin.security.login.LoginVaadinPagelet">
         <argument ref="blueprintContainer"/>
+        <!-- trackers -->
+        <argument ref="guiFactoryTracker"/>
     </bean>
 
     <service ref="loginPagelet">
@@ -63,8 +65,17 @@
 
     <!-- trackers -->
 
+    <bean id="guiFactoryTracker"
+        class="org.panifex.web.spi.tracker.GuiFactoryTracker"/>
+
+    <reference interface="org.panifex.web.spi.html.GuiFactory">
+        <reference-listener ref="guiFactoryTracker"
+            bind-method="bind"
+            unbind-method="unbind"/>
+    </reference>
+
     <bean id="securityUtilServiceTracker"
-            class="org.panifex.module.api.security.SecurityUtilServiceTracker"/>
+        class="org.panifex.module.api.security.SecurityUtilServiceTracker"/>
 
     <reference interface="org.panifex.module.api.security.SecurityUtilService">
         <reference-listener ref="securityUtilServiceTracker"

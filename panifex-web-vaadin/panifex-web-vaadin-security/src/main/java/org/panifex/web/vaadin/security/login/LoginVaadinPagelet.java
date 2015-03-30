@@ -22,6 +22,7 @@ import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.panifex.module.vaadin.api.VaadinPagelet;
 import org.panifex.web.spi.security.LoginPagelet;
 import org.panifex.web.spi.security.LoginViewModel;
+import org.panifex.web.spi.tracker.GuiFactoryTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,8 +43,10 @@ public class LoginVaadinPagelet
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public LoginVaadinPagelet(BlueprintContainer blueprintContainer) {
-        super(blueprintContainer);
+    public LoginVaadinPagelet(
+            BlueprintContainer blueprintContainer,
+            GuiFactoryTracker guiFactoryTracker) {
+        super(blueprintContainer, guiFactoryTracker);
     }
 
     @Override

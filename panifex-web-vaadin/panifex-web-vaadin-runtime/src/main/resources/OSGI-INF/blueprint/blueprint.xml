@@ -36,6 +36,14 @@
         <argument ref="uiProvider"/>
     </bean>
 
+    <!-- GUI factory -->
+
+    <bean id="vaadinGuiFactory"
+        class="org.panifex.web.vaadin.runtime.html.VaadinGuiFactory"/>
+
+    <service ref="vaadinGuiFactory"
+        interface="org.panifex.web.spi.html.GuiFactory"/>
+
     <!-- UI provider -->
 
     <bean id="uiProvider"

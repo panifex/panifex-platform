@@ -24,6 +24,14 @@
         http://www.osgi.org/xmlns/blueprint/v1.0.0
             http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
+    <!-- GUI factory -->
+
+    <bean id="zkGuiFactory"
+        class="org.panifex.web.zk.runtime.html.ZkGuiFactory"/>
+
+    <service ref="zkGuiFactory"
+        interface="org.panifex.web.spi.html.GuiFactory"/>
+
     <!-- ZkContextListener -->
 
     <bean id="zkContextListener"
