@@ -114,8 +114,8 @@ public abstract class LoginPageletShiroTest extends LoginPageletTest {
         expect(authServiceMock.getAuthenticationInfo(isA(UsernamePasswordToken.class))).andReturn(authInfoMock);
 
         // expect getting principals
-        expect(authInfoMock.getPrincipals()).andReturn(principalsMock).atLeastOnce();
-        expect(principalsMock.isEmpty()).andReturn(true).atLeastOnce();
+        expect(authInfoMock.getPrincipals()).andReturn(principalsMock).anyTimes();
+        expect(principalsMock.isEmpty()).andReturn(true).anyTimes();
 
         Object[] mocks = new Object[] {authInfoMock, principalsMock, authServiceMock};
 
