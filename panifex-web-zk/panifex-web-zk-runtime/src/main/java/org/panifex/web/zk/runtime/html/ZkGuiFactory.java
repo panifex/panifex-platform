@@ -21,6 +21,7 @@ package org.panifex.web.zk.runtime.html;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
+import org.panifex.web.spi.html.TextField;
 import org.panifex.web.spi.html.VerticalLayout;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.zk.ui.Component;
@@ -57,5 +58,10 @@ public class ZkGuiFactory implements GuiFactory<Page> {
     @Override
     public VerticalLayout createVerticalLayout() {
         return new ZkVerticalLayout();
+    }
+
+    @Override
+    public TextField createTextField() {
+        return new ZkTextField();
     }
 }

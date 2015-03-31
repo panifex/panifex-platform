@@ -25,6 +25,7 @@ import org.panifex.test.support.TestSupport;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
+import org.panifex.web.spi.html.TextField;
 import org.panifex.web.spi.html.VerticalLayout;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -115,13 +116,25 @@ public class VaadinGuiFactoryTest extends TestSupport {
 
     @Test
     public void testCreateVerticalLayout() throws Exception {
-        VaadinVerticalLayout exceptedLayout = createMockAndExpectNew(VaadinVerticalLayout.class);
+        VaadinVerticalLayout expectedLayout = createMockAndExpectNew(VaadinVerticalLayout.class);
 
         // perform test
         replayAll();
         VerticalLayout createdLayout = guiFactory.createVerticalLayout();
         verifyAll();
 
-        assertEquals(exceptedLayout, createdLayout);
+        assertEquals(expectedLayout, createdLayout);
+    }
+
+    @Test
+    public void testCreateTextField() throws Exception {
+        VaadinTextField expectedTextField = createMockAndExpectNew(VaadinTextField.class);
+
+        // perform test
+        replayAll();
+        TextField createdTextField = guiFactory.createTextField();
+        verifyAll();
+
+        assertEquals(expectedTextField, createdTextField);
     }
 }

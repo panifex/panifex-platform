@@ -16,23 +16,12 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.spi.html;
+package org.panifex.web.vaadin.runtime.html;
 
-public interface GuiFactory<Request> {
+import com.vaadin.ui.TextField;
 
-    /**
-     * Sets the content of page container.
-     *
-     * @param request
-     * @param content the content to be set
-     */
-    void setPageContent(Request request, HtmlComponent content);
+public class VaadinTextField
+    extends TextField
+    implements org.panifex.web.spi.html.TextField {
 
-    void initViewModelBinding(Object viewModel, HtmlComponent content);
-
-    HorizontalLayout createHorizontalLayout();
-
-    VerticalLayout createVerticalLayout();
-
-    TextField createTextField();
 }

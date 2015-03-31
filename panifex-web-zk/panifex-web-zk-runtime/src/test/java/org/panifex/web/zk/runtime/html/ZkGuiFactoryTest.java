@@ -24,10 +24,8 @@ import org.panifex.test.support.TestSupport;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
+import org.panifex.web.spi.html.TextField;
 import org.panifex.web.spi.html.VerticalLayout;
-import org.panifex.web.zk.runtime.html.ZkGuiFactory;
-import org.panifex.web.zk.runtime.html.ZkHorizontalLayout;
-import org.panifex.web.zk.runtime.html.ZkVerticalLayout;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.bind.DefaultBinder;
@@ -114,5 +112,17 @@ public class ZkGuiFactoryTest extends TestSupport {
         verifyAll();
 
         assertEquals(expectedLayout, createdLayout);
+    }
+
+    @Test
+    public void testCreateTextField() throws Exception {
+        ZkTextField expectedTextField = createMockAndExpectNew(ZkTextField.class);
+
+        // perform test
+        replayAll();
+        TextField createdTextField = guiFactory.createTextField();
+        verifyAll();
+
+        assertEquals(expectedTextField, createdTextField);
     }
 }

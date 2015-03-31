@@ -21,6 +21,7 @@ package org.panifex.web.vaadin.runtime.html;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
+import org.panifex.web.spi.html.TextField;
 import org.panifex.web.spi.html.VerticalLayout;
 
 import com.vaadin.data.util.BeanItem;
@@ -60,6 +61,11 @@ public class VaadinGuiFactory implements GuiFactory<VaadinRequest> {
     @Override
     public VerticalLayout createVerticalLayout() {
         return new VaadinVerticalLayout();
+    }
+
+    @Override
+    public TextField createTextField() {
+        return new VaadinTextField();
     }
 
 }

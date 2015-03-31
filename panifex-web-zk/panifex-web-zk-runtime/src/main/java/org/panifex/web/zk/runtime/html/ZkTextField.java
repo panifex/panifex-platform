@@ -16,23 +16,21 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.spi.html;
+package org.panifex.web.zk.runtime.html;
 
-public interface GuiFactory<Request> {
+import org.panifex.web.spi.html.TextField;
+import org.zkoss.zul.Textbox;
 
-    /**
-     * Sets the content of page container.
-     *
-     * @param request
-     * @param content the content to be set
-     */
-    void setPageContent(Request request, HtmlComponent content);
+public class ZkTextField extends Textbox implements TextField {
 
-    void initViewModelBinding(Object viewModel, HtmlComponent content);
+    @Override
+    public void addStyleName(String styleName) {
+        ZkHtmlComponentUtil.addStyleName(styleName, this);
+    }
 
-    HorizontalLayout createHorizontalLayout();
+    @Override
+    public void removeStyleName(String styleName) {
+        ZkHtmlComponentUtil.removeStyleName(styleName, this);
+    }
 
-    VerticalLayout createVerticalLayout();
-
-    TextField createTextField();
 }
