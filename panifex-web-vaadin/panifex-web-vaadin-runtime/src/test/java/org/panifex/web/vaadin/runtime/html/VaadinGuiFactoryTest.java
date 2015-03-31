@@ -45,7 +45,7 @@ import com.vaadin.ui.UI;
     VaadinGuiFactory.class})
 public class VaadinGuiFactoryTest extends TestSupport {
 
-    private GuiFactory<VaadinRequest> guiFactory;
+    private GuiFactory guiFactory;
 
     @Before
     public void setUp() {
@@ -102,7 +102,10 @@ public class VaadinGuiFactoryTest extends TestSupport {
 
         // perform test
         replayAll();
+
+        // init view model binding
         guiFactory.initViewModelBinding(viewModel, htmlComp);
+
         verifyAll();
     }
 
@@ -131,10 +134,38 @@ public class VaadinGuiFactoryTest extends TestSupport {
 
         // perform test
         replayAll();
+
+        // init view model binding
         guiFactory.initViewModelBinding(viewModel, textField);
 
         // bind property
         guiFactory.bindProperty(viewModel, propId, textField);
+
+        verifyAll();
+    }
+
+    @Test
+    public void testLoadComponent() throws Exception {
+        // mocks
+        HtmlComponent htmlComp = createMock(HtmlComponent.class);
+        Object viewModel = createMock(Object.class);
+
+        // expect creating BeanItem
+        @SuppressWarnings("unchecked")
+        BeanItem<Object> beanItem = createMockAndExpectNew(BeanItem.class, viewModel);
+
+        // expect getting bean from BeanItem
+        expect(beanItem.getBean()).andReturn(viewModel);
+
+        // perform test
+        replayAll();
+
+        // init view model binding
+        guiFactory.initViewModelBinding(viewModel, htmlComp);
+
+        // load component
+        guiFactory.loadComponent(viewModel, htmlComp);
+
         verifyAll();
     }
 

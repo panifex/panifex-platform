@@ -40,7 +40,7 @@ import org.zkoss.zk.ui.Page;
 @PrepareForTest(ZkGuiFactory.class)
 public class ZkGuiFactoryTest extends TestSupport {
 
-    private GuiFactory<Page> guiFactory;
+    private GuiFactory guiFactory;
 
     @Before
     public void setUp() {

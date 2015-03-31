@@ -24,6 +24,7 @@ import org.panifex.module.api.pagelet.GenericPagelet;
 import org.panifex.module.api.pagelet.Pagelet;
 import org.panifex.web.spi.html.Button;
 import org.panifex.web.spi.html.Container;
+import org.panifex.web.spi.html.Event;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.TextField;
@@ -53,15 +54,15 @@ public abstract class LoginPagelet<Request>
     public static final String USERNAME_TXT_ID = "username-txt";
     public static final String PASSWORD_TXT_ID = "password-txt";
 
-    private final GuiFactoryTracker<Request> guiFactoryTracker;
+    private final GuiFactoryTracker guiFactoryTracker;
 
     // thread locals
     private final ThreadLocal<LoginViewModel> viewModelThreadLocal = new ThreadLocal<>();
-    private final ThreadLocal<GuiFactory<Request>> guiFactoryThreadLocal = new ThreadLocal<>();
+    private final ThreadLocal<GuiFactory> guiFactoryThreadLocal = new ThreadLocal<>();
 
     public LoginPagelet(
             BlueprintContainer blueprintContainer,
-            GuiFactoryTracker<Request> guiFactoryTracker) {
+            GuiFactoryTracker guiFactoryTracker) {
         super(blueprintContainer);
 
         this.guiFactoryTracker = Validate.notNull(guiFactoryTracker);
@@ -69,7 +70,7 @@ public abstract class LoginPagelet<Request>
 
     @Override
     public final void service(Request request) {
-        GuiFactory<Request> guiFactory = guiFactoryTracker.service();
+        GuiFactory guiFactory = guiFactoryTracker.service();
         guiFactoryThreadLocal.set(guiFactory);
 
         // create root content
@@ -81,7 +82,11 @@ public abstract class LoginPagelet<Request>
         viewModelThreadLocal.set(viewModel);
         guiFactory.initViewModelBinding(viewModel, vlayout);
 
+        // create log in form container
         createLogInFormContainer(vlayout);
+
+        // load props
+        guiFactory.loadComponent(viewModel, vlayout);
 
         // free thread locals
         guiFactoryThreadLocal.remove();
@@ -154,6 +159,11 @@ public abstract class LoginPagelet<Request>
         Button button = guiFactoryThreadLocal.get().createButton();
         button.setId(LOGIN_BUTTON_ID);
         parent.addHtmlComponent(button);
+        guiFactoryThreadLocal.get().bindCommand(
+                Event.ON_CLICK,
+                viewModelThreadLocal.get(),
+                LoginViewModel.LOG_IN_COMMAND,
+                button);
     }
 
     private void createResetButton(Container parent) {
@@ -161,5 +171,10 @@ public abstract class LoginPagelet<Request>
         Button button = guiFactoryThreadLocal.get().createButton();
         button.setId(RESET_BUTTON_ID);
         parent.addHtmlComponent(button);
+        guiFactoryThreadLocal.get().bindCommand(
+                Event.ON_CLICK,
+                viewModelThreadLocal.get(),
+                LoginViewModel.RESET_COMMAND,
+                button);
     }
 }

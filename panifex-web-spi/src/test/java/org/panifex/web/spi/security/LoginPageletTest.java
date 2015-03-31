@@ -39,7 +39,7 @@ public class LoginPageletTest extends TestSupport {
     private class SimpleLoginPagelet extends LoginPagelet<Object> {
 
         public SimpleLoginPagelet(BlueprintContainer container,
-                GuiFactoryTracker<Object> guiFactoryTracker) {
+                GuiFactoryTracker guiFactoryTracker) {
             super(container, guiFactoryTracker);
         }
     }

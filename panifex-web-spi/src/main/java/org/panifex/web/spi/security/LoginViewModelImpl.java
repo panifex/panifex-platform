@@ -73,8 +73,8 @@ public class LoginViewModelImpl implements LoginViewModel {
     }
 
     @Override
-    public void signIn() {
-        log.info("Sign in {} user", username);
+    public void logIn() {
+        log.info("Log in {} user", username);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, isRememberMe);
         SecurityUtilService service = securityUtilServiceTracker.service();
         Subject currentSubject = service.getSubject();
@@ -83,7 +83,7 @@ public class LoginViewModelImpl implements LoginViewModel {
 
     @Override
     public void reset() {
-        log.info("Reset login view model");
+        log.info("Reset login form");
         username = StringUtils.EMPTY;
         password = StringUtils.EMPTY;
     }

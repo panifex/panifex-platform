@@ -33,14 +33,12 @@ public interface LoginViewModel {
     boolean getIsRememberMe();
     void setIsRememberMe(boolean isRememberMe);
 
-    String SIGN_IN_COMMAND_ = "signIn";
-    String SIGN_IN_COMMAND = "'" + SIGN_IN_COMMAND_ + "'";
-    void signIn();
+    String LOG_IN_COMMAND = "logIn";
+    void logIn();
 
     /**
      * Resets username and password fields.
      */
-    String RESET_COMMAND_ = "reset";
-    String RESET_COMMAND = "'" + RESET_COMMAND_ + "'";
+    String RESET_COMMAND = "reset";
     void reset();
 }

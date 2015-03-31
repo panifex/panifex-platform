@@ -23,6 +23,8 @@ Embed-Dependency: \
 Export-Package:
 
 Import-Package: \
+    com.vaadin.data;version="[7.4,8.0)", \
+    com.vaadin.data.util;version="[7.4,8.0)", \
     com.vaadin.server;version="[7.4,8.0)", \
     com.vaadin.ui;version="[7.4,8.0)", \
     com.vaadin.util;version="[7.4,8.0)", \

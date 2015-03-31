@@ -22,27 +22,32 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import org.panifex.web.spi.html.Button;
-import org.panifex.web.spi.html.ValueComponent;
+import org.panifex.web.spi.html.ClickableComponent;
+import org.panifex.web.spi.html.Event;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
 import org.panifex.web.spi.html.TextField;
+import org.panifex.web.spi.html.ValueComponent;
 import org.panifex.web.spi.html.VerticalLayout;
 import org.zkoss.bind.Binder;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
+import org.zkoss.zk.ui.event.Events;
 
-public class ZkGuiFactory implements GuiFactory<Page> {
+public class ZkGuiFactory implements GuiFactory {
 
     /* package */ static final String VM_BIND_ID = "VM";
 
     private ThreadLocal<Deque<Binder>> binderThreadLocal = new ThreadLocal<>();
 
     @Override
-    public void setPageContent(Page request, HtmlComponent htmlComp) {
+    public void setPageContent(Object request, HtmlComponent htmlComp) {
         Component comp = ZkHtmlComponentUtil.castHtmlComponent(htmlComp);
-        comp.setPage(request);
+
+        Page page = (Page) request;
+        comp.setPage(page);
     }
 
     @Override
@@ -64,11 +69,38 @@ public class ZkGuiFactory implements GuiFactory<Page> {
     }
 
     @Override
+    public void bindCommand(Event onEvent, Object viewModel, String commandExpr,
+            ClickableComponent clickableComp) {
+        Component comp = ZkHtmlComponentUtil.castHtmlComponent(clickableComp);
+
+        Deque<Binder> registeredBinders = binderThreadLocal.get();
+        if (registeredBinders.isEmpty()) {
+            throw new IllegalStateException("Binder must be registered");
+        }
+
+        Binder binder = registeredBinders.getLast();
+        if (viewModel != binder.getViewModel()) {
+            throw new IllegalStateException("Bind property only on last registered bean item");
+        }
+
+        String evtnm;
+        switch (onEvent) {
+        case ON_CLICK:
+            evtnm = Events.ON_CLICK;
+            break;
+        default:
+            throw new UnsupportedOperationException("Unsupported event: " + onEvent);
+        }
+
+        binder.addCommandBinding(comp, evtnm, "'" + commandExpr + "'", null);
+    }
+
+    @Override
     public void bindProperty(Object viewModel, String propertyId, ValueComponent<?> valueComp) {
         Component comp = ZkHtmlComponentUtil.castHtmlComponent(valueComp);
 
         Deque<Binder> registeredBinders = binderThreadLocal.get();
-        if (registeredBinders.isEmpty()) {
+        if (registeredBinders != null && registeredBinders.isEmpty()) {
             throw new IllegalStateException("Binder must be registered");
         }
 
@@ -87,6 +119,25 @@ public class ZkGuiFactory implements GuiFactory<Page> {
 
         binder.addPropertyLoadBindings(comp, "value", expr, null, null, null, null, null);
         binder.addPropertySaveBindings(comp, "value", expr, null, null, null, null, null, null, null);
+    }
+
+    @Override
+    public void loadComponent(Object viewModel, HtmlComponent htmlComp) {
+        Component comp = ZkHtmlComponentUtil.castHtmlComponent(htmlComp);
+
+        Deque<Binder> registeredBinders = binderThreadLocal.get();
+        if (registeredBinders != null && registeredBinders.isEmpty()) {
+            throw new IllegalStateException("Binder must be registered");
+        }
+
+        Binder binder = registeredBinders.getLast();
+        if (viewModel != binder.getViewModel()) {
+            throw new IllegalStateException("Bind property only on last registered bean item");
+        }
+
+        binder.loadComponent(comp, true);
+
+        registeredBinders.pollLast();
     }
 
     @Override

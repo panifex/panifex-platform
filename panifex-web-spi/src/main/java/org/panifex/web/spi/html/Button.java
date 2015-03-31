@@ -18,6 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
-public interface Button extends HtmlComponent {
+public interface Button extends ClickableComponent {
 
 }

@@ -32,7 +32,7 @@ public class LoginZkPagelet extends LoginPagelet<Page> implements ZkPagelet {
 
     public LoginZkPagelet(
             BlueprintContainer blueprintContainer,
-            GuiFactoryTracker<Page> guiFactoryTracker) {
+            GuiFactoryTracker guiFactoryTracker) {
         super(blueprintContainer, guiFactoryTracker);
     }
 

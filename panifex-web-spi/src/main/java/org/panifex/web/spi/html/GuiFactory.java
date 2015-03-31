@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
-public interface GuiFactory<Request> {
+public interface GuiFactory {
 
     /**
      * Sets the content of page container.
@@ -26,11 +26,15 @@ public interface GuiFactory<Request> {
      * @param request
      * @param content the content to be set
      */
-    void setPageContent(Request request, HtmlComponent htmlComp);
+    void setPageContent(Object request, HtmlComponent htmlComp);
 
     void initViewModelBinding(Object viewModel, HtmlComponent htmlComp);
 
+    void bindCommand(Event onEvent, Object viewModel, String commandExpr, ClickableComponent clickableComp);
+
     void bindProperty(Object viewModel, String propertyId, ValueComponent<?> valueComp);
+
+    void loadComponent(Object viewModel, HtmlComponent htmlComp);
 
     Button createButton();
 

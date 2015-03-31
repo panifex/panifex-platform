@@ -31,7 +31,7 @@ public class LoginVaadinPagelet
 
     public LoginVaadinPagelet(
             BlueprintContainer blueprintContainer,
-            GuiFactoryTracker<VaadinRequest> guiFactoryTracker) {
+            GuiFactoryTracker guiFactoryTracker) {
         super(blueprintContainer, guiFactoryTracker);
     }
 
