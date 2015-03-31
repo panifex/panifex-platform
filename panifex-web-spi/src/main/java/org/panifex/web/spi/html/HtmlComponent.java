@@ -40,4 +40,12 @@ public interface HtmlComponent {
      *      the style name of the style names to be removed from the component
      */
     void removeStyleName(String styleName);
+
+    /**
+     * Adds an unique id for component that is used in the client-side for testing purposes.
+     * Keeping identifiers unique is the responsibility of the programmer.
+     *
+     * @param id an alphanumeric id
+     */
+    void setId(String id);
 }
