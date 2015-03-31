@@ -33,7 +33,7 @@ public class VaadinHtmlComponentUtil {
      */
     public static void addComponentToContainer(
             HtmlComponent htmlComp, ComponentContainer container) {
-        Component comp = castHtmlComponent(htmlComp);
+        Component comp = castHtmlComponent(htmlComp, Component.class);
         container.addComponent(comp);
     }
 
@@ -45,7 +45,7 @@ public class VaadinHtmlComponentUtil {
      */
     public static void removeComponentFromContainer(
             HtmlComponent htmlComp, ComponentContainer container) {
-        Component comp = castHtmlComponent(htmlComp);
+        Component comp = castHtmlComponent(htmlComp, Component.class);
         container.removeComponent(comp);
     }
 
@@ -56,12 +56,13 @@ public class VaadinHtmlComponentUtil {
      * @param htmlComp the html component to be cast
      * @return  the casted html component
      */
-    public static Component castHtmlComponent(HtmlComponent htmlComp) {
-        if (Component.class.isInstance(htmlComp)) {
-            return (Component) htmlComp;
+    @SuppressWarnings("unchecked")
+    public static <T> T castHtmlComponent(HtmlComponent htmlComp, Class<T> compClass) {
+        if (compClass.isInstance(htmlComp)) {
+            return (T) htmlComp;
         } else {
             String msg = new StringBuilder("HtmlComponent must be subclassed from ").
-                    append(Component.class.getCanonicalName()).
+                    append(compClass.getCanonicalName()).
                     append(" class").
                     toString();
             throw new IllegalArgumentException(msg);

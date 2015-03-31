@@ -26,9 +26,11 @@ public interface GuiFactory<Request> {
      * @param request
      * @param content the content to be set
      */
-    void setPageContent(Request request, HtmlComponent content);
+    void setPageContent(Request request, HtmlComponent htmlComp);
 
-    void initViewModelBinding(Object viewModel, HtmlComponent content);
+    void initViewModelBinding(Object viewModel, HtmlComponent htmlComp);
+
+    void bindProperty(Object viewModel, String propertyId, FieldComponent<?> fieldComp);
 
     Button createButton();
 

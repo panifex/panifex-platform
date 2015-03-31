@@ -18,37 +18,75 @@
  ******************************************************************************/
 package org.panifex.web.zk.runtime.html;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 import org.panifex.web.spi.html.Button;
+import org.panifex.web.spi.html.FieldComponent;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
 import org.panifex.web.spi.html.TextField;
 import org.panifex.web.spi.html.VerticalLayout;
+import org.zkoss.bind.Binder;
 import org.zkoss.bind.DefaultBinder;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
 
 public class ZkGuiFactory implements GuiFactory<Page> {
 
-    public static final String VM_BIND_ID = "VM";
+    /* package */ static final String VM_BIND_ID = "VM";
 
-    private ThreadLocal<DefaultBinder> binderThreadLocal = new ThreadLocal<>();
+    private ThreadLocal<Deque<Binder>> binderThreadLocal = new ThreadLocal<>();
 
     @Override
-    public void setPageContent(Page request, HtmlComponent content) {
-        Component component = ZkHtmlComponentUtil.castHtmlComponent(content);
-        component.setPage(request);
+    public void setPageContent(Page request, HtmlComponent htmlComp) {
+        Component comp = ZkHtmlComponentUtil.castHtmlComponent(htmlComp);
+        comp.setPage(request);
     }
 
     @Override
-    public void initViewModelBinding(Object viewModel, HtmlComponent content) {
-        Component component = ZkHtmlComponentUtil.castHtmlComponent(content);
+    public void initViewModelBinding(Object viewModel, HtmlComponent htmlComp) {
+        Component comp = ZkHtmlComponentUtil.castHtmlComponent(htmlComp);
+
+        Deque<Binder> registeredBinders = binderThreadLocal.get();
+        if (registeredBinders == null) {
+            registeredBinders = new ArrayDeque<>();
+            binderThreadLocal.set(registeredBinders);
+        }
 
         // init binder
         DefaultBinder binder = new DefaultBinder();
-        binder.init(component, viewModel, null);
-        component.setAttribute(VM_BIND_ID, viewModel);
-        binderThreadLocal.set(binder);
+        registeredBinders.add(binder);
+
+        binder.init(comp, viewModel, null);
+        comp.setAttribute(VM_BIND_ID + registeredBinders.size(), viewModel);
+    }
+
+    @Override
+    public void bindProperty(Object viewModel, String propertyId, FieldComponent<?> field) {
+        Component comp = ZkHtmlComponentUtil.castHtmlComponent(field);
+
+        Deque<Binder> registeredBinders = binderThreadLocal.get();
+        if (registeredBinders.isEmpty()) {
+            throw new IllegalStateException("Binder must be registered");
+        }
+
+        Binder binder = registeredBinders.getLast();
+        if (viewModel != binder.getViewModel()) {
+            throw new IllegalStateException("Bind property only on last registered bean item");
+        }
+
+        int bindId = registeredBinders.size();
+
+        String expr = new StringBuilder(VM_BIND_ID).
+                append(bindId).
+                append('.').
+                append(propertyId).
+                toString();
+
+        binder.addPropertyLoadBindings(comp, "value", expr, null, null, null, null, null);
+        binder.addPropertySaveBindings(comp, "value", expr, null, null, null, null, null, null, null);
     }
 
     @Override

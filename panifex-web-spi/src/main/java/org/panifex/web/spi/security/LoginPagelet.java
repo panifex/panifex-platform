@@ -22,8 +22,11 @@ import org.apache.commons.lang3.Validate;
 import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.panifex.module.api.pagelet.GenericPagelet;
 import org.panifex.module.api.pagelet.Pagelet;
+import org.panifex.web.spi.html.Button;
+import org.panifex.web.spi.html.Container;
 import org.panifex.web.spi.html.GuiFactory;
-import org.panifex.web.spi.html.HtmlComponent;
+import org.panifex.web.spi.html.HorizontalLayout;
+import org.panifex.web.spi.html.TextField;
 import org.panifex.web.spi.html.VerticalLayout;
 import org.panifex.web.spi.tracker.GuiFactoryTracker;
 
@@ -35,15 +38,26 @@ public abstract class LoginPagelet<Request>
         extends GenericPagelet<Request>
         implements Pagelet<Request> {
 
-    // text fields
-    public static final String USERNAME_TXT_ID = "username-txt";
-    public static final String PASSWORD_TXT_ID = "password-txt";
-
     // buttons
     public static final String LOGIN_BUTTON_ID = "login-btn";
     public static final String RESET_BUTTON_ID = "reset-btn";
 
+    // containers
+    public static final String BUTTONS_AREA_ID = "buttons-area-id";
+    public static final String FIELDS_AREA_ID = "fields-area-id";
+    public static final String LOGIN_FORM_CONTAINER_ID = "login-form-cnt-id";
+    public static final String PASSWORD_FIELD_AREA_ID = "password-field-area-id";
+    public static final String USERNAME_FIELD_AREA_ID = "username-field-area-id";
+
+    // text fields
+    public static final String USERNAME_TXT_ID = "username-txt";
+    public static final String PASSWORD_TXT_ID = "password-txt";
+
     private final GuiFactoryTracker<Request> guiFactoryTracker;
+
+    // thread locals
+    private final ThreadLocal<LoginViewModel> viewModelThreadLocal = new ThreadLocal<>();
+    private final ThreadLocal<GuiFactory<Request>> guiFactoryThreadLocal = new ThreadLocal<>();
 
     public LoginPagelet(
             BlueprintContainer blueprintContainer,
@@ -56,6 +70,7 @@ public abstract class LoginPagelet<Request>
     @Override
     public final void service(Request request) {
         GuiFactory<Request> guiFactory = guiFactoryTracker.service();
+        guiFactoryThreadLocal.set(guiFactory);
 
         // create root content
         VerticalLayout vlayout = guiFactory.createVerticalLayout();
@@ -63,12 +78,88 @@ public abstract class LoginPagelet<Request>
 
         // init bean item
         LoginViewModel viewModel = getComponentInstance(LoginViewModel.class);
+        viewModelThreadLocal.set(viewModel);
         guiFactory.initViewModelBinding(viewModel, vlayout);
 
         createLogInFormContainer(vlayout);
+
+        // free thread locals
+        guiFactoryThreadLocal.remove();
+        viewModelThreadLocal.remove();
     }
 
-    private void createLogInFormContainer(HtmlComponent parent) {
+    private void createLogInFormContainer(Container parent) {
+        // create login form container layout
+        VerticalLayout vlayout = guiFactoryThreadLocal.get().createVerticalLayout();
+        vlayout.setId(LOGIN_FORM_CONTAINER_ID);
+        parent.addHtmlComponent(vlayout);
 
+        // create login form content
+        createFieldsArea(vlayout);
+        createButtonsArea(vlayout);
+    }
+
+    private void createFieldsArea(Container parent) {
+        // create fields area container
+        VerticalLayout vlayout = guiFactoryThreadLocal.get().createVerticalLayout();
+        vlayout.setId(FIELDS_AREA_ID);
+        parent.addHtmlComponent(vlayout);
+
+        // create fields area content
+        createUsernameField(vlayout);
+        createPasswordField(vlayout);
+    }
+
+    private void createUsernameField(Container parent) {
+        // create username field layout
+        HorizontalLayout hlayout = guiFactoryThreadLocal.get().createHorizontalLayout();
+        hlayout.setId(USERNAME_FIELD_AREA_ID);
+        parent.addHtmlComponent(hlayout);
+
+        // create username text field
+        TextField textField = guiFactoryThreadLocal.get().createTextField();
+        textField.setId(USERNAME_TXT_ID);
+        hlayout.addHtmlComponent(textField);
+        guiFactoryThreadLocal.get().
+            bindProperty(viewModelThreadLocal.get(), LoginViewModel.USERNAME_ATTR, textField);
+    }
+
+    private void createPasswordField(Container parent) {
+        // create password field layout
+        HorizontalLayout hlayout = guiFactoryThreadLocal.get().createHorizontalLayout();
+        hlayout.setId(PASSWORD_FIELD_AREA_ID);
+        parent.addHtmlComponent(hlayout);
+
+        // create password text field
+        TextField textField = guiFactoryThreadLocal.get().createTextField();
+        textField.setId(PASSWORD_TXT_ID);
+        hlayout.addHtmlComponent(textField);
+        guiFactoryThreadLocal.get().
+            bindProperty(viewModelThreadLocal.get(), LoginViewModel.PASSWORD_ATTR, textField);
+    }
+
+    private void createButtonsArea(Container parent) {
+        // create buttons area container
+        HorizontalLayout hlayout = guiFactoryThreadLocal.get().createHorizontalLayout();
+        hlayout.setId(BUTTONS_AREA_ID);
+        parent.addHtmlComponent(hlayout);
+
+        // create buttons area content
+        createLogInButton(parent);
+        createResetButton(parent);
+    }
+
+    private void createLogInButton(Container parent) {
+        // create log in button
+        Button button = guiFactoryThreadLocal.get().createButton();
+        button.setId(LOGIN_BUTTON_ID);
+        parent.addHtmlComponent(button);
+    }
+
+    private void createResetButton(Container parent) {
+        // create reset button
+        Button button = guiFactoryThreadLocal.get().createButton();
+        button.setId(RESET_BUTTON_ID);
+        parent.addHtmlComponent(button);
     }
 }

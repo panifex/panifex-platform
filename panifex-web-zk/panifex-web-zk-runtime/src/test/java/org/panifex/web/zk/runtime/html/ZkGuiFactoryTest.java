@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.zk.runtime.html;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
@@ -39,7 +40,14 @@ import org.zkoss.zk.ui.Page;
 @PrepareForTest(ZkGuiFactory.class)
 public class ZkGuiFactoryTest extends TestSupport {
 
-    private final GuiFactory<Page> guiFactory = new ZkGuiFactory();
+    private GuiFactory<Page> guiFactory;
+
+    @Before
+    public void setUp() {
+        resetAll();
+
+        guiFactory = new ZkGuiFactory();
+    }
 
     @Test
     public void testSetValidPageContent() throws Exception {
@@ -83,12 +91,48 @@ public class ZkGuiFactoryTest extends TestSupport {
         // expect creating binder
         DefaultBinder binder = createMockAndExpectNew(DefaultBinder.class);
         binder.init(layout, viewModel, null);
-        expect(layout.setAttribute(ZkGuiFactory.VM_BIND_ID, viewModel)).andReturn(createMock(Object.class));
+        expect(layout.setAttribute(ZkGuiFactory.VM_BIND_ID + 1, viewModel)).andReturn(createMock(Object.class));
 
         // perform test
         replayAll();
         guiFactory.initViewModelBinding(viewModel, layout);
         verifyAll();
+    }
+
+    @Test
+    public void testBindProperty() throws Exception {
+        // variables
+        String propId = getRandomChars(20);
+        String expr = new StringBuilder(ZkGuiFactory.VM_BIND_ID).
+                append(1).
+                append('.').
+                append(propId).
+                toString();
+
+        // mocks
+        ZkTextField textField = createMock(ZkTextField.class);
+        Object viewModel = createMock(Object.class);
+
+        // expect creating binder
+        DefaultBinder binder = createMockAndExpectNew(DefaultBinder.class);
+        binder.init(textField, viewModel, null);
+        expect(textField.setAttribute(ZkGuiFactory.VM_BIND_ID + 1, viewModel)).andReturn(createMock(Object.class));
+
+        // expect binding property
+        binder.addPropertyLoadBindings(textField, "value", expr, null, null, null, null, null);
+        binder.addPropertySaveBindings(textField, "value", expr, null, null, null, null, null, null, null);
+
+        // expect getting view model from binder
+        expect(binder.getViewModel()).andReturn(viewModel);
+
+        // perform test
+        replayAll();
+        guiFactory.initViewModelBinding(viewModel, textField);
+
+        // bind property
+        guiFactory.bindProperty(viewModel, propId, textField);
+        verifyAll();
+
     }
 
     @Test

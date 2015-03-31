@@ -31,6 +31,7 @@ import org.panifex.web.spi.html.VerticalLayout;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
@@ -44,13 +45,15 @@ import com.vaadin.ui.UI;
     VaadinGuiFactory.class})
 public class VaadinGuiFactoryTest extends TestSupport {
 
-    private final GuiFactory<VaadinRequest> guiFactory = new VaadinGuiFactory();
+    private GuiFactory<VaadinRequest> guiFactory;
 
     @Before
     public void setUp() {
         mockStatic(UI.class);
 
         resetAll();
+
+        guiFactory = new VaadinGuiFactory();
     }
 
     @Test
@@ -91,7 +94,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     @Test
     public void testInitViewModelBinding() throws Exception {
         // mocks
-        HtmlComponent component = createMock(HtmlComponent.class);
+        HtmlComponent htmlComp = createMock(HtmlComponent.class);
         Object viewModel = createMock(Object.class);
 
         // expect creating BeanItem
@@ -99,7 +102,39 @@ public class VaadinGuiFactoryTest extends TestSupport {
 
         // perform test
         replayAll();
-        guiFactory.initViewModelBinding(viewModel, component);
+        guiFactory.initViewModelBinding(viewModel, htmlComp);
+        verifyAll();
+    }
+
+    @Test
+    public void testBindProperty() throws Exception {
+        // variables
+        String propId = getRandomChars(20);
+
+        // mocks
+        VaadinTextField textField = createMock(VaadinTextField.class);
+        Object viewModel = createMock(Object.class);
+        Property<?> propertyDataSource = createMock(Property.class);
+
+        // expect creating BeanItem
+        @SuppressWarnings("unchecked")
+        BeanItem<Object> beanItem = createMockAndExpectNew(BeanItem.class, viewModel);
+
+        // expect getting bean property data source
+        expect(beanItem.getItemProperty(propId)).andReturn(propertyDataSource);
+
+        // expect getting bean from BeanItem
+        expect(beanItem.getBean()).andReturn(viewModel);
+
+        // expect assigning property data source to text field
+        textField.setPropertyDataSource(propertyDataSource);
+
+        // perform test
+        replayAll();
+        guiFactory.initViewModelBinding(viewModel, textField);
+
+        // bind property
+        guiFactory.bindProperty(viewModel, propId, textField);
         verifyAll();
     }
 
