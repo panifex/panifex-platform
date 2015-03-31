@@ -22,7 +22,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import org.panifex.web.spi.html.Button;
-import org.panifex.web.spi.html.FieldComponent;
+import org.panifex.web.spi.html.ValueComponent;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
@@ -58,13 +58,13 @@ public class VaadinGuiFactory implements GuiFactory<VaadinRequest> {
     }
 
     @Override
-    public void bindProperty(Object viewModel, String propertyId, FieldComponent<?> fieldComp) {
+    public void bindProperty(Object viewModel, String propertyId, ValueComponent<?> valueComp) {
         BeanItem<Object> beanItem = beanItemThreadLocal.get().getLast();
         if (viewModel != beanItem.getBean()) {
             throw new IllegalStateException("Bind property only on last registered bean item");
         }
 
-        Viewer viewer = VaadinHtmlComponentUtil.castHtmlComponent(fieldComp, Viewer.class);
+        Viewer viewer = VaadinHtmlComponentUtil.castHtmlComponent(valueComp, Viewer.class);
         viewer.setPropertyDataSource(beanItem.getItemProperty(propertyId));
     }
 

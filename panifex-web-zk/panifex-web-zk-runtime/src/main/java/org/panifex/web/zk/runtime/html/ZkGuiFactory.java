@@ -22,7 +22,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import org.panifex.web.spi.html.Button;
-import org.panifex.web.spi.html.FieldComponent;
+import org.panifex.web.spi.html.ValueComponent;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
@@ -64,8 +64,8 @@ public class ZkGuiFactory implements GuiFactory<Page> {
     }
 
     @Override
-    public void bindProperty(Object viewModel, String propertyId, FieldComponent<?> field) {
-        Component comp = ZkHtmlComponentUtil.castHtmlComponent(field);
+    public void bindProperty(Object viewModel, String propertyId, ValueComponent<?> valueComp) {
+        Component comp = ZkHtmlComponentUtil.castHtmlComponent(valueComp);
 
         Deque<Binder> registeredBinders = binderThreadLocal.get();
         if (registeredBinders.isEmpty()) {

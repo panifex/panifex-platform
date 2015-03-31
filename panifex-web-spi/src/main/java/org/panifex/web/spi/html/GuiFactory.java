@@ -30,7 +30,7 @@ public interface GuiFactory<Request> {
 
     void initViewModelBinding(Object viewModel, HtmlComponent htmlComp);
 
-    void bindProperty(Object viewModel, String propertyId, FieldComponent<?> fieldComp);
+    void bindProperty(Object viewModel, String propertyId, ValueComponent<?> valueComp);
 
     Button createButton();
 

@@ -18,7 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
-public interface FieldComponent<T> extends HtmlComponent {
+public interface ValueComponent<T> extends HtmlComponent {
 
     T getValue();
 

@@ -18,6 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
-public interface TextField extends FieldComponent<String> {
+public interface TextField extends ValueComponent<String> {
 
 }
