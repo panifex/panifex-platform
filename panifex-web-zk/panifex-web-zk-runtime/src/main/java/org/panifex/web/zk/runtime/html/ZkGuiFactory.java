@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.zk.runtime.html;
 
+import org.panifex.web.spi.html.Button;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
@@ -48,6 +49,11 @@ public class ZkGuiFactory implements GuiFactory<Page> {
         binder.init(component, viewModel, null);
         component.setAttribute(VM_BIND_ID, viewModel);
         binderThreadLocal.set(binder);
+    }
+
+    @Override
+    public Button createButton() {
+        return new ZkButton();
     }
 
     @Override

@@ -21,6 +21,7 @@ package org.panifex.web.zk.runtime.html;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
+import org.panifex.web.spi.html.Button;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
@@ -88,6 +89,18 @@ public class ZkGuiFactoryTest extends TestSupport {
         replayAll();
         guiFactory.initViewModelBinding(viewModel, layout);
         verifyAll();
+    }
+
+    @Test
+    public void testCreateButton() throws Exception {
+        ZkButton expectedButton = createMockAndExpectNew(ZkButton.class);
+
+        // perform test
+        replayAll();
+        Button createdButton = guiFactory.createButton();
+        verifyAll();
+
+        assertEquals(expectedButton, createdButton);
     }
 
     @Test

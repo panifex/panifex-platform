@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
+import org.panifex.web.spi.html.Button;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
@@ -100,6 +101,18 @@ public class VaadinGuiFactoryTest extends TestSupport {
         replayAll();
         guiFactory.initViewModelBinding(viewModel, component);
         verifyAll();
+    }
+
+    @Test
+    public void testCreateButton() throws Exception {
+        VaadinButton expectedButton = createMockAndExpectNew(VaadinButton.class);
+
+        // perform test
+        replayAll();
+        Button createdButton = guiFactory.createButton();
+        verifyAll();
+
+        assertEquals(expectedButton, createdButton);
     }
 
     @Test

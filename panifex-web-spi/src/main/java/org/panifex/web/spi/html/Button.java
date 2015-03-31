@@ -18,23 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
-public interface GuiFactory<Request> {
+public interface Button extends HtmlComponent {
 
-    /**
-     * Sets the content of page container.
-     *
-     * @param request
-     * @param content the content to be set
-     */
-    void setPageContent(Request request, HtmlComponent content);
-
-    void initViewModelBinding(Object viewModel, HtmlComponent content);
-
-    Button createButton();
-
-    HorizontalLayout createHorizontalLayout();
-
-    VerticalLayout createVerticalLayout();
-
-    TextField createTextField();
 }

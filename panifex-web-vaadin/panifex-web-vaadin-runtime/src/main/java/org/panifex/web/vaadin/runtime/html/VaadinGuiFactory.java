@@ -18,6 +18,7 @@
  ******************************************************************************/
 package org.panifex.web.vaadin.runtime.html;
 
+import org.panifex.web.spi.html.Button;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
@@ -51,6 +52,11 @@ public class VaadinGuiFactory implements GuiFactory<VaadinRequest> {
     public void initViewModelBinding(Object viewModel, HtmlComponent content) {
         BeanItem<Object> beanItem = new BeanItem<>(viewModel);
         beanItemThreadLocal.set(beanItem);
+    }
+
+    @Override
+    public Button createButton() {
+        return new VaadinButton();
     }
 
     @Override

@@ -16,25 +16,12 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.spi.html;
+package org.panifex.web.vaadin.runtime.html;
 
-public interface GuiFactory<Request> {
+import com.vaadin.ui.Button;
 
-    /**
-     * Sets the content of page container.
-     *
-     * @param request
-     * @param content the content to be set
-     */
-    void setPageContent(Request request, HtmlComponent content);
+public class VaadinButton
+    extends Button
+    implements org.panifex.web.spi.html.Button {
 
-    void initViewModelBinding(Object viewModel, HtmlComponent content);
-
-    Button createButton();
-
-    HorizontalLayout createHorizontalLayout();
-
-    VerticalLayout createVerticalLayout();
-
-    TextField createTextField();
 }
