@@ -21,9 +21,9 @@ package org.panifex.web.vaadin.runtime.html;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.panifex.test.support.TestSupport;
 import org.panifex.web.spi.html.Button;
 import org.panifex.web.spi.html.GuiFactory;
+import org.panifex.web.spi.html.GuiFactoryTestSupport;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
 import org.panifex.web.spi.html.TextField;
@@ -43,7 +43,7 @@ import com.vaadin.ui.UI;
 @PrepareForTest({
     UI.class,
     VaadinGuiFactory.class})
-public class VaadinGuiFactoryTest extends TestSupport {
+public class VaadinGuiFactoryTest extends GuiFactoryTestSupport {
 
     private GuiFactory guiFactory;
 
@@ -57,6 +57,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     }
 
     @Test
+    @Override
     public void testSetValidPageContent() throws Exception {
         // mocks
         VaadinHorizontalLayout layout = createMock(VaadinHorizontalLayout.class);
@@ -74,6 +75,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    @Override
     public void testSetInvalidPageContent() throws Exception {
         // mocks
         HtmlComponent component = createMock(HtmlComponent.class);
@@ -92,6 +94,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     }
 
     @Test
+    @Override
     public void testInitViewModelBinding() throws Exception {
         // mocks
         HtmlComponent htmlComp = createMock(HtmlComponent.class);
@@ -110,6 +113,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     }
 
     @Test
+    @Override
     public void testBindProperty() throws Exception {
         // variables
         String propId = getRandomChars(20);
@@ -145,6 +149,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     }
 
     @Test
+    @Override
     public void testLoadComponent() throws Exception {
         // mocks
         HtmlComponent htmlComp = createMock(HtmlComponent.class);
@@ -170,6 +175,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     }
 
     @Test
+    @Override
     public void testCreateButton() throws Exception {
         VaadinButton expectedButton = createMockAndExpectNew(VaadinButton.class);
 
@@ -182,6 +188,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     }
 
     @Test
+    @Override
     public void testCreateHorizontalLayout() throws Exception {
         VaadinHorizontalLayout expectedLayout = createMockAndExpectNew(VaadinHorizontalLayout.class);
 
@@ -194,6 +201,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     }
 
     @Test
+    @Override
     public void testCreateVerticalLayout() throws Exception {
         VaadinVerticalLayout expectedLayout = createMockAndExpectNew(VaadinVerticalLayout.class);
 
@@ -206,6 +214,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     }
 
     @Test
+    @Override
     public void testCreateTextField() throws Exception {
         VaadinTextField expectedTextField = createMockAndExpectNew(VaadinTextField.class);
 

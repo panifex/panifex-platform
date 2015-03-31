@@ -21,9 +21,9 @@ package org.panifex.web.zk.runtime.html;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.panifex.test.support.TestSupport;
 import org.panifex.web.spi.html.Button;
 import org.panifex.web.spi.html.GuiFactory;
+import org.panifex.web.spi.html.GuiFactoryTestSupport;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
 import org.panifex.web.spi.html.TextField;
@@ -38,7 +38,7 @@ import org.zkoss.zk.ui.Page;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ZkGuiFactory.class)
-public class ZkGuiFactoryTest extends TestSupport {
+public class ZkGuiFactoryTest extends GuiFactoryTestSupport {
 
     private GuiFactory guiFactory;
 
@@ -50,6 +50,7 @@ public class ZkGuiFactoryTest extends TestSupport {
     }
 
     @Test
+    @Override
     public void testSetValidPageContent() throws Exception {
         // mocks
         ZkHorizontalLayout layout = createMock(ZkHorizontalLayout.class);
@@ -65,6 +66,7 @@ public class ZkGuiFactoryTest extends TestSupport {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    @Override
     public void testSetInvalidPageContent() throws Exception {
         // mocks
         HtmlComponent component = createMock(HtmlComponent.class);
@@ -83,6 +85,7 @@ public class ZkGuiFactoryTest extends TestSupport {
     }
 
     @Test
+    @Override
     public void testInitViewModelBinding() throws Exception {
         // mocks
         ZkHorizontalLayout layout = createMock(ZkHorizontalLayout.class);
@@ -99,6 +102,7 @@ public class ZkGuiFactoryTest extends TestSupport {
         verifyAll();
     }
 
+    @Override
     @Test
     public void testBindProperty() throws Exception {
         // variables
@@ -135,6 +139,12 @@ public class ZkGuiFactoryTest extends TestSupport {
 
     }
 
+    @Override
+    public void testLoadComponent() throws Exception {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
     @Test
     public void testCreateButton() throws Exception {
         ZkButton expectedButton = createMockAndExpectNew(ZkButton.class);
@@ -147,6 +157,7 @@ public class ZkGuiFactoryTest extends TestSupport {
         assertEquals(expectedButton, createdButton);
     }
 
+    @Override
     @Test
     public void testCreateHorizontalLayout() throws Exception {
         ZkHorizontalLayout expectedLayout = createMockAndExpectNew(ZkHorizontalLayout.class);
@@ -159,6 +170,7 @@ public class ZkGuiFactoryTest extends TestSupport {
         assertEquals(expectedLayout, createdLayout);
     }
 
+    @Override
     @Test
     public void testCreateVerticalLayout() throws Exception {
         ZkVerticalLayout expectedLayout = createMockAndExpectNew(ZkVerticalLayout.class);
@@ -171,6 +183,7 @@ public class ZkGuiFactoryTest extends TestSupport {
         assertEquals(expectedLayout, createdLayout);
     }
 
+    @Override
     @Test
     public void testCreateTextField() throws Exception {
         ZkTextField expectedTextField = createMockAndExpectNew(ZkTextField.class);

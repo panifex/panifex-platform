@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Panifex platform
-  Copyright (C) 2013  Mario Krizmanic
-  
+  Copyright (C) 2015  Mario Krizmanic
+
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
   License as published by the Free Software Foundation; either
   version 2.1 of the License, or any later version.
-  
+
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   Lesser General Public License for more details.
-  
+
   You should have received a copy of the GNU Lesser General Public
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="
-            http://maven.apache.org/POM/4.0.0
-                http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <relativePath>../poms/compiled/</relativePath>
         <groupId>org.panifex.parent.build</groupId>
         <artifactId>compiled-bundle-settings</artifactId>
         <version>0.2.0-SNAPSHOT</version>
+        <relativePath>../poms/compiled/</relativePath>
     </parent>
 
     <properties>
@@ -35,7 +34,6 @@
         <bundle.namespace>org.panifex.web.spi</bundle.namespace>
     </properties>
 
-    <modelVersion>4.0.0</modelVersion>
     <groupId>org.panifex</groupId>
     <artifactId>panifex-web-spi</artifactId>
     <name>${bundle.symbolicName}</name>
@@ -48,4 +46,21 @@
             <artifactId>panifex-module-api</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- maven-jar-plugin generate test-jar because it is used in other modules -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
