@@ -18,6 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
-public interface HorizontalLayout extends HtmlComponent {
+public interface HorizontalLayout extends Container {
 
 }

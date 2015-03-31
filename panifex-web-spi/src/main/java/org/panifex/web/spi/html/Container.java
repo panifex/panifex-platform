@@ -16,23 +16,21 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.vaadin.runtime.html;
+package org.panifex.web.spi.html;
 
-import org.panifex.web.spi.html.HtmlComponent;
+public interface Container extends HtmlComponent {
 
-import com.vaadin.ui.VerticalLayout;
+    /**
+     * Adds the component to this component container.
+     *
+     * @param htmlComp the component to be added to this container
+     */
+    void addHtmlComponent(HtmlComponent htmlComp);
 
-public class VaadinVerticalLayout
-        extends VerticalLayout
-        implements org.panifex.web.spi.html.VerticalLayout {
-
-    @Override
-    public void addHtmlComponent(HtmlComponent component) {
-        VaadinHtmlComponentUtil.addComponentToContainer(component, this);
-    }
-
-    @Override
-    public void removeHtmlComponent(HtmlComponent component) {
-        VaadinHtmlComponentUtil.removeComponentFromContainer(component, this);
-    }
+    /**
+     * Removes the component from this component container.
+     *
+     * @param htmlComp the component to be removed from this container
+     */
+    void removeHtmlComponent(HtmlComponent htmlComp);
 }

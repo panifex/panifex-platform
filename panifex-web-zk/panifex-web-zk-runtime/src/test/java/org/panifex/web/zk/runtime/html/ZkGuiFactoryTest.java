@@ -16,9 +16,8 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.vaadin.runtime.html;
+package org.panifex.web.zk.runtime.html;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
@@ -26,41 +25,31 @@ import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
 import org.panifex.web.spi.html.VerticalLayout;
+import org.panifex.web.zk.runtime.html.ZkGuiFactory;
+import org.panifex.web.zk.runtime.html.ZkHorizontalLayout;
+import org.panifex.web.zk.runtime.html.ZkVerticalLayout;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-
-import com.vaadin.data.util.BeanItem;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.UI;
+import org.zkoss.bind.DefaultBinder;
+import org.zkoss.zk.ui.Page;
 
 /**
- * Unit tests for {@link VaadinGuiFactory} class.
+ * Unit tests for {@link ZkGuiFactory} class.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({
-    UI.class,
-    VaadinGuiFactory.class})
-public class VaadinGuiFactoryTest extends TestSupport {
+@PrepareForTest(ZkGuiFactory.class)
+public class ZkGuiFactoryTest extends TestSupport {
 
-    private final GuiFactory<VaadinRequest> guiFactory = new VaadinGuiFactory();
-
-    @Before
-    public void setUp() {
-        mockStatic(UI.class);
-
-        resetAll();
-    }
+    private final GuiFactory<Page> guiFactory = new ZkGuiFactory();
 
     @Test
     public void testSetValidPageContent() throws Exception {
         // mocks
-        VaadinHorizontalLayout layout = createMock(VaadinHorizontalLayout.class);
-        UI ui = createMock(UI.class);
-        VaadinRequest request = createMock(VaadinRequest.class);
+        ZkHorizontalLayout layout = createMock(ZkHorizontalLayout.class);
+        Page request = createMock(Page.class);
 
         // expect setting page content
-        expect(UI.getCurrent()).andReturn(ui);
-        ui.setContent(layout);
+        layout.setPage(request);
 
         // perform test
         replayAll();
@@ -72,7 +61,7 @@ public class VaadinGuiFactoryTest extends TestSupport {
     public void testSetInvalidPageContent() throws Exception {
         // mocks
         HtmlComponent component = createMock(HtmlComponent.class);
-        VaadinRequest request = createMock(VaadinRequest.class);
+        Page request = createMock(Page.class);
 
         // perform test
         replayAll();
@@ -89,21 +78,23 @@ public class VaadinGuiFactoryTest extends TestSupport {
     @Test
     public void testInitViewModelBinding() throws Exception {
         // mocks
-        HtmlComponent component = createMock(HtmlComponent.class);
+        ZkHorizontalLayout layout = createMock(ZkHorizontalLayout.class);
         Object viewModel = createMock(Object.class);
 
-        // expect creating BeanItem
-        createMockAndExpectNew(BeanItem.class, viewModel);
+        // expect creating binder
+        DefaultBinder binder = createMockAndExpectNew(DefaultBinder.class);
+        binder.init(layout, viewModel, null);
+        expect(layout.setAttribute(ZkGuiFactory.VM_BIND_ID, viewModel)).andReturn(createMock(Object.class));
 
         // perform test
         replayAll();
-        guiFactory.initViewModelBinding(viewModel, component);
+        guiFactory.initViewModelBinding(viewModel, layout);
         verifyAll();
     }
 
     @Test
     public void testCreateHorizontalLayout() throws Exception {
-        VaadinHorizontalLayout expectedLayout = createMockAndExpectNew(VaadinHorizontalLayout.class);
+        ZkHorizontalLayout expectedLayout = createMockAndExpectNew(ZkHorizontalLayout.class);
 
         // perform test
         replayAll();
@@ -115,13 +106,13 @@ public class VaadinGuiFactoryTest extends TestSupport {
 
     @Test
     public void testCreateVerticalLayout() throws Exception {
-        VaadinVerticalLayout exceptedLayout = createMockAndExpectNew(VaadinVerticalLayout.class);
+        ZkVerticalLayout expectedLayout = createMockAndExpectNew(ZkVerticalLayout.class);
 
         // perform test
         replayAll();
         VerticalLayout createdLayout = guiFactory.createVerticalLayout();
         verifyAll();
 
-        assertEquals(exceptedLayout, createdLayout);
+        assertEquals(expectedLayout, createdLayout);
     }
 }

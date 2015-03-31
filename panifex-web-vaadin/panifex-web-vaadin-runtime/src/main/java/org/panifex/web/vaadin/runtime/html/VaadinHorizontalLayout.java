@@ -18,10 +18,22 @@
  ******************************************************************************/
 package org.panifex.web.vaadin.runtime.html;
 
+import org.panifex.web.spi.html.HtmlComponent;
+
 import com.vaadin.ui.HorizontalLayout;
 
 public class VaadinHorizontalLayout
-    extends HorizontalLayout
-    implements org.panifex.web.spi.html.HorizontalLayout {
+        extends HorizontalLayout
+        implements org.panifex.web.spi.html.HorizontalLayout {
+
+    @Override
+    public void addHtmlComponent(HtmlComponent htmlComp) {
+        VaadinHtmlComponentUtil.addComponentToContainer(htmlComp, this);
+    }
+
+    @Override
+    public void removeHtmlComponent(HtmlComponent htmlComp) {
+        VaadinHtmlComponentUtil.removeComponentFromContainer(htmlComp, this);
+    }
 
 }

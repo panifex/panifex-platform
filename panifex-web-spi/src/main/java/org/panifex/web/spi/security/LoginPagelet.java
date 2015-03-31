@@ -22,6 +22,9 @@ import org.apache.commons.lang3.Validate;
 import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.panifex.module.api.pagelet.GenericPagelet;
 import org.panifex.module.api.pagelet.Pagelet;
+import org.panifex.web.spi.html.GuiFactory;
+import org.panifex.web.spi.html.HtmlComponent;
+import org.panifex.web.spi.html.VerticalLayout;
 import org.panifex.web.spi.tracker.GuiFactoryTracker;
 
 /**
@@ -40,14 +43,32 @@ public abstract class LoginPagelet<Request>
     public static final String LOGIN_BUTTON_ID = "login-btn";
     public static final String RESET_BUTTON_ID = "reset-btn";
 
-    private final GuiFactoryTracker guiFactoryTracker;
+    private final GuiFactoryTracker<Request> guiFactoryTracker;
 
     public LoginPagelet(
-            BlueprintContainer container,
-            GuiFactoryTracker guiFactoryTracker) {
-        super(container);
+            BlueprintContainer blueprintContainer,
+            GuiFactoryTracker<Request> guiFactoryTracker) {
+        super(blueprintContainer);
 
         this.guiFactoryTracker = Validate.notNull(guiFactoryTracker);
     }
 
+    @Override
+    public final void service(Request request) {
+        GuiFactory<Request> guiFactory = guiFactoryTracker.service();
+
+        // create root content
+        VerticalLayout vlayout = guiFactory.createVerticalLayout();
+        guiFactory.setPageContent(request, vlayout);
+
+        // init bean item
+        LoginViewModel viewModel = getComponentInstance(LoginViewModel.class);
+        guiFactory.initViewModelBinding(viewModel, vlayout);
+
+        createLogInFormContainer(vlayout);
+    }
+
+    private void createLogInFormContainer(HtmlComponent parent) {
+
+    }
 }

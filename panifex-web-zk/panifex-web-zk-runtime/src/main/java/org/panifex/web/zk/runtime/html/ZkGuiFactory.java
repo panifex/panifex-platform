@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Panifex platform
- * Copyright (C) 2013  Mario Krizmanic
+ * Copyright (C) 2015  Mario Krizmanic
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,34 @@ package org.panifex.web.zk.runtime.html;
 
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
+import org.panifex.web.spi.html.HtmlComponent;
 import org.panifex.web.spi.html.VerticalLayout;
+import org.zkoss.bind.DefaultBinder;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Page;
 
-public class ZkGuiFactory implements GuiFactory {
+public class ZkGuiFactory implements GuiFactory<Page> {
+
+    public static final String VM_BIND_ID = "VM";
+
+    private ThreadLocal<DefaultBinder> binderThreadLocal = new ThreadLocal<>();
+
+    @Override
+    public void setPageContent(Page request, HtmlComponent content) {
+        Component component = ZkHtmlComponentUtil.castHtmlComponent(content);
+        component.setPage(request);
+    }
+
+    @Override
+    public void initViewModelBinding(Object viewModel, HtmlComponent content) {
+        Component component = ZkHtmlComponentUtil.castHtmlComponent(content);
+
+        // init binder
+        DefaultBinder binder = new DefaultBinder();
+        binder.init(component, viewModel, null);
+        component.setAttribute(VM_BIND_ID, viewModel);
+        binderThreadLocal.set(binder);
+    }
 
     @Override
     public HorizontalLayout createHorizontalLayout() {
@@ -33,5 +58,4 @@ public class ZkGuiFactory implements GuiFactory {
     public VerticalLayout createVerticalLayout() {
         return new ZkVerticalLayout();
     }
-
 }

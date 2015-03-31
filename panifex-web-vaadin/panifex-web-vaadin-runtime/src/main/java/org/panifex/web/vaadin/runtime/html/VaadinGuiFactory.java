@@ -20,9 +20,37 @@ package org.panifex.web.vaadin.runtime.html;
 
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
+import org.panifex.web.spi.html.HtmlComponent;
 import org.panifex.web.spi.html.VerticalLayout;
 
-public class VaadinGuiFactory implements GuiFactory {
+import com.vaadin.data.util.BeanItem;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.UI;
+
+public class VaadinGuiFactory implements GuiFactory<VaadinRequest> {
+
+    private ThreadLocal<BeanItem<Object>> beanItemThreadLocal = new ThreadLocal<>();
+
+    @Override
+    public void setPageContent(VaadinRequest request, HtmlComponent content) {
+        if (Component.class.isInstance(content)) {
+            Component component = (Component) content;
+            UI.getCurrent().setContent(component);
+        } else {
+            String msg = new StringBuilder("Only ").
+                    append(Component.class.getCanonicalName()).
+                    append(" instance may be set as page content").
+                    toString();
+            throw new IllegalArgumentException(msg);
+        }
+    }
+
+    @Override
+    public void initViewModelBinding(Object viewModel, HtmlComponent content) {
+        BeanItem<Object> beanItem = new BeanItem<>(viewModel);
+        beanItemThreadLocal.set(beanItem);
+    }
 
     @Override
     public HorizontalLayout createHorizontalLayout() {

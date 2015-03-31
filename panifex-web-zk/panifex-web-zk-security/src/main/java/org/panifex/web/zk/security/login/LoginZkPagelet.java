@@ -21,33 +21,18 @@ package org.panifex.web.zk.security.login;
 import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.panifex.module.zk.api.ZkPagelet;
 import org.panifex.web.spi.security.LoginPagelet;
-import org.panifex.web.spi.security.LoginViewModel;
 import org.panifex.web.spi.tracker.GuiFactoryTracker;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zkoss.bind.Binder;
-import org.zkoss.bind.DefaultBinder;
-import org.zkoss.zhtml.H1;
-import org.zkoss.zhtml.P;
-import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.RichletConfig;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.metainfo.LanguageDefinition;
-import org.zkoss.zul.Button;
-import org.zkoss.zul.Checkbox;
-import org.zkoss.zul.Div;
-import org.zkoss.zul.Textbox;
 
 public class LoginZkPagelet extends LoginPagelet<Page> implements ZkPagelet {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
-
-    private final String VM_BIND_ID = "VM";
+    //private final String VM_BIND_ID = "VM";
 
     public LoginZkPagelet(
             BlueprintContainer blueprintContainer,
-            GuiFactoryTracker guiFactoryTracker) {
+            GuiFactoryTracker<Page> guiFactoryTracker) {
         super(blueprintContainer, guiFactoryTracker);
     }
 
@@ -56,7 +41,7 @@ public class LoginZkPagelet extends LoginPagelet<Page> implements ZkPagelet {
         return "LoginZkPagelet";
     }
 
-    @Override
+    /*@Override
     public void service(Page page) {
         log.debug("Create login zk pagelet content");
 
@@ -210,7 +195,7 @@ public class LoginZkPagelet extends LoginPagelet<Page> implements ZkPagelet {
         actionsArea.appendChild(button);
 
         binder.addCommandBinding(button, Events.ON_CLICK, LoginViewModel.RESET_COMMAND, null);
-    }
+    }*/
 
     @Override
     public void destroy() {

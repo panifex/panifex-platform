@@ -21,31 +21,17 @@ package org.panifex.web.vaadin.security.login;
 import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.panifex.module.vaadin.api.VaadinPagelet;
 import org.panifex.web.spi.security.LoginPagelet;
-import org.panifex.web.spi.security.LoginViewModel;
 import org.panifex.web.spi.tracker.GuiFactoryTracker;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.vaadin.data.util.BeanItem;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Layout;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
 public class LoginVaadinPagelet
         extends LoginPagelet<VaadinRequest>
         implements VaadinPagelet {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
-
     public LoginVaadinPagelet(
             BlueprintContainer blueprintContainer,
-            GuiFactoryTracker guiFactoryTracker) {
+            GuiFactoryTracker<VaadinRequest> guiFactoryTracker) {
         super(blueprintContainer, guiFactoryTracker);
     }
 
@@ -54,7 +40,7 @@ public class LoginVaadinPagelet
         return "LoginVaadinPagelet";
     }
 
-    @Override
+    /*@Override
     public void service(VaadinRequest request) throws Exception {
         log.debug("Create login vaadin pagelet content");
 
@@ -150,5 +136,5 @@ public class LoginVaadinPagelet
                 viewModel.getBean().reset();
             }
         });
-    }
+    }*/
 }

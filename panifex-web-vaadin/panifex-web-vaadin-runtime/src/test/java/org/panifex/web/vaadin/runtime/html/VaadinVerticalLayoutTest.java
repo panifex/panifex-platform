@@ -16,37 +16,56 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.zk.html;
+package org.panifex.web.vaadin.runtime.html;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.test.support.TestSupport;
-import org.panifex.web.spi.html.GuiFactory;
-import org.panifex.web.spi.html.HorizontalLayout;
-import org.panifex.web.zk.runtime.html.ZkGuiFactory;
-import org.panifex.web.zk.runtime.html.ZkHorizontalLayout;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
- * Unit tests for {@link ZkGuiFactory} class.
+ * Unit tests for {@link VaadinVerticalLayout} class.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(ZkGuiFactory.class)
-public class ZkGuiFactoryTest extends TestSupport {
+@PrepareForTest(VaadinHtmlComponentUtil.class)
+public class VaadinVerticalLayoutTest extends TestSupport {
 
-    private final GuiFactory guiFactory = new ZkGuiFactory();
+    private final VaadinVerticalLayout layout = new VaadinVerticalLayout();
+
+    @Before
+    public void setUp() {
+        mockStatic(VaadinHtmlComponentUtil.class);
+
+        resetAll();
+    }
 
     @Test
-    public void testCreateHorizontalLayout() throws Exception {
-        ZkHorizontalLayout horizontalLayout = createMockAndExpectNew(ZkHorizontalLayout.class);
+    public void testAddHtmlComponent() {
+        // mocks
+        VaadinHorizontalLayout component = createMock(VaadinHorizontalLayout.class);
+
+        // expect adding component
+        VaadinHtmlComponentUtil.addComponentToContainer(component, layout);
 
         // perform test
         replayAll();
-        HorizontalLayout createdHorizontalLayout = guiFactory.createHorizontalLayout();
+        layout.addHtmlComponent(component);
         verifyAll();
+    }
 
-        assertEquals(horizontalLayout, createdHorizontalLayout);
+    @Test
+    public void testRemoveHtmlComponent() {
+        // mocks
+        VaadinHorizontalLayout component = createMock(VaadinHorizontalLayout.class);
 
+        // expect removing component
+        VaadinHtmlComponentUtil.removeComponentFromContainer(component, layout);
+
+        // perform test
+        replayAll();
+        layout.removeHtmlComponent(component);
+        verifyAll();
     }
 }

@@ -21,5 +21,6 @@ package org.panifex.web.spi.tracker;
 import org.panifex.module.api.tracker.AbstractSingleTracker;
 import org.panifex.web.spi.html.GuiFactory;
 
-public class GuiFactoryTracker extends AbstractSingleTracker<GuiFactory> {
+public class GuiFactoryTracker<Request>
+    extends AbstractSingleTracker<GuiFactory<Request>> {
 }

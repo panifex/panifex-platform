@@ -18,6 +18,6 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
-public interface VerticalLayout extends HtmlComponent {
+public interface VerticalLayout extends Container {
 
 }

@@ -20,4 +20,24 @@ package org.panifex.web.spi.html;
 
 public interface HtmlComponent {
 
+    /**
+     * Adds one or more style names to this component. Multiple styles can be specified as
+     * a space-separated list of style names. The style name will be rendered as a HTML class
+     * name, which can be used in a CSS definition.
+     *
+     * @param styleName
+     *      the new style name or the new style names to be added to the component
+     */
+    void addStyleName(String styleName);
+
+    /**
+     * Removes one or more style names from component. Multiple styles can be specified as
+     * a space-separated list of style names. The parameter must be a valid CSS style name. Only
+     * user-defined style names added with addStyleName() or setStyleName() can be removed;
+     * built-in style names defined in Vaadin or GWT can not be removed.
+     *
+     * @param styleName
+     *      the style name of the style names to be removed from the component
+     */
+    void removeStyleName(String styleName);
 }

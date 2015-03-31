@@ -18,9 +18,29 @@
  ******************************************************************************/
 package org.panifex.web.zk.runtime.html;
 
+import org.panifex.web.spi.html.HtmlComponent;
 import org.panifex.web.spi.html.VerticalLayout;
 import org.zkoss.zul.Vlayout;
 
 public class ZkVerticalLayout extends Vlayout implements VerticalLayout {
 
+    @Override
+    public void addHtmlComponent(HtmlComponent htmlComp) {
+        ZkHtmlComponentUtil.addComponentToContainer(htmlComp, this);
+    }
+
+    @Override
+    public void removeHtmlComponent(HtmlComponent htmlComp) {
+        ZkHtmlComponentUtil.removeComponentFromContainer(htmlComp, this);
+    }
+
+    @Override
+    public void addStyleName(String styleName) {
+        ZkHtmlComponentUtil.addStyleName(styleName, this);
+    }
+
+    @Override
+    public void removeStyleName(String styleName) {
+        ZkHtmlComponentUtil.removeStyleName(styleName, this);
+    }
 }
