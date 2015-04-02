@@ -18,9 +18,8 @@
  ******************************************************************************/
 package org.panifex.web.zk.runtime.html;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.panifex.web.zk.runtime.support.HtmlBasedComponentTestSupport;
+import org.panifex.web.zk.runtime.support.LayoutTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zul.Vlayout;
@@ -30,39 +29,11 @@ import org.zkoss.zul.Vlayout;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ZkVerticalLayout.class)
-public class ZkVerticalLayoutTest extends HtmlBasedComponentTestSupport<ZkVerticalLayout> {
+public class ZkVerticalLayoutTest extends LayoutTestSupport<ZkVerticalLayout> {
 
     @Override
     public ZkVerticalLayout constructComponent() {
         suppress(constructor(Vlayout.class));
         return new ZkVerticalLayout();
-    }
-
-    @Test
-    public void testAddHtmlComponent() {
-        // mocks
-        ZkButton button = createMock(ZkButton.class);
-
-        // expect adding component
-        ZkHtmlComponentUtil.addComponentToContainer(button, component);
-
-        // perform test
-        replayAll();
-        component.addHtmlComponent(button);
-        verifyAll();
-    }
-
-    @Test
-    public void testRemoveHtmlComponent() {
-        // mocks
-        ZkButton button = createMock(ZkButton.class);
-
-        // expect removing component
-        ZkHtmlComponentUtil.removeComponentFromContainer(button, component);
-
-        // perform test
-        replayAll();
-        component.removeHtmlComponent(button);
-        verifyAll();
     }
 }
