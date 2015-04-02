@@ -29,9 +29,12 @@ import org.zkoss.zk.ui.HtmlBasedComponent;
 /**
  * Template test class for testing {@link HtmlComponent} and
  * {@link HtmlBasedComponent} subclasses.
+ * <p>
+ * This class is introduced because mismatched methods between Panifex's HtmlComponent and ZKOSS's
+ * HtmlBasedComponent classes.
  */
 @PrepareForTest(ZkHtmlComponentUtil.class)
-public abstract class HtmlComponentTestSupport<T extends HtmlComponent> extends TestSupport {
+public abstract class HtmlBasedComponentTestSupport<T extends HtmlComponent> extends TestSupport {
 
     protected T component;
 

@@ -20,7 +20,7 @@ package org.panifex.web.zk.runtime.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.panifex.web.zk.runtime.support.HtmlComponentTestSupport;
+import org.panifex.web.zk.runtime.support.HtmlBasedComponentTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zul.Vlayout;
@@ -30,7 +30,7 @@ import org.zkoss.zul.Vlayout;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ZkVerticalLayout.class)
-public class ZkVerticalLayoutTest extends HtmlComponentTestSupport<ZkVerticalLayout> {
+public class ZkVerticalLayoutTest extends HtmlBasedComponentTestSupport<ZkVerticalLayout> {
 
     @Override
     public ZkVerticalLayout constructComponent() {

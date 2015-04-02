@@ -19,7 +19,7 @@
 package org.panifex.web.zk.runtime.html;
 
 import org.junit.runner.RunWith;
-import org.panifex.web.zk.runtime.support.HtmlComponentTestSupport;
+import org.panifex.web.zk.runtime.support.HtmlBasedComponentTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zul.Textbox;
@@ -29,7 +29,7 @@ import org.zkoss.zul.Textbox;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ZkTextField.class)
-public class ZkTextFieldTest extends HtmlComponentTestSupport<ZkTextField> {
+public class ZkTextFieldTest extends HtmlBasedComponentTestSupport<ZkTextField> {
 
     @Override
     public ZkTextField constructComponent() {

@@ -20,7 +20,7 @@ package org.panifex.web.zk.runtime.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.panifex.web.zk.runtime.support.HtmlComponentTestSupport;
+import org.panifex.web.zk.runtime.support.HtmlBasedComponentTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zul.Hlayout;
@@ -31,7 +31,7 @@ import org.zkoss.zul.Hlayout;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ZkHorizontalLayout.class)
-public class ZkHorizontalLayoutTest extends HtmlComponentTestSupport<ZkHorizontalLayout> {
+public class ZkHorizontalLayoutTest extends HtmlBasedComponentTestSupport<ZkHorizontalLayout> {
 
     @Override
     public ZkHorizontalLayout constructComponent() {
