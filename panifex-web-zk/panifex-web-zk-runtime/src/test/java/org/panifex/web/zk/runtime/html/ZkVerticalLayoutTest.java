@@ -18,10 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.zk.runtime.html;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.panifex.test.support.TestSupport;
+import org.panifex.web.zk.runtime.support.HtmlComponentTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zul.Vlayout;
@@ -30,75 +29,40 @@ import org.zkoss.zul.Vlayout;
  * Unit tests for {@link ZkVerticalLayout} class.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({
-    ZkHtmlComponentUtil.class,
-    ZkVerticalLayout.class})
-public class ZkVerticalLayoutTest extends TestSupport {
+@PrepareForTest(ZkVerticalLayout.class)
+public class ZkVerticalLayoutTest extends HtmlComponentTestSupport<ZkVerticalLayout> {
 
-    private ZkVerticalLayout layout;
-
-    @Before
-    public void setUp() {
-        mockStatic(ZkHtmlComponentUtil.class);
-
-        resetAll();
-
-        // init layout
+    @Override
+    public ZkVerticalLayout constructComponent() {
         suppress(constructor(Vlayout.class));
-        layout = new ZkVerticalLayout();
+        return new ZkVerticalLayout();
     }
 
     @Test
     public void testAddHtmlComponent() {
         // mocks
-        ZkHorizontalLayout component = createMock(ZkHorizontalLayout.class);
+        ZkButton button = createMock(ZkButton.class);
 
         // expect adding component
-        ZkHtmlComponentUtil.addComponentToContainer(component, layout);
+        ZkHtmlComponentUtil.addComponentToContainer(button, component);
 
         // perform test
         replayAll();
-        layout.addHtmlComponent(component);
+        component.addHtmlComponent(button);
         verifyAll();
     }
 
     @Test
     public void testRemoveHtmlComponent() {
         // mocks
-        ZkHorizontalLayout component = createMock(ZkHorizontalLayout.class);
+        ZkButton button = createMock(ZkButton.class);
 
         // expect removing component
-        ZkHtmlComponentUtil.removeComponentFromContainer(component, layout);
+        ZkHtmlComponentUtil.removeComponentFromContainer(button, component);
 
         // perform test
         replayAll();
-        layout.removeHtmlComponent(component);
-        verifyAll();
-    }
-
-    @Test
-    public void testAddStyleName() {
-        String styleName = "styleName";
-
-        // expect adding style
-        ZkHtmlComponentUtil.addStyleName(styleName, layout);
-
-        // perform test
-        replayAll();
-        layout.addStyleName(styleName);
-        verifyAll();
-    }
-
-    @Test
-    public void testRemoveStyleName() {
-        String styleName = "styleName";
-
-        // expect remove style
-        ZkHtmlComponentUtil.removeStyleName(styleName, layout);
-
-        // perform test
-        replayAll();
-        layout.removeStyleName(styleName);
+        component.removeHtmlComponent(button);
         verifyAll();
     }
 }

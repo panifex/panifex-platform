@@ -18,10 +18,8 @@
  ******************************************************************************/
 package org.panifex.web.zk.runtime.html;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.panifex.test.support.TestSupport;
+import org.panifex.web.zk.runtime.support.HtmlComponentTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zul.Textbox;
@@ -30,47 +28,12 @@ import org.zkoss.zul.Textbox;
  * Unit tests for {@link ZkTextField} class.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({
-    ZkHtmlComponentUtil.class,
-    ZkTextField.class})
-public class ZkTextFieldTest extends TestSupport {
+@PrepareForTest(ZkTextField.class)
+public class ZkTextFieldTest extends HtmlComponentTestSupport<ZkTextField> {
 
-    private ZkTextField textField;
-
-    @Before
-    public void setUp() {
-        mockStatic(ZkHtmlComponentUtil.class);
-
-        resetAll();
-
-        // init layout
+    @Override
+    public ZkTextField constructComponent() {
         suppress(defaultConstructorIn(Textbox.class));
-        textField = new ZkTextField();
-    }
-
-    @Test
-    public void testAddStyleName() {
-        String styleName = "styleName";
-
-        // expect adding style
-        ZkHtmlComponentUtil.addStyleName(styleName, textField);
-
-        // perform test
-        replayAll();
-        textField.addStyleName(styleName);
-        verifyAll();
-    }
-
-    @Test
-    public void testRemoveStyleName() {
-        String styleName = "styleName";
-
-        // expect remove style
-        ZkHtmlComponentUtil.removeStyleName(styleName, textField);
-
-        // perform test
-        replayAll();
-        textField.removeStyleName(styleName);
-        verifyAll();
+        return new ZkTextField();
     }
 }
