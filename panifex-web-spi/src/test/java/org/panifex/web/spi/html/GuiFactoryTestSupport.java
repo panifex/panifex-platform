@@ -77,6 +77,11 @@ public abstract class GuiFactoryTestSupport extends TestSupport {
     public abstract void testCreateHorizontalLayout() throws Exception;
 
     /**
+     * Tests the {@link GuiFactory#createPasswordField()} method.
+     */
+    public abstract void testCreatePasswordField() throws Exception;
+
+    /**
      * Tests the {@link GuiFactory#createVerticalLayout()} method.
      * <p>
      * The vertical layout must be created.

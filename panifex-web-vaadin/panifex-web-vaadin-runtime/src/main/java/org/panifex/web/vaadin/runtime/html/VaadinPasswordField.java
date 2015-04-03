@@ -16,36 +16,12 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.spi.html;
+package org.panifex.web.vaadin.runtime.html;
 
-public interface GuiFactory {
+import com.vaadin.ui.PasswordField;
 
-    /**
-     * Sets the content of page container.
-     *
-     * @param request
-     * @param content the content to be set
-     */
-    void setPageContent(Object request, HtmlComponent htmlComp);
+public class VaadinPasswordField
+    extends PasswordField
+    implements org.panifex.web.spi.html.PasswordField {
 
-    void initViewModelBinding(Object viewModel, HtmlComponent htmlComp);
-
-    void bindCommand(Event onEvent, Object viewModel, String commandExpr, ClickableComponent clickableComp);
-
-    void bindProperty(Object viewModel, String propertyId, ValueComponent<?> valueComp);
-
-    void loadComponent(Object viewModel, HtmlComponent htmlComp);
-
-    Button createButton();
-
-    HorizontalLayout createHorizontalLayout();
-
-    /**
-     * Constructs the {@link PasswordField} element.
-     */
-    PasswordField createPasswordField();
-
-    VerticalLayout createVerticalLayout();
-
-    TextField createTextField();
 }

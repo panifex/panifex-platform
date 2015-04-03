@@ -27,6 +27,7 @@ import org.panifex.web.spi.html.Event;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
+import org.panifex.web.spi.html.PasswordField;
 import org.panifex.web.spi.html.TextField;
 import org.panifex.web.spi.html.ValueComponent;
 import org.panifex.web.spi.html.VerticalLayout;
@@ -148,6 +149,11 @@ public class ZkGuiFactory implements GuiFactory {
     @Override
     public HorizontalLayout createHorizontalLayout() {
         return new ZkHorizontalLayout();
+    }
+
+    @Override
+    public PasswordField createPasswordField() {
+        return new ZkPasswordField();
     }
 
     @Override

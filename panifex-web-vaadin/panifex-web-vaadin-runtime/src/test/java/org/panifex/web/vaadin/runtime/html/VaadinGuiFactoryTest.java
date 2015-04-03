@@ -26,6 +26,7 @@ import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.GuiFactoryTestSupport;
 import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
+import org.panifex.web.spi.html.PasswordField;
 import org.panifex.web.spi.html.TextField;
 import org.panifex.web.spi.html.VerticalLayout;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -185,6 +186,19 @@ public class VaadinGuiFactoryTest extends GuiFactoryTestSupport {
         verifyAll();
 
         assertEquals(expectedButton, createdButton);
+    }
+
+    @Test
+    @Override
+    public void testCreatePasswordField() throws Exception {
+        VaadinPasswordField expectedPasswordField = createMockAndExpectNew(VaadinPasswordField.class);
+
+        // perform test
+        replayAll();
+        PasswordField createdPasswordField = guiFactory.createPasswordField();
+        verifyAll();
+
+        assertEquals(expectedPasswordField, createdPasswordField);
     }
 
     @Test

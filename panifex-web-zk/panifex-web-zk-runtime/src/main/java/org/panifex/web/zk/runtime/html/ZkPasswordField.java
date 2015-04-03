@@ -16,36 +16,25 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.spi.html;
+package org.panifex.web.zk.runtime.html;
 
-public interface GuiFactory {
+import org.panifex.web.spi.html.PasswordField;
+import org.zkoss.zul.Textbox;
 
-    /**
-     * Sets the content of page container.
-     *
-     * @param request
-     * @param content the content to be set
-     */
-    void setPageContent(Object request, HtmlComponent htmlComp);
+public class ZkPasswordField extends Textbox implements PasswordField {
 
-    void initViewModelBinding(Object viewModel, HtmlComponent htmlComp);
+    public ZkPasswordField() {
+        setType("password");
+    }
 
-    void bindCommand(Event onEvent, Object viewModel, String commandExpr, ClickableComponent clickableComp);
+    @Override
+    public void addStyleName(String styleName) {
+        ZkHtmlComponentUtil.addStyleName(styleName, this);
+    }
 
-    void bindProperty(Object viewModel, String propertyId, ValueComponent<?> valueComp);
+    @Override
+    public void removeStyleName(String styleName) {
+        ZkHtmlComponentUtil.removeStyleName(styleName, this);
+    }
 
-    void loadComponent(Object viewModel, HtmlComponent htmlComp);
-
-    Button createButton();
-
-    HorizontalLayout createHorizontalLayout();
-
-    /**
-     * Constructs the {@link PasswordField} element.
-     */
-    PasswordField createPasswordField();
-
-    VerticalLayout createVerticalLayout();
-
-    TextField createTextField();
 }

@@ -27,6 +27,7 @@ import org.panifex.web.spi.html.Container;
 import org.panifex.web.spi.html.Event;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
+import org.panifex.web.spi.html.PasswordField;
 import org.panifex.web.spi.html.TextField;
 import org.panifex.web.spi.html.VerticalLayout;
 import org.panifex.web.spi.tracker.GuiFactoryTracker;
@@ -135,12 +136,12 @@ public abstract class LoginPagelet<Request>
         hlayout.setId(PASSWORD_FIELD_AREA_ID);
         parent.addHtmlComponent(hlayout);
 
-        // create password text field
-        TextField textField = guiFactoryThreadLocal.get().createTextField();
-        textField.setId(PASSWORD_TXT_ID);
-        hlayout.addHtmlComponent(textField);
+        // create password password field
+        PasswordField passwordField = guiFactoryThreadLocal.get().createPasswordField();
+        passwordField.setId(PASSWORD_TXT_ID);
+        hlayout.addHtmlComponent(passwordField);
         guiFactoryThreadLocal.get().
-            bindProperty(viewModelThreadLocal.get(), LoginViewModel.PASSWORD_ATTR, textField);
+            bindProperty(viewModelThreadLocal.get(), LoginViewModel.PASSWORD_ATTR, passwordField);
     }
 
     private void createButtonsArea(Container parent) {

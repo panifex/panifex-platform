@@ -16,36 +16,26 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.spi.html;
+package org.panifex.web.zk.runtime.html;
 
-public interface GuiFactory {
+import org.junit.runner.RunWith;
+import org.panifex.web.spi.html.PasswordField;
+import org.panifex.web.zk.runtime.support.HtmlBasedComponentTestSupport;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.zkoss.zul.Textbox;
 
-    /**
-     * Sets the content of page container.
-     *
-     * @param request
-     * @param content the content to be set
-     */
-    void setPageContent(Object request, HtmlComponent htmlComp);
+/**
+ * Unit tests for {@link PasswordField} class.
+ */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(ZkPasswordField.class)
+public class ZkPasswordFieldTest extends HtmlBasedComponentTestSupport<ZkPasswordField> {
 
-    void initViewModelBinding(Object viewModel, HtmlComponent htmlComp);
+    @Override
+    protected ZkPasswordField constructComponent() {
+        suppress(defaultConstructorIn(Textbox.class));
+        return new ZkPasswordField();
+    }
 
-    void bindCommand(Event onEvent, Object viewModel, String commandExpr, ClickableComponent clickableComp);
-
-    void bindProperty(Object viewModel, String propertyId, ValueComponent<?> valueComp);
-
-    void loadComponent(Object viewModel, HtmlComponent htmlComp);
-
-    Button createButton();
-
-    HorizontalLayout createHorizontalLayout();
-
-    /**
-     * Constructs the {@link PasswordField} element.
-     */
-    PasswordField createPasswordField();
-
-    VerticalLayout createVerticalLayout();
-
-    TextField createTextField();
 }
