@@ -18,10 +18,8 @@
  ******************************************************************************/
 package org.panifex.web.vaadin.runtime.html;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.panifex.test.support.TestSupport;
+import org.panifex.web.vaadin.runtime.support.ComponentContainerTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -30,42 +28,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(VaadinHtmlComponentUtil.class)
-public class VaadinVerticalLayoutTest extends TestSupport {
+public class VaadinVerticalLayoutTest extends ComponentContainerTestSupport<VaadinVerticalLayout> {
 
-    private final VaadinVerticalLayout layout = new VaadinVerticalLayout();
-
-    @Before
-    public void setUp() {
-        mockStatic(VaadinHtmlComponentUtil.class);
-
-        resetAll();
+    @Override
+    protected VaadinVerticalLayout constructComponent() {
+        return new VaadinVerticalLayout();
     }
 
-    @Test
-    public void testAddHtmlComponent() {
-        // mocks
-        VaadinHorizontalLayout component = createMock(VaadinHorizontalLayout.class);
-
-        // expect adding component
-        VaadinHtmlComponentUtil.addComponentToContainer(component, layout);
-
-        // perform test
-        replayAll();
-        layout.addHtmlComponent(component);
-        verifyAll();
-    }
-
-    @Test
-    public void testRemoveHtmlComponent() {
-        // mocks
-        VaadinHorizontalLayout component = createMock(VaadinHorizontalLayout.class);
-
-        // expect removing component
-        VaadinHtmlComponentUtil.removeComponentFromContainer(component, layout);
-
-        // perform test
-        replayAll();
-        layout.removeHtmlComponent(component);
-        verifyAll();
-    }
 }
