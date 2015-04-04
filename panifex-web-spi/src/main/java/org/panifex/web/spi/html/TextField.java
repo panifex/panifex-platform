@@ -18,6 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
+/**
+ * A text editor component.
+ */
 public interface TextField extends ValueComponent<String> {
 
 }

@@ -22,9 +22,21 @@ import org.panifex.web.spi.html.HtmlComponent;
 
 import com.vaadin.ui.HorizontalLayout;
 
+/**
+ * A horizontal layout.
+ */
 public class VaadinHorizontalLayout
         extends HorizontalLayout
         implements org.panifex.web.spi.html.HorizontalLayout {
+
+    /**
+     * Creates a horizontal layout component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     */
+    public VaadinHorizontalLayout(String id) {
+        setId(id);
+    }
 
     @Override
     public void addHtmlComponent(HtmlComponent htmlComp) {

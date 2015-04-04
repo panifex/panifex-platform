@@ -24,6 +24,7 @@ import org.panifex.web.zk.runtime.support.HtmlBasedComponentTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Vlayout;
 
 /**
  * Unit tests for {@link PasswordField} class.
@@ -32,10 +33,13 @@ import org.zkoss.zul.Textbox;
 @PrepareForTest(ZkPasswordField.class)
 public class ZkPasswordFieldTest extends HtmlBasedComponentTestSupport<ZkPasswordField> {
 
+    private final String compId = getRandomChars(20);
+
     @Override
     protected ZkPasswordField constructComponent() {
         suppress(defaultConstructorIn(Textbox.class));
-        return new ZkPasswordField();
+        suppress(method(Vlayout.class, "setId", String.class));
+        return new ZkPasswordField(compId);
     }
 
 }

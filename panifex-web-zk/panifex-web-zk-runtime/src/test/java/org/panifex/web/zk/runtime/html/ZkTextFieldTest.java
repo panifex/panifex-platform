@@ -23,6 +23,7 @@ import org.panifex.web.zk.runtime.support.HtmlBasedComponentTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Vlayout;
 
 /**
  * Unit tests for {@link ZkTextField} class.
@@ -31,9 +32,12 @@ import org.zkoss.zul.Textbox;
 @PrepareForTest(ZkTextField.class)
 public class ZkTextFieldTest extends HtmlBasedComponentTestSupport<ZkTextField> {
 
+    private final String compId = getRandomChars(20);
+
     @Override
     public ZkTextField constructComponent() {
         suppress(defaultConstructorIn(Textbox.class));
-        return new ZkTextField();
+        suppress(method(Vlayout.class, "setId", String.class));
+        return new ZkTextField(compId);
     }
 }

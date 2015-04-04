@@ -18,6 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
+/**
+ * A horizontal layout.
+ */
 public interface HorizontalLayout extends Container {
 
 }

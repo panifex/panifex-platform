@@ -21,9 +21,19 @@ package org.panifex.web.zk.runtime.html;
 import org.panifex.web.spi.html.PasswordField;
 import org.zkoss.zul.Textbox;
 
+/**
+ * A field that is used to enter secret text information like passwords. The entered text
+ * is not displayed on the screen.
+ */
 public class ZkPasswordField extends Textbox implements PasswordField {
 
-    public ZkPasswordField() {
+    /**
+     * Creates a new password field component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     */
+    public ZkPasswordField(String id) {
+        setId(id);
         setType("password");
     }
 

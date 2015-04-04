@@ -22,7 +22,19 @@ import org.panifex.web.spi.html.HtmlComponent;
 import org.panifex.web.spi.html.VerticalLayout;
 import org.zkoss.zul.Vlayout;
 
+/**
+ * A vertical layout component.
+ */
 public class ZkVerticalLayout extends Vlayout implements VerticalLayout {
+
+    /**
+     * Creates a new vertical layout component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     */
+    public ZkVerticalLayout(String id) {
+        setId(id);
+    }
 
     @Override
     public void addHtmlComponent(HtmlComponent htmlComp) {

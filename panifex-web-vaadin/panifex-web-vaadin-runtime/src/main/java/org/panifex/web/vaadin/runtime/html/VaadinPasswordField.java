@@ -20,8 +20,20 @@ package org.panifex.web.vaadin.runtime.html;
 
 import com.vaadin.ui.PasswordField;
 
+/**
+ * A field that is used to enter secret text information like passwords. The entered text is
+ * not displayed on the screen.
+ */
 public class VaadinPasswordField
     extends PasswordField
     implements org.panifex.web.spi.html.PasswordField {
 
+    /**
+     * Creates a new password field component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     */
+    public VaadinPasswordField(String id) {
+        setId(id);
+    }
 }

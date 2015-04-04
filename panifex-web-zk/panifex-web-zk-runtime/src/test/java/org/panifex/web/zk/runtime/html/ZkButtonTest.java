@@ -23,6 +23,7 @@ import org.panifex.web.zk.runtime.support.HtmlBasedComponentTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Vlayout;
 
 /**
  * Unit tests for {@link ZkButton} class.
@@ -31,9 +32,12 @@ import org.zkoss.zul.Button;
 @PrepareForTest(ZkButton.class)
 public class ZkButtonTest extends HtmlBasedComponentTestSupport<ZkButton> {
 
+    private final String compId = getRandomChars(20);
+
     @Override
     public ZkButton constructComponent() {
         suppress(defaultConstructorIn(Button.class));
-        return new ZkButton();
+        suppress(method(Vlayout.class, "setId", String.class));
+        return new ZkButton(compId);
     }
 }

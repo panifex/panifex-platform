@@ -23,6 +23,7 @@ import java.util.Deque;
 
 import org.panifex.web.spi.html.Button;
 import org.panifex.web.spi.html.ClickableComponent;
+import org.panifex.web.spi.html.Container;
 import org.panifex.web.spi.html.Event;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
@@ -142,27 +143,51 @@ public class ZkGuiFactory implements GuiFactory {
     }
 
     @Override
-    public Button createButton() {
-        return new ZkButton();
+    public Button createButton(String id, Container parent) {
+        ZkButton button = new ZkButton(id);
+        parent.addHtmlComponent(button);
+        return button;
     }
 
     @Override
-    public HorizontalLayout createHorizontalLayout() {
-        return new ZkHorizontalLayout();
+    public HorizontalLayout createHorizontalLayout(String id) {
+        return createHorizontalLayout(id, null);
     }
 
     @Override
-    public PasswordField createPasswordField() {
-        return new ZkPasswordField();
+    public HorizontalLayout createHorizontalLayout(String id, Container parent) {
+        ZkHorizontalLayout layout = new ZkHorizontalLayout(id);
+        if (parent != null) {
+            parent.addHtmlComponent(layout);
+        }
+        return layout;
     }
 
     @Override
-    public VerticalLayout createVerticalLayout() {
-        return new ZkVerticalLayout();
+    public PasswordField createPasswordField(String id, Container parent) {
+        ZkPasswordField passwordField = new ZkPasswordField(id);
+        parent.addHtmlComponent(passwordField);
+        return passwordField;
     }
 
     @Override
-    public TextField createTextField() {
-        return new ZkTextField();
+    public VerticalLayout createVerticalLayout(String id) {
+        return createVerticalLayout(id, null);
+    }
+
+    @Override
+    public VerticalLayout createVerticalLayout(String id, Container parent) {
+        ZkVerticalLayout layout = new ZkVerticalLayout(id);
+        if (parent != null) {
+            parent.addHtmlComponent(layout);
+        }
+        return layout;
+    }
+
+    @Override
+    public TextField createTextField(String id, Container parent) {
+        ZkTextField textField = new ZkTextField(id);
+        parent.addHtmlComponent(textField);
+        return textField;
     }
 }

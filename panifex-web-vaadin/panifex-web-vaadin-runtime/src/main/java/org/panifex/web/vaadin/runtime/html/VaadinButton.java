@@ -20,8 +20,19 @@ package org.panifex.web.vaadin.runtime.html;
 
 import com.vaadin.ui.Button;
 
+/**
+ * A button component.
+ */
 public class VaadinButton
     extends Button
     implements org.panifex.web.spi.html.Button {
 
+    /**
+     * Creates a new button component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     */
+    public VaadinButton(String id) {
+        setId(id);
+    }
 }

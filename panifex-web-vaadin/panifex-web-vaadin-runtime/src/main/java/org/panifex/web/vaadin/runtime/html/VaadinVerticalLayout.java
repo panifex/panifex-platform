@@ -22,9 +22,21 @@ import org.panifex.web.spi.html.HtmlComponent;
 
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * A vertical layout component.
+ */
 public class VaadinVerticalLayout
         extends VerticalLayout
         implements org.panifex.web.spi.html.VerticalLayout {
+
+    /**
+     * Creates a new vertical layout component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     */
+    public VaadinVerticalLayout(String id) {
+        setId(id);
+    }
 
     @Override
     public void addHtmlComponent(HtmlComponent component) {

@@ -22,7 +22,19 @@ import org.panifex.web.spi.html.HorizontalLayout;
 import org.panifex.web.spi.html.HtmlComponent;
 import org.zkoss.zul.Hlayout;
 
+/**
+ * A horizontal layout component.
+ */
 public class ZkHorizontalLayout extends Hlayout implements HorizontalLayout {
+
+    /**
+     * Creates a horizontal layout container.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     */
+    public ZkHorizontalLayout(String id) {
+        setId(id);
+    }
 
     @Override
     public void addHtmlComponent(HtmlComponent htmlComp) {

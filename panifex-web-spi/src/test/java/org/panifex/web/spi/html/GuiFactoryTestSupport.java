@@ -63,35 +63,51 @@ public abstract class GuiFactoryTestSupport extends TestSupport {
     public abstract void testLoadComponent() throws Exception;
 
     /**
-     * Tests the {@link GuiFactory#createButton()} method.
+     * Tests the {@link GuiFactory#createButton(String, Container)} method.
      * <p>
-     * The button must be created.
+     * The button must be created inside the parent container component..
      */
     public abstract void testCreateButton() throws Exception;
 
     /**
-     * Tests the {@link GuiFactory#createHorizontalLayout()} method.
+     * Tests the {@link GuiFactory#createHorizontalLayout(String)} method.
      * <p>
-     * The horizontal layout must be created.
+     * The horizontal layout component must be created.
      */
     public abstract void testCreateHorizontalLayout() throws Exception;
 
     /**
-     * Tests the {@link GuiFactory#createPasswordField()} method.
+     * Tests the {@link GuiFactory#createHorizontalLayout(String, Container)} method.
+     * <p>
+     * The horizontal layout must be created inside the parent container component.
+     */
+    public abstract void testCreateHorizontalLayoutInsideParentContainer() throws Exception;
+
+    /**
+     * Tests the {@link GuiFactory#createPasswordField(String, Container)} method.
+     * <p>
+     * The password field must be created inside the parent container component.
      */
     public abstract void testCreatePasswordField() throws Exception;
 
     /**
-     * Tests the {@link GuiFactory#createVerticalLayout()} method.
+     * Tests the {@link GuiFactory#createVerticalLayout(String)} method.
      * <p>
      * The vertical layout must be created.
      */
     public abstract void testCreateVerticalLayout() throws Exception;
 
     /**
-     * Tests the {@link GuiFactory#createTextField()} method.
+     * Tests the {@link GuiFactory#createVerticalLayout(String, Container)} method.
      * <p>
-     * The text field must be created.
+     * The vertical layout must be created inside the parent container method.
+     */
+    public abstract void testCreateVerticalLayoutInsideParentContainer() throws Exception;
+
+    /**
+     * Tests the {@link GuiFactory#createTextField(String, Container)} method.
+     * <p>
+     * The text field must be created inside the parent container method..
      */
     public abstract void testCreateTextField() throws Exception;
 }

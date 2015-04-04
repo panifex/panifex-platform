@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.web.spi.html.Button;
+import org.panifex.web.spi.html.Container;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.GuiFactoryTestSupport;
 import org.panifex.web.spi.html.HorizontalLayout;
@@ -148,11 +149,21 @@ public class ZkGuiFactoryTest extends GuiFactoryTestSupport {
     @Override
     @Test
     public void testCreateButton() throws Exception {
-        ZkButton expectedButton = createMockAndExpectNew(ZkButton.class);
+        // variables
+        String compId = getRandomChars(20);
+
+        // mocks
+        Container container = createMock(Container.class);
+
+        // expect creating button
+        ZkButton expectedButton = createMockAndExpectNew(ZkButton.class, compId);
+
+        // expect adding button to container
+        container.addHtmlComponent(expectedButton);
 
         // perform test
         replayAll();
-        Button createdButton = guiFactory.createButton();
+        Button createdButton = guiFactory.createButton(compId, container);
         verifyAll();
 
         assertEquals(expectedButton, createdButton);
@@ -161,11 +172,38 @@ public class ZkGuiFactoryTest extends GuiFactoryTestSupport {
     @Override
     @Test
     public void testCreateHorizontalLayout() throws Exception {
-        ZkHorizontalLayout expectedLayout = createMockAndExpectNew(ZkHorizontalLayout.class);
+        // variables
+        String compId = getRandomChars(20);
+
+        // expect creating layout
+        ZkHorizontalLayout expectedLayout = createMockAndExpectNew(ZkHorizontalLayout.class, compId);
 
         // perform test
         replayAll();
-        HorizontalLayout createdLayout = guiFactory.createHorizontalLayout();
+        HorizontalLayout createdLayout = guiFactory.createHorizontalLayout(compId);
+        verifyAll();
+
+        assertEquals(expectedLayout, createdLayout);
+    }
+
+    @Test
+    @Override
+    public void testCreateHorizontalLayoutInsideParentContainer() throws Exception {
+        // variables
+        String compId = getRandomChars(20);
+
+        // mocks
+        Container container = createMock(Container.class);
+
+        // expect creating layout
+        ZkHorizontalLayout expectedLayout = createMockAndExpectNew(ZkHorizontalLayout.class, compId);
+
+        // expect adding layout to parent container
+        container.addHtmlComponent(expectedLayout);
+
+        // perform test
+        replayAll();
+        HorizontalLayout createdLayout = guiFactory.createHorizontalLayout(compId, container);
         verifyAll();
 
         assertEquals(expectedLayout, createdLayout);
@@ -174,11 +212,21 @@ public class ZkGuiFactoryTest extends GuiFactoryTestSupport {
     @Test
     @Override
     public void testCreatePasswordField() throws Exception {
-        ZkPasswordField expectedPasswordField = createMockAndExpectNew(ZkPasswordField.class);
+        // variables
+        String compId = getRandomChars(20);
+
+        // mocks
+        Container container = createMock(Container.class);
+
+        // expect creating password field
+        ZkPasswordField expectedPasswordField = createMockAndExpectNew(ZkPasswordField.class, compId);
+
+        // expect adding password field to container
+        container.addHtmlComponent(expectedPasswordField);
 
         // perform test
         replayAll();
-        PasswordField createdPasswordField = guiFactory.createPasswordField();
+        PasswordField createdPasswordField = guiFactory.createPasswordField(compId, container);
         verifyAll();
 
         assertEquals(expectedPasswordField, createdPasswordField);
@@ -187,11 +235,39 @@ public class ZkGuiFactoryTest extends GuiFactoryTestSupport {
     @Override
     @Test
     public void testCreateVerticalLayout() throws Exception {
-        ZkVerticalLayout expectedLayout = createMockAndExpectNew(ZkVerticalLayout.class);
+        // variables
+        String compId = getRandomChars(20);
+
+        // expect creating layout
+        ZkVerticalLayout expectedLayout = createMockAndExpectNew(ZkVerticalLayout.class, compId);
 
         // perform test
         replayAll();
-        VerticalLayout createdLayout = guiFactory.createVerticalLayout();
+        VerticalLayout createdLayout = guiFactory.createVerticalLayout(compId);
+        verifyAll();
+
+        assertEquals(expectedLayout, createdLayout);
+    }
+
+    @Test
+    @Override
+    public void testCreateVerticalLayoutInsideParentContainer()
+            throws Exception {
+        // variables
+        String compId = getRandomChars(20);
+
+        // mocks
+        Container container = createMock(Container.class);
+
+        // expect creating layout
+        ZkVerticalLayout expectedLayout = createMockAndExpectNew(ZkVerticalLayout.class, compId);
+
+        // expect adding layout to parent container
+        container.addHtmlComponent(expectedLayout);
+
+        // perform test
+        replayAll();
+        VerticalLayout createdLayout = guiFactory.createVerticalLayout(compId,container);
         verifyAll();
 
         assertEquals(expectedLayout, createdLayout);
@@ -200,11 +276,21 @@ public class ZkGuiFactoryTest extends GuiFactoryTestSupport {
     @Override
     @Test
     public void testCreateTextField() throws Exception {
-        ZkTextField expectedTextField = createMockAndExpectNew(ZkTextField.class);
+        // variables
+        String compId = getRandomChars(20);
+
+        // mocks
+        Container container = createMock(Container.class);
+
+        // expect creating text field
+        ZkTextField expectedTextField = createMockAndExpectNew(ZkTextField.class, compId);
+
+        // expect adding text field to container
+        container.addHtmlComponent(expectedTextField);
 
         // perform test
         replayAll();
-        TextField createdTextField = guiFactory.createTextField();
+        TextField createdTextField = guiFactory.createTextField(compId, container);
         verifyAll();
 
         assertEquals(expectedTextField, createdTextField);

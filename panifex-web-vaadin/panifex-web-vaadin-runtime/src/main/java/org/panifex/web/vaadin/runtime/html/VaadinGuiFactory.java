@@ -25,6 +25,7 @@ import java.util.Deque;
 
 import org.panifex.web.spi.html.Button;
 import org.panifex.web.spi.html.ClickableComponent;
+import org.panifex.web.spi.html.Container;
 import org.panifex.web.spi.html.Event;
 import org.panifex.web.spi.html.GuiFactory;
 import org.panifex.web.spi.html.HorizontalLayout;
@@ -117,27 +118,51 @@ public class VaadinGuiFactory implements GuiFactory {
     }
 
     @Override
-    public Button createButton() {
-        return new VaadinButton();
+    public Button createButton(String id, Container parent) {
+        VaadinButton button = new VaadinButton(id);
+        parent.addHtmlComponent(button);
+        return button;
     }
 
     @Override
-    public HorizontalLayout createHorizontalLayout() {
-        return new VaadinHorizontalLayout();
+    public HorizontalLayout createHorizontalLayout(String id) {
+        return createHorizontalLayout(id, null);
     }
 
     @Override
-    public PasswordField createPasswordField() {
-        return new VaadinPasswordField();
+    public HorizontalLayout createHorizontalLayout(String id, Container parent) {
+        VaadinHorizontalLayout layout = new VaadinHorizontalLayout(id);
+        if (parent != null) {
+            parent.addHtmlComponent(layout);
+        }
+        return layout;
     }
 
     @Override
-    public VerticalLayout createVerticalLayout() {
-        return new VaadinVerticalLayout();
+    public PasswordField createPasswordField(String id, Container parent) {
+        VaadinPasswordField passwordField = new VaadinPasswordField(id);
+        parent.addHtmlComponent(passwordField);
+        return passwordField;
     }
 
     @Override
-    public TextField createTextField() {
-        return new VaadinTextField();
+    public VerticalLayout createVerticalLayout(String id) {
+        return createVerticalLayout(id, null);
+    }
+
+    @Override
+    public VerticalLayout createVerticalLayout(String id, Container parent) {
+        VaadinVerticalLayout layout = new VaadinVerticalLayout(id);
+        if (parent != null) {
+            parent.addHtmlComponent(layout);
+        }
+        return layout;
+    }
+
+    @Override
+    public TextField createTextField(String id, Container parent) {
+        VaadinTextField textField = new VaadinTextField(id);
+        parent.addHtmlComponent(textField);
+        return textField;
     }
 }

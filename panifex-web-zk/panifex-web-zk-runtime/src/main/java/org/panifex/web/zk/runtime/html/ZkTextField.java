@@ -21,7 +21,19 @@ package org.panifex.web.zk.runtime.html;
 import org.panifex.web.spi.html.TextField;
 import org.zkoss.zul.Textbox;
 
+/**
+ * A text editor component.
+ */
 public class ZkTextField extends Textbox implements TextField {
+
+    /**
+     * Creates a new text field component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     */
+    public ZkTextField(String id) {
+        setId(id);
+    }
 
     @Override
     public void addStyleName(String styleName) {

@@ -18,6 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
+/**
+ * A factory service for creating GUI components.
+ */
 public interface GuiFactory {
 
     /**
@@ -36,16 +39,64 @@ public interface GuiFactory {
 
     void loadComponent(Object viewModel, HtmlComponent htmlComp);
 
-    Button createButton();
-
-    HorizontalLayout createHorizontalLayout();
+    /**
+     * Creates a button component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     * @param parent the container component in that the created component will be inserted
+     * @return the created button component
+     */
+    Button createButton(String id, Container parent);
 
     /**
-     * Constructs the {@link PasswordField} element.
+     * Creates  a horizontal layout component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     * @return the created horizontal layout component
      */
-    PasswordField createPasswordField();
+    HorizontalLayout createHorizontalLayout(String id);
 
-    VerticalLayout createVerticalLayout();
+    /**
+     * Creates a horizontal layout component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     * @param parent the container component in that the created component will be inserted
+     * @return the created horizontal layout component
+     */
+    HorizontalLayout createHorizontalLayout(String id, Container parent);
 
-    TextField createTextField();
+    /**
+     * Creates a password field component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     * @param parent the container component in that the created component will be inserted
+     * @return the created password field component
+     */
+    PasswordField createPasswordField(String id, Container parent);
+
+    /**
+     * Creates a vertical layout component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     * @return the created vertical layout component
+     */
+    VerticalLayout createVerticalLayout(String id);
+
+    /**
+     * Creates a vertical layout component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     * @param parent the container component in that the created component will be inserted
+     * @return the created vertical layout component
+     */
+    VerticalLayout createVerticalLayout(String id, Container parent);
+
+    /**
+     * Creates a text field component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     * @param parent the container component in that the created component will be inserted
+     * @return the created text field component
+     */
+    TextField createTextField(String id, Container parent);
 }

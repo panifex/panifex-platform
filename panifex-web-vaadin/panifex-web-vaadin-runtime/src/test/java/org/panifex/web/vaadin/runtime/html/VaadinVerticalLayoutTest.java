@@ -30,9 +30,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PrepareForTest(VaadinHtmlComponentUtil.class)
 public class VaadinVerticalLayoutTest extends ComponentContainerTestSupport<VaadinVerticalLayout> {
 
+    private final String compId = getRandomChars(20);
+
     @Override
     protected VaadinVerticalLayout constructComponent() {
-        return new VaadinVerticalLayout();
+        return new VaadinVerticalLayout(compId);
     }
 
 }

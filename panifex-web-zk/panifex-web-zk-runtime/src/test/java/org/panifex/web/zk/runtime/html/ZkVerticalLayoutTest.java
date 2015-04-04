@@ -31,9 +31,12 @@ import org.zkoss.zul.Vlayout;
 @PrepareForTest(ZkVerticalLayout.class)
 public class ZkVerticalLayoutTest extends LayoutTestSupport<ZkVerticalLayout> {
 
+    private final String compId = getRandomChars(20);
+
     @Override
     public ZkVerticalLayout constructComponent() {
         suppress(constructor(Vlayout.class));
-        return new ZkVerticalLayout();
+        suppress(method(Vlayout.class, "setId", String.class));
+        return new ZkVerticalLayout(compId);
     }
 }

@@ -28,8 +28,10 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(PowerMockRunner.class)
 public class VaadinHorizontalLayoutTest extends ComponentContainerTestSupport<VaadinHorizontalLayout> {
 
+    private final String compId = getRandomChars(20);
+
     @Override
     protected VaadinHorizontalLayout constructComponent() {
-        return new VaadinHorizontalLayout();
+        return new VaadinHorizontalLayout(compId);
     }
 }

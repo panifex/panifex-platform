@@ -48,6 +48,7 @@ public abstract class LoginPagelet<Request>
     public static final String BUTTONS_AREA_ID = "buttons-area-id";
     public static final String FIELDS_AREA_ID = "fields-area-id";
     public static final String LOGIN_FORM_CONTAINER_ID = "login-form-cnt-id";
+    public static final String LOGIN_ROOT_CONTAINER_ID = "login-root-cnt-id";
     public static final String PASSWORD_FIELD_AREA_ID = "password-field-area-id";
     public static final String USERNAME_FIELD_AREA_ID = "username-field-area-id";
 
@@ -75,7 +76,7 @@ public abstract class LoginPagelet<Request>
         guiFactoryThreadLocal.set(guiFactory);
 
         // create root content
-        VerticalLayout vlayout = guiFactory.createVerticalLayout();
+        VerticalLayout vlayout = guiFactory.createVerticalLayout(LOGIN_ROOT_CONTAINER_ID);
         guiFactory.setPageContent(request, vlayout);
 
         // init bean item
@@ -96,9 +97,8 @@ public abstract class LoginPagelet<Request>
 
     private void createLogInFormContainer(Container parent) {
         // create login form container layout
-        VerticalLayout vlayout = guiFactoryThreadLocal.get().createVerticalLayout();
-        vlayout.setId(LOGIN_FORM_CONTAINER_ID);
-        parent.addHtmlComponent(vlayout);
+        VerticalLayout vlayout = guiFactoryThreadLocal.get().
+                createVerticalLayout(LOGIN_FORM_CONTAINER_ID, parent);
 
         // create login form content
         createFieldsArea(vlayout);
@@ -107,9 +107,8 @@ public abstract class LoginPagelet<Request>
 
     private void createFieldsArea(Container parent) {
         // create fields area container
-        VerticalLayout vlayout = guiFactoryThreadLocal.get().createVerticalLayout();
-        vlayout.setId(FIELDS_AREA_ID);
-        parent.addHtmlComponent(vlayout);
+        VerticalLayout vlayout = guiFactoryThreadLocal.get().
+                createVerticalLayout(FIELDS_AREA_ID, parent);
 
         // create fields area content
         createUsernameField(vlayout);
@@ -118,48 +117,42 @@ public abstract class LoginPagelet<Request>
 
     private void createUsernameField(Container parent) {
         // create username field layout
-        HorizontalLayout hlayout = guiFactoryThreadLocal.get().createHorizontalLayout();
-        hlayout.setId(USERNAME_FIELD_AREA_ID);
-        parent.addHtmlComponent(hlayout);
+        HorizontalLayout hlayout = guiFactoryThreadLocal.get().
+                createHorizontalLayout(USERNAME_FIELD_AREA_ID, parent);
 
         // create username text field
-        TextField textField = guiFactoryThreadLocal.get().createTextField();
-        textField.setId(USERNAME_TXT_ID);
-        hlayout.addHtmlComponent(textField);
+        TextField textField = guiFactoryThreadLocal.get().
+                createTextField(USERNAME_TXT_ID, hlayout);
         guiFactoryThreadLocal.get().
             bindProperty(viewModelThreadLocal.get(), LoginViewModel.USERNAME_ATTR, textField);
     }
 
     private void createPasswordField(Container parent) {
         // create password field layout
-        HorizontalLayout hlayout = guiFactoryThreadLocal.get().createHorizontalLayout();
-        hlayout.setId(PASSWORD_FIELD_AREA_ID);
-        parent.addHtmlComponent(hlayout);
+        HorizontalLayout hlayout = guiFactoryThreadLocal.get().
+                createHorizontalLayout(PASSWORD_FIELD_AREA_ID, parent);
 
         // create password password field
-        PasswordField passwordField = guiFactoryThreadLocal.get().createPasswordField();
-        passwordField.setId(PASSWORD_TXT_ID);
-        hlayout.addHtmlComponent(passwordField);
+        PasswordField passwordField = guiFactoryThreadLocal.get().
+                createPasswordField(PASSWORD_TXT_ID, hlayout);
         guiFactoryThreadLocal.get().
             bindProperty(viewModelThreadLocal.get(), LoginViewModel.PASSWORD_ATTR, passwordField);
     }
 
     private void createButtonsArea(Container parent) {
         // create buttons area container
-        HorizontalLayout hlayout = guiFactoryThreadLocal.get().createHorizontalLayout();
-        hlayout.setId(BUTTONS_AREA_ID);
-        parent.addHtmlComponent(hlayout);
+        HorizontalLayout hlayout = guiFactoryThreadLocal.get().
+                createHorizontalLayout(BUTTONS_AREA_ID, parent);
 
         // create buttons area content
-        createLogInButton(parent);
-        createResetButton(parent);
+        createLogInButton(hlayout);
+        createResetButton(hlayout);
     }
 
     private void createLogInButton(Container parent) {
         // create log in button
-        Button button = guiFactoryThreadLocal.get().createButton();
-        button.setId(LOGIN_BUTTON_ID);
-        parent.addHtmlComponent(button);
+        Button button = guiFactoryThreadLocal.get().
+                createButton(LOGIN_BUTTON_ID, parent);
         guiFactoryThreadLocal.get().bindCommand(
                 Event.ON_CLICK,
                 viewModelThreadLocal.get(),
@@ -169,9 +162,8 @@ public abstract class LoginPagelet<Request>
 
     private void createResetButton(Container parent) {
         // create reset button
-        Button button = guiFactoryThreadLocal.get().createButton();
-        button.setId(RESET_BUTTON_ID);
-        parent.addHtmlComponent(button);
+        Button button = guiFactoryThreadLocal.get().
+                createButton(RESET_BUTTON_ID, parent);
         guiFactoryThreadLocal.get().bindCommand(
                 Event.ON_CLICK,
                 viewModelThreadLocal.get(),

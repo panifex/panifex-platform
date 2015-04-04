@@ -20,8 +20,19 @@ package org.panifex.web.vaadin.runtime.html;
 
 import com.vaadin.ui.TextField;
 
+/**
+ * A text editor component.
+ */
 public class VaadinTextField
     extends TextField
     implements org.panifex.web.spi.html.TextField {
 
+    /**
+     * Creates a new text field component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     */
+    public VaadinTextField(String id) {
+        setId(id);
+    }
 }

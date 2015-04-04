@@ -18,6 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
+/**
+ * A vertical layout component.
+ */
 public interface VerticalLayout extends Container {
 
 }

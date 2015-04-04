@@ -18,6 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
+/**
+ * A html container componet that can contain child html components.
+ */
 public interface Container extends HtmlComponent {
 
     /**

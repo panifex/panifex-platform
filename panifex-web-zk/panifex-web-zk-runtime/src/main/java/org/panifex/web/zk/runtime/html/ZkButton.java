@@ -20,9 +20,21 @@ package org.panifex.web.zk.runtime.html;
 
 import org.zkoss.zul.Button;
 
+/**
+ * A button component.
+ */
 public class ZkButton
     extends Button
     implements org.panifex.web.spi.html.Button {
+
+    /**
+     * Creates a new button component.
+     *
+     * @param id the unique id for component that is used for client-side testing purpose
+     */
+    public ZkButton(String id) {
+        setId(id);
+    }
 
     @Override
     public void addStyleName(String styleName) {

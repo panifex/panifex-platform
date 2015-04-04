@@ -23,6 +23,7 @@ import org.panifex.web.zk.runtime.support.LayoutTestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.zkoss.zul.Hlayout;
+import org.zkoss.zul.Vlayout;
 
 /**
  * Unit tests for {@link ZkHorizontalLayout} class.
@@ -32,9 +33,12 @@ import org.zkoss.zul.Hlayout;
 @PrepareForTest(ZkHorizontalLayout.class)
 public class ZkHorizontalLayoutTest extends LayoutTestSupport<ZkHorizontalLayout> {
 
+    private final String compId = getRandomChars(20);
+
     @Override
     public ZkHorizontalLayout constructComponent() {
         suppress(constructor(Hlayout.class));
-        return new ZkHorizontalLayout();
+        suppress(method(Vlayout.class, "setId", String.class));
+        return new ZkHorizontalLayout(compId);
     }
 }
