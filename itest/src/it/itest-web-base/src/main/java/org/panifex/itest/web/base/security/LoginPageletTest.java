@@ -69,13 +69,13 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         usernameInputElement.setValueAttribute("user");
         passwordInputElement.setValueAttribute("pass");
 
-        Thread.sleep(1_000L);
+        Thread.sleep(5_000L);
 
         // reset form
         ButtonElement resetButton = getButtonElementById(page, LoginPagelet.RESET_BUTTON_ID);
         resetButton.click();
 
-        webClient.waitForBackgroundJavaScript(1_000L);
+        webClient.waitForBackgroundJavaScript(5_000L);
         Thread.sleep(1_000L);
 
         // assert username and password input fields are empty
@@ -100,7 +100,7 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         usernameInputElement.setValueAttribute("user");
         passwordInputElement.setValueAttribute("pass");
 
-        Thread.sleep(1_000L);
+        Thread.sleep(5_000L);
 
         // click on login
         ButtonElement loginButtonElement = getButtonElementById(page, LoginPagelet.LOGIN_BUTTON_ID);

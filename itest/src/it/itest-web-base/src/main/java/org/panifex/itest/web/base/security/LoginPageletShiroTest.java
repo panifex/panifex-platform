@@ -79,7 +79,7 @@ public abstract class LoginPageletShiroTest extends LoginPageletTest {
         replay(authServiceMock);
         authServiceRegistration = registerService(AuthenticationService.class, authServiceMock);
 
-        Thread.sleep(1_000L);
+        Thread.sleep(5_000L);
 
         verify(authServiceMock);
         reset(authServiceMock);
@@ -96,7 +96,7 @@ public abstract class LoginPageletShiroTest extends LoginPageletTest {
 
         authServiceRegistration.unregister();
 
-        Thread.sleep(1_000L);
+        Thread.sleep(5_000L);
 
         verify(authServiceMock);
         reset(authServiceMock);
