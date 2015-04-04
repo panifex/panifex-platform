@@ -24,14 +24,18 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.OptionUtils;
 import org.panifex.itest.web.base.support.html.ButtonElement;
 import org.panifex.itest.web.base.support.html.HTMLButtonToButtonAdapter;
+import org.panifex.itest.web.base.support.html.HTMLInputToPasswordInputAdapter;
 import org.panifex.itest.web.base.support.html.HTMLInputToTextInputAdapter;
 import org.panifex.itest.web.base.support.html.HtmlDivisionToButtonAdapter;
+import org.panifex.itest.web.base.support.html.HtmlPasswordInputToPasswordInputAdapter;
 import org.panifex.itest.web.base.support.html.HtmlTextInputToTextInputAdapter;
+import org.panifex.itest.web.base.support.html.PasswordInputElement;
 import org.panifex.itest.web.base.support.html.TextInputElement;
 import org.panifex.test.support.IWebTestSupport;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
@@ -59,6 +63,19 @@ public abstract class PageletTestSupport extends IWebTestSupport {
             return new HTMLButtonToButtonAdapter((HTMLButtonElement) element);
         } else if (HtmlDivision.class.isInstance(element)) {
             return new HtmlDivisionToButtonAdapter((HtmlDivision) element);
+        } else {
+            throw new ClassCastException("Unexpected class: " + element.getClass().getCanonicalName());
+        }
+    }
+
+    public final PasswordInputElement getPasswordInputElementById(
+            final HtmlPage htmlPage, final String id) {
+        Object element = testHelper.getHtmlElementById(htmlPage, id);
+
+        if (HTMLInputElement.class.isInstance(element)) {
+            return new HTMLInputToPasswordInputAdapter((HTMLInputElement) element);
+        } else if (HtmlPasswordInput.class.isInstance(element)) {
+            return new HtmlPasswordInputToPasswordInputAdapter((HtmlPasswordInput) element);
         } else {
             throw new ClassCastException("Unexpected class: " + element.getClass().getCanonicalName());
         }

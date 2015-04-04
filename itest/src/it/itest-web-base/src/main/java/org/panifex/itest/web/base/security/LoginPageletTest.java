@@ -28,6 +28,7 @@ import org.ops4j.pax.exam.OptionUtils;
 import org.panifex.itest.web.base.support.PageletTestHelper;
 import org.panifex.itest.web.base.support.PageletTestSupport;
 import org.panifex.itest.web.base.support.html.ButtonElement;
+import org.panifex.itest.web.base.support.html.PasswordInputElement;
 import org.panifex.itest.web.base.support.html.TextInputElement;
 import org.panifex.web.spi.security.LoginPagelet;
 
@@ -57,16 +58,16 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         webClient.waitForBackgroundJavaScript(20_000L);
 
         // find username and password text input elements
-        TextInputElement usernameTextInput = getTextInputElementById(page, LoginPagelet.USERNAME_TXT_ID);
-        TextInputElement passwordTextInput = getTextInputElementById(page, LoginPagelet.PASSWORD_TXT_ID);
+        TextInputElement usernameInputElement = getTextInputElementById(page, LoginPagelet.USERNAME_TXT_ID);
+        PasswordInputElement passwordInputElement = getPasswordInputElementById(page, LoginPagelet.PASSWORD_TXT_ID);
 
         // assert username and password input fields are empty
-        assertEquals(StringUtils.EMPTY, usernameTextInput.getValueAttribute());
-        assertEquals(StringUtils.EMPTY, passwordTextInput.getValueAttribute());
+        assertEquals(StringUtils.EMPTY, usernameInputElement.getValueAttribute());
+        assertEquals(StringUtils.EMPTY, passwordInputElement.getValueAttribute());
 
         // type username and password
-        usernameTextInput.setValueAttribute("user");
-        passwordTextInput.setValueAttribute("pass");
+        usernameInputElement.setValueAttribute("user");
+        passwordInputElement.setValueAttribute("pass");
 
         Thread.sleep(1_000L);
 
@@ -78,8 +79,8 @@ public abstract class LoginPageletTest extends PageletTestSupport {
         Thread.sleep(1_000L);
 
         // assert username and password input fields are empty
-        assertEquals(StringUtils.EMPTY, usernameTextInput.getValueAttribute());
-        assertEquals(StringUtils.EMPTY, passwordTextInput.getValueAttribute());
+        assertEquals(StringUtils.EMPTY, usernameInputElement.getValueAttribute());
+        assertEquals(StringUtils.EMPTY, passwordInputElement.getValueAttribute());
 
         webClient.closeAllWindows();
     }
@@ -93,7 +94,7 @@ public abstract class LoginPageletTest extends PageletTestSupport {
 
         // find username and password text input elements
         TextInputElement usernameInputElement = getTextInputElementById(page, LoginPagelet.USERNAME_TXT_ID);
-        TextInputElement passwordInputElement = getTextInputElementById(page, LoginPagelet.PASSWORD_TXT_ID);
+        PasswordInputElement passwordInputElement = getPasswordInputElementById(page, LoginPagelet.PASSWORD_TXT_ID);
 
         // type username and password
         usernameInputElement.setValueAttribute("user");

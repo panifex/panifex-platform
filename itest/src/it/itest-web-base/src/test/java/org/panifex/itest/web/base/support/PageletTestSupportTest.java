@@ -23,9 +23,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.panifex.itest.web.base.support.html.ButtonElement;
 import org.panifex.itest.web.base.support.html.HTMLButtonToButtonAdapter;
+import org.panifex.itest.web.base.support.html.HTMLInputToPasswordInputAdapter;
 import org.panifex.itest.web.base.support.html.HTMLInputToTextInputAdapter;
 import org.panifex.itest.web.base.support.html.HtmlDivisionToButtonAdapter;
+import org.panifex.itest.web.base.support.html.HtmlPasswordInputToPasswordInputAdapter;
 import org.panifex.itest.web.base.support.html.HtmlTextInputToTextInputAdapter;
+import org.panifex.itest.web.base.support.html.PasswordInputElement;
 import org.panifex.itest.web.base.support.html.TextInputElement;
 import org.panifex.test.support.TestSupport;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -33,6 +36,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
@@ -141,5 +145,49 @@ public class PageletTestSupportTest extends TestSupport {
         verifyAll();
 
         assertEquals(adapter, actualTextInput);
+    }
+
+    @Test
+    public void testAdaptHTMLInputToPasswordInputElement() throws Exception {
+        String elementId = getRandomChars(20);
+        HTMLInputElement htmlInput = createMock(HTMLInputElement.class);
+        HtmlPage htmlPage = createMock(HtmlPage.class);
+
+        // expect getting html element
+        expect(testHelperMock.getHtmlElementById(htmlPage, elementId)).andReturn(htmlInput);
+
+        // expect creating adaptor
+        HTMLInputToPasswordInputAdapter adapter = createMockAndExpectNew(
+                HTMLInputToPasswordInputAdapter.class,
+                htmlInput);
+
+        // perform test
+        replayAll();
+        PasswordInputElement actualPasswordInput = testSupport.getPasswordInputElementById(htmlPage, elementId);
+        verifyAll();
+
+        assertEquals(adapter, actualPasswordInput);
+    }
+
+    @Test
+    public void testAdaptHtmlPasswordInputToPasswordInputElement() throws Exception {
+        String elementId = getRandomChars(20);
+        HtmlPasswordInput htmlPasswordInput = createMock(HtmlPasswordInput.class);
+        HtmlPage htmlPage = createMock(HtmlPage.class);
+
+        // expect getting html element
+        expect(testHelperMock.getHtmlElementById(htmlPage, elementId)).andReturn(htmlPasswordInput);
+
+        // expect creating adaptor
+        HtmlPasswordInputToPasswordInputAdapter adapter = createMockAndExpectNew(
+                HtmlPasswordInputToPasswordInputAdapter.class,
+                htmlPasswordInput);
+
+        // perform test
+        replayAll();
+        PasswordInputElement actualPasswordInput = testSupport.getPasswordInputElementById(htmlPage, elementId);
+        verifyAll();
+
+        assertEquals(adapter, actualPasswordInput);
     }
 }
