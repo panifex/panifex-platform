@@ -158,6 +158,9 @@ public abstract class LoginPagelet<Request>
                 viewModelThreadLocal.get(),
                 LoginViewModel.LOG_IN_COMMAND,
                 button);
+
+        // log in button should have focus
+        button.focus();
     }
 
     private void createResetButton(Container parent) {

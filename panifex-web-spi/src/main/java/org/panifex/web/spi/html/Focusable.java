@@ -18,9 +18,13 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
-public interface ValueComponent<T> extends Focusable {
+/**
+ * A HtmlComponent that can obtain input focus.
+ */
+public interface Focusable extends HtmlComponent {
 
-    T getValue();
-
-    void setValue(T value);
+    /**
+     * Sets the focus to this component.
+     */
+    void focus();
 }

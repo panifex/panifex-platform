@@ -18,6 +18,9 @@
  ******************************************************************************/
 package org.panifex.web.spi.html;
 
-public interface ClickableComponent extends HtmlComponent {
+/**
+ * A HtmlComponent that can be clicked.
+ */
+public interface ClickableComponent extends Focusable {
 
 }
