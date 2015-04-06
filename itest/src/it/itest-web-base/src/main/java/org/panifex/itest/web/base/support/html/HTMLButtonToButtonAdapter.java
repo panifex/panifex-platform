@@ -19,10 +19,9 @@
 package org.panifex.itest.web.base.support.html;
 
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 
 /**
- * Adapts {@link HTMLInputElement} to {@link TextInputElement}.
+ * Adapts {@link HTMLButtonElement} to {@link ButtonElement}.
  */
 public class HTMLButtonToButtonAdapter implements ButtonElement {
 

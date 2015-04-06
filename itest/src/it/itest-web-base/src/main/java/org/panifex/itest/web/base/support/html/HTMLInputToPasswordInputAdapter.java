@@ -20,6 +20,9 @@ package org.panifex.itest.web.base.support.html;
 
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 
+/**
+ * Adapts {@link HtmlInputElement} to {@link PasswordInputElement}.
+ */
 public class HTMLInputToPasswordInputAdapter implements PasswordInputElement {
 
     private final HTMLInputElement inputElement;

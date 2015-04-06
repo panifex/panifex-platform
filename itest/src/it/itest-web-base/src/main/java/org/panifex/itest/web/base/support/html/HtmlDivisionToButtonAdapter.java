@@ -21,9 +21,7 @@ package org.panifex.itest.web.base.support.html;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 
 /**
- *
- * @author mariokr
- *
+ * Adapts {@link HtmlDivision} to {@link ButtonElement}.
  */
 public class HtmlDivisionToButtonAdapter implements ButtonElement {
 
