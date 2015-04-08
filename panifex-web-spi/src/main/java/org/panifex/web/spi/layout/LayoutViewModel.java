@@ -16,31 +16,29 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ******************************************************************************/
-package org.panifex.web.spi.security;
+package org.panifex.web.spi.layout;
 
-import org.panifex.web.spi.layout.LayoutViewModel;
-
-public interface LoginViewModel extends LayoutViewModel {
+/**
+ * A base layout view-model interface that contains fields that can
+ * be used in wide-range view-models.
+ */
+public interface LayoutViewModel {
 
     // attributes
-    String USERNAME_ATTR = "username";
-    String getUsername();
-    void setUsername(String username);
-
-    String PASSWORD_ATTR = "password";
-    String getPassword();
-    void setPassword(String password);
-
-    String IS_REMEMBER_ME_ATTR = "isRememberMe";
-    boolean getIsRememberMe();
-    void setIsRememberMe(boolean isRememberMe);
-
-    String LOG_IN_COMMAND = "logIn";
-    void logIn();
+    String IS_USER_AUTHENTICATED = "isUserAuthenticated";
+    String IS_USER_LOGGED = "isUserLogged";
 
     /**
-     * Resets username and password fields.
+     * Returns true if the current subject is authenticated.
+     *
+     * @see <a href="http://shiro.apache.org/authentication.html">http://shiro.apache.org/authentication.html</a>
      */
-    String RESET_COMMAND = "reset";
-    void reset();
+    boolean getIsUserAuthenticated();
+
+    /**
+     * Returns true if the current subject is remembered or authenticated.
+     *
+     * @see <a href="http://shiro.apache.org/authentication.html">http://shiro.apache.org/authentication.html</a>
+     */
+    boolean getIsUserLogged();
 }

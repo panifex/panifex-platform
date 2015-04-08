@@ -17,6 +17,7 @@
 
 Export-Package: \
     org.panifex.web.spi.html;version="1.0", \
+    org.panifex.web.spi.layout;version="1.0", \
     org.panifex.web.spi.security;version="1.0", \
     org.panifex.web.spi.tracker;version="1.0"
 

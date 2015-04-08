@@ -21,17 +21,14 @@ package org.panifex.web.spi.security;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.panifex.module.api.security.SecurityUtilService;
 import org.panifex.module.api.security.SecurityUtilServiceTracker;
+import org.panifex.web.spi.layout.LayoutViewModelImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LoginViewModelImpl implements LoginViewModel {
+public class LoginViewModelImpl extends LayoutViewModelImpl implements LoginViewModel {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
-
-    // trackers
-    private final SecurityUtilServiceTracker securityUtilServiceTracker;
 
     private String username = StringUtils.EMPTY;
     private String password = StringUtils.EMPTY;
@@ -39,7 +36,7 @@ public class LoginViewModelImpl implements LoginViewModel {
 
     public LoginViewModelImpl(
             SecurityUtilServiceTracker securityUtilServiceTracker) {
-        this.securityUtilServiceTracker = securityUtilServiceTracker;
+        super(securityUtilServiceTracker);
     }
 
     @Override
@@ -76,8 +73,7 @@ public class LoginViewModelImpl implements LoginViewModel {
     public void logIn() {
         log.info("Log in {} user", username);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, isRememberMe);
-        SecurityUtilService service = securityUtilServiceTracker.service();
-        Subject currentSubject = service.getSubject();
+        Subject currentSubject = getCurrentSubject();
         currentSubject.login(token);
     }
 
