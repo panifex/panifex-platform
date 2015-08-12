@@ -126,19 +126,21 @@
         </dependency>
         <dependency>
             <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkmax</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
             <artifactId>zul</artifactId>
         </dependency>
         <dependency>
             <groupId>org.zkoss.common</groupId>
             <artifactId>zweb</artifactId>
         </dependency>
+        <!-- ZK PE Framework Dependencies (Professional Edition) -->
         <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zkex</artifactId>
+        </dependency>
+        <!-- ZK EE Framework Dependencies (Enterprise Edition) -->
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkmax</artifactId>
         </dependency>
     </dependencies>
 

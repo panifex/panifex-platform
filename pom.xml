@@ -99,6 +99,28 @@
         </developer>
     </developers>
 
+    <repositories>
+        <!-- SpringSource Enterprise Bundle Repository - External Bundle Releases -->
+        <repository>
+            <id>com.springsource.repository.bundles.external</id>
+            <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/external</url>
+        </repository>
+        <!-- ZK PE-eval / EE- eval (60-days free evaluation) repository-->
+        <repository>
+            <id>ZK PE EE Evaluation</id>
+            <url>http://mavensync.zkoss.org/eval/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <!-- ZK CE (Freely available under LGPL) plugin repository-->
+        <pluginRepository>
+            <id>ZK CE</id>
+            <url>http://mavensync.zkoss.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
         <plugins>
             <plugin>

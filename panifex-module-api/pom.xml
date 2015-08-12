@@ -78,6 +78,7 @@
             <groupId>org.zkoss.common</groupId>
             <artifactId>zel</artifactId>
         </dependency>
+        <!-- ZK PE Framework Dependencies (Professional Edition) -->
         <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zkex</artifactId>
