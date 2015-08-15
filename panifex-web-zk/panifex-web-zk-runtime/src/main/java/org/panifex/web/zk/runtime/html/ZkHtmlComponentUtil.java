@@ -24,9 +24,9 @@ import static org.apache.commons.lang3.StringUtils.join;
 import static org.apache.commons.lang3.StringUtils.trim;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
 
 import org.panifex.web.spi.html.HtmlComponent;
 import org.zkoss.zk.ui.Component;
@@ -139,9 +139,9 @@ public class ZkHtmlComponentUtil {
 
         Set<String> styles;
         if (isNotBlank(actualStyles)) {
-            styles = new HashSet<>(Arrays.asList(actualStyles.split(" ")));
+            styles = new TreeSet<>(Arrays.asList(actualStyles.split(" ")));
         } else {
-            styles = new HashSet<>();
+            styles = new TreeSet<>();
         }
 
         return styles;

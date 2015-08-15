@@ -86,17 +86,17 @@ public class ZkHtmlComponentUtilTest extends TestSupport {
 
     @Test
     public void testAddAlreadyAssignedStyleName() {
-        addStyleName("AAA", "AAA AAA BBB AAA", "BBB AAA");
+        addStyleName("AAA", "AAA AAA BBB AAA", "AAA BBB");
     }
 
     @Test
     public void testAddNotAssignedStyleName() {
-        addStyleName("AAA", "BBB CCC", "BBB AAA CCC");
+        addStyleName("AAA", "BBB CCC", "AAA BBB CCC");
     }
 
     @Test
     public void testAddMultipleNotAssignedStyleNames() {
-        addStyleName("AAA BBB", "CCC DDD", "BBB AAA DDD CCC");
+        addStyleName("AAA BBB", "CCC DDD", "AAA BBB CCC DDD");
     }
 
     @Test
