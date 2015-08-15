@@ -122,7 +122,12 @@
             <name>ZK CE repository</name>
             <url>http://mavensync.zkoss.org/maven2</url>
         </repository>
-        <!-- ZK PE/EE repository should be defined in .m2/settings.xml -->
+        <!-- ZK PE/EE repository should be defined in .m2/settings.xml or use below eval repository-->
+        <!-- ZK PE-eval / EE- eval (60-days free evaluation) repository-->
+        <repository>
+            <id>ZK PE EE Evaluation</id>
+            <url>http://mavensync.zkoss.org/eval/</url>
+        </repository>
     </repositories>
 
     <pluginRepositories>
