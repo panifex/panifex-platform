@@ -44,7 +44,7 @@ import org.panifex.test.support.TestSupport;
  */
 public abstract class RepositoryTestSupport extends TestSupport {
 
-    private static final String MASTER_CHANGELOG = "../panifex-persistence-impl/src/main/resources/db-changelog/db.changelog-master.xml";
+    private static final String MASTER_CHANGELOG = "../panifex-persistence-impl/src/main/resources/db-changelog/db.changelog-0.1.0.xml";
     private static final String TEST_DATA_CHANGELOG = "src/test/resources/db-changelog/db.changelog-test.xml";
     
     protected EntityManager entityManager;

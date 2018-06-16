@@ -61,7 +61,7 @@ public final class PersistenceRealmTest extends TestSupport {
     // constants
     private final String USERNAME = "admin";
     private final String PASSWORD = "admin";
-    private final String PASSWORD_HASH = "lA2jtiWHI3Yp35rRL/50CzAvGvTVb2PsULtZ3GeKdtDwS8V54sUAQ3g7wF6KCT3wE9OMRXLtTQ/PLJjbEaF4yg==";
+    private final String PASSWORD_HASH = "BZuCLbdxl9mFGXnBhiIO8CKaC/Tj6/D+R5vlkBRQQi4hv1sFAWh1zeDXp3btAwoeUV3iO/oC2nXFULEd1j1PYQ==";
     private final String PASSWORD_SALT = "1dfpY4vWFRtQIqOxejFVJg==";
     
     /**
