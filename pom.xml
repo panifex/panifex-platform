@@ -691,7 +691,7 @@
             <dependency>
                 <groupId>org.ops4j.pax.runner</groupId>
                 <artifactId>pax-runner</artifactId>
-                <version>1.8.5</version>
+                <version>1.9.0</version>
             </dependency>
             <!-- Pax Web Dependencies -->
             <dependency>
