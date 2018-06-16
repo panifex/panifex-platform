@@ -324,6 +324,11 @@
             <!-- Apache Felix Dependencies -->
             <dependency>
                 <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.configadmin</artifactId>
+                <version>1.9.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.prefs</artifactId>
                 <version>1.0.6</version>
             </dependency>
