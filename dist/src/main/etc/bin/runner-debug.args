@@ -1,0 +1,7 @@
+--noConsole
+--vmOptions=-Dbundles.configuration.location=../../conf -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
+--platform=felix
+file:../equinox/org/eclipse/osgi/org.eclipse.osgi.services/3.2.100.v20100503/org.eclipse.osgi.services-3.2.100.v20100503.jar
+file:../equinox/org/eclipse/osgi/org.eclipse.osgi.util/3.2.100.v20100503/org.eclipse.osgi.util-3.2.100.v20100503.jar
+file:../equinox/org/ops4j/pax/confman/pax-confman-propsloader/0.2.3/pax-confman-propsloader-0.2.3.jar
+scan-dir:../lib
