@@ -41,7 +41,7 @@ public class DataSourceListener {
 
     private BundleContext bundleContext;
 
-    private String changeLogFile = "/db-changelog/db.changelog-master.xml";;
+    private String changeLogFile = "/db-changelog/db.changelog-0.1.0.xml";;
     private String defaultSchema = "";
     private String contexts = "";
 
