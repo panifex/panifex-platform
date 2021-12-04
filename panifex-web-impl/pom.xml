@@ -133,15 +133,15 @@
             <artifactId>zweb</artifactId>
         </dependency>
         <!-- ZK PE Framework Dependencies (Professional Edition) -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zkex</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- ZK EE Framework Dependencies (Enterprise Edition) -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zkmax</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
 </project>

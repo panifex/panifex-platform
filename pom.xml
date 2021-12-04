@@ -780,7 +780,7 @@
                 <artifactId>zhtml</artifactId>
                 <version>${zk.framework.version}</version>
             </dependency>
-            <dependency>
+            <!--<dependency>
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zkex</artifactId>
                 <version>${zk.framework.version}</version>
@@ -795,7 +795,7 @@
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zkmax</artifactId>
                 <version>${zk.framework.version}</version>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zul</artifactId>

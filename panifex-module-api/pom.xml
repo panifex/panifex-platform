@@ -79,10 +79,10 @@
             <artifactId>zel</artifactId>
         </dependency>
         <!-- ZK PE Framework Dependencies (Professional Edition) -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zkex</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
 </project>
